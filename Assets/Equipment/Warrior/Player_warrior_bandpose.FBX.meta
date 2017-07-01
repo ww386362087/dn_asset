@@ -1,0 +1,246 @@
+fileFormatVersion: 2
+guid: 15561877c2b2f034dbeefc4447119e5a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bip01 Head_zhanshi
+    100002: Bip01 L Calf_zhanshi
+    100004: Bip01 L Clavicle_zhanshi
+    100006: Bip01 L Finger01_zhanshi
+    100008: Bip01 L Finger0_zhanshi
+    100010: Bip01 L Finger11_zhanshi
+    100012: Bip01 L Finger1_zhanshi
+    100014: Bip01 L Foot_zhanshi
+    100016: Bip01 L Forearm_zhanshi
+    100018: Bip01 L Hand_zhanshi
+    100020: Bip01 L Thigh_zhanshi
+    100022: Bip01 L UpperArm_zhanshi
+    100024: Bip01 Neck_zhanshi
+    100026: Bip01 Pelvis_zhanshi
+    100028: Bip01 R Calf_zhanshi
+    100030: Bip01 R Clavicle_zhanshi
+    100032: Bip01 R Finger01_zhanshi
+    100034: Bip01 R Finger0_zhanshi
+    100036: Bip01 R Finger11_zhanshi
+    100038: Bip01 R Finger1_zhanshi
+    100040: Bip01 R Foot_zhanshi
+    100042: Bip01 R Forearm_zhanshi
+    100044: Bip01 R Hand_zhanshi
+    100046: Bip01 R Thigh_zhanshi
+    100048: Bip01 R UpperArm_zhanshi
+    100050: Bip01 Spine1_zhanshi
+    100052: Bip01 Spine_zhanshi
+    100054: Bip01_zhanshi
+    100056: //RootNode
+    100058: Player_warrior_hair01
+    100060: Player_warrior_hair02
+    100062: Point001_zhanshi
+    100064: Point_tail_zhanshi
+    100066: Point_wing_zhanshi
+    100068: zhanshi_d_Body
+    100070: zhanshi_d_Boots
+    100072: zhanshi_d_face
+    100074: zhanshi_d_glove_L
+    100076: zhanshi_d_glove_R
+    100078: zhanshi_d_hair
+    100080: zhanshi_d_Leg
+    100082: zhanshi_d_weapon
+    100084: Point_fishing_zhanshi
+    100086: Point_fishing
+    100088: Player_warrior_body
+    100090: Player_warrior_boots
+    100092: Player_warrior_face
+    100094: Player_warrior_gauntlet
+    100096: Player_warrior_glove
+    100098: Player_warrior_hair02 1
+    100100: Player_warrior_leg
+    100102: Player_warrior_sword_weapon
+    100104: Player_warrior_hair1
+    100106: Player_warrior_hair2
+    100108: Player_warrior_hair2_a
+    100110: player_warrior_hair1_a
+    100112: player_warrior_hair01_a
+    100114: eye_left_zhanshi
+    100116: eye_right_zhanshi
+    100118: weapon_fx
+    400000: Bip01 Head_zhanshi
+    400002: Bip01 L Calf_zhanshi
+    400004: Bip01 L Clavicle_zhanshi
+    400006: Bip01 L Finger01_zhanshi
+    400008: Bip01 L Finger0_zhanshi
+    400010: Bip01 L Finger11_zhanshi
+    400012: Bip01 L Finger1_zhanshi
+    400014: Bip01 L Foot_zhanshi
+    400016: Bip01 L Forearm_zhanshi
+    400018: Bip01 L Hand_zhanshi
+    400020: Bip01 L Thigh_zhanshi
+    400022: Bip01 L UpperArm_zhanshi
+    400024: Bip01 Neck_zhanshi
+    400026: Bip01 Pelvis_zhanshi
+    400028: Bip01 R Calf_zhanshi
+    400030: Bip01 R Clavicle_zhanshi
+    400032: Bip01 R Finger01_zhanshi
+    400034: Bip01 R Finger0_zhanshi
+    400036: Bip01 R Finger11_zhanshi
+    400038: Bip01 R Finger1_zhanshi
+    400040: Bip01 R Foot_zhanshi
+    400042: Bip01 R Forearm_zhanshi
+    400044: Bip01 R Hand_zhanshi
+    400046: Bip01 R Thigh_zhanshi
+    400048: Bip01 R UpperArm_zhanshi
+    400050: Bip01 Spine1_zhanshi
+    400052: Bip01 Spine_zhanshi
+    400054: Bip01_zhanshi
+    400056: //RootNode
+    400058: Player_warrior_hair01
+    400060: Player_warrior_hair02
+    400062: Point001_zhanshi
+    400064: Point_tail_zhanshi
+    400066: Point_wing_zhanshi
+    400068: zhanshi_d_Body
+    400070: zhanshi_d_Boots
+    400072: zhanshi_d_face
+    400074: zhanshi_d_glove_L
+    400076: zhanshi_d_glove_R
+    400078: zhanshi_d_hair
+    400080: zhanshi_d_Leg
+    400082: zhanshi_d_weapon
+    400084: Point_fishing_zhanshi
+    400086: Point_fishing
+    400088: Player_warrior_body
+    400090: Player_warrior_boots
+    400092: Player_warrior_face
+    400094: Player_warrior_gauntlet
+    400096: Player_warrior_glove
+    400098: Player_warrior_hair02 1
+    400100: Player_warrior_leg
+    400102: Player_warrior_sword_weapon
+    400104: Player_warrior_hair1
+    400106: Player_warrior_hair2
+    400108: Player_warrior_hair2_a
+    400110: player_warrior_hair1_a
+    400112: player_warrior_hair01_a
+    400114: eye_left_zhanshi
+    400116: eye_right_zhanshi
+    400118: weapon_fx
+    2300000: zhanshi_d_weapon
+    2300002: Player_warrior_sword_weapon
+    3300000: zhanshi_d_weapon
+    3300002: Player_warrior_sword_weapon
+    4300000: zhanshi_d_face
+    4300002: zhanshi_d_glove_L
+    4300004: zhanshi_d_Leg
+    4300006: zhanshi_d_Boots
+    4300008: zhanshi_d_hair
+    4300010: Player_warrior_hair02
+    4300012: zhanshi_d_weapon
+    4300014: zhanshi_d_glove_R
+    4300016: Player_warrior_hair01
+    4300018: zhanshi_d_Body
+    4300020: Player_warrior_face
+    4300022: Player_warrior_glove
+    4300024: Player_warrior_leg
+    4300026: Player_warrior_boots
+    4300028: Player_warrior_hair02
+    4300030: Player_warrior_sword_weapon
+    4300032: Player_warrior_gauntlet
+    4300034: Player_warrior_body
+    4300036: Player_warrior_hair2
+    4300038: Player_warrior_hair2_a
+    4300040: Player_warrior_hair1
+    4300042: player_warrior_hair1_a
+    4300044: player_warrior_hair01_a
+    9500000: //RootNode
+    13700000: Player_warrior_hair01
+    13700002: Player_warrior_hair02
+    13700004: zhanshi_d_Body
+    13700006: zhanshi_d_Boots
+    13700008: zhanshi_d_face
+    13700010: zhanshi_d_glove_L
+    13700012: zhanshi_d_glove_R
+    13700014: zhanshi_d_hair
+    13700016: zhanshi_d_Leg
+    13700018: Player_warrior_body
+    13700020: Player_warrior_boots
+    13700022: Player_warrior_face
+    13700024: Player_warrior_gauntlet
+    13700026: Player_warrior_glove
+    13700028: Player_warrior_hair02 1
+    13700030: Player_warrior_leg
+    13700032: Player_warrior_hair1
+    13700034: Player_warrior_hair2
+    13700036: Player_warrior_hair2_a
+    13700038: player_warrior_hair1_a
+    13700040: player_warrior_hair01_a
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 1
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths:
+    - Point001_zhanshi
+    - Bip01_zhanshi/Bip01 Pelvis_zhanshi/Bip01 Spine_zhanshi/Bip01 Spine1_zhanshi/Bip01
+      Neck_zhanshi/Bip01 L Clavicle_zhanshi/Bip01 L UpperArm_zhanshi/Bip01 L Forearm_zhanshi/Bip01
+      L Hand_zhanshi/Bip01 L Finger1_zhanshi
+    - Bip01_zhanshi/Bip01 Pelvis_zhanshi/Bip01 Spine_zhanshi/Bip01 Spine1_zhanshi/Bip01
+      Neck_zhanshi/Bip01 R Clavicle_zhanshi/Bip01 R UpperArm_zhanshi/Bip01 R Forearm_zhanshi/Bip01
+      R Hand_zhanshi/Bip01 R Finger1_zhanshi
+    - Bip01_zhanshi/Bip01 Pelvis_zhanshi/Bip01 Spine_zhanshi/Bip01 Spine1_zhanshi/Bip01
+      Neck_zhanshi/Bip01 R Clavicle_zhanshi/Bip01 R UpperArm_zhanshi/Bip01 R Forearm_zhanshi/Bip01
+      R Hand_zhanshi/Bip01 R Finger1_zhanshi/Bip01 R Finger11_zhanshi
+    - Bip01_zhanshi/Bip01 Pelvis_zhanshi/Bip01 Spine_zhanshi/Bip01 Spine1_zhanshi/Bip01
+      Neck_zhanshi/Bip01 L Clavicle_zhanshi/Bip01 L UpperArm_zhanshi/Bip01 L Forearm_zhanshi/Bip01
+      L Hand_zhanshi/Point_fishing_zhanshi
+    - Bip01_zhanshi/Bip01 Pelvis_zhanshi/Bip01 Spine_zhanshi/Bip01 Spine1_zhanshi/Bip01
+      Neck_zhanshi/Bip01 L Clavicle_zhanshi/Bip01 L UpperArm_zhanshi/Bip01 L Forearm_zhanshi/Bip01
+      L Hand_zhanshi/weapon_fx
+    - Bip01_zhanshi/Bip01 Pelvis_zhanshi/Bip01 Spine_zhanshi/Bip01 Spine1_zhanshi/Point_wing_zhanshi
+    - Bip01_zhanshi/Bip01 Pelvis_zhanshi/Point_tail_zhanshi
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 1
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 180
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

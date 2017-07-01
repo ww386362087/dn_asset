@@ -1,0 +1,6 @@
+id,name,age,part,com
+id,名字,年龄,组合,党员
+int,string,int,int[],bool
+1001,彭德怀,43,3|4|5,FALSE
+1002,贺龙,24,2|1,TRUE
+1003,叶剑英,23,2|3,FALSE

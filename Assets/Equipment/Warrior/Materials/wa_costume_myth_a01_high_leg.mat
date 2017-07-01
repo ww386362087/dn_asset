@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: wa_costume_myth_a01_high_leg
+  m_Shader: {fileID: 4800000, guid: c8ff729b2333b224db711a512a989e88, type: 3}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 65ce84f08b1b7a042862aca358c1a789, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Mask
+        second:
+          m_Texture: {fileID: 2800000, guid: 58895ee7df85176408b4c7621de4a6b8, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Cube
+        second:
+          m_Texture: {fileID: 8900000, guid: 1c29b285820d16145b826f0892ebd15c, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _RimPower
+        second: 2.73214269
+      data:
+        first:
+          name: _DiffusePower
+        second: .85535717
+      data:
+        first:
+          name: _CubePower
+        second: .196428567
+    m_Colors:
+      data:
+        first:
+          name: _Color
+        second: {r: .588, g: .588, b: .588, a: 1}
+      data:
+        first:
+          name: _RimColor
+        second: {r: .742647052, g: .68540442, b: .567906559, a: 0}
+      data:
+        first:
+          name: _CubeColor
+        second: {r: .727941155, g: .700329542, b: .545955896, a: 1}

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ar_may22th_d03_body
+  m_Shader: {fileID: 4800000, guid: 48da639377865c246b51a705966fcf21, type: 3}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: c6eb6ad3070c96c4687578ea509362fb, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Mask
+        second:
+          m_Texture: {fileID: 2800000, guid: 0951275850c814747bad1131c9854ad4, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _Cutoff
+        second: .5
+    m_Colors:
+      data:
+        first:
+          name: _LightArgs
+        second: {r: 1, g: .209999993, b: 0, a: 3}
+      data:
+        first:
+          name: _RimColor
+        second: {r: .352999985, g: .352999985, b: .352999985, a: 0}
+      data:
+        first:
+          name: _UIRimMask
+        second: {r: 1, g: 1, b: 0, a: 0}

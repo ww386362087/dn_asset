@@ -1,0 +1,209 @@
+fileFormatVersion: 2
+guid: 48d1ab69a105ded44a5dd2d7d21affea
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bip01 Head_archer
+    100002: Bip01 L Calf_archer
+    100004: Bip01 L Clavicle_archer
+    100006: Bip01 L Finger0_archer
+    100008: Bip01 L Foot_archer
+    100010: Bip01 L Forearm_archer
+    100012: Bip01 L Hand_archer
+    100014: Bip01 L Thigh_archer
+    100016: Bip01 L Toe0_archer
+    100018: Bip01 L UpperArm_archer
+    100020: Bip01 Neck_archer
+    100022: Bip01 Pelvis_archer
+    100024: Bip01 R Calf_archer
+    100026: Bip01 R Clavicle_archer
+    100028: Bip01 R Finger0_archer
+    100030: Bip01 R Foot_archer
+    100032: Bip01 R Forearm_archer
+    100034: Bip01 R Hand_archer
+    100036: Bip01 R Thigh_archer
+    100038: Bip01 R Toe0_archer
+    100040: Bip01 R UpperArm_archer
+    100042: Bip01 Spine1_archer
+    100044: Bip01 Spine_archer
+    100046: Bip01 Tail_archer
+    100048: Bip01_archer
+    100050: Bone003(mirrored)_archer
+    100052: Bone003_archer
+    100054: Bone004(mirrored)_archer
+    100056: Bone004_archer
+    100058: Bone006(mirrored)_archer
+    100060: Bone006_archer
+    100062: Bone008(mirrored)_archer
+    100064: Bone008_archer
+    100066: Bone009(mirrored)_archer
+    100068: Bone009_archer
+    100070: Bone01_archer
+    100072: Bone03_archer
+    100074: Bone04_archer
+    100076: Bone06_archer
+    100078: Bone07_archer
+    100080: Bone08_archer
+    100082: BoxBone01_archer
+    100084: eye_left_archer
+    100086: eye_right_archer
+    100088: //RootNode
+    100090: Player_archer_body
+    100092: Player_archer_boots
+    100094: Player_archer_glove
+    100096: Player_archer_hair
+    100098: Player_archer_head
+    100100: Player_archer_leg
+    100102: Player_archer_quiver
+    100104: Player_archer_weapon_archer
+    100106: Point_fishing_archer
+    100108: Point_tail_archer
+    100110: Point_wing_archer
+    100112: weapon_fx01
+    100114: weapon_fx02
+    400000: Bip01 Head_archer
+    400002: Bip01 L Calf_archer
+    400004: Bip01 L Clavicle_archer
+    400006: Bip01 L Finger0_archer
+    400008: Bip01 L Foot_archer
+    400010: Bip01 L Forearm_archer
+    400012: Bip01 L Hand_archer
+    400014: Bip01 L Thigh_archer
+    400016: Bip01 L Toe0_archer
+    400018: Bip01 L UpperArm_archer
+    400020: Bip01 Neck_archer
+    400022: Bip01 Pelvis_archer
+    400024: Bip01 R Calf_archer
+    400026: Bip01 R Clavicle_archer
+    400028: Bip01 R Finger0_archer
+    400030: Bip01 R Foot_archer
+    400032: Bip01 R Forearm_archer
+    400034: Bip01 R Hand_archer
+    400036: Bip01 R Thigh_archer
+    400038: Bip01 R Toe0_archer
+    400040: Bip01 R UpperArm_archer
+    400042: Bip01 Spine1_archer
+    400044: Bip01 Spine_archer
+    400046: Bip01 Tail_archer
+    400048: Bip01_archer
+    400050: Bone003(mirrored)_archer
+    400052: Bone003_archer
+    400054: Bone004(mirrored)_archer
+    400056: Bone004_archer
+    400058: Bone006(mirrored)_archer
+    400060: Bone006_archer
+    400062: Bone008(mirrored)_archer
+    400064: Bone008_archer
+    400066: Bone009(mirrored)_archer
+    400068: Bone009_archer
+    400070: Bone01_archer
+    400072: Bone03_archer
+    400074: Bone04_archer
+    400076: Bone06_archer
+    400078: Bone07_archer
+    400080: Bone08_archer
+    400082: BoxBone01_archer
+    400084: eye_left_archer
+    400086: eye_right_archer
+    400088: //RootNode
+    400090: Player_archer_body
+    400092: Player_archer_boots
+    400094: Player_archer_glove
+    400096: Player_archer_hair
+    400098: Player_archer_head
+    400100: Player_archer_leg
+    400102: Player_archer_quiver
+    400104: Player_archer_weapon_archer
+    400106: Point_fishing_archer
+    400108: Point_tail_archer
+    400110: Point_wing_archer
+    400112: weapon_fx01
+    400114: weapon_fx02
+    2300000: Player_archer_weapon_archer
+    3300000: Player_archer_weapon_archer
+    4300000: Player_archer_boots
+    4300002: Player_archer_glove
+    4300004: Player_archer_leg
+    4300006: Player_archer_quiver
+    4300008: Player_archer_body
+    4300010: Player_archer_hair
+    4300012: Player_archer_head
+    4300014: Player_archer_weapon_archer
+    9500000: //RootNode
+    13700000: Player_archer_body
+    13700002: Player_archer_boots
+    13700004: Player_archer_glove
+    13700006: Player_archer_hair
+    13700008: Player_archer_head
+    13700010: Player_archer_leg
+    13700012: Player_archer_quiver
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 1
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths:
+    - Bip01_archer/Bip01 Spine_archer/Bip01 Spine1_archer/Bip01 Neck_archer/Bip01
+      L Clavicle_archer/Bip01 L UpperArm_archer/Bip01 L Forearm_archer/Bip01 L Hand_archer/Bip01
+      L Finger0_archer
+    - Bip01_archer/Bip01 Pelvis_archer
+    - Bip01_archer/Bip01 Pelvis_archer/Bip01 R Thigh_archer/Bip01 R Calf_archer/Bip01
+      R Foot_archer/Bip01 R Toe0_archer
+    - Bip01_archer/Bip01 Pelvis_archer/Bip01 L Thigh_archer/Bip01 L Calf_archer/Bip01
+      L Foot_archer/Bip01 L Toe0_archer
+    - Bip01_archer/Bip01 Pelvis_archer/Bip01 L Thigh_archer/weapon_fx02
+    - Bip01_archer/Bip01 Pelvis_archer/Bip01 R Thigh_archer/weapon_fx01
+    - Bip01_archer/Bip01 Pelvis_archer/Point_tail_archer
+    - Bip01_archer/Bip01 Spine_archer/Bip01 Spine1_archer/Bip01 Neck_archer/Bip01
+      L Clavicle_archer/Bip01 L UpperArm_archer/Bip01 L Forearm_archer/Bip01 L Hand_archer/BoxBone01_archer
+    - Bip01_archer/Bip01 Spine_archer/Bip01 Spine1_archer/Bip01 Neck_archer/Bip01
+      L Clavicle_archer/Bip01 L UpperArm_archer/Bip01 L Forearm_archer/Bip01 L Hand_archer/Point_fishing_archer
+    - Bip01_archer/Bip01 Spine_archer/Bip01 Spine1_archer/Point_wing_archer
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 1
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

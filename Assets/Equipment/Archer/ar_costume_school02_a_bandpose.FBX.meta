@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: 422def512f4d5d3419af78d1f85eb875
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ar_costume_school02_a_bigbow_weapon
+    100004: ar_costume_school02_a_body
+    100006: ar_costume_school02_a_boots
+    100008: ar_costume_school02_a_glove
+    100010: ar_costume_school02_a_helmet
+    100012: ar_costume_school02_a_leg
+    100014: ar_costume_school02_a_quiver
+    100016: Bip01 Head_archer
+    100018: Bip01 L Calf_archer
+    100020: Bip01 L Clavicle_archer
+    100022: Bip01 L Finger0_archer
+    100024: Bip01 L Foot_archer
+    100026: Bip01 L Forearm_archer
+    100028: Bip01 L Hand_archer
+    100030: Bip01 L Thigh_archer
+    100032: Bip01 L Toe0_archer
+    100034: Bip01 L UpperArm_archer
+    100036: Bip01 Neck_archer
+    100038: Bip01 Pelvis_archer
+    100040: Bip01 R Calf_archer
+    100042: Bip01 R Clavicle_archer
+    100044: Bip01 R Finger0_archer
+    100046: Bip01 R Foot_archer
+    100048: Bip01 R Forearm_archer
+    100050: Bip01 R Hand_archer
+    100052: Bip01 R Thigh_archer
+    100054: Bip01 R Toe0_archer
+    100056: Bip01 R UpperArm_archer
+    100058: Bip01 Spine1_archer
+    100060: Bip01 Spine_archer
+    100062: Bip01 Tail_archer
+    100064: Bip01_archer
+    100066: Bone003(mirrored)_archer
+    100068: Bone003_archer
+    100070: Bone004(mirrored)_archer
+    100072: Bone004_archer
+    100074: Bone006(mirrored)_archer
+    100076: Bone006_archer
+    100078: Bone008(mirrored)_archer
+    100080: Bone008_archer
+    100082: Bone009(mirrored)_archer
+    100084: Bone009_archer
+    100086: Bone01_archer
+    100088: Bone03_archer
+    100090: Bone04_archer
+    100092: Bone06_archer
+    100094: Bone07_archer
+    100096: Bone08_archer
+    100098: BoxBone01_archer
+    100100: Point_tail_archer
+    100102: Point_wing_archer
+    400000: //RootNode
+    400002: ar_costume_school02_a_bigbow_weapon
+    400004: ar_costume_school02_a_body
+    400006: ar_costume_school02_a_boots
+    400008: ar_costume_school02_a_glove
+    400010: ar_costume_school02_a_helmet
+    400012: ar_costume_school02_a_leg
+    400014: ar_costume_school02_a_quiver
+    400016: Bip01 Head_archer
+    400018: Bip01 L Calf_archer
+    400020: Bip01 L Clavicle_archer
+    400022: Bip01 L Finger0_archer
+    400024: Bip01 L Foot_archer
+    400026: Bip01 L Forearm_archer
+    400028: Bip01 L Hand_archer
+    400030: Bip01 L Thigh_archer
+    400032: Bip01 L Toe0_archer
+    400034: Bip01 L UpperArm_archer
+    400036: Bip01 Neck_archer
+    400038: Bip01 Pelvis_archer
+    400040: Bip01 R Calf_archer
+    400042: Bip01 R Clavicle_archer
+    400044: Bip01 R Finger0_archer
+    400046: Bip01 R Foot_archer
+    400048: Bip01 R Forearm_archer
+    400050: Bip01 R Hand_archer
+    400052: Bip01 R Thigh_archer
+    400054: Bip01 R Toe0_archer
+    400056: Bip01 R UpperArm_archer
+    400058: Bip01 Spine1_archer
+    400060: Bip01 Spine_archer
+    400062: Bip01 Tail_archer
+    400064: Bip01_archer
+    400066: Bone003(mirrored)_archer
+    400068: Bone003_archer
+    400070: Bone004(mirrored)_archer
+    400072: Bone004_archer
+    400074: Bone006(mirrored)_archer
+    400076: Bone006_archer
+    400078: Bone008(mirrored)_archer
+    400080: Bone008_archer
+    400082: Bone009(mirrored)_archer
+    400084: Bone009_archer
+    400086: Bone01_archer
+    400088: Bone03_archer
+    400090: Bone04_archer
+    400092: Bone06_archer
+    400094: Bone07_archer
+    400096: Bone08_archer
+    400098: BoxBone01_archer
+    400100: Point_tail_archer
+    400102: Point_wing_archer
+    2300000: ar_costume_school02_a_bigbow_weapon
+    3300000: ar_costume_school02_a_bigbow_weapon
+    4300000: ar_costume_school02_a_body
+    4300002: ar_costume_school02_a_boots
+    4300004: ar_costume_school02_a_glove
+    4300006: ar_costume_school02_a_helmet
+    4300008: ar_costume_school02_a_quiver
+    4300010: ar_costume_school02_a_bigbow_weapon
+    4300012: ar_costume_school02_a_leg
+    9500000: //RootNode
+    13700000: ar_costume_school02_a_body
+    13700002: ar_costume_school02_a_boots
+    13700004: ar_costume_school02_a_glove
+    13700006: ar_costume_school02_a_helmet
+    13700008: ar_costume_school02_a_leg
+    13700010: ar_costume_school02_a_quiver
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

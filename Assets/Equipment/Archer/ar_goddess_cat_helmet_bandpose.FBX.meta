@@ -1,0 +1,116 @@
+fileFormatVersion: 2
+guid: 915a268fa13a67546bb363624179ede5
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: ar_goddess_cat_helmet
+    100002: //RootNode
+    100004: Bip01 Head_archer
+    100006: Bip01 L Calf_archer
+    100008: Bip01 L Clavicle_archer
+    100010: Bip01 L Finger0_archer
+    100012: Bip01 L Foot_archer
+    100014: Bip01 L Forearm_archer
+    100016: Bip01 L Hand_archer
+    100018: Bip01 L Thigh_archer
+    100020: Bip01 L Toe0_archer
+    100022: Bip01 L UpperArm_archer
+    100024: Bip01 Neck_archer
+    100026: Bip01 Pelvis_archer
+    100028: Bip01 R Calf_archer
+    100030: Bip01 R Clavicle_archer
+    100032: Bip01 R Finger0_archer
+    100034: Bip01 R Foot_archer
+    100036: Bip01 R Forearm_archer
+    100038: Bip01 R Hand_archer
+    100040: Bip01 R Thigh_archer
+    100042: Bip01 R Toe0_archer
+    100044: Bip01 R UpperArm_archer
+    100046: Bip01 Spine1_archer
+    100048: Bip01 Spine_archer
+    100050: Bip01 Tail_archer
+    100052: Bip01_archer
+    400000: ar_goddess_cat_helmet
+    400002: //RootNode
+    400004: Bip01 Head_archer
+    400006: Bip01 L Calf_archer
+    400008: Bip01 L Clavicle_archer
+    400010: Bip01 L Finger0_archer
+    400012: Bip01 L Foot_archer
+    400014: Bip01 L Forearm_archer
+    400016: Bip01 L Hand_archer
+    400018: Bip01 L Thigh_archer
+    400020: Bip01 L Toe0_archer
+    400022: Bip01 L UpperArm_archer
+    400024: Bip01 Neck_archer
+    400026: Bip01 Pelvis_archer
+    400028: Bip01 R Calf_archer
+    400030: Bip01 R Clavicle_archer
+    400032: Bip01 R Finger0_archer
+    400034: Bip01 R Foot_archer
+    400036: Bip01 R Forearm_archer
+    400038: Bip01 R Hand_archer
+    400040: Bip01 R Thigh_archer
+    400042: Bip01 R Toe0_archer
+    400044: Bip01 R UpperArm_archer
+    400046: Bip01 Spine1_archer
+    400048: Bip01 Spine_archer
+    400050: Bip01 Tail_archer
+    400052: Bip01_archer
+    4300000: ar_goddess_cat_helmet
+    9500000: //RootNode
+    13700000: ar_goddess_cat_helmet
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 1
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

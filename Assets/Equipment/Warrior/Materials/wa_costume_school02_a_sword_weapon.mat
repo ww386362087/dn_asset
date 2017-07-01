@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: wa_costume_school02_a_sword_weapon
+  m_Shader: {fileID: 4800000, guid: 939ce5577dbf23f4e9f7c734f8e83efc, type: 3}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 8dcc624908a70e944a539641e9259627, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Mask
+        second:
+          m_Texture: {fileID: 2800000, guid: e559a9e81ee1ce840961ab5687b1bb52, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Cube
+        second:
+          m_Texture: {fileID: 8900000, guid: 1c29b285820d16145b826f0892ebd15c, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats: {}
+    m_Colors:
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _CubeColor
+        second: {r: 1, g: .919675469, b: .470588207, a: 1}
+      data:
+        first:
+          name: _LightArgs
+        second: {r: .600000024, g: .699999988, b: 1.29999995, a: 4}
+      data:
+        first:
+          name: _RimColor
+        second: {r: .691176474, g: .577966511, b: .208369374, a: 0}
+      data:
+        first:
+          name: _UIRimMask
+        second: {r: 1, g: 1, b: 0, a: 0}
