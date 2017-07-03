@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Editor\Assets\AnimationEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\BytesTableEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\BytesTableViewEditor.cs" />
      <Compile Include="Assets\Editor\Assets\EquipPreview.cs" />
      <Compile Include="Assets\Editor\Assets\FbxEditor.cs" />
      <Compile Include="Assets\Editor\Assets\MakeEquip.cs" />

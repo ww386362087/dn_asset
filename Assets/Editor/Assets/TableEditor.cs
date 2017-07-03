@@ -135,6 +135,13 @@ namespace XEditor
         }
 
 
+        public static void Table2Bytes(UnityEngine.Object target)
+        {
+            UnityEngine.Object[] targets = new UnityEngine.Object[1];
+            targets[0] = target;
+            Table2Bytes(targets);
+        }
+
         public static void Table2Bytes(UnityEngine.Object[] targets)
         {
 #if UNITY_EDITOR_WIN

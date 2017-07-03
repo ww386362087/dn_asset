@@ -14,6 +14,8 @@ public class Main : MonoBehaviour
     {
         XEquipUtil.Test();
         go = GameObject.Find("Player(Clone)");
+
+        Debug.LogError(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
     }
 
     private string CombinePath(string path)
