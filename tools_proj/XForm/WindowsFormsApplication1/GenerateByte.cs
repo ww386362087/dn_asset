@@ -14,16 +14,25 @@ namespace XForm
 
         public void GenerateAllBytes(XCForm f)
         {
-            DirectoryInfo dir = new DirectoryInfo(f.unity_table_path);
+            DirectoryInfo dir = new DirectoryInfo(XCForm.unity_table_path);
             FileInfo[] files = dir.GetFiles("*.csv");
             for (int i = 0, max = files.Length; i < max; i++)
             {
                 FileInfo file = files[i];
                 int indx = file.Name.LastIndexOf('.');
-                string destname = f.unity_bytes_path + file.Name.Substring(0, indx) + ".bytes";
+                string destname = XCForm.unity_bytes_path + file.Name.Substring(0, indx) + ".bytes";
                 WriteBytes(file, destname);
                 f.PCB(file.FullName);
             }
+        }
+
+
+        public void WriteByte(string path)
+        {
+            FileInfo file = new FileInfo(path);
+            int indx = file.Name.LastIndexOf('.');
+            string destname = XCForm.unity_bytes_path + file.Name.Substring(0, indx) + ".bytes";
+            WriteBytes(file, destname);
         }
 
 

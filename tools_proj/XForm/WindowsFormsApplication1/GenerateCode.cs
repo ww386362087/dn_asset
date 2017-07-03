@@ -23,7 +23,7 @@ namespace XForm
             {
                 if (string.IsNullOrEmpty(_originDir))
                 {
-                    _originDir = form.unity_table_path;
+                    _originDir = XCForm.unity_table_path;
                 }
                 return _originDir;
             }
@@ -37,7 +37,7 @@ namespace XForm
             {
                 if (string.IsNullOrEmpty(_destDir))
                 {
-                    _destDir = form.unity_proj_path + @"Assets\Scripts\Table\";
+                    _destDir = XCForm.unity_proj_path + @"Assets\Scripts\Table\";
                 }
                 return _destDir;
             }
@@ -67,7 +67,15 @@ namespace XForm
                 f.PCB(files[i].FullName);
             }
         }
-        public void GenerateTable(FileInfo file)
+
+
+        public void GenerateTCode(string path)
+        {
+            FileInfo file = new FileInfo(path);
+            GenerateTable(file);
+        }
+
+        private void GenerateTable(FileInfo file)
         {
             string[] titles = null;
             string[] types = null;
@@ -146,7 +154,7 @@ namespace XForm
             fileContent.Replace("public int replace;", content2.ToString());
 
             string filePath = destdir + name + ".cs";
-            Console.WriteLine("make:" + filePath);
+           // Console.WriteLine("make:" + filePath);
             File.WriteAllText(filePath, fileContent.ToString());
         }
 

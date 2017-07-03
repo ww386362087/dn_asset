@@ -8,50 +8,29 @@ namespace XEditor
 {
     public class TableEditor
     {
-
-        private delegate bool EnumTableCallback(TextAsset table, string path, Type readerType);
-        
-        private static void EnumTable(EnumTableCallback cb, string title, Dictionary<string, Type> tableScriptMap)
+        [MenuItem(@"Assets/Tool/Table/MakeSelect2Bytes")]
+        private static void MakeTableBytes()
         {
-            UnityEngine.Object[] tables = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
-            if (tables != null)
-            {
-                for (int i = 0; i < tables.Length; ++i)
-                {
-                    TextAsset table = tables[i] as TextAsset;
-                    string path = "";
-                    if (table != null)
-                    {
-                        {
-                            path = AssetDatabase.GetAssetPath(table);
-                            if (path.EndsWith(".txt"))
-                            {
-                                string name = path.Replace("Assets/Resources/Table/", "");
-                                name = name.Replace(".txt", "");
-                                if (tableScriptMap != null)
-                                {
-                                    Type readerType = null;
-                                    if (tableScriptMap.TryGetValue(name, out readerType))
-                                    {
-                                        cb(table, path, readerType);
-                                    }
-                                }
-                                else
-                                {
-                                    cb(table, path, null);
-                                }
-                            }
-
-                        }
-                    }
-                    EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", title, i, tables.Length), path, (float)i / tables.Length);
-                }
-            }
-            AssetDatabase.Refresh();
-            EditorUtility.ClearProgressBar();
-            EditorUtility.DisplayDialog("Finish", "All gameobjects processed finish", "OK");
+            UnityEngine.Object[] objs = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
+            Table2Bytes(objs);
         }
 
+        [MenuItem(@"Assets/Tool/Table/MakeSelect2Codes")]
+        private static void MakeTableCodes()
+        {
+            UnityEngine.Object[] objs = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
+            Table2Codes(objs);
+        }
+
+        [MenuItem(@"Assets/Tool/Table/MakeAll2Bytes")]
+        private static void AllTable2Bytes()
+        {
+            UnityEngine.Object[] objects = Resources.LoadAll<UnityEngine.Object>("Table");
+            Table2Bytes(objects);
+            EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
+        }
+
+        private static string postCsv = ".csv";
         private delegate bool EnumBytesTableCallback(TextAsset table, string path);
 
         private static void EnumBytesTable(EnumBytesTableCallback cb, string title)
@@ -71,7 +50,6 @@ namespace XEditor
                             {
                                 cb(table, path);
                             }
-
                         }
                     }
                     EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", title, i, tables.Length), path, (float)i / tables.Length);
@@ -106,7 +84,6 @@ namespace XEditor
             for (int i = 0; i < deletedAssets.Length; ++i)
             {
                 string tableName = GetTableName(deletedAssets[i]);
-
                 if (tableName != "")
                 {
                     string des = "Assets/Resources/Table/" + tableName + ".bytes";
@@ -125,10 +102,10 @@ namespace XEditor
 
         private static string GetTableName(string tablePath)
         {
-            if (tablePath.StartsWith("Assets/Table/") && tablePath.EndsWith(".txt"))
+            if (tablePath.StartsWith("Assets/Table/") && tablePath.EndsWith(postCsv))
             {
                 string tableName = tablePath.Replace("Assets/Table/", "");
-                tableName = tableName.Replace(".txt", "");
+                tableName = tableName.Replace(postCsv, "");
                 return tableName.Replace("\\", "/");
             }
             return "";
@@ -139,11 +116,12 @@ namespace XEditor
             return GetTableName(AssetDatabase.GetAssetPath(target));
         }
 
-        private static void ExeTable2Bytes(string tables, string arg0 = "-q -tables ")
+        private static void ExeTable2Bytes(string tables, string arg0 = "-t ")
         {
 #if UNITY_EDITOR_WIN
             System.Diagnostics.Process exep = new System.Diagnostics.Process();
-            exep.StartInfo.FileName = @"..\XProject\Shell\Table2Bytes.exe";
+            exep.StartInfo.FileName = Application.dataPath.Replace("Assets", "") 
+                + @"tools_proj/XForm/WindowsFormsApplication1/bin/Debug/XForm.exe";
             exep.StartInfo.Arguments = arg0 + tables;
             exep.StartInfo.CreateNoWindow = true;
             exep.StartInfo.UseShellExecute = false;
@@ -152,32 +130,44 @@ namespace XEditor
             exep.Start();
             string output = exep.StandardOutput.ReadToEnd();
             exep.WaitForExit();
-            if (output != "")
-            {
-                Debug.LogError(output);
-            }
-            AssetDatabase.Refresh();
+            if (output != "")Debug.Log(output);
 #endif
         }
 
-        public static void Table2Bytes(UnityEngine.Object target)
-        {
-#if UNITY_EDITOR_WIN
-            string tableName = GetTableName(target);
-            if (tableName != "")
-            {
-                ExeTable2Bytes(tableName);
-            }
-            EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
-#endif
-        }
 
         public static void Table2Bytes(UnityEngine.Object[] targets)
         {
 #if UNITY_EDITOR_WIN
+            string tables = MakeTableByObjects(targets);
+            if (tables != "")
+            {
+                ExeTable2Bytes(tables, "-t ");
+            }
+            AssetDatabase.Refresh();
+            EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
+#endif
+        }
+
+        private static void Table2Codes(UnityEngine.Object[] targets)
+        {
+#if UNITY_EDITOR_WIN
+            string tables = MakeTableByObjects(targets);
+            if (tables != "")
+            {
+                ExeTable2Bytes(tables, "-c ");
+            } 
+            AssetDatabase.Refresh();
+            EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
+#endif
+        }
+
+
+        private static string MakeTableByObjects(UnityEngine.Object[] targets)
+        {
+            string tables = "";
             if (targets != null)
             {
-                string tables = "";
+
                 for (int i = 0; i < targets.Length; ++i)
                 {
                     string tableName = AssetDatabase.GetAssetPath(targets[i]);
@@ -186,19 +176,8 @@ namespace XEditor
                         tables += tableName + " ";
                     }
                 }
-                if (tables != "")
-                {
-                    ExeTable2Bytes(tables);
-                }
             }
-            EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
-#endif
-        }
-
-        public static void AllTable2Bytes()
-        {
-            ExeTable2Bytes("");
-            EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
+            return tables;
         }
 
     }

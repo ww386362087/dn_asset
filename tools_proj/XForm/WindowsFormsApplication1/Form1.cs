@@ -11,7 +11,7 @@ namespace XForm
 
     public partial class XCForm : Form
     {
-        private string _tablepath = string.Empty;
+        private static string _proj_path = string.Empty;
 
         private StringBuilder _content = new StringBuilder();
 
@@ -19,28 +19,28 @@ namespace XForm
 
         public ProgressCallback PCB;
 
-        public string unity_proj_path
+        public static string unity_proj_path
         {
             get
             {
-                if (string.IsNullOrEmpty(_tablepath))
+                if (string.IsNullOrEmpty(_proj_path))
                 {
                     string path = System.Windows.Forms.Application.StartupPath;
                     int indx = path.IndexOf("tools_proj");
                     path = path.Substring(0, indx);
-                    _tablepath = path;
+                    _proj_path = path;
                 }
-                return _tablepath;
+                return _proj_path;
             }
         }
 
 
-        public string unity_table_path
+        public static string unity_table_path
         {
             get { return unity_proj_path + @"Assets\Table\"; }
         }
 
-        public string unity_bytes_path
+        public static string unity_bytes_path
         {
             get { return unity_proj_path + @"Assets\Resources\Table\"; }
         }

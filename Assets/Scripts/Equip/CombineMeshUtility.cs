@@ -71,7 +71,6 @@ public class CombineMeshUtility :XSingleton<CombineMeshUtility>
             bool isOnepart = false;
             bool haAlpha = false;
             PartLoadTask onePart = null;
-            //bool isCutoutBlend = false;
             int index = 0;
             for (int i = (int)EPartType.ECombinePartStart; i < (int)EPartType.ECombinePartEnd; ++i)
             {
@@ -131,15 +130,8 @@ public class CombineMeshUtility :XSingleton<CombineMeshUtility>
             combineTask.skin.sharedMaterial = mainBody;
 
             //换脸
-            //PartLoadTask facePart = combineTask.parts[XFastEnumIntEqualityComparer<EPartType>.ToInt(EPartType.EFace)];
-            //PartLoadTask decalPart = combineTask.parts[XFastEnumIntEqualityComparer<EPartType>.ToInt(EPartType.EDecal)];
-            //combineTask.faceTex = facePart.mtd != null ? facePart.mtd.tex : null;
-            //Texture faceTex = (decalPart.processStatus == EProcessStatus.EProcessed && decalPart.t != null) ? decalPart.t : combineTask.faceTex;
             if (mainBody != null)
             {
-
-                //mainBody.SetTexture(matTexName[0], faceTex);
-                //int texIndex = XFastEnumIntEqualityComparer<EPartType>.ToInt(EPartType.EHair);
                 if (isOnepart)
                 {
                     PartLoadTask face = combineTask.parts[(int)EPartType.EFace] as PartLoadTask;

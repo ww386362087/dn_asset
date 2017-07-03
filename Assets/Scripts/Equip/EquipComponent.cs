@@ -47,7 +47,6 @@ public class EquipComponent
             }
         }
         CombineMesh();
-        
     }
 
     private void CombineMesh()
