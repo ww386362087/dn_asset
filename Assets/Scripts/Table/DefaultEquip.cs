@@ -38,9 +38,14 @@ namespace XTable {
 			public string SideWeaponPoint;
 		}
 
+
+		public DefaultEquip() { }
+
+		public DefaultEquip(bool create) { Create(); }
+
 		public RowData[] Table = null;
 
-		public string bytePath { get { return "Table/DefaultEquip"; } }
+		public override string bytePath { get { return "Table/DefaultEquip"; } }
         
         public override void OnClear(int lineCount) {
 			if (lineCount > 0) Table = new RowData[lineCount];

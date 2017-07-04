@@ -322,7 +322,7 @@ namespace XEditor
         private CombineConfig combineConfig = null;
         public override void Init()
         {
-            combineConfig = CombineConfig.GetConfig();
+            combineConfig = FbxEditor.GetConfig();
             base.Init();
         }
         protected override void FilterBone()

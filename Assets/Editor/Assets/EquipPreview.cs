@@ -25,6 +25,7 @@ namespace XEditor
             public List<TempEquipData> data = new List<TempEquipData>();
 
         }
+
         public class TempEquipData
         {
             public FashionList.RowData row;
@@ -37,11 +38,10 @@ namespace XEditor
             public int id = 0;
         }
         private CombineConfig combineConfig = null;
-        //private XEntityPresentation defaultEquip = new XEntityPresentation();
-        private DefaultEquip defaultEquip = new DefaultEquip();
-        private FashionList fashionList = new FashionList();
-        private FashionSuit fashionSuit = new FashionSuit();
-        private EquipSuit equipSuit = new EquipSuit();
+        private DefaultEquip defaultEquip = new DefaultEquip(true);
+        private FashionList fashionList = new FashionList(true);
+        private FashionSuit fashionSuit = new FashionSuit(true);
+        private EquipSuit equipSuit = new EquipSuit(true);
 
         private int m_professionIndex = 0;
         private FieldInfo[] fashionTypeField = null;
@@ -119,7 +119,6 @@ namespace XEditor
                 for (int i = 0; i < fashionIDs.Length; ++i)
                 {
                     int fashionID = fashionIDs[i];
-
                     FashionList.RowData row = null;// fashionList.GetByItemID(fashionID);
                     if (row != null)
                     {
@@ -135,25 +134,17 @@ namespace XEditor
                                     string path = fi.GetValue(row) as string;
                                     tp.part[2] = path;
                                 }
-                                else
-                                {
-                                }
                                 threePart = true;
                             }
                             else
                             {
                                 TempEquipSuit suit = tmpFashionData[j];
-
-
                                 if (row.ReplaceID != null && j < row.ReplaceID.Length)
                                 {
                                     FashionList.RowData replace = null;// fashionList.GetByItemID(row.ReplaceID[j]);
                                     if (replace != null)
                                     {
-                                        if (replace.EquipPos == row.EquipPos)
-                                        {
-                                            row = replace;
-                                        }
+                                        if (replace.EquipPos == row.EquipPos) row = replace;
                                     }
                                 }
                                 string path = fi.GetValue(row) as string;
@@ -169,8 +160,7 @@ namespace XEditor
                         }
                     }
                 }
-                if (threePart)
-                    return;
+                if (threePart) return;
                 for (int i = 0; i < equipList.Length; ++i)
                 {
                     bool findSame = false;
@@ -240,6 +230,7 @@ namespace XEditor
             }
             return partPath;
         }
+
         private void Preview(EquipPart part)
         {
             List<CombineInstance> ciList = new List<CombineInstance>();
@@ -263,7 +254,6 @@ namespace XEditor
                     {
                         name = path.Substring(0, index);
                     }
-
                 }
                 if (!string.IsNullOrEmpty(path))
                 {
@@ -288,7 +278,6 @@ namespace XEditor
                                 cutout = false;
                             }
                         }
-
                     }
                     if (ci.mesh != null)
                     {
@@ -320,10 +309,8 @@ namespace XEditor
                     if (hair != null)
                     {
                         mat.SetTexture("_Body", mmtd.tex0);
-                        if (cutout)
-                            mat.SetTexture("_Alpha", mmtd.tex1);
+                        if (cutout) mat.SetTexture("_Alpha", mmtd.tex1);
                     }
-
                 }
                 else
                 {
@@ -339,12 +326,10 @@ namespace XEditor
                     }
                 }
 
-
                 string skinPrfab = "Prefabs/" + combineConfig.PrefabName[m_professionIndex];
                 string anim = combineConfig.IdleAnimName[m_professionIndex];
                 GameObject newGo = GameObject.Instantiate(Resources.Load<UnityEngine.Object>(skinPrfab)) as GameObject;
-                if (name != "")
-                    newGo.name = name;
+                if (name != "") newGo.name = name;
                 Animator ator = newGo.GetComponent<Animator>();
                 AnimatorOverrideController aoc = new AnimatorOverrideController();
                 aoc.runtimeAnimatorController = ator.runtimeAnimatorController;
@@ -383,7 +368,7 @@ namespace XEditor
 
         public void Init()
         {
-            combineConfig = CombineConfig.GetConfig();
+            combineConfig = FbxEditor.GetConfig();
             Type t = typeof(FashionList.RowData);
             FieldInfo[] fields = t.GetFields();
             fashionTypeField = new FieldInfo[combineConfig.FashionListColumn.Length];
@@ -398,7 +383,6 @@ namespace XEditor
                 m_EquipList[i] = new List<EquipPart>();
                 m_ThreePartList[i] = new List<ThreePart>();
             }
-
             for (int i = 0; i < fields.Length; ++i)
             {
                 FieldInfo fi = fields[i];
@@ -410,65 +394,6 @@ namespace XEditor
                         fashionTypeField[j] = fi;
                         break;
                     }
-                }
-            }
-
-            List<int> fashionID = new List<int>();
-            TextAsset ta = Resources.Load<TextAsset>(@"Table/DefaultEquip");
-            if (ta != null)
-            {
-                using (MemoryStream ms = new System.IO.MemoryStream(ta.bytes))
-                {
-                    defaultEquip.ReadFile(ms);
-                }
-                Resources.UnloadAsset(ta);
-            }
-            ta = Resources.Load<TextAsset>(@"Table/FashionList");
-            if (ta != null)
-            {
-                using (MemoryStream ms = new System.IO.MemoryStream(ta.bytes))
-                {
-                    fashionList.ReadFile(ms);
-                }
-                Resources.UnloadAsset(ta);
-            }
-            CVSReader.Uninit();
-            CVSReader.Init();
-            ta = Resources.Load<TextAsset>(@"Table/FashionSuit");
-            if (ta != null)
-            {
-                using (MemoryStream ms = new System.IO.MemoryStream(ta.bytes))
-                {
-                    fashionSuit.ReadFile(ms);
-                }
-                Resources.UnloadAsset(ta);
-                for (int i = 0; i < fashionSuit.Table.Length; ++i)
-                {
-                    FashionSuit.RowData row = fashionSuit.Table[i];
-                    if (row.FashionID != null)
-                    {
-                        for (int j = 0; j < row.FashionID.Length; ++j)
-                        {
-                            fashionID.Add((int)row.FashionID[j]);
-                        }
-                      //  MakeEquip(row.SuitName, fashionID.ToArray(), m_FashionList, fashions, row.SuitID);
-                        fashionID.Clear();
-                    }
-                }
-            }
-            ta = Resources.Load<TextAsset>(@"Table/EquipSuit");
-            if (ta != null)
-            {
-                using (MemoryStream ms = new System.IO.MemoryStream(ta.bytes))
-                {
-                    equipSuit.ReadFile(ms);
-                }
-                Resources.UnloadAsset(ta);
-                for (int i = 0; i < equipSuit.Table.Length; ++i)
-                {
-                    EquipSuit.RowData row = equipSuit.Table[i];
-                   // if (row.EquipID != null)
-                      //  MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1, row.ProfID - 1);
                 }
             }
         }
@@ -540,9 +465,8 @@ namespace XEditor
             }
             EditorGUILayout.EndScrollView();
             GUILayout.EndVertical();
-
             GUILayout.EndHorizontal();
         }
-    }
 
+    }
 }

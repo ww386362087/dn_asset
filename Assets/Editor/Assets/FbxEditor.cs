@@ -27,10 +27,20 @@ namespace XEditor
             window.Show();
         }
 
+        [MenuItem(@"Assets/Tool/Fbx/InitCombineConfig")]
+        private static void InitCombineConfig()
+        {
+            GameObject go = new GameObject("CombineConfig");
+            CombineConfig cc = new CombineConfig();
+            cc = go.AddComponent<CombineConfig>();
+            PrefabUtility.CreatePrefab("Assets/Editor/ImporterData/CombineConfig.prefab", go, ReplacePrefabOptions.ReplaceNameBased);
+            GameObject.DestroyImmediate(go);
+        }
+
         [MenuItem(@"Assets/Tool/Fbx/SaveSkinAsset %3")]
         private static void SaveSkinAsset()
         {
-            s_CombineConfig = CombineConfig.GetConfig();
+            s_CombineConfig = GetConfig();
             EnumFbx(_SaveSkinAsset, "SaveSkinAsset");
         }
 
@@ -386,6 +396,12 @@ namespace XEditor
             GameObject.DestroyImmediate(go);
             modelImporter.isReadable = false;
             return true;
+        }
+
+        public static CombineConfig GetConfig()
+        {
+            GameObject go = AssetDatabase.LoadAssetAtPath("Assets/Editor/ImporterData/CombineConfig.prefab", typeof(GameObject)) as GameObject;
+            return go.GetComponent<CombineConfig>();
         }
 
     }

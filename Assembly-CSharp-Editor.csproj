@@ -162,7 +162,6 @@
      <None Include="Assets\Resources\Shader\Projector\CircleAdd.shader" />
      <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture 1.shader" />
      <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlend8NoLight.shader" />
-     <None Include="Assets\Editor\ImporterData\Table.xml" />
      <None Include="Assets\Resources\Shader\Include\CommonHead_Include.cginc" />
      <None Include="Assets\Resources\Shader\FxPro\MobileDOFPro.shader" />
      <None Include="Assets\Resources\Shader\Scene\CustomLightSphere.shader" />

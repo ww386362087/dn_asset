@@ -42,9 +42,14 @@ namespace XTable {
 			public int OverAll;
 		}
 
+
+		public FashionSuit() { }
+
+		public FashionSuit(bool create) { Create(); }
+
 		public RowData[] Table = null;
 
-		public string bytePath { get { return "Table/FashionSuit"; } }
+		public override string bytePath { get { return "Table/FashionSuit"; } }
         
         public override void OnClear(int lineCount) {
 			if (lineCount > 0) Table = new RowData[lineCount];

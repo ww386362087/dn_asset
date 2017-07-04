@@ -14,8 +14,6 @@ public class Main : MonoBehaviour
     {
         XEquipUtil.Test();
         go = GameObject.Find("Player(Clone)");
-
-        Debug.LogError(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
     }
 
     private string CombinePath(string path)
@@ -47,19 +45,13 @@ public class Main : MonoBehaviour
 
     void ReadBytes()
     {
-        People p = new People();
-        FileStream fs = new FileStream(CombinePath(p.bytePath), FileMode.Open);
-        p.ReadFile(fs);
-        fs.Close();
+        People p = new People(true);
         for (int i = 0, max = p.Table.Length; i < max; i++)
         {
             Debug.Log("id: " + p.Table[i].id + " name: " + p.Table[i].name + " com:" + p.Table[i].com);
         }
 
-        XTable.FashionList f = new XTable.FashionList();
-        fs = new FileStream(CombinePath(f.bytePath), FileMode.Open);
-        f.ReadFile(fs);
-        fs.Close();
+        FashionList f = new FashionList(true);
         for (int i = 0; i < 10; i++)
         {
             Debug.Log("id:" + f.Table[i].ItemID + " name:" + f.Table[i].ItemName + " comment:" + f.Table[i].EquipPos);

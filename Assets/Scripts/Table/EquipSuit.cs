@@ -35,9 +35,14 @@ namespace XTable {
 			public string Effect10;
 		}
 
+
+		public EquipSuit() { }
+
+		public EquipSuit(bool create) { Create(); }
+
 		public RowData[] Table = null;
 
-		public string bytePath { get { return "Table/EquipSuit"; } }
+		public override string bytePath { get { return "Table/EquipSuit"; } }
         
         public override void OnClear(int lineCount) {
 			if (lineCount > 0) Table = new RowData[lineCount];

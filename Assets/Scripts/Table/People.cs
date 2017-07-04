@@ -23,9 +23,14 @@ namespace XTable {
 			public bool com;
 		}
 
+
+		public People() { }
+
+		public People(bool create) { Create(); }
+
 		public RowData[] Table = null;
 
-		public string bytePath { get { return "Table/People"; } }
+		public override string bytePath { get { return "Table/People"; } }
         
         public override void OnClear(int lineCount) {
 			if (lineCount > 0) Table = new RowData[lineCount];

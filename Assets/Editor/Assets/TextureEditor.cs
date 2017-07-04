@@ -75,10 +75,7 @@ namespace XEditor
                     {
                         format = (ETextureCompress)int.Parse(str[0]);
                     }
-                    catch (Exception)
-                    {
-
-                    }
+                    catch (Exception) { }
                 }
                 if (str.Length > 1)
                 {
@@ -86,10 +83,7 @@ namespace XEditor
                     {
                         size = (ETextureSize)int.Parse(str[1]);
                     }
-                    catch (Exception)
-                    {
-
-                    }
+                    catch (Exception) { }
                 }
             }
         }
@@ -101,7 +95,6 @@ namespace XEditor
             {
                 path = path.Substring(0, index);
             }
-
             Material mat = AssetDatabase.LoadAssetAtPath(path + ".mat", typeof(Material)) as Material;
             GameObject atlas = AssetDatabase.LoadAssetAtPath(path + ".prefab", typeof(GameObject)) as GameObject;
             return mat != null && atlas != null;
@@ -165,7 +158,6 @@ namespace XEditor
                         }
                     }
                 }
-
             }
 
             SceneView.onSceneGUIDelegate = TargetUpdate;
@@ -203,8 +195,6 @@ namespace XEditor
                     warningStyle.normal.textColor = new Color(1, 0, 0);
                     warningStyle.fontSize = 20;
                 }
-
-
                 GUILayout.Label("此图不能热更新!!!", warningStyle);
             }
             if (isUITex && texImporter != null)
@@ -214,7 +204,6 @@ namespace XEditor
                 ETextureSize newAlphaSize = (ETextureSize)EditorGUILayout.EnumPopup("Alpha缩放", alphaSize);
                 if (newSrcFormat != srcFormat || newAlphaSize != alphaSize)
                 {
-                    //texImporter.userData = string.Format("{0} {1}", (int)newSrcFormat, (int)newAlphaSize);
                     if (newSrcFormat != srcFormat)
                     {
                         srcFormat = newSrcFormat;
@@ -241,7 +230,6 @@ namespace XEditor
                             int s = size == -1 ? (int)tf.alphaSize : size;
                             ti.userData = string.Format("{0} {1}", f, s);
                             EditorUtility.DisplayProgressBar(string.Format("Processing-{0}/{1}", i, targets.Length), ti.assetPath, (float)i / targets.Length);
-                            // XEditor.AssetModify.CompressSeparateAlpha(ti);
                         }
                     }
                     EditorUtility.ClearProgressBar();
@@ -255,7 +243,6 @@ namespace XEditor
                 GUILayout.EndHorizontal();
             }
         }
-
     }
 
     internal class TextureStatus : EditorWindow
@@ -372,7 +359,6 @@ namespace XEditor
                 GUILayout.Label(tf.path);
                 EditorGUILayout.EnumPopup("压缩", tf.srcFormat);
                 EditorGUILayout.EnumPopup("Alpha缩放", tf.alphaSize);
-                //EditorGUILayout.ObjectField(data.GetName(), tex, typeof(Texture2D), true, GUILayout.MaxWidth(250)) as Texture2D;
                 GUILayout.EndHorizontal();
             }
             EditorGUILayout.EndScrollView();
@@ -532,15 +518,6 @@ namespace XEditor
             //Rect wr = new Rect(0, 0, 1800, 1200);
             TextureFindEditor window = (TextureFindEditor)EditorWindow.GetWindow(typeof(TextureFindEditor), true, "查找贴图");
             window.Show();
-        }
-
-        [MenuItem(@"Assets/Tool/Test/Test")]
-        private static void Test()
-        {
-            Material mat = Resources.Load<Material>("Combo_Hit03_Clip09");
-            Material emptyMat = new Material(mat.shader);
-            mat.CopyPropertiesFromMaterial(emptyMat);
-            AssetDatabase.SaveAssets();
         }
 
         [MenuItem(@"Assets/Tool/Texture/Compress")]

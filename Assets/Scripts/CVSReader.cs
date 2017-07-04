@@ -14,6 +14,16 @@ public abstract class CVSReader
         public abstract void SkipBuffer(BinaryReader stream, int count);
     }
 
+    public virtual string bytePath { get { return string.Empty; } }
+
+    
+    public void Create()
+    {
+        string path = Application.dataPath + "/Resources/" + bytePath + ".bytes";
+        FileStream fs=new FileStream(path,FileMode.Open);
+        ReadFile(fs);
+        fs.Close();
+    }
 
     public sealed class UIntParse : ValueParse<uint>
     {
@@ -169,7 +179,6 @@ public abstract class CVSReader
     {
         get { return " line: " + lineno.ToString() + " column: " + columnno.ToString(); }
     }
-
 
     public static bool IsInited()
     {

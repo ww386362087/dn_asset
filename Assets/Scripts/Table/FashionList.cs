@@ -36,9 +36,14 @@ namespace XTable {
 			public string AgainReplaceID;
 		}
 
+
+		public FashionList() { }
+
+		public FashionList(bool create) { Create(); }
+
 		public RowData[] Table = null;
 
-		public string bytePath { get { return "Table/FashionList"; } }
+		public override string bytePath { get { return "Table/FashionList"; } }
         
         public override void OnClear(int lineCount) {
 			if (lineCount > 0) Table = new RowData[lineCount];
