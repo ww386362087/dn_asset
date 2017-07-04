@@ -14,6 +14,8 @@ public class Main : MonoBehaviour
     {
         XEquipUtil.Test();
         go = GameObject.Find("Player(Clone)");
+
+        EquipSuit suit = new EquipSuit();
     }
 
     private string CombinePath(string path)

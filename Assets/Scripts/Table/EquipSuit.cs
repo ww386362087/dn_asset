@@ -22,7 +22,7 @@ namespace XTable {
 			public int ProfID;
 			public int SuitQuality;
 			public bool IsCreateShow;
-			public string EquipID;
+			public int[] EquipID;
 			public string Effect1;
 			public string Effect2;
 			public string Effect3;
@@ -57,7 +57,7 @@ namespace XTable {
 			Read<int>(reader, ref row.ProfID, intParse); columnno = 3;
 			Read<int>(reader, ref row.SuitQuality, intParse); columnno = 4;
 			Read<bool>(reader, ref row.IsCreateShow, boolParse); columnno = 5;
-			Read<string>(reader, ref row.EquipID, stringParse); columnno = 6;
+			ReadArray<int>(reader, ref row.EquipID, intParse); columnno = 6;
 			Read<string>(reader, ref row.Effect1, stringParse); columnno = 7;
 			Read<string>(reader, ref row.Effect2, stringParse); columnno = 8;
 			Read<string>(reader, ref row.Effect3, stringParse); columnno = 9;

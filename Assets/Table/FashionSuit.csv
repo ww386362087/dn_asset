@@ -1,6 +1,6 @@
 SuitID,SuitName,SuitQuality,SuitAtlas,SuitIcon,FashionID,Effect2,Effect3,Effect4,Effect5,Effect6,Effect7,All1,All2,All3,All4,All0SP,All1SP,All2SP,All3SP,All4SP,NoSale,ShowLevel,OverAll
 套装ID,套名字,套装品质,套装图标atlas,套装图标(UI/Item/Item),时装ID,2件效果,3件效果,4件效果,5件效果,6件效果,7件效果,全1级效果,全2级效果,全3级效果,全4级效果,凑齐套装奖励SP,全1级奖励SP,全2级奖励SP,全3级奖励SP,全4级奖励SP,不卖了,显示等级,是否为整套
-uint,string,int,string,string,string,string,string,string,string,string,string,int,int,int,int,int,int,int,int,int,bool,int,int
+uint,string,int,string,string,int[],string,string,string,string,string,string,int,int,int,int,int,int,int,int,int,bool,int,int
 3,熔岩套,3,Item/Fashion,3_1_1|3_1_2|3_1_3|3_1_4|3_1_5,10030|10031|10032|10033|10034|10035|10036,0,13=2000,0,12=200|22=200,0,1011=5|1021=5,0,0,0,0,0,0,0,0,0,FALSE,9,0
 6,海军套,3,Item/Fashion,6_1_1|6_1_2|6_1_3|6_1_4|6_1_5,10060|10061|10062|10063|10064|10065|10066,0,13=1000,0,12=100|22=100,0,1011=2|1021=2,0,0,0,0,0,0,0,0,0,FALSE,9,0
 7,暗夜骑士套,3,Item/Fashion,7_1_1|7_1_2|7_1_3|7_1_4|7_1_5,10070|10071|10072|10073|10074|10075|10076,0,13=1000,0,12=100|22=100,0,1011=2|1021=2,0,0,0,0,0,0,0,0,0,FALSE,9,0

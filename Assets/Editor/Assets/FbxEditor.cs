@@ -65,7 +65,7 @@ namespace XEditor
             window.Show();
         }
 
-        [MenuItem(@"Assets/Tool/Fbx/Preview")]
+        [MenuItem(@"Assets/Tool/Fbx/Preview %5")]
         private static void PreviewEquip()
         {
             EquipPreview window = (EquipPreview)EditorWindow.GetWindow(typeof(EquipPreview), true, "套装预览");

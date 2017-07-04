@@ -155,7 +155,15 @@ namespace XEditor
 #endif
         }
 
-        private static void Table2Codes(UnityEngine.Object[] targets)
+        public static void Table2Codes(UnityEngine.Object target)
+        {
+            UnityEngine.Object[] targets = new UnityEngine.Object[1];
+            targets[0] = target;
+            Table2Codes(targets);
+        }
+
+
+        public static void Table2Codes(UnityEngine.Object[] targets)
         {
 #if UNITY_EDITOR_WIN
             string tables = MakeTableByObjects(targets);

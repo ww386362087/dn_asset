@@ -21,7 +21,7 @@ namespace XTable {
 			public int SuitQuality;
 			public string SuitAtlas;
 			public string SuitIcon;
-			public string FashionID;
+			public int[] FashionID;
 			public string Effect2;
 			public string Effect3;
 			public string Effect4;
@@ -63,7 +63,7 @@ namespace XTable {
 			Read<int>(reader, ref row.SuitQuality, intParse); columnno = 2;
 			Read<string>(reader, ref row.SuitAtlas, stringParse); columnno = 3;
 			Read<string>(reader, ref row.SuitIcon, stringParse); columnno = 4;
-			Read<string>(reader, ref row.FashionID, stringParse); columnno = 5;
+			ReadArray<int>(reader, ref row.FashionID, intParse); columnno = 5;
 			Read<string>(reader, ref row.Effect2, stringParse); columnno = 6;
 			Read<string>(reader, ref row.Effect3, stringParse); columnno = 7;
 			Read<string>(reader, ref row.Effect4, stringParse); columnno = 8;

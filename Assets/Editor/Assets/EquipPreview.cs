@@ -43,11 +43,11 @@ namespace XEditor
         private FashionSuit fashionSuit = new FashionSuit(true);
         private EquipSuit equipSuit = new EquipSuit(true);
 
-        private int m_professionIndex = 0;
-        private FieldInfo[] fashionTypeField = null;
-        private List<EquipPart>[] m_FashionList = null;
-        private List<EquipPart>[] m_EquipList = null;
-        private List<ThreePart>[] m_ThreePartList = null;
+        private int m_profession = 0;
+        private FieldInfo fashionTypeField = null;
+        private List<EquipPart> m_FashionList = null;
+        private List<EquipPart> m_EquipList = null;
+        private List<ThreePart> m_ThreePartList = null;
         private Vector2 fashionScrollPos = Vector2.zero;
         private Vector2 equipScrollPos = Vector2.zero;
         private void Hash(ref uint hash, string str)
@@ -106,97 +106,88 @@ namespace XEditor
             return newTp;
         }
 
-        private void MakeEquip(string name, int[] fashionIDs, List<EquipPart>[] equipList, TempEquipSuit[] tmpFashionData, int suitID, int prefassion = -1)
+        private void MakeEquip(string name, int[] fashionIDs, List<EquipPart> equipList, TempEquipSuit tmpFashionData, int suitID, int prefassion = -1)
         {
             if (fashionIDs != null)
             {
-                foreach (TempEquipSuit suit in tmpFashionData)
-                {
-                    suit.hash = 0;
-                    suit.data.Clear();
-                }
+                tmpFashionData.hash = 0;
+                tmpFashionData.data.Clear();
+
                 bool threePart = false;
                 for (int i = 0; i < fashionIDs.Length; ++i)
                 {
                     int fashionID = fashionIDs[i];
-                    FashionList.RowData row = null;// fashionList.GetByItemID(fashionID);
+                    FashionList.RowData row = fashionList.GetByItemID(fashionID);
                     if (row != null)
                     {
-                        for (int j = 0; j < fashionTypeField.Length; ++j)
+                        FieldInfo fi = fashionTypeField;
+                        List<ThreePart> tpLst = m_ThreePartList;
+                        if (row.EquipPos == 7 || row.EquipPos == 8 || row.EquipPos == 9)
                         {
-                            FieldInfo fi = fashionTypeField[j];
-                            List<ThreePart> tpLst = m_ThreePartList[j];
-                            if (row.EquipPos == 7 || row.EquipPos == 8 || row.EquipPos == 9)
+                            ThreePart tp = FindThreePart(suitID, tpLst);
+                            if (row.EquipPos == 9)
                             {
-                                ThreePart tp = FindThreePart(suitID, tpLst);
-                                if (row.EquipPos == 9)
-                                {
-                                    string path = fi.GetValue(row) as string;
-                                    tp.part[2] = path;
-                                }
-                                threePart = true;
-                            }
-                            else
-                            {
-                                TempEquipSuit suit = tmpFashionData[j];
-                                if (row.ReplaceID != null && j < row.ReplaceID.Length)
-                                {
-                                    FashionList.RowData replace = null;// fashionList.GetByItemID(row.ReplaceID[j]);
-                                    if (replace != null)
-                                    {
-                                        if (replace.EquipPos == row.EquipPos) row = replace;
-                                    }
-                                }
                                 string path = fi.GetValue(row) as string;
-                                if (!string.IsNullOrEmpty(path))
+                                tp.part[2] = path;
+                            }
+                            threePart = true;
+                        }
+                        else
+                        {
+                            if (row.ReplaceID != null && row.ReplaceID.Length > 1)
+                            {
+                                FashionList.RowData replace = fashionList.GetByItemID(row.ReplaceID[1]);
+                                if (replace != null)
                                 {
-                                    Hash(ref suit.hash, path);
-                                    TempEquipData data = new TempEquipData();
-                                    data.row = row;
-                                    data.path = path;
-                                    suit.data.Add(data);
+                                    if (replace.EquipPos == row.EquipPos) row = replace;
                                 }
+                            }
+                            string path = fi.GetValue(row) as string;
+                            if (!string.IsNullOrEmpty(path))
+                            {
+                                Hash(ref tmpFashionData.hash, path);
+                                TempEquipData data = new TempEquipData();
+                                data.row = row;
+                                data.path = path;
+                                tmpFashionData.data.Add(data);
                             }
                         }
                     }
                 }
                 if (threePart) return;
-                for (int i = 0; i < equipList.Length; ++i)
+
+                bool findSame = false;
+                TempEquipSuit suit = tmpFashionData;
+                if (suit.hash == 0 || prefassion != -1) return;
+                for (int j = 0; j < equipList.Count; ++j)
                 {
-                    bool findSame = false;
-                    List<EquipPart> equips = equipList[i];
-                    TempEquipSuit suit = tmpFashionData[i];
-                    if (suit.hash == 0 || prefassion != -1 && prefassion != i) continue;
-                    for (int j = 0; j < equips.Count; ++j)
+                    EquipPart part = equipList[j];
+                    if (part != null && part.hash == suit.hash)
                     {
-                        EquipPart part = equips[j];
-                        if (part != null && part.hash == suit.hash)
-                        {
-                            part.suitName.Add(name);
-                            findSame = true;
-                            break;
-                        }
-                    }
-                    if (!findSame)
-                    {
-                        EquipPart part = new EquipPart();
-                        part.hash = suit.hash;
                         part.suitName.Add(name);
-                        for (int j = 0; j < suit.data.Count; ++j)
-                        {
-                            TempEquipData data = suit.data[j];
-                            int partPos = ConvertPart(data.row.EquipPos);
-                            if (partPos < part.partPath.Length)
-                            {
-                                part.partPath[partPos] = data.path;
-                            }
-                            else if (partPos == part.partPath.Length)
-                            {
-                                part.mainWeapon = data.path;
-                            }
-                        }
-                        equips.Add(part);
+                        findSame = true;
+                        break;
                     }
+                }
+                if (!findSame)
+                {
+                    EquipPart part = new EquipPart();
+                    part.hash = suit.hash;
+                    part.suitName.Add(name);
+                    for (int j = 0; j < suit.data.Count; ++j)
+                    {
+                        TempEquipData data = suit.data[j];
+                        int partPos = ConvertPart(data.row.EquipPos);
+                        if (partPos < part.partPath.Length)
+                        {
+                            part.partPath[partPos] = data.path;
+                        }
+                        else if (partPos == part.partPath.Length)
+                        {
+                            part.mainWeapon = data.path;
+                        }
+                    }
+                    equipList.Add(part);
                 }
             }
         }
@@ -235,7 +226,7 @@ namespace XEditor
         {
             List<CombineInstance> ciList = new List<CombineInstance>();
             System.Object[] meshPrefab = new System.Object[8];
-            DefaultEquip.RowData data = null;// defaultEquip.GetByProfID(m_professionIndex + 1);
+            DefaultEquip.RowData data = defaultEquip.GetByProfID(m_profession + 1);
             bool hasOnepart = false;
             bool cutout = true;
             string name = "";
@@ -263,7 +254,6 @@ namespace XEditor
                     {
                         ci.mesh = mtd.mesh;
                         meshPrefab[i] = mtd;
-
                     }
                     else
                     {
@@ -273,16 +263,10 @@ namespace XEditor
                             ci.mesh = mmtd.mesh;
                             meshPrefab[i] = mmtd;
                             hasOnepart = true;
-                            if (mmtd.tex1 == null)
-                            {
-                                cutout = false;
-                            }
+                            if (mmtd.tex1 == null) cutout = false;
                         }
                     }
-                    if (ci.mesh != null)
-                    {
-                        ciList.Add(ci);
-                    }
+                    if (ci.mesh != null) ciList.Add(ci);
                 }
             }
 
@@ -291,14 +275,8 @@ namespace XEditor
                 Material mat = null;
                 if (hasOnepart)
                 {
-                    if (cutout)
-                    {
-                        mat = new Material(Shader.Find("Custom/Skin/RimlightBlendCutout"));
-                    }
-                    else
-                    {
-                        mat = new Material(Shader.Find("Custom/Skin/RimlightBlendCutout"));
-                    }
+                    string mshader = cutout ? "Custom/Skin/RimlightBlendCutout" : "Custom/Skin/RimlightBlendCutout";
+                    mat = new Material(Shader.Find(mshader));
                     XMeshTexData face = meshPrefab[0] as XMeshTexData;
                     if (face != null)
                         mat.SetTexture("_Face", face.tex);
@@ -326,8 +304,8 @@ namespace XEditor
                     }
                 }
 
-                string skinPrfab = "Prefabs/" + combineConfig.PrefabName[m_professionIndex];
-                string anim = combineConfig.IdleAnimName[m_professionIndex];
+                string skinPrfab = "Prefabs/" + combineConfig.PrefabName[m_profession];
+                string anim = combineConfig.IdleAnimName[m_profession];
                 GameObject newGo = GameObject.Instantiate(Resources.Load<UnityEngine.Object>(skinPrfab)) as GameObject;
                 if (name != "") newGo.name = name;
                 Animator ator = newGo.GetComponent<Animator>();
@@ -371,53 +349,45 @@ namespace XEditor
             combineConfig = FbxEditor.GetConfig();
             Type t = typeof(FashionList.RowData);
             FieldInfo[] fields = t.GetFields();
-            fashionTypeField = new FieldInfo[combineConfig.FashionListColumn.Length];
-            TempEquipSuit[] fashions = new TempEquipSuit[combineConfig.FashionListColumn.Length];
-            m_FashionList = new List<EquipPart>[combineConfig.FashionListColumn.Length];
-            m_EquipList = new List<EquipPart>[combineConfig.FashionListColumn.Length];
-            m_ThreePartList = new List<ThreePart>[combineConfig.FashionListColumn.Length];
-            for (int i = 0; i < combineConfig.FashionListColumn.Length; ++i)
-            {
-                fashions[i] = new TempEquipSuit();
-                m_FashionList[i] = new List<EquipPart>();
-                m_EquipList[i] = new List<EquipPart>();
-                m_ThreePartList[i] = new List<ThreePart>();
-            }
+            int cnt = combineConfig.FashionListColumn.Length;
+            TempEquipSuit fashions = new TempEquipSuit();
+            m_FashionList = new List<EquipPart>();
+            m_EquipList = new List<EquipPart>();
+            m_ThreePartList = new List<ThreePart>();
+
             for (int i = 0; i < fields.Length; ++i)
             {
                 FieldInfo fi = fields[i];
-                for (int j = 0; j < combineConfig.FashionListColumn.Length; ++j)
+                if ("ModelPrefabArcher" == fi.Name) fashionTypeField = fi;
+            }
+            for (int i = 0; i < fashionSuit.Table.Length; ++i)
+            {
+                FashionSuit.RowData row = fashionSuit.Table[i];
+                if (row.FashionID != null)
                 {
-                    string equipPathColumn = combineConfig.FashionListColumn[j];
-                    if (equipPathColumn == fi.Name)
-                    {
-                        fashionTypeField[j] = fi;
-                        break;
-                    }
+                    MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
                 }
+            }
+            for (int i = 0; i < equipSuit.Table.Length; ++i)
+            {
+                EquipSuit.RowData row = equipSuit.Table[i];
+                if (row.EquipID != null)
+                    MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1, row.ProfID - 1);
             }
         }
 
         protected virtual void OnGUI()
         {
-            GUILayout.BeginHorizontal();
-            for (int i = 0; i < combineConfig.EquipFolderName.Length; ++i)
-            {
-                if (GUILayout.Button(combineConfig.EquipFolderName[i], GUILayout.MaxWidth(100)))
-                {
-                    m_professionIndex = i;
-                }
-            }
-            GUILayout.EndHorizontal();
+            m_profession = 1;//Archer
 
-            GUILayout.BeginHorizontal();
             //时装
+            GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("时装", GUILayout.MaxWidth(100));
             GUILayout.EndHorizontal();
             fashionScrollPos = GUILayout.BeginScrollView(fashionScrollPos, false, false);
-            List<EquipPart> currentPrefession = m_FashionList[m_professionIndex];
+            List<EquipPart> currentPrefession = m_FashionList;
             for (int i = 0; i < currentPrefession.Count; ++i)
             {
                 EquipPart part = currentPrefession[i];
@@ -427,10 +397,7 @@ namespace XEditor
                     EditorGUILayout.LabelField(part.suitName[j], GUILayout.MaxWidth(150));
                     if (j == 0)
                     {
-                        if (GUILayout.Button("Preview", GUILayout.MaxWidth(100)))
-                        {
-                            Preview(part);
-                        }
+                        if (GUILayout.Button("Preview", GUILayout.MaxWidth(100))) Preview(part);
                     }
                     GUILayout.EndHorizontal();
                 }
@@ -438,13 +405,14 @@ namespace XEditor
             }
             EditorGUILayout.EndScrollView();
             GUILayout.EndVertical();
+
             //装备
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("装备", GUILayout.MaxWidth(100));
             GUILayout.EndHorizontal();
             equipScrollPos = GUILayout.BeginScrollView(equipScrollPos, false, false);
-            List<EquipPart> currentEquipPrefession = m_EquipList[m_professionIndex];
+            List<EquipPart> currentEquipPrefession = m_EquipList;
             for (int i = 0; i < currentEquipPrefession.Count; ++i)
             {
                 EquipPart part = currentEquipPrefession[i];
@@ -454,10 +422,7 @@ namespace XEditor
                     EditorGUILayout.LabelField(part.suitName[j], GUILayout.MaxWidth(200));
                     if (j == 0)
                     {
-                        if (GUILayout.Button("Preview", GUILayout.MaxWidth(100)))
-                        {
-                            Preview(part);
-                        }
+                        if (GUILayout.Button("Preview", GUILayout.MaxWidth(100))) Preview(part);
                     }
                     GUILayout.EndHorizontal();
                 }
