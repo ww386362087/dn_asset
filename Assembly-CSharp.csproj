@@ -59,14 +59,15 @@
      <Compile Include="Assets\Scripts\Equip\XMeshMultiTexData.cs" />
      <Compile Include="Assets\Scripts\Equip\XMeshTexData.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
+     <Compile Include="Assets\Scripts\Others\CombineConfig.cs" />
+     <Compile Include="Assets\Scripts\Others\XRotation.cs" />
+     <Compile Include="Assets\Scripts\Others\XTableUtil.cs" />
      <Compile Include="Assets\Scripts\Table\DefaultEquip.cs" />
      <Compile Include="Assets\Scripts\Table\EquipSuit.cs" />
      <Compile Include="Assets\Scripts\Table\FashionList.cs" />
      <Compile Include="Assets\Scripts\Table\FashionSuit.cs" />
      <Compile Include="Assets\Scripts\Table\People.cs" />
      <Compile Include="Assets\Scripts\XCommon.cs" />
-     <Compile Include="Assets\Scripts\XEditor\CombineConfig.cs" />
-     <Compile Include="Assets\Scripts\XEditor\XTableUtil.cs" />
      <None Include="Assets\Resources\Shader\Particle\ParticleAdd.shader" />
      <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 2.shader" />
      <None Include="Assets\Resources\Shader\Projector\RectBlend.shader" />

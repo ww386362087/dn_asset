@@ -6,22 +6,14 @@ using System.IO;
 public class Main : MonoBehaviour
 {
 
-    GameObject go;
-    
-    float speed = 1;
-
     void Start()
     {
         XEquipUtil.Test();
-        go = GameObject.Find("Player(Clone)");
-
+        GameObject go = GameObject.Find("Player(Clone)");
+        go.AddComponent<XRotation>();
         EquipSuit suit = new EquipSuit();
     }
 
-    private string CombinePath(string path)
-    {
-        return Application.dataPath + "/Resources/" + path + ".bytes";
-    }
 
     void OnGUI()
     {
@@ -34,11 +26,7 @@ public class Main : MonoBehaviour
 
     void Update()
     {
-        if (go != null)
-        {
-            go.transform.localRotation = Quaternion.Euler(new Vector3(0, 12 + speed, 0));
-            speed++;
-        }
+       
         if (Input.GetKeyUp(KeyCode.F2))
         {
             ReadBytes();

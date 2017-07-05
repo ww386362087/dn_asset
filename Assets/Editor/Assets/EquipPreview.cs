@@ -23,7 +23,6 @@ namespace XEditor
         {
             public uint hash = 0;
             public List<TempEquipData> data = new List<TempEquipData>();
-
         }
 
         public class TempEquipData
@@ -95,10 +94,7 @@ namespace XEditor
             for (int i = 0; i < lst.Count; ++i)
             {
                 ThreePart tp = lst[i];
-                if (tp.id == id)
-                {
-                    return tp;
-                }
+                if (tp.id == id) return tp;
             }
             ThreePart newTp = new ThreePart();
             newTp.id = id;
@@ -222,6 +218,7 @@ namespace XEditor
             return partPath;
         }
 
+        private GameObject newGo;
         private void Preview(EquipPart part)
         {
             List<CombineInstance> ciList = new List<CombineInstance>();
@@ -304,10 +301,12 @@ namespace XEditor
                     }
                 }
 
+                if (newGo != null) GameObject.DestroyImmediate(newGo);
                 string skinPrfab = "Prefabs/" + combineConfig.PrefabName[m_profession];
                 string anim = combineConfig.IdleAnimName[m_profession];
-                GameObject newGo = GameObject.Instantiate(Resources.Load<UnityEngine.Object>(skinPrfab)) as GameObject;
+                newGo = GameObject.Instantiate(Resources.Load<UnityEngine.Object>(skinPrfab)) as GameObject;
                 if (name != "") newGo.name = name;
+                newGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 Animator ator = newGo.GetComponent<Animator>();
                 AnimatorOverrideController aoc = new AnimatorOverrideController();
                 aoc.runtimeAnimatorController = ator.runtimeAnimatorController;
@@ -376,10 +375,29 @@ namespace XEditor
             }
         }
 
+        protected void OnDestroy()
+        {
+            OnLostFocus();
+        }
+
+        protected void OnFocus()
+        {
+            OnLostFocus();
+            Init();
+        }
+
+        protected void OnLostFocus()
+        {
+            if (newGo != null) GameObject.DestroyImmediate(newGo);
+            m_FashionList = null;
+            m_EquipList = null;
+            m_ThreePartList = null;
+        }
+
         protected virtual void OnGUI()
         {
             m_profession = 1;//Archer
-
+            if (m_FashionList == null || m_EquipList == null) return;
             //时装
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
@@ -387,10 +405,10 @@ namespace XEditor
             EditorGUILayout.LabelField("时装", GUILayout.MaxWidth(100));
             GUILayout.EndHorizontal();
             fashionScrollPos = GUILayout.BeginScrollView(fashionScrollPos, false, false);
-            List<EquipPart> currentPrefession = m_FashionList;
-            for (int i = 0; i < currentPrefession.Count; ++i)
+           
+            for (int i = 0; i < m_FashionList.Count; ++i)
             {
-                EquipPart part = currentPrefession[i];
+                EquipPart part = m_FashionList[i];
                 for (int j = 0; j < part.suitName.Count; ++j)
                 {
                     GUILayout.BeginHorizontal();
