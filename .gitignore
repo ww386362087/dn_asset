@@ -14,14 +14,12 @@
 *.suo
 *.tmp
 *.user
-Assembly-CSharp.csproj
-Assembly-CSharp-Editor-vs.csproj
+Assembly-*.csproj
 Assembly-CSharp-Editor.csproj
 Assembly-CSharp-vs.csproj
 Asset_Process_Proj.CSharp.csproj
 Asset_Process_Proj.CSharp.Editor.csproj
-Asset_Process_Proj.sln
-Asset_Process_Proj-csharp.sln
+Asset_*.sln
 *.userprefs
 *.pidb
 *.booproj
