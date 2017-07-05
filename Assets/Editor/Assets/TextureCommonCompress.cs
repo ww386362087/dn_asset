@@ -98,7 +98,7 @@ namespace XEditor
                         textureImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), (int)compressSize, TextureImporterFormat.RGBA32);
                         textureImporter.isReadable = true;
                         AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
-                        Texture2D alphaTex = TextureModify.MakeAlphaRTex(alphaTexPath, (int)alphaSize, tex);
+                        TextureModify.MakeAlphaRTex(alphaTexPath, (int)alphaSize, tex);
                         textureImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), (int)compressSize, iosFormat);
                         textureImporter.SetPlatformTextureSettings(BuildTarget.Android.ToString(), (int)compressSize, androidFormat);
                         textureImporter.isReadable = false;

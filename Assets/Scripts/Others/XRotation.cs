@@ -9,7 +9,6 @@ public class XRotation : MonoBehaviour
     void Start()
     {
         Debug.Log("xrotation "+name);
-       
     }
 
     // Update is called once per frame

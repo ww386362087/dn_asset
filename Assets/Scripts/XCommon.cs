@@ -41,7 +41,6 @@ public class XCommon : XSingleton<XCommon>
         get { return _eps; }
     }
 
-    private System.Random _random = new System.Random(DateTime.Now.Millisecond);
 
     private int _idx = 0;
 

@@ -59,8 +59,8 @@ namespace XEditor
                             lights[0].name = "MainLight";
                             LayerMask layerMask = lights[0].cullingMask;
                             layerMask.value = 1 << LayerMask.NameToLayer("Player") |
-                                1 << LayerMask.NameToLayer("Role") |
-                                1 << LayerMask.NameToLayer("Enemy") |
+                                 1 << LayerMask.NameToLayer("Role") |
+                                 1 << LayerMask.NameToLayer("Enemy") |
                                  1 << LayerMask.NameToLayer("BigGuy") |
                                  1 << LayerMask.NameToLayer("Npc") |
                                  1 << LayerMask.NameToLayer("Terrain") |

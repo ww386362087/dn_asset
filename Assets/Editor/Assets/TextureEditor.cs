@@ -45,10 +45,7 @@ namespace XEditor
         private List<TexFormat> texFormat = new List<TexFormat>();
         private static GUIStyle buttonStyle = null;
         private GUIStyle warningStyle = null;
-        void TargetUpdate(SceneView sceneview)
-        {
-            Event e = Event.current;
-        }
+        void TargetUpdate(SceneView sceneview) { }
 
         public static bool IsDefaultFormat(bool isAtlas, TextureEditor.ETextureCompress format, TextureEditor.ETextureSize size)
         {
@@ -135,8 +132,6 @@ namespace XEditor
                 isUITex = (path.StartsWith("Assets/Resources/atlas/UI") || path.StartsWith("Assets/Resources/StaticUI")) && !path.EndsWith("_A.png");
                 if (isUITex)
                 {
-                    string userData = texImporter.userData;
-
                     GetTexFormat(IsAtlas(path), texImporter.userData, out srcFormat, out alphaSize);
                     for (int i = 0; i < targets.Length; ++i)
                     {
@@ -258,7 +253,6 @@ namespace XEditor
             public TextureEditor.ETextureSize alphaSize = TextureEditor.ETextureSize.Original;
             public bool isAtlas = false;
         }
-        private GameObject _model = null;
         private static List<TexInfo> allTexStatus = new List<TexInfo>();
         private int CompareNewMsg(TexInfo a, TexInfo b)
         {

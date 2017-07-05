@@ -48,16 +48,16 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\Assets\AnimationEditor.cs" />
      <Compile Include="Assets\Editor\Assets\BytesTableViewEditor.cs" />
-     <Compile Include="Assets\Editor\Assets\EquipPreview.cs" />
+     <Compile Include="Assets\Editor\Assets\EquipPreviewEditor.cs" />
      <Compile Include="Assets\Editor\Assets\FbxEditor.cs" />
      <Compile Include="Assets\Editor\Assets\MakeEquip.cs" />
      <Compile Include="Assets\Editor\Assets\MaterialEditor.cs" />
      <Compile Include="Assets\Editor\Assets\MaterialFindEditor.cs" />
      <Compile Include="Assets\Editor\Assets\PrefabEditor.cs" />
      <Compile Include="Assets\Editor\Assets\SceneEditor.cs" />
-     <Compile Include="Assets\Editor\Assets\SelectBones.cs" />
+     <Compile Include="Assets\Editor\Assets\SelectBonesEditor.cs" />
      <Compile Include="Assets\Editor\Assets\TableEditor.cs" />
-     <Compile Include="Assets\Editor\Assets\TextInspector.cs" />
+     <Compile Include="Assets\Editor\Assets\TextAssetInspector.cs" />
      <Compile Include="Assets\Editor\Assets\TextureCombine.cs" />
      <Compile Include="Assets\Editor\Assets\TextureCommonCompress.cs" />
      <Compile Include="Assets\Editor\Assets\TextureEditor.cs" />

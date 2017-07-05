@@ -9,7 +9,6 @@ namespace XEditor
     public class AnimationEditor
     {
         private delegate bool EnumAnimatorCallback(UnityEditorInternal.AnimatorController controller, string path);
-
         private static void EnumAnimatorController(EnumAnimatorCallback cb, string title)
         {
             UnityEngine.Object[] objects = Selection.GetFiltered(typeof(UnityEditorInternal.AnimatorController), SelectionMode.DeepAssets);
@@ -22,10 +21,7 @@ namespace XEditor
                     if (controller != null)
                     {
                         path = AssetDatabase.GetAssetPath(controller);
-                        if (cb != null)
-                        {
-                            cb(controller, path);
-                        }
+                        if (cb != null) cb(controller, path);
                     }
                     EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", title, i, objects.Length), path, (float)i / objects.Length);
                 }
@@ -37,7 +33,6 @@ namespace XEditor
         }
 
         private delegate void EnumAnimationCallback(AnimationClip clip, string path);
-
         private static void EnumAnimation(EnumAnimationCallback cb, string title)
         {
             UnityEngine.Object[] animationClips = Selection.GetFiltered(typeof(UnityEngine.AnimationClip), SelectionMode.DeepAssets);
@@ -50,10 +45,7 @@ namespace XEditor
                     if (clip != null)
                     {
                         path = AssetDatabase.GetAssetPath(clip);
-                        if (cb != null)
-                        {
-                            cb(clip, path);
-                        }
+                        if (cb != null) cb(clip, path);
                     }
                     EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", title, i, animationClips.Length), path, (float)i / animationClips.Length);
                 }
@@ -74,10 +66,6 @@ namespace XEditor
                 AnimationClip clip = (AnimationClip)AssetDatabase.LoadAssetAtPath(clipPath, typeof(AnimationClip));
                 if (clip != null)
                 {
-                    //if (clip.isLooping)
-                    //{
-                    //    clip.wrapMode = WrapMode.Loop;
-                    //}
                     SerializedObject serializedObject = new SerializedObject(clip);
                     SerializedProperty animationType = serializedObject.FindProperty("m_AnimationType");
                     animationType.intValue = 1;
@@ -114,14 +102,13 @@ namespace XEditor
                     Debug.Log("clip not found:" + controllerPath);
                 }
             }
-
             return true;
         }
 
         [MenuItem(@"Assets/Tool/Animation/ReduceKeyFrame")]
         private static void ReduceKeyFrame()
         {
-            UnityEngine.Object[] clips = Selection.GetFiltered(typeof(AnimationClip), SelectionMode.DeepAssets);
+            Object[] clips = Selection.GetFiltered(typeof(AnimationClip), SelectionMode.DeepAssets);
             if (clips != null)
             {
                 for (int i = 0; i < clips.Length; ++i)
@@ -130,7 +117,6 @@ namespace XEditor
                     if (clip != null)
                     {
                         AnimationClipCurveData[] accds = AnimationUtility.GetAllCurves(clip, true);
-
                         foreach (AnimationClipCurveData accd in accds)
                         {
                             EditorCurveBinding ecb = new EditorCurveBinding();
@@ -152,9 +138,7 @@ namespace XEditor
                                     int inTangent = (int)(key.inTangent * 1000.0f);
                                     int outTangent = (int)(key.outTangent * 1000.0f);
                                     int value = (int)(key.value * 1000.0f);
-                                    if (inTangent != firstIn ||
-                                        outTangent != firstOut ||
-                                        value != firstValue)
+                                    if (inTangent != firstIn || outTangent != firstOut || value != firstValue)
                                     {
                                         same = false;
                                     }
@@ -176,7 +160,7 @@ namespace XEditor
             AssetDatabase.Refresh();
             AssetDatabase.SaveAssets();
             EditorUtility.ClearProgressBar();
-            EditorUtility.DisplayDialog("Finish", "All gameobjects processed finish", "OK");
+            EditorUtility.DisplayDialog("Finish", "All Clips process finish", "OK");
         }
 
         [MenuItem(@"Assets/Tool/Animation/ClearTxt")]
@@ -187,15 +171,14 @@ namespace XEditor
             for (int i = 0; i < files.Length; ++i)
             {
                 FileInfo fi = files[i];
-                try
-                {
-                    fi.Delete();
-                }
-                catch
-                {
-
-                }
+                fi.Delete();
             }
+        }
+
+        [MenuItem(@"Assets/Tool/Animation/CheckAnimator")]
+        private static void CheckAnimator()
+        {
+            EnumAnimatorController(_CheckAnimator, "CheckAnimator");
         }
 
         private static bool _CheckAnimator(UnityEditorInternal.AnimatorController controller, string path)
@@ -207,6 +190,7 @@ namespace XEditor
                 if (asm.stateCount == 1)
                 {
                     UnityEditorInternal.State state = asm.defaultState;
+                    Debug.Log("state name: "+state.name+" cotroll: "+controller.name);
                     if (state.name != controller.name)
                     {
                         Debug.LogError(string.Format("Animator name error controller name:{0} state name:{1} path:{2}", controller.name, state.name, path));
@@ -219,15 +203,7 @@ namespace XEditor
             }
             return true;
         }
-
-
-
-        [MenuItem(@"Assets/Tool/Animation/CheckAnimator")]
-        private static void CheckAnimator()
-        {
-            EnumAnimatorController(_CheckAnimator, "CheckAnimator");
-        }
-
+        
 
     }
 

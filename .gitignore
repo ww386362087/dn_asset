@@ -14,12 +14,8 @@
 *.suo
 *.tmp
 *.user
-Assembly-*.csproj
-Assembly-CSharp-Editor.csproj
-Assembly-CSharp-vs.csproj
-Asset_Process_Proj.CSharp.csproj
-Asset_Process_Proj.CSharp.Editor.csproj
-Asset_*.sln
+*.csproj
+*.sln
 *.userprefs
 *.pidb
 *.booproj

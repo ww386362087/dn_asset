@@ -9,11 +9,20 @@ namespace XEditor
     public class FbxEditor
     {
 
+        [MenuItem(@"Assets/Tool/Fbx/InitCombineConfig")]
+        private static void InitCombineConfig()
+        {
+            GameObject go = new GameObject("CombineConfig");
+            go.AddComponent<CombineConfig>();
+            PrefabUtility.CreatePrefab("Assets/Editor/ImporterData/CombineConfig.prefab", go, ReplacePrefabOptions.ReplaceNameBased);
+            GameObject.DestroyImmediate(go);
+        }
+
         [MenuItem(@"Assets/Tool/Fbx/OptmizeCreatures")]
         private static void OptmizeGameObject()
         {
             Rect wr = new Rect(0, 0, 600, 800);
-            SelectBones window = (SelectBones)EditorWindow.GetWindowWithRect(typeof(SelectBones), wr, true, "隐藏骨骼");
+            SelectBonesEditor window = (SelectBonesEditor)EditorWindow.GetWindowWithRect(typeof(SelectBonesEditor), wr, true, "隐藏骨骼");
             window.Init();
             window.Show();
         }
@@ -27,16 +36,7 @@ namespace XEditor
             window.Show();
         }
 
-        [MenuItem(@"Assets/Tool/Fbx/InitCombineConfig")]
-        private static void InitCombineConfig()
-        {
-            GameObject go = new GameObject("CombineConfig");
-            CombineConfig cc = new CombineConfig();
-            cc = go.AddComponent<CombineConfig>();
-            PrefabUtility.CreatePrefab("Assets/Editor/ImporterData/CombineConfig.prefab", go, ReplacePrefabOptions.ReplaceNameBased);
-            GameObject.DestroyImmediate(go);
-        }
-
+      
         [MenuItem(@"Assets/Tool/Fbx/SaveSkinAsset %3")]
         private static void SaveSkinAsset()
         {
@@ -68,7 +68,7 @@ namespace XEditor
         [MenuItem(@"Assets/Tool/Fbx/Preview %5")]
         private static void PreviewEquip()
         {
-            EquipPreview window = (EquipPreview)EditorWindow.GetWindow(typeof(EquipPreview), true, "套装预览");
+            EquipPreviewEditor window = (EquipPreviewEditor)EditorWindow.GetWindow(typeof(EquipPreviewEditor), true, "套装预览");
             window.Init();
             window.Show();
         }
@@ -261,7 +261,6 @@ namespace XEditor
 
             List<TexUVInfo> texuvList = new List<TexUVInfo>();
             SkinnedMeshRenderer[] smrs = go.GetComponentsInChildren<SkinnedMeshRenderer>();
-            List<XMeshTexData> mtdList = new List<XMeshTexData>();
             bool isCutout = fbx.name.Contains("_onepart");
             foreach (SkinnedMeshRenderer smr in smrs)
             {

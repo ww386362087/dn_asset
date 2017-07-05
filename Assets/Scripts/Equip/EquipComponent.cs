@@ -75,16 +75,12 @@ public class EquipComponent
     {
         Object o = Resources.Load<GameObject>("Prefabs/Player");
         GameObject gameObject = Object.Instantiate(o) as GameObject;
-        Transform rootT = gameObject.transform.Find("");
-        //GetEquipPoints(rootT);
         Transform skinmesh = gameObject.transform.Find("CombinedMesh");
      
         SkinnedMeshRenderer skm = skinmesh.GetComponent<SkinnedMeshRenderer>();
         if (skm == null)
             skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         _combineMeshTask.skin = skm;
-        
-
     }
 
 }

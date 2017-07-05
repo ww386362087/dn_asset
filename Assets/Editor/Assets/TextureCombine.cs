@@ -57,7 +57,6 @@ public class TextureCombine : EditorWindow
     {
         if (namepath != "")
         {
-            Texture2D[] tmpTex = new Texture2D[4];
             for (int i = 0, imax = texs.Length; i < imax; ++i)
             {
                 Texture2D tex = texs[i];

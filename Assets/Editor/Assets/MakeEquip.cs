@@ -123,11 +123,9 @@ namespace XEditor
                             emt.srcMat = mr != null ? mr.sharedMaterial : null;
                             meshList.Add(emt);
                         }
-
                     }
                     GameObject.DestroyImmediate(go);
                 }
-
             }
             GUILayout.EndHorizontal();
 
@@ -135,7 +133,6 @@ namespace XEditor
             for (int i = 0, imax = mtdList.Count; i < imax; ++i)
             {
                 ExtraSkinMeshTex emt = mtdList[i];
-
                 if (emt.mtd != null)
                 {
                     GUILayout.BeginHorizontal();
@@ -236,7 +233,6 @@ namespace XEditor
                             emt.tex = AssetDatabase.LoadAssetAtPath(modelPath + texName + ".tga", typeof(Texture2D)) as Texture2D;
                         }
                     }
-
                 }
                 for (int i = 0, imax = meshList.Count; i < imax; ++i)
                 {
@@ -282,22 +278,16 @@ namespace XEditor
                                 mmtd._tex0 = emt.tex;
                                 mmtd._tex1 = TextureModify.ConvertTexRtex(mmtd._tex0);
                                 PrefabUtility.CreatePrefab(equipPath + emt.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
-
                             }
                             GameObject.DestroyImmediate(go);
                         }
-
                     }
-
-
                     for (int i = 0, imax = meshList.Count; i < imax; ++i)
                     {
                         ExtraMeshTex emt = meshList[i];
                         if (emt.tex != null)
                         {
                             GameObject go = new GameObject(emt.name);
-
-
                             Material mat = new Material(emt.srcMat);
                             mat.mainTexture = emt.tex;
                             mat.name = emt.name;
@@ -333,14 +323,12 @@ namespace XEditor
                                 mr.castShadows = false;
                                 mr.receiveShadows = false;
                             }
-
                             go.layer = LayerMask.NameToLayer("Role");
                             PrefabUtility.CreatePrefab(weaponPath + emt.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
                             GameObject.DestroyImmediate(go);
                         }
                     }
                 }
-
             }
             if (GUILayout.Button("Cancel", GUILayout.ExpandWidth(false)))
             {

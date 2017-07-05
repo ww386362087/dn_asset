@@ -11,7 +11,6 @@ public class Main : MonoBehaviour
         XEquipUtil.Test();
         GameObject go = GameObject.Find("Player(Clone)");
         go.AddComponent<XRotation>();
-        EquipSuit suit = new EquipSuit();
     }
 
 
@@ -23,15 +22,6 @@ public class Main : MonoBehaviour
         }
     }
 
-
-    void Update()
-    {
-       
-        if (Input.GetKeyUp(KeyCode.F2))
-        {
-            ReadBytes();
-        }
-    }
 
     void ReadBytes()
     {
