@@ -36,7 +36,7 @@ public class PartLoadTask : EquipLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                GameObject go = Resources.Load<GameObject>(location);
+                GameObject go = XResourceMgr.Load<GameObject>(location);
                 LoadFinish(go, this);
             }
             else if (m_PartLoadCb != null)
@@ -71,7 +71,7 @@ public class PartLoadTask : EquipLoadTask
     {
         if (mtd != null || mmtd != null)
         {
-            Resources.UnloadAsset(go);
+            XResourceMgr.UnloadAsset(go);
             mtd = null;
             mmtd = null;
         }

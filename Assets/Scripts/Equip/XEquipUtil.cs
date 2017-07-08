@@ -33,7 +33,7 @@ public class XEquipUtil
         else
         {
             if (roleType > 0)
-                return Resources.Load<Material>(GetRoleMaterial(roleType));
+                return XResourceMgr.Load<Material>(GetRoleMaterial(roleType));
             else
             {
                 return GetMaterial(_skin8);
@@ -53,19 +53,19 @@ public class XEquipUtil
     {
         if (shader == _skin_cutout)
         {
-            return Resources.Load<Material>("Materials/Char/RimLightBlendCutout");//mat
+            return XResourceMgr.Load<Material>("Materials/Char/RimLightBlendCutout");//mat
         }
         else if (shader == _skin_nocutout)
         {
-            return Resources.Load<Material>("Materials/Char/RimLightBlendNoCutout");
+            return XResourceMgr.Load<Material>("Materials/Char/RimLightBlendNoCutout");
         }
         else if (shader == _skin_blend)
         {
-            return Resources.Load<Material>("Materials/Char/RimLightBlend");
+            return XResourceMgr.Load<Material>("Materials/Char/RimLightBlend");
         }
         else if (shader == _skin8)
         {
-            return Resources.Load<Material>("Materials/Char/RimLightBlend8");
+            return XResourceMgr.Load<Material>("Materials/Char/RimLightBlend8");
         }
         return new Material(shader);
     }
@@ -126,39 +126,6 @@ public class XEquipUtil
         return skm;
     }
 
-
-
-    public static void Test()
-    {
-        FashionPositionInfo[] fashionList = new FashionPositionInfo[(int)FashionPosition.FASHION_ALL_END];
-        FashionPositionInfo fpi = new FashionPositionInfo();
-        fpi.fasionID = 0;
-        fpi.presentName = "0";
-        fpi.replace = false;
-
-        fpi.equipName = "";
-        fashionList[0] = fpi;
-        fpi.equipName = "Player_archer_body";
-        fashionList[1] = fpi;
-        fpi.equipName = "Player_archer_leg";
-        fashionList[2] = fpi;
-        fpi.equipName = "Player_archer_glove";
-        fashionList[3] = fpi;
-        fpi.equipName = "Player_archer_boots";
-        fashionList[4] = fpi;
-        fpi.equipName = "weapon/Player_archer_weapon_archer";
-        fashionList[5] = fpi;
-        fpi.equipName = "Player_archer_quiver";
-        fashionList[6] = fpi;
-        fpi.equipName = "Player_archer_head";
-        fashionList[10] = fpi;
-        fpi.equipName = "Player_archer_hair";
-        fashionList[11] = fpi;
-        EquipComponent com = new EquipComponent();
-        com.CreateRole();
-        com.EquipAll(fashionList);
-
-    }
 
 
 }

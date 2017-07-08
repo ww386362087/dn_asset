@@ -25,7 +25,7 @@ namespace XEditor
         [MenuItem(@"Assets/Tool/Table/MakeAll2Bytes")]
         private static void AllTable2Bytes()
         {
-            UnityEngine.Object[] objects = Resources.LoadAll<UnityEngine.Object>("Table");
+            UnityEngine.Object[] objects = XResourceMgr.LoadAll<UnityEngine.Object>("Table");
             Table2Bytes(objects);
             EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
         }

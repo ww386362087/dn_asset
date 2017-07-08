@@ -30,7 +30,7 @@ public class XCommon : XSingleton<XCommon>
 {
     public XCommon()
     {
-        _idx = 5;  
+        _idx = 5;
     }
 
     public readonly float FrameStep = (1 / 30.0f);
@@ -44,14 +44,9 @@ public class XCommon : XSingleton<XCommon>
 
     private int _idx = 0;
 
-    private uint[] _seeds = { 17, 33, 65, 129 };
-
     private int _new_id = 0;
 
-    public int New_id
-    {
-        get { return ++_new_id; }
-    }
+    public int New_id { get { return ++_new_id; } }
 
     public long UniqueToken
     {
@@ -111,4 +106,5 @@ public class XCommon : XSingleton<XCommon>
         return a == b;
 #endif
     }
+
 }

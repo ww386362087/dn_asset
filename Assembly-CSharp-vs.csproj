@@ -46,12 +46,28 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AssetSystem\XResourceMgr.cs" />
      <Compile Include="Assets\Scripts\CVSReader.cs" />
+     <Compile Include="Assets\Scripts\Component\XAIComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\XAnimComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\XAttributes.cs" />
+     <Compile Include="Assets\Scripts\Component\XAudioComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\XComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\XEquipComponent.cs" />
+     <Compile Include="Assets\Scripts\Document\Documents.cs" />
+     <Compile Include="Assets\Scripts\Entity\XBoss.cs" />
+     <Compile Include="Assets\Scripts\Entity\XEnemy.cs" />
+     <Compile Include="Assets\Scripts\Entity\XEntity.cs" />
+     <Compile Include="Assets\Scripts\Entity\XEntityMgr.cs" />
+     <Compile Include="Assets\Scripts\Entity\XMount.cs" />
+     <Compile Include="Assets\Scripts\Entity\XNPC.cs" />
+     <Compile Include="Assets\Scripts\Entity\XObject.cs" />
+     <Compile Include="Assets\Scripts\Entity\XPlayer.cs" />
+     <Compile Include="Assets\Scripts\Entity\XRole.cs" />
      <Compile Include="Assets\Scripts\Equip\CombineMeshTask.cs" />
      <Compile Include="Assets\Scripts\Equip\CombineMeshUtility.cs" />
      <Compile Include="Assets\Scripts\Equip\DecalLoadTask.cs" />
      <Compile Include="Assets\Scripts\Equip\EPartType.cs" />
-     <Compile Include="Assets\Scripts\Equip\EquipComponent.cs" />
      <Compile Include="Assets\Scripts\Equip\EquipLoadTask.cs" />
      <Compile Include="Assets\Scripts\Equip\MountLoadTask.cs" />
      <Compile Include="Assets\Scripts\Equip\PartLoadTask.cs" />
@@ -60,6 +76,7 @@
      <Compile Include="Assets\Scripts\Equip\XMeshTexData.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\Others\CombineConfig.cs" />
+     <Compile Include="Assets\Scripts\Others\XException.cs" />
      <Compile Include="Assets\Scripts\Others\XRotation.cs" />
      <Compile Include="Assets\Scripts\Others\XTableUtil.cs" />
      <Compile Include="Assets\Scripts\Table\DefaultEquip.cs" />

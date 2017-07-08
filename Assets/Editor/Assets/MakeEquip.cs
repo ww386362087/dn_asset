@@ -85,7 +85,7 @@ namespace XEditor
                         }
                         else if (isCutout)
                         {
-                            XMeshMultiTexData mmtd = Resources.Load<XMeshMultiTexData>(path);
+                            XMeshMultiTexData mmtd = XResourceMgr.Load<XMeshMultiTexData>(path);
                             if (mmtd != null)
                             {
                                 ExtraSkinMeshTex emt = new ExtraSkinMeshTex();
@@ -96,7 +96,7 @@ namespace XEditor
                         }
                         else
                         {
-                            XMeshTexData mtd = Resources.Load<XMeshTexData>(path);
+                            XMeshTexData mtd = XResourceMgr.Load<XMeshTexData>(path);
                             if (mtd != null)
                             {
                                 ExtraSkinMeshTex emt = new ExtraSkinMeshTex();

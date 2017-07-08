@@ -244,7 +244,7 @@ namespace XEditor
                 if (!string.IsNullOrEmpty(path))
                 {
                     path = "Equipments/" + path;
-                    XMeshTexData mtd = Resources.Load<XMeshTexData>(path);
+                    XMeshTexData mtd = XResourceMgr.Load<XMeshTexData>(path);
                     if (mtd != null && mtd.mesh != null)
                     {
                         ci.mesh = mtd.mesh;
@@ -252,7 +252,7 @@ namespace XEditor
                     }
                     else
                     {
-                        XMeshMultiTexData mmtd = Resources.Load<XMeshMultiTexData>(path);
+                        XMeshMultiTexData mmtd = XResourceMgr.Load<XMeshMultiTexData>(path);
                         if (mmtd != null && mmtd.mesh != null)
                         {
                             ci.mesh = mmtd.mesh;
@@ -302,14 +302,14 @@ namespace XEditor
                 if (newGo != null) GameObject.DestroyImmediate(newGo);
                 string skinPrfab = "Prefabs/" + combineConfig.PrefabName[m_profession];
                 string anim = combineConfig.IdleAnimName[m_profession];
-                newGo = GameObject.Instantiate(Resources.Load<UnityEngine.Object>(skinPrfab)) as GameObject;
+                newGo = GameObject.Instantiate(XResourceMgr.Load<UnityEngine.Object>(skinPrfab)) as GameObject;
                 if (name != "") newGo.name = name;
                 newGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 Animator ator = newGo.GetComponent<Animator>();
                 AnimatorOverrideController aoc = new AnimatorOverrideController();
                 aoc.runtimeAnimatorController = ator.runtimeAnimatorController;
                 ator.runtimeAnimatorController = aoc;
-                aoc["Idle"] = Resources.Load<AnimationClip>(anim);
+                aoc["Idle"] = XResourceMgr.Load<AnimationClip>(anim);
                 Transform t = newGo.transform.FindChild("CombinedMesh");
                 SkinnedMeshRenderer newSmr = t.GetComponent<SkinnedMeshRenderer>();
                 newSmr.sharedMesh = new Mesh();
@@ -327,7 +327,7 @@ namespace XEditor
                         {
                             path = data.Weapon;
                         }
-                        GameObject mainWeapon = Resources.Load<GameObject>("Equipments/" + path);
+                        GameObject mainWeapon = XResourceMgr.Load<GameObject>("Equipments/" + path);
                         if (mainWeapon != null)
                         {
                             GameObject instance = GameObject.Instantiate(mainWeapon) as GameObject;

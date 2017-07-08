@@ -30,7 +30,7 @@ public class MountLoadTask : EquipLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                xgo = Resources.Load<GameObject>(location);
+                xgo = XResourceMgr.Load<GameObject>(location);
                 LoadFinish(xgo, this);
             }
             else

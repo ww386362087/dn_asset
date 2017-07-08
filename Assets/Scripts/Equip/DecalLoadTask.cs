@@ -30,7 +30,7 @@ public class DecalLoadTask : EquipLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                    Texture2D tex = Resources.Load<Texture2D>(location);// ".tga"
+                Texture2D tex = XResourceMgr.Load<Texture2D>(location);// ".tga"
                     LoadFinish(tex, this);   
             }
             else if (m_PartLoadCb != null)

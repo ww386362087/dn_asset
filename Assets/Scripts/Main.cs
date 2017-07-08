@@ -3,16 +3,17 @@ using System.Collections;
 using XTable;
 using System.IO;
 
+
 public class Main : MonoBehaviour
 {
 
     void Start()
     {
-        XEquipUtil.Test();
-        GameObject go = GameObject.Find("Player(Clone)");
+        Application.targetFrameRate=60;
+        XRole role = XEntityMgr.singleton.CreateTestRole();
+        GameObject go = GameObject.Find("Archer");
         go.AddComponent<XRotation>();
     }
-
 
     void OnGUI()
     {
