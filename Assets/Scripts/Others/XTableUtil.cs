@@ -33,13 +33,24 @@ namespace XTable
         }
 
 
-
         public static FashionList.RowData GetByItemID(this FashionList input, int fashioid)
         {
             for (int i = 0, max = input.Table.Length; i < max; i++)
             {
                 if (input.Table[i].ItemID == fashioid)
                     return input.Table[i];
+            }
+            return null;
+        }
+
+        public static XEntityPresentation.RowData GetItemID(this XEntityPresentation input, uint id)
+        {
+            for (int i = 0, max = input.Table.Length; i < max; i++)
+            {
+                if (input.Table[i].ID == id)
+                {
+                    return input.Table[i];
+                }
             }
             return null;
         }

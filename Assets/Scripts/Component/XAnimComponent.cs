@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using XTable;
 
 public class XAnimComponent : XComponent
 {
@@ -33,12 +34,7 @@ public class XAnimComponent : XComponent
             m_Animator.runtimeAnimatorController = m_overrideController;
         }
         m_Animator.Rebind();
-        string[] anims = { "Idle", "Jump", "A", "AA", "Art", "RunRight", "RunLeft", "Run", "Walk" };
-        for (int i = 0, max = anims.Length; i < max; i++)
-        {
-            OverrideAnim(anims[i], anims[i]);
-        }
-        
+     
     }
 
     public override void OnUninit()
@@ -48,10 +44,26 @@ public class XAnimComponent : XComponent
     }
 
 
-    private IEnumerator Test()
+    bool init = false;
+    public void OverrideAnims(XEntityPresentation.RowData row)
     {
-        yield return new WaitForSeconds(2);
-
+        if (!init)
+        {
+            init = true;
+            OverrideAnim("A", row.AnimLocation + row.A);
+            OverrideAnim("AA", row.AnimLocation + row.AA);
+            OverrideAnim("AAA", row.AnimLocation + row.AAA);
+            OverrideAnim("AAAA", row.AnimLocation + row.AAAA);
+            OverrideAnim("AAAAA", row.AnimLocation + row.AAAAA);
+            OverrideAnim("Walk", row.AnimLocation + row.Walk);
+            OverrideAnim("Idle", row.AnimLocation + row.Idle);
+            OverrideAnim("Death", row.AnimLocation + row.Death);
+            OverrideAnim("Run", row.AnimLocation + row.Run);
+            OverrideAnim("RunLeft", row.AnimLocation + row.RunLeft);
+            OverrideAnim("RunRight", row.AnimLocation + row.RunRight);
+            OverrideAnim("Freezed", row.AnimLocation + row.Freeze);
+            OverrideAnim("HitLanding", row.AnimLocation + row.Hit_l);
+        }
     }
 
     public void SyncSpeed(float speed)
@@ -150,7 +162,7 @@ public class XAnimComponent : XComponent
 
         if(m_overrideController[key] ==null)
         {
-            m_overrideController[key] = XResourceMgr.Load<AnimationClip>("Animation/Player_archer/Player_archer_argent_kiss");
+            m_overrideController[key] = XResourceMgr.Load<AnimationClip>("Animation/"+clippath);
         }
     }
 

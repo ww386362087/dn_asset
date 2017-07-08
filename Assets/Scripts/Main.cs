@@ -6,14 +6,13 @@ using System.IO;
 
 public class Main : MonoBehaviour
 {
-
+    XRole role;
     void Start()
     {
         //test
-        Application.targetFrameRate=60;
-        XRole role = XEntityMgr.singleton.CreateTestRole();
-        GameObject go = GameObject.Find("Archer");
-        go.AddComponent<XRotation>();
+        Application.targetFrameRate = 60;
+        role = XEntityMgr.singleton.CreateTestRole();
+        Test();
     }
 
     void Update()
@@ -21,29 +20,22 @@ public class Main : MonoBehaviour
         XResourceMgr.Update();
     }
 
+    void Test()
+    {
+        role.EntityObject.AddComponent<XRotation>();
+        uint archerid = 2;
+        XEntityPresentation p = new XEntityPresentation(true);
+        XEntityPresentation.RowData row = p.GetItemID(archerid);
+        role.GetComponent<XAnimComponent>().OverrideAnims(row);
+    }
+
+    string[] anims = { "ToStand", "ToSkill", "EndSkill", "ToMove", "ToArtSkill" };
     void OnGUI()
     {
-        //test
-        if (GUI.Button(new Rect(20, 20, 100, 40), "ReadByte"))
+        GUILayout.Label("动作");
+        for (int i = 0, max = anims.Length; i < max; i++)
         {
-            ReadBytes();
+            if (GUILayout.Button(anims[i])) role.GetComponent<XAnimComponent>().SetTrigger(anims[i]);
         }
     }
-
-
-    void ReadBytes()
-    {
-        People p = new People(true);
-        for (int i = 0, max = p.Table.Length; i < max; i++)
-        {
-            Debug.Log("id: " + p.Table[i].id + " name: " + p.Table[i].name + " com:" + p.Table[i].com);
-        }
-
-        FashionList f = new FashionList(true);
-        for (int i = 0; i < 10; i++)
-        {
-            Debug.Log("id:" + f.Table[i].ItemID + " name:" + f.Table[i].ItemName + " comment:" + f.Table[i].EquipPos);
-        }
-    }
-
 }
