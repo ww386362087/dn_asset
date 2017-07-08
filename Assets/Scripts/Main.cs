@@ -15,6 +15,11 @@ public class Main : MonoBehaviour
         go.AddComponent<XRotation>();
     }
 
+    void Update()
+    {
+        XResourceMgr.Update();
+    }
+
     void OnGUI()
     {
         if (GUI.Button(new Rect(20, 20, 100, 40), "ReadByte"))
