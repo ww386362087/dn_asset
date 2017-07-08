@@ -84,6 +84,7 @@
      <Compile Include="Assets\Scripts\Table\FashionList.cs" />
      <Compile Include="Assets\Scripts\Table\FashionSuit.cs" />
      <Compile Include="Assets\Scripts\Table\People.cs" />
+     <Compile Include="Assets\Scripts\Table\XEntityPresentation.cs" />
      <Compile Include="Assets\Scripts\XCommon.cs" />
      <None Include="Assets\Resources\Shader\Particle\ParticleAdd.shader" />
      <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 2.shader" />

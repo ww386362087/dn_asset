@@ -172,7 +172,7 @@ namespace XForm
                 case "float": t = floatParse; break;
                 case "int[]": t = arrIntParse; break;
                 case "uint[]": t = arruintParse; break;
-                case "float[]": t = floatParse; break;
+                case "float[]": t = arrFloatParse; break;
                 case "string[]": t = arrStringParse; break;
                 case "bool[]": t = arrBoolParse; break;
                 default: throw new Exception("非法的数据类型:" + str + " from " + table);

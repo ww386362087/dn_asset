@@ -33,12 +33,12 @@ public class XAnimComponent : XComponent
             m_Animator.runtimeAnimatorController = m_overrideController;
         }
         m_Animator.Rebind();
-        string[] anims = { "Idle", "Jump", "A", "AA", "Art", "Back", "Death", "Fall", "CameraEffect" };
+        string[] anims = { "Idle", "Jump", "A", "AA", "Art", "RunRight", "RunLeft", "Run", "Walk" };
         for (int i = 0, max = anims.Length; i < max; i++)
         {
             OverrideAnim(anims[i], anims[i]);
         }
-        Play("Stand", 0);
+        
     }
 
     public override void OnUninit()
@@ -47,6 +47,12 @@ public class XAnimComponent : XComponent
         base.OnUninit();
     }
 
+
+    private IEnumerator Test()
+    {
+        yield return new WaitForSeconds(2);
+
+    }
 
     public void SyncSpeed(float speed)
     {

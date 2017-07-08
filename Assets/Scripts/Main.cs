@@ -9,6 +9,7 @@ public class Main : MonoBehaviour
 
     void Start()
     {
+        //test
         Application.targetFrameRate=60;
         XRole role = XEntityMgr.singleton.CreateTestRole();
         GameObject go = GameObject.Find("Archer");
@@ -22,6 +23,7 @@ public class Main : MonoBehaviour
 
     void OnGUI()
     {
+        //test
         if (GUI.Button(new Rect(20, 20, 100, 40), "ReadByte"))
         {
             ReadBytes();

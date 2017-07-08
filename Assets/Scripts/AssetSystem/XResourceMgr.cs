@@ -96,6 +96,7 @@ public class XResourceMgr
         {
             node.cb[i](node.request.asset);
         }
+        node.cb.Clear();
         list.Remove(node);
         cnt--;
     }

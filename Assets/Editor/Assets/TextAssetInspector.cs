@@ -79,14 +79,18 @@ namespace XEditor
                         }
                         GUILayout.Space(12);
                         Assembly ass = Assembly.Load("Assembly-CSharp");
-                        Type tableType = ass.GetType("XTable." + target.name).GetNestedType("RowData");
-                        FieldInfo[] fields = tableType.GetFields();
-                 
-                        GUILayout.Label("Preview:\n  字段数：" + fields.Length + "\n  字节数：" + ((target as TextAsset).bytes.Length));
+                        Type type = ass.GetType("XTable." + target.name);
                         string str = "字段列表:\n";
-                        for(int i=0;i< fields.Length;i++)
+                        if (type != null)
                         {
-                            str += "   "+fields[i].Name+"\n";
+                            Type tableType = type.GetNestedType("RowData");
+                            FieldInfo[] fields = tableType.GetFields();
+                            GUILayout.Label("Preview:\n  字段数：" + fields.Length + "\n  字节数：" + ((target as TextAsset).bytes.Length));
+                           
+                            for (int i = 0; i < fields.Length; i++)
+                            {
+                                str += "   " + fields[i].Name + "\n";
+                            }
                         }
                         GUILayout.Space(4);
                         GUILayout.Label(str);
