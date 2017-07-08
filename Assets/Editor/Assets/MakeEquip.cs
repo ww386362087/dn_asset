@@ -10,7 +10,6 @@ namespace XEditor
         public class ExtraSkinMeshTex
         {
             public XMeshTexData mtd;
-            public XMeshMultiTexData mmtd;
             public string name = "";
             public Texture2D tex;
         }
@@ -65,7 +64,6 @@ namespace XEditor
                     currentModel = model;
                     string rootPath = "Equipments/";
                     GameObject go = GameObject.Instantiate(model) as GameObject;
-                    bool isCutout = model.name.Contains("_onepart");
                     SkinnedMeshRenderer[] smrs = go.GetComponentsInChildren<SkinnedMeshRenderer>();
                     foreach (SkinnedMeshRenderer smr in smrs)
                     {
@@ -82,17 +80,6 @@ namespace XEditor
                             emt.tex = null;
                             emt.srcMat = smr.sharedMaterial;
                             meshList.Add(emt);
-                        }
-                        else if (isCutout)
-                        {
-                            XMeshMultiTexData mmtd = XResourceMgr.Load<XMeshMultiTexData>(path);
-                            if (mmtd != null)
-                            {
-                                ExtraSkinMeshTex emt = new ExtraSkinMeshTex();
-                                emt.mmtd = mmtd;
-                                emt.name = "";
-                                mtdList.Add(emt);
-                            }
                         }
                         else
                         {
@@ -137,12 +124,6 @@ namespace XEditor
                 {
                     GUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField(emt.mtd.mesh != null ? emt.mtd.mesh.name : "");
-                    GUILayout.EndHorizontal();
-                }
-                else if (emt.mmtd != null)
-                {
-                    GUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField(emt.mmtd.mesh != null ? emt.mmtd.mesh.name : "");
                     GUILayout.EndHorizontal();
                 }
 
@@ -221,18 +202,6 @@ namespace XEditor
                             emt.tex = AssetDatabase.LoadAssetAtPath(modelPath + texName + ".tga", typeof(Texture2D)) as Texture2D;
                         }
                     }
-                    else if (emt.mmtd != null)
-                    {
-                        if (emt.mmtd.mesh != null)
-                        {
-                            emt.name = emt.mmtd.mesh.name.Replace(srcString, replaceString);
-                        }
-                        if (emt.mmtd.tex0 != null)
-                        {
-                            string texName = emt.mmtd.tex0.name.Replace(srcString, replaceString);
-                            emt.tex = AssetDatabase.LoadAssetAtPath(modelPath + texName + ".tga", typeof(Texture2D)) as Texture2D;
-                        }
-                    }
                 }
                 for (int i = 0, imax = meshList.Count; i < imax; ++i)
                 {
@@ -270,14 +239,6 @@ namespace XEditor
                                 mtd._offset = emt.mtd.offset;
                                 PrefabUtility.CreatePrefab(equipPath + emt.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
 
-                            }
-                            else if (emt.mmtd != null)
-                            {
-                                XMeshMultiTexData mmtd = go.AddComponent<XMeshMultiTexData>();
-                                mmtd._mesh = emt.mmtd.mesh;
-                                mmtd._tex0 = emt.tex;
-                                mmtd._tex1 = TextureModify.ConvertTexRtex(mmtd._tex0);
-                                PrefabUtility.CreatePrefab(equipPath + emt.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
                             }
                             GameObject.DestroyImmediate(go);
                         }

@@ -140,20 +140,6 @@ namespace XEditor
                     TryScanTex(mtd.tex);
                     isEquip = true;
                 }
-
-                XMeshMultiTexData mmtd = instance.GetComponent<XMeshMultiTexData>();
-                if (mmtd != null)
-                {
-                    if (mmtd.tex0 != null)
-                    {
-                        TryScanTex(mmtd.tex0);
-                    }
-                    if (mmtd.tex1 != null)
-                    {
-                        TryScanTex(mmtd.tex1);
-                    }
-                    isEquip = true;
-                }
                 if (!isEquip)
                 {
                     fileName[0] = prefabPath;

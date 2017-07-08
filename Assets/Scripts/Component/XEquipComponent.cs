@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class XEquipComponent : XComponent
@@ -21,12 +20,13 @@ public class XEquipComponent : XComponent
         if (skm == null)
             skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         _combineMeshTask.skin = skm;
+
+        EquipTest();
     }
 
     private void PartLoaded(MountLoadTask mountPart)
     {
     }
-
 
     public void EquipTest()
     {
@@ -35,7 +35,6 @@ public class XEquipComponent : XComponent
         fpi.fasionID = 0;
         fpi.presentName = "0";
         fpi.replace = false;
-
         fpi.equipName = "";
         fashionList[0] = fpi;
         fpi.equipName = "Player_archer_body";
@@ -69,11 +68,10 @@ public class XEquipComponent : XComponent
         for (int i = 0, imax = fashionList.Length; i < imax; ++i)
         {
             FashionPositionInfo fpi = fashionList[i];
-
             int part = CombineMeshTask.ConvertPart((FashionPosition)i);
             if (part >= 0)
             {
-                EquipLoadTask task = _combineMeshTask.parts[part];
+                BaseLoadTask task = _combineMeshTask.parts[part];
                 task.Load(ref fpi, loadPath);
             }
         }
@@ -89,6 +87,12 @@ public class XEquipComponent : XComponent
 
         _combineMeshTask.combineStatus = ECombineStatus.ECombined;
 
+
+        for (EPartType part = EPartType.ECombinePartStart; part < EPartType.ECombinePartEnd; ++part)
+        {
+            PartLoadTask loadPart = _combineMeshTask.parts[(int)part] as PartLoadTask;
+            loadPart.PostLoad(_combineMeshTask.skin);
+        }
         for (EPartType part = EPartType.ECombinePartEnd; part < EPartType.EMountEnd; ++part)
         {
             MountLoadTask loadPart = _combineMeshTask.parts[(int)part] as MountLoadTask;

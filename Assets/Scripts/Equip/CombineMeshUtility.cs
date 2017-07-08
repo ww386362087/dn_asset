@@ -53,24 +53,16 @@ public class CombineMeshUtility :XSingleton<CombineMeshUtility>
     /// </summary>
     public bool Combine(CombineMeshTask combineTask)
     {
-
         int partCount = 0;
         for (int i = (int)EPartType.ECombinePartStart; i < (int)EPartType.ECombinePartEnd; ++i)
         {
             PartLoadTask part = combineTask.parts[i] as PartLoadTask;
-            if (part.HasMesh())
-            {
-                partCount++;
-            }
+            if (part.HasMesh()) partCount++;
         }
-
         CombineInstance[] combineArray = GetMatCombineInstanceArray(partCount);
         if (combineArray != null)
         {
             //1.mesh collection
-            bool isOnepart = false;
-            bool haAlpha = false;
-            PartLoadTask onePart = null;
             int index = 0;
             for (int i = (int)EPartType.ECombinePartStart; i < (int)EPartType.ECombinePartEnd; ++i)
             {
@@ -78,14 +70,7 @@ public class CombineMeshUtility :XSingleton<CombineMeshUtility>
                 if (part.HasMesh())
                 {
                     CombineInstance ci = new CombineInstance();
-                    if (part.mmtd != null)
-                    {
-                        ci.mesh = part.mmtd.mesh;
-                        isOnepart = true;
-                        haAlpha = part.mmtd.tex1 != null;
-                        onePart = part;
-                    }
-                    else if (part.mtd != null)
+                    if (part.mtd != null)
                     {
                         ci.mesh = part.mtd.mesh;
                     }
@@ -102,70 +87,20 @@ public class CombineMeshUtility :XSingleton<CombineMeshUtility>
             {
                 combineTask.skin.sharedMesh.Clear(true);
             }
-
             combineTask.skin.gameObject.SetActive(false);
             combineTask.skin.sharedMesh.CombineMeshes(combineArray, true, false);
             combineTask.skin.gameObject.SetActive(true);
 
             //3.set material
-            Material mainBody = combineTask.mainBody;
-            if (mainBody != null)
+            Material mat = combineTask.mat;
+            if (mat != null)
             {
-                XEquipUtil.ReturnMaterial(mainBody);
-                mainBody = null;
+                XEquipUtil.ReturnMaterial(mat);
+                mat = null;
             }
-            if (mainBody == null)
-            {
-                if (CombineMeshTask.s_CombineMatType == ECombineMatType.ECombined)
-                {
-                    mainBody = XEquipUtil.GetRoleMat(isOnepart, haAlpha);
-                }
-                else
-                {
-                    mainBody = XEquipUtil.GetRoleMat(isOnepart, haAlpha, combineTask.roleType);
-                }
-            }
-
-            combineTask.mainBody = mainBody;
-            combineTask.skin.sharedMaterial = mainBody;
-
-            //换脸
-            if (mainBody != null)
-            {
-                if (isOnepart)
-                {
-                    PartLoadTask face = combineTask.parts[(int)EPartType.EFace] as PartLoadTask;
-                    PartLoadTask hair = combineTask.parts[(int)EPartType.EHair] as PartLoadTask;
-                    if (face.mtd != null)
-                        mainBody.SetTexture("_Face", face.mtd.tex);
-                    if (hair.mtd != null)
-                        mainBody.SetTexture("_Hair", hair.mtd.tex);
-                    if (onePart != null)
-                    {
-                        mainBody.SetTexture("_Body", onePart.mmtd.tex0);
-                        if (onePart.mmtd.tex1 != null)
-                            mainBody.SetTexture("_Alpha", onePart.mmtd.tex1);
-                    }
-
-                }
-                else
-                {
-                    for (int i = 0, imax = (int)EPartType.ECombinePartEnd; i < imax; ++i)
-                    {
-                        PartLoadTask part = combineTask.parts[i] as PartLoadTask;
-                        if (part.HasMesh())
-                        {
-
-                            mainBody.SetTexture(matTexName[i], part.mtd.tex);
-                        }
-                        else
-                        {
-                            mainBody.SetTexture(matTexName[i], null);
-                        }
-                    }
-                }
-
-            }
+            mat = XEquipUtil.GetRoleMat();
+            combineTask.mat = mat;
+            combineTask.skin.sharedMaterial = mat;
             return true;
         }
         return false;

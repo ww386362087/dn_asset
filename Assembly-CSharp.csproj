@@ -64,15 +64,14 @@
      <Compile Include="Assets\Scripts\Entity\XObject.cs" />
      <Compile Include="Assets\Scripts\Entity\XPlayer.cs" />
      <Compile Include="Assets\Scripts\Entity\XRole.cs" />
+     <Compile Include="Assets\Scripts\Equip\BaseLoadTask.cs" />
      <Compile Include="Assets\Scripts\Equip\CombineMeshTask.cs" />
      <Compile Include="Assets\Scripts\Equip\CombineMeshUtility.cs" />
      <Compile Include="Assets\Scripts\Equip\DecalLoadTask.cs" />
      <Compile Include="Assets\Scripts\Equip\EPartType.cs" />
-     <Compile Include="Assets\Scripts\Equip\EquipLoadTask.cs" />
      <Compile Include="Assets\Scripts\Equip\MountLoadTask.cs" />
      <Compile Include="Assets\Scripts\Equip\PartLoadTask.cs" />
      <Compile Include="Assets\Scripts\Equip\XEquipUtil.cs" />
-     <Compile Include="Assets\Scripts\Equip\XMeshMultiTexData.cs" />
      <Compile Include="Assets\Scripts\Equip\XMeshTexData.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\Others\CombineConfig.cs" />
@@ -84,6 +83,7 @@
      <Compile Include="Assets\Scripts\Table\FashionList.cs" />
      <Compile Include="Assets\Scripts\Table\FashionSuit.cs" />
      <Compile Include="Assets\Scripts\Table\XEntityPresentation.cs" />
+     <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\XCommon.cs" />
      <None Include="Assets\Resources\Shader\Particle\ParticleAdd.shader" />
      <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 2.shader" />

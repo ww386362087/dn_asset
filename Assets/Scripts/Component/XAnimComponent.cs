@@ -5,7 +5,6 @@ using XTable;
 
 public class XAnimComponent : XComponent
 {
-
     private Animator m_Animator;
     private AnimatorOverrideController m_overrideController = null;
     private string m_stateName = "";

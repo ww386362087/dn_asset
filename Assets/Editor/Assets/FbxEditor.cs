@@ -261,7 +261,6 @@ namespace XEditor
 
             List<TexUVInfo> texuvList = new List<TexUVInfo>();
             SkinnedMeshRenderer[] smrs = go.GetComponentsInChildren<SkinnedMeshRenderer>();
-            bool isCutout = fbx.name.Contains("_onepart");
             foreach (SkinnedMeshRenderer smr in smrs)
             {
                 Mesh mesh = UnityEngine.Object.Instantiate(smr.sharedMesh) as Mesh;
@@ -274,29 +273,7 @@ namespace XEditor
                 else
                 {
                     mesh.UploadMeshData(false);
-                    if (isCutout)
-                    {
-                        ReCalculateUV(mesh, 2);
-                        mesh.uv1 = null;
-                        mesh.uv2 = null;
-                        mesh.tangents = null;
-                        string skinmeshPath = saveRootPath + mesh.name + ".asset";
-                        AssetDatabase.CreateAsset(mesh, skinmeshPath);
-                        AssetDatabase.SaveAssets();
-                        Mesh loadSkinMesh = AssetDatabase.LoadAssetAtPath(skinmeshPath, typeof(Mesh)) as Mesh;
-
-                        GameObject onepartMesh = new GameObject(mesh.name);
-                        XMeshMultiTexData mmtd = onepartMesh.AddComponent<XMeshMultiTexData>();
-                        mmtd._mesh = loadSkinMesh;
-                        mmtd._tex0 = smr.sharedMaterial.mainTexture as Texture2D;
-                        mmtd._tex1 = TextureModify.ConvertTexRtex(mmtd._tex0);
-                        PrefabUtility.CreatePrefab(saveRootPath + mesh.name + ".prefab", onepartMesh, ReplacePrefabOptions.ReplaceNameBased);
-                        GameObject.DestroyImmediate(onepartMesh);
-                    }
-                    else
-                    {
-                        SaveMeshAsset(mesh, smr.sharedMaterial.mainTexture as Texture2D, profession, saveRootPath, texuvList);
-                    }
+                    SaveMeshAsset(mesh, smr.sharedMaterial.mainTexture as Texture2D, profession, saveRootPath, texuvList);
                 }
             }
             modelImporter.isReadable = false;

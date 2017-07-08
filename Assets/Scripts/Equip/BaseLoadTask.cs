@@ -34,11 +34,6 @@ public struct FashionPositionInfo
     }
 }
 
-public enum ECombineMatType
-{
-    ECombined,
-    EIndependent,
-}
 
 public enum ECombineStatus
 {
@@ -55,13 +50,6 @@ public enum EProcessStatus
     EProcessed,
 }
 
-public enum ESpriteStatus
-{
-    ENormal,
-    EMount,
-    EDead,
-}
-
 public enum EPartLoadType
 {
     EPart,
@@ -70,10 +58,10 @@ public enum EPartLoadType
     EDecal,
 }
 
-public class EquipLoadTask
+public class BaseLoadTask
 {
 
-    public EquipLoadTask(EPartType p)
+    public BaseLoadTask(EPartType p)
     {
         part = p;
         fpi.Reset();
@@ -134,4 +122,5 @@ public class EquipLoadTask
         processStatus = EProcessStatus.ENotProcess;
         location = "";
     }
+
 }

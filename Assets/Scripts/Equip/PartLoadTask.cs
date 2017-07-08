@@ -3,16 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public delegate void PartLoadCallback(EquipLoadTask part, bool needCombine);
+public delegate void PartLoadCallback(BaseLoadTask part, bool needCombine);
 
 public delegate void LoadCallBack(UnityEngine.Object obj, System.Object cbOjb);
 
-public class PartLoadTask : EquipLoadTask
+public class PartLoadTask : BaseLoadTask
 {
-
     public GameObject go = null;
     public XMeshTexData mtd = null;
-    public XMeshMultiTexData mmtd = null;
     private LoadCallBack loadCb = null;
     private PartLoadCallback m_PartLoadCb = null;
 
@@ -55,10 +53,6 @@ public class PartLoadTask : EquipLoadTask
             if (go != null)
             {
                 mtd = go.GetComponent<XMeshTexData>();
-                if (mtd == null)
-                {
-                    mmtd = go.GetComponent<XMeshMultiTexData>();
-                }
             }
         }
         if (m_PartLoadCb != null)
@@ -67,19 +61,24 @@ public class PartLoadTask : EquipLoadTask
         }
     }
 
+    public void PostLoad(SkinnedMeshRenderer skin)
+    {
+        if (skin == null || mtd == null) return;
+        skin.sharedMaterial.SetTexture(mtd._offset, mtd._tex);
+    }
+
     public override void Reset()
     {
-        if (mtd != null || mmtd != null)
+        if (mtd != null)
         {
             XResourceMgr.UnloadAsset(go);
             mtd = null;
-            mmtd = null;
         }
     }
 
     public bool HasMesh()
     {
-        return mtd != null && mtd.mesh != null || mmtd != null && mmtd.mesh != null;
+        return mtd != null && mtd.mesh != null;
     }
 
     public Texture GetTexture()

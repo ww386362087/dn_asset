@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public delegate void MountLoadCallback(MountLoadTask mountPart);
 
-public class MountLoadTask : EquipLoadTask
+public class MountLoadTask : BaseLoadTask
 {
     public GameObject xgo = null;
     public bool transferRef = false;

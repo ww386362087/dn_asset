@@ -18,8 +18,7 @@ public class XRole : XEntity
         base.OnInitial();
         AttachComponent<XAIComponent>();
         AttachComponent<XAnimComponent>();
-        XEquipComponent equip = AttachComponent<XEquipComponent>();
-        equip.EquipTest();
+        AttachComponent<XEquipComponent>();
     }
 
 

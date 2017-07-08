@@ -24,7 +24,7 @@ public enum FashionPosition
 public class CombineMeshTask
 {
 
-    public EquipLoadTask[] parts = new EquipLoadTask[(int)EPartType.ENum];
+    public BaseLoadTask[] parts = new BaseLoadTask[(int)EPartType.ENum];
 
     public ECombineStatus combineStatus = ECombineStatus.ENotCombine;
 
@@ -35,10 +35,9 @@ public class CombineMeshTask
     public uint roleType;
 
     public SkinnedMeshRenderer skin = null;
-    public Material mainBody = null;
+    public Material mat = null;
 
-    public static ECombineMatType s_CombineMatType = ECombineMatType.ECombined;
-
+ 
     public CombineMeshTask(MountLoadCallback mountLoadFinish)
     {
         m_PartLoaded = PartLoadFinish;
@@ -71,7 +70,7 @@ public class CombineMeshTask
     {
         for (int i = 0; i < parts.Length; ++i)
         {
-            EquipLoadTask task = parts[i];
+            BaseLoadTask task = parts[i];
             task.Reset();
         }
     }
@@ -95,7 +94,7 @@ public class CombineMeshTask
         m_LoadStatus |= partEnum;
     }
 
-    public void PartLoadFinish(EquipLoadTask part, bool combinePart)
+    public void PartLoadFinish(BaseLoadTask part, bool combinePart)
     {
         needCombine |= combinePart;
         AddLoadPart(part.part);

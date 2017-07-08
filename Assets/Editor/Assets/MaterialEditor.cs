@@ -15,6 +15,26 @@ namespace XEditor
             window.Show();
         }
 
+        [MenuItem(@"Assets/Tool/Material/Cutoff2RMat2 %2")]
+        private static void Cutoff2RMat2()
+        {
+            EnumMaterial(_Cutoff2RMat, "Cutoff2RMat");
+        }
+
+        [MenuItem(@"Assets/Tool/Material/Cutoff2RMat")]
+        private static void Cutoff2RMat()
+        {
+            TextureModify.scaleSize = 1;
+            EnumMaterial(_Cutoff2RMat, "Cutoff2RMat");
+            TextureModify.scaleSize = 2;
+        }
+
+        [MenuItem(@"Assets/Tool/Material/ReturnMat")]
+        private static void ReturnMatSkin8()
+        {
+            EnumMaterial(ReturnMaterial, "ReturnMat");
+        }
+
 
         public delegate bool EnumMaterialCallback(Material material, string path);
 
@@ -68,18 +88,10 @@ namespace XEditor
             return true;
         }
 
-        [MenuItem(@"Assets/Tool/Material/Cutoff2RMat2 %2")]
-        private static void Cutoff2RMat2()
+        private static bool ReturnMaterial(Material mat, string path)
         {
-            EnumMaterial(_Cutoff2RMat, "Cutoff2RMat");
-        }
-
-        [MenuItem(@"Assets/Tool/Material/Cutoff2RMat")]
-        private static void Cutoff2RMat()
-        {
-            TextureModify.scaleSize = 1;
-            EnumMaterial(_Cutoff2RMat, "Cutoff2RMat");
-            TextureModify.scaleSize = 2;
+            XEquipUtil.ReturnMaterial(mat);
+            return true;
         }
 
 
