@@ -147,14 +147,12 @@ namespace XForm
             {
                 content2.Append("\n\t\t\tpublic "+types[i]+" "+titles[i]+";");
             }
-            content2.Append("\n\t\t}\n");
-            content2.Append("\n\n\t\tpublic " + name + "() { }");
-            content2.Append("\n\n\t\tpublic "+name+"(bool create) { Create(); }");
-            content2.Append("\n\n\t\tpublic RowData[] Table = null;");
-            content2.Append("\n\n\t\tpublic override string bytePath { get { return \"Table/" + name + "\"; } }");
+            content2.Append("\r\n\t\t}\r\n");
+            content2.Append("\r\n\n\t\tpublic " + name + "() { if (Table == null) Create(); }");
+            content2.Append("\r\n\r\n\t\tpublic RowData[] Table = null;");
+            content2.Append("\r\n\r\n\t\tpublic override string bytePath { get { return \"Table/" + name + "\"; } }");
 
             fileContent.Replace("public int replace;", content2.ToString());
-
             string filePath = destdir + name + ".cs";
            // Console.WriteLine("make:" + filePath);
             File.WriteAllText(filePath, fileContent.ToString());

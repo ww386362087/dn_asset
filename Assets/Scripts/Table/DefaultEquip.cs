@@ -39,9 +39,7 @@ namespace XTable {
 		}
 
 
-		public DefaultEquip() { }
-
-		public DefaultEquip(bool create) { Create(); }
+		public DefaultEquip() { if (Table == null) Create(); }
 
 		public RowData[] Table = null;
 

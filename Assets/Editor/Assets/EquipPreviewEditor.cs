@@ -11,9 +11,9 @@ namespace XEditor
     {
 
         private CombineConfig combineConfig = null;
-        private DefaultEquip defaultEquip = new DefaultEquip(true);
-        private FashionSuit fashionSuit = new FashionSuit(true);
-        private EquipSuit equipSuit = new EquipSuit(true);
+        private DefaultEquip defaultEquip = new DefaultEquip();
+        private FashionSuit fashionSuit = new FashionSuit();
+        private EquipSuit equipSuit = new EquipSuit();
 
         private int m_profession = 1;
         private List<EquipPart> m_FashionList = null;
@@ -21,36 +21,6 @@ namespace XEditor
         private Vector2 fashionScrollPos = Vector2.zero;
         private Vector2 equipScrollPos = Vector2.zero;
 
-
-        private string GetDefaultPath(EPartType part, DefaultEquip.RowData data)
-        {
-            string partPath = "";
-            switch (part)
-            {
-                case EPartType.EFace:
-                    partPath = data.Face;
-                    break;
-                case EPartType.EHair:
-                    partPath = data.Hair;
-                    break;
-                case EPartType.EUpperBody:
-                    partPath = data.Body;
-                    break;
-                case EPartType.ELowerBody:
-                    partPath = data.Leg;
-                    break;
-                case EPartType.EGloves:
-                    partPath = data.Glove;
-                    break;
-                case EPartType.EBoots:
-                    partPath = data.Boots;
-                    break;
-                case EPartType.ESecondaryWeapon:
-                    partPath = data.SecondWeapon;
-                    break;
-            }
-            return partPath;
-        }
 
         private GameObject newGo;
         private void Preview(EquipPart part)
@@ -66,7 +36,7 @@ namespace XEditor
                 CombineInstance ci = new CombineInstance();
                 if (string.IsNullOrEmpty(path))
                 {
-                    path = GetDefaultPath((EPartType)i, data);
+                    path = XEquipUtil.GetDefaultPath((EPartType)i, data);
                 }
                 else if (name == "")
                 {
@@ -93,7 +63,6 @@ namespace XEditor
             {
                 if (newGo != null) GameObject.DestroyImmediate(newGo);
                 string skinPrfab = "Prefabs/" + combineConfig.PrefabName[m_profession];
-                string anim = combineConfig.IdleAnimName[m_profession];
                 newGo = GameObject.Instantiate(XResourceMgr.Load<UnityEngine.Object>(skinPrfab)) as GameObject;
                 if (name != "") newGo.name = name;
                 newGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));

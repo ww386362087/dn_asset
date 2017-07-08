@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class XComponent:XObject
+public class XComponent : XObject
 {
 
     public XEntity entity = null;
@@ -18,5 +18,5 @@ public class XComponent:XObject
     }
 
 
-  
+
 }

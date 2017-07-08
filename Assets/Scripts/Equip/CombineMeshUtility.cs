@@ -17,17 +17,6 @@ public class CombineMeshUtility :XSingleton<CombineMeshUtility>
 
     private List<CombineInstance[]> matCombineInstanceArrayCache = new List<CombineInstance[]>();
 
-    private string[] matTexName = new string[] { 
-            string.Intern("_Tex0") ,
-            string.Intern("_Tex1") ,
-            string.Intern("_Tex2") ,
-            string.Intern("_Tex3") ,
-            string.Intern("_Tex4") ,
-            string.Intern("_Tex5") ,
-            string.Intern("_Tex6") ,
-            string.Intern("_Tex7") ,
-        };
-
     /// <summary>
     /// 根据combineinstantce的长度获取对应的array
     /// </summary>

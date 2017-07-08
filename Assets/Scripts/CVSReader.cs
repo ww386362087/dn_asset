@@ -16,6 +16,7 @@ public abstract class CVSReader
 
     public virtual string bytePath { get { return string.Empty; } }
 
+
     
     public void Create()
     {

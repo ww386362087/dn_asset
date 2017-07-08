@@ -4,15 +4,15 @@ using XTable;
 
 public class Test : XSingleton<Test>
 {
-    private CombineConfig combineConfig = null;
-    private DefaultEquip defaultEquip = new DefaultEquip(true);
-    private FashionList fashionList = new FashionList(true);
-    private FashionSuit fashionSuit = new FashionSuit(true);
-    private EquipSuit equipSuit = new EquipSuit(true);
+    //private CombineConfig combineConfig = null;
+    //private DefaultEquip defaultEquip = new DefaultEquip();
+    //private FashionList fashionList = new FashionList();
+    //private FashionSuit fashionSuit = new FashionSuit();
+    //private EquipSuit equipSuit = new EquipSuit();
     XRole role;
 
 
-    public void Init()
+    public void Initial()
     {
         Application.targetFrameRate = 60;
         role = XEntityMgr.singleton.CreateTestRole();
@@ -25,7 +25,7 @@ public class Test : XSingleton<Test>
 
         //动作
         uint archerid = 2;
-        XEntityPresentation p = new XEntityPresentation(true);
+        XEntityPresentation p = new XEntityPresentation();
         XEntityPresentation.RowData row = p.GetItemID(archerid);
         role.GetComponent<XAnimComponent>().OverrideAnims(row);
     }
@@ -33,7 +33,7 @@ public class Test : XSingleton<Test>
     int space = 30;
     string[] anims = { "ToSkill", "EndSkill", "ToMove" };
     private Vector2 fashionScrollPos = Vector2.zero;
-    private Vector2 equipScrollPos = Vector2.zero;
+    //private Vector2 equipScrollPos = Vector2.zero;
     public void GUI()
     {
         GUILayout.BeginHorizontal();

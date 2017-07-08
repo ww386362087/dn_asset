@@ -70,7 +70,7 @@ public class XAnimComponent : XComponent
         if (m_Animator != null)
         {
             m_speed = speed;
-            m_Animator.speed = speed;
+            m_Animator.speed = m_speed;
         }
     }
 

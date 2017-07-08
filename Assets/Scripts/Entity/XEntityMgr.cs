@@ -32,7 +32,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
-        if (!_entities.ContainsKey(attr.ID)) _entities.Add(attr.ID, x);
+        if (!_entities.ContainsKey(attr.id)) _entities.Add(attr.id, x);
         return x;
     }
 

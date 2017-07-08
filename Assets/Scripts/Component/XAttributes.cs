@@ -10,7 +10,7 @@ public class XAttributes : XComponent
     private Vector3 _appear_pos = Vector3.zero;
     private Quaternion _appear_qua = Quaternion.identity;
 
-    public uint ID
+    public uint id
     {
         get { return _id; }
         set { _id = value; }

@@ -130,7 +130,7 @@ public class XEquipUtil
 
     public static void MakeEquip(string name, int[] fashionIDs, List<EquipPart> equipList, TempEquipSuit tmpFashionData, int suitID)
     {
-        FashionList fashionList = new FashionList(true);
+        FashionList fashionList = new FashionList();
         if (fashionIDs != null)
         {
             tmpFashionData.hash = 0;
@@ -264,6 +264,36 @@ public class XEquipUtil
                 return (int)EPartType.EHair;
         }
         return -1;
+    }
+
+    public static string GetDefaultPath(EPartType part, DefaultEquip.RowData data)
+    {
+        string partPath = "";
+        switch (part)
+        {
+            case EPartType.EFace:
+                partPath = data.Face;
+                break;
+            case EPartType.EHair:
+                partPath = data.Hair;
+                break;
+            case EPartType.EUpperBody:
+                partPath = data.Body;
+                break;
+            case EPartType.ELowerBody:
+                partPath = data.Leg;
+                break;
+            case EPartType.EGloves:
+                partPath = data.Glove;
+                break;
+            case EPartType.EBoots:
+                partPath = data.Boots;
+                break;
+            case EPartType.ESecondaryWeapon:
+                partPath = data.SecondWeapon;
+                break;
+        }
+        return partPath;
     }
 
 }

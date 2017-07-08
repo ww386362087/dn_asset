@@ -37,9 +37,7 @@ namespace XTable {
 		}
 
 
-		public FashionList() { }
-
-		public FashionList(bool create) { Create(); }
+		public FashionList() { if (Table == null) Create(); }
 
 		public RowData[] Table = null;
 

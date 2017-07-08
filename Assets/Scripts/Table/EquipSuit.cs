@@ -36,9 +36,7 @@ namespace XTable {
 		}
 
 
-		public EquipSuit() { }
-
-		public EquipSuit(bool create) { Create(); }
+		public EquipSuit() { if (Table == null) Create(); }
 
 		public RowData[] Table = null;
 

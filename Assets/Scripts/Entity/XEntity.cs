@@ -25,7 +25,7 @@ public abstract class XEntity : XObject
 
     public uint EntityID
     {
-        get { return _attr != null ? _attr.ID : 0; }
+        get { return _attr != null ? _attr.id : 0; }
     }
 
     public bool IsPlayer

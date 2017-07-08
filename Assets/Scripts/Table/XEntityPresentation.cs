@@ -99,9 +99,7 @@ namespace XTable {
 		}
 
 
-		public XEntityPresentation() { }
-
-		public XEntityPresentation(bool create) { Create(); }
+		public XEntityPresentation() { if (Table == null) Create(); }
 
 		public RowData[] Table = null;
 

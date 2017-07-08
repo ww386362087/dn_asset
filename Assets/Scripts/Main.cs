@@ -6,7 +6,7 @@ public class Main : MonoBehaviour
    
     void Start()
     {
-        Test.singleton.Init();
+        Test.singleton.Initial();
     }
 
     void Update()

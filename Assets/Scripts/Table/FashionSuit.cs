@@ -43,9 +43,7 @@ namespace XTable {
 		}
 
 
-		public FashionSuit() { }
-
-		public FashionSuit(bool create) { Create(); }
+		public FashionSuit() { if (Table == null) Create(); }
 
 		public RowData[] Table = null;
 
