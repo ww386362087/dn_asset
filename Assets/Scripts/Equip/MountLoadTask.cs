@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public delegate void MountLoadCallback(MountLoadTask mountPart);
 
 public class MountLoadTask : BaseLoadTask
 {
-    public GameObject xgo = null;
+    public GameObject go = null;
+    public XMeshTexData mtd = null;
     public bool transferRef = false;
     public Renderer mainRender = null;
     private MountLoadCallback m_MountPartLoadCb = null;
@@ -30,8 +30,8 @@ public class MountLoadTask : BaseLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                xgo = XResourceMgr.Load<GameObject>(location);
-                LoadFinish(xgo, this);
+                go = XResourceMgr.Load<GameObject>(location);
+                LoadFinish(go, this);
             }
             else
             {
@@ -44,7 +44,7 @@ public class MountLoadTask : BaseLoadTask
         }
     }
 
-    static void LoadFinish(GameObject gameObject, object o)
+    private void LoadFinish(GameObject go, object o)
     {
         MountLoadTask mlt = o as MountLoadTask;
         if (mlt != null)
@@ -56,24 +56,32 @@ public class MountLoadTask : BaseLoadTask
                 if (mlt.m_MountPartLoadCb != null)
                 {
                     mlt.m_MountPartLoadCb(mlt);
+                    mtd = go.GetComponent<XMeshTexData>();
                 }
+
             }
         }
     }
 
+    public void PostLoad(SkinnedMeshRenderer skin)
+    {
+        if (skin == null || mtd == null) return;
+        skin.sharedMaterial.SetTexture(mtd._offset, mtd._tex);
+    }
+
     public override void Reset()
     {
-        if (!transferRef && xgo != null)
+        if (!transferRef && go != null)
         {
-            GameObject.Destroy(xgo);
+            GameObject.Destroy(go);
         }
-        xgo = null;
+        go = null;
         transferRef = false;
     }
 
     public void ProcessRender(int layer, bool enable, bool castShadow, int renderQueue)
     {
-        if (xgo != null)
+        if (go != null)
         {
             for (int i = 0; i < XCommon.tmpRender.Count; i++)
             {

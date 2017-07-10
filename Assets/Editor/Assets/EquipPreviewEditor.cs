@@ -49,6 +49,7 @@ namespace XEditor
                 if (!string.IsNullOrEmpty(path))
                 {
                     path = "Equipments/" + path;
+                    Debug.Log("path: "+path);
                     XMeshTexData mtd = XResourceMgr.Load<XMeshTexData>(path);
                     if (mtd != null && mtd.mesh != null)
                     {

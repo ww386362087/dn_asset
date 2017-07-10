@@ -1,244 +1,240 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E044BE34-2321-57C0-15E0-2EC368720E9B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <BaseDirectory>Assets</BaseDirectory>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{E044BE34-2321-57C0-15E0-2EC368720E9B}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_4_7_2;UNITY_4_7;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>0169</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_7_2;UNITY_4_7;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>Temp\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>0169</NoWarn>
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+	<Reference Include="System" />
     <Reference Include="System.XML" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="UnityEngine">
-      <HintPath>D:/install/Editor/Data/Managed/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>D:/install/Editor/Data/Managed/UnityEditor.dll</HintPath>
-    </Reference>
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>D:/install/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>D:/install/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\Assets\AnimationEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\BytesTableViewEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\EquipPreviewEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\FbxEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\MakeEquip.cs" />
-    <Compile Include="Assets\Editor\Assets\MaterialEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\MaterialFindEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\PrefabEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\SceneEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\SelectBonesEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\TableEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\TextAssetInspector.cs" />
-    <Compile Include="Assets\Editor\Assets\TextureCombine.cs" />
-    <Compile Include="Assets\Editor\Assets\TextureCommonCompress.cs" />
-    <Compile Include="Assets\Editor\Assets\TextureEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\TextureFindEditor.cs" />
-    <Compile Include="Assets\Editor\Assets\XDataIO.cs" />
-    <Compile Include="Assets\Editor\Assets\XResImportModelEditor.cs" />
-    <None Include="Assets\Resources\Shader\Particle\ParticleAdd.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 2.shader" />
-    <None Include="Assets\Resources\Shader\Projector\RectBlend.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Separate Alpha Colored 3.shader" />
-    <None Include="Assets\Resources\Shader\Effect\CombineTex.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlend.shader" />
-    <None Include="Assets\Resources\Shader\Include\OutLine_Include.cginc" />
-    <None Include="Assets\Resources\Shader\Projector\Projector-Multiply.shader" />
-    <None Include="Assets\Resources\Shader\Common\TransparentDiffuseMaskR.shader" />
-    <None Include="Assets\Resources\Shader\Common\TransparentDiffuseColNoLight.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalRefl.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalReflEmsPanner.shader" />
-    <None Include="Assets\Resources\Shader\PostEffects\RadialBlur.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_IceMaterial.shader" />
-    <None Include="Assets\Resources\Shader\Particle\ParticleAlphaBlend.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendNoCutout.shader" />
-    <None Include="Assets\Resources\Shader\Scene\TransparentDiffuseMaskLM.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Blood.shader" />
-    <None Include="Assets\Resources\Shader\RimLight\CutoutDiffuseMaskRCap.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CustomShadowG.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Transparent Colored 2.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalReflFlowbar.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Masked Colored.shader" />
-    <None Include="Assets\Resources\Shader\RimLight\Diffuse.shader" />
-    <None Include="Assets\Resources\Shader\FxPro\LensCurvature.cginc" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture32 1.shader" />
-    <None Include="Assets\Resources\Shader\Effect\UVMoveAdd2.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - WhiteAnim.shader" />
-    <None Include="Assets\Resources\Shader\FxPro\FxProTap.shader" />
-    <None Include="Assets\Resources\Shader\Projector\Projector-Color.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Merge.shader" />
-    <None Include="Assets\Resources\Shader\Include\PBS_Include.cginc" />
-    <None Include="Assets\Resources\Shader\Common\AdditiveColor.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-FlowTexCutout.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_AlphaClipMask_Add.shader" />
-    <None Include="Assets\Resources\Shader\RimLight\CutoutDiffuseMaskR.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCube_Glass.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CustomShadowA.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_AutoMask_Add.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalReflEmsPanner_Cutout.shader" />
-    <None Include="Assets\Resources\Shader\Effect\TexScaleAlpha.shader" />
-    <None Include="Assets\Resources\Shader\Scene\ParticleAlphaBlendC_UVPanner.shader" />
-    <None Include="Assets\Resources\Shader\Include\SkinBlend_Include.cginc" />
-    <None Include="Assets\Resources\Shader\Scene\TerrainFirstPass.shader" />
-    <None Include="Assets\Resources\Shader\Projector\FanBlend.shader" />
-    <None Include="Assets\Resources\Shader\Include\PBSHead_Include.cginc" />
-    <None Include="Assets\Resources\Shader\NGUI\UI-RenderTexture.shader" />
-    <None Include="Assets\Resources\Shader\Common\TransparentGrayMaskRNoLight.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalReflFlowbar.shader" />
-    <None Include="Assets\Resources\Shader\Effect\Rol.shader" />
-    <None Include="Assets\Resources\Shader\FxPro\FxProInclude.cginc" />
-    <None Include="Assets\Resources\Shader\Common\CutoutDiffuseMask.shader" />
-    <None Include="Assets\Resources\Shader\Skin\CutoutDiffuseMaskRFlow.shader" />
-    <None Include="Assets\Resources\Shader\Particle\Particle-Add(clipRGB).shader" />
-    <None Include="Assets\Resources\Shader\Projector\CircleBlend.shader" />
-    <None Include="Assets\Resources\Shader\FxPro\DOFPro.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalReflFlowbar_CutOut.shader" />
-    <None Include="Assets\Resources\Shader\Effect\ParticleUVanim_Add.shader" />
-    <None Include="Assets\Resources\Shader\Common\CutoutAdditiveColor.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CustomShadowR.shader" />
-    <None Include="Assets\Resources\Shader\Effect\UVMove.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_AlphaSoftClip.shader" />
-    <None Include="Assets\Resources\Shader\Effect\Color.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Separate Alpha Colored 2.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalRefl.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture32 3.shader" />
-    <None Include="Assets\Resources\Shader\FxPro\BloomPro.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\UI_Include.cginc" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Transparent Colored 1.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture32.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\UI-Mask 1.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Transparent Colored 3.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_LavaMaterial.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-Cube.shader" />
-    <None Include="Assets\Resources\Shader\Particle\Particle-Add(4Tex).shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture 3.shader" />
-    <None Include="Assets\Resources\Shader\Effect\RayTestClip.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - ParticleAdditive 3.shader" />
-    <None Include="Assets\Resources\Shader\Common\TransparentDiffuseMaskRNoLight.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - ParticleAdditive.shader" />
-    <None Include="Assets\Resources\Shader\FxPro\DOFProBokeh.cginc" />
-    <None Include="Assets\Resources\Shader\Particle\Particle-AddColor(RGB).shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 3.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - ParticleAdditive 1.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendCutout_blend.shader" />
-    <None Include="Assets\Resources\Shader\Common\MobileDiffuseColMask.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CustomShadowB.shader" />
-    <None Include="Assets\Resources\Shader\Common\CutoutDiffuseCol.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-FlowTexDiff.shader" />
-    <None Include="Assets\Resources\Shader\Scene\TerrainAddPass.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture.shader" />
-    <None Include="Assets\Resources\Shader\Common\CutoutDiffuseMaskRNoLight.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-CubeNoMask.shader" />
-    <None Include="Assets\Resources\Shader\Projector\RectAdd.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalReflEmsPanner.shader" />
-    <None Include="Assets\Resources\Shader\Projector\CircleAdd.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture 1.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlend8NoLight.shader" />
-    <None Include="Assets\Resources\Shader\Include\CommonHead_Include.cginc" />
-    <None Include="Assets\Resources\Shader\FxPro\MobileDOFPro.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CustomLightSphere.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CutoutFadeLM.shader" />
-    <None Include="Assets\Resources\Shader\FxPro\SeparableBlur.cginc" />
-    <None Include="Assets\Resources\Shader\RimLight\CutoutDiffuse.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_AlphaAttenuation_Inv.shader" />
-    <None Include="Assets\Resources\Shader\Common\TransparentDiffuseMaskRCube.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Transparent Colored.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CutoutDiffuseMaskLM_VMove.shader" />
-    <None Include="Assets\Resources\Shader\Particle\Particle-Add(clip).shader" />
-    <None Include="Assets\Resources\Shader\FxPro\FxPro.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_Standard.shader" />
-    <None Include="Assets\Resources\Shader\Common\MobileDiffuse.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CutoutFade.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-MainPlayer.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture32 2.shader" />
-    <None Include="Assets\Resources\Shader\Include\CommonBasic_Include.cginc" />
-    <None Include="Assets\Resources\Shader\Common\TransparentDiffuseCol.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Text.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlend8.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture 2.shader" />
-    <None Include="Assets\Resources\Shader\Common\TransparentDiffuse.shader" />
-    <None Include="Assets\Resources\Shader\Common\DiffuseNoLight.shader" />
-    <None Include="Assets\Resources\Shader\PostEffects\BlurEffectConeTaps.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalRefl_CutOut.shader" />
-    <None Include="Assets\Resources\Shader\Scene\Custom Add.shader" />
-    <None Include="Assets\Resources\Shader\Common\CutoutDiffuseMaskR.shader" />
-    <None Include="Assets\Resources\Shader\Common\CutoutDiffuseColNoLight.shader" />
-    <None Include="Assets\Resources\Shader\Effect\TexScale.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Separate Alpha Colored 1.shader" />
-    <None Include="Assets\Resources\Shader\Scene\Scene-Add_DoubleRot.shader" />
-    <None Include="Assets\Resources\Shader\Scene\Fade.shader" />
-    <None Include="Assets\Resources\Shader\Common\MobileDiffuseCol.shader" />
-    <None Include="Assets\Resources\Shader\Scene\CutoutDiffuseMaskLM.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - ParticleAdditive 2.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 1.shader" />
-    <None Include="Assets\Resources\Shader\Projector\Projector-Alpha.shader" />
-    <None Include="Assets\Resources\Shader\Include\Shadow_Include.cginc" />
-    <None Include="Assets\Resources\Shader\RimLight\DiffuseCap.shader" />
-    <None Include="Assets\Resources\Shader\Include\LightMap_Include.cginc" />
-    <None Include="Assets\Resources\Shader\Scene\WarpMoon.shader" />
-    <None Include="Assets\Resources\Shader\Common\CutoutDiffuse.shader" />
-    <None Include="Assets\Resources\Shader\Projector\FanAdd.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_AlphaClips.shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendCutout.shader" />
-    <None Include="Assets\Resources\Shader\Common\CutoutSpecCol.shader" />
-    <None Include="Assets\Resources\Shader\Effect\UVMoveMaskR.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCap_Glass.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\Unlit - Separate Alpha Colored.shader" />
-    <None Include="Assets\Resources\Shader\Particle\Particle-Add(RGB).shader" />
-    <None Include="Assets\Resources\Shader\Skin\Skin-Fade8.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_AlphaAttenuation_Add.shader" />
-    <None Include="Assets\Resources\Shader\PostEffects\BlackWhite.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalRefFlowbarl_Cutout.shader" />
-    <None Include="Assets\Resources\Shader\NGUI\UI-Mask.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalReflEmsPanner_Cutout.shader" />
-    <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalRefl_Cutout.shader" />
-    <None Include="Assets\Resources\Shader\Effect\SFX_Projector.shader" />
-    <None Include="Assets\Resources\Shader\RimLight\CutoutDiffuseMask.shader" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>D:/install/Editor/Data/UnityExtensions/Unity/GUISystem/4.7.2/Standalone/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>D:/install/Editor/Data/UnityExtensions/Unity/GUISystem/4.7.2/Editor/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Graphs">
-      <HintPath>D:/install/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\Editor\Assets\AnimationEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\BytesTableViewEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\EquipPreviewEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\FbxEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\MakeEquip.cs" />
+     <Compile Include="Assets\Editor\Assets\MaterialEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\MaterialFindEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\PrefabEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\SceneEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\SelectBonesEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\TableEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\TextAssetInspector.cs" />
+     <Compile Include="Assets\Editor\Assets\TextureCombine.cs" />
+     <Compile Include="Assets\Editor\Assets\TextureCommonCompress.cs" />
+     <Compile Include="Assets\Editor\Assets\TextureEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\TextureFindEditor.cs" />
+     <Compile Include="Assets\Editor\Assets\XDataIO.cs" />
+     <Compile Include="Assets\Editor\Assets\XResImportModelEditor.cs" />
+     <None Include="Assets\Resources\Shader\Particle\ParticleAdd.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 2.shader" />
+     <None Include="Assets\Resources\Shader\Projector\RectBlend.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Separate Alpha Colored 3.shader" />
+     <None Include="Assets\Resources\Shader\Effect\CombineTex.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlend.shader" />
+     <None Include="Assets\Resources\Shader\Include\OutLine_Include.cginc" />
+     <None Include="Assets\Resources\Shader\Projector\Projector-Multiply.shader" />
+     <None Include="Assets\Resources\Shader\Common\TransparentDiffuseMaskR.shader" />
+     <None Include="Assets\Resources\Shader\Common\TransparentDiffuseColNoLight.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalRefl.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalReflEmsPanner.shader" />
+     <None Include="Assets\Resources\Shader\PostEffects\RadialBlur.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_IceMaterial.shader" />
+     <None Include="Assets\Resources\Shader\Particle\ParticleAlphaBlend.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendNoCutout.shader" />
+     <None Include="Assets\Resources\Shader\Scene\TransparentDiffuseMaskLM.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Blood.shader" />
+     <None Include="Assets\Resources\Shader\RimLight\CutoutDiffuseMaskRCap.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CustomShadowG.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Transparent Colored 2.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalReflFlowbar.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Masked Colored.shader" />
+     <None Include="Assets\Resources\Shader\RimLight\Diffuse.shader" />
+     <None Include="Assets\Resources\Shader\FxPro\LensCurvature.cginc" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture32 1.shader" />
+     <None Include="Assets\Resources\Shader\Effect\UVMoveAdd2.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - WhiteAnim.shader" />
+     <None Include="Assets\Resources\Shader\FxPro\FxProTap.shader" />
+     <None Include="Assets\Resources\Shader\Projector\Projector-Color.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Merge.shader" />
+     <None Include="Assets\Resources\Shader\Include\PBS_Include.cginc" />
+     <None Include="Assets\Resources\Shader\Common\AdditiveColor.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-FlowTexCutout.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_AlphaClipMask_Add.shader" />
+     <None Include="Assets\Resources\Shader\RimLight\CutoutDiffuseMaskR.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCube_Glass.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CustomShadowA.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_AutoMask_Add.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalReflEmsPanner_Cutout.shader" />
+     <None Include="Assets\Resources\Shader\Effect\TexScaleAlpha.shader" />
+     <None Include="Assets\Resources\Shader\Scene\ParticleAlphaBlendC_UVPanner.shader" />
+     <None Include="Assets\Resources\Shader\Include\SkinBlend_Include.cginc" />
+     <None Include="Assets\Resources\Shader\Scene\TerrainFirstPass.shader" />
+     <None Include="Assets\Resources\Shader\Projector\FanBlend.shader" />
+     <None Include="Assets\Resources\Shader\Include\PBSHead_Include.cginc" />
+     <None Include="Assets\Resources\Shader\NGUI\UI-RenderTexture.shader" />
+     <None Include="Assets\Resources\Shader\Common\TransparentGrayMaskRNoLight.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalReflFlowbar.shader" />
+     <None Include="Assets\Resources\Shader\Effect\Rol.shader" />
+     <None Include="Assets\Resources\Shader\FxPro\FxProInclude.cginc" />
+     <None Include="Assets\Resources\Shader\Common\CutoutDiffuseMask.shader" />
+     <None Include="Assets\Resources\Shader\Skin\CutoutDiffuseMaskRFlow.shader" />
+     <None Include="Assets\Resources\Shader\Particle\Particle-Add(clipRGB).shader" />
+     <None Include="Assets\Resources\Shader\Projector\CircleBlend.shader" />
+     <None Include="Assets\Resources\Shader\FxPro\DOFPro.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalReflFlowbar_CutOut.shader" />
+     <None Include="Assets\Resources\Shader\Effect\ParticleUVanim_Add.shader" />
+     <None Include="Assets\Resources\Shader\Common\CutoutAdditiveColor.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CustomShadowR.shader" />
+     <None Include="Assets\Resources\Shader\Effect\UVMove.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_AlphaSoftClip.shader" />
+     <None Include="Assets\Resources\Shader\Effect\Color.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Separate Alpha Colored 2.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalRefl.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture32 3.shader" />
+     <None Include="Assets\Resources\Shader\FxPro\BloomPro.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\UI_Include.cginc" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Transparent Colored 1.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture32.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\UI-Mask 1.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Transparent Colored 3.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_LavaMaterial.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-Cube.shader" />
+     <None Include="Assets\Resources\Shader\Particle\Particle-Add(4Tex).shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture 3.shader" />
+     <None Include="Assets\Resources\Shader\Effect\RayTestClip.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - ParticleAdditive 3.shader" />
+     <None Include="Assets\Resources\Shader\Common\TransparentDiffuseMaskRNoLight.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - ParticleAdditive.shader" />
+     <None Include="Assets\Resources\Shader\FxPro\DOFProBokeh.cginc" />
+     <None Include="Assets\Resources\Shader\Particle\Particle-AddColor(RGB).shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 3.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - ParticleAdditive 1.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendCutout_blend.shader" />
+     <None Include="Assets\Resources\Shader\Common\MobileDiffuseColMask.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CustomShadowB.shader" />
+     <None Include="Assets\Resources\Shader\Common\CutoutDiffuseCol.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-FlowTexDiff.shader" />
+     <None Include="Assets\Resources\Shader\Scene\TerrainAddPass.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture.shader" />
+     <None Include="Assets\Resources\Shader\Common\CutoutDiffuseMaskRNoLight.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-CubeNoMask.shader" />
+     <None Include="Assets\Resources\Shader\Projector\RectAdd.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalReflEmsPanner.shader" />
+     <None Include="Assets\Resources\Shader\Projector\CircleAdd.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture 1.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlend8NoLight.shader" />
+     <None Include="Assets\Resources\Shader\Include\CommonHead_Include.cginc" />
+     <None Include="Assets\Resources\Shader\FxPro\MobileDOFPro.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CustomLightSphere.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CutoutFadeLM.shader" />
+     <None Include="Assets\Resources\Shader\FxPro\SeparableBlur.cginc" />
+     <None Include="Assets\Resources\Shader\RimLight\CutoutDiffuse.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_AlphaAttenuation_Inv.shader" />
+     <None Include="Assets\Resources\Shader\Common\TransparentDiffuseMaskRCube.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Transparent Colored.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CutoutDiffuseMaskLM_VMove.shader" />
+     <None Include="Assets\Resources\Shader\Particle\Particle-Add(clip).shader" />
+     <None Include="Assets\Resources\Shader\FxPro\FxPro.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_Standard.shader" />
+     <None Include="Assets\Resources\Shader\Common\MobileDiffuse.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CutoutFade.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-MainPlayer.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture32 2.shader" />
+     <None Include="Assets\Resources\Shader\Include\CommonBasic_Include.cginc" />
+     <None Include="Assets\Resources\Shader\Common\TransparentDiffuseCol.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Text.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlend8.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Colored Texture 2.shader" />
+     <None Include="Assets\Resources\Shader\Common\TransparentDiffuse.shader" />
+     <None Include="Assets\Resources\Shader\Common\DiffuseNoLight.shader" />
+     <None Include="Assets\Resources\Shader\PostEffects\BlurEffectConeTaps.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalRefl_CutOut.shader" />
+     <None Include="Assets\Resources\Shader\Scene\Custom Add.shader" />
+     <None Include="Assets\Resources\Shader\Common\CutoutDiffuseMaskR.shader" />
+     <None Include="Assets\Resources\Shader\Common\CutoutDiffuseColNoLight.shader" />
+     <None Include="Assets\Resources\Shader\Effect\TexScale.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Separate Alpha Colored 1.shader" />
+     <None Include="Assets\Resources\Shader\Scene\Scene-Add_DoubleRot.shader" />
+     <None Include="Assets\Resources\Shader\Scene\Fade.shader" />
+     <None Include="Assets\Resources\Shader\Common\MobileDiffuseCol.shader" />
+     <None Include="Assets\Resources\Shader\Scene\CutoutDiffuseMaskLM.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - ParticleAdditive 2.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Text 1.shader" />
+     <None Include="Assets\Resources\Shader\Projector\Projector-Alpha.shader" />
+     <None Include="Assets\Resources\Shader\Include\Shadow_Include.cginc" />
+     <None Include="Assets\Resources\Shader\RimLight\DiffuseCap.shader" />
+     <None Include="Assets\Resources\Shader\Include\LightMap_Include.cginc" />
+     <None Include="Assets\Resources\Shader\Scene\WarpMoon.shader" />
+     <None Include="Assets\Resources\Shader\Common\CutoutDiffuse.shader" />
+     <None Include="Assets\Resources\Shader\Projector\FanAdd.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_AlphaClips.shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendCutout.shader" />
+     <None Include="Assets\Resources\Shader\Common\CutoutSpecCol.shader" />
+     <None Include="Assets\Resources\Shader\Effect\UVMoveMaskR.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCap_Glass.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\Unlit - Separate Alpha Colored.shader" />
+     <None Include="Assets\Resources\Shader\Particle\Particle-Add(RGB).shader" />
+     <None Include="Assets\Resources\Shader\Skin\Skin-Fade8.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_AlphaAttenuation_Add.shader" />
+     <None Include="Assets\Resources\Shader\PostEffects\BlackWhite.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalRefFlowbarl_Cutout.shader" />
+     <None Include="Assets\Resources\Shader\NGUI\UI-Mask.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCube_MetalReflEmsPanner_Cutout.shader" />
+     <None Include="Assets\Resources\Shader\Effect\DiffuseCap_MetalRefl_Cutout.shader" />
+     <None Include="Assets\Resources\Shader\Effect\SFX_Projector.shader" />
+     <None Include="Assets\Resources\Shader\RimLight\CutoutDiffuseMask.shader" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>D:/install/Editor/Data/UnityExtensions/Unity/GUISystem/4.7.2/Standalone/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>D:/install/Editor/Data/UnityExtensions/Unity/GUISystem/4.7.2/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>D:/install/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-vs.csproj">
-      <Project>{FC7DE37E-2679-7AA8-AD70-4B93AB56C45F}</Project>
-      <Name>Assembly-CSharp-vs</Name>
-    </ProjectReference>
+      <Project>{FC7DE37E-2679-7AA8-AD70-4B93AB56C45F}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -248,4 +244,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>

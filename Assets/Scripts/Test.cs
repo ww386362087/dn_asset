@@ -6,12 +6,9 @@ using System.Collections.Generic;
 public class Test : XSingleton<Test>
 {
     private CombineConfig combineConfig = null;
-    private DefaultEquip defaultEquip = new DefaultEquip();
-    private FashionList fashionList = new FashionList();
     private FashionSuit fashionSuit = new FashionSuit();
     private EquipSuit equipSuit = new EquipSuit();
 
-    private int m_profession = 1;
     private List<EquipPart> m_FashionList = null;
     private List<EquipPart> m_EquipList = null;
     private Vector2 fashionScrollPos = Vector2.zero;
@@ -36,8 +33,8 @@ public class Test : XSingleton<Test>
             {
                 XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
             }
-        } 
-        
+        }
+
         //装备
         m_EquipList = new List<EquipPart>();
         for (int i = 0; i < equipSuit.Table.Length; ++i)
@@ -52,6 +49,8 @@ public class Test : XSingleton<Test>
         XEntityPresentation p = new XEntityPresentation();
         XEntityPresentation.RowData xrow = p.GetItemID(archerid);
         role.GetComponent<XAnimComponent>().OverrideAnims(xrow);
+
+        role.GetComponent<XEquipComponent>().EquipTest(m_FashionList[0]);
     }
 
     int space = 30;
@@ -121,6 +120,7 @@ public class Test : XSingleton<Test>
 
     private void Preview(EquipPart part)
     {
+        role.GetComponent<XEquipComponent>().EquipTest(part);
     }
 
 }

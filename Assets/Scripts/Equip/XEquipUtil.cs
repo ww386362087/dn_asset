@@ -108,8 +108,8 @@ public class XEquipUtil
                 mat.SetTexture("_Tex6", null);
                 mat.SetTexture("_Tex7", null);
             }
-            if (Application.isPlaying)
-                UnityEngine.Object.Destroy(mat);
+            //if (Application.isPlaying && mat != null)
+            //    UnityEngine.Object.Destroy(mat);
         }
     }
 

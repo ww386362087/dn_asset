@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using XTable;
 
 public class XEquipComponent : XComponent
 {
@@ -21,42 +22,40 @@ public class XEquipComponent : XComponent
             skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         _combineMeshTask.skin = skm;
 
-        EquipTest();
     }
 
     private void PartLoaded(MountLoadTask mountPart)
     {
     }
 
-    public void EquipTest()
+
+    public void EquipTest(EquipPart part)
     {
-        FashionPositionInfo[] fashionList = new FashionPositionInfo[(int)FashionPosition.FASHION_ALL_END];
+        int m_profession = 1;
+        System.Object[] meshPrefab = new System.Object[8];
+        FashionPositionInfo[] fashionList = new FashionPositionInfo[part.partPath.Length];
         FashionPositionInfo fpi = new FashionPositionInfo();
         fpi.fasionID = 0;
         fpi.presentName = "0";
         fpi.replace = false;
         fpi.equipName = "";
-        fashionList[0] = fpi;
-        fpi.equipName = "Player_archer_body";
-        fashionList[1] = fpi;
-        fpi.equipName = "Player_archer_leg";
-        fashionList[2] = fpi;
-        fpi.equipName = "Player_archer_glove";
-        fashionList[3] = fpi;
-        fpi.equipName = "Player_archer_boots";
-        fashionList[4] = fpi;
-        fpi.equipName = "weapon/Player_archer_weapon_archer";
-        fashionList[5] = fpi;
-        fpi.equipName = "Player_archer_quiver";
-        fashionList[6] = fpi;
-        fpi.equipName = "Player_archer_head";
-        fashionList[10] = fpi;
-        fpi.equipName = "Player_archer_hair";
-        fashionList[11] = fpi;
+
+        DefaultEquip defaultEquip = new DefaultEquip();
+        DefaultEquip.RowData data = defaultEquip.GetByProfID(m_profession + 1);
+        for (int i = 0; i < part.partPath.Length; ++i)
+        {
+            string path = part.partPath[i];
+            if (string.IsNullOrEmpty(path))
+            {
+                path = XEquipUtil.GetDefaultPath((EPartType)i, data);
+            }
+            fpi.equipName = path;
+            fashionList[i] = fpi;
+        }
         EquipAll(fashionList);
     }
 
-    public void EquipAll(FashionPositionInfo[] fashionList, uint hairID = 0)
+    public void EquipAll(FashionPositionInfo[] fashionList)
     {
         if (fashionList == null)
         {
@@ -68,12 +67,8 @@ public class XEquipComponent : XComponent
         for (int i = 0, imax = fashionList.Length; i < imax; ++i)
         {
             FashionPositionInfo fpi = fashionList[i];
-            int part = CombineMeshTask.ConvertPart((FashionPosition)i);
-            if (part >= 0)
-            {
-                BaseLoadTask task = _combineMeshTask.parts[part];
-                task.Load(ref fpi, loadPath);
-            }
+            BaseLoadTask task = _combineMeshTask.parts[i];
+            task.Load(ref fpi, loadPath);
         }
         CombineMesh();
     }
@@ -84,7 +79,6 @@ public class XEquipComponent : XComponent
         {
             CombineMeshUtility.singleton.Combine(_combineMeshTask);
         }
-
         _combineMeshTask.combineStatus = ECombineStatus.ECombined;
 
 
@@ -96,7 +90,7 @@ public class XEquipComponent : XComponent
         for (EPartType part = EPartType.ECombinePartEnd; part < EPartType.EMountEnd; ++part)
         {
             MountLoadTask loadPart = _combineMeshTask.parts[(int)part] as MountLoadTask;
-            PartLoaded(loadPart);
+            loadPart.PostLoad(_combineMeshTask.skin);
         }
         for (EPartType part = EPartType.EMountEnd; part <= EPartType.EDecal; ++part)
         {
