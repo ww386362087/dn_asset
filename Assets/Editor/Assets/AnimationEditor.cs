@@ -2,21 +2,21 @@
 using System.Collections;
 using UnityEditor;
 using System.IO;
-
+using UnityEditor.Animations;
 
 namespace XEditor
 {
     public class AnimationEditor
     {
-        private delegate bool EnumAnimatorCallback(UnityEditorInternal.AnimatorController controller, string path);
+        private delegate bool EnumAnimatorCallback(AnimatorController controller, string path);
         private static void EnumAnimatorController(EnumAnimatorCallback cb, string title)
         {
-            UnityEngine.Object[] objects = Selection.GetFiltered(typeof(UnityEditorInternal.AnimatorController), SelectionMode.DeepAssets);
+            UnityEngine.Object[] objects = Selection.GetFiltered(typeof(AnimatorController), SelectionMode.DeepAssets);
             if (objects != null)
             {
                 for (int i = 0; i < objects.Length; ++i)
                 {
-                    UnityEditorInternal.AnimatorController controller = objects[i] as UnityEditorInternal.AnimatorController;
+                    AnimatorController controller = objects[i] as AnimatorController;
                     string path = "";
                     if (controller != null)
                     {
@@ -181,15 +181,15 @@ namespace XEditor
             EnumAnimatorController(_CheckAnimator, "CheckAnimator");
         }
 
-        private static bool _CheckAnimator(UnityEditorInternal.AnimatorController controller, string path)
+        private static bool _CheckAnimator(AnimatorController controller, string path)
         {
-            if (controller.layerCount == 1)
+            if (controller.layers.Length == 1)
             {
-                UnityEditorInternal.AnimatorControllerLayer layer = controller.GetLayer(0);
-                UnityEditorInternal.StateMachine asm = layer.stateMachine;
-                if (asm.stateCount == 1)
+                AnimatorControllerLayer layer = controller.layers[0];
+                AnimatorStateMachine asm = layer.stateMachine;
+                if (asm.states.Length == 1)
                 {
-                    UnityEditorInternal.State state = asm.defaultState;
+                    AnimatorState state = asm.defaultState;
                     Debug.Log("state name: "+state.name+" cotroll: "+controller.name);
                     if (state.name != controller.name)
                     {
@@ -199,7 +199,7 @@ namespace XEditor
             }
             else
             {
-                Debug.LogError(string.Format("Not 1 layer:{0} Count:{1}", controller.name, controller.layerCount));
+                Debug.LogError(string.Format("Not 1 layer:{0} Count:{1}", controller.name, controller.layers.Length));
             }
             return true;
         }

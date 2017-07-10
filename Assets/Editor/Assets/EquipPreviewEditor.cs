@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
-using System.Reflection;
-using System;
 using XTable;
 
 namespace XEditor
@@ -49,7 +47,6 @@ namespace XEditor
                 if (!string.IsNullOrEmpty(path))
                 {
                     path = "Equipments/" + path;
-                    Debug.Log("path: "+path);
                     XMeshTexData mtd = XResourceMgr.Load<XMeshTexData>(path);
                     if (mtd != null && mtd.mesh != null)
                     {
@@ -70,7 +67,7 @@ namespace XEditor
                
 
                 //2.combine
-                Transform t = newGo.transform.FindChild("CombinedMesh");
+                Transform t = newGo.transform;
                 SkinnedMeshRenderer newSmr = t.GetComponent<SkinnedMeshRenderer>();
                 newSmr.sharedMesh = new Mesh();
                 newSmr.sharedMesh.CombineMeshes(ciList.ToArray(), true, false);

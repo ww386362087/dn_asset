@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEditor;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine.Rendering;
+
 namespace XEditor
 {
 
@@ -191,7 +193,6 @@ namespace XEditor
             }
 
             //mesh.uv = null;
-            mesh.uv1 = null;
             mesh.uv2 = null;
             mesh.tangents = null;
             string meshPath = path + mesh.name + ".asset";
@@ -217,7 +218,6 @@ namespace XEditor
         private static void SaveSkinWeaponAsset(SkinnedMeshRenderer smr, Mesh mesh, string saveRootPath)
         {
             mesh.UploadMeshData(true);
-            mesh.uv1 = null;
             mesh.uv2 = null;
             mesh.tangents = null;
             string meshPath = saveRootPath + "weapon/" + mesh.name + ".asset";
@@ -227,8 +227,8 @@ namespace XEditor
             GameObject weaponGo = new GameObject(mesh.name);
             SkinnedMeshRenderer newSmr = weaponGo.AddComponent<SkinnedMeshRenderer>();
             newSmr.sharedMesh = loadMesh;
-            newSmr.useLightProbes = true;
-            newSmr.castShadows = false;
+            newSmr.lightProbeUsage = LightProbeUsage.BlendProbes;
+            newSmr.shadowCastingMode = ShadowCastingMode.Off;
             newSmr.receiveShadows = false;
             newSmr.sharedMaterial = smr.sharedMaterial;
             newSmr.localBounds = loadMesh.bounds;
@@ -265,7 +265,6 @@ namespace XEditor
             {
                 Mesh mesh = UnityEngine.Object.Instantiate(smr.sharedMesh) as Mesh;
                 mesh.name = smr.sharedMesh.name;
-                mesh.Optimize();
                 if (smr.sharedMesh.name.EndsWith("_weapon"))
                 {
                     SaveSkinWeaponAsset(smr, mesh, saveRootPath);
@@ -285,9 +284,7 @@ namespace XEditor
             {
                 Mesh mesh = UnityEngine.Object.Instantiate(mf.sharedMesh) as Mesh;
                 mesh.name = mf.sharedMesh.name;
-                mesh.Optimize();
                 mesh.UploadMeshData(true);
-                mesh.uv1 = null;
                 mesh.uv2 = null;
                 mesh.tangents = null;
                 string meshPath = saveRootPath + mesh.name + ".asset";
@@ -296,8 +293,8 @@ namespace XEditor
                 Mesh loadMesh = AssetDatabase.LoadAssetAtPath(meshPath, typeof(Mesh)) as Mesh;
                 mf.sharedMesh = loadMesh;
                 MeshRenderer mr = mf.transform.GetComponent<MeshRenderer>();
-                mr.useLightProbes = true;
-                mr.castShadows = false;
+                mr.lightProbeUsage = LightProbeUsage.BlendProbes;
+                mr.shadowCastingMode = ShadowCastingMode.Off;
                 mr.receiveShadows = false;
                 mr.gameObject.layer = LayerMask.NameToLayer("Role");
                 PrefabUtility.CreatePrefab(saveRootPath + mesh.name + ".prefab", mr.gameObject, ReplacePrefabOptions.ReplaceNameBased);
@@ -356,8 +353,8 @@ namespace XEditor
             Shader shader = Shader.Find("Custom/Common/MobileDiffuse");
             foreach (Renderer r in renders)
             {
-                r.useLightProbes = true;
-                r.castShadows = false;
+                r.lightProbeUsage = LightProbeUsage.BlendProbes;
+                r.shadowCastingMode = ShadowCastingMode.Off;
                 r.receiveShadows = false;
                 foreach (Material mat in r.sharedMaterials)
                 {

@@ -185,8 +185,8 @@ namespace XEditor
         public string model;
 
         public ModelImporterMeshCompression compression;
-        public ModelImporterTangentSpaceMode normal;
-        public ModelImporterTangentSpaceMode tangent;
+        public ModelImporterNormals normal;
+        public ModelImporterTangents tangent;
         public bool active = true;
     }
 
@@ -241,13 +241,10 @@ namespace XEditor
                     EditorGUILayout.LabelField("Path", _data.model);
 
                     EditorGUILayout.Space();
-                    _data.compression = (ModelImporterMeshCompression)EditorGUILayout.EnumPopup("Mesh Compression", (ModelImporterMeshCompression)_data.compression);
-                    _data.normal = (ModelImporterTangentSpaceMode)EditorGUILayout.EnumPopup("Normals", (ModelImporterTangentSpaceMode)_data.normal);
-
-                    if (_data.normal != ModelImporterTangentSpaceMode.None)
-                        _data.tangent = (ModelImporterTangentSpaceMode)EditorGUILayout.EnumPopup("Tangents", (ModelImporterTangentSpaceMode)_data.tangent);
-                    else
-                        _data.tangent = ModelImporterTangentSpaceMode.None;
+                    _data.compression = (ModelImporterMeshCompression)EditorGUILayout.EnumPopup("Mesh Compression", _data.compression);
+                    _data.normal = (ModelImporterNormals)EditorGUILayout.EnumPopup("Normals", _data.normal);
+                    _data.tangent = (ModelImporterTangents)EditorGUILayout.EnumPopup("Tangents", _data.tangent);
+                   
 
                     if (GUILayout.Button("Confirm", GUILayout.MaxWidth(80)))
                     {

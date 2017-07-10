@@ -279,7 +279,7 @@ namespace XEditor
             m_Tex = null;
             m_TotalSize = 0;
             m_TotalCount = 0;
-            EditorUtility.UnloadUnusedAssets();
+            EditorUtility.UnloadUnusedAssetsImmediate();
             string[] parsePath = pathInfo.Split('=');
             string paths = parsePath[0];
             string findType = parsePath[1];

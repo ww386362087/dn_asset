@@ -16,10 +16,9 @@ public class XEquipComponent : XComponent
     {
         base.OnInitial(e);
 
-        Transform skinmesh = e.EntityObject.transform.Find("CombinedMesh");
+        Transform skinmesh = e.EntityObject.transform;
         SkinnedMeshRenderer skm = skinmesh.GetComponent<SkinnedMeshRenderer>();
-        if (skm == null)
-            skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
+        if (skm == null) skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         _combineMeshTask.skin = skm;
 
     }
@@ -32,7 +31,6 @@ public class XEquipComponent : XComponent
     public void EquipTest(EquipPart part)
     {
         int m_profession = 1;
-        System.Object[] meshPrefab = new System.Object[8];
         FashionPositionInfo[] fashionList = new FashionPositionInfo[part.partPath.Length];
         FashionPositionInfo fpi = new FashionPositionInfo();
         fpi.fasionID = 0;

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEditor;
 using System.Collections.Generic;
-using XEditor;
 using System.IO;
-
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 namespace XEditor
 {
@@ -45,32 +45,30 @@ namespace XEditor
 
         private static bool _PrcessLight(EditorBuildSettingsScene scene)
         {
-            if (EditorApplication.OpenScene(scene.path))
+            Scene sc = EditorSceneManager.OpenScene(scene.path);
+            Light[] lights = UnityEngine.Object.FindObjectsOfType(typeof(Light)) as Light[];
+            if (lights != null)
             {
-                Light[] lights = UnityEngine.Object.FindObjectsOfType(typeof(Light)) as Light[];
-                if (lights != null)
+                foreach (Light light in lights)
                 {
-                    foreach (Light light in lights)
+                    if (light.gameObject.activeInHierarchy && light.type == LightType.Directional)
                     {
-                        if (light.gameObject.activeInHierarchy && light.type == LightType.Directional)
-                        {
-                            lights[0].transform.parent = null;
-                            lights[0].transform.localRotation = Quaternion.Euler(new Vector3(45, 180, 0));
-                            lights[0].name = "MainLight";
-                            LayerMask layerMask = lights[0].cullingMask;
-                            layerMask.value = 1 << LayerMask.NameToLayer("Player") |
-                                 1 << LayerMask.NameToLayer("Role") |
-                                 1 << LayerMask.NameToLayer("Enemy") |
-                                 1 << LayerMask.NameToLayer("BigGuy") |
-                                 1 << LayerMask.NameToLayer("Npc") |
-                                 1 << LayerMask.NameToLayer("Terrain") |
-                                 1 << LayerMask.NameToLayer("Dummy");
-                            lights[0].cullingMask = layerMask;
-                            break;
-                        }
+                        lights[0].transform.parent = null;
+                        lights[0].transform.localRotation = Quaternion.Euler(new Vector3(45, 180, 0));
+                        lights[0].name = "MainLight";
+                        LayerMask layerMask = lights[0].cullingMask;
+                        layerMask.value = 1 << LayerMask.NameToLayer("Player") |
+                             1 << LayerMask.NameToLayer("Role") |
+                             1 << LayerMask.NameToLayer("Enemy") |
+                             1 << LayerMask.NameToLayer("BigGuy") |
+                             1 << LayerMask.NameToLayer("Npc") |
+                             1 << LayerMask.NameToLayer("Terrain") |
+                             1 << LayerMask.NameToLayer("Dummy");
+                        lights[0].cullingMask = layerMask;
+                        break;
                     }
-                    EditorApplication.SaveScene(scene.path);
                 }
+                EditorSceneManager.SaveScene(sc, scene.path);
             }
             return true;
         }
@@ -98,14 +96,19 @@ namespace XEditor
                             string texPath = AssetDatabase.GetAssetPath(tex);
                             int size = tex.width > tex.height ? tex.width : tex.height;
                             TextureImporter texImporter = AssetImporter.GetAtPath(texPath) as TextureImporter;
-                            texImporter.textureType = TextureImporterType.Advanced;
+                            texImporter.textureType = TextureImporterType.Default;
                             texImporter.anisoLevel = 0;
                             texImporter.mipmapEnabled = size > 256;
                             texImporter.npotScale = TextureImporterNPOTScale.ToNearest;
                             texImporter.wrapMode = TextureWrapMode.Repeat;
                             texImporter.filterMode = FilterMode.Bilinear;
-                            texImporter.SetPlatformTextureSettings(BuildTarget.Android.ToString(), size, TextureImporterFormat.RGBA16);
-                            texImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), size, TextureImporterFormat.RGBA16);
+                            TextureImporterPlatformSettings pseting = new TextureImporterPlatformSettings();
+                            pseting.format = TextureImporterFormat.RGBA16;
+                            pseting.name = BuildTarget.Android.ToString();
+                            pseting.maxTextureSize = size;
+                            texImporter.SetPlatformTextureSettings(pseting);
+                            pseting.name = BuildTarget.iOS.ToString();
+                            texImporter.SetPlatformTextureSettings(pseting);
                             texImporter.isReadable = false;
                             AssetDatabase.ImportAsset(texPath, ImportAssetOptions.ForceUpdate);
                             mat.shader = Shader.Find("Transparent/Cutout/Diffuse");
@@ -113,7 +116,6 @@ namespace XEditor
                         else
                         {
                             Texture2D alphaTex = TextureModify.ConvertTexRtex(tex);
-
                             mat.shader = Shader.Find("Custom/Scene/CutoutDiffuseMaskLM");
                             mat.SetTexture("_Mask", alphaTex);
                         }
@@ -184,31 +186,29 @@ namespace XEditor
 
         private static bool _PrcessSceneTerrain(EditorBuildSettingsScene scene)
         {
-            if (EditorApplication.OpenScene(scene.path))
+            Scene sc = EditorSceneManager.OpenScene(scene.path);
+            Terrain[] terrains = UnityEngine.Object.FindObjectsOfType(typeof(Terrain)) as Terrain[];
+            if (terrains != null)
             {
-                Terrain[] terrains = UnityEngine.Object.FindObjectsOfType(typeof(Terrain)) as Terrain[];
-                if (terrains != null)
+                for (int i = 0, imax = terrains.Length; i < imax; ++i)
                 {
-                    for (int i = 0, imax = terrains.Length; i < imax; ++i)
+                    Terrain terrain = terrains[i];
+                    if (terrain.basemapDistance < 1000)
                     {
-                        Terrain terrain = terrains[i];
-                        if (terrain.basemapDistance < 1000)
-                        {
-                            terrain.basemapDistance = 1000;
-                        }
-                        else if (terrain.basemapDistance > 1000)
-                        {
-                            terrain.basemapDistance = 1000;
-                        }
-                        else
-                        {
-                            terrain.basemapDistance = 1001;
-                        }
-                        terrain.terrainData.baseMapResolution = 16;
-                        terrain.Flush();
+                        terrain.basemapDistance = 1000;
                     }
-                    EditorApplication.SaveScene(scene.path);
+                    else if (terrain.basemapDistance > 1000)
+                    {
+                        terrain.basemapDistance = 1000;
+                    }
+                    else
+                    {
+                        terrain.basemapDistance = 1001;
+                    }
+                    terrain.terrainData.baseMapResolution = 16;
+                    terrain.Flush();
                 }
+                EditorSceneManager.SaveScene(sc, scene.path);
             }
             return true;
         }
@@ -234,49 +234,48 @@ namespace XEditor
             {
                 name = name.Substring(0, index);
             }
-            if (EditorApplication.OpenScene(path))
+            EditorSceneManager.OpenScene(path);
+            GameObject go = GameObject.Find("Scene");
+            if (go != null)
             {
-                GameObject go = GameObject.Find("Scene");
-                if (go != null)
+                //1.save as new scene
+                string addpath = string.Format("{0}{1}_add.unity", rootPath, name);
+                Scene addScene = EditorSceneManager.GetSceneByPath(addpath);
+                EditorSceneManager.SaveScene(addScene);
+
+                //2.save as old scene
+                GameObject.DestroyImmediate(go);
+                LightmapSettings.lightmaps = null;
+                LightmapSettings.lightProbes = null;
+                string origpath = string.Format("{0}{1}.unity", rootPath, name);
+                Scene oriScene = EditorSceneManager.GetSceneByPath(origpath);
+                EditorSceneManager.SaveScene(oriScene);
+
+                addScene = EditorSceneManager.OpenScene(addpath);
+                List<GameObject> gos = new List<GameObject>();
+                HierarchyProperty hp = new HierarchyProperty(HierarchyType.GameObjects);
+                int[] expanded = new int[0];
+                while (hp.Next(expanded))
                 {
-                    //1.save as new scene
-                    string addpath = string.Format("{0}{1}_add.unity", rootPath, name);
-                    EditorApplication.SaveScene(addpath, true);
-
-                    //2.save as old scene
-                    GameObject.DestroyImmediate(go);
-                    LightmapSettings.lightmaps = null;
-                    LightmapSettings.lightProbes = null;
-                    string origpath = string.Format("{0}{1}.unity", rootPath, name);
-                    EditorApplication.SaveScene(origpath, true);
-
-                    if (EditorApplication.OpenScene(addpath))
+                    gos.Add(hp.pptrValue as GameObject);
+                }
+                for (int i = gos.Count - 1; i >= 0; --i)
+                {
+                    if (gos[i].name != "Scene")
                     {
-                        List<GameObject> gos = new List<GameObject>();
-                        HierarchyProperty hp = new HierarchyProperty(HierarchyType.GameObjects);
-                        int[] expanded = new int[0];
-                        while (hp.Next(expanded))
-                        {
-                            gos.Add(hp.pptrValue as GameObject);
-                        }
-                        for (int i = gos.Count - 1; i >= 0; --i)
-                        {
-                            if (gos[i].name != "Scene")
-                            {
-                                GameObject.DestroyImmediate(gos[i]);
-                            }
-                        }
-                        StaticOcclusionCulling.Cancel();
-                        EditorApplication.SaveScene(addpath, true);
+                        GameObject.DestroyImmediate(gos[i]);
                     }
                 }
-                else
-                {
-                    LightmapSettings.lightmaps = null;
-                    LightmapSettings.lightProbes = null;
-                    string origpath = string.Format("{0}{1}.unity", rootPath, name);
-                    EditorApplication.SaveScene(origpath, true);
-                }
+                StaticOcclusionCulling.Cancel();
+                EditorSceneManager.SaveScene(addScene, addpath);
+            }
+            else
+            {
+                LightmapSettings.lightmaps = null;
+                LightmapSettings.lightProbes = null;
+                string origpath = string.Format("{0}{1}.unity", rootPath, name);
+                Scene oriScene = EditorSceneManager.GetSceneByPath(origpath);
+                EditorSceneManager.SaveScene(oriScene);
             }
         }
         private static bool _SeprateScene(EditorBuildSettingsScene scene)
@@ -296,7 +295,7 @@ namespace XEditor
             }
             if (meshRender != null && meshRender.enabled)
             {
-                meshRender.castShadows = recover;
+                meshRender.shadowCastingMode = recover ? ShadowCastingMode.On : ShadowCastingMode.Off;
                 meshRender.receiveShadows = recover;
                 for (int i = 0, imax = meshRender.sharedMaterials.Length; i < imax; ++i)
                 {
@@ -392,27 +391,25 @@ namespace XEditor
         }
         public static void RemoveLightmapBakeThing(string scenePath)
         {
-            if (EditorApplication.OpenScene(scenePath))
+            Scene sc = EditorSceneManager.OpenScene(scenePath);
+            GameObject scene = GameObject.Find(@"Scene");
+            if (scene != null)
             {
-                GameObject scene = GameObject.Find(@"Scene");
-                if (scene != null)
+                List<GameObject> lst = new List<GameObject>();
+                for (int i = 0, imax = scene.transform.childCount; i < imax; ++i)
                 {
-                    List<GameObject> lst = new List<GameObject>();
-                    for (int i = 0, imax = scene.transform.childCount; i < imax; ++i)
+                    Transform t = scene.transform.GetChild(i);
+                    if (!t.gameObject.activeSelf)
                     {
-                        Transform t = scene.transform.GetChild(i);
-                        if (!t.gameObject.activeSelf)
-                        {
-                            lst.Add(t.gameObject);
-                        }
+                        lst.Add(t.gameObject);
                     }
-                    for (int i = 0, imax = lst.Count; i < imax; ++i)
-                    {
-                        GameObject.DestroyImmediate(lst[i]);
-                    }
-                    if (lst.Count > 0)
-                        EditorApplication.SaveScene(scenePath);
                 }
+                for (int i = 0, imax = lst.Count; i < imax; ++i)
+                {
+                    GameObject.DestroyImmediate(lst[i]);
+                }
+                if (lst.Count > 0)
+                    EditorSceneManager.SaveScene(sc);
             }
         }
 

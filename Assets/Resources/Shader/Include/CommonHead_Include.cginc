@@ -15,7 +15,7 @@ struct a2v {
 struct v2f {  
 	float4 pos : POSITION;  	
 #ifndef NONORMAL
-	half3 normal;
+	half3 normal : NORMAL;	
 #endif				  
 	half2 uv : TEXCOORD0;
 #ifdef UV2

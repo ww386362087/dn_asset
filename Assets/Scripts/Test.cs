@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class Test : XSingleton<Test>
 {
-    private CombineConfig combineConfig = null;
     private FashionSuit fashionSuit = new FashionSuit();
     private EquipSuit equipSuit = new EquipSuit();
 
@@ -49,7 +48,6 @@ public class Test : XSingleton<Test>
         XEntityPresentation p = new XEntityPresentation();
         XEntityPresentation.RowData xrow = p.GetItemID(archerid);
         role.GetComponent<XAnimComponent>().OverrideAnims(xrow);
-
         role.GetComponent<XEquipComponent>().EquipTest(m_FashionList[0]);
     }
 

@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
 #ifndef OUTLINE_INCLUDED
 #define OUTLINE_INCLUDED
 	
@@ -26,7 +28,7 @@ v2f vert(a2v v) {
 	o.uv = v.texcoord;
 	half rim = 1.0f;
 #ifdef RIMON
-	half3 normal = mul((float3x3)_Object2World, SCALED_NORMAL);
+	half3 normal = mul((float3x3)unity_ObjectToWorld, SCALED_NORMAL);
 	half3 viewDir = WorldSpaceViewDir( v.vertex );	
 	rim = 1.0 - saturate(dot (normalize(viewDir), normal));
 #endif	

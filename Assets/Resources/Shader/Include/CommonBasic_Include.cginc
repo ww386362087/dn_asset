@@ -1,7 +1,9 @@
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
 #ifndef COMMONBASIC_INCLUDED
 #define COMMONBASIC_INCLUDED 
 	
-
+#include "CommonHead_Include.cginc"
 //inline fixed MaskUV(half2 uv,inout fixed4 uvMask)
 //{
 //	uvMask.x = uvMask.x + 1.0;
@@ -43,7 +45,7 @@ v2f vert(a2v v) {
 //#endif//SKINTEX
 #ifndef NONORMAL	
 //1.calc normal
-	o.normal = normalize(mul((float3x3)_Object2World, SCALED_NORMAL));
+	o.normal = normalize(mul((float3x3)unity_ObjectToWorld, SCALED_NORMAL));
 #ifdef MATCAP
 	half2 capCoord;
 	capCoord.x = dot(UNITY_MATRIX_IT_MV[0].xyz, v.normal);

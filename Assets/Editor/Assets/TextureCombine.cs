@@ -30,8 +30,27 @@ public class TextureCombine : EditorWindow
     private Texture2D[] texs = new Texture2D[4];
     private ETexChanel[] texChanels = new ETexChanel[4];
     private TexureImportInfo[] importInfo = new TexureImportInfo[4];
-    private TextureImporterFormat desAndroidFormat = TextureImporterFormat.RGBA16;
-    private TextureImporterFormat desIOSFormat = TextureImporterFormat.RGBA16;
+    private TextureImporterPlatformSettings desAndroidFormat
+    {
+        get
+        {
+            TextureImporterPlatformSettings pseting = new TextureImporterPlatformSettings();
+            pseting.format = TextureImporterFormat.RGBA16;
+            pseting.name = BuildTarget.Android.ToString();
+            return pseting;
+        }
+    }
+    private TextureImporterPlatformSettings desIOSFormat
+    {
+        get
+        {
+            TextureImporterPlatformSettings pseting = new TextureImporterPlatformSettings();
+            pseting.format = TextureImporterFormat.RGBA16;
+            pseting.name = BuildTarget.iOS.ToString();
+            return pseting;
+        }
+    }
+
     private int width = 256;
     private int height = 256;
     private string namepath = "";
@@ -75,7 +94,12 @@ public class TextureCombine : EditorWindow
                         TextureImporterFormat format;
                         textureImporter.wrapMode = TextureWrapMode.Clamp;
                         textureImporter.GetPlatformTextureSettings(EditorUserBuildSettings.activeBuildTarget.ToString(), out texSize, out format);
-                        textureImporter.SetPlatformTextureSettings(EditorUserBuildSettings.activeBuildTarget.ToString(), texSize, TextureImporterFormat.RGBA16);
+
+                        TextureImporterPlatformSettings pseting = new TextureImporterPlatformSettings();
+                        pseting.format = TextureImporterFormat.RGBA16;
+                        pseting.name = EditorUserBuildSettings.activeBuildTarget.ToString();
+                        pseting.maxTextureSize = texSize;
+                        textureImporter.SetPlatformTextureSettings(pseting);
 
                         AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
                         tii.format = format;
@@ -136,14 +160,15 @@ public class TextureCombine : EditorWindow
             TextureImporter desTexImporter = AssetImporter.GetAtPath(namepath) as TextureImporter;
             if (desTexImporter != null)
             {
-                int size = width > height ? width : height;
-                desTexImporter.textureType = TextureImporterType.Advanced;
-                desTexImporter.anisoLevel = 0;
-                desTexImporter.mipmapEnabled = false;
-                desTexImporter.isReadable = false;
-                desTexImporter.npotScale = TextureImporterNPOTScale.ToNearest;
-                desTexImporter.SetPlatformTextureSettings(BuildTarget.Android.ToString(), size, desAndroidFormat);
-                desTexImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), size, desIOSFormat);
+                TextureImporterSettings setting = new TextureImporterSettings();
+                setting.textureType = TextureImporterType.Default;
+                setting.aniso = 0;
+                setting.mipmapEnabled = false;
+                setting.readable = false;
+                setting.npotScale = TextureImporterNPOTScale.ToNearest;
+                desTexImporter.SetTextureSettings(setting);
+                desTexImporter.SetPlatformTextureSettings(desAndroidFormat);
+                desTexImporter.SetPlatformTextureSettings(desIOSFormat);
                 AssetDatabase.ImportAsset(namepath, ImportAssetOptions.ForceUpdate);
             }
             for (int i = 0, imax = texs.Length; i < imax; ++i)
@@ -152,7 +177,11 @@ public class TextureCombine : EditorWindow
                 if (tex != null)
                 {
                     TexureImportInfo tii = importInfo[i];
-                    tii.textureImporter.SetPlatformTextureSettings(EditorUserBuildSettings.activeBuildTarget.ToString(), tii.texSize, tii.format);
+                    TextureImporterPlatformSettings pseting = new TextureImporterPlatformSettings();
+                    pseting.format = tii.format;
+                    pseting.name = EditorUserBuildSettings.activeBuildTarget.ToString();
+                    pseting.maxTextureSize = tii.texSize;
+                    tii.textureImporter.SetPlatformTextureSettings(pseting);
                     tii.textureImporter.wrapMode = tii.wrapMode;
                     AssetDatabase.ImportAsset(tii.path, ImportAssetOptions.ForceUpdate);
                 }

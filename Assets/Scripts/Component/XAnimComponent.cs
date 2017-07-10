@@ -33,7 +33,6 @@ public class XAnimComponent : XComponent
             m_Animator.runtimeAnimatorController = m_overrideController;
         }
         m_Animator.Rebind();
-     
     }
 
     public override void OnUninit()
@@ -42,27 +41,22 @@ public class XAnimComponent : XComponent
         base.OnUninit();
     }
 
-
-    bool init = false;
+    
     public void OverrideAnims(XEntityPresentation.RowData row)
     {
-        if (!init)
-        {
-            init = true;
-            OverrideAnim("A", row.AnimLocation + row.A);
-            OverrideAnim("AA", row.AnimLocation + row.AA);
-            OverrideAnim("AAA", row.AnimLocation + row.AAA);
-            OverrideAnim("AAAA", row.AnimLocation + row.AAAA);
-            OverrideAnim("AAAAA", row.AnimLocation + row.AAAAA);
-            OverrideAnim("Walk", row.AnimLocation + row.Walk);
-            OverrideAnim("Idle", row.AnimLocation + row.Idle);
-            OverrideAnim("Death", row.AnimLocation + row.Death);
-            OverrideAnim("Run", row.AnimLocation + row.Run);
-            OverrideAnim("RunLeft", row.AnimLocation + row.RunLeft);
-            OverrideAnim("RunRight", row.AnimLocation + row.RunRight);
-            OverrideAnim("Freezed", row.AnimLocation + row.Freeze);
-            OverrideAnim("HitLanding", row.AnimLocation + row.Hit_l);
-        }
+        OverrideAnim("A", row.AnimLocation + row.A);
+        OverrideAnim("AA", row.AnimLocation + row.AA);
+        OverrideAnim("AAA", row.AnimLocation + row.AAA);
+        OverrideAnim("AAAA", row.AnimLocation + row.AAAA);
+        OverrideAnim("AAAAA", row.AnimLocation + row.AAAAA);
+        OverrideAnim("Walk", row.AnimLocation + row.Walk);
+        OverrideAnim("Idle", row.AnimLocation + row.Idle);
+        OverrideAnim("Death", row.AnimLocation + row.Death);
+        OverrideAnim("Run", row.AnimLocation + row.Run);
+        OverrideAnim("RunLeft", row.AnimLocation + row.RunLeft);
+        OverrideAnim("RunRight", row.AnimLocation + row.RunRight);
+        OverrideAnim("Freezed", row.AnimLocation + row.Freeze);
+        OverrideAnim("HitLanding", row.AnimLocation + row.Hit_l);
     }
 
     public void SyncSpeed(float speed)
@@ -159,20 +153,29 @@ public class XAnimComponent : XComponent
         if (string.IsNullOrEmpty(clippath) || m_Animator == null || m_overrideController == null)
             return;
 
-        if(m_overrideController[key] ==null)
-        {
-            m_overrideController[key] = XResourceMgr.Load<AnimationClip>("Animation/"+clippath);
-        }
+        m_overrideController[key] = XResourceMgr.Load<AnimationClip>("Animation/" + clippath);
     }
 
     public void Reset()
     {
         if (m_Animator != null)
         {
-            m_Animator.cullingMode = AnimatorCullingMode.BasedOnRenderers;
+            m_Animator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
             m_Animator.enabled = false;
             m_Animator = null;
         }
+        ResetClips();
+        m_overrideController = null;
+        m_stateName = "";
+        m_value = -1;
+        m_playLayer = -1;
+        m_normalizedTime = float.NegativeInfinity;
+        m_triggerName = "";
+    }
+
+
+    private void ResetClips()
+    {
         if (m_overrideController != null)
         {
             AnimationClipPair[] clips = m_overrideController.clips;
@@ -184,13 +187,7 @@ public class XAnimComponent : XComponent
                     m_overrideController[clip.originalClip.name] = null;
                 }
             }
-            m_overrideController = null;
         }
-        m_stateName = "";
-        m_value = -1;
-        m_playLayer = -1;
-        m_normalizedTime = float.NegativeInfinity;
-        m_triggerName = "";
     }
 
 }

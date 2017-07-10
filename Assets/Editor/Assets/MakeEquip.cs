@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 namespace XEditor
 {
@@ -269,9 +270,9 @@ namespace XEditor
                                 SkinnedMeshRenderer smr = go.AddComponent<SkinnedMeshRenderer>();
                                 smr.sharedMesh = emt.mesh;
                                 smr.sharedMaterial = newMat;
-                                smr.useLightProbes = true;
-                                smr.castShadows = false;
                                 smr.receiveShadows = false;
+                                smr.lightProbeUsage = LightProbeUsage.BlendProbes;
+                                smr.shadowCastingMode = ShadowCastingMode.Off;
                             }
                             else
                             {
@@ -279,9 +280,9 @@ namespace XEditor
                                 mf.sharedMesh = emt.mesh;
                                 MeshRenderer mr = go.AddComponent<MeshRenderer>();
                                 mr.sharedMaterial = newMat;
-                                mr.useLightProbes = true;
-                                mr.castShadows = false;
                                 mr.receiveShadows = false;
+                                mr.lightProbeUsage = LightProbeUsage.BlendProbes;
+                                mr.shadowCastingMode = ShadowCastingMode.Off;
                             }
                             go.layer = LayerMask.NameToLayer("Role");
                             PrefabUtility.CreatePrefab(weaponPath + emt.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);

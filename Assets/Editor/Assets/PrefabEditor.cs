@@ -74,7 +74,7 @@ namespace XEditor
                 Renderer render = renderLst[i];
                 if (render != null)
                 {
-                    if (render.receiveShadows || render.castShadows)
+                    if (render.receiveShadows || render.shadowCastingMode== UnityEngine.Rendering.ShadowCastingMode.On)
                     {
                         Debug.LogError(string.Format("Error Shadow cast:{0} render:{1}", go.name, render.name));
                     }
@@ -116,15 +116,14 @@ namespace XEditor
                 ParticleSystem ps = child.GetComponent<ParticleSystem>();
                 if (ps != null)
                 {
-                    if (ps.renderer == null || ps.renderer.sharedMaterial == null)
+                    if (ps.GetComponent<Renderer>() == null || ps.GetComponent<Renderer>().sharedMaterial == null)
                     {
                         Debug.LogError("ps render error:" + currentFxPath);
                     }
                     else
                     {
-                        path += ps.renderer.sharedMaterial.name;
+                        path += ps.GetComponent<Renderer>().sharedMaterial.name;
                     }
-
                 }
                 _CheckFx(child, ref path);
             }

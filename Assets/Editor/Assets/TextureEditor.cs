@@ -170,7 +170,6 @@ namespace XEditor
                 }
             }
             nativeEditor = Editor.CreateEditor(target, t);
-
         }
 
         public override void OnInspectorGUI()
@@ -415,14 +414,14 @@ namespace XEditor
             TextureImporter alphaTextureImporter = AssetImporter.GetAtPath(alphaTexPath) as TextureImporter;
             if (alphaTextureImporter != null)
             {
+                
                 int alphaSize = size;
-                alphaTextureImporter.textureType = TextureImporterType.Advanced;
+                alphaTextureImporter.textureType = TextureImporterType.Default;
                 alphaTextureImporter.anisoLevel = 0;
                 alphaTextureImporter.mipmapEnabled = false;
                 alphaTextureImporter.isReadable = false;
                 alphaTextureImporter.npotScale = TextureImporterNPOTScale.ToNearest;
-                alphaTextureImporter.SetPlatformTextureSettings(BuildTarget.Android.ToString(), alphaSize, TextureImporterFormat.ETC_RGB4);
-                alphaTextureImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), alphaSize, TextureImporterFormat.PVRTC_RGB4);
+                SetPlatformSetting(alphaTextureImporter, alphaSize);
                 AssetDatabase.ImportAsset(alphaTexPath, ImportAssetOptions.ForceUpdate);
             }
             return AssetDatabase.LoadAssetAtPath(alphaTexPath, typeof(Texture2D)) as Texture2D;
@@ -439,19 +438,17 @@ namespace XEditor
             int size = src.width > src.height ? src.width : src.height;
             TextureImporter texImporter = AssetImporter.GetAtPath(texPath) as TextureImporter;
             if (!texImporter.DoesSourceTextureHaveAlpha()) return null;
-            texImporter.textureType = TextureImporterType.Advanced;
-            texImporter.anisoLevel = 0;
-            texImporter.mipmapEnabled = size > 256;
-            texImporter.npotScale = TextureImporterNPOTScale.ToNearest;
-            texImporter.wrapMode = TextureWrapMode.Repeat;
-            texImporter.filterMode = FilterMode.Bilinear;
-            texImporter.SetPlatformTextureSettings(BuildTarget.Android.ToString(), size, TextureImporterFormat.RGBA32);
-            texImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), size, TextureImporterFormat.RGBA32);
-            texImporter.isReadable = true;
+            TextureImporterSettings setting = new TextureImporterSettings();
+            setting.textureType = TextureImporterType.Default;
+            setting.aniso = 0;
+            setting.mipmapEnabled = size > 256;
+            setting.npotScale = TextureImporterNPOTScale.ToNearest;
+            setting.wrapMode = TextureWrapMode.Repeat;
+            setting.filterMode = FilterMode.Bilinear;
+            setting.readable = true;
             AssetDatabase.ImportAsset(texPath, ImportAssetOptions.ForceUpdate);
             Texture2D alphaTex = MakeAlphaRTex(alphaTexPath, size / scaleSize, src);
-            texImporter.SetPlatformTextureSettings(BuildTarget.Android.ToString(), size, TextureImporterFormat.ETC_RGB4);
-            texImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), size, TextureImporterFormat.PVRTC_RGB4);
+            SetPlatformSetting(texImporter, size);
             texImporter.isReadable = false;
             AssetDatabase.ImportAsset(texPath, ImportAssetOptions.ForceUpdate);
             return alphaTex;
@@ -463,33 +460,45 @@ namespace XEditor
             if (path.IndexOf("_A.") >= 0 || path.IndexOf("_NRM.") >= 0)
                 return false;
             int size = tex.width > tex.height ? tex.width : tex.height;
-            textureImporter.SetPlatformTextureSettings(BuildTarget.Android.ToString(), size, TextureImporterFormat.RGBA32);
-            textureImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), size, TextureImporterFormat.RGBA32);
-            textureImporter.textureType = TextureImporterType.Advanced;
-            textureImporter.anisoLevel = 0;
-            textureImporter.mipmapEnabled = size > 256;
-            textureImporter.npotScale = TextureImporterNPOTScale.ToNearest;
-            textureImporter.wrapMode = TextureWrapMode.Repeat;
-            textureImporter.filterMode = FilterMode.Bilinear;
+            TextureImporterSettings setting = new TextureImporterSettings();
+            setting.textureType = TextureImporterType.Default;
+            
+            setting.textureType = TextureImporterType.Default;
+            setting.aniso = 0;
+            setting.mipmapEnabled = size > 256;
+            setting.npotScale = TextureImporterNPOTScale.ToNearest;
+            setting.wrapMode = TextureWrapMode.Repeat;
+            setting.filterMode = FilterMode.Bilinear;
 
             if (textureImporter.DoesSourceTextureHaveAlpha())
             {
-                textureImporter.isReadable = true;
+                setting.readable = true;
                 AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
                 int extIndex = path.LastIndexOf(".");
                 if (extIndex >= 0)
                 {
-                    textureImporter.isReadable = true;
-
+                    setting.readable = true;
                     string alphaTexPath = path.Substring(0, extIndex) + "_A.png";
-
                     MakeAlphaRTex(alphaTexPath, size / 2, tex);
                 }
             }
-            textureImporter.SetPlatformTextureSettings(BuildTarget.Android.ToString(), size, TextureImporterFormat.ETC_RGB4);
-            textureImporter.SetPlatformTextureSettings(BuildTarget.iPhone.ToString(), size, TextureImporterFormat.PVRTC_RGB4);
+            textureImporter.SetTextureSettings(setting);
+            SetPlatformSetting(textureImporter, size);
             textureImporter.isReadable = false;
             return true;
+        }
+
+        private static void SetPlatformSetting(TextureImporter textureImporter,int size)
+        {
+            TextureImporterPlatformSettings pseting = new TextureImporterPlatformSettings();
+            pseting.format = TextureImporterFormat.ETC_RGB4;
+            pseting.name = BuildTarget.Android.ToString();
+            pseting.maxTextureSize = size;
+            textureImporter.SetPlatformTextureSettings(pseting);
+            pseting.format = TextureImporterFormat.PVRTC_RGB4;
+            pseting.name = BuildTarget.iOS.ToString();
+            pseting.maxTextureSize = size;
+            textureImporter.SetPlatformTextureSettings(pseting);
         }
 
         [MenuItem(@"Assets/Tool/Texture/DefaultCompress")]

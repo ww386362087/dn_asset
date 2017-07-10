@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
 #ifndef PBS_INCLUDED
 #define PBS_INCLUDED
 
@@ -437,7 +439,7 @@ v2f vert(a2v v) {
 
 #ifdef LIGHTON
 	//1.calc normal
-	o.normal = normalize(mul((float3x3)_Object2World, SCALED_NORMAL));	
+	o.normal = normalize(mul((float3x3)unity_ObjectToWorld, SCALED_NORMAL));	
 	
 	//2.calc view
 	o.viewDir = WorldSpaceViewDir( v.vertex );

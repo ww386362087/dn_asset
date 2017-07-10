@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using XEditor;
 using System.IO;
 using XTable;
+using UnityEngine.Rendering;
 
 namespace XEditor
 {
@@ -205,14 +206,14 @@ namespace XEditor
                 FindComponentSkinnedMesh(newGo.transform, skins);
                 foreach (SkinnedMeshRenderer skin in skins)
                 {
-                    skin.castShadows = false;
                     skin.receiveShadows = false;
-                    skin.useLightProbes = true;
+                    skin.lightProbeUsage = LightProbeUsage.BlendProbes;
+                    skin.shadowCastingMode = ShadowCastingMode.Off;
                     foreach (SkinnedMeshRenderer srcSkin in srcSkins)
                     {
                         if (srcSkin.name == skin.name)
                         {
-                            skin.useLightProbes = srcSkin.useLightProbes;
+                            skin.lightProbeUsage = srcSkin.lightProbeUsage;
                             break;
                         }
                     }
@@ -221,14 +222,14 @@ namespace XEditor
                 FindComponentMesh(newGo.transform, meshs);
                 foreach (MeshRenderer mesh in meshs)
                 {
-                    mesh.castShadows = false;
                     mesh.receiveShadows = false;
-                    mesh.useLightProbes = true;
+                    mesh.lightProbeUsage = LightProbeUsage.BlendProbes;
+                    mesh.shadowCastingMode = ShadowCastingMode.Off;
                     foreach (MeshRenderer srcMesh in srcMeshs)
                     {
                         if (srcMesh.name == mesh.name)
                         {
-                            mesh.useLightProbes = srcMesh.useLightProbes;
+                            mesh.lightProbeUsage = srcMesh.lightProbeUsage;
                             break;
                         }
                     }
@@ -373,8 +374,8 @@ namespace XEditor
                     skinMesh.transform.parent = newGo.transform;
                     SkinnedMeshRenderer smr = skinMesh.AddComponent<SkinnedMeshRenderer>();
                     smr.receiveShadows = false;
-                    smr.useLightProbes = true;
-                    smr.castShadows = false;
+                    smr.lightProbeUsage = LightProbeUsage.BlendProbes;
+                    smr.shadowCastingMode = ShadowCastingMode.Off;
                     smr.updateWhenOffscreen = false;
                     smr.rootBone = newGo.transform;
                     smr.localBounds = new Bounds(new Vector3(0, 0.5f, 0), new Vector3(0.5f, 1.0f, 0.5f));

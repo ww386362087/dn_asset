@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public delegate void MountLoadCallback(MountLoadTask mountPart);
 
@@ -113,7 +114,7 @@ public class MountLoadTask : BaseLoadTask
                     if (mat != null && mat.shader.renderQueue < 3000)
                     {
                         mainRender = render;
-                        render.castShadows = castShadow;
+                        render.shadowCastingMode = castShadow ? ShadowCastingMode.On : ShadowCastingMode.Off;
                     }
                     else if (renderQueue >= 0)
                     {
