@@ -149,7 +149,7 @@ namespace XForm
             }
             content2.Append("\r\n\t\t}\r\n");
             content2.Append("\r\n\n\t\tpublic " + name + "() { if (Table == null) Create(); }");
-            content2.Append("\r\n\r\n\t\tpublic RowData[] Table = null;");
+            content2.Append("\r\n\r\n\t\tpublic static RowData[] Table = null;");
             content2.Append("\r\n\r\n\t\tpublic override string bytePath { get { return \"Table/" + name + "\"; } }");
 
             fileContent.Replace("public int replace;", content2.ToString());

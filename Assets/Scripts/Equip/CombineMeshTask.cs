@@ -38,7 +38,7 @@ public class CombineMeshTask
     public Material mat = null;
 
  
-    public CombineMeshTask(MountLoadCallback mountLoadFinish)
+    public CombineMeshTask(XEquipComponent ec)
     {
         m_PartLoaded = PartLoadFinish;
         for (EPartType part = EPartType.ECombinePartStart; part < EPartType.ECombinePartEnd; ++part)
@@ -47,7 +47,7 @@ public class CombineMeshTask
         }
         for (EPartType part = EPartType.ECombinePartEnd; part < EPartType.EMountEnd; ++part)
         {
-            parts[(int)part] = new MountLoadTask(part, mountLoadFinish);
+            parts[(int)part] = new MountLoadTask(part,ec);
         }
         for (EPartType part = EPartType.EMountEnd; part < EPartType.ENum; ++part)
         {

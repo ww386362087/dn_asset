@@ -13,10 +13,10 @@ namespace XTable
 
         public static EquipSuit.RowData GetByProfID(this EquipSuit input,int proID)
         {
-            for (int i = 0, max = input.Table.Length; i < max; i++)
+            for (int i = 0, max = EquipSuit.Table.Length; i < max; i++)
             {
-                if (input.Table[i].ProfID == proID)
-                    return input.Table[i];
+                if (EquipSuit.Table[i].ProfID == proID)
+                    return EquipSuit.Table[i];
             }
             return null;
         }
@@ -24,10 +24,10 @@ namespace XTable
 
         public static DefaultEquip.RowData GetByProfID(this DefaultEquip input, int proID)
         {
-            for (int i = 0, max = input.Table.Length; i < max; i++)
+            for (int i = 0, max = DefaultEquip.Table.Length; i < max; i++)
             {
-                if (input.Table[i].ProfID == proID)
-                    return input.Table[i];
+                if (DefaultEquip.Table[i].ProfID == proID)
+                    return DefaultEquip.Table[i];
             }
             return null;
         }
@@ -35,21 +35,21 @@ namespace XTable
 
         public static FashionList.RowData GetByItemID(this FashionList input, int fashioid)
         {
-            for (int i = 0, max = input.Table.Length; i < max; i++)
+            for (int i = 0, max = FashionList.Table.Length; i < max; i++)
             {
-                if (input.Table[i].ItemID == fashioid)
-                    return input.Table[i];
+                if (FashionList.Table[i].ItemID == fashioid)
+                    return FashionList.Table[i];
             }
             return null;
         }
 
         public static XEntityPresentation.RowData GetItemID(this XEntityPresentation input, uint id)
         {
-            for (int i = 0, max = input.Table.Length; i < max; i++)
+            for (int i = 0, max = XEntityPresentation.Table.Length; i < max; i++)
             {
-                if (input.Table[i].ID == id)
+                if (XEntityPresentation.Table[i].ID == id)
                 {
-                    return input.Table[i];
+                    return XEntityPresentation.Table[i];
                 }
             }
             return null;

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using XTable;
 
@@ -292,8 +291,18 @@ public class XEquipUtil
             case EPartType.ESecondaryWeapon:
                 partPath = data.SecondWeapon;
                 break;
+            case EPartType.EMainWeapon:
+                partPath = data.Weapon;
+                break;
+            case EPartType.EWings:
+                partPath = data.WingPoint;
+                break;
+            case EPartType.ETail:
+                partPath = data.TailPoint;
+                break;
         }
         return partPath;
     }
+
 
 }

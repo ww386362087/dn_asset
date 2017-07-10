@@ -6,10 +6,12 @@ public class XEquipComponent : XComponent
 {
 
     private CombineMeshTask _combineMeshTask = null;
-
+    private int m_profession = 1;
+    public DefaultEquip.RowData data = null;
+    List<FashionPositionInfo> fashionList = null;
     public XEquipComponent()
     {
-        _combineMeshTask = new CombineMeshTask(PartLoaded);
+        _combineMeshTask = new CombineMeshTask(this);
     }
 
     public override void OnInitial(XEntity e)
@@ -21,26 +23,22 @@ public class XEquipComponent : XComponent
         if (skm == null) skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         _combineMeshTask.skin = skm;
 
+        int m_profession = 1;
+        DefaultEquip defaultEquip = new DefaultEquip();
+        data = defaultEquip.GetByProfID(m_profession + 1);
     }
 
-    private void PartLoaded(MountLoadTask mountPart)
-    {
-    }
 
 
     public void EquipTest(EquipPart part)
     {
-        int m_profession = 1;
-        FashionPositionInfo[] fashionList = new FashionPositionInfo[part.partPath.Length];
+        fashionList = new List<FashionPositionInfo>();
         FashionPositionInfo fpi = new FashionPositionInfo();
         fpi.fasionID = 0;
         fpi.presentName = "0";
         fpi.replace = false;
         fpi.equipName = "";
-
-        DefaultEquip defaultEquip = new DefaultEquip();
-        DefaultEquip.RowData data = defaultEquip.GetByProfID(m_profession + 1);
-        for (int i = 0; i < part.partPath.Length; ++i)
+        for (int i = 0; i < part.partPath.Length; ++i) //length = 8
         {
             string path = part.partPath[i];
             if (string.IsNullOrEmpty(path))
@@ -48,9 +46,32 @@ public class XEquipComponent : XComponent
                 path = XEquipUtil.GetDefaultPath((EPartType)i, data);
             }
             fpi.equipName = path;
-            fashionList[i] = fpi;
+            fashionList.Add(fpi);
         }
-        EquipAll(fashionList);
+
+        //武器 --8
+        //fpi.equipName = XEquipUtil.GetDefaultPath(EPartType.EMainWeapon, data);
+        //fashionList.Add(fpi);
+
+        EquipAll(fashionList.ToArray());
+    }
+
+    public void AttachWeapon(string path)
+    {
+        if(fashionList!=null)
+        {
+            FashionPositionInfo fpi = new FashionPositionInfo();
+            fpi.equipName = "weapon/"+path;
+            if (fashionList.Count>8)
+            {
+                fashionList[8] = fpi;
+            }
+            else
+            {
+                fashionList.Add(fpi);
+            }
+            EquipAll(fashionList.ToArray());
+        }
     }
 
     public void EquipAll(FashionPositionInfo[] fashionList)
@@ -88,7 +109,7 @@ public class XEquipComponent : XComponent
         for (EPartType part = EPartType.ECombinePartEnd; part < EPartType.EMountEnd; ++part)
         {
             MountLoadTask loadPart = _combineMeshTask.parts[(int)part] as MountLoadTask;
-            loadPart.PostLoad(_combineMeshTask.skin);
+            loadPart.PostLoad();
         }
         for (EPartType part = EPartType.EMountEnd; part <= EPartType.EDecal; ++part)
         {

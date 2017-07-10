@@ -39,7 +39,7 @@ namespace XTable {
 
 		public FashionList() { if (Table == null) Create(); }
 
-		public RowData[] Table = null;
+		public static RowData[] Table = null;
 
 		public override string bytePath { get { return "Table/FashionList"; } }
         

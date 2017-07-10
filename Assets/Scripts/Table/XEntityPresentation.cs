@@ -101,7 +101,7 @@ namespace XTable {
 
 		public XEntityPresentation() { if (Table == null) Create(); }
 
-		public RowData[] Table = null;
+		public static RowData[] Table = null;
 
 		public override string bytePath { get { return "Table/XEntityPresentation"; } }
         

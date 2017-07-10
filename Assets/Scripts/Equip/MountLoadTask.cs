@@ -1,51 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using XTable;
 
-public delegate void MountLoadCallback(MountLoadTask mountPart);
 
 public class MountLoadTask : BaseLoadTask
 {
-    public GameObject go = null;
-    public XMeshTexData mtd = null;
+    private XEquipComponent component;
+    private Object obj = null;
+    private GameObject goInstance = null;
     public bool transferRef = false;
     public Renderer mainRender = null;
-    private MountLoadCallback m_MountPartLoadCb = null;
 
-    public MountLoadTask(EPartType p, MountLoadCallback mountPartLoadCb)
+    public MountLoadTask(EPartType p, XEquipComponent e)
         : base(p)
     {
-        m_MountPartLoadCb = mountPartLoadCb;
+        component = e;
     }
 
     public override void Load(ref FashionPositionInfo newFpi, HashSet<string> loadedPath)
     {
-        if (IsSamePart(ref newFpi))
-        {
-            if (m_MountPartLoadCb != null)
-            {
-                m_MountPartLoadCb(this);
-            }
-        }
-        else
+        if (!IsSamePart(ref newFpi))
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                go = XResourceMgr.Load<GameObject>(location);
-                LoadFinish(go, this);
+                if (goInstance != null) GameObject.Destroy(goInstance);
+                obj = XResourceMgr.Load<GameObject>(location);
+                LoadFinish(this);
+                ProcessTransfer();
             }
             else
             {
                 if (string.IsNullOrEmpty(location))
                 {
                     processStatus = EProcessStatus.EProcessing;
-                    LoadFinish(null, this);
+                    LoadFinish(this);
                 }
             }
         }
     }
 
-    private void LoadFinish(GameObject go, object o)
+    private void LoadFinish(object o)
     {
         MountLoadTask mlt = o as MountLoadTask;
         if (mlt != null)
@@ -53,81 +48,80 @@ public class MountLoadTask : BaseLoadTask
             if (mlt.processStatus == EProcessStatus.EProcessing)
             {
                 mlt.processStatus = EProcessStatus.EPreProcess;
-
-                if (mlt.m_MountPartLoadCb != null)
-                {
-                    mlt.m_MountPartLoadCb(mlt);
-                    mtd = go.GetComponent<XMeshTexData>();
-                }
-
             }
         }
+        ProcessRender();
     }
 
-    public void PostLoad(SkinnedMeshRenderer skin)
+
+    public void PostLoad()
     {
-        if (skin == null || mtd == null) return;
-        skin.sharedMaterial.SetTexture(mtd._offset, mtd._tex);
     }
 
     public override void Reset()
     {
-        if (!transferRef && go != null)
+        if (!transferRef && obj != null)
         {
-            GameObject.Destroy(go);
+            GameObject.Destroy(obj);
         }
-        go = null;
+        obj = null;
         transferRef = false;
     }
 
-    public void ProcessRender(int layer, bool enable, bool castShadow, int renderQueue)
+    public void ProcessRender()
     {
-        if (go != null)
+        if (obj != null)
         {
             for (int i = 0; i < XCommon.tmpRender.Count; i++)
             {
                 Renderer render = XCommon.tmpRender[i];
-                render.enabled = enable;
-                if (layer >= 0)
+                render.enabled = true;
+                Material mat = render.sharedMaterial;
+                if (mat != null && mat.shader.renderQueue < 3000)
                 {
-                    render.gameObject.layer = layer;
-
-                    bool hasUIRimMask = render.sharedMaterial.HasProperty("_UIRimMask");
-
-                    if (hasUIRimMask)
-                    {
-                        render.material.SetVector("_UIRimMask", new Vector4(0, 0, 2, 0));
-                    }
+                    mainRender = render;
+                    render.shadowCastingMode = ShadowCastingMode.Off;
                 }
-
-
-                if (render is ParticleRenderer)
+                bool hasUIRimMask = render.sharedMaterial.HasProperty("_UIRimMask");
+                if (hasUIRimMask)
                 {
-                    if (renderQueue >= 0)
-                    {
-                        render.material.renderQueue = renderQueue;
-                    }
-                }
-                else
-                {
-                    Material mat = render.sharedMaterial;
-                    if (mat != null && mat.shader.renderQueue < 3000)
-                    {
-                        mainRender = render;
-                        render.shadowCastingMode = castShadow ? ShadowCastingMode.On : ShadowCastingMode.Off;
-                    }
-                    else if (renderQueue >= 0)
-                    {
-                        render.material.renderQueue = renderQueue;
-                    }
+                    render.material.SetVector("_UIRimMask", new Vector4(0, 0, 2, 0));
                 }
             }
             XCommon.tmpRender.Clear();
         }
     }
 
-    public void TransferRef(bool transfer)
+    public void ProcessTransfer()
     {
-        transferRef = transfer;
+        goInstance = GameObject.Instantiate(obj) as GameObject;
+        goInstance.transform.parent = component.entity.EntityObject.transform.FindChild(GetMountPoint());
+        goInstance.transform.localPosition = Vector3.zero;
+        goInstance.transform.localRotation = Quaternion.identity;
+        goInstance.transform.localScale = Vector3.one;
+        
     }
+
+    private string GetMountPoint()
+    {
+        DefaultEquip.RowData data = component.data;
+        string point = "";
+        switch (part)
+        {
+            case EPartType.EMainWeapon:
+                point = data.WeaponPoint;
+                break;
+            case EPartType.EWings:
+                point = data.WingPoint;
+                break;
+            case EPartType.ETail:
+                point = data.TailPoint;
+                break;
+            default:
+                throw new System.Exception("err");
+        }
+        return point;
+    }
+
+
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using XTable;
 using System.Collections.Generic;
 
@@ -18,16 +17,15 @@ public class Test : XSingleton<Test>
 
     public void Initial()
     {
-        Application.targetFrameRate = 60;
         role = XEntityMgr.singleton.CreateTestRole();
         role.EntityObject.AddComponent<XRotation>();
 
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
         m_FashionList = new List<EquipPart>();
-        for (int i = 0; i < fashionSuit.Table.Length; ++i)
+        for (int i = 0; i < FashionSuit.Table.Length; ++i)
         {
-            FashionSuit.RowData row = fashionSuit.Table[i];
+            FashionSuit.RowData row = FashionSuit.Table[i];
             if (row.FashionID != null)
             {
                 XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
@@ -36,9 +34,9 @@ public class Test : XSingleton<Test>
 
         //装备
         m_EquipList = new List<EquipPart>();
-        for (int i = 0; i < equipSuit.Table.Length; ++i)
+        for (int i = 0; i < EquipSuit.Table.Length; ++i)
         {
-            EquipSuit.RowData row = equipSuit.Table[i];
+            EquipSuit.RowData row = EquipSuit.Table[i];
             if (row.EquipID != null)
                 XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
         }
@@ -53,6 +51,7 @@ public class Test : XSingleton<Test>
 
     int space = 30;
     string[] anims = { "ToSkill", "EndSkill", "ToMove" };
+    string[] weapons = { "Player_archer_weapon_archer", "ar_costume_baseball_a_bigbow_weapon"};
     public void GUI()
     {
         GUILayout.BeginHorizontal();
@@ -110,6 +109,14 @@ public class Test : XSingleton<Test>
         {
             if (GUILayout.Button(anims[i])) role.GetComponent<XAnimComponent>().SetTrigger(anims[i]);
         }
+        GUILayout.Space(10);
+        GUILayout.Label("武器");
+        for (int i = 0, max = weapons.Length; i < max; i++)
+        {
+            if (GUILayout.Button(weapons[i])) role.GetComponent<XEquipComponent>().AttachWeapon(weapons[i]);
+        }
+        GUILayout.Space(10);
+
         GUILayout.EndVertical();
 
         GUILayout.EndHorizontal();
