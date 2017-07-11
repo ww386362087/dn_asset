@@ -23,9 +23,9 @@ public class Test : XSingleton<Test>
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
         m_FashionList = new List<EquipPart>();
-        for (int i = 0; i < FashionSuit.Table.Length; ++i)
+        for (int i = 0; i < fashionSuit.Table.Length; ++i)
         {
-            FashionSuit.RowData row = FashionSuit.Table[i];
+            FashionSuit.RowData row = fashionSuit.Table[i];
             if (row.FashionID != null)
             {
                 XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
@@ -34,9 +34,9 @@ public class Test : XSingleton<Test>
 
         //装备
         m_EquipList = new List<EquipPart>();
-        for (int i = 0; i < EquipSuit.Table.Length; ++i)
+        for (int i = 0; i < equipSuit.Table.Length; ++i)
         {
-            EquipSuit.RowData row = EquipSuit.Table[i];
+            EquipSuit.RowData row = equipSuit.Table[i];
             if (row.EquipID != null)
                 XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
         }
@@ -51,7 +51,15 @@ public class Test : XSingleton<Test>
 
     int space = 30;
     string[] anims = { "ToSkill", "EndSkill", "ToMove" };
-    string[] weapons = { "Player_archer_weapon_archer", "ar_costume_baseball_a_bigbow_weapon"};
+    string[] weapons = {
+        "Player_archer_weapon_archer",
+        "ar_costume_baseball_a_bigbow_weapon",
+        "ar_blackdragon_bigbow_weapon",
+        "ar_light_bigbow_weapon",
+        "ar_duya_d02_bigbow_weapon",
+        "ar_tamasama_d_bigbow_weapon",
+        "ar_ziyo_d03_bigbow_weapon",
+        "ar_pajamas_a03_bigbow_weapon"};
     public void GUI()
     {
         GUILayout.BeginHorizontal();
@@ -83,10 +91,9 @@ public class Test : XSingleton<Test>
         GUILayout.BeginVertical();
         GUILayout.Label("装备");
         equipScrollPos = GUILayout.BeginScrollView(equipScrollPos, false, false);
-        List<EquipPart> currentEquipPrefession = m_EquipList;
-        for (int i = 0; i < currentEquipPrefession.Count; ++i)
+        for (int i = 0; i < m_EquipList.Count; ++i)
         {
-            EquipPart part = currentEquipPrefession[i];
+            EquipPart part = m_EquipList[i];
             for (int j = 0; j < part.suitName.Count; ++j)
             {
                 GUILayout.BeginHorizontal();

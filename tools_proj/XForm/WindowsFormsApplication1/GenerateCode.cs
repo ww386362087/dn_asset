@@ -106,8 +106,8 @@ namespace XForm
             method.Attributes = MemberAttributes.Override | MemberAttributes.Public;
             method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "lineCount")); 
             method.ReturnType = new CodeTypeReference(typeof(void));//返回值
-            method.Statements.Add(new CodeSnippetStatement("\t\t\tif (lineCount > 0) Table = new RowData[lineCount];"));
-            method.Statements.Add(new CodeSnippetStatement("\t\t\telse Table = null;"));
+            method.Statements.Add(new CodeSnippetStatement("\t\t\tif (lineCount > 0) table = new RowData[lineCount];"));
+            method.Statements.Add(new CodeSnippetStatement("\t\t\telse table = null;"));
             
             CodeMemberMethod method2 = new CodeMemberMethod();
             method2.Name = "ReadLine";
@@ -149,7 +149,8 @@ namespace XForm
             }
             content2.Append("\r\n\t\t}\r\n");
             content2.Append("\r\n\n\t\tpublic " + name + "() { if (Table == null) Create(); }");
-            content2.Append("\r\n\r\n\t\tpublic static RowData[] Table = null;");
+            content2.Append("\r\n\r\n\t\tpublic RowData[] Table { get { return table; } }");
+            content2.Append("\r\n\r\n\t\tprivate static RowData[] table = null;");
             content2.Append("\r\n\r\n\t\tpublic override string bytePath { get { return \"Table/" + name + "\"; } }");
 
             fileContent.Replace("public int replace;", content2.ToString());

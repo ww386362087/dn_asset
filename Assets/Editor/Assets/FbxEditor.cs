@@ -71,8 +71,7 @@ namespace XEditor
         private static void PreviewEquip()
         {
             EquipPreviewEditor window = (EquipPreviewEditor)EditorWindow.GetWindow(typeof(EquipPreviewEditor), true, "套装预览");
-            window.Init();
-            window.Show();
+           window.Show();
         }
 
 

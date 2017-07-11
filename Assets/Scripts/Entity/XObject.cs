@@ -20,9 +20,7 @@ public class XObject
 
     protected void Unload()
     {
-        if (_eventMap != null)
-            _eventMap.Clear();
-        _eventMap = null;
+        EventUnsubscribe();
         Deprecated = true;
     }
 
@@ -52,7 +50,9 @@ public class XObject
     /// </summary>
     protected void EventUnsubscribe()
     {
-        _eventMap.Clear();
+        if (_eventMap != null)
+            _eventMap.Clear();
+        _eventMap = null;
     }
 
     protected void RegisterEvent(XEventDefine eventID, XEventHandler handler)

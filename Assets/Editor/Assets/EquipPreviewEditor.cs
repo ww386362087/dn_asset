@@ -7,7 +7,8 @@ namespace XEditor
 {
     public class EquipPreviewEditor : EditorWindow
     {
-
+        private FashionSuit fashionSuit;
+        private EquipSuit equipSuit;
         private CombineConfig combineConfig = null;
         private DefaultEquip defaultEquip = new DefaultEquip();
       
@@ -111,22 +112,24 @@ namespace XEditor
 
         public void Init()
         {
+            fashionSuit = new FashionSuit();
+            equipSuit = new EquipSuit();
             combineConfig = FbxEditor.GetConfig();
             TempEquipSuit fashions = new TempEquipSuit();
             m_FashionList = new List<EquipPart>();
             m_EquipList = new List<EquipPart>();
            
-            for (int i = 0; i < FashionList.Table.Length; ++i)
+            for (int i = 0; i < fashionSuit.Table.Length; ++i)
             {
-                FashionSuit.RowData row = FashionSuit.Table[i];
+                FashionSuit.RowData row = fashionSuit.Table[i];
                 if (row.FashionID != null)
                 {
                     XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
                 }
             }
-            for (int i = 0; i < EquipSuit.Table.Length; ++i)
+            for (int i = 0; i < equipSuit.Table.Length; ++i)
             {
-                EquipSuit.RowData row = EquipSuit.Table[i];
+                EquipSuit.RowData row = equipSuit.Table[i];
                 if (row.EquipID != null)
                     XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
             }

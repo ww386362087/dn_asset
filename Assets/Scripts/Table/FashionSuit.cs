@@ -45,13 +45,15 @@ namespace XTable {
 
 		public FashionSuit() { if (Table == null) Create(); }
 
-		public static RowData[] Table = null;
+		public RowData[] Table { get { return table; } }
+
+		private static RowData[] table = null;
 
 		public override string bytePath { get { return "Table/FashionSuit"; } }
         
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) Table = new RowData[lineCount];
-			else Table = null;
+			if (lineCount > 0) table = new RowData[lineCount];
+			else table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {

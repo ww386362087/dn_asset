@@ -16,14 +16,17 @@ public abstract class CVSReader
 
     public virtual string bytePath { get { return string.Empty; } }
 
-
-    
+  
     public void Create()
     {
-        string path = Application.dataPath + "/Resources/" + bytePath + ".bytes";
-        FileStream fs=new FileStream(path,FileMode.Open);
-        ReadFile(fs);
-        fs.Close();
+        try
+        {
+            string path = Application.dataPath + "/Resources/" + bytePath + ".bytes";
+            FileStream fs = new FileStream(path, FileMode.Open);
+            ReadFile(fs);
+            fs.Close();
+        }
+        catch { }
     }
 
     public sealed class UIntParse : ValueParse<uint>
