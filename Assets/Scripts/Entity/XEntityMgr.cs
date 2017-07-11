@@ -41,7 +41,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     {
         if (_entities.ContainsKey(id))
         {
-            _entities[id].Unload();
+            _entities[id].UnloadEntity();
         }
     }
 

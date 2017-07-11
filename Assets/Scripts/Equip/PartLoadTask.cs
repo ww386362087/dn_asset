@@ -10,13 +10,11 @@ public class PartLoadTask : BaseLoadTask
 {
     public GameObject go = null;
     public XMeshTexData mtd = null;
-    private LoadCallBack loadCb = null;
     private PartLoadCallback m_PartLoadCb = null;
 
     public PartLoadTask(EPartType p, PartLoadCallback partLoadCb)
         : base(p)
     {
-        loadCb = LoadFinish;
         m_PartLoadCb = partLoadCb;
     }
 

@@ -99,7 +99,7 @@ public abstract class XEntity : XObject
         base.Initilize();
     }
 
-    public void Unload()
+    public void UnloadEntity()
     {
         _attr = null;
         GameObject.Destroy(_object);
