@@ -10,8 +10,7 @@ namespace XEditor
 
         private CombineConfig combineConfig = null;
         private DefaultEquip defaultEquip = new DefaultEquip();
-        private FashionSuit fashionSuit = new FashionSuit();
-        private EquipSuit equipSuit = new EquipSuit();
+      
 
         private int m_profession = 1;
         private List<EquipPart> m_FashionList = null;

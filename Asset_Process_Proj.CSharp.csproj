@@ -108,6 +108,8 @@
     <Compile Include="Assets\Scripts\Equip\PartLoadTask.cs" />
     <Compile Include="Assets\Scripts\Equip\XEquipUtil.cs" />
     <Compile Include="Assets\Scripts\Equip\XMeshTexData.cs" />
+    <Compile Include="Assets\Scripts\Event\XEventDefine.cs" />
+    <Compile Include="Assets\Scripts\Event\XEventMgr.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Others\CombineConfig.cs" />
     <Compile Include="Assets\Scripts\Others\XException.cs" />

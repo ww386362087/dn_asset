@@ -8,6 +8,13 @@ public class XNPC : XEntity
         get { return EnitityType.Entity_Npc; }
     }
 
+    public static int NpcLayer = LayerMask.NameToLayer("Npc");
 
+
+    public override void OnInitial()
+    {
+        base.OnInitial();
+        _layer = LayerMask.NameToLayer("Npc");
+    }
 
 }

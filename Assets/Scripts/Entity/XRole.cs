@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+using XTable;
 
 public class XRole : XEntity
 {
-    XAIComponent ai;
-    XEquipComponent eq;
 
 
     protected override EnitityType _eEntity_Type
@@ -12,6 +10,8 @@ public class XRole : XEntity
         get { return EnitityType.Entity_Role; }
     }
 
+    public int profession = 1;
+    public DefaultEquip.RowData defEquip = null;
 
     public override void OnInitial()
     {
@@ -19,7 +19,14 @@ public class XRole : XEntity
         AttachComponent<XAIComponent>();
         AttachComponent<XAnimComponent>();
         AttachComponent<XEquipComponent>();
+
+        _layer = LayerMask.NameToLayer("Role");
+        profession = 1;
+        DefaultEquip defaultEquip = new DefaultEquip();
+        defEquip = defaultEquip.GetByProfID(profession + 1);
     }
+
+
 
 
 }

@@ -22,7 +22,7 @@ public abstract class XEntity : XObject
     protected abstract EnitityType _eEntity_Type { get; }
     protected XAttributes _attr = null;
     protected GameObject _object = null;
-
+    protected int _layer = 0;
     public uint EntityID
     {
         get { return _attr != null ? _attr.id : 0; }
@@ -78,6 +78,16 @@ public abstract class XEntity : XObject
         get { return _attr; }
     }
 
+    public int DefaultLayer
+    {
+        get { return _layer; }
+    }
+
+    public virtual bool HasAI
+    {
+        get { return GetComponent<XAIComponent>() == null; }
+    }
+
     protected Dictionary<uint, XComponent> components;
 
     public void Initilize(GameObject o, XAttributes attr)
@@ -94,6 +104,7 @@ public abstract class XEntity : XObject
         _attr = null;
         GameObject.Destroy(_object);
         _object = null;
+        base.Unload();
         OnUnintial();
     }
 

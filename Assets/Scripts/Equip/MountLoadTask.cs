@@ -104,7 +104,7 @@ public class MountLoadTask : BaseLoadTask
 
     private string GetMountPoint()
     {
-        DefaultEquip.RowData data = component.data;
+        DefaultEquip.RowData data = (component.entity as XRole).defEquip;
         string point = "";
         switch (part)
         {

@@ -6,8 +6,7 @@ public class XEquipComponent : XComponent
 {
 
     private CombineMeshTask _combineMeshTask = null;
-    private int m_profession = 1;
-    public DefaultEquip.RowData data = null;
+   
     List<FashionPositionInfo> fashionList = null;
     public XEquipComponent()
     {
@@ -22,10 +21,6 @@ public class XEquipComponent : XComponent
         SkinnedMeshRenderer skm = skinmesh.GetComponent<SkinnedMeshRenderer>();
         if (skm == null) skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         _combineMeshTask.skin = skm;
-
-        int m_profession = 1;
-        DefaultEquip defaultEquip = new DefaultEquip();
-        data = defaultEquip.GetByProfID(m_profession + 1);
     }
 
 
@@ -43,15 +38,11 @@ public class XEquipComponent : XComponent
             string path = part.partPath[i];
             if (string.IsNullOrEmpty(path))
             {
-                path = XEquipUtil.GetDefaultPath((EPartType)i, data);
+                path = XEquipUtil.GetDefaultPath((EPartType)i, (entity as XRole).defEquip);
             }
             fpi.equipName = path;
             fashionList.Add(fpi);
         }
-
-        //武器 --8
-        //fpi.equipName = XEquipUtil.GetDefaultPath(EPartType.EMainWeapon, data);
-        //fashionList.Add(fpi);
 
         EquipAll(fashionList.ToArray());
     }

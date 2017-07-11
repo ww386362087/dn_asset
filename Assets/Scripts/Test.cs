@@ -107,7 +107,23 @@ public class Test : XSingleton<Test>
         GUILayout.Label("动作");
         for (int i = 0, max = anims.Length; i < max; i++)
         {
-            if (GUILayout.Button(anims[i])) role.GetComponent<XAnimComponent>().SetTrigger(anims[i]);
+            if (GUILayout.Button(anims[i]))
+            {
+                role.GetComponent<XAnimComponent>().SetTrigger(anims[i]);
+                if(i==0)
+                {
+                    XIdleEventArgs arg = new XIdleEventArgs();
+                    arg.Firer = role.GetComponent<XAIComponent>();
+                    XEventMgr.singleton.FireEvent(arg);
+                }
+                else if(i==1)
+                {
+                    XMoveEventArgs arg = new XMoveEventArgs();
+                    arg.Speed = 12;
+                    arg.Firer = role.GetComponent<XAIComponent>();
+                    XEventMgr.singleton.FireEvent(arg);
+                }
+            }
         }
         GUILayout.Space(10);
         GUILayout.Label("武器");

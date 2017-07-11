@@ -9,4 +9,22 @@ public class XEnemy : XEntity
     }
 
 
+    public override void OnInitial()
+    {
+        base.OnInitial();
+        _layer = LayerMask.NameToLayer("Enemy");
+    }
+
+
+    public bool IsFighting
+    {
+        get
+        {
+            XAIComponent ai = GetComponent<XAIComponent>();
+            if (ai == null) return false;
+            return ai.IsFighting;
+        }
+    }
+
+
 }

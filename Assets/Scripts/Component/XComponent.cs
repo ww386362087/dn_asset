@@ -10,11 +10,13 @@ public class XComponent : XObject
 
     public virtual void OnInitial(XEntity _entity)
     {
+        base.Initilize();
         entity = _entity;
     }
 
     public virtual void OnUninit()
     {
+        base.Unload();
     }
 
 

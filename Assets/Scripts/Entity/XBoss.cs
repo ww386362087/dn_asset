@@ -9,6 +9,12 @@ public class XBoss : XEnemy
         get { return EnitityType.Entity_Boss; }
     }
 
+    public override void OnInitial()
+    {
+        base.OnInitial();
+        _layer = LayerMask.NameToLayer("BigGuy");
+    }
+
 
 
 }
