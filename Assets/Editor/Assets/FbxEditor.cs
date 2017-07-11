@@ -190,8 +190,6 @@ namespace XEditor
                     Debug.LogError("Find UV Error:" + mesh.name);
                 }
             }
-
-            //mesh.uv = null;
             mesh.uv2 = null;
             mesh.tangents = null;
             string meshPath = path + mesh.name + ".asset";
