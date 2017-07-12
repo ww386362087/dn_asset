@@ -162,7 +162,7 @@
     <Compile Include="Assets\Editor\Assets\XResImportModelEditor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\AssetBundles\Android\cache.txt" />
+    <None Include="Assets\Editor\Cache\Android\cache.txt" />
     <None Include="Assets\Resources\Shader\Common\AdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutAdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutDiffuse.shader" />

@@ -13,23 +13,18 @@ namespace ABSystem
         {
             GetWindow<AssetBundleBuildPanel>("ABSystem", true);
         }
-
         
         public static bool ABUpdateOpen = false;
         public static List<XMetaResPackage> assetBundleUpdate = new List<XMetaResPackage>();
         public static string TargetFolder = "";
 
-        public static T LoadAssetAtPath<T>(string path) where T : Object
-        {
-            return AssetDatabase.LoadAssetAtPath<T>(savePath);
-        }
 
         public static string savePath
         {
             get { return "Assets/Editor/ABSystem/Config/config.asset"; }
         }
 
-        private AssetBundleBuildConfig _config;
+        private static AssetBundleBuildConfig _config;
         private ReorderableList _list;
         private ReorderableList _fileList;
 
@@ -131,7 +126,7 @@ namespace ABSystem
             bool execBuild = false;
             if (_config == null)
             {
-                _config = LoadAssetAtPath<AssetBundleBuildConfig>(savePath);
+                _config = AssetDatabase.LoadAssetAtPath<AssetBundleBuildConfig>(savePath);
                 if (_config == null)
                 {
                     _config = CreateInstance<AssetBundleBuildConfig>(); 
@@ -208,13 +203,12 @@ namespace ABSystem
 
         public static void BuildAssetBundles()
         {
-            AssetBundleBuildConfig config = LoadAssetAtPath<AssetBundleBuildConfig>(savePath);
+            AssetBundleBuildConfig config = AssetDatabase.LoadAssetAtPath<AssetBundleBuildConfig>(savePath);
             ABBuilder builder = new ABBuilder();
             builder.SetDataWriter(config.depInfoFileFormat == AssetBundleBuildConfig.Format.Text ?
                 new AssetBundleDataWriter() : new AssetBundleDataBinaryWriter());
 
             builder.Begin();
-
             for (int i = 0; i < config.filters.Count; i++)
             {
                 AssetBundleFilter f = config.filters[i];
@@ -223,21 +217,22 @@ namespace ABSystem
                     builder.AddRootTargets(new DirectoryInfo(f.path), new string[] { f.filter });
                 }
             }
-
             for (int i = 0; i < config.files.Count; ++i)
             {
                 AssetBundleFilter f = config.files[i];
-                if (f.valid && File.Exists(f.path)) builder.AddRootTargets(f.path);
+                if (f.valid && File.Exists(f.path)) builder.AddRootTargets(new FileInfo(f.path));
             }
+            builder.Analyze();
             builder.Export();
             builder.End();
 
             EditorUtility.DisplayDialog("AssetBundle Build Finish", "AssetBundle Build Finish!", "OK");
         }
 
-        void Save()
+        public static void Save()
         {
-            if (LoadAssetAtPath<AssetBundleBuildConfig>(savePath) == null)
+            _config = AssetDatabase.LoadAssetAtPath<AssetBundleBuildConfig>(savePath);
+            if (_config == null)
             {
                 AssetDatabase.CreateAsset(_config, savePath);
             }

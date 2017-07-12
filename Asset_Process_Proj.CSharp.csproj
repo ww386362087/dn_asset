@@ -81,6 +81,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AssetSystem\ABManager.cs" />
+    <Compile Include="Assets\Scripts\AssetSystem\AssetBundleDataReader.cs" />
     <Compile Include="Assets\Scripts\AssetSystem\AssetBundlePathResolver.cs" />
     <Compile Include="Assets\Scripts\AssetSystem\XResourceMgr.cs" />
     <Compile Include="Assets\Scripts\CVSReader.cs" />
@@ -125,7 +127,7 @@
     <Compile Include="Assets\Scripts\XCommon.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\AssetBundles\Android\cache.txt" />
+    <None Include="Assets\Editor\Cache\Android\cache.txt" />
     <None Include="Assets\Resources\Shader\Common\AdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutAdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutDiffuse.shader" />

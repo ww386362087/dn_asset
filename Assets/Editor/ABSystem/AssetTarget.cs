@@ -18,7 +18,7 @@ namespace ABSystem
         /// </summary>
         public FileInfo file;
         /// <summary>
-        /// 相对于Assets文件夹的目录
+        /// 路径： Assets\Equipment\Archer\ar_lotus_a01_leg.tga
         /// </summary>
         public string assetPath;
         /// <summary>
@@ -38,11 +38,11 @@ namespace ABSystem
         /// </summary>
         public string bundleSavePath;
         /// <summary>
-        /// BundleName
+        /// BundleName 如:3975040047.ab
         /// </summary>
         public string bundleName;
         /// <summary>
-        /// 短名
+        /// 短名：mobilediffuse.shader
         /// </summary>
         public string bundleShortName;
 
@@ -85,7 +85,8 @@ namespace ABSystem
             _metaHash = "0";
         }
 
-        
+
+        string testpath = "Assets\\Resources\\Equipments\\ar_blackdragon_body.prefab";
         public void Analyze()
         {
             if (_isAnalyzed) return;
@@ -101,11 +102,10 @@ namespace ABSystem
             Object[] deps = EditorUtility.CollectDependencies(new Object[] { asset });
             var res = from s in deps
                       let path = AssetDatabase.GetAssetPath(s)
-                      where !path.StartsWith("Resources") && !(s is MonoScript)
+                      where !path.StartsWith("Assets/Resources") && !(s is MonoScript)
                       select path;
 
             var paths = res.Distinct().ToArray();
-
             for (int i = 0; i < paths.Length; i++)
             {
                 if (!File.Exists(paths[i]))
@@ -179,7 +179,6 @@ namespace ABSystem
         /// <summary>
         /// 获取所有依赖项
         /// </summary>
-        /// <param name="list"></param>
         public void GetDependencies(HashSet<AssetTarget> list)
         {
             var ie = _dependencies.GetEnumerator();
@@ -216,7 +215,7 @@ namespace ABSystem
             set
             {
                 _isNewBuild = value != _bundleCrc;
-                if (_isNewBuild) Debug.Log("Export AB : " + bundleName);
+                if (_isNewBuild) Debug.Log("Export AB : " + bundleShortName);
                 _bundleCrc = value;
             }
         }
@@ -372,6 +371,7 @@ namespace ABSystem
             {
                 sw.WriteLine(at.assetPath);
             }
+            sw.WriteLine("***************************************");
         }
     }
 }

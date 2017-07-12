@@ -87,9 +87,7 @@ namespace ABSystem
                 while (true)
                 {
                     string path = sr.ReadLine();
-                    if (path == null)
-                        break;
-
+                    if (path == null) break;
                     AssetCacheInfo cache = new AssetCacheInfo();
                     cache.fileHash = sr.ReadLine();
                     cache.metaHash = sr.ReadLine();
@@ -101,6 +99,7 @@ namespace ABSystem
                         cache.depNames[i] = sr.ReadLine();
                     }
                     _fileHashOld[path] = cache;
+                    sr.ReadLine();//分隔符 ***************************
                 }
             }
         }
@@ -123,7 +122,6 @@ namespace ABSystem
             }
 
             StreamWriter sw = new StreamWriter(GetCacheFile());
-            
             foreach (AssetTarget target in _object2target.Values)
             {
                 target.WriteCache(sw);
@@ -162,7 +160,6 @@ namespace ABSystem
                     if (o != null)
                     {
                         int instanceId = o.GetInstanceID();
-
                         if (_object2target.ContainsKey(instanceId))
                         {
                             target = _object2target[instanceId];

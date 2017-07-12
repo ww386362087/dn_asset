@@ -6,9 +6,17 @@ using UnityEngine;
 namespace ABSystem
 {
 
-    public class ABBuilder 
+    public class ABBuilder
     {
         AssetBundleDataWriter dataWriter = new AssetBundleDataBinaryWriter();
+
+        [MenuItem(@"ABSystem/BuildABImmdiate")]
+        public static void BuildBundle()
+        {
+            AssetBundleBuildPanel.Save();
+            AssetBundleBuildPanel.BuildAssetBundles();
+        }
+
 
         public ABBuilder()
         {
@@ -34,11 +42,11 @@ namespace ABSystem
             EditorUtility.ClearProgressBar();
         }
 
-        public virtual void Analyze()
+        public void Analyze()
         {
             var all = AssetBundleUtil.GetAll();
-            float total = all.Count;
-            float count = 0;
+            int total = all.Count;
+            int count = 0;
             foreach (AssetTarget target in all)
             {
                 target.Analyze();
@@ -64,8 +72,6 @@ namespace ABSystem
 
         public void Export()
         {
-            Analyze();
-
             List<AssetBundleBuild> list = new List<AssetBundleBuild>();
             //标记所有 asset bundle name
             var all = AssetBundleUtil.GetAll();
@@ -80,14 +86,11 @@ namespace ABSystem
                     list.Add(build);
                 }
             }
-
             string bundleSavePath = AssetBundleUtil.GetBundleDir();
 
             //开始打包
             BuildPipeline.BuildAssetBundles(bundleSavePath, list.ToArray(), BuildAssetBundleOptions.UncompressedAssetBundle, EditorUserBuildSettings.activeBuildTarget);
-
             AssetBundle ab = AssetBundle.LoadFromFile(bundleSavePath + "/AssetBundles");
-
             AssetBundleManifest manifest = ab.LoadAsset("AssetBundleManifest") as AssetBundleManifest;
             //hash
             for (int i = 0; i < all.Count; i++)
@@ -126,94 +129,30 @@ namespace ABSystem
             AssetDatabase.Refresh();
         }
 
-        private void AddAssetUIDependencies(Object asset)
+
+        public void AddRootTargets(FileInfo file)
         {
-            Object[] deps = EditorUtility.CollectDependencies(new Object[] { asset });
-
-            for (int i = 0; i < deps.Length; i++)
-            {
-                Object dep = deps[i];
-                string path = AssetDatabase.GetAssetPath(dep);
-                if (path.StartsWith("Assets/Resources/atlas") || path.StartsWith("Assets/Resources/StaticUI"))
-                {
-                    AddRootTargets(path);
-                }
-            }
-        }
-
-        public void AddRootTargets(string path)
-        {
-            if (path.Contains("atlas/UI"))
-            {
-                if (path.Contains("_A.png") && File.Exists(path.Replace("_A.png", ".prefab")))
-                {
-                    return;
-                }
-                else if (path.Contains(".png") && File.Exists(path.Replace(".png", ".prefab")))
-                {
-                    return;
-                }
-                else if (path.Contains(".mat") && File.Exists(path.Replace(".mat", ".prefab")))
-                {
-                    return;
-                }
-            }
-
-            if (path.Contains("Resources/UI"))
-            {
-                AddAssetUIDependencies(AssetDatabase.LoadMainAssetAtPath(path));
-            }
-
-            FileInfo file = new FileInfo(path);
             AssetTarget target = AssetBundleUtil.Load(file);
-            if (target == null)
-                Debug.LogError(file);
+            if (target == null) Debug.LogError(file);
             target.exportType = AssetBundleExportType.Root;
         }
 
-        public void AddRootTargets(DirectoryInfo bundleDir, string[] partterns = null, SearchOption searchOption = SearchOption.AllDirectories)
+        public void AddRootTargets(DirectoryInfo bundleDir, string[] partterns)
         {
-            if (partterns == null)
-                partterns = new string[] { "*.*" };
             for (int i = 0; i < partterns.Length; i++)
             {
-                FileInfo[] prefabs = bundleDir.GetFiles(partterns[i], searchOption);
-                foreach (FileInfo file in prefabs)
+                FileInfo[] files = bundleDir.GetFiles(partterns[i], SearchOption.AllDirectories);
+                foreach (FileInfo file in files)
                 {
-                    if (file.FullName.Contains("atlas/UI"))
-                    {
-                        if (file.FullName.Contains("_A.png") && File.Exists(file.FullName.Replace("_A.png", ".prefab")))
-                        {
-                            continue;
-                        }
-                        else if (file.FullName.Contains(".png") && File.Exists(file.FullName.Replace(".png", ".prefab")))
-                        {
-                            continue;
-                        }
-                        else if (file.FullName.Contains(".mat") && File.Exists(file.FullName.Replace(".mat", ".prefab")))
-                        {
-                            continue;
-                        }
-                    }
-                    if (file.FullName.Contains("Resources/UI"))
-                    {
-                        AddAssetUIDependencies(AssetDatabase.LoadMainAssetAtPath(file.FullName));
-                    }
-
-                    AssetTarget target = AssetBundleUtil.Load(file);
-                    if (target == null) Debug.LogError(file);
-                    target.exportType = AssetBundleExportType.Root;
+                    AddRootTargets(file);
                 }
             }
         }
 
         protected void SaveDepAll(List<AssetTarget> all)
         {
-            string path = AssetBundleUtil.GetCacheFile();
-
-            if (File.Exists(path))
-                File.Delete(path);
-
+            string path = Path.Combine(AssetBundleUtil.GetBundleDir(), AssetBundlePathResolver.DependFileName);
+            if (File.Exists(path)) File.Delete(path);
             List<AssetTarget> exportList = new List<AssetTarget>();
             for (int i = 0; i < all.Count; i++)
             {
@@ -245,7 +184,6 @@ namespace ABSystem
             }
 
             DirectoryInfo di = new DirectoryInfo(AssetBundleUtil.GetBundleDir());
-
             FileInfo[] abFiles = di.GetFiles("*.ab");
             for (int i = 0; i < abFiles.Length; i++)
             {
@@ -253,9 +191,7 @@ namespace ABSystem
                 if (usedSet.Add(fi.Name))
                 {
                     Debug.Log("Remove unused AB : " + fi.Name);
-
                     fi.Delete();
-                    //for U5X
                     File.Delete(fi.FullName + ".manifest");
                 }
             }

@@ -69,6 +69,22 @@ public class XResourceMgr
         AddSysnLoad<T>(path, cb);
     }
 
+    public static void CancelLoad(System.Action<Object> cb)
+    {
+        if (list == null || cnt <= 0) return;
+        for (int i = cnt - 1; i >= 0; i--)
+        {
+            if (list[i].cb.Contains(cb))
+                list[i].cb.Remove(cb);
+
+            if (list[i].cb.Count <= 0)
+            {
+                list.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
     private static void AddSysnLoad<T>(string path, System.Action<Object> cb) where T : Object
     {
         if (list == null) list = new List<AssetNode>();

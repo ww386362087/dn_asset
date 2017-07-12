@@ -86,7 +86,7 @@ namespace XEditor
                             Type tableType = type.GetNestedType("RowData");
                             FieldInfo[] fields = tableType.GetFields();
                             GUILayout.Label("Preview:\n  字段数：" + fields.Length + "\n  字节数：" + ((target as TextAsset).bytes.Length));
-                           
+
                             for (int i = 0; i < fields.Length; i++)
                             {
                                 str += "   " + fields[i].Name + "\n";
@@ -101,7 +101,7 @@ namespace XEditor
                         GUI.enabled = true;
                         if (GUILayout.Button("Open", GUILayout.Width(80)))
                         {
-                            XEditor.BytesTableViewEditor window = (XEditor.BytesTableViewEditor)EditorWindow.GetWindow(typeof(XEditor.BytesTableViewEditor), true, "BytesTableViewEditor");
+                            BytesTableViewEditor window = (BytesTableViewEditor)EditorWindow.GetWindow(typeof(XEditor.BytesTableViewEditor), true, "BytesTableViewEditor");
                             window.Init(target);
                             window.Show();
                         }
@@ -109,9 +109,12 @@ namespace XEditor
                     break;
                 case EType.EOther:
                     GUI.enabled = true;
-                    GUILayout.Label((target as TextAsset).text);
+                    string txt = (target as TextAsset).text;
+                    if (txt.Length > 1 << 12) txt = txt.Substring(0, 1 << 12) + "\n......";
+                    GUILayout.Label(txt);
                     break;
             }
         }
     }
+
 }
