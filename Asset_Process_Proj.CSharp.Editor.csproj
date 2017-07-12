@@ -132,6 +132,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\ABSystem\ABBuilder.cs" />
+    <Compile Include="Assets\Editor\ABSystem\AssetBundleBuildConfig.cs" />
+    <Compile Include="Assets\Editor\ABSystem\AssetBundleBuildPanel.cs" />
+    <Compile Include="Assets\Editor\ABSystem\AssetBundleDataBinaryWriter.cs" />
+    <Compile Include="Assets\Editor\ABSystem\AssetBundleDataWriter.cs" />
+    <Compile Include="Assets\Editor\ABSystem\AssetBundleDetail.cs" />
+    <Compile Include="Assets\Editor\ABSystem\AssetBundleUtil.cs" />
+    <Compile Include="Assets\Editor\ABSystem\AssetTarget.cs" />
+    <Compile Include="Assets\Editor\ABSystem\AssetType.cs" />
+    <Compile Include="Assets\Editor\ABSystem\HashUtil.cs" />
     <Compile Include="Assets\Editor\Assets\AnimationEditor.cs" />
     <Compile Include="Assets\Editor\Assets\BytesTableViewEditor.cs" />
     <Compile Include="Assets\Editor\Assets\EquipPreviewEditor.cs" />
@@ -152,6 +162,7 @@
     <Compile Include="Assets\Editor\Assets\XResImportModelEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\AssetBundles\Android\cache.txt" />
     <None Include="Assets\Resources\Shader\Common\AdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutAdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutDiffuse.shader" />
