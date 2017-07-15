@@ -244,16 +244,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Cache\cache.txt" />
-    <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
-    <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
-    <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
-    <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
-    <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
-    <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
-    <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
-    <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
-    <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
-    <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth.shader" />
     <None Include="Assets\NGUI\ReadMe - 3.8.1.txt" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (TextureClip).shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
@@ -272,6 +262,16 @@
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
+    <None Include="Assets\NGUI\Shaders\Refractive.shader" />
+    <None Include="Assets\NGUI\Shaders\Unlit - Additive Colored.shader" />
+    <None Include="Assets\NGUI\Shaders\Unlit - Depth Cutout.shader" />
+    <None Include="Assets\NGUI\Shaders\Unlit - Depth.shader" />
+    <None Include="Assets\Resources\Atlases\Fantasy\Fantasy Font - Normal.txt" />
+    <None Include="Assets\Resources\Atlases\SciFi\SciFi Font - Header.txt" />
+    <None Include="Assets\Resources\Atlases\SciFi\SciFi Font - Normal.txt" />
+    <None Include="Assets\Resources\Atlases\Wooden\Arimo14.txt" />
+    <None Include="Assets\Resources\Atlases\Wooden\Arimo18.txt" />
+    <None Include="Assets\Resources\Atlases\Wooden\Arimo20.txt" />
     <None Include="Assets\Resources\Shader\Common\AdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutAdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutDiffuse.shader" />
