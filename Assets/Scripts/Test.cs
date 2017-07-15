@@ -47,25 +47,35 @@ public class Test : XSingleton<Test>
         XEntityPresentation.RowData xrow = p.GetItemID(archerid);
         role.GetComponent<XAnimComponent>().OverrideAnims(xrow);
         role.GetComponent<XEquipComponent>().EquipTest(m_FashionList[0]);
+
+        TestAB();
     }
 
 
     public void TestAB()
     {
-        Object oo = ABManager.singleton.LoadImm("Animation/Player_archer/Player_archer_attack_pinpointshot", AssetType.Anim);
-        AnimationClip clip = oo as AnimationClip;
-        Debug.Log("clip: " + clip.length);
+        //Object oo = ABManager.singleton.LoadImm("Animation/Player_archer/Player_archer_attack_pinpointshot", AssetType.Anim);
+        //AnimationClip clip = oo as AnimationClip;
+        //Debug.Log("clip: " + clip.length);
 
         //Object o = ABManager.singleton.LoadImm("Equipments/ar_costume_marine01_glove", AssetType.Prefab);
         //Debug.Log("o: " + (o == null) + " " + o.name);
         //XMeshTexData md= (o as GameObject).GetComponent<XMeshTexData>();
         //Debug.Log("md: " + md.offset);
 
-        ABManager.singleton.LoadImm("Animation/Player_archer/Player_archer_2_4_cutscene_end", AssetType.Anim, (o) =>
-        {
-            AnimationClip cli = o as AnimationClip;
-            Debug.Log("clip length: " + cli.length);
-        });
+        //ABManager.singleton.LoadImm("Animation/Player_archer/Player_archer_2_4_cutscene_end", AssetType.Anim, (o) =>
+        //{
+        //    AnimationClip cli = o as AnimationClip;
+        //    Debug.Log("clip length: " + cli.length);
+        //});
+
+
+        GameObject o = XResourceMgr.Load<GameObject>("UI/Canvas2", AssetType.Prefab);
+        Debug.Log("name: " + o.name);
+        GameObject go = MonoBehaviour.Instantiate(o) as GameObject;
+        go.transform.localPosition = Vector3.zero;
+        go.transform.localScale = Vector3.one;
+        go.transform.localRotation = Quaternion.identity;
     }
 
     int space = 30;
