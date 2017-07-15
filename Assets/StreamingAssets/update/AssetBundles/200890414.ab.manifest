@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2808859916
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 063d33dfe066f7e1b6d13b78c3cc4cb7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_Mount_horse_idle_people.anim
+Dependencies: []

@@ -26,7 +26,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     private T PrepareEntity<T>(XAttributes attr, bool autoAdd) where T : XEntity
     {
         T x = Activator.CreateInstance<T>();
-        UnityEngine.Object obj = XResourceMgr.Load<GameObject>("Prefabs/" + attr.Prefab);
+        UnityEngine.Object obj = XResourceMgr.Load<GameObject>("Prefabs/" + attr.Prefab,AssetType.Prefab);
         GameObject o = UnityEngine.Object.Instantiate(obj) as GameObject;
         o.name = attr.Name;
         o.transform.position = attr.AppearPostion;

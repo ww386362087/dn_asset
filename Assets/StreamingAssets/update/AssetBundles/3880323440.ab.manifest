@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2232784328
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e178f6f979888fa2a65820a6c0c914f9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/OverrideClips/Jump.anim
+Dependencies: []

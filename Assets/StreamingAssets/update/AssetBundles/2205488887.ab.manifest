@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 472322452
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ba259927e968c19f48bd1a433632288c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_hit_front_shiver.anim
+Dependencies: []

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 867621368
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2ee6e769d95b550b2c26d2c7086b05a8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_attack_revolutionarybal.anim
+Dependencies: []

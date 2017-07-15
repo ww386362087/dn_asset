@@ -143,7 +143,7 @@ namespace XForm
                     sct.title = titles[i];
                     sct.comment = comments[i];
                     sct.parse = TransParse(tps[i], file.Name);
-                    sct.content = rows[i];
+                    sct.content = string.Intern(rows[i]);
                     table.list.Add(sct);
                 }
                 lineCnt++;

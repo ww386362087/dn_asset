@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3627248255
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d26e3b2470cb75d0d3cc7e4829fe8d41
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_1_4_cutscene_start.anim
+Dependencies: []

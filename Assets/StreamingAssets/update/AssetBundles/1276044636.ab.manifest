@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 4114163111
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2f3e96c21a7bf21633fe7e46ebe2eed8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_hit_front_recover.anim
+Dependencies: []

@@ -102,11 +102,6 @@ public class XEquipComponent : XComponent
             MountLoadTask loadPart = _combineMeshTask.parts[(int)part] as MountLoadTask;
             loadPart.PostLoad();
         }
-        for (EPartType part = EPartType.EMountEnd; part <= EPartType.EDecal; ++part)
-        {
-            DecalLoadTask loadPart = _combineMeshTask.parts[(int)part] as DecalLoadTask;
-            loadPart.PostLoad(_combineMeshTask.skin);
-        }
     }
 
 

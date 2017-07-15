@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 3571728679
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d7879622e2f07db616eb79a64c71dc2b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f3efaaad075ba72b45612400cb94c56b
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: dbd85748116a1e8478ad865525a8d74c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Equipments/ar_costume_chess_a01_boots.prefab
+Dependencies: []

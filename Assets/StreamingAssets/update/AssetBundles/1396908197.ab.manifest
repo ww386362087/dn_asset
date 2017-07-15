@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3321597352
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d770f684bed5e5f19135eca2f311e977
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c1642440719609290a7e09a50a7286f4
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/Equipment/Archer/ar_tamasama_d_leg.tga
+Dependencies: []

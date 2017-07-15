@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2925321188
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 50869c7a48e6d586aabeb239ed1b8b4a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/OverrideClips/Phase9.anim
+Dependencies: []

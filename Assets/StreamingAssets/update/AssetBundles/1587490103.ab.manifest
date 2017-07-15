@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1347175044
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9c46131d9e31627be758118890bed8ac
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_sit_start.anim
+Dependencies: []

@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 1777450337
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 913a5fb18c24fd6e414a600a0f41e5f3
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4e59d43e874f69684097871520d17bed
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Equipments/weapon/ar_costume_school02_a_bigbow_weapon.prefab
+Dependencies:
+- D:/projects/asset_process_proj/Assets/StreamingAssets/update/AssetBundles/3297702105.ab

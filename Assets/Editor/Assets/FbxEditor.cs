@@ -360,7 +360,7 @@ namespace XEditor
             }
 
             Animator animator = go.GetComponent<Animator>();
-            animator.runtimeAnimatorController = XResourceMgr.Load("Controller/XMinorAnimator") as RuntimeAnimatorController;
+            animator.runtimeAnimatorController = XResourceMgr.Load("Controller/XMinorAnimator",AssetType.Controller) as RuntimeAnimatorController;
             go.layer = LayerMask.NameToLayer("Role");
             PrefabUtility.CreatePrefab(saveRootPath + fbx.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
             GameObject.DestroyImmediate(go);

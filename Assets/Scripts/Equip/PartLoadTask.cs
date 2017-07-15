@@ -31,7 +31,7 @@ public class PartLoadTask : BaseLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                GameObject go = XResourceMgr.Load<GameObject>(location);
+                GameObject go = XResourceMgr.Load<GameObject>(location,AssetType.Prefab);
                 LoadFinish(go, this);
             }
             else if (m_PartLoadCb != null)

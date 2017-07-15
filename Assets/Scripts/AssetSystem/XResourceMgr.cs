@@ -39,12 +39,31 @@ public class XResourceMgr
         }
     }
 
-    public static T Load<T>(string path) where T : Object
+    public static T Load<T>(string path, AssetType type) where T : Object
     {
-        return Resources.Load<T>(path);
+        if (ABManager.singleton.Exist(path, type))
+        {
+            Object o = ABManager.singleton.LoadImm(path, type);
+            if (type == AssetType.Prefab)
+            {
+
+                if (typeof(T) == typeof(GameObject) || typeof(T) == typeof(Transform))
+                    return o as T;
+                else
+                {
+                    return (o as GameObject).GetComponent<T>();
+                }
+            }
+            else
+                return o as T;
+        }
+        else
+        {
+            return Resources.Load<T>(path);
+        }
     }
 
-    public static Object[] LoadAll(string path)
+    public static Object[] LoadAll(string path, AssetType type)
     {
         return Resources.LoadAll(path);
     }
@@ -54,7 +73,7 @@ public class XResourceMgr
         return Resources.LoadAll<T>(path);
     }
 
-    public static Object Load(string path)
+    public static Object Load(string path, AssetType type)
     {
         return Resources.Load(path);
     }
@@ -64,9 +83,9 @@ public class XResourceMgr
         Resources.UnloadAsset(assetToUnload);
     }
 
-    public static void LoadAsync<T>(string path, System.Action<Object> cb) where T : Object
+    public static void LoadAsync<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
     {
-        AddSysnLoad<T>(path, cb);
+        AddSysnLoad<T>(path, type, cb);
     }
 
     public static void CancelLoad(System.Action<Object> cb)
@@ -85,7 +104,7 @@ public class XResourceMgr
         }
     }
 
-    private static void AddSysnLoad<T>(string path, System.Action<Object> cb) where T : Object
+    private static void AddSysnLoad<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
     {
         if (list == null) list = new List<AssetNode>();
         for (int i = 0, max = list.Count; i < max; i++)
@@ -116,6 +135,5 @@ public class XResourceMgr
         list.Remove(node);
         cnt--;
     }
-
 
 }

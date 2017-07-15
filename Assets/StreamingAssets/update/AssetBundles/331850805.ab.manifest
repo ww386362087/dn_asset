@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1809740483
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1f36b3bdb5a9b053991e1766b0b1cede
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/OverrideClips/A.anim
+Dependencies: []

@@ -83,7 +83,7 @@ namespace XEditor
                         }
                         else
                         {
-                            XMeshTexData mtd = XResourceMgr.Load<XMeshTexData>(path);
+                            XMeshTexData mtd = XResourceMgr.Load<XMeshTexData>(path,AssetType.Prefab);
                             if (mtd != null)
                             {
                                 ExtraSkinMeshTex emt = new ExtraSkinMeshTex();

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1384427726
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d9e8d93446c1ac6e44110bee1426bcb6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_fishing_lift.anim
+Dependencies: []

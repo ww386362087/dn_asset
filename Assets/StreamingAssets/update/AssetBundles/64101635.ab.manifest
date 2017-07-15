@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3986210966
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6627f1ca1e4dd3f8131e4c495fd1aa83
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/OverrideClips/Walk.anim
+Dependencies: []

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1535545868
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 432d86f82ff9cbc6c8f4ff22058aab00
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_idle.anim
+Dependencies: []

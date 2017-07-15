@@ -25,7 +25,7 @@ public class MountLoadTask : BaseLoadTask
             if (MakePath(ref newFpi, loadedPath))
             {
                 if (goInstance != null) GameObject.Destroy(goInstance);
-                obj = XResourceMgr.Load<GameObject>(location);
+                obj = XResourceMgr.Load<GameObject>(location,AssetType.Prefab);
                 LoadFinish(this);
                 ProcessTransfer();
             }

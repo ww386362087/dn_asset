@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1830746402
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2ddeeddd214edb89777eebeaba05fea9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/OverrideClips/Idle.anim
+Dependencies: []

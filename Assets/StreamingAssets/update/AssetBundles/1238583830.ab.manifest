@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 2839744243
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3fe8453032e0747d26d7afde039dda49
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f3efaaad075ba72b45612400cb94c56b
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: dbd85748116a1e8478ad865525a8d74c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Equipments/ar_tamasama_d_quiver.prefab
+Dependencies:
+- D:/projects/asset_process_proj/Assets/StreamingAssets/update/AssetBundles/1396908197.ab

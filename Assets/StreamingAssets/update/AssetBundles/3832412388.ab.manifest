@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1799770177
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2d0d6d287b4cf18f8c75a43620ed3cb2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_Stun.anim
+Dependencies: []

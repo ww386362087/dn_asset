@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2955427927
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b16757d033675d1d2b7ed85aa1528fda
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_attack_run_left.anim
+Dependencies: []

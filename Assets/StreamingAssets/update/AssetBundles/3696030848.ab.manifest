@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 192302445
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1f1e661a1266cf3a517f24fd6e7e0b05
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_Mount_alpaca_walk_people.anim
+Dependencies: []

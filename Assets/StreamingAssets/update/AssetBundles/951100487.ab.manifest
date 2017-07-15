@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 571183992
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f28997977b27c13a7359f0e9ce304873
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/player_archer_talk01.anim
+Dependencies: []

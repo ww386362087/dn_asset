@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2493378730
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c66d092d6a6350817f5967e1282d3d1a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/OverrideClips/RightForward.anim
+Dependencies: []

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2488721347
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 88ce87fb6f989cb68dd8bec24ace0b9f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_attack_swiftshot.anim
+Dependencies: []

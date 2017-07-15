@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2230154843
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b5820098cb14d2c6668d33fedb5d6b3e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_tusiji_style02.anim
+Dependencies: []

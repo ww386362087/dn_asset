@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2539106752
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 866ec54acbb7085c7386c471c4657b81
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: e2658f3a82ff5015cfac1043556e10e2
+HashAppended: 0
+ClassTypes:
+- Class: 89
+  Script: {instanceID: 0}
+Assets:
+- Assets/Scenes/cubemap/metal.cubemap
+Dependencies: []

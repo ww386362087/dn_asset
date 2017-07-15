@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 4164131198
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4ec05bae21752b45134f15bf6386d0a9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ec62c833794ed47ab0d995e9182437d2
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: dbd85748116a1e8478ad865525a8d74c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Equipments/ar_straw_helmet.prefab
+Dependencies: []

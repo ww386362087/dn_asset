@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2721325244
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 495a47c66bb32b7ba516178bb5fd4c6e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2f83f8f92ace07d29cf518d0769d85c5
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Animation/Player_archer/Player_archer_3_2_cutscene_end.anim
+Dependencies: []

@@ -265,11 +265,11 @@ namespace XEditor
                 {
                     if (srcAni != null && srcAni.runtimeAnimatorController != null)
                     {
-                        desAni.runtimeAnimatorController = XResourceMgr.Load("Controller/" + srcAni.runtimeAnimatorController.name) as RuntimeAnimatorController;
+                        desAni.runtimeAnimatorController = XResourceMgr.Load("Controller/" + srcAni.runtimeAnimatorController.name,AssetType.Controller) as RuntimeAnimatorController;
                     }
                     else
                     {
-                        desAni.runtimeAnimatorController = XResourceMgr.Load("Controller/XAnimator") as RuntimeAnimatorController;
+                        desAni.runtimeAnimatorController = XResourceMgr.Load("Controller/XAnimator",AssetType.Controller) as RuntimeAnimatorController;
                     }
                 }
             }
@@ -326,7 +326,7 @@ namespace XEditor
         {
             if (model != null)
             {
-                TextAsset ta = XResourceMgr.Load<TextAsset>(@"Table/DefaultEquip");
+                TextAsset ta = XResourceMgr.Load<TextAsset>(@"Table/DefaultEquip",AssetType.Byte);
                 if (ta != null)
                 {
                     DefaultEquip de = new DefaultEquip();

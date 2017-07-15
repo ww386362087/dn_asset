@@ -49,10 +49,6 @@ public class CombineMeshTask
         {
             parts[(int)part] = new MountLoadTask(part,ec);
         }
-        for (EPartType part = EPartType.EMountEnd; part < EPartType.ENum; ++part)
-        {
-            parts[(int)part] = new DecalLoadTask(part, m_PartLoaded, parts[0] as PartLoadTask);
-        }
         if (m_FinalLoadStatus == 0)
         {
             for (EPartType part = EPartType.ECombinePartStart; part < EPartType.ECombinePartEnd; ++part)

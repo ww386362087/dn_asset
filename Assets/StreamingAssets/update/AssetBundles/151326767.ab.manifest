@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 3508333007
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 883d9b65d4b964e7c539e518676a6974
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ec62c833794ed47ab0d995e9182437d2
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: dbd85748116a1e8478ad865525a8d74c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Equipments/ar_watermelon_helmet.prefab
+Dependencies: []
