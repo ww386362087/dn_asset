@@ -49,6 +49,25 @@ public class Test : XSingleton<Test>
         role.GetComponent<XEquipComponent>().EquipTest(m_FashionList[0]);
     }
 
+
+    public void TestAB()
+    {
+        Object oo = ABManager.singleton.LoadImm("Animation/Player_archer/Player_archer_attack_pinpointshot", AssetType.Anim);
+        AnimationClip clip = oo as AnimationClip;
+        Debug.Log("clip: " + clip.length);
+
+        //Object o = ABManager.singleton.LoadImm("Equipments/ar_costume_marine01_glove", AssetType.Prefab);
+        //Debug.Log("o: " + (o == null) + " " + o.name);
+        //XMeshTexData md= (o as GameObject).GetComponent<XMeshTexData>();
+        //Debug.Log("md: " + md.offset);
+
+        ABManager.singleton.LoadImm("Animation/Player_archer/Player_archer_2_4_cutscene_end", AssetType.Anim, (o) =>
+        {
+            AnimationClip cli = o as AnimationClip;
+            Debug.Log("clip length: " + cli.length);
+        });
+    }
+
     int space = 30;
     string[] anims = { "ToSkill", "EndSkill", "ToMove" };
     string[] weapons = {

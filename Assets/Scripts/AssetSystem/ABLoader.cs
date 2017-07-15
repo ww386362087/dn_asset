@@ -5,13 +5,13 @@ using System.IO;
 using UnityEngine;
 
 
-public class ABLoader
+public class LoaderBase
 {
     protected AssetBundleData data;
     protected MonoBehaviour mono;
     protected int depsCnt = 0;
 
-    public ABLoader(AssetBundleData d, MonoBehaviour m)
+    public LoaderBase(AssetBundleData d, MonoBehaviour m)
     {
         data = d;
         mono = m;
@@ -24,9 +24,9 @@ public class ABLoader
 /// <summary>
 /// 同步加载
 /// </summary>
-public class SyncLoader : ABLoader
+public class Loader : LoaderBase
 {
-    public SyncLoader(AssetBundleData d, MonoBehaviour m) 
+    public Loader(AssetBundleData d, MonoBehaviour m) 
         : base(d, m)
     {
     }
@@ -46,7 +46,7 @@ public class SyncLoader : ABLoader
         for (int i = 0; i < depsCnt; i++)
         {
             AssetBundleData ad = ABManager.singleton.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
-            SyncLoader loader = new SyncLoader(ad, mono);
+            Loader loader = new Loader(ad, mono);
             loader.LoadImm();
         }
     }
@@ -68,8 +68,12 @@ public class SyncLoader : ABLoader
 
     private UnityEngine.Object LoadFromCacheFile(uint bundleName)
     {
+
         string file = Path.Combine(AssetBundlePathResolver.BundleCacheDir, bundleName + ".ab");
-        return AssetBundle.LoadFromFile(file).LoadAsset(data.loadName);
+        AssetBundle bundle = AssetBundle.LoadFromFile(file);
+        UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
+        bundle.Unload(false);
+        return obj;
     }
 
     /// <summary>
@@ -78,20 +82,23 @@ public class SyncLoader : ABLoader
     private UnityEngine.Object LoadFromPackage(uint bundleName)
     {
         string file = AssetBundlePathResolver.GetBundleSourceFile(bundleName + ".ab", false);
-        return AssetBundle.LoadFromFile(file).LoadAsset(data.loadName);
+        AssetBundle bundle = AssetBundle.LoadFromFile(file);
+        UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
+        bundle.Unload(false);
+        return obj;
     }
 }
 
 /// <summary>
 /// 异步加载
 /// </summary>
-public class AsyncLoader :ABLoader
+public class AsyncLoader : LoaderBase
 {
     Action<UnityEngine.Object> loadCB;
 
     int loadCnt;
 
-    public AsyncLoader(AssetBundleData d, MonoBehaviour m) 
+    public AsyncLoader(AssetBundleData d, MonoBehaviour m)
         : base(d, m)
     {
         loadCnt = depsCnt;
@@ -147,21 +154,23 @@ public class AsyncLoader :ABLoader
         {
             LoadAsset();
         }
-        else if (loadCnt>depsCnt)
+        else if (loadCnt > depsCnt)
         {
             loadCB(obj);
         }
-       
+
     }
 
-    
+
     private IEnumerator LoadFromCacheFile(uint bundleName, Action<uint, UnityEngine.Object> cb)
     {
         string file = Path.Combine(AssetBundlePathResolver.BundleCacheDir, bundleName + ".ab");
         AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(file);
         while (!req.isDone) yield return null;
-        ABManager.singleton.CacheObject(bundleName, req.assetBundle);
-        cb(bundleName, req.assetBundle.LoadAsset(data.loadName));
+        AssetBundle bundle = req.assetBundle;
+        ABManager.singleton.CacheObject(bundleName, bundle);
+        cb(bundleName, bundle.LoadAsset(data.loadName));
+        bundle.Unload(false);
     }
 
     /// <summary>
@@ -173,9 +182,11 @@ public class AsyncLoader :ABLoader
         string file = AssetBundlePathResolver.GetBundleSourceFile(bundleName + ".ab", false);
         AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(file);
         while (!req.isDone) yield return null;
-        ABManager.singleton.CacheObject(bundleName, req.assetBundle);
-        cb(bundleName, req.assetBundle.LoadAsset(data.loadName));
+        AssetBundle bundle = req.assetBundle;
+        ABManager.singleton.CacheObject(bundleName, bundle);
+        cb(bundleName, bundle.LoadAsset(data.loadName));
+        bundle.Unload(false);
     }
-    
+
 
 }

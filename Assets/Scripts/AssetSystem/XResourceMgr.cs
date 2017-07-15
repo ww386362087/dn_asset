@@ -20,9 +20,10 @@ public class XResourceMgr
     //为了效率 避免update的时候重复计算list长度
     private static int cnt = 0;
 
-    //update里大量重复的遍历
+    //记录resource 里的资源列表
     private static List<AssetNode> list;
 
+    private static bool useAB = true;
 
     public static void Update()
     {
@@ -41,18 +42,15 @@ public class XResourceMgr
 
     public static T Load<T>(string path, AssetType type) where T : Object
     {
-        if (ABManager.singleton.Exist(path, type))
+        if (useAB && ABManager.singleton.Exist(path, type))
         {
             Object o = ABManager.singleton.LoadImm(path, type);
             if (type == AssetType.Prefab)
             {
-
                 if (typeof(T) == typeof(GameObject) || typeof(T) == typeof(Transform))
                     return o as T;
                 else
-                {
                     return (o as GameObject).GetComponent<T>();
-                }
             }
             else
                 return o as T;
@@ -75,7 +73,14 @@ public class XResourceMgr
 
     public static Object Load(string path, AssetType type)
     {
-        return Resources.Load(path);
+        if (useAB && ABManager.singleton.Exist(path, type))
+        {
+            return ABManager.singleton.LoadImm(path, type);
+        }
+        else
+        {
+            return Resources.Load(path);
+        }
     }
 
     public static void UnloadAsset(Object assetToUnload)
@@ -106,22 +111,29 @@ public class XResourceMgr
 
     private static void AddSysnLoad<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
     {
-        if (list == null) list = new List<AssetNode>();
-        for (int i = 0, max = list.Count; i < max; i++)
+        if (useAB && ABManager.singleton.Exist(path, type))
         {
-            if (list[i].path == path)
-            {
-                list[i].cb.Add(cb);
-                return;
-            }
+            ABManager.singleton.LoadImm(path, type, cb);
         }
-        AssetNode node = new AssetNode();
-        node.path = path;
-        node.request = Resources.LoadAsync<T>(path);
-        node.cb = new List<System.Action<Object>>();
-        node.cb.Add(cb);
-        list.Add(node);
-        cnt = list.Count;
+        else
+        {
+            if (list == null) list = new List<AssetNode>();
+            for (int i = 0, max = list.Count; i < max; i++)
+            {
+                if (list[i].path == path)
+                {
+                    list[i].cb.Add(cb);
+                    return;
+                }
+            }
+            AssetNode node = new AssetNode();
+            node.path = path;
+            node.request = Resources.LoadAsync<T>(path);
+            node.cb = new List<System.Action<Object>>();
+            node.cb.Add(cb);
+            list.Add(node);
+            cnt = list.Count;
+        }
     }
 
 

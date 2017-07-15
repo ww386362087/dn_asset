@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-public class ABManager:XSingleton<ABManager>
+public class ABManager : XSingleton<ABManager>
 {
 
     private MonoBehaviour mono;
@@ -34,11 +34,11 @@ public class ABManager:XSingleton<ABManager>
             }
             else
             {
-                Debug.LogError("depFile not exist! "+depFile);
+                Debug.LogError("depFile not exist! " + depFile);
             }
         }
     }
-    
+
     public void Init(Stream depStream)
     {
         if (depStream.Length > 4)
@@ -58,42 +58,39 @@ public class ABManager:XSingleton<ABManager>
     }
 
 
-
-
     public bool Exist(uint hash)
     {
         return depInfoReader.GetAssetBundleInfo(hash) != null;
     }
 
-    public bool Exist(string location, string suffix)
+    public bool Exist(string location, AssetType type)
     {
         string path = location.Replace("/", "\\");
-        AssetBundleData data = MakePath(path, suffix);
+        AssetBundleData data = MakePath(path, type);
         return data != null && Exist(data.hash);
     }
 
 
-    private AssetBundleData MakePath(string location, string suffix)
+    private AssetBundleData MakePath(string location, AssetType type)
     {
-        string path = @"Assets\Resources\" + location.Replace("/", "\\") + suffix;
-       // Debug.Log("path: " + path);
+        string path = @"Assets\Resources\" + location.Replace("/", "\\") + type;
         return depInfoReader.GetAssetBundleInfoByAssetpath(path);
     }
 
-    public Object LoadImm(string location, string suffix) 
+    public Object LoadImm(string location, AssetType type)
     {
-        AssetBundleData data = MakePath(location, suffix);
-        SyncLoader loader = new SyncLoader(data, mono);
+        AssetBundleData data = MakePath(location, type);
+        Loader loader = new Loader(data, mono);
         return loader.LoadImm();
     }
 
-    public void LoadImm(string location, string suffix, System.Action<Object> cb)
+    public void LoadImm(string location, AssetType type, System.Action<Object> cb)
     {
-        AssetBundleData data = MakePath(location, suffix);
+        AssetBundleData data = MakePath(location, type);
         AsyncLoader loader = new AsyncLoader(data, mono);
         loader.LoadImm(cb);
     }
-    
+
 
     public void CacheObject(uint hash, Object obj)
     {
