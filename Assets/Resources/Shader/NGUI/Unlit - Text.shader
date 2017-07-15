@@ -29,7 +29,7 @@ Shader "Unlit/Text"
 				#pragma vertex vert
 				#pragma fragment frag
 				#include "UnityCG.cginc"
-				#include "UI_Include.cginc"
+
 				struct appdata_t
 				{
 					float4 vertex : POSITION;
@@ -56,11 +56,45 @@ Shader "Unlit/Text"
 					return o;
 				}
 
-				fixed4 frag (v2f IN) : COLOR
+				half4 frag (v2f i) : COLOR
 				{
-					return UISampleText(_MainTex, IN.color, IN.texcoord);
+					half4 col = i.color;
+					col.a *= tex2D(_MainTex, i.texcoord).a;
+					return col;
 				}
 			ENDCG
+		}
+	}
+
+	SubShader
+	{
+		Tags
+		{
+			"Queue"="Transparent"
+			"IgnoreProjector"="True"
+			"RenderType"="Transparent"
+		}
+		
+		Lighting Off
+		Cull Off
+		ZTest Always
+		ZWrite Off
+		Fog { Mode Off }
+		Blend SrcAlpha OneMinusSrcAlpha
+		
+		BindChannels
+		{
+			Bind "Color", color
+			Bind "Vertex", vertex
+			Bind "TexCoord", texcoord
+		}
+		
+		Pass
+		{
+			SetTexture [_MainTex]
+			{ 
+				combine primary, texture
+			}
 		}
 	}
 }

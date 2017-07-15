@@ -11,7 +11,7 @@ Shader "Hidden/Unlit/Transparent Colored 2"
 
 		Tags
 		{
-			"Queue" = "Transparent+500"
+			"Queue" = "Transparent"
 			"IgnoreProjector" = "True"
 			"RenderType" = "Transparent"
 		}
@@ -24,7 +24,6 @@ Shader "Hidden/Unlit/Transparent Colored 2"
 			Offset -1, -1
 			Fog { Mode Off }
 			ColorMask RGB
-			AlphaTest Greater .01
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM
@@ -62,9 +61,10 @@ Shader "Hidden/Unlit/Transparent Colored 2"
 				return ret;
 			}
 
+			v2f o;
+
 			v2f vert (appdata_t v)
 			{
-				v2f o;
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.color = v.color;
 				o.texcoord = v.texcoord;
@@ -75,34 +75,17 @@ Shader "Hidden/Unlit/Transparent Colored 2"
 
 			half4 frag (v2f IN) : COLOR
 			{
-				half4 col;
-				if(IN.color.r < 0.001 && IN.color.g < 0.001 && IN.color.b < 0.001)
-				{
-					col = tex2D(_MainTex, IN.texcoord);  
-										 
-					//float grey = dot(col.rgb, float3(0.299, 0.587, 0.114));  
-
-					float grey = Luminance(col.rgb);
-					col.rgb = float3(grey, grey, grey);
-					//col.a *= IN.color.a;
-				}
-				else
-				{
-					col = tex2D(_MainTex, IN.texcoord) * IN.color;
-
-
-				}
 				// First clip region
-					float2 factor = (float2(1.0, 1.0) - abs(IN.worldPos.xy)) * _ClipArgs0.xy;
-					float f = min(factor.x, factor.y);
+				float2 factor = (float2(1.0, 1.0) - abs(IN.worldPos.xy)) * _ClipArgs0.xy;
+				float f = min(factor.x, factor.y);
 
-					// Second clip region
-					factor = (float2(1.0, 1.0) - abs(IN.worldPos.zw)) * _ClipArgs1.xy;
-					f = min(f, min(factor.x, factor.y));
+				// Second clip region
+				factor = (float2(1.0, 1.0) - abs(IN.worldPos.zw)) * _ClipArgs1.xy;
+				f = min(f, min(factor.x, factor.y));
 
-					// Sample the texture
-					
-					col.a *= clamp(f, 0.0, 1.0);
+				// Sample the texture
+				half4 col = tex2D(_MainTex, IN.texcoord) * IN.color;
+				col.a *= clamp(f, 0.0, 1.0);
 				return col;
 			}
 			ENDCG
@@ -127,7 +110,6 @@ Shader "Hidden/Unlit/Transparent Colored 2"
 			ZWrite Off
 			Fog { Mode Off }
 			ColorMask RGB
-			AlphaTest Greater .01
 			Blend SrcAlpha OneMinusSrcAlpha
 			ColorMaterial AmbientAndDiffuse
 			

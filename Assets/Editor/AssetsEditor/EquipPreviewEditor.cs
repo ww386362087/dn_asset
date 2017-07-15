@@ -46,8 +46,8 @@ namespace XEditor
                 }
                 if (!string.IsNullOrEmpty(path))
                 {
-                    path = "Equipments/" + path;
-                    XMeshTexData mtd = XResourceMgr.Load<XMeshTexData>(path,AssetType.Prefab);
+                    path = "Assets/Resources/Equipments/" + path+AssetType.Prefab;
+                    XMeshTexData mtd = AssetDatabase.LoadAssetAtPath<XMeshTexData>(path);
                     if (mtd != null && mtd.mesh != null)
                     {
                         ci.mesh = mtd.mesh;
@@ -60,8 +60,8 @@ namespace XEditor
             if (ciList.Count > 0)
             {
                 if (newGo != null) GameObject.DestroyImmediate(newGo);
-                string skinPrfab = "Prefabs/" + combineConfig.PrefabName[m_profession];
-                newGo = GameObject.Instantiate(XResourceMgr.Load<Object>(skinPrfab,AssetType.Prefab)) as GameObject;
+                string skinPrfab = "Assets/Resources/Prefabs/" + combineConfig.PrefabName[m_profession]+AssetType.Prefab;
+                newGo = GameObject.Instantiate(AssetDatabase.LoadAssetAtPath<Object>(skinPrfab)) as GameObject;
                 if (name != "") newGo.name = name;
                 newGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
                
@@ -96,7 +96,8 @@ namespace XEditor
                         {
                             path = data.Weapon;
                         }
-                        GameObject mainWeapon = XResourceMgr.Load<GameObject>("Equipments/" + path,AssetType.Prefab);
+                      
+                        GameObject mainWeapon = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Equipments/" + path+AssetType.Prefab);
                         if (mainWeapon != null)
                         {
                             GameObject instance = GameObject.Instantiate(mainWeapon) as GameObject;

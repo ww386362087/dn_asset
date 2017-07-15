@@ -11,7 +11,7 @@ Shader "Hidden/Unlit/Transparent Colored 1"
 
 		Tags
 		{
-			"Queue" = "Transparent+500"
+			"Queue" = "Transparent"
 			"IgnoreProjector" = "True"
 			"RenderType" = "Transparent"
 		}
@@ -24,7 +24,6 @@ Shader "Hidden/Unlit/Transparent Colored 1"
 			Offset -1, -1
 			Fog { Mode Off }
 			ColorMask RGB
-			AlphaTest Greater .01
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM
@@ -52,9 +51,10 @@ Shader "Hidden/Unlit/Transparent Colored 1"
 				float2 worldPos : TEXCOORD1;
 			};
 
+			v2f o;
+
 			v2f vert (appdata_t v)
 			{
-				v2f o;
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.color = v.color;
 				o.texcoord = v.texcoord;
@@ -68,24 +68,8 @@ Shader "Hidden/Unlit/Transparent Colored 1"
 				float2 factor = (float2(1.0, 1.0) - abs(IN.worldPos)) * _ClipArgs0;
 			
 				// Sample the texture
-				half4 col;
-				if(IN.color.r < 0.001 && IN.color.g < 0.001 && IN.color.b < 0.001)
-				{
-					col = tex2D(_MainTex, IN.texcoord);
-										 
-					//float grey = dot(col.rgb, float3(0.299, 0.587, 0.114));  
-
-					float grey = Luminance(col.rgb);
-					col.rgb = float3(grey, grey, grey);
-					//col.a = 1;
-				}
-				else
-				{
-					col = tex2D(_MainTex, IN.texcoord) * IN.color;
-				}
-								
+				half4 col = tex2D(_MainTex, IN.texcoord) * IN.color;
 				col.a *= clamp( min(factor.x, factor.y), 0.0, 1.0);
-				col.a *= IN.color.a;
 				return col;
 			}
 			ENDCG
@@ -110,7 +94,6 @@ Shader "Hidden/Unlit/Transparent Colored 1"
 			ZWrite Off
 			Fog { Mode Off }
 			ColorMask RGB
-			AlphaTest Greater .01
 			Blend SrcAlpha OneMinusSrcAlpha
 			ColorMaterial AmbientAndDiffuse
 			

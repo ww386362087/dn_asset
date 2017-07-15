@@ -326,11 +326,11 @@ namespace XEditor
         {
             if (model != null)
             {
-                TextAsset ta = XResourceMgr.Load<TextAsset>(@"Table/DefaultEquip",AssetType.Byte);
+                TextAsset ta = AssetDatabase.LoadAssetAtPath<TextAsset>(@"Assets/Resources/Table/DefaultEquip"+AssetType.Byte);
                 if (ta != null)
                 {
                     DefaultEquip de = new DefaultEquip();
-                    using (MemoryStream ms = new System.IO.MemoryStream(ta.bytes))
+                    using (MemoryStream ms = new MemoryStream(ta.bytes))
                     {
                         de.ReadFile(ms);
                         for (int i = 0; i < combineConfig.BandposeName.Length; ++i)
