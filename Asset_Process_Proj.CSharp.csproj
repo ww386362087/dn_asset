@@ -81,38 +81,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UIEquipmentSlot.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UIItemSlot.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UIItemStorage.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UIStorageSlot.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\System\InvAttachmentPoint.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\System\InvBaseItem.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\System\InvDatabase.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\System\InvEquipment.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\System\InvGameItem.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\System\InvStat.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\ChatInput.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\DownloadTexture.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\EnvelopContent.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\ExampleDragDropItem.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\ExampleDragDropSurface.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\LagPosition.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\LagRotation.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\LoadLevelOnClick.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\LookAtTarget.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\OpenURLOnClick.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\PanWithMouse.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\PlayIdleAnimations.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\SetColorOnSelection.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\Spin.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\SpinWithMouse.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\Tutorial5.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\UISliderColors.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\WindowAutoYaw.cs" />
-    <Compile Include="Assets\NGUI\Examples\Scripts\Other\WindowDragTilt.cs" />
     <Compile Include="Assets\NGUI\Scripts\Interaction\LanguageSelection.cs" />
     <Compile Include="Assets\NGUI\Scripts\Interaction\TypewriterEffect.cs" />
     <Compile Include="Assets\NGUI\Scripts\Interaction\UIButton.cs" />
@@ -267,16 +235,11 @@
   <ItemGroup>
     <None Include="Assets\Editor\Cache\cache.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
-    <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
-    <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
-    <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
-    <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
-    <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
     <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
     <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
     <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
