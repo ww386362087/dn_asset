@@ -5,7 +5,6 @@ using System.Collections.Generic;
 /// 资源加载管理
 /// 同步+异步 
 /// Resources+AssetBundle
-/// (AB部分暂未实现)
 /// </summary>
 public class XResourceMgr
 {
