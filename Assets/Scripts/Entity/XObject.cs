@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class XObject
 {
 
-    private List<EventHandler> _eventMap;
+    private Dictionary<XEventDefine,EventHandler> _eventMap;
     
     public bool Deprecated { get; set; }
     
@@ -53,6 +53,7 @@ public class XObject
         if (_eventMap != null)
             _eventMap.Clear();
         _eventMap = null;
+        XEventMgr.singleton.RemoveRegist(this);
     }
 
     protected void RegisterEvent(XEventDefine eventID, XEventHandler handler)
@@ -60,17 +61,16 @@ public class XObject
         if (!Deprecated)
         {
             if (_eventMap == null)
-                _eventMap = new List<EventHandler>();
+                _eventMap = new Dictionary<XEventDefine, EventHandler>();
             int length = _eventMap.Count;
-            for (int i = 0; i < length; ++i)
-            {
-                EventHandler ceh = _eventMap[i];
-                if (ceh.eventDefine == eventID) return;
-            }
+
+            if (_eventMap.ContainsKey(eventID)) return;
+
             EventHandler eh = new EventHandler();
             eh.eventDefine = eventID;
             eh.handler = handler;
-            _eventMap.Add(eh);
+            _eventMap.Add(eventID,eh);
+            XEventMgr.singleton.AddRegist(eventID, this);
         }
     }
 
@@ -78,15 +78,17 @@ public class XObject
     {
         if (!Deprecated && _eventMap!=null)
         {
-            int length = _eventMap.Count;
-            for (int i = 0; i < length; ++i)
+            if (_eventMap.ContainsKey(e.ArgsDefine))
             {
-                EventHandler eh = _eventMap[i];
-                if (eh.eventDefine == e.ArgsDefine)
+                foreach (var item in _eventMap)
                 {
-                    XEventHandler func = eh.handler;
-                    if (func != null) func(e);
-                    return true;
+                    EventHandler eh = item.Value;
+                    if (eh.eventDefine == e.ArgsDefine)
+                    {
+                        XEventHandler func = eh.handler;
+                        if (func != null) func(e);
+                        return true;
+                    }
                 }
             }
         }

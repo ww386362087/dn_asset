@@ -86,7 +86,6 @@ namespace ABSystem
         }
 
 
-        string testpath = "Assets\\Resources\\Equipments\\ar_blackdragon_body.prefab";
         public void Analyze()
         {
             if (_isAnalyzed) return;
@@ -108,7 +107,7 @@ namespace ABSystem
             var paths = res.Distinct().ToArray();
             for (int i = 0; i < paths.Length; i++)
             {
-                if (!File.Exists(paths[i]))
+                if (!File.Exists(paths[i]) && !paths[i].Contains("unity_builtin_extra"))
                 {
                     Debug.Log("invalid:" + paths[i]);
                     continue;
@@ -139,7 +138,7 @@ namespace ABSystem
         private bool beforeExportProcess;
 
         /// <summary>
-        /// 在导出之前执行
+        /// 在导出之前执行 计算被多个素材依赖
         /// </summary>
         public void BeforeExport()
         {
@@ -253,7 +252,6 @@ namespace ABSystem
         /// <summary>
         /// (作为AssetType.Asset时)是否需要单独导出
         /// </summary>
-        /// <returns></returns>
         private bool NeedExportStandalone()
         {
             return _dependsChildren.Count > 1;
@@ -265,7 +263,7 @@ namespace ABSystem
         /// <param name="target"></param>
         private void AddDepend(AssetTarget target)
         {
-            if (target == this || this.ContainsDepend(target)) return;
+            if (target == this || ContainsDepend(target)) return;
             _dependencies.Add(target);
             target.AddDependChild(this);
             ClearParentDepend(target);
@@ -274,9 +272,6 @@ namespace ABSystem
         /// <summary>
         /// 是否已经包含了这个依赖（检查子子孙孙）
         /// </summary>
-        /// <param name="target"></param>
-        /// <param name="recursive"></param>
-        /// <returns></returns>
         private bool ContainsDepend(AssetTarget target, bool recursive = true)
         {
             if (_dependencies.Contains(target)) return true;

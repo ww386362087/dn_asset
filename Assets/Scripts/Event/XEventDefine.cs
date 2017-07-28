@@ -14,6 +14,7 @@ public enum XEventDefine
 }
 
 
+
 public abstract class XEventArgs
 {
     protected long _token = 0;

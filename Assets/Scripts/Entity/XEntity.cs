@@ -101,6 +101,7 @@ public abstract class XEntity : XObject
 
     public void UnloadEntity()
     {
+        DetachAllComponents();
         _attr = null;
         GameObject.Destroy(_object);
         _object = null;
@@ -138,9 +139,8 @@ public abstract class XEntity : XObject
 
     public bool DetachComponent<T>() where T : XComponent, new()
     {
-        CheckCondtion();
         uint uid = XCommon.singleton.XHash(typeof(T).Name);
-        if (components.ContainsKey(uid))
+        if (components != null && components.ContainsKey(uid))
         {
             components[uid].OnUninit();
             components.Remove(uid);
@@ -152,10 +152,22 @@ public abstract class XEntity : XObject
 
     public T GetComponent<T>() where T : XComponent
     {
-        CheckCondtion();
         uint uid = XCommon.singleton.XHash(typeof(T).Name);
-        if (components.ContainsKey(uid)) return components[uid] as T;
+        if (components != null && components.ContainsKey(uid)) return components[uid] as T;
         return null;
+    }
+
+
+    private void DetachAllComponents()
+    {
+        if (components != null)
+        {
+            foreach (var item in components)
+            {
+                item.Value.OnUninit();
+            }
+        }
+        components.Clear();
     }
 
 }

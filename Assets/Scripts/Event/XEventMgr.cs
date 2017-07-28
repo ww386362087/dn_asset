@@ -1,4 +1,6 @@
-﻿
+﻿using System.Collections.Generic;
+
+
 public delegate void XEventHandler(XEventArgs e);
 
 public struct EventHandler
@@ -9,24 +11,69 @@ public struct EventHandler
 
 public class XEventMgr : XSingleton<XEventMgr>
 {
+
+
+    public Dictionary<XEventDefine, HashSet<XObject>> pool;
+
+
+    public void AddRegist(XEventDefine def, XObject obj)
+    {
+        if (pool == null)
+            pool = new Dictionary<XEventDefine, HashSet<XObject>>();
+
+        if (pool.ContainsKey(def))
+        {
+            pool[def].Add(obj);
+        }
+        else
+        {
+            HashSet<XObject> hash = new HashSet<XObject>();
+            hash.Add(obj);
+            pool.Add(def, hash);
+        }
+    }
+
+
+    public void RemoveRegist(XObject o)
+    {
+        if (pool != null)
+        {
+            List<XEventDefine> list = new List<XEventDefine>();
+            foreach (var item in pool)
+            {
+                if (item.Value.Contains(o))
+                {
+                    item.Value.Remove(o);
+                    list.Add(item.Key);
+                }
+            }
+            //从池子移掉不再需要的对象 减少遍历的时间
+            for (int i = 0, max = list.Count; i < max; i++)
+            {
+                if (pool[list[i]].Count == 0) pool.Remove(list[i]);
+            }
+        }
+    } 
+    
     
     public bool FireEvent(XEventArgs args)
     {
-        return DispatchEvent(args);
+        if(pool!=null)
+        {
+            if(pool.ContainsKey(args.ArgsDefine))
+            {
+                var objs = pool[args.ArgsDefine];
+                var e = objs.GetEnumerator();
+                while(e.MoveNext())
+                {
+                    e.Current.DispatchEvent(args);
+                }
+                return true;
+            }
+        }
+        return false;
     }
-
-    private bool DispatchEvent(XEventArgs args)
-    {
-        bool bHandled = false;
-
-        if (!(args.Firer == null || (args.Firer.Deprecated)))
-            bHandled = args.Firer.DispatchEvent(args);
-
-        if (!args.ManualRecycle)
-            args.Recycle();
-
-        return bHandled;
-    }
+    
 
 }
 

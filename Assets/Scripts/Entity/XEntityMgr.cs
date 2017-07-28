@@ -6,7 +6,8 @@ using System;
 public class XEntityMgr : XSingleton<XEntityMgr>
 {
 
-    private Dictionary<uint, XEntity> _entities = new Dictionary<uint, XEntity>();
+    private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
+    private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
     
     private XEntity CreateEntity(XAttributes attr, bool autoAdd)
     {
@@ -32,20 +33,32 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
-        if (!_entities.ContainsKey(attr.id)) _entities.Add(attr.id, x);
+        if (!_dic_entities.ContainsKey(attr.id)) _dic_entities.Add(attr.id, x);
+        if (_hash_entitys.Add(x)) Debug.Log("has exist entity: " + attr.id);
         return x;
+    }
+
+
+    private void UnloadAll()
+    {
+        var e = _hash_entitys.GetEnumerator();
+        while(e.MoveNext())
+        {
+            e.Current.UnloadEntity();
+        }
+        _hash_entitys.Clear();
+        _dic_entities.Clear();
     }
 
 
     public void UnloadEntity<T>(uint id)
     {
-        if (_entities.ContainsKey(id))
+        if (_dic_entities.ContainsKey(id))
         {
-            _entities[id].UnloadEntity();
+            _dic_entities[id].UnloadEntity();
         }
     }
-
- 
+    
 
     public XRole CreateRole(XAttributes attr, bool autoAdd)
     {
@@ -57,6 +70,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     public XRole CreateTestRole()
     {
         XAttributes attr = new XAttributes();
+        attr.id = 10001;
         attr.Prefab = "Player";
         attr.Name = "Archer";
         attr.Type = EnitityType.Entity_Role;
@@ -64,5 +78,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         attr.AppearQuaternion = Quaternion.identity;
         return CreateRole(attr, false);
     }
+
+
+
 
 }

@@ -149,14 +149,12 @@ public class Test : XSingleton<Test>
                 if(i==0)
                 {
                     XIdleEventArgs arg = new XIdleEventArgs();
-                    arg.Firer = role.GetComponent<XAIComponent>();
                     XEventMgr.singleton.FireEvent(arg);
                 }
                 else if(i==1)
                 {
                     XMoveEventArgs arg = new XMoveEventArgs();
                     arg.Speed = 12;
-                    arg.Firer = role.GetComponent<XAIComponent>();
                     XEventMgr.singleton.FireEvent(arg);
                 }
             }
@@ -178,6 +176,30 @@ public class Test : XSingleton<Test>
     private void Preview(EquipPart part)
     {
         role.GetComponent<XEquipComponent>().EquipTest(part);
+    }
+
+
+    private void TestMesh(Transform t)
+    {
+
+        Mesh mesh = t.GetComponent<MeshFilter>().mesh;
+        Debug.Log("mesh v: " + mesh.vertices.Length + " tri: " + mesh.triangles.Length + " uv: " + mesh.uv.Length);
+        for (int i = 0; i < mesh.vertices.Length; i++) Debug.Log("v" + i + ":" + mesh.vertices[i]);
+        for (int i = 0; i < mesh.uv.Length; i++) Debug.Log("uv" + i + ":" + mesh.uv[i]);
+        for (int i = 0; i < mesh.triangles.Length; i++) Debug.Log("tri" + i + ":" + mesh.triangles[i]);
+        mesh = new Mesh();
+        mesh.Clear();
+
+        Vector3[] vertices = { new Vector3(-0.5f, -0.5f, 0), new Vector3(-0.5f, 0.5f, 0), new Vector3(0.5f, 0.5f, 0), new Vector3(0.5f, -0.5f, 0) };
+        Vector2[] uv = { new Vector2(0, 0), new Vector2(0, 1f), new Vector2(1, 1f), new Vector2(1, 0) };
+        int[] triangles = { 0, 2, 1, 0, 3, 2 };
+
+        mesh.vertices = vertices;
+        mesh.uv = uv;
+        mesh.triangles = triangles;
+
+        t.GetComponent<MeshFilter>().mesh = mesh;
+
     }
 
 }
