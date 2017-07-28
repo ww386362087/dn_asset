@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public abstract class XBaseSingleton
 {
     public abstract bool Init();
+
     public abstract void Uninit();
 }
 
@@ -22,6 +23,7 @@ public abstract class XSingleton<T> : XBaseSingleton where T : new()
     public static T singleton { get { return _instance; } }
 
     public override bool Init() { return true; }
+
     public override void Uninit() { }
 }
 
@@ -107,4 +109,79 @@ public class XCommon : XSingleton<XCommon>
 #endif
     }
 
+    private float CrossProduct(float x1, float z1, float x2, float z2)
+    {
+        return x1 * z2 - x2 * z1;
+    }
+
+    public bool IsLineSegmentCross(Vector3 p1, Vector3 p2, Vector3 q1, Vector3 q2)
+    {
+        //fast detect
+        if (Mathf.Min(p1.x, p2.x) <= Mathf.Max(q1.x, q2.x) &&
+            Mathf.Min(q1.x, q2.x) <= Mathf.Max(p1.x, p2.x) &&
+            Mathf.Min(p1.z, p2.z) <= Mathf.Max(q1.z, q2.z) &&
+            Mathf.Min(q1.z, q2.z) <= Mathf.Max(p1.z, p2.z))
+        {
+            //( p1 - q1 ) * ( q2 - q1 )
+            float p1xq = CrossProduct(p1.x - q1.x, p1.z - q1.z,
+                                       q2.x - q1.x, q2.z - q1.z);
+            //( p2 - q1 ) * ( q2 - q1 )
+            float p2xq = CrossProduct(p2.x - q1.x, p2.z - q1.z,
+                                       q2.x - q1.x, q2.z - q1.z);
+
+            //( q1 - p1 ) * ( p2 - p1 )
+            float q1xp = CrossProduct(q1.x - p1.x, q1.z - p1.z,
+                                       p2.x - p1.x, p2.z - p1.z);
+            //( q2 - p1 ) * ( p2 - p1 )
+            float q2xp = CrossProduct(q2.x - p1.x, q2.z - p1.z,
+                                       p2.x - p1.x, p2.z - p1.z);
+
+            return ((p1xq * p2xq <= 0) && (q1xp * q2xp <= 0));
+        }
+
+        return false;
+    }
+
+    public Vector3 Horizontal(Vector3 v)
+    {
+        v.y = 0;
+        return v.normalized;
+    }
+    public void Horizontal(ref Vector3 v)
+    {
+        v.y = 0;
+        v.Normalize();
+    }
+
+    public Vector2 HorizontalRotateVetor2(Vector2 v, float degree, bool normalized = true)
+    {
+        degree = -degree;
+
+        float rad = degree * Mathf.Deg2Rad;
+        float sinA = Mathf.Sin(rad);
+        float cosA = Mathf.Cos(rad);
+
+        float x = v.x * cosA - v.y * sinA;
+        float y = v.x * sinA + v.y * cosA;
+
+        v.x = x;
+        v.y = y;
+        return normalized ? v.normalized : v;
+    }
+
+    public Vector3 HorizontalRotateVetor3(Vector3 v, float degree, bool normalized = true)
+    {
+        degree = -degree;
+
+        float rad = degree * Mathf.Deg2Rad;
+        float sinA = Mathf.Sin(rad);
+        float cosA = Mathf.Cos(rad);
+
+        float x = v.x * cosA - v.z * sinA;
+        float z = v.x * sinA + v.z * cosA;
+
+        v.x = x;
+        v.z = z;
+        return normalized ? v.normalized : v;
+    }
 }

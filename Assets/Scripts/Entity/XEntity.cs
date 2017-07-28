@@ -113,6 +113,7 @@ public abstract class XEntity : XObject
 
     protected virtual void OnUnintial() { }
 
+    public virtual void Update(float delta) { }
 
     private void CheckCondtion()
     {

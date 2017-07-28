@@ -8,6 +8,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 
     private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
     private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
+
+    public XPlayer player;
     
     private XEntity CreateEntity(XAttributes attr, bool autoAdd)
     {
@@ -58,12 +60,20 @@ public class XEntityMgr : XSingleton<XEntityMgr>
             _dic_entities[id].UnloadEntity();
         }
     }
+
+    public void Update(float delta)
+    {
+        var e = _hash_entitys.GetEnumerator();
+        while(e.MoveNext())
+        {
+            e.Current.Update(delta);
+        }
+    }
     
 
     public XRole CreateRole(XAttributes attr, bool autoAdd)
     {
-        XRole e = PrepareEntity<XRole>(attr, autoAdd);
-        return e;
+        return PrepareEntity<XRole>(attr, autoAdd);
     }
 
 
@@ -79,7 +89,17 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         return CreateRole(attr, false);
     }
 
-
+    public void CreatePlayer()
+    {
+        XAttributes attr = new XAttributes();
+        attr.id = 10001;
+        attr.Prefab = "Player";
+        attr.Name = "Archer";
+        attr.Type = EnitityType.Entity_Role;
+        attr.AppearPostion = Vector3.zero;
+        attr.AppearQuaternion = Quaternion.identity;
+        player = PrepareEntity<XPlayer>(attr, false);
+    }
 
 
 }

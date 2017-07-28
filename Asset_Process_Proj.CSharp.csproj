@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -129,6 +127,17 @@
     <Compile Include="Assets\Scripts\Table\FashionSuit.cs" />
     <Compile Include="Assets\Scripts\Table\XEntityPresentation.cs" />
     <Compile Include="Assets\Scripts\Test.cs" />
+    <Compile Include="Assets\Scripts\Walls\IXPlayerAction.cs" />
+    <Compile Include="Assets\Scripts\Walls\XCameraWall.cs" />
+    <Compile Include="Assets\Scripts\Walls\XCurve.cs" />
+    <Compile Include="Assets\Scripts\Walls\XCutsceneWall.cs" />
+    <Compile Include="Assets\Scripts\Walls\XCylinderTrigger.cs" />
+    <Compile Include="Assets\Scripts\Walls\XHorseWall.cs" />
+    <Compile Include="Assets\Scripts\Walls\XSpawnWall.cs" />
+    <Compile Include="Assets\Scripts\Walls\XTerminalWall.cs" />
+    <Compile Include="Assets\Scripts\Walls\XTransferWall.cs" />
+    <Compile Include="Assets\Scripts\Walls\XTrigger.cs" />
+    <Compile Include="Assets\Scripts\Walls\XWall.cs" />
     <Compile Include="Assets\Scripts\XCommon.cs" />
   </ItemGroup>
   <ItemGroup>

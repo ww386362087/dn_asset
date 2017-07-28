@@ -16,7 +16,9 @@ public class Main : MonoBehaviour
 
     void Update()
     {
+        float delta = Time.deltaTime;
         XResourceMgr.Update();
+        XEntityMgr.singleton.Update(delta);
     }
 
   
