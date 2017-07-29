@@ -126,7 +126,8 @@
     <Compile Include="Assets\Scripts\Table\FashionList.cs" />
     <Compile Include="Assets\Scripts\Table\FashionSuit.cs" />
     <Compile Include="Assets\Scripts\Table\XEntityPresentation.cs" />
-    <Compile Include="Assets\Scripts\Test.cs" />
+    <Compile Include="Assets\Scripts\Test\Test.cs" />
+    <Compile Include="Assets\Scripts\Test\TestCPP.cs" />
     <Compile Include="Assets\Scripts\Walls\IXPlayerAction.cs" />
     <Compile Include="Assets\Scripts\Walls\XCameraWall.cs" />
     <Compile Include="Assets\Scripts\Walls\XCurve.cs" />
