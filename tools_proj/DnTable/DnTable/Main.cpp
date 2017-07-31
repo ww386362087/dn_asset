@@ -1,6 +1,9 @@
+#pragma once
+
+
 #define EXPORT __declspec (dllexport)  
 
-char*  table_path="";
+char*  table_path;
 
 extern "C" bool EXPORT init(char* dir)
 {

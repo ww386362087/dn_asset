@@ -4,6 +4,11 @@
 
 **/tools_proj/XForm/WindowsFormsApplication1/bin/
 **/tools_proj/XForm/WindowsFormsApplication1/obj/
+**/tools_proj/DnTable/Debug/
+**/tools_proj/DnTable/DnTable/Debug/
+**/tools_proj/DnTable/DnTable/x64/
+**/tools_proj/DnTable/x64/
+
 **/[Ll]ibrary/
 **/[Tt]emp/
 **/[Oo]bj/
