@@ -1,0 +1,27 @@
+﻿生成启动时间为 2017/7/31 19:58:43。
+     1>项目“D:\projects\Asset_Process_Proj\tools_proj\DnTable\DnTable\DnTable.vcxproj”在节点 2 上(build 个目标)。
+     1>PrepareForBuild:
+         正在创建目录“D:\projects\Asset_Process_Proj\tools_proj\DNTable\Release\”。
+       InitializeBuildStatus:
+         正在创建“Release\DnTable.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D DNTABLE_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt LibTable.cpp Main.cpp
+         LibTable.cpp
+         Main.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\projects\Asset_Process_Proj\tools_proj\DNTable\Release\DnTable.dll" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\DnTable.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\projects\Asset_Process_Proj\tools_proj\DNTable\Release\DnTable.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\projects\Asset_Process_Proj\tools_proj\DNTable\Release\DnTable.lib" /MACHINE:X86 /DLL Release\LibTable.obj
+         Release\Main.obj
+            正在创建库 D:\projects\Asset_Process_Proj\tools_proj\DNTable\Release\DnTable.lib 和对象 D:\projects\Asset_Process_Proj\tools_proj\DNTable\Release\DnTable.exp
+         正在生成代码
+         已完成代码的生成
+         DnTable.vcxproj -> D:\projects\Asset_Process_Proj\tools_proj\DNTable\Release\DnTable.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\projects\Asset_Process_Proj\tools_proj\DNTable\Release\DnTable.dll;#2" /manifest Release\DnTable.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Release\DnTable.unsuccessfulbuild”。
+         正在对“Release\DnTable.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\projects\Asset_Process_Proj\tools_proj\DnTable\DnTable\DnTable.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.73
