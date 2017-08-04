@@ -1,0 +1,26 @@
+﻿生成启动时间为 2017/8/4 14:49:39。
+     1>项目“D:\projects\Asset_Process_Proj\tools_proj\DnTable\DnTable\DnTable.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在对“x64\Release\Table.unsuccessfulbuild”执行 Touch 任务。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D DNTABLE_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc100.pdb" /Gd /TP /errorReport:prompt CSVReader.cpp
+         CSVReader.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\projects\Asset_Process_Proj\tools_proj\DNTable\x64\Release\Table.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"x64\Release\Table.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\projects\Asset_Process_Proj\tools_proj\DNTable\x64\Release\Table.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\projects\Asset_Process_Proj\tools_proj\DNTable\x64\Release\Table.lib" /MACHINE:X64 /DLL x64\Release\EquipSuit.obj
+         x64\Release\LibTable.obj
+         x64\Release\Main.obj
+         x64\Release\CSVReader.obj
+            正在创建库 D:\projects\Asset_Process_Proj\tools_proj\DNTable\x64\Release\Table.lib 和对象 D:\projects\Asset_Process_Proj\tools_proj\DNTable\x64\Release\Table.exp
+         正在生成代码
+         已完成代码的生成
+         DnTable.vcxproj -> D:\projects\Asset_Process_Proj\tools_proj\DNTable\x64\Release\Table.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\projects\Asset_Process_Proj\tools_proj\DNTable\x64\Release\Table.dll;#2" /manifest x64\Release\Table.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“x64\Release\Table.unsuccessfulbuild”。
+         正在对“x64\Release\Table.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\projects\Asset_Process_Proj\tools_proj\DnTable\DnTable\DnTable.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.53

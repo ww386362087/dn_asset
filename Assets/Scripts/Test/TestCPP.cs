@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.Profiling;
+//using UnityEngine.Profiling;
 using XTable;
 
 
@@ -9,16 +9,16 @@ public class TestCPP : MonoBehaviour
     [DllImport("DnTable")]
     private static extern int add(int x, int y);
 
-  int i = add(5, 7);
+    int i = add(5, 7);
 
 
     void TStart()
     {
-       // Profiler.BeginSample("ForList");
+        // Profiler.BeginSample("ForList");
         XEntityPresentation tab = new XEntityPresentation();
         FashionSuit tab2 = new FashionSuit();
         DefaultEquip tab3 = new DefaultEquip();
-     //   Profiler.EndSample();
+        //   Profiler.EndSample();
     }
 
     void OnGUI()
@@ -27,6 +27,7 @@ public class TestCPP : MonoBehaviour
         {
             TStart();
         }
-       
+
     }
+
 }
