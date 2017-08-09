@@ -22,10 +22,10 @@ public abstract class XWall : MonoBehaviour
         _right = _box.center + _box.transform.position + half;
     }
 
-     void Update()
+    void Update()
     {
         XPlayer player = XEntityMgr.singleton.player;
-        if (player != null)
+        if (player != null && player.EntityObject != null)
         {
             Vector3 pos = player.EntityObject.transform.position;
             Vector3 last_pos = player.lastpos;
@@ -48,4 +48,6 @@ public abstract class XWall : MonoBehaviour
     }
 
     protected abstract void OnTriggered();
+
+
 }

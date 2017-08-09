@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using XTable;
 using System.Collections.Generic;
-using System;
+
 
 public class TestAB : ITest
 {
@@ -17,6 +17,13 @@ public class TestAB : ITest
 
 
     public void Start()
+    {
+        TestAvatar();
+        TestUIAB();
+    }
+
+
+    private void TestAvatar()
     {
         role = XEntityMgr.singleton.CreateTestRole();
         role.EntityObject.AddComponent<XRotation>();
@@ -48,12 +55,9 @@ public class TestAB : ITest
         XEntityPresentation.RowData xrow = p.GetItemID(archerid);
         role.GetComponent<XAnimComponent>().OverrideAnims(xrow);
         role.GetComponent<XEquipComponent>().EquipTest(m_FashionList[0]);
-
-        TestUIAB();
     }
 
-
-    public void TestUIAB()
+    private void TestUIAB()
     {
         GameObject o = XResourceMgr.Load<GameObject>("UI/Canvas2", AssetType.Prefab);
         Debug.Log("name: " + o.name);
