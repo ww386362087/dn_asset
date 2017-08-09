@@ -140,14 +140,7 @@ public abstract class XEntity : XObject
 
     public bool DetachComponent<T>() where T : XComponent, new()
     {
-        uint uid = XCommon.singleton.XHash(typeof(T).Name);
-        if (components != null && components.ContainsKey(uid))
-        {
-            components[uid].OnUninit();
-            components.Remove(uid);
-            return true;
-        }
-        return false;
+       return DetachComponent(typeof(T).Name);
     }
 
 
@@ -158,17 +151,59 @@ public abstract class XEntity : XObject
         return null;
     }
 
+    //lua interface
+    public object GetComponent(string name)
+    {
+        uint uid = XCommon.singleton.XHash(name);
+        if (components != null && components.ContainsKey(uid)) return components[uid];
+        return null;
+    }
+
+    //lua interface
+    public bool DetachComponent(string name)
+    {
+        uint uid = XCommon.singleton.XHash(name);
+        if (components != null && components.ContainsKey(uid))
+        {
+            components[uid].OnUninit();
+            components.Remove(uid);
+            return true;
+        }
+        return false;
+    }
+
 
     private void DetachAllComponents()
     {
         if (components != null)
         {
-            foreach (var item in components)
+            var e = components.GetEnumerator();
+            while(e.MoveNext())
             {
-                item.Value.OnUninit();
+                e.Current.Value.OnUninit();
             }
         }
         components.Clear();
     }
 
+
+    public void AttachHost()
+    {
+        OnAttachToHost();
+    }
+
+    public void DeatchHost()
+    {
+        OnDeatchToHost();
+    }
+
+
+    protected virtual void OnAttachToHost()
+    {
+    }
+
+
+    protected virtual void OnDeatchToHost()
+    {
+    }
 }

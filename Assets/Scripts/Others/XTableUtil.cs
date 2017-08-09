@@ -51,6 +51,18 @@
             return null;
         }
 
+        public static SceneList.RowData GetItemID(this SceneList input, uint id)
+        {
+            for (int i = 0, max = input.Table.Length; i < max; i++)
+            {
+                if (input.Table[i].SceneID == id)
+                {
+                    return input.Table[i];
+                }
+            }
+            return null;
+        }
+
 
     }
 

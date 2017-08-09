@@ -24,19 +24,6 @@ public class XObject
         Deprecated = true;
     }
 
-    /// <summary>
-    /// 登录进入
-    /// </summary>
-    protected virtual void OnAttachToHost()
-    {
-    }
-
-    /// <summary>
-    /// 退出登录
-    /// </summary>
-    protected virtual void OnDetachFromHost()
-    {
-    }
 
     /// <summary>
     /// 注册事件

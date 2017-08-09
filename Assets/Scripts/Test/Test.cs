@@ -187,13 +187,6 @@ public class Test : XSingleton<Test>
 
     }
 
-    [DllImport("TestDll")]
-    private static extern int add(int x, int y);
-
-
-    public void TestCPP()
-    {
-        Debug.Log("add: " + add(3, 6));
-    }
+    
 
 }

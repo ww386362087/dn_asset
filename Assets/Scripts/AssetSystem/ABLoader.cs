@@ -72,7 +72,7 @@ public class Loader : LoaderBase
         string file = Path.Combine(AssetBundlePathResolver.BundleCacheDir, bundleName + ".ab");
         AssetBundle bundle = AssetBundle.LoadFromFile(file);
         UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
-        bundle.Unload(false);
+       // bundle.Unload(false);
         return obj;
     }
 
@@ -84,7 +84,7 @@ public class Loader : LoaderBase
         string file = AssetBundlePathResolver.GetBundleSourceFile(bundleName + ".ab", false);
         AssetBundle bundle = AssetBundle.LoadFromFile(file);
         UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
-        bundle.Unload(false);
+    //    bundle.Unload(false);
         return obj;
     }
 }

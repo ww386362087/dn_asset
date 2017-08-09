@@ -133,7 +133,7 @@ namespace XForm
                 else if (rows.Length != tps.Length ||
                 rows.Length != titles.Length)
                 {
-                    attachmsg = "字段不等长 内容：" + rows.Length + " tpye:" + tps.Length;
+                    attachmsg = "字段不等长 内容：" + rows.Length + " tpye:" + tps.Length+"\n"+line;
                     throw new Exception("非法的表格:" + file.Name + " " + attachmsg);
                 }
 

@@ -15,7 +15,10 @@ public abstract class XSingleton<T> : XBaseSingleton where T : new()
 {
     protected XSingleton()
     {
-        if (null != _instance) { throw new Exception(_instance.ToString() + @" can not be created again."); }
+        if (null != _instance)
+        {
+            throw new Exception(_instance.ToString() + @" can not be created again.");
+        }
     }
 
     private static readonly T _instance = new T();
@@ -55,12 +58,8 @@ public class XCommon : XSingleton<XCommon>
         get { return DateTime.Now.Ticks + New_id; }
     }
 
-    public StringBuilder shareSB = new StringBuilder();
-
     public static List<Renderer> tmpRender = new List<Renderer>();
-    public static List<ParticleSystem> tmpParticle = new List<ParticleSystem>();
-    public static List<SkinnedMeshRenderer> tmpSkinRender = new List<SkinnedMeshRenderer>();
-    public static List<MeshRenderer> tmpMeshRender = new List<MeshRenderer>();
+
     public uint XHash(string str)
     {
         if (str == null) return 0;
@@ -70,9 +69,9 @@ public class XCommon : XSingleton<XCommon>
         {
             hash = (hash << _idx) + hash + str[i];
         }
-
         return hash;
     }
+
     public uint XHashLower(string str)
     {
         if (str == null) return 0;
@@ -83,9 +82,9 @@ public class XCommon : XSingleton<XCommon>
             char c = char.ToLower(str[i]);
             hash = (hash << _idx) + hash + c;
         }
-
         return hash;
     }
+
     public uint XHash(StringBuilder str)
     {
         if (str == null) return 0;
@@ -95,7 +94,6 @@ public class XCommon : XSingleton<XCommon>
         {
             hash = (hash << _idx) + hash + str[i];
         }
-
         return hash;
     }
 
@@ -109,11 +107,19 @@ public class XCommon : XSingleton<XCommon>
 #endif
     }
 
+
+    /// <summary>
+    /// 叉积
+    /// </summary>
     private float CrossProduct(float x1, float z1, float x2, float z2)
     {
         return x1 * z2 - x2 * z1;
     }
 
+
+    /// <summary>
+    /// 线段是否相交 叉积运算
+    /// </summary>
     public bool IsLineSegmentCross(Vector3 p1, Vector3 p2, Vector3 q1, Vector3 q2)
     {
         //fast detect
@@ -147,6 +153,8 @@ public class XCommon : XSingleton<XCommon>
         v.y = 0;
         return v.normalized;
     }
+
+
     public void Horizontal(ref Vector3 v)
     {
         v.y = 0;
@@ -184,4 +192,25 @@ public class XCommon : XSingleton<XCommon>
         v.z = z;
         return normalized ? v.normalized : v;
     }
+
+
+    /// <summary>
+    /// 顺时针旋转 - 第一象限 - x-z平面
+    /// </summary>
+    public bool Clockwise(Vector3 fiduciary, Vector3 relativity)
+    {
+        float r = fiduciary.z * relativity.x - fiduciary.x * relativity.z;
+        return r > 0;
+    }
+
+
+    /// <summary>
+    /// 顺时针旋转 - 第一象限
+    /// </summary>
+    public bool Clockwise(Vector2 fiduciary, Vector2 relativity)
+    {
+        float r = fiduciary.y * relativity.x - fiduciary.x * relativity.y;
+        return r > 0;
+    }
+
 }

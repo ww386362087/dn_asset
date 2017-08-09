@@ -3,15 +3,15 @@
 
 public class Main : MonoBehaviour
 {
-    
 
+    private uint sceneid = 401;
 
     void Start()
     {
         ABManager.singleton.Init(this);
-        
-        Test.singleton.Initial();
- 
+        Documents.singleton.Initial();
+        XScene.singleton.EnterScene(sceneid);
+        TestManager.Get().Start();
     }
 
     void Update()
@@ -19,13 +19,19 @@ public class Main : MonoBehaviour
         float delta = Time.deltaTime;
         XResourceMgr.Update();
         XEntityMgr.singleton.Update(delta);
+        TestManager.Get().Update();
     }
 
-  
+
+    void LateUpdate()
+    {
+        XEntityMgr.singleton.PostUpdate();
+    }
+
     void OnGUI()
     {
-        Test.singleton.GUI();
+        TestManager.Get().OnGUI();
     }
 
-    
+
 }
