@@ -5,11 +5,12 @@ public class DlgBehaviourBase : MonoBehaviour
 {
 
     public int ChildCnt = 0;
-
+    public RectTransform rect;
     protected Transform[] _objs;
 
     void Awake()
     {
+        rect = transform.GetComponent<RectTransform>();
         _objs = transform.GetComponentsInChildren<Transform>(true);
         ChildCnt = _objs.Length;
         OnInitial();

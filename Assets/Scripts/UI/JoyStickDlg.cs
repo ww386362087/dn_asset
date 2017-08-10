@@ -4,7 +4,13 @@ using UnityEngine;
 public class JoyStickDlg : UIDlg<JoyStickDlg, JoyyouStickBahaviour>
 {
 
-    
+    private Vector3 dir_pos = Vector3.zero;
+
+    public override DlgType type
+    {
+        get { return DlgType.Fixed; }
+    }
+
     public override string fileName
     {
         get { return "UI/JoyStick"; }
@@ -18,10 +24,11 @@ public class JoyStickDlg : UIDlg<JoyStickDlg, JoyyouStickBahaviour>
 
     public void Show(bool show, Vector2 screenpos)
     {
+        
         if (show)
         {
             if (!IsVisible()) SetVisible(true);
-            uiBehaviour.transform.localPosition = screenpos;
+            uiBehaviour.rect.anchoredPosition = screenpos;
         }
         else
         {
@@ -43,9 +50,28 @@ public class JoyStickDlg : UIDlg<JoyStickDlg, JoyyouStickBahaviour>
     }
 
 
-    private void SetOffsetPos(Vector3 pos)
+    public void SetOffsetPos(float radius,float angle)
     {
-        uiBehaviour.m_sprSir.transform.localPosition = pos;
+        float max_radius = GetMaxRadius();
+        
+        float r = (radius > max_radius) ? max_radius : radius;
+        float a = angle / 180 * Mathf.PI;
+        float x = Mathf.Cos(a) * r;
+        float y = -Mathf.Sin(a) * r;
+        dir_pos.x = x;
+        dir_pos.y = y;
+        uiBehaviour.m_sprSir.rectTransform.anchoredPosition =  dir_pos;
     }
 
+
+    private float GetMaxRadius()
+    {
+        if(IsVisible())
+        {
+            float w1 = uiBehaviour.m_sprBg.preferredWidth / 2;
+            float w2 = uiBehaviour.m_sprSir.preferredWidth / 2;
+            return w1 + w2;
+        }
+        return 100;
+    }
 }

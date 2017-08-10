@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 internal class XTouch : XSingleton<XTouch>
 {
@@ -10,14 +8,16 @@ internal class XTouch : XSingleton<XTouch>
 
     public static bool PointOnUI(Vector3 point)
     {
-        //RaycastHit hitinfo;
-        //Ray uiRay = XGameUI.singleton.UICamera.ScreenPointToRay(point);
-        //if (Physics.Raycast(uiRay, out hitinfo, Mathf.Infinity, 1 << 5))
-        //{
-        //    return !hitinfo.collider.CompareTag("ChatUI");
-        //}
-        //else
-        return false;
+        RaycastHit hitinfo;
+        Ray uiRay = UIManager.singleton.UiCamera.ScreenPointToRay(point);
+        if (Physics.Raycast(uiRay, out hitinfo, Mathf.Infinity, 1 << 5))
+        {
+            return !hitinfo.collider.CompareTag("ChatUI");
+        }
+        else
+        {
+            return false;
+        }
     }
 
 
@@ -28,7 +28,7 @@ internal class XTouch : XSingleton<XTouch>
     }
 
 
-    public void Update()
+    public void Update(float deltaTime)
     {
         UpdateTouch();
     }
@@ -38,10 +38,23 @@ internal class XTouch : XSingleton<XTouch>
     private void UpdateTouch()
     {
         int max = Mathf.Min(Input.touchCount, MaxTouchCount);
+        //real touch always updated first
         for (int i = 0; i < max; i++)
         {
             _touch.Fake = false;
             _touch.touch = Input.GetTouch(i);
+            HandleTouch(_touch);
+        }
+
+
+        if (XKeyboard.singleton.Enabled)
+        {
+            XKeyboard.singleton.Update();
+            max = XKeyboard.singleton.touchCount;
+            for (int i = 0; i < max; i++)
+            {
+                HandleTouch(XKeyboard.singleton.GetTouch(i));
+            }
         }
     }
 
@@ -70,8 +83,7 @@ internal class XTouch : XSingleton<XTouch>
                     break;
             }
         }
-
-
+        
         XVirtualTab.singleton.Feed(touch);
         XGesture.singleton.Feed(touch);
     }

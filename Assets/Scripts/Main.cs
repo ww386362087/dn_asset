@@ -19,6 +19,7 @@ public class Main : MonoBehaviour
         float delta = Time.deltaTime;
         XResourceMgr.Update();
         XEntityMgr.singleton.Update(delta);
+        XTouch.singleton.Update(delta);
         TestManager.Get().Update();
     }
 

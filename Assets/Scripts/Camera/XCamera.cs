@@ -37,6 +37,7 @@ public class XCamera
     public void Initial(GameObject camera)
     {
         _cameraObject = camera;
+        _cameraTransform = camera.transform;
 
         if (null != _cameraObject)
         {

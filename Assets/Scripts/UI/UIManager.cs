@@ -46,11 +46,11 @@ public class UIManager : XSingleton<UIManager>
 
     private void LoadRoot()
     {
-        GameObject go = XResourceMgr.Load<GameObject>("UI/UIRoot", AssetType.Prefab);
+        Object obj = XResourceMgr.Load<GameObject>("UI/UIRoot", AssetType.Prefab);
+        GameObject go = GameObject.Instantiate(obj) as GameObject;
         GameObject.DontDestroyOnLoad(go);
         _uiCamera = go.GetComponent<Camera>();
         _canvas = go.transform.GetChild(0).GetComponent<Canvas>();
-        Debug.Log("camera：" + _uiCamera.name + " canvas:" + _canvas.name);
     }
 
     private bool Exist(IUIDlg dlg)
@@ -81,6 +81,7 @@ public class UIManager : XSingleton<UIManager>
     {
         if (!Exist(dlg))
         {
+            if (m_recycle == null) m_recycle = new Dictionary<uint, IUIDlg>();
             if (m_recycle.ContainsKey(dlg.id))
             {
                 m_recycle.Remove(dlg.id);
@@ -90,8 +91,11 @@ public class UIManager : XSingleton<UIManager>
             {
                 Object o = XResourceMgr.Load<GameObject>(dlg.fileName, AssetType.Prefab);
                 GameObject go = GameObject.Instantiate(o) as GameObject;
-                DlgBehaviourBase behav = go.AddComponent<DlgBehaviourBase>();
-                dlg.SetBehaviour(behav);
+                go.transform.parent = _canvas.transform;
+                go.transform.localPosition = Vector3.zero;
+                go.transform.localRotation = Quaternion.identity;
+                go.transform.localScale = Vector3.one;
+                dlg.SetBehaviour(go);
                 dlg.OnLoad();
             }
             if (dlg.pushStack)

@@ -1,9 +1,12 @@
 ﻿
+using UnityEngine;
+
 public enum DlgType
 {
     Stack,   //入栈的 
     Top,     //最前的 提示框 跑马灯等
-    Surface  //贴在栈顶ui表面 放在栈顶 但可以被其他UI覆盖 如聊天 需要自己管理
+    Surface,  //贴在栈顶ui表面 放在栈顶 但可以被其他UI覆盖 如聊天 需要自己管理
+    Fixed     //固定层级的 depth只由prefab上的设定决定
 }
 
 public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
@@ -16,7 +19,7 @@ public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
     private static object s_objLock = new object();
 
 
-    private TBehaviour _uibehaviour;
+    private DlgBehaviourBase _uibehaviour;
     private bool _show = false;
     private bool _load = false;
     private uint _id = 0;
@@ -65,7 +68,7 @@ public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
 
     public TBehaviour uiBehaviour
     {
-        get { return _uibehaviour; }
+        get { return _uibehaviour as TBehaviour; }
     }
 
     public DlgBehaviourBase innerBehaviour
@@ -120,10 +123,10 @@ public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
     }
 
 
-    public void SetBehaviour(DlgBehaviourBase _behaviour)
+    public void SetBehaviour(GameObject _go)
     {
-        _uibehaviour = _behaviour as TBehaviour;
-        _uibehaviour.gameObject.SetActive(true);
+        _uibehaviour = _go.AddComponent<TBehaviour>();
+        _go.SetActive(true);
         OnLoad();
     }
 

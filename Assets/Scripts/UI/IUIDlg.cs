@@ -1,4 +1,6 @@
-﻿public interface IUIDlg
+﻿using UnityEngine;
+
+public interface IUIDlg
 {
 
 	uint id { get; }
@@ -25,5 +27,5 @@
 
     void SetVisible(bool visble);
 
-    void SetBehaviour(DlgBehaviourBase _behaviour);
+    void SetBehaviour(GameObject _go);
 }

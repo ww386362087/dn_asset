@@ -33,6 +33,8 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
 
     public Vector3 Direction { get { return _direction; } }
 
+    public float MaxDistance { get { return _max_distance; } }
+
     public void Feed(XTouchItem touch)
     {
         if (!_bFreeze && ((_finger_id == -1 && touch.FingerId != XGesture.singleton.FingerId) || _finger_id == touch.FingerId))
@@ -133,8 +135,7 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
         _direction = XCommon.singleton.HorizontalRotateVetor3(forward, bClockwise ? angle : -angle);
 
         JoyStickDlg.singleton.Show(true, _center);
-        //VirtualJoystick.singleton.ShowPanel(true, _center);
-        //VirtualJoystick.singleton.SetJoystickPos(radius, (bClockwise ? angle : 360.0f - angle) - 90);
+        JoyStickDlg.singleton.SetOffsetPos(radius, (bClockwise ? angle : 360.0f - angle) - 90);
     }
 
     private void TabCulling()

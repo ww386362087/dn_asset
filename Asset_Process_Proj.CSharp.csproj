@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\Event\XEventMgr.cs" />
     <Compile Include="Assets\Scripts\Input\XFakeTouchItem.cs" />
     <Compile Include="Assets\Scripts\Input\XGesture.cs" />
+    <Compile Include="Assets\Scripts\Input\XKeyBoard.cs" />
     <Compile Include="Assets\Scripts\Input\XTouch.cs" />
     <Compile Include="Assets\Scripts\Input\XTouchItem.cs" />
     <Compile Include="Assets\Scripts\Input\XVirtualTab.cs" />
@@ -150,7 +151,6 @@
     <Compile Include="Assets\Scripts\Table\SceneList.cs" />
     <Compile Include="Assets\Scripts\Table\XEntityPresentation.cs" />
     <Compile Include="Assets\Scripts\Test\ITest.cs" />
-    <Compile Include="Assets\Scripts\Test\Test.cs" />
     <Compile Include="Assets\Scripts\Test\TestAB.cs" />
     <Compile Include="Assets\Scripts\Test\TestCPP.cs" />
     <Compile Include="Assets\Scripts\Test\TestScene.cs" />
