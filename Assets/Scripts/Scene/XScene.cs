@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 internal class XScene : XSingleton<XScene>
 {
@@ -29,6 +27,10 @@ internal class XScene : XSingleton<XScene>
 
     public void EnterScene(uint sceneid)
     {
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+
+        GameCamera.Initial(camera);
+
         Documents.singleton.OnEnterScene();
     }
 

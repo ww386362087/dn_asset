@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 13e192dc42944004896f4a18cb870ce9
-timeCreated: 1500381935
+guid: 2468fc4ae97f30d4b9f225c948dccff7
+timeCreated: 1502277628
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,24 +34,24 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaUsage: 0
-  alphaIsTransparency: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 256
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -59,7 +59,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 256
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -67,7 +67,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: iPhone
-    maxTextureSize: 2048
+    maxTextureSize: 256
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -75,7 +75,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 256
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50

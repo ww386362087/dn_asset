@@ -12,6 +12,7 @@ public class TestScene : ITest
     public void Start()
     {
         CreatePlayer();
+        XScene.singleton.EnterScene(sceneid);
     }
 
     public void OnGUI() { }
@@ -47,5 +48,8 @@ public class TestScene : ITest
         player.GetComponent<XAnimComponent>().OverrideAnims(xrow);
     }
 
+
+
+    
     
 }

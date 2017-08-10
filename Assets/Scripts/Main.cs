@@ -10,7 +10,7 @@ public class Main : MonoBehaviour
     {
         ABManager.singleton.Init(this);
         Documents.singleton.Initial();
-        XScene.singleton.EnterScene(sceneid);
+        UIManager.singleton.Initial();
         TestManager.Get().Start();
     }
 

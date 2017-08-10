@@ -9,41 +9,21 @@ public abstract class XDoc : XObject
 
     public virtual uint ID { get { return XCommon.singleton.XHash(_name); } }
 
- 
-    public void Init() { OnInitial(); }
+    public virtual void OnInitial() { }
 
-    public void UnInit() { OnInitial(); }
+    public virtual void OnUninitial() { }
 
-    public void EnterScene() { OnEnterScene(); }
-
-    public void EnterSceneFinally() { OnEnterSceneFinally(); }
-
-    public void LeaveScene() { OnLeaveScene(); }
-
-    public void AttachHost() { OnAttachToHost(); }
-
-    public void DeatchHost() { OnDeatchToHost(); }
-
-    public void Reconnect() { OnReconnected(); }
-
-    public void Update() { OnUpdate(); }
-
-    protected virtual void OnInitial() { }
-
-    protected virtual void OnUninitial() { }
-
-    protected abstract void OnReconnected();
+    public abstract void OnReconnected();
     
-    protected virtual void OnEnterSceneFinally() { }
+    public virtual void OnEnterSceneFinally() { }
 
-    protected virtual void OnEnterScene() { }
+    public virtual void OnEnterScene() { }
+    
+    public virtual void OnLeaveScene() { }
 
+    public virtual void OnAttachToHost() { }
 
-    protected virtual void OnLeaveScene() { }
+    public virtual void OnDeatchToHost() { }
 
-    protected virtual void OnAttachToHost() { }
-
-    protected virtual void OnDeatchToHost() { }
-
-    protected virtual void OnUpdate() { }
+    public virtual void OnUpdate() { }
 }

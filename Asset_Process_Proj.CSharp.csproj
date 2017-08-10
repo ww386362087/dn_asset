@@ -154,6 +154,12 @@
     <Compile Include="Assets\Scripts\Test\TestAB.cs" />
     <Compile Include="Assets\Scripts\Test\TestCPP.cs" />
     <Compile Include="Assets\Scripts\Test\TestScene.cs" />
+    <Compile Include="Assets\Scripts\UI\DlgBehaviourBase.cs" />
+    <Compile Include="Assets\Scripts\UI\IUIDlg.cs" />
+    <Compile Include="Assets\Scripts\UI\JoyStickDlg.cs" />
+    <Compile Include="Assets\Scripts\UI\JoyyouStickBahaviour.cs" />
+    <Compile Include="Assets\Scripts\UI\UIDlg.cs" />
+    <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\XCommon.cs" />
   </ItemGroup>
   <ItemGroup>

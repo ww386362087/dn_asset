@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2339987734
+CRC: 2968002986
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bbec18a6e83b9869b76a36598651f59f
+    Hash: 9be0d408cecfc99cdc49a360057ce6a2
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 189ea49457fee455dd67458895b48280
+    Hash: e9562d4e2cf1fec3a430af731953d128
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,13 +25,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 212
   Script: {instanceID: 0}
-- Class: 213
-  Script: {instanceID: 0}
 - Class: 223
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/UI/Canvas1.prefab
-Dependencies:
-- D:/projects/asset_process_proj/Assets/StreamingAssets/update/AssetBundles/3507469817.ab
+Dependencies: []

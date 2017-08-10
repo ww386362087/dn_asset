@@ -15,16 +15,15 @@ public class TestCPP : ITest
     void TStart()
     {
         Profiler.BeginSample("ForList");
-        XEntityPresentation tab = new XEntityPresentation();
-        FashionSuit tab2 = new FashionSuit();
-        DefaultEquip tab3 = new DefaultEquip();
+        new XEntityPresentation();
+        new FashionSuit();
+        new DefaultEquip();
         Profiler.EndSample();
     }
 
 
     public void Start()
     {
-
     }
 
 

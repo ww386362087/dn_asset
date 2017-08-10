@@ -190,8 +190,6 @@ public class TestAB : ITest
         t.GetComponent<MeshFilter>().mesh = mesh;
 
     }
-
-  
-
+    
     public void Update() { }
 }

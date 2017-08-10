@@ -42,8 +42,16 @@ public class XCamera
         {
             _camera = _cameraObject.GetComponent<Camera>();
             _camera.enabled = true;
-
             _field_of_view = _camera.fieldOfView;
+
+
+            XPlayer player = XEntityMgr.singleton.player;
+
+            if (player != null && player.EntityObject != null)
+            {
+                _cameraObject.transform.rotation = player.EntityObject.transform.rotation;
+                _cameraObject.transform.position = player.EntityObject.transform.position + new Vector3(-1, 1, 1);
+            }
         }
     }
 

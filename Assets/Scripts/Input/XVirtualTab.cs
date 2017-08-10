@@ -67,7 +67,6 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
                     {
                         _bTouch = true;
                         _center = touch.Position;
-
                         _finger_id = touch.FingerId;
                     }
                 }
@@ -82,11 +81,10 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
         {
             _bTouch = false;
             _bFeeding = false;
-
             _center = Vector2.zero;
             _finger_id = -1;
 
-     //       VirtualJoystick.singleton.ShowPanel(false);
+            JoyStickDlg.singleton.Hide();
         }
     }
 
@@ -134,6 +132,7 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
 
         _direction = XCommon.singleton.HorizontalRotateVetor3(forward, bClockwise ? angle : -angle);
 
+        JoyStickDlg.singleton.Show(true, _center);
         //VirtualJoystick.singleton.ShowPanel(true, _center);
         //VirtualJoystick.singleton.SetJoystickPos(radius, (bClockwise ? angle : 360.0f - angle) - 90);
     }

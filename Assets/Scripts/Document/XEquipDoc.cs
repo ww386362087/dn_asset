@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class XEquipDoc : XDoc
+﻿public class XEquipDoc : XDoc
 {
     
-    protected override void OnReconnected()
+    public override void OnReconnected()
     {
        // throw new NotImplementedException();
     }

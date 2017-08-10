@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4051715511
+CRC: 3696473786
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 212b141a8212387e0f3dade27974a637
+    Hash: 0644b7989f7884599efd79325ce00e65
   TypeTreeHash:
     serializedVersion: 2
     Hash: 189ea49457fee455dd67458895b48280
@@ -34,5 +34,4 @@ ClassTypes:
 Assets:
 - Assets/Resources/UI/Canvas12.prefab
 Dependencies:
-- D:/projects/asset_process_proj/Assets/StreamingAssets/update/AssetBundles/3507469817.ab
 - D:/projects/asset_process_proj/Assets/StreamingAssets/update/AssetBundles/3508662206.ab

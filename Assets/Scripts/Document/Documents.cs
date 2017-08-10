@@ -26,7 +26,7 @@ public class Documents : XSingleton<Documents>
             var e = documents.GetEnumerator();
             while (e.MoveNext())
             {
-                e.Current.Value.UnInit();
+                e.Current.Value.OnUninitial();
             }
             documents.Clear();
         }
@@ -45,7 +45,7 @@ public class Documents : XSingleton<Documents>
         else
         {
             T doc = new T();
-            doc.Init();
+            doc.OnInitial();
             documents.Add(uid, doc);
             return doc;
         }
@@ -101,7 +101,7 @@ public class Documents : XSingleton<Documents>
             var e = documents.GetEnumerator();
             while (e.MoveNext())
             {
-                e.Current.Value.EnterScene();
+                e.Current.Value.OnEnterScene();
             }
         }
     }
@@ -113,7 +113,7 @@ public class Documents : XSingleton<Documents>
             var e = documents.GetEnumerator();
             while (e.MoveNext())
             {
-                e.Current.Value.EnterSceneFinally();
+                e.Current.Value.OnEnterSceneFinally();
             }
         }
     }
@@ -126,7 +126,7 @@ public class Documents : XSingleton<Documents>
             var e = documents.GetEnumerator();
             while (e.MoveNext())
             {
-                e.Current.Value.LeaveScene();
+                e.Current.Value.OnLeaveScene();
             }
         }
     }
@@ -138,7 +138,7 @@ public class Documents : XSingleton<Documents>
             var e = documents.GetEnumerator();
             while(e.MoveNext())
             {
-                e.Current.Value.AttachHost();
+                e.Current.Value.OnAttachToHost();
             }
         }
     }
@@ -150,7 +150,7 @@ public class Documents : XSingleton<Documents>
             var e = documents.GetEnumerator();
             while (e.MoveNext())
             {
-                e.Current.Value.DeatchHost();
+                e.Current.Value.OnDeatchToHost();
             }
         }
     }
@@ -162,7 +162,7 @@ public class Documents : XSingleton<Documents>
             var e = documents.GetEnumerator();
             while(e.MoveNext())
             {
-                e.Current.Value.Reconnect();
+                e.Current.Value.OnReconnected();
             }
         }
     }
@@ -174,7 +174,7 @@ public class Documents : XSingleton<Documents>
             var e = documents.GetEnumerator();
             while(e.MoveNext())
             {
-                e.Current.Value.Update();
+                e.Current.Value.OnUpdate();
             }
         }
     }
