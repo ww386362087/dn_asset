@@ -11,6 +11,11 @@ public class JoyStickDlg : UIDlg<JoyStickDlg, JoyyouStickBahaviour>
         get { return DlgType.Fixed; }
     }
 
+    public override bool shareCanvas
+    {
+        get { return true; }
+    }
+
     public override string fileName
     {
         get { return "UI/JoyStick"; }

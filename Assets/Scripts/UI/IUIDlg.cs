@@ -9,6 +9,8 @@ public interface IUIDlg
 
     string fileName { get; }
 
+    bool shareCanvas { get; }
+
     DlgBehaviourBase innerBehaviour { get; }
 
     DlgType type { get; }

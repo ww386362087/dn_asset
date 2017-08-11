@@ -91,7 +91,12 @@ public class UIManager : XSingleton<UIManager>
             {
                 Object o = XResourceMgr.Load<GameObject>(dlg.fileName, AssetType.Prefab);
                 GameObject go = GameObject.Instantiate(o) as GameObject;
-                go.transform.parent = _canvas.transform;
+                go.transform.parent = dlg.shareCanvas ? _canvas.transform : _uiCamera.transform;
+                if (!dlg.shareCanvas)
+                {
+                    Canvas cans = go.GetComponent<Canvas>();
+                    if (cans != null) cans.worldCamera = _uiCamera;
+                }
                 go.transform.localPosition = Vector3.zero;
                 go.transform.localRotation = Quaternion.identity;
                 go.transform.localScale = Vector3.one;
@@ -197,8 +202,26 @@ public class UIManager : XSingleton<UIManager>
     }
 
 
-    public void OnEnterScene()
+    /// <summary>
+    /// 切换场景或者退出登录的时候调用
+    /// </summary>
+    public void UnloadAll()
     {
-        _sort = 0;
+        if (m_list != null)
+        {
+            var e = m_list.GetEnumerator();
+            while (e.MoveNext())
+            {
+                DestroyDlg(e.Current);
+            }
+            m_list.Clear();
+
+            var e2 = m_stack.GetEnumerator();
+            while (e2.MoveNext())
+            {
+                DestroyDlg(e2.Current);
+            }
+            m_stack.Clear();
+        }
     }
 }

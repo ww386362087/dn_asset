@@ -86,6 +86,10 @@ public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
         get { return DlgType.Stack; }
     }
 
+    public virtual bool shareCanvas
+    { get { return false; } }
+
+
     public virtual void OnLoad()
     {
         _load = true;

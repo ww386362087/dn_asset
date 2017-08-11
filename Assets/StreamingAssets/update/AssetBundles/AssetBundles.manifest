@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1074263782
+CRC: 2419556441
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -17,5 +17,11 @@ AssetBundleManifest:
       Dependencies:
         Dependency_0: 3508662206.ab
     Info_4:
+      Name: 3363197988.ab
+      Dependencies: {}
+    Info_5:
+      Name: 784396374.ab
+      Dependencies: {}
+    Info_6:
       Name: 3508662206.ab
       Dependencies: {}

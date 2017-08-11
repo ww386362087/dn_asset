@@ -59,12 +59,10 @@ public class TestAB : ITest
 
     private void TestUIAB()
     {
-        GameObject o = XResourceMgr.Load<GameObject>("UI/Canvas2", AssetType.Prefab);
-        Debug.Log("name: " + o.name);
-        GameObject go = MonoBehaviour.Instantiate(o) as GameObject;
-        go.transform.localPosition = Vector3.zero;
-        go.transform.localScale = Vector3.one;
-        go.transform.localRotation = Quaternion.identity;
+        CanvasDlg.singleton.SetVisible(true);
+        Debug.Log("depth: " + UIManager.singleton.UiCamera.depth);
+        UIManager.singleton.UiCamera.depth = -2;
+        Debug.Log("depth2: " + UIManager.singleton.UiCamera.depth);
     }
 
     int space = 30;
