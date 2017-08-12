@@ -119,15 +119,11 @@ internal class XGesture : XSingleton<XGesture>
 
     private bool OneUpUpdate(XTouchItem touch)
     {
-        if (touch.FingerId == XTouch.mouseFingerID || touch.FingerId == XTouch.keyboardFinderID)
-        {
-            _touchpos = touch.Position;
-            return true;
-        }
+        if (touch.FingerId != XTouch.mouseFingerID && touch.FingerId != XTouch.keyboardFinderID) return false;
+
         if (touch.Phase == TouchPhase.Began)
         {
-            if (!Application.isMobilePlatform && touch.FingerId == XTouch.keyboardFinderID)
-                return false;
+            if (!Application.isMobilePlatform && touch.FingerId == XTouch.keyboardFinderID) return false;
 
             //only process mouse point but keyboard for Editor Mode
             _touchpos = touch.Position;
@@ -141,10 +137,8 @@ internal class XGesture : XSingleton<XGesture>
                 Vector2 delta;
                 delta.x = _touchpos.x - touch.Position.x;
                 delta.y = _touchpos.y - touch.Position.y;
-
-                float dist = Mathf.Sqrt(Mathf.Pow(delta.x, 2) + Mathf.Pow(delta.y, 2));
-
-                if (dist < _dead_zone)
+                
+                if (delta.magnitude < _dead_zone)
                 {
                     _touchpos = touch.Position;
                     return true;
@@ -157,25 +151,20 @@ internal class XGesture : XSingleton<XGesture>
 
     private bool SwypeUpdate(XTouchItem touch)
     {
-        TouchPhase phase = touch.Phase;
-
-        if (phase == TouchPhase.Moved)
+        if (touch.Phase == TouchPhase.Moved)
         {
             _end = touch.Position;
             Vector2 delta = _end - _swype_start;
 
             float endAt = Time.time;
-            _swype_dis = Vector2.Distance(delta,Vector2.zero);// Mathf.Sqrt(Mathf.Pow(delta.x, 2) + Mathf.Pow(delta.y, 2));
+            _swype_dis = delta.magnitude;
 
             if (_swype_dis > _dead_zone)
             {
-                
                 _swype_start = _end;
-
                 _swypedir.x = delta.x;
                 _swypedir.y = 0;
                 _swypedir.z = delta.y;
-
                 _swypedir.Normalize();
                 _gesturepos = _end;
                 return true;
