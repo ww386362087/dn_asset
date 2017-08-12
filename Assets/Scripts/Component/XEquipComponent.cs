@@ -4,6 +4,10 @@ using XTable;
 
 public class XEquipComponent : XComponent
 {
+    private FashionSuit fashionSuit = new FashionSuit();
+    private EquipSuit equipSuit = new EquipSuit();
+    private List<EquipPart> m_FashionList = null;
+    private List<EquipPart> m_EquipList = null;
 
     private CombineMeshTask _combineMeshTask = null;
    
@@ -17,10 +21,34 @@ public class XEquipComponent : XComponent
     {
         base.OnInitial(e);
 
+        //时装
+        TempEquipSuit fashions = new TempEquipSuit();
+        m_FashionList = new List<EquipPart>();
+        for (int i = 0; i < fashionSuit.Table.Length; ++i)
+        {
+            FashionSuit.RowData row = fashionSuit.Table[i];
+            if (row.FashionID != null)
+            {
+                XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
+            }
+        }
+
+        //装备
+        m_EquipList = new List<EquipPart>();
+        for (int i = 0; i < equipSuit.Table.Length; ++i)
+        {
+            EquipSuit.RowData row = equipSuit.Table[i];
+            if (row.EquipID != null)
+                XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
+        }
+
+
         Transform skinmesh = e.EntityObject.transform;
         SkinnedMeshRenderer skm = skinmesh.GetComponent<SkinnedMeshRenderer>();
         if (skm == null) skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         _combineMeshTask.skin = skm;
+
+        EquipTest(m_FashionList[0]);
     }
 
 
@@ -43,7 +71,6 @@ public class XEquipComponent : XComponent
             fpi.equipName = path;
             fashionList.Add(fpi);
         }
-
         EquipAll(fashionList.ToArray());
     }
 

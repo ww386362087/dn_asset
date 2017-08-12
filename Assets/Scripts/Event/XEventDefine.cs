@@ -77,15 +77,8 @@ public class XMoveEventArgs : XEventArgs
 
         Destination = Vector3.zero;
         Speed = 0;
-
-        Inertia = false;
-        Stoppage = true;
-        StopTowards = 0;
     }
 
     public Vector3 Destination = Vector3.zero;
     public float Speed = 0;
-    public bool Inertia = false;
-    public bool Stoppage = true;
-    public float StopTowards = 0;
 }

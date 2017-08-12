@@ -48,21 +48,12 @@ public class TestAB : ITest
             if (row.EquipID != null)
                 XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
         }
-
-        //动作
-        uint archerid = 2;
-        XEntityPresentation p = new XEntityPresentation();
-        XEntityPresentation.RowData xrow = p.GetItemID(archerid);
-        role.GetComponent<XAnimComponent>().OverrideAnims(xrow);
-        role.GetComponent<XEquipComponent>().EquipTest(m_FashionList[0]);
     }
 
     private void TestUIAB()
     {
         CanvasDlg.singleton.SetVisible(true);
-        Debug.Log("depth: " + UIManager.singleton.UiCamera.depth);
         UIManager.singleton.UiCamera.depth = -2;
-        Debug.Log("depth2: " + UIManager.singleton.UiCamera.depth);
     }
 
     int space = 30;
@@ -133,17 +124,6 @@ public class TestAB : ITest
             if (GUILayout.Button(anims[i]))
             {
                 role.GetComponent<XAnimComponent>().SetTrigger(anims[i]);
-                if (i == 0)
-                {
-                    XIdleEventArgs arg = new XIdleEventArgs();
-                    XEventMgr.singleton.FireEvent(arg);
-                }
-                else if (i == 1)
-                {
-                    XMoveEventArgs arg = new XMoveEventArgs();
-                    arg.Speed = 12;
-                    XEventMgr.singleton.FireEvent(arg);
-                }
             }
         }
         GUILayout.Space(10);

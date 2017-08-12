@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System;
 
@@ -36,7 +35,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
         if (!_dic_entities.ContainsKey(attr.id)) _dic_entities.Add(attr.id, x);
-        if (_hash_entitys.Add(x)) Debug.Log("has exist entity: " + attr.id);
+        if (!_hash_entitys.Add(x)) Debug.Log("has exist entity: " + attr.id);
         return x;
     }
 

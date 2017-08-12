@@ -16,14 +16,16 @@ public class XRole : XEntity
     public override void OnInitial()
     {
         base.OnInitial();
-        AttachComponent<XAIComponent>();
-        AttachComponent<XAnimComponent>();
-        AttachComponent<XEquipComponent>();
-
+        
         _layer = LayerMask.NameToLayer("Role");
         profession = 1;
         DefaultEquip defaultEquip = new DefaultEquip();
         defEquip = defaultEquip.GetByProfID(profession + 1);
+
+
+        AttachComponent<XAIComponent>();
+        AttachComponent<XAnimComponent>();
+        AttachComponent<XEquipComponent>();
     }
 
 

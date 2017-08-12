@@ -15,7 +15,7 @@ public class XAnimComponent : XComponent
     private float m_value = 0;
     private bool m_enable = true;
 
-
+    static XEntityPresentation.RowData epRow;
     public override void OnInitial(XEntity _entity)
     {
         base.OnInitial(_entity);
@@ -31,6 +31,13 @@ public class XAnimComponent : XComponent
             m_Animator.runtimeAnimatorController = m_overrideController;
         }
         m_Animator.Rebind();
+        if (epRow == null)
+        {
+            uint archerid = 2;
+            XEntityPresentation p = new XEntityPresentation();
+            epRow = p.GetItemID(archerid);
+        }
+        OverrideAnims();
     }
 
     public override void OnUninit()
@@ -39,22 +46,22 @@ public class XAnimComponent : XComponent
         base.OnUninit();
     }
 
-    
-    public void OverrideAnims(XEntityPresentation.RowData row)
+
+    public void OverrideAnims()
     {
-        OverrideAnim("A", row.AnimLocation + row.A);
-        OverrideAnim("AA", row.AnimLocation + row.AA);
-        OverrideAnim("AAA", row.AnimLocation + row.AAA);
-        OverrideAnim("AAAA", row.AnimLocation + row.AAAA);
-        OverrideAnim("AAAAA", row.AnimLocation + row.AAAAA);
-        OverrideAnim("Walk", row.AnimLocation + row.Walk);
-        OverrideAnim("Idle", row.AnimLocation + row.Idle);
-        OverrideAnim("Death", row.AnimLocation + row.Death);
-        OverrideAnim("Run", row.AnimLocation + row.Run);
-        OverrideAnim("RunLeft", row.AnimLocation + row.RunLeft);
-        OverrideAnim("RunRight", row.AnimLocation + row.RunRight);
-        OverrideAnim("Freezed", row.AnimLocation + row.Freeze);
-        OverrideAnim("HitLanding", row.AnimLocation + row.Hit_l);
+        OverrideAnim("A", epRow.AnimLocation + epRow.A);
+        OverrideAnim("AA", epRow.AnimLocation + epRow.AA);
+        OverrideAnim("AAA", epRow.AnimLocation + epRow.AAA);
+        OverrideAnim("AAAA", epRow.AnimLocation + epRow.AAAA);
+        OverrideAnim("AAAAA", epRow.AnimLocation + epRow.AAAAA);
+        OverrideAnim("Walk", epRow.AnimLocation + epRow.Walk);
+        OverrideAnim("Idle", epRow.AnimLocation + epRow.Idle);
+        OverrideAnim("Death", epRow.AnimLocation + epRow.Death);
+        OverrideAnim("Run", epRow.AnimLocation + epRow.Run);
+        OverrideAnim("RunLeft", epRow.AnimLocation + epRow.RunLeft);
+        OverrideAnim("RunRight", epRow.AnimLocation + epRow.RunRight);
+        OverrideAnim("Freezed", epRow.AnimLocation + epRow.Freeze);
+        OverrideAnim("HitLanding", epRow.AnimLocation + epRow.Hit_l);
     }
 
     public void SyncSpeed(float speed)
@@ -90,7 +97,7 @@ public class XAnimComponent : XComponent
 
     public void SyncEnable(bool enable)
     {
-        if (m_Animator != null )
+        if (m_Animator != null)
         {
             m_enable = enable;
             m_Animator.enabled = m_enable;
@@ -139,7 +146,7 @@ public class XAnimComponent : XComponent
 
     public bool IsAnimStateValid()
     {
-        if (m_Animator==null) return false;
+        if (m_Animator == null) return false;
         if (string.IsNullOrEmpty(m_stateName))
             return false;
         return true;
@@ -150,7 +157,6 @@ public class XAnimComponent : XComponent
     {
         if (string.IsNullOrEmpty(clippath) || m_Animator == null || m_overrideController == null)
             return;
-
         m_overrideController[key] = XResourceMgr.Load<AnimationClip>("Animation/" + clippath, AssetType.Anim);
     }
 
