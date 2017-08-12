@@ -10,8 +10,11 @@ public class TestScene : ITest
 
     public void Start()
     {
-        CreatePlayer();
         XScene.singleton.EnterScene(sceneid);
+        //create player and monster here
+        CreatePlayer();
+
+        XScene.singleton.EnterSceneFinally();
     }
 
     public void OnGUI() { }
@@ -27,7 +30,7 @@ public class TestScene : ITest
         SceneList.RowData row = sc.GetItemID(sceneid);
         XEntityMgr.singleton.CreatePlayer(row);
         player = XEntityMgr.singleton.player;
-
+        player.EntityObject.GetComponent<CharacterController>().enabled = true;
         Debug.Log("player name: " + player.EntityObject.name);
     }
     

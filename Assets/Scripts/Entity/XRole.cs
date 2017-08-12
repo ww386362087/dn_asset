@@ -26,7 +26,6 @@ public class XRole : XEntity
         AttachComponent<XAIComponent>();
         AttachComponent<XAnimComponent>();
         AttachComponent<XEquipComponent>();
-        AttachComponent<XActionComponent>();
     }
 
 

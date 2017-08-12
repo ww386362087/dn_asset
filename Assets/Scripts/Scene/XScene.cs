@@ -26,13 +26,13 @@ internal class XScene : XSingleton<XScene>
     public void EnterScene(uint sceneid)
     {
         _sceneid = sceneid;
-        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-        GameCamera.Initial(camera);
         Documents.singleton.OnEnterScene();
     }
 
     public void EnterSceneFinally()
     {
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        GameCamera.Initial(camera);
         Documents.singleton.OnEnterSceneFinally();
     }
 

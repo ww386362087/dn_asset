@@ -205,7 +205,7 @@ public class XCommon : XSingleton<XCommon>
 
 
     /// <summary>
-    /// 顺时针旋转 - 第一象限
+    /// 顺时针旋转 - 
     /// </summary>
     public bool Clockwise(Vector2 fiduciary, Vector2 relativity)
     {

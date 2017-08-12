@@ -5,10 +5,8 @@ public enum XEventDefine
     XEvent_Invalid = -1,
 
     //move event
-    XEvent_Idle = 0,
-    XEvent_Move = 1,
-    XEvent_Jump = 2,
-    XEvent_Fall = 3,
+    XEvent_JoyStick_Stop = 0,
+    XEvent_JoySick_Move = 1,
 
     XEvent_Num
 }
@@ -49,34 +47,37 @@ public abstract class XEventArgs
     } 
 }
 
-public class XIdleEventArgs : XEventArgs
-{
-    public XIdleEventArgs()
-    {
-        _eDefine = XEventDefine.XEvent_Idle;
-        Token = XCommon.singleton.UniqueToken;
-    }
-
-    public override void Recycle()
-    {
-        base.Recycle();
-    }
-}
 
 public class XJoyStickDirectionEvent : XEventArgs
 {
     public XJoyStickDirectionEvent()
     {
-        _eDefine = XEventDefine.XEvent_Move;
+        _eDefine = XEventDefine.XEvent_JoySick_Move;
         Token = XCommon.singleton.UniqueToken;
     }
 
     public override void Recycle()
     {
         base.Recycle();
-
-        Direction = Vector3.zero;
+        x = y = 0;
     }
 
-    public Vector3 Direction = Vector3.zero;
+    public float x, y;
+}
+
+
+public class XJoyStickStopEvent : XEventArgs
+{
+    public XJoyStickStopEvent()
+    {
+        _eDefine = XEventDefine.XEvent_JoyStick_Stop;
+        Token = XCommon.singleton.UniqueToken;
+    }
+
+    public override void Recycle()
+    {
+        base.Recycle();
+        
+    }
+    
 }

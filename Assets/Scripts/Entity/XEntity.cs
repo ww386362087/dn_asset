@@ -24,7 +24,7 @@ public abstract class XEntity : XObject
     protected GameObject _object = null;
     protected int _layer = 0;
     protected Vector3 _movement = Vector3.zero;
-    public float speed = 0.03f;
+    public float speed = 0.02f;
 
     public uint EntityID
     {
@@ -118,7 +118,6 @@ public abstract class XEntity : XObject
 
     public virtual void Update(float delta)
     {
-        Move();
     }
 
     private void CheckCondtion()
@@ -214,9 +213,9 @@ public abstract class XEntity : XObject
     }
 
 
-    public void ApplyMove(Vector3 move)
+    public void ApplyMove()
     {
-        _movement = move;
+       
     }
 
     public void ApplyMove(float x,float y,float z)
@@ -225,11 +224,6 @@ public abstract class XEntity : XObject
         _movement.y = y;
         _movement.z = z;
     }
-
-    protected virtual void Move()
-    {
-        EntityObject.transform.position += _movement;
-        _movement = Vector3.zero;
-    }
+    
 
 }

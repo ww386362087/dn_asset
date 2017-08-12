@@ -58,13 +58,10 @@ public class JoyStickDlg : UIDlg<JoyStickDlg, JoyyouStickBahaviour>
     public void SetOffsetPos(float radius,float angle)
     {
         float max_radius = GetMaxRadius();
-        
         float r = (radius > max_radius) ? max_radius : radius;
-        float a = angle / 180 * Mathf.PI;
-        float x = Mathf.Cos(a) * r;
-        float y = -Mathf.Sin(a) * r;
-        dir_pos.x = x;
-        dir_pos.y = y;
+        angle = angle / 180 * Mathf.PI;
+        dir_pos.x = Mathf.Cos(angle) * r;
+        dir_pos.y = -Mathf.Sin(angle) * r;
         uiBehaviour.m_sprSir.rectTransform.anchoredPosition =  dir_pos;
     }
 

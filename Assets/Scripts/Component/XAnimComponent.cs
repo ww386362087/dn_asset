@@ -90,12 +90,24 @@ public class XAnimComponent : XComponent
         }
     }
 
+
+    public void SetTrigger(string name,bool val)
+    {
+        if(m_Animator!=null)
+        {
+            m_Animator.SetBool(name, val);
+        }
+    }
+
     public void SetTrigger(string name)
     {
-        m_triggerName = name;
-        if (m_Animator != null && m_Animator != null)
+        if (!m_triggerName.Equals(name))
         {
-            m_Animator.SetTrigger(m_triggerName);
+            m_triggerName = name;
+            if (m_Animator != null )
+            {
+                m_Animator.SetTrigger(m_triggerName);
+            }
         }
     }
 
