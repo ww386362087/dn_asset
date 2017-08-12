@@ -4,6 +4,7 @@ using XTable;
 public class XRole : XEntity
 {
 
+    protected CharacterController controller;
 
     protected override EnitityType _eEntity_Type
     {
@@ -21,7 +22,8 @@ public class XRole : XEntity
         profession = 1;
         DefaultEquip defaultEquip = new DefaultEquip();
         defEquip = defaultEquip.GetByProfID(profession + 1);
-
+        controller = EntityObject.GetComponent<CharacterController>();
+        controller.enabled = false;
 
         AttachComponent<XAIComponent>();
         AttachComponent<XAnimComponent>();
@@ -30,5 +32,13 @@ public class XRole : XEntity
 
 
 
+
+    public void EnableCC(bool enable)
+    {
+        if(controller!=null)
+        {
+            controller.enabled = enable;
+        }
+    }
 
 }

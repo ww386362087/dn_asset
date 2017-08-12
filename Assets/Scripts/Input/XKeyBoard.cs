@@ -12,8 +12,7 @@ internal class XKeyboard : XSingleton<XKeyboard>
     private float _x = 0;
     private float _y = 0;
     private Vector3 _lastMousePos = Vector3.zero;
-    private const int mFingerID = 0;
-    private const int kFinderID = 1;
+    
 
 
     public bool Enabled { get { return !Application.isMobilePlatform; } }
@@ -41,7 +40,7 @@ internal class XKeyboard : XSingleton<XKeyboard>
         //mouse
         if (Input.GetMouseButton(0))
         {
-            _touches[_touch_count].faketouch.fingerId = mFingerID;
+            _touches[_touch_count].faketouch.fingerId = XTouch.mouseFingerID;
             _touches[_touch_count].faketouch.position = Input.mousePosition;
             _touches[_touch_count].faketouch.deltaTime = Time.smoothDeltaTime;
             _touches[_touch_count].faketouch.deltaPosition = Input.mousePosition - _lastMousePos;
@@ -54,7 +53,7 @@ internal class XKeyboard : XSingleton<XKeyboard>
         }
         else if(Input.GetMouseButtonUp(0))
         {
-            _touches[_touch_count].faketouch.fingerId = mFingerID;
+            _touches[_touch_count].faketouch.fingerId = XTouch.mouseFingerID;
             _touches[_touch_count].faketouch.position = Input.mousePosition;
             _touches[_touch_count].faketouch.deltaTime = Time.smoothDeltaTime;
             _touches[_touch_count].faketouch.phase = TouchPhase.Ended;
@@ -74,7 +73,7 @@ internal class XKeyboard : XSingleton<XKeyboard>
         if (Input.GetKey(KeyCode.W)) y++;
         if (x != 0 || y != 0)
         {
-            _touches[_touch_count].faketouch.fingerId = 1;
+            _touches[_touch_count].faketouch.fingerId = XTouch.keyboardFinderID;
             _touches[_touch_count].faketouch.deltaTime = Time.smoothDeltaTime;
             _touches[_touch_count].faketouch.phase = (_x == 0 && _y == 0) ? TouchPhase.Began : TouchPhase.Moved;
             _touches[_touch_count].faketouch.position = _touches[_touch_count].faketouch.phase == TouchPhase.Began ?
@@ -88,7 +87,7 @@ internal class XKeyboard : XSingleton<XKeyboard>
         }
         else if (_x != 0 || _y != 0)
         {
-            _touches[_touch_count].faketouch.fingerId = 1;
+            _touches[_touch_count].faketouch.fingerId = XTouch.keyboardFinderID;
             _touches[_touch_count].faketouch.position = new Vector2(XVirtualTab.singleton.MaxDistance, XVirtualTab.singleton.MaxDistance);
             _touches[_touch_count].faketouch.deltaTime = Time.smoothDeltaTime;
             _touches[_touch_count].faketouch.phase = TouchPhase.Ended;

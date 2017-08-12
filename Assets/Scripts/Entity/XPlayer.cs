@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class XPlayer : XRole
 {
@@ -25,6 +24,7 @@ public class XPlayer : XRole
         RegisterEvent(XEventDefine.XEvent_JoyStick_Stop, OnStop);
     }
 
+
     public override void Update(float delta)
     {
         base.Update(delta);
@@ -48,7 +48,6 @@ public class XPlayer : XRole
             }
             EntityObject.transform.forward = XVirtualTab.singleton.Direction;
             transf = Vector3.forward * speed;
-            transf.y = 0;
             EntityObject.transform.Translate(transf);
         }
     }

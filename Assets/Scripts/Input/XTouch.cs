@@ -2,8 +2,10 @@
 
 internal class XTouch : XSingleton<XTouch>
 {
-    private XTouchItem _touch = new XTouchItem();
+    public const int mouseFingerID = 0;
+    public const int keyboardFinderID = 1;
 
+    private XTouchItem _touch = new XTouchItem();
     public const int MaxTouchCount = 2;
 
     public static bool PointOnUI(Vector3 point)

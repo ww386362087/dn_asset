@@ -26,6 +26,7 @@ public class XCamera
 
     public Quaternion Rotaton { get { return _cameraTransform.rotation; } }
 
+    public float FieldOfView { get { return _field_of_view; } }
 
     public XEntity Target
     {
