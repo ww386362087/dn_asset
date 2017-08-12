@@ -13,6 +13,7 @@ public class XPlayer : XRole
 
     public Vector3 lastpos = Vector3.zero;
 
+    private Vector3 transf = Vector3.zero;
     private XRole _watch_to = null;
 
     public XRole WatchTo { get { return _watch_to != null && !_watch_to.Deprecated ? _watch_to : null; } }
@@ -46,7 +47,9 @@ public class XPlayer : XRole
                 anim.SetTrigger("ToMove");
             }
             EntityObject.transform.forward = XVirtualTab.singleton.Direction;
-            EntityObject.transform.Translate(Vector3.forward * speed);
+            transf = Vector3.forward * speed;
+            transf.y = 0;
+            EntityObject.transform.Translate(transf);
         }
     }
 
