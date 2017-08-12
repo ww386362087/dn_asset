@@ -63,9 +63,9 @@ public class XIdleEventArgs : XEventArgs
     }
 }
 
-public class XMoveEventArgs : XEventArgs
+public class XJoyStickDirectionEvent : XEventArgs
 {
-    public XMoveEventArgs()
+    public XJoyStickDirectionEvent()
     {
         _eDefine = XEventDefine.XEvent_Move;
         Token = XCommon.singleton.UniqueToken;
@@ -75,10 +75,8 @@ public class XMoveEventArgs : XEventArgs
     {
         base.Recycle();
 
-        Destination = Vector3.zero;
-        Speed = 0;
+        Direction = Vector3.zero;
     }
 
-    public Vector3 Destination = Vector3.zero;
-    public float Speed = 0;
+    public Vector3 Direction = Vector3.zero;
 }

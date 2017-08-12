@@ -16,21 +16,18 @@ internal class XScene : XSingleton<XScene>
 
     public void Update(float deltaTime)
     {
-
     }
 
     public void PostUpdate()
     {
-
     }
 
 
     public void EnterScene(uint sceneid)
     {
+        _sceneid = sceneid;
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-
         GameCamera.Initial(camera);
-
         Documents.singleton.OnEnterScene();
     }
 

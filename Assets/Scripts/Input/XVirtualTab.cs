@@ -9,6 +9,7 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
     private bool _bTouch = false;
     private bool _bFeeding = false;
     private bool _bFreeze = false;
+    private Vector3 _last_direction = Vector3.zero;
     private Vector3 _direction = Vector3.zero;
 
     private Vector2 _center = Vector2.zero;
@@ -133,7 +134,13 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
         forward.y = 0; forward.Normalize();
 
         _direction = XCommon.singleton.HorizontalRotateVetor3(forward, bClockwise ? angle : -angle);
-
+        if (!_direction.Equals(_last_direction))
+        {
+            XJoyStickDirectionEvent e = new XJoyStickDirectionEvent();
+            e.Direction = _direction;
+            XEventMgr.singleton.FireEvent(e);
+        }
+        _last_direction = _direction;
         JoyStickDlg.singleton.Show(true, _center);
         JoyStickDlg.singleton.SetOffsetPos(radius, (bClockwise ? angle : 360.0f - angle) - 90);
     }

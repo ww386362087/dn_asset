@@ -51,8 +51,8 @@ public class XAnimComponent : XComponent
     {
         OverrideAnim("A", epRow.AnimLocation + epRow.A);
         OverrideAnim("AA", epRow.AnimLocation + epRow.AA);
-        OverrideAnim("AAA", epRow.AnimLocation + epRow.AAA);
-        OverrideAnim("AAAA", epRow.AnimLocation + epRow.AAAA);
+        OverrideAnim("AAA", epRow.AnimLocation + "Player_archer_attack_run");
+        OverrideAnim("AAAA", epRow.AnimLocation + "Player_archer_attack_run");
         OverrideAnim("AAAAA", epRow.AnimLocation + epRow.AAAAA);
         OverrideAnim("Walk", epRow.AnimLocation + epRow.Walk);
         OverrideAnim("Idle", epRow.AnimLocation + epRow.Idle);
@@ -62,6 +62,10 @@ public class XAnimComponent : XComponent
         OverrideAnim("RunRight", epRow.AnimLocation + epRow.RunRight);
         OverrideAnim("Freezed", epRow.AnimLocation + epRow.Freeze);
         OverrideAnim("HitLanding", epRow.AnimLocation + epRow.Hit_l);
+        OverrideAnim("Phase0", epRow.AnimLocation + "Player_archer_jump");
+        OverrideAnim("Phase1", epRow.AnimLocation + "Player_archer_attack_lifttwinshot");
+        OverrideAnim("Phase2", epRow.AnimLocation + "Player_archer_attack_aerialchainshot");
+        OverrideAnim("Art", epRow.AnimLocation + "Player_archer_victory");
     }
 
     public void SyncSpeed(float speed)

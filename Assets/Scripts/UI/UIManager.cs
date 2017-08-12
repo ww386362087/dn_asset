@@ -91,7 +91,7 @@ public class UIManager : XSingleton<UIManager>
             {
                 Object o = XResourceMgr.Load<GameObject>(dlg.fileName, AssetType.Prefab);
                 GameObject go = GameObject.Instantiate(o) as GameObject;
-                go.transform.parent = dlg.shareCanvas ? _canvas.transform : _uiCamera.transform;
+                go.transform.SetParent(dlg.shareCanvas ? _canvas.transform : _uiCamera.transform);
                 if (!dlg.shareCanvas)
                 {
                     Canvas cans = go.GetComponent<Canvas>();

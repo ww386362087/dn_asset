@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class XActionComponent : XComponent
 {
 
+    XAnimComponent ani;
+
     public override void OnInitial(XEntity _entity)
     {
         base.OnInitial(_entity);
+        ani = entity.GetComponent<XAnimComponent>();
     }
 
     public override void OnUninit()
@@ -24,7 +25,13 @@ public class XActionComponent : XComponent
 
     private void OnMove(XEventArgs e)
     {
-        XMoveEventArgs move = e as XMoveEventArgs;
-        Debug.Log("ai move:" + move.Speed);
+        XJoyStickDirectionEvent move = e as XJoyStickDirectionEvent;
+        ani.SetTrigger("ToMove");
+        Vector3 mov = entity.speed * move.Direction;
+        mov.y = 0;
+        entity.ApplyMove(mov);
     }
+
+
+
 }

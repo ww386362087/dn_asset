@@ -27,6 +27,8 @@ public class TestScene : ITest
         SceneList.RowData row = sc.GetItemID(sceneid);
         XEntityMgr.singleton.CreatePlayer(row);
         player = XEntityMgr.singleton.player;
+
+        Debug.Log("player name: " + player.EntityObject.name);
     }
     
     

@@ -3,9 +3,7 @@
 
 public class Main : MonoBehaviour
 {
-
-    private uint sceneid = 401;
-
+    
     void Start()
     {
         ABManager.singleton.Init(this);
