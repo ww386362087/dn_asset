@@ -54,33 +54,6 @@ public class XResourceMgr
         }
     }
 
-    public static T Load<T>(string path, AssetType type) where T : Object
-    {
-        if (_syn_list == null) _syn_list = new List<Asset>();
-        object obj = FindInSynPool(path, type);
-        if (obj != null)
-        {
-            return Obj2T<T>(obj);
-        }
-        else
-        {
-            if (useAB && ABManager.singleton.Exist(path, type))
-            {
-                Object o = ABManager.singleton.LoadImm(path, type);
-                _syn_list.Add(new Asset() { path = path, type = type, obj = o });
-                return Obj2T<T>(o);
-            }
-            else
-            {
-                Object o = Resources.Load<T>(path);
-                _syn_list.Add(new Asset() { path = path, type = type, obj = o });
-                return o as T;
-            }
-        }
-    }
-
-
-
     private static Object FindInSynPool(string path, AssetType type)
     {
         if (_syn_list != null)
@@ -97,14 +70,42 @@ public class XResourceMgr
         return null;
     }
 
+    public static T Load<T>(string path, AssetType type) where T : Object
+    {
+        if (_syn_list == null) _syn_list = new List<Asset>();
+        Object obt = FindInSynPool(path, type);
+        if (obt == null)
+        {
+            if (useAB && ABManager.singleton.Exist(path, type))
+            {
+                obt = ABManager.singleton.LoadImm(path, type);
+                _syn_list.Add(new Asset() { path = path, type = type, obj = obt });
+            }
+            else
+            {
+                obt = Resources.Load<T>(path);
+                _syn_list.Add(new Asset() { path = path, type = type, obj = obt });
+            }
+        }
+        return Obj2T<T>(obt);
+    }
 
-    private static T Obj2T<T>(object o) where T : Object
+
+    private static T Obj2T<T>(Object o) where T : Object
     {
         if (typeof(T) == typeof(GameObject)
-            || typeof(T) == typeof(Transform))
-            return o as T;
-        else
+            || typeof(T) == typeof(Transform))  //从ab拿到obj->Instantiate
+        {
+            return GameObject.Instantiate(o) as T;
+        }
+        else if (o is GameObject)  //从ab拿到obj->加载texture, audio, material
+        {
             return (o as GameObject).GetComponent<T>();
+        }
+        else //resource.load 直接拿到texture,audio,material
+        {
+            return o as T;
+        }
     }
 
     public static Object[] LoadAll(string path, AssetType type)

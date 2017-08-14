@@ -7,7 +7,6 @@ using XTable;
 public class MountLoadTask : BaseLoadTask
 {
     private XEquipComponent component;
-    private Object obj = null;
     private GameObject goInstance = null;
     public bool transferRef = false;
     public Renderer mainRender = null;
@@ -25,7 +24,7 @@ public class MountLoadTask : BaseLoadTask
             if (MakePath(ref newFpi, loadedPath))
             {
                 if (goInstance != null) GameObject.Destroy(goInstance);
-                obj = XResourceMgr.Load<GameObject>(location,AssetType.Prefab);
+                goInstance = XResourceMgr.Load<GameObject>(location,AssetType.Prefab);
                 LoadFinish(this);
                 ProcessTransfer();
             }
@@ -60,41 +59,34 @@ public class MountLoadTask : BaseLoadTask
 
     public override void Reset()
     {
-        if (!transferRef && obj != null)
-        {
-            GameObject.Destroy(obj);
-        }
-        obj = null;
+        if (goInstance != null) GameObject.Destroy(goInstance);
+        XResourceMgr.UnloadAsset(location, AssetType.Prefab);
         transferRef = false;
     }
 
     public void ProcessRender()
     {
-        if (obj != null)
+        for (int i = 0; i < XCommon.tmpRender.Count; i++)
         {
-            for (int i = 0; i < XCommon.tmpRender.Count; i++)
+            Renderer render = XCommon.tmpRender[i];
+            render.enabled = true;
+            Material mat = render.sharedMaterial;
+            if (mat != null && mat.shader.renderQueue < 3000)
             {
-                Renderer render = XCommon.tmpRender[i];
-                render.enabled = true;
-                Material mat = render.sharedMaterial;
-                if (mat != null && mat.shader.renderQueue < 3000)
-                {
-                    mainRender = render;
-                    render.shadowCastingMode = ShadowCastingMode.Off;
-                }
-                bool hasUIRimMask = render.sharedMaterial.HasProperty("_UIRimMask");
-                if (hasUIRimMask)
-                {
-                    render.material.SetVector("_UIRimMask", new Vector4(0, 0, 2, 0));
-                }
+                mainRender = render;
+                render.shadowCastingMode = ShadowCastingMode.Off;
             }
-            XCommon.tmpRender.Clear();
+            bool hasUIRimMask = render.sharedMaterial.HasProperty("_UIRimMask");
+            if (hasUIRimMask)
+            {
+                render.material.SetVector("_UIRimMask", new Vector4(0, 0, 2, 0));
+            }
         }
+        XCommon.tmpRender.Clear();
     }
 
     public void ProcessTransfer()
     {
-        goInstance = GameObject.Instantiate(obj) as GameObject;
         goInstance.transform.parent = (component.xobj as XEntity).EntityObject.transform.FindChild(GetMountPoint());
         goInstance.transform.localPosition = Vector3.zero;
         goInstance.transform.localRotation = Quaternion.identity;

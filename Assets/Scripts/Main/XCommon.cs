@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Text;
 using System;
 using System.Collections.Generic;
@@ -195,7 +194,7 @@ public class XCommon : XSingleton<XCommon>
 
 
     /// <summary>
-    /// 顺时针旋转 - 第一象限 - x-z平面
+    /// 顺时针旋转
     /// </summary>
     public bool Clockwise(Vector3 fiduciary, Vector3 relativity)
     {
@@ -205,7 +204,7 @@ public class XCommon : XSingleton<XCommon>
 
 
     /// <summary>
-    /// 顺时针旋转 - 
+    /// 顺时针旋转 
     /// </summary>
     public bool Clockwise(Vector2 fiduciary, Vector2 relativity)
     {

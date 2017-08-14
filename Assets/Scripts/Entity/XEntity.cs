@@ -25,6 +25,7 @@ public abstract class XEntity : XObject
     protected int _layer = 0;
     protected Vector3 _movement = Vector3.zero;
     public float speed = 0.02f;
+    private SkinnedMeshRenderer _skin = null;
 
     public uint EntityID
     {
@@ -91,7 +92,22 @@ public abstract class XEntity : XObject
         get { return GetComponent<XAIComponent>() == null; }
     }
 
-   
+    public Vector3 Position
+    {
+        get { return _object != null ? _object.transform.position : Vector3.zero; }
+    }
+
+    public Quaternion Rotation
+    {
+        get { return _object != null ? _object.transform.rotation : Quaternion.identity; }
+    }
+
+
+    public SkinnedMeshRenderer skin
+    {
+        get { return _skin; }
+        set { _skin = value; }
+    }
 
     public void Initilize(GameObject o, XAttributes attr)
     {
@@ -114,44 +130,33 @@ public abstract class XEntity : XObject
 
     protected virtual void OnUnintial() { }
 
-    public virtual void Update(float delta)
+    public virtual void Update(float delta) { }
+
+    public virtual void OnAttachToHost() { }
+
+    public virtual void OnDeatchToHost() { }
+
+    public bool TestVisible(Plane[] planes, bool fully)
     {
+        if (_skin != null)
+        {
+            Bounds bound = _skin.bounds;
+            if (fully)
+            {
+                for (int i = 0; i < planes.Length; i++)
+                {
+                    if (planes[i].GetDistanceToPoint(bound.min) < 0 ||
+                        planes[i].GetDistanceToPoint(bound.max) < 0)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else
+                return GeometryUtility.TestPlanesAABB(planes, bound);
+        }
+        return false;
     }
-
-  
-    
-    public void AttachHost()
-    {
-        OnAttachToHost();
-    }
-
-    public void DeatchHost()
-    {
-        OnDeatchToHost();
-    }
-
-
-    protected virtual void OnAttachToHost()
-    {
-    }
-
-
-    protected virtual void OnDeatchToHost()
-    {
-    }
-
-
-    public void ApplyMove()
-    {
-       
-    }
-
-    public void ApplyMove(float x,float y,float z)
-    {
-        _movement.x = x;
-        _movement.y = y;
-        _movement.z = z;
-    }
-    
 
 }

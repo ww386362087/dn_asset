@@ -28,8 +28,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     private T PrepareEntity<T>(XAttributes attr, bool autoAdd) where T : XEntity
     {
         T x = Activator.CreateInstance<T>();
-        UnityEngine.Object obj = XResourceMgr.Load<GameObject>("Prefabs/" + attr.Prefab, AssetType.Prefab);
-        GameObject o = UnityEngine.Object.Instantiate(obj) as GameObject;
+        GameObject o = XResourceMgr.Load<GameObject>("Prefabs/" + attr.Prefab, AssetType.Prefab);
         o.name = attr.Name;
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
@@ -84,7 +83,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         var e = _hash_entitys.GetEnumerator();
         while (e.MoveNext())
         {
-            e.Current.AttachHost();
+            e.Current.OnAttachToHost();
         }
     }
 
@@ -96,7 +95,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         var e = _hash_entitys.GetEnumerator();
         while (e.MoveNext())
         {
-            e.Current.DeatchHost();
+            e.Current.OnDeatchToHost();
         }
     }
 

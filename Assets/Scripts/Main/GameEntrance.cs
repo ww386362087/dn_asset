@@ -38,5 +38,10 @@ public class GameEntrance : MonoBehaviour
     }
 
 
+    void OnDestroy()
+    {
+        GameEnine.OnUnintial();
+    }
+
 
 }

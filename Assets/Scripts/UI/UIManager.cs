@@ -46,8 +46,7 @@ public class UIManager : XSingleton<UIManager>
 
     private void LoadRoot()
     {
-        Object obj = XResourceMgr.Load<GameObject>("UI/UIRoot", AssetType.Prefab);
-        GameObject go = GameObject.Instantiate(obj) as GameObject;
+        GameObject go = XResourceMgr.Load<GameObject>("UI/UIRoot", AssetType.Prefab);
         GameObject.DontDestroyOnLoad(go);
         _uiCamera = go.GetComponent<Camera>();
         _canvas = go.transform.GetChild(0).GetComponent<Canvas>();
@@ -89,8 +88,7 @@ public class UIManager : XSingleton<UIManager>
             }
             else
             {
-                Object o = XResourceMgr.Load<GameObject>(dlg.fileName, AssetType.Prefab);
-                GameObject go = GameObject.Instantiate(o) as GameObject;
+                GameObject go = XResourceMgr.Load<GameObject>(dlg.fileName, AssetType.Prefab);
                 go.transform.SetParent(dlg.shareCanvas ? _canvas.transform : _uiCamera.transform);
                 if (!dlg.shareCanvas)
                 {

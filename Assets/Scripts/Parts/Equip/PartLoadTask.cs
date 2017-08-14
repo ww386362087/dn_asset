@@ -68,7 +68,8 @@ public class PartLoadTask : BaseLoadTask
     {
         if (mtd != null)
         {
-            XResourceMgr.UnloadAsset(go);
+            GameObject.Destroy(go);
+            XResourceMgr.UnloadAsset(location,AssetType.Prefab);
             mtd = null;
         }
     }
