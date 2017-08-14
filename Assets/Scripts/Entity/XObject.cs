@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 /// <summary>
 /// 处理对象生命周期、事件相关
+/// 对象可以挂载component, 作为对象的属性
 /// </summary>
 public class XObject
 {

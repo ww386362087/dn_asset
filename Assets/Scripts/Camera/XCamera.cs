@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class XCamera
+public class XCamera : XObject
 {
 
     public enum XStatus
@@ -60,7 +58,7 @@ public class XCamera
     public void Uninitial()
     {
         _camera = null;
-        
+
     }
 
 

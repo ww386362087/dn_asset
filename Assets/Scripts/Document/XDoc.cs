@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-using System;
-using System.Diagnostics;
-
-public abstract class XDoc : XObject
+﻿public abstract class XDoc : XObject
 {
 
     protected virtual string _name { get { return GetType().Name; } }
