@@ -95,7 +95,7 @@ public class MountLoadTask : BaseLoadTask
     public void ProcessTransfer()
     {
         goInstance = GameObject.Instantiate(obj) as GameObject;
-        goInstance.transform.parent = (component.obj as XEntity).EntityObject.transform.FindChild(GetMountPoint());
+        goInstance.transform.parent = (component.xobj as XEntity).EntityObject.transform.FindChild(GetMountPoint());
         goInstance.transform.localPosition = Vector3.zero;
         goInstance.transform.localRotation = Quaternion.identity;
         goInstance.transform.localScale = Vector3.one;
@@ -104,7 +104,7 @@ public class MountLoadTask : BaseLoadTask
 
     private string GetMountPoint()
     {
-        DefaultEquip.RowData data = (component.obj as XRole).defEquip;
+        DefaultEquip.RowData data = (component.xobj as XRole).defEquip;
         string point = "";
         switch (part)
         {

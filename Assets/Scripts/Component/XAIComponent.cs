@@ -8,6 +8,7 @@ public class XAIComponent : XComponent
    // private float _ai_tick = 1.0f;  //AI心跳间隔 
 
     public bool IsFighting { get { return _is_fighting; } set { _is_fighting = value; } }
+
     public XRole Opponent { get { return _opponent; } set { _opponent = value; } }
    
 

@@ -89,7 +89,6 @@
     <Compile Include="Assets\Scripts\AssetSystem\AssetBundlePathResolver.cs" />
     <Compile Include="Assets\Scripts\AssetSystem\AssetType.cs" />
     <Compile Include="Assets\Scripts\AssetSystem\XResourceMgr.cs" />
-    <Compile Include="Assets\Scripts\CVSReader.cs" />
     <Compile Include="Assets\Scripts\Camera\XCamera.cs" />
     <Compile Include="Assets\Scripts\Component\XAIComponent.cs" />
     <Compile Include="Assets\Scripts\Component\XAnimComponent.cs" />
@@ -118,7 +117,10 @@
     <Compile Include="Assets\Scripts\Input\XTouch.cs" />
     <Compile Include="Assets\Scripts\Input\XTouchItem.cs" />
     <Compile Include="Assets\Scripts\Input\XVirtualTab.cs" />
-    <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\Main\CVSReader.cs" />
+    <Compile Include="Assets\Scripts\Main\GameEnine.cs" />
+    <Compile Include="Assets\Scripts\Main\GameEntrance.cs" />
+    <Compile Include="Assets\Scripts\Main\XCommon.cs" />
     <Compile Include="Assets\Scripts\Parts\Anim\AnimParam.cs" />
     <Compile Include="Assets\Scripts\Parts\Equip\BaseLoadTask.cs" />
     <Compile Include="Assets\Scripts\Parts\Equip\CombineMeshTask.cs" />
@@ -163,7 +165,6 @@
     <Compile Include="Assets\Scripts\UI\JoyyouStickBahaviour.cs" />
     <Compile Include="Assets\Scripts\UI\UIDlg.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\Scripts\XCommon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Cache\cache.txt" />

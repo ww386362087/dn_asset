@@ -68,7 +68,7 @@ public class XEquipComponent : XComponent
             string path = part.partPath[i];
             if (string.IsNullOrEmpty(path))
             {
-                path = XEquipUtil.GetDefaultPath((EPartType)i, (obj as XRole).defEquip);
+                path = XEquipUtil.GetDefaultPath((EPartType)i, (xobj as XRole).defEquip);
             }
             fpi.equipName = path;
             fashionList.Add(fpi);

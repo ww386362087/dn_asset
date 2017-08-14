@@ -2,8 +2,10 @@
 
 
 /// <summary>
-/// 处理对象生命周期、事件相关
-/// 对象可以挂载component, 作为对象的属性
+/// 三个功能：
+/// 1.对象生命周期
+/// 2.分发事件
+/// 3.挂载component, 作为对象的属性
 /// </summary>
 public class XObject
 {
@@ -88,7 +90,9 @@ public class XObject
     private void CheckCondtion()
     {
         if (components == null)
-            throw new XComponentException("components is nil");
+        {
+            throw new XComponentException("object is not initial ");
+        }
     }
 
 

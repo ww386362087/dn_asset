@@ -6,37 +6,37 @@
 public class XComponent : XObject
 {
 
-    public XObject obj = null;
+    public XObject xobj = null;
 
     public virtual uint ID { get { return XCommon.singleton.XHash(this.GetType().Name); } }
 
     public virtual void OnInitial(XObject _obj)
     {
         base.Initilize();
-        obj = _obj;
+        xobj = _obj;
     }
 
     public virtual void OnUninit()
     {
-        obj = null;
+        xobj = null;
         base.Unload();
     }
 
 
     public bool IsRoleComponent()
     {
-        return obj is XRole;
+        return xobj is XRole;
     }
 
     public bool IsEntityComponent()
     {
-        return obj is XEntity;
+        return xobj is XEntity;
     }
 
 
     public bool IsCameraComponent()
     {
-        return obj is XCamera;
+        return xobj is XCamera;
     }
 
 }
