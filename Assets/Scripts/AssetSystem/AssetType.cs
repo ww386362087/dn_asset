@@ -41,6 +41,16 @@ public class AssetType
         return V;
     }
 
-    
+
+    public override bool Equals(object obj)
+    {
+        return V.Equals(obj.ToString());
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
 }
 

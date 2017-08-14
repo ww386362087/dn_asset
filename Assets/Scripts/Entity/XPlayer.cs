@@ -12,7 +12,7 @@ public class XPlayer : XRole
 
     public Vector3 lastpos = Vector3.zero;
 
-    private Vector3 transf = Vector3.zero;
+    private Vector3 _v3 = Vector3.zero;
     private XRole _watch_to = null;
 
     public XRole WatchTo { get { return _watch_to != null && !_watch_to.Deprecated ? _watch_to : null; } }
@@ -21,7 +21,7 @@ public class XPlayer : XRole
     protected override void EventSubscribe()
     {
         base.EventSubscribe();
-        RegisterEvent(XEventDefine.XEvent_JoyStick_Stop, OnStop);
+        RegisterEvent(XEventDefine.XEvent_JoyStick_Stop, OnStopJoyStick);
     }
 
 
@@ -46,13 +46,17 @@ public class XPlayer : XRole
             {
                 anim.SetTrigger("ToMove");
             }
-            EntityObject.transform.forward = XVirtualTab.singleton.Direction;
-            transf = Vector3.forward * speed;
-            EntityObject.transform.Translate(transf);
+            //方向
+            _transf.forward = XVirtualTab.singleton.Direction;
+
+            //位置
+            _v3 = _transf.position + _transf.forward * speed;
+            _v3.y = XScene.singleton.TerrainY(Position);
+            _transf.position = _v3;
         }
     }
 
-    private void OnStop(XEventArgs e)
+    private void OnStopJoyStick(XEventArgs e)
     {
         XAnimComponent anim = GetComponent<XAnimComponent>();
         if(anim!=null)

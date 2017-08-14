@@ -5,6 +5,7 @@ internal class XScene : XSingleton<XScene>
     private XCamera _camera = new XCamera();
     private uint _sceneid;
 
+    private Terrain _terrain;
 
     public uint SceneID { get { return _sceneid; } }
 
@@ -34,6 +35,7 @@ internal class XScene : XSingleton<XScene>
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
         GameCamera.Initial(camera);
         Documents.singleton.OnEnterSceneFinally();
+        _terrain = Terrain.activeTerrain;
     }
 
 
@@ -42,5 +44,14 @@ internal class XScene : XSingleton<XScene>
         _camera.Uninitial();
     }
 
+
+    public float TerrainY(Vector3 pos)
+    {
+        if(_terrain!=null)
+        {
+            return _terrain.SampleHeight(pos);
+        }
+        return 0;
+    }
 
 }

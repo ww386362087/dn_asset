@@ -26,6 +26,7 @@ public class XResourceMgr
         public string path;
         public AssetType type;
         public Object obj;
+        public bool fromAB;
     }
 
     //为了效率 避免update的时候重复计算list长度
@@ -61,7 +62,8 @@ public class XResourceMgr
             var e = _syn_list.GetEnumerator();
             while (e.MoveNext())
             {
-                if (e.Current.path == path && e.Current.type == type)
+                if (e.Current.path.Equals(path)
+                    && e.Current.type.Equals(type))
                 {
                     return e.Current.obj;
                 }
@@ -70,6 +72,29 @@ public class XResourceMgr
         return null;
     }
 
+    private static bool RemoveInSynPool(string path, AssetType type)
+    {
+        if (_syn_list != null)
+        {
+            var e = _syn_list.GetEnumerator();
+            while (e.MoveNext())
+            {
+                if (e.Current.path.Equals(path)
+                    && e.Current.type.Equals(type))
+                {
+                    Asset asset = e.Current;
+                    _syn_list.Remove(asset);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 加载 GameObject 深复制（Instantiate） 注意卸载
+    /// Texture, Material, Audio等是共享的 (不会Instantiate)
+    /// </summary>
     public static T Load<T>(string path, AssetType type) where T : Object
     {
         if (_syn_list == null) _syn_list = new List<Asset>();
@@ -79,12 +104,12 @@ public class XResourceMgr
             if (useAB && ABManager.singleton.Exist(path, type))
             {
                 obt = ABManager.singleton.LoadImm(path, type);
-                _syn_list.Add(new Asset() { path = path, type = type, obj = obt });
+                _syn_list.Add(new Asset() { path = path, type = type, fromAB = true, obj = obt });
             }
             else
             {
                 obt = Resources.Load<T>(path);
-                _syn_list.Add(new Asset() { path = path, type = type, obj = obt });
+                _syn_list.Add(new Asset() { path = path, type = type, fromAB = false, obj = obt });
             }
         }
         return Obj2T<T>(obt);
@@ -98,7 +123,7 @@ public class XResourceMgr
         {
             return GameObject.Instantiate(o) as T;
         }
-        else if (o is GameObject)  //从ab拿到obj->加载texture, audio, material
+        else if (o is GameObject && typeof(T) == typeof(GameObject))
         {
             return (o as GameObject).GetComponent<T>();
         }
@@ -130,16 +155,32 @@ public class XResourceMgr
         }
     }
 
-    public static void UnloadAsset(string path,AssetType type)
+    public static void UnloadAsset(string path, AssetType type)
     {
         Object o = FindInSynPool(path, type);
         UnloadAsset(o);
+        RemoveInSynPool(path, type);
     }
 
     public static void UnloadAsset(Object assetToUnload)
     {
         if (assetToUnload != null)
-            Resources.UnloadAsset(assetToUnload);
+        {
+            if (assetToUnload is GameObject)
+            {
+#if UNITY_EDITOR
+                // 在编辑器模式下无法卸载go物体，否则会报错让改用DestroyImmediate(obj, true)
+                // 但这样做会连文件夹里的原始Asset一并删除
+#else
+                GameObject.DestroyImmediate(assetToUnload);
+#endif
+            }
+            else
+            {
+                //当使用Resources.UnloadAsset后，若依然有物体用该图，那么物体就变全黑
+                Resources.UnloadAsset(assetToUnload);
+            }
+        }
     }
 
     public static void LoadAsync<T>(string path, AssetType type, System.Action<Object> cb) where T : Object

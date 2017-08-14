@@ -22,6 +22,7 @@ public abstract class XEntity : XObject
     protected abstract EnitityType _eEntity_Type { get; }
     protected XAttributes _attr = null;
     protected GameObject _object = null;
+    protected Transform _transf = null;
     protected int _layer = 0;
     protected Vector3 _movement = Vector3.zero;
     public float speed = 0.02f;
@@ -77,6 +78,11 @@ public abstract class XEntity : XObject
         get { return _object; }
     }
 
+    public Transform EntityTransfer
+    {
+        get { return _transf; }
+    }
+
     public XAttributes EntityAttribute
     {
         get { return _attr; }
@@ -94,12 +100,12 @@ public abstract class XEntity : XObject
 
     public Vector3 Position
     {
-        get { return _object != null ? _object.transform.position : Vector3.zero; }
+        get { return _transf != null ? _transf.position : Vector3.zero; }
     }
 
     public Quaternion Rotation
     {
-        get { return _object != null ? _object.transform.rotation : Quaternion.identity; }
+        get { return _transf != null ? _transf.rotation : Quaternion.identity; }
     }
 
 
@@ -113,6 +119,7 @@ public abstract class XEntity : XObject
     {
         base.Initilize();
         _object = o;
+        _transf = o.transform;
         _attr = attr;
         OnInitial();
     }
