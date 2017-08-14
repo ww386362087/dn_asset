@@ -70,7 +70,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     }
 
 
-    public void PostUpdate()
+    public void LateUpdate()
     {
     }
 

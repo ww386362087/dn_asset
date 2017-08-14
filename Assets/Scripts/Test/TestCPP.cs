@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿#if TEST
+
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Profiling;
 using XTable;
@@ -41,3 +43,6 @@ public class TestCPP : ITest
     }
 
 }
+
+
+#endif

@@ -9,7 +9,10 @@ public class Main : MonoBehaviour
         ABManager.singleton.Init(this);
         Documents.singleton.Initial();
         UIManager.singleton.Initial();
+
+#if TEST
         TestManager.Get().Start();
+#endif
     }
 
     void Update()
@@ -18,18 +21,23 @@ public class Main : MonoBehaviour
         XResourceMgr.Update();
         XEntityMgr.singleton.Update(delta);
         XTouch.singleton.Update(delta);
+
+#if TEST
         TestManager.Get().Update();
+#endif
     }
 
 
     void LateUpdate()
     {
-        XEntityMgr.singleton.PostUpdate();
+        XEntityMgr.singleton.LateUpdate();
     }
 
     void OnGUI()
     {
+#if TEST
         TestManager.Get().OnGUI();
+#endif
     }
 
 

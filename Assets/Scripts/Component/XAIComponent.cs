@@ -11,9 +11,9 @@ public class XAIComponent : XComponent
     public XRole Opponent { get { return _opponent; } set { _opponent = value; } }
    
 
-    public override void OnInitial(XEntity _entity)
+    public override void OnInitial(XObject _obj)
     {
-        base.OnInitial(_entity);
+        base.OnInitial(_obj);
     }
     
     public override void OnUninit()

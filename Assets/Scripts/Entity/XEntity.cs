@@ -91,25 +91,23 @@ public abstract class XEntity : XObject
         get { return GetComponent<XAIComponent>() == null; }
     }
 
-    protected Dictionary<uint, XComponent> components;
+   
 
     public void Initilize(GameObject o, XAttributes attr)
     {
+        base.Initilize();
         _object = o;
         _attr = attr;
-        components = new Dictionary<uint, XComponent>();
         OnInitial();
-        base.Initilize();
     }
 
     public void UnloadEntity()
     {
-        DetachAllComponents();
         _attr = null;
         GameObject.Destroy(_object);
         _object = null;
-        base.Unload();
         OnUnintial();
+        base.Unload();
     }
 
     public virtual void OnInitial() { }
@@ -120,78 +118,8 @@ public abstract class XEntity : XObject
     {
     }
 
-    private void CheckCondtion()
-    {
-        if (components == null)
-            throw new XComponentException("entity components is nil");
-    }
-
-    public T AttachComponent<T>() where T : XComponent, new()
-    {
-        CheckCondtion();
-        uint uid = XCommon.singleton.XHash(typeof(T).Name);
-        if (components.ContainsKey(uid))
-        {
-            return components[uid] as T;
-        }
-        else
-        {
-            T com = new T();
-            com.OnInitial(this);
-            components.Add(uid, com);
-            return com;
-        }
-    }
-
-    public bool DetachComponent<T>() where T : XComponent, new()
-    {
-       return DetachComponent(typeof(T).Name);
-    }
-
-
-    public T GetComponent<T>() where T : XComponent
-    {
-        uint uid = XCommon.singleton.XHash(typeof(T).Name);
-        if (components != null && components.ContainsKey(uid)) return components[uid] as T;
-        return null;
-    }
-
-    //lua interface
-    public object GetComponent(string name)
-    {
-        uint uid = XCommon.singleton.XHash(name);
-        if (components != null && components.ContainsKey(uid)) return components[uid];
-        return null;
-    }
-
-    //lua interface
-    public bool DetachComponent(string name)
-    {
-        uint uid = XCommon.singleton.XHash(name);
-        if (components != null && components.ContainsKey(uid))
-        {
-            components[uid].OnUninit();
-            components.Remove(uid);
-            return true;
-        }
-        return false;
-    }
-
-
-    private void DetachAllComponents()
-    {
-        if (components != null)
-        {
-            var e = components.GetEnumerator();
-            while(e.MoveNext())
-            {
-                e.Current.Value.OnUninit();
-            }
-        }
-        components.Clear();
-    }
-
-
+  
+    
     public void AttachHost()
     {
         OnAttachToHost();

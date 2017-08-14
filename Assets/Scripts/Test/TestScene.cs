@@ -1,4 +1,5 @@
-﻿using XTable;
+﻿#if TEST
+using XTable;
 using UnityEngine;
 
 public class TestScene : ITest
@@ -36,3 +37,7 @@ public class TestScene : ITest
     
     
 }
+
+
+
+#endif

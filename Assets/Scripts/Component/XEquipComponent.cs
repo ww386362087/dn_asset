@@ -17,9 +17,11 @@ public class XEquipComponent : XComponent
         _combineMeshTask = new CombineMeshTask(this);
     }
 
-    public override void OnInitial(XEntity e)
+    public override void OnInitial(XObject o)
     {
-        base.OnInitial(e);
+        base.OnInitial(o);
+
+        XEntity e = o as XEntity;
 
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
@@ -66,7 +68,7 @@ public class XEquipComponent : XComponent
             string path = part.partPath[i];
             if (string.IsNullOrEmpty(path))
             {
-                path = XEquipUtil.GetDefaultPath((EPartType)i, (entity as XRole).defEquip);
+                path = XEquipUtil.GetDefaultPath((EPartType)i, (obj as XRole).defEquip);
             }
             fpi.equipName = path;
             fashionList.Add(fpi);

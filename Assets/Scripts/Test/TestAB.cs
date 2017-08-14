@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if TEST
+
+using UnityEngine;
 using XTable;
 using System.Collections.Generic;
 
@@ -171,3 +173,6 @@ public class TestAB : ITest
     
     public void Update() { }
 }
+
+
+#endif

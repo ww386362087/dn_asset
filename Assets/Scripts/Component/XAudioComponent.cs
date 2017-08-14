@@ -4,9 +4,9 @@ using System.Collections;
 public class XAudioComponent : XComponent
 {
    
-    public override void OnInitial(XEntity _entity)
+    public override void OnInitial(XObject _obj)
     {
-        base.OnInitial(_entity);
+        base.OnInitial(_obj);
     }
 
     public override void OnUninit()

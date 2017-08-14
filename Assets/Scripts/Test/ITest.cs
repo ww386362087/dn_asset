@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if TEST
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public interface ITest
@@ -51,3 +53,6 @@ public class TestManager
 
 
 }
+
+
+#endif

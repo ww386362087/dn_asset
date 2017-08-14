@@ -16,10 +16,10 @@ public class XAnimComponent : XComponent
     private bool m_enable = true;
 
     static XEntityPresentation.RowData epRow;
-    public override void OnInitial(XEntity _entity)
+    public override void OnInitial(XObject _obj)
     {
-        base.OnInitial(_entity);
-        m_Animator = _entity.EntityObject.GetComponent<Animator>();
+        base.OnInitial(_obj);
+        m_Animator = (_obj as XEntity).EntityObject.GetComponent<Animator>();
         if (m_Animator.runtimeAnimatorController is AnimatorOverrideController)
         {
             m_overrideController = m_Animator.runtimeAnimatorController as AnimatorOverrideController;
