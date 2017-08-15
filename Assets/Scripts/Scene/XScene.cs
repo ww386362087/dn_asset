@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using XTable;
 
 internal class XScene : XSingleton<XScene>
 {
-    private XCamera _camera = new XCamera();
+    private XCamera _camera;
     private uint _sceneid;
 
     private Terrain _terrain;
@@ -11,7 +12,11 @@ internal class XScene : XSingleton<XScene>
 
     public XCamera GameCamera
     {
-        get { return _camera; }
+        get
+        {
+            if (_camera == null) _camera = new XCamera();
+            return _camera;
+        }
     }
 
 
@@ -19,21 +24,35 @@ internal class XScene : XSingleton<XScene>
     {
     }
 
-    public void PostUpdate()
+    public void LateUpdate()
     {
+        if (_camera != null)
+            _camera.LateUpdate();
     }
 
 
-    public void EnterScene(uint sceneid)
+    public void Enter(uint sceneid)
     {
         _sceneid = sceneid;
+        OnEnterScene(sceneid);
+        //to-do 
+        CreatePlayer();
+        CreateMonsters();
+
+        OnEnterSceneFinally();
+    }
+
+    private void OnEnterScene(uint sceneid)
+    {
+        _sceneid = sceneid;
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        GameCamera.PreInitial(camera);
         Documents.singleton.OnEnterScene();
     }
 
-    public void EnterSceneFinally()
+    private void OnEnterSceneFinally()
     {
-        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-        GameCamera.Initial(camera);
+        GameCamera.Initial();
         Documents.singleton.OnEnterSceneFinally();
         _terrain = Terrain.activeTerrain;
     }
@@ -42,6 +61,8 @@ internal class XScene : XSingleton<XScene>
     public void LeaveScene()
     {
         _camera.Uninitial();
+        _camera = null;
+        Documents.singleton.OnLeaveScene();
     }
 
 
@@ -53,5 +74,23 @@ internal class XScene : XSingleton<XScene>
         }
         return 0;
     }
+
+    private void CreatePlayer()
+    {
+        SceneList sc = new SceneList();
+        SceneList.RowData row = sc.GetItemID(_sceneid);
+        XEntityMgr.singleton.CreatePlayer(row);
+        XPlayer player = XEntityMgr.singleton.player;
+        player.EnableCC(true);
+        Debug.Log("player name: " + player.EntityObject.name);
+    }
+
+
+    private void CreateMonsters()
+    {
+        //to-do create monster
+    }
+
+
 
 }

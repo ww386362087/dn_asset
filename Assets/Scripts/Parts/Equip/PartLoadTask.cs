@@ -31,7 +31,7 @@ public class PartLoadTask : BaseLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                GameObject go = XResourceMgr.Load<GameObject>(location,AssetType.Prefab);
+                mtd = XResourceMgr.Load<XMeshTexData>(location,AssetType.Prefab);
                 LoadFinish(go, this);
             }
             else if (m_PartLoadCb != null)
@@ -46,11 +46,6 @@ public class PartLoadTask : BaseLoadTask
         if (processStatus == EProcessStatus.EProcessing)
         {
             processStatus = EProcessStatus.EPreProcess;
-            go = obj as GameObject;
-            if (go != null)
-            {
-                mtd = go.GetComponent<XMeshTexData>();
-            }
         }
         if (m_PartLoadCb != null)
         {

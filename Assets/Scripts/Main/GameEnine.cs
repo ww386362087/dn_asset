@@ -24,17 +24,22 @@ public class GameEnine : XObject
 
         XResourceMgr.Update();
         XEntityMgr.singleton.Update(delta);
+        XScene.singleton.Update(delta);
     }
 
 
     public static void LateUpdate()
     {
         XEntityMgr.singleton.LateUpdate();
+        XScene.singleton.LateUpdate();
     }
 
     public static void OnUnintial()
     {
 
     }
+
+    
+
 
 }

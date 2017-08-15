@@ -3,15 +3,6 @@
 public class XCamera : XObject
 {
 
-    public enum XStatus
-    {
-        None,
-        Idle,
-        Solo,
-        Effect
-    }
-
-
     private XEntity _active_target = null;
     private float _field_of_view = 45;
     private GameObject _dummyObject = null;
@@ -19,9 +10,33 @@ public class XCamera : XObject
     private Transform _cameraTransform = null;
     private Camera _camera;
     private GameObject _cameraObject = null;
-   
     private Animator _ator = null;
     private AnimatorOverrideController _overrideController;
+
+    private float _tdis = 4.2f;
+    private float _basic_dis = 4.2f;
+    //basic root
+    private bool _root_pos_inited = false;
+    private Vector3 _root_pos = Vector3.zero;
+    private Quaternion _idle_root_rotation = Quaternion.identity;
+    private float _idle_root_basic_x = 0;
+    private bool _init_idle_root_basic_x = false;
+
+    private float _idle_root_rotation_x_default = 0;
+    private float _idle_root_rotation_x_target = 0;
+    private float _idle_root_rotation_x = 0;
+    private float _idle_root_rotation_y = 0;
+    private float _idle_root_rotation_y_default = 0;
+    private float _idle_root_rotation_y_target = 0;
+
+    //position & rotation
+    private Vector3 _last_dummyCamera_pos = Vector3.zero;
+    private Vector3 _dummyCamera_pos = Vector3.zero;
+    private Vector3 _dummyCamera_rot = Vector3.forward;
+    private Quaternion _dummyCamera_quat = Quaternion.identity;
+
+    private Vector3 _v_self_p = Vector3.zero;
+    private Quaternion _q_self_r = Quaternion.identity;
 
     public Transform CameraTrans { get { return _cameraTransform; } }
 
@@ -31,10 +46,11 @@ public class XCamera : XObject
 
     public float FieldOfView { get { return _field_of_view; } }
 
+    public float TargetOffset { get { return _tdis; } set { _tdis = value; } }
+
     public Camera UnityCamera { get { return _camera; } }
 
     public Animator Ator { get { return _ator; } }
-
 
     public XEntity Target
     {
@@ -42,9 +58,9 @@ public class XCamera : XObject
         set { _active_target = value; }
     }
 
-
-    public void Initial(GameObject camera)
+    public void PreInitial(GameObject camera)
     {
+        base.Initilize();
         _cameraObject = camera;
         _cameraTransform = camera.transform;
 
@@ -67,11 +83,18 @@ public class XCamera : XObject
             }
             _overrideController.runtimeAnimatorController = _ator.runtimeAnimatorController;
             _ator.runtimeAnimatorController = _overrideController;
+        }
+    }
 
 
+    public void Initial()
+    {
+        if (_cameraObject != null)
+        {
             XPlayer player = XEntityMgr.singleton.player;
             if (player != null)
             {
+                _active_target = player;
                 _cameraObject.transform.rotation = player.Rotation;
                 _cameraObject.transform.position = player.Position + new Vector3(-1, 1, 1);
             }
@@ -81,9 +104,84 @@ public class XCamera : XObject
     public void Uninitial()
     {
         _camera = null;
-
+        GameObject.Destroy(_dummyObject);
+        base.Unload();
     }
 
+
+    public void LateUpdate()
+    {
+        if (!_root_pos_inited)
+        {
+            Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
+            _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
+            _dummyCamera_rot = _dummyCamera_quat.eulerAngles;
+
+            if (!_init_idle_root_basic_x)
+            {
+                _idle_root_basic_x = _dummyCamera_rot.x;
+                _basic_dis = (_dummyCamera.position - _dummyObject.transform.position).magnitude;
+            }
+            //SyncTarget();
+            _idle_root_rotation = Quaternion.Euler(_idle_root_rotation_x, _idle_root_rotation_y, 0);
+            _root_pos = _idle_root_rotation * _dummyCamera.position;
+            _root_pos_inited = true;
+            _init_idle_root_basic_x = true;
+        }
+
+        if (_active_target != null) InnerUpdateEx();
+    }
+
+    private void InnerUpdateEx()
+    {
+        InnerPosition();
+
+        Quaternion rotation = Quaternion.identity;
+        if (Target != null)
+            rotation = Target.Rotation;
+
+        if (Target != null)
+            _q_self_r = rotation;
+
+        Quaternion q_self_r = Target == null ? Quaternion.identity : rotation;
+        Vector3 v_self_p = Target == null ? Vector3.zero : Target.Position;
+
+        Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
+        _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
+        _dummyCamera_rot = _dummyCamera_quat.eulerAngles;
+
+        Vector3 delta = (_dummyCamera_pos - _root_pos);
+        Vector3 target_pos = Quaternion.identity * _root_pos;
+        delta = Quaternion.identity * delta;
+
+        _cameraTransform.rotation = Quaternion.identity * _idle_root_rotation * _dummyCamera_quat;
+        target_pos += v_self_p;
+        target_pos += delta;
+        _cameraTransform.position = target_pos;
+        LookAtTarget();
+    }
+
+
+    private void InnerPosition()
+    {
+        Vector3 dummyCamera = _dummyCamera.position;
+        if (Target.IsPlayer)
+        {
+            Vector3 offset_dir = (_dummyCamera.position - _dummyObject.transform.position);
+            float offset_dis = offset_dir.magnitude; offset_dir.Normalize();
+            if (offset_dir.z > 0)
+            {
+                offset_dis = -offset_dis;
+                offset_dir = -offset_dir;
+            }
+            float effect = (offset_dis - _basic_dis);
+            float dis = TargetOffset + effect;
+            if (dis <= 0) dis = 0.1f;
+            dummyCamera = _dummyObject.transform.position + dis * offset_dir;
+        }
+        _dummyCamera_pos = _idle_root_rotation * (dummyCamera - _dummyObject.transform.position) + (_dummyObject.transform.position);
+        _last_dummyCamera_pos = _dummyCamera_pos;
+    }
 
     public void LookAtTarget()
     {
@@ -93,7 +191,6 @@ public class XCamera : XObject
             _cameraTransform.LookAt(pos);
         }
     }
-
 
     public bool IsVisibleFromCamera(XEntity entity, bool fully)
     {
@@ -115,7 +212,41 @@ public class XCamera : XObject
         }
     }
 
+    //SetCameraLayer(XPlayer.PlayerLayer, true);
+    public void SetCameraLayer(int layer, bool add)
+    {
+        if (add)
+        {
+            _camera.cullingMask |= 1 << layer;
+        }
+        else
+        {
+            _camera.cullingMask &= ~(1 << layer);
+        }
+    }
 
+    public void SetCameraLayer(int layermask)
+    {
+        _camera.cullingMask = layermask;
+    }
+
+    public int GetCameraLayer()
+    {
+        return _camera.cullingMask;
+    }
+
+    public void SetSolidBlack(bool enabled)
+    {
+        if (enabled)
+        {
+            _camera.clearFlags = CameraClearFlags.SolidColor;
+            _camera.backgroundColor = Color.black;
+        }
+        else
+        {
+            _camera.clearFlags = CameraClearFlags.Skybox;
+        }
+    }
 
 
 }

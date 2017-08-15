@@ -6,20 +6,68 @@
 public class XComponent : XObject
 {
 
+    public enum UpdateState
+    {
+        NONE,  //不调用
+        TIMER, //每秒一次
+        FRAME, //每帧调用
+        DOUBLE,//每两帧调用
+    }
+
+    /// <summary>
+    /// 被挂载的对象
+    /// </summary>
     public XObject xobj = null;
 
     public virtual uint ID { get { return XCommon.singleton.XHash(this.GetType().Name); } }
 
+    protected UpdateState state { get { return UpdateState.NONE; } }
+
+    private bool _double = false;
+    private float _time = 0;
+    
     public virtual void OnInitial(XObject _obj)
     {
         base.Initilize();
         xobj = _obj;
+        _double = false;
+        _time = 0;
     }
 
     public virtual void OnUninit()
     {
         xobj = null;
+        _double = false;
+        _time = 0;
         base.Unload();
+    }
+
+    public void Update(float delta)
+    {
+        _time += delta;
+        switch (state)
+        {
+            case UpdateState.FRAME:
+                OnUpdate();
+                break;
+            case UpdateState.DOUBLE:
+                if (_double) OnUpdate();
+                _double = !_double;
+                break;
+            case UpdateState.TIMER:
+                if (_time >= 1f)
+                {
+                    OnUpdate();
+                    _time = 0;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public virtual void OnUpdate()
+    {
     }
 
 

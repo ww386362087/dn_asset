@@ -157,14 +157,14 @@
     <Compile Include="Assets\Scripts\Test\TestAB.cs" />
     <Compile Include="Assets\Scripts\Test\TestCPP.cs" />
     <Compile Include="Assets\Scripts\Test\TestScene.cs" />
-    <Compile Include="Assets\Scripts\UI\CanvasBehaviour.cs" />
-    <Compile Include="Assets\Scripts\UI\CanvasDlg.cs" />
-    <Compile Include="Assets\Scripts\UI\DlgBehaviourBase.cs" />
-    <Compile Include="Assets\Scripts\UI\IUIDlg.cs" />
-    <Compile Include="Assets\Scripts\UI\JoyStickDlg.cs" />
-    <Compile Include="Assets\Scripts\UI\JoyyouStickBahaviour.cs" />
-    <Compile Include="Assets\Scripts\UI\UIDlg.cs" />
-    <Compile Include="Assets\Scripts\UI\UIManager.cs" />
+    <Compile Include="Assets\Scripts\UI\JoyStick\CanvasBehaviour.cs" />
+    <Compile Include="Assets\Scripts\UI\JoyStick\CanvasDlg.cs" />
+    <Compile Include="Assets\Scripts\UI\JoyStick\JoyStickDlg.cs" />
+    <Compile Include="Assets\Scripts\UI\JoyStick\JoyyouStickBahaviour.cs" />
+    <Compile Include="Assets\Scripts\UI\Manager\DlgBehaviourBase.cs" />
+    <Compile Include="Assets\Scripts\UI\Manager\IUIDlg.cs" />
+    <Compile Include="Assets\Scripts\UI\Manager\UIDlg.cs" />
+    <Compile Include="Assets\Scripts\UI\Manager\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Cache\cache.txt" />

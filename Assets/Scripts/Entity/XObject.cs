@@ -11,10 +11,10 @@ public class XObject
 {
     protected Dictionary<uint, XComponent> components;
 
-    private Dictionary<XEventDefine,EventHandler> _eventMap;
-    
+    private Dictionary<XEventDefine, EventHandler> _eventMap;
+
     public bool Deprecated { get; set; }
-    
+
     protected void Initilize()
     {
         Deprecated = false;
@@ -61,14 +61,14 @@ public class XObject
             EventHandler eh = new EventHandler();
             eh.eventDefine = eventID;
             eh.handler = handler;
-            _eventMap.Add(eventID,eh);
+            _eventMap.Add(eventID, eh);
             XEventMgr.singleton.AddRegist(eventID, this);
         }
     }
 
     public virtual bool DispatchEvent(XEventArgs e)
     {
-        if (!Deprecated && _eventMap!=null)
+        if (!Deprecated && _eventMap != null)
         {
             if (_eventMap.ContainsKey(e.ArgsDefine))
             {
@@ -148,7 +148,7 @@ public class XObject
     }
 
 
-    private void DetachAllComponents()
+    public void DetachAllComponents()
     {
         if (components != null)
         {
@@ -160,4 +160,17 @@ public class XObject
         }
         components.Clear();
     }
+
+    protected void UpdateComponents(float delta)
+    {
+        if (components != null)
+        {
+            var e = components.GetEnumerator();
+            while (e.MoveNext())
+            {
+                e.Current.Value.Update(delta);
+            }
+        }
+    }
+
 }

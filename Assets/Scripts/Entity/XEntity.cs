@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 
 public enum EnitityType
@@ -137,7 +136,10 @@ public abstract class XEntity : XObject
 
     protected virtual void OnUnintial() { }
 
-    public virtual void Update(float delta) { }
+    public virtual void Update(float delta)
+    {
+        UpdateComponents(delta);
+    }
 
     public virtual void OnAttachToHost() { }
 
