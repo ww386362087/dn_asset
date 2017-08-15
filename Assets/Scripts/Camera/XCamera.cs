@@ -80,16 +80,8 @@ public class XCamera : XObject
 
     public void Initial()
     {
-        if (_cameraObject != null)
-        {
-            XPlayer player = XEntityMgr.singleton.player;
-            if (player != null)
-            {
-                _active_target = player;
-                _cameraObject.transform.rotation = player.Rotation;
-                _cameraObject.transform.position = player.Position + new Vector3(-1, 1, 1);
-            }
-        }
+        XPlayer player = XEntityMgr.singleton.player;
+        _active_target = player;
     }
 
     public void Uninitial()
@@ -107,10 +99,7 @@ public class XCamera : XObject
             Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
             _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
 
-            if (!_init_idle_root_basic_x)
-            {
-                _basic_dis = (_dummyCamera.position - _dummyObject.transform.position).magnitude;
-            }
+            if (!_init_idle_root_basic_x) _basic_dis = (_dummyCamera.position - _dummyObject.transform.position).magnitude;
             _idle_root_rotation = Quaternion.Euler(_idle_root_rotation_x, _idle_root_rotation_y, 0);
             _root_pos = _idle_root_rotation * _dummyCamera.position;
             _root_pos_inited = true;
@@ -124,10 +113,8 @@ public class XCamera : XObject
         InnerPosition();
 
         Quaternion rotation = Quaternion.identity;
-        if (Target != null) rotation = Target.Rotation;
-
+        if (_active_target != null) rotation = _active_target.Rotation;
         Vector3 v_self_p = Target == null ? Vector3.zero : Target.Position;
-
         Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
         _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
 
