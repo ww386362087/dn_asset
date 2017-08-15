@@ -46,13 +46,13 @@ internal class XScene : XSingleton<XScene>
     {
         _sceneid = sceneid;
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-        GameCamera.PreInitial(camera);
+        GameCamera.Initial(camera);
         Documents.singleton.OnEnterScene();
     }
 
     private void OnEnterSceneFinally()
     {
-        GameCamera.Initial();
+        GameCamera.OnEnterSceneFinally();
         Documents.singleton.OnEnterSceneFinally();
         _terrain = Terrain.activeTerrain;
     }
