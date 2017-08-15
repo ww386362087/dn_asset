@@ -19,24 +19,15 @@ public class XCamera : XObject
     private bool _root_pos_inited = false;
     private Vector3 _root_pos = Vector3.zero;
     private Quaternion _idle_root_rotation = Quaternion.identity;
-    private float _idle_root_basic_x = 0;
     private bool _init_idle_root_basic_x = false;
 
-    private float _idle_root_rotation_x_default = 0;
-    private float _idle_root_rotation_x_target = 0;
     private float _idle_root_rotation_x = 0;
     private float _idle_root_rotation_y = 0;
-    private float _idle_root_rotation_y_default = 0;
-    private float _idle_root_rotation_y_target = 0;
 
     //position & rotation
-    private Vector3 _last_dummyCamera_pos = Vector3.zero;
     private Vector3 _dummyCamera_pos = Vector3.zero;
-    private Vector3 _dummyCamera_rot = Vector3.forward;
     private Quaternion _dummyCamera_quat = Quaternion.identity;
 
-    private Vector3 _v_self_p = Vector3.zero;
-    private Quaternion _q_self_r = Quaternion.identity;
 
     public Transform CameraTrans { get { return _cameraTransform; } }
 
@@ -115,20 +106,16 @@ public class XCamera : XObject
         {
             Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
             _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
-            _dummyCamera_rot = _dummyCamera_quat.eulerAngles;
 
             if (!_init_idle_root_basic_x)
             {
-                _idle_root_basic_x = _dummyCamera_rot.x;
                 _basic_dis = (_dummyCamera.position - _dummyObject.transform.position).magnitude;
             }
-            //SyncTarget();
             _idle_root_rotation = Quaternion.Euler(_idle_root_rotation_x, _idle_root_rotation_y, 0);
             _root_pos = _idle_root_rotation * _dummyCamera.position;
             _root_pos_inited = true;
             _init_idle_root_basic_x = true;
         }
-
         if (_active_target != null) InnerUpdateEx();
     }
 
@@ -137,20 +124,14 @@ public class XCamera : XObject
         InnerPosition();
 
         Quaternion rotation = Quaternion.identity;
-        if (Target != null)
-            rotation = Target.Rotation;
+        if (Target != null) rotation = Target.Rotation;
 
-        if (Target != null)
-            _q_self_r = rotation;
-
-        Quaternion q_self_r = Target == null ? Quaternion.identity : rotation;
         Vector3 v_self_p = Target == null ? Vector3.zero : Target.Position;
 
         Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
         _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
-        _dummyCamera_rot = _dummyCamera_quat.eulerAngles;
 
-        Vector3 delta = (_dummyCamera_pos - _root_pos);
+        Vector3 delta = _dummyCamera_pos - _root_pos;
         Vector3 target_pos = Quaternion.identity * _root_pos;
         delta = Quaternion.identity * delta;
 
@@ -180,7 +161,6 @@ public class XCamera : XObject
             dummyCamera = _dummyObject.transform.position + dis * offset_dir;
         }
         _dummyCamera_pos = _idle_root_rotation * (dummyCamera - _dummyObject.transform.position) + (_dummyObject.transform.position);
-        _last_dummyCamera_pos = _dummyCamera_pos;
     }
 
     public void LookAtTarget()
