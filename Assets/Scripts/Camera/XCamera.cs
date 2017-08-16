@@ -11,26 +11,25 @@ public class XCamera : XObject
     private GameObject _cameraObject = null;
     private Animator _ator = null;
     private AnimatorOverrideController _overrideController;
-
-    private float _tdis = 4.2f;
-    private float _basic_dis = 4.2f;
+    
     //basic root
-    private bool _root_pos_inited = false;
-    private Quaternion _idle_root_rotation = Quaternion.identity;
-    private bool _init_idle_root_basic_x = false;
+    private bool _pos_inited = false;
+    private float _angle_x = 0;
+    private float _angle_y = 0;
+    private Quaternion _root_quat = Quaternion.identity;
+    private bool _init_basic_x = false;
 
     //position & rotation
     private Vector3 _dummyCamera_pos = Vector3.zero;
     private Quaternion _dummyCamera_quat = Quaternion.identity;
-
+    private Vector3 _dummyCamera_angle = Vector3.forward;
 
     public Transform CameraTrans { get { return _cameraTransform; } }
 
     public Vector3 Position { get { return _cameraTransform.position; } }
 
     public Quaternion Rotaton { get { return _cameraTransform.rotation; } }
-    
-    public float TargetOffset { get { return _tdis; } set { _tdis = value; } }
+
 
     public Camera UnityCamera { get { return _camera; } }
 
@@ -67,32 +66,36 @@ public class XCamera : XObject
             _ator.runtimeAnimatorController = _overrideController;
         }
     }
-    
+
     public void OnEnterSceneFinally()
     {
         _target = XEntityMgr.singleton.player;
+        AttachComponent<XCameraActionComponent>();
     }
 
     public void Uninitial()
     {
         _camera = null;
+        _angle_x = 0;
+        _angle_y = 0;
+        _pos_inited = false;
+        _overrideController = null;
+        _target = null;
         GameObject.Destroy(_dummyObject);
+        DetachAllComponents();
         base.Unload();
     }
 
     public void LateUpdate()
     {
-        if (!_root_pos_inited)
+        if (!_pos_inited)
         {
-            Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
-            _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
-
-            if (!_init_idle_root_basic_x) _basic_dis = (_dummyCamera.position - _dummyObject.transform.position).magnitude;
-            _idle_root_rotation = Quaternion.identity;
-            _root_pos_inited = true;
-            _init_idle_root_basic_x = true;
+            _root_quat = Quaternion.identity;
+            _dummyCamera_angle = _dummyCamera_quat.eulerAngles;
+            _pos_inited = true;
         }
         if (_target != null) InnerUpdateEx();
+        base.UpdateComponents(Time.deltaTime);
     }
 
     private void InnerUpdateEx()
@@ -101,7 +104,8 @@ public class XCamera : XObject
 
         Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
         _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
-        _cameraTransform.rotation = _idle_root_rotation * _dummyCamera_quat;
+        _dummyCamera_angle = _dummyCamera_quat.eulerAngles;
+        _cameraTransform.rotation = _root_quat * _dummyCamera_quat;
         _cameraTransform.position = _dummyCamera_pos + _target.Position;
         LookAtTarget();
     }
@@ -111,22 +115,51 @@ public class XCamera : XObject
         Vector3 offset_dir = _dummyCamera.position - _dummyObject.transform.position;
         float offset_dis = offset_dir.magnitude;
         offset_dir.Normalize();
-        if (offset_dir.z > 0)
+        if (offset_dis <= 0) offset_dis = 0.1f;
+        _dummyCamera_pos = offset_dis * (_root_quat * offset_dir) + _dummyObject.transform.position;
+    }
+
+
+    public void XRotate(float addation)
+    {
+        if (addation != 0)
         {
-            offset_dis = -offset_dis;
-            offset_dir = -offset_dir;
+            _angle_x += addation;
+            ReCaleRoot();
         }
-        float effect = offset_dis - _basic_dis;
-        float dis = TargetOffset + effect;
-        if (dis <= 0) dis = 0.1f;
-        _dummyCamera_pos = _idle_root_rotation * (dis * offset_dir) + _dummyObject.transform.position;
+    }
+
+    public void YRotate(float addation)
+    {
+        if (addation != 0)
+        {
+            _angle_y += addation;
+            ReCaleRoot();
+        }
+    }
+
+    public void XRotateEx(float x)
+    {
+        _angle_x = x;
+        ReCaleRoot();
+    }
+
+    public void YRotateEx(float y)
+    {
+        _angle_y = y;
+        ReCaleRoot();
+    }
+
+    public void ReCaleRoot()
+    {
+        _root_quat = Quaternion.Euler(_angle_x, _angle_y, 0);
     }
 
     public void LookAtTarget()
     {
         if (_target != null)
         {
-            Vector3 pos = _target.Position + (_dummyCamera == null ? Vector3.zero : _dummyCamera.position);
+            Vector3 pos = _target.Position + _dummyCamera.position;
             _cameraTransform.LookAt(pos);
         }
     }

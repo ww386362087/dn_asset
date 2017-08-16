@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -90,6 +92,7 @@
     <Compile Include="Assets\Scripts\AssetSystem\AssetType.cs" />
     <Compile Include="Assets\Scripts\AssetSystem\XResourceMgr.cs" />
     <Compile Include="Assets\Scripts\Camera\XCamera.cs" />
+    <Compile Include="Assets\Scripts\Camera\XCameraActionComponent.cs" />
     <Compile Include="Assets\Scripts\Component\XAIComponent.cs" />
     <Compile Include="Assets\Scripts\Component\XAnimComponent.cs" />
     <Compile Include="Assets\Scripts\Component\XAttributes.cs" />

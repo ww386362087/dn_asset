@@ -21,7 +21,7 @@ public class XComponent : XObject
 
     public virtual uint ID { get { return XCommon.singleton.XHash(this.GetType().Name); } }
 
-    protected UpdateState state { get { return UpdateState.NONE; } }
+    protected virtual UpdateState state { get { return UpdateState.NONE; } }
 
     private bool _double = false;
     private float _time = 0;
@@ -48,16 +48,16 @@ public class XComponent : XObject
         switch (state)
         {
             case UpdateState.FRAME:
-                OnUpdate();
+                OnUpdate(delta);
                 break;
             case UpdateState.DOUBLE:
-                if (_double) OnUpdate();
+                if (_double) OnUpdate(delta);
                 _double = !_double;
                 break;
             case UpdateState.TIMER:
                 if (_time >= 1f)
                 {
-                    OnUpdate();
+                    OnUpdate(delta);
                     _time = 0;
                 }
                 break;
@@ -66,7 +66,7 @@ public class XComponent : XObject
         }
     }
 
-    public virtual void OnUpdate()
+    public virtual void OnUpdate(float delta)
     {
     }
 
