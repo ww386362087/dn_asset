@@ -18,7 +18,7 @@ class XCameraActionComponent : XComponent
     private float _ty = 0;
 
     private bool _auto = true;
-    private const float speed = 0.02f;
+    private const float speed = 0.06f;
 
 
     protected override UpdateState state
@@ -73,7 +73,7 @@ class XCameraActionComponent : XComponent
             _auto_x += _tx - _auto_x;
             _auto_y += _ty - _auto_y;
             if (_auto_y != 0) _camera_host.XRotate(-_auto_y);
-            if (_tx != 0) _camera_host.YRotate(_tx);
+            if (_tx != 0) _camera_host.YRotate(_auto_x);
         }
         else
         {

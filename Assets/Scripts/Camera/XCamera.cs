@@ -11,7 +11,10 @@ public class XCamera : XObject
     private GameObject _cameraObject = null;
     private Animator _ator = null;
     private AnimatorOverrideController _overrideController;
-    
+
+    const float MaxV = 80;
+    const float MinV = -80;
+
     //basic root
     private bool _pos_inited = false;
     private float _angle_x = 0;
@@ -106,8 +109,7 @@ public class XCamera : XObject
         Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
         _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
         _cameraTransform.rotation =_root_quat * _dummyCamera_quat ;
-
-
+        
         Vector3 _dir = _dummyCamera.position - _dummyObject.transform.position;
         float _dis = _dir.magnitude;
         _dir.Normalize();
