@@ -18,7 +18,7 @@ class XCameraActionComponent : XComponent
     private float _ty = 0;
 
     private bool _auto = true;
-    private const float speed = 0.08f;
+    private const float speed = 0.02f;
 
 
     protected override UpdateState state
@@ -42,7 +42,6 @@ class XCameraActionComponent : XComponent
 
     public override void OnUpdate(float delta)
     {
-        base.OnUpdate(delta);
         if (XGesture.singleton.Working)
         {
             if (_began)
@@ -73,15 +72,15 @@ class XCameraActionComponent : XComponent
         {
             _auto_x += _tx - _auto_x;
             _auto_y += _ty - _auto_y;
-          //  if (_auto_y != 0) _camera_host.XRotate(-_auto_y);
-            if (_auto_x != 0) _camera_host.YRotate(_auto_x);
+            if (_auto_y != 0) _camera_host.XRotate(-_auto_y);
+            if (_tx != 0) _camera_host.YRotate(_tx);
         }
         else
         {
             _manual_x += _tx - _manual_x;
             _manual_y += _ty - _manual_y;
             _camera_host.XRotateEx(_manual_x);
-          //  _camera_host.YRotateEx(_manual_y);
+            _camera_host.YRotateEx(_manual_y);
         }
     }
 

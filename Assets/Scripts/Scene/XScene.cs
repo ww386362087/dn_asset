@@ -22,6 +22,8 @@ internal class XScene : XSingleton<XScene>
 
     public void Update(float deltaTime)
     {
+        if (_camera != null)
+            _camera.Update(deltaTime);
     }
 
     public void LateUpdate()

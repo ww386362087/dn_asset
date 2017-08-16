@@ -17,12 +17,11 @@ public class XCamera : XObject
     private float _angle_x = 0;
     private float _angle_y = 0;
     private Quaternion _root_quat = Quaternion.identity;
-    private bool _init_basic_x = false;
-
+   
     //position & rotation
     private Vector3 _dummyCamera_pos = Vector3.zero;
     private Quaternion _dummyCamera_quat = Quaternion.identity;
-    private Vector3 _dummyCamera_angle = Vector3.forward;
+    
 
     public Transform CameraTrans { get { return _cameraTransform; } }
 
@@ -86,40 +85,39 @@ public class XCamera : XObject
         base.Unload();
     }
 
+    public void Update(float delta)
+    {
+        base.UpdateComponents(delta);
+    }
+
     public void LateUpdate()
     {
         if (!_pos_inited)
         {
             _root_quat = Quaternion.identity;
-            _dummyCamera_angle = _dummyCamera_quat.eulerAngles;
             _pos_inited = true;
         }
+       
         if (_target != null) InnerUpdateEx();
-        base.UpdateComponents(Time.deltaTime);
     }
 
     private void InnerUpdateEx()
     {
-        InnerPosition();
-
         Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
         _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
-        _dummyCamera_angle = _dummyCamera_quat.eulerAngles;
-        _cameraTransform.rotation = _root_quat * _dummyCamera_quat;
+        _cameraTransform.rotation =_root_quat * _dummyCamera_quat ;
+
+
+        Vector3 _dir = _dummyCamera.position - _dummyObject.transform.position;
+        float _dis = _dir.magnitude;
+        _dir.Normalize();
+        if (_dis <= 0) _dis = 0.1f;
+        _dummyCamera_pos = _root_quat * (_dis * _dir) + _dummyObject.transform.position;
         _cameraTransform.position = _dummyCamera_pos + _target.Position;
         LookAtTarget();
     }
-
-    private void InnerPosition()
-    {
-        Vector3 offset_dir = _dummyCamera.position - _dummyObject.transform.position;
-        float offset_dis = offset_dir.magnitude;
-        offset_dir.Normalize();
-        if (offset_dis <= 0) offset_dis = 0.1f;
-        _dummyCamera_pos = offset_dis * (_root_quat * offset_dir) + _dummyObject.transform.position;
-    }
-
-
+    
+    
     public void XRotate(float addation)
     {
         if (addation != 0)
@@ -159,7 +157,7 @@ public class XCamera : XObject
     {
         if (_target != null)
         {
-            Vector3 pos = _target.Position + _dummyCamera.position;
+            Vector3 pos = _target.Position + _dummyObject.transform.position;
             _cameraTransform.LookAt(pos);
         }
     }
