@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// screen 右侧手势->camera旋转
+/// </summary>
 
 class XCameraActionComponent : XComponent
 {

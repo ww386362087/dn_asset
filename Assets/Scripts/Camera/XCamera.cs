@@ -11,9 +11,7 @@ public class XCamera : XObject
     private GameObject _cameraObject = null;
     private Animator _ator = null;
     private AnimatorOverrideController _overrideController;
-
-    const float MaxV = 80;
-    const float MinV = -80;
+    
 
     //basic root
     private bool _pos_inited = false;

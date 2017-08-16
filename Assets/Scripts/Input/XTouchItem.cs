@@ -6,7 +6,7 @@ internal class XTouchItem
 
     public Touch touch;
 
-    public XFakeTouch faketouch;
+    public XFakeTouch faketouch = default(XFakeTouch);
 
     public float DeltaTime
     {

@@ -17,6 +17,11 @@ public class XPlayer : XRole
 
     public XRole WatchTo { get { return _watch_to != null && !_watch_to.Deprecated ? _watch_to : null; } }
 
+    public override void OnInitial()
+    {
+        base.OnInitial();
+        OnStopJoyStick(null);
+    }
 
     protected override void EventSubscribe()
     {
