@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\Entity\XObject.cs" />
     <Compile Include="Assets\Scripts\Entity\XPlayer.cs" />
     <Compile Include="Assets\Scripts\Entity\XRole.cs" />
+    <Compile Include="Assets\Scripts\Event\XEventArgs.cs" />
     <Compile Include="Assets\Scripts\Event\XEventDefine.cs" />
     <Compile Include="Assets\Scripts\Event\XEventMgr.cs" />
     <Compile Include="Assets\Scripts\Input\XFakeTouchItem.cs" />

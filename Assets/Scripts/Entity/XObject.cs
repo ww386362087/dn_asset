@@ -55,9 +55,7 @@ public class XObject
             if (_eventMap == null)
                 _eventMap = new Dictionary<XEventDefine, EventHandler>();
             int length = _eventMap.Count;
-
             if (_eventMap.ContainsKey(eventID)) return;
-
             EventHandler eh = new EventHandler();
             eh.eventDefine = eventID;
             eh.handler = handler;
@@ -73,7 +71,7 @@ public class XObject
             if (_eventMap.ContainsKey(e.ArgsDefine))
             {
                 var etor = _eventMap.GetEnumerator();
-                while(etor.MoveNext())
+                while (etor.MoveNext())
                 {
                     EventHandler eh = etor.Current.Value;
                     if (eh.eventDefine == e.ArgsDefine)

@@ -11,7 +11,7 @@ public enum DlgType
 
 public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
     where TBehaviour : DlgBehaviourBase
-    where TDlg : IUIDlg, new()
+    where TDlg :  IUIDlg, new()
 {
 
     private static TDlg s_instance = default(TDlg);

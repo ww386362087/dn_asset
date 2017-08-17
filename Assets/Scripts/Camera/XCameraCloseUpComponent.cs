@@ -37,6 +37,7 @@ class XCameraCloseUpComponent : XComponent
     private void OnCloseUpEnd(XEventArgs e)
     {
 
+        Debug.Log("OnCloseUpEnd");
     }
 
 

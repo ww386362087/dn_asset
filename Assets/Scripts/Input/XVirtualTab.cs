@@ -87,7 +87,6 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
             _finger_id = -1;
             
             XEventMgr.singleton.FireEvent(new XJoyStickCancelEvent());
-
             JoyStickDlg.singleton.Hide();
         }
     }

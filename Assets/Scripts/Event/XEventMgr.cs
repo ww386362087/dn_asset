@@ -53,21 +53,22 @@ public class XEventMgr : XSingleton<XEventMgr>
                 if (pool[list[i]].Count == 0) pool.Remove(list[i]);
             }
         }
-    } 
-    
-    
+    }
+
+
     public bool FireEvent(XEventArgs args)
     {
-        if(pool!=null)
+        if (pool != null)
         {
-            if(pool.ContainsKey(args.ArgsDefine))
+            if (pool.ContainsKey(args.ArgsDefine))
             {
                 var objs = pool[args.ArgsDefine];
                 var e = objs.GetEnumerator();
-                while(e.MoveNext())
+                while (e.MoveNext())
                 {
                     e.Current.DispatchEvent(args);
                 }
+                if (!args.ManualRecycle) args.Recycle();
                 return true;
             }
         }

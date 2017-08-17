@@ -74,6 +74,7 @@ public class XCamera : XObject
     {
         _target = XEntityMgr.singleton.player;
         AttachComponent<XCameraActionComponent>();
+        AttachComponent<XCameraCloseUpComponent>();
     }
 
     public void Uninitial()
