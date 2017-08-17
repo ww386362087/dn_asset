@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\AssetSystem\XResourceMgr.cs" />
     <Compile Include="Assets\Scripts\Camera\XCamera.cs" />
     <Compile Include="Assets\Scripts\Camera\XCameraActionComponent.cs" />
+    <Compile Include="Assets\Scripts\Camera\XCameraCloseUpComponent.cs" />
     <Compile Include="Assets\Scripts\Component\XAIComponent.cs" />
     <Compile Include="Assets\Scripts\Component\XAnimComponent.cs" />
     <Compile Include="Assets\Scripts\Component\XAttributes.cs" />

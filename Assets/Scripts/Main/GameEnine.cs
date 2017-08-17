@@ -5,11 +5,13 @@ public class GameEnine : XObject
 
     private static GameEntrance _entrance;
 
+    public static GameEntrance entrance { get { return _entrance; } }
+
     public static void Init(GameEntrance en)
     {
         _entrance = en;
 
-        ABManager.singleton.Init(_entrance);
+        ABManager.singleton.Initial();
         Documents.singleton.Initial();
         UIManager.singleton.Initial();
     }

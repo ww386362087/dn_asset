@@ -72,9 +72,10 @@ public class XObject
         {
             if (_eventMap.ContainsKey(e.ArgsDefine))
             {
-                foreach (var item in _eventMap)
+                var etor = _eventMap.GetEnumerator();
+                while(etor.MoveNext())
                 {
-                    EventHandler eh = item.Value;
+                    EventHandler eh = etor.Current.Value;
                     if (eh.eventDefine == e.ArgsDefine)
                     {
                         XEventHandler func = eh.handler;

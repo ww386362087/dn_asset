@@ -91,7 +91,7 @@ public class XCamera : XObject
 
     public void Update(float delta)
     {
-        base.UpdateComponents(delta);
+        UpdateComponents(delta);
     }
 
     public void LateUpdate()
@@ -183,11 +183,10 @@ public class XCamera : XObject
             _overrideController[motion] = null;
         }
     }
-
-    //SetCameraLayer(XPlayer.PlayerLayer, true);
-    public void SetCameraLayer(int layer, bool add)
+    
+    public void SetCameraLayer(int layer, bool show)
     {
-        if (add)
+        if (show)
         {
             _camera.cullingMask |= 1 << layer;
         }

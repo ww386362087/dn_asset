@@ -9,8 +9,7 @@ namespace ABSystem
 {
     class AssetBundleUtil 
     {
-
-        public static AssetBundlePathResolver pathResolver;
+        
         public static DirectoryInfo AssetDir = new DirectoryInfo(Application.dataPath);
         public static string AssetPath = AssetDir.FullName;
         public static DirectoryInfo ProjectDir = AssetDir.Parent;

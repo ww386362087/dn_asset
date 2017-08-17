@@ -6,7 +6,7 @@
 
 class XCameraActionComponent : XComponent
 {
-    private XCamera _camera_host = null;
+    private XCamera _camera = null;
 
     private Vector3 _last_pos = Vector3.zero;
     private bool _began = false;
@@ -14,8 +14,7 @@ class XCameraActionComponent : XComponent
     private float _auto_x = 0;
     private float _auto_y = 0;
 
-    private float _manual_x = 0;
-    private float _manual_y = 0;
+    private float _manual = 0;
 
     private float _tx = 0;
     private float _ty = 0;
@@ -23,7 +22,7 @@ class XCameraActionComponent : XComponent
     private bool _auto = true;
     private const float speed = 0.06f;
 
-    private float _closeSpeed = 0.8f;//the value must be less 1f
+    private float _flowSpeed = 0.8f;//the value must be less 1f
 
     protected override UpdateState state
     {
@@ -33,14 +32,14 @@ class XCameraActionComponent : XComponent
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
-        _camera_host = _obj as XCamera;
+        _camera = _obj as XCamera;
     }
 
 
     public override void OnUninit()
     {
         base.OnUninit();
-        _camera_host = null;
+        _camera = null;
     }
 
     protected override void EventSubscribe()
@@ -79,17 +78,17 @@ class XCameraActionComponent : XComponent
 
         if (_auto)
         {
-            _auto_x = (_tx - _auto_x) * _closeSpeed;
-            _auto_y += (_ty - _auto_y) * _closeSpeed;
-            if (_auto_y != 0) _camera_host.XRotate(-_auto_y);
-            if (_auto_x != 0) _camera_host.YRotate(_auto_x);
+            _auto_x = (_tx - _auto_x) * _flowSpeed;
+            _auto_y += (_ty - _auto_y) * _flowSpeed;
+            if (_auto_y != 0) _camera.XRotate(-_auto_y);
+            if (_auto_x != 0) _camera.YRotate(_auto_x);
         }
         else
         {
-            _manual_x = _manual_x * _closeSpeed;
-            if (_manual_x > 0.002f)
+            _manual = _manual * _flowSpeed;
+            if (_manual > 0.002f)
             {
-                _camera_host.YRotate(_tx);
+                _camera.YRotate(_tx);
             }
         }
     }
@@ -97,7 +96,7 @@ class XCameraActionComponent : XComponent
 
     private void OnGestureCancel(XEventArgs e)
     {
-        _manual_x = _auto_x;
+        _manual = _auto_x;
         _auto = false;
     }
 

@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class ABManager : XSingleton<ABManager>
 {
-
-    private MonoBehaviour mono;
+    
     public AssetBundleDataReader depInfoReader;
     private Dictionary<uint, Object> map;
 
-    public void Init(MonoBehaviour entraince)
+    public void Initial()
     {
-        mono = entraince;
         map = new Dictionary<uint, Object>();
         LoadDepInfo();
     }
@@ -80,14 +78,14 @@ public class ABManager : XSingleton<ABManager>
     public Object LoadImm(string location, AssetType type)
     {
         AssetBundleData data = MakePath(location, type);
-        Loader loader = new Loader(data, mono);
+        Loader loader = new Loader(data);
         return loader.LoadImm();
     }
 
     public void LoadImm(string location, AssetType type, System.Action<Object> cb)
     {
         AssetBundleData data = MakePath(location, type);
-        AsyncLoader loader = new AsyncLoader(data, mono);
+        AsyncLoader loader = new AsyncLoader(data);
         loader.LoadImm(cb);
     }
 

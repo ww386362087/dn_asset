@@ -11,10 +11,10 @@ public class LoaderBase
     protected MonoBehaviour mono;
     protected int depsCnt = 0;
 
-    public LoaderBase(AssetBundleData d, MonoBehaviour m)
+    public LoaderBase(AssetBundleData d)
     {
         data = d;
-        mono = m;
+        mono = GameEnine.entrance;
         depsCnt = data.dependencies.Length;
     }
  
@@ -26,8 +26,8 @@ public class LoaderBase
 /// </summary>
 public class Loader : LoaderBase
 {
-    public Loader(AssetBundleData d, MonoBehaviour m) 
-        : base(d, m)
+    public Loader(AssetBundleData d) 
+        : base(d)
     {
     }
 
@@ -46,7 +46,7 @@ public class Loader : LoaderBase
         for (int i = 0; i < depsCnt; i++)
         {
             AssetBundleData ad = ABManager.singleton.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
-            Loader loader = new Loader(ad, mono);
+            Loader loader = new Loader(ad);
             loader.LoadImm();
         }
     }
@@ -98,8 +98,8 @@ public class AsyncLoader : LoaderBase
 
     int loadCnt;
 
-    public AsyncLoader(AssetBundleData d, MonoBehaviour m)
-        : base(d, m)
+    public AsyncLoader(AssetBundleData d)
+        : base(d)
     {
         loadCnt = depsCnt;
     }
@@ -122,7 +122,7 @@ public class AsyncLoader : LoaderBase
         for (int i = 0; i < depsCnt; i++)
         {
             AssetBundleData ad = ABManager.singleton.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
-            AsyncLoader loader = new AsyncLoader(ad, mono);
+            AsyncLoader loader = new AsyncLoader(ad);
             loader.LoadImm(OnDepLoadFinish);
         }
     }
