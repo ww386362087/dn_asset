@@ -85,9 +85,8 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
             _bFeeding = false;
             _center = Vector2.zero;
             _finger_id = -1;
-
-            XJoyStickStopEvent e = new XJoyStickStopEvent();
-            XEventMgr.singleton.FireEvent(e);
+            
+            XEventMgr.singleton.FireEvent(new XJoyStickCancelEvent());
 
             JoyStickDlg.singleton.Hide();
         }

@@ -29,8 +29,7 @@ public class XCamera : XObject
     public Vector3 Position { get { return _cameraTransform.position; } }
 
     public Quaternion Rotaton { get { return _cameraTransform.rotation; } }
-
-
+    
     public Camera UnityCamera { get { return _camera; } }
 
     public Animator Ator { get { return _ator; } }
@@ -40,6 +39,10 @@ public class XCamera : XObject
         get { return (_target == null || _target.Deprecated) ? null : _target; }
         set { _target = value; }
     }
+
+    public float Root_R_X { get { return _root_quat.eulerAngles.x; } }
+
+    public float Root_R_Y { get { return _root_quat.eulerAngles.y; } }
 
     public void Initial(GameObject camera)
     {

@@ -26,7 +26,7 @@ public class XPlayer : XRole
     protected override void EventSubscribe()
     {
         base.EventSubscribe();
-        RegisterEvent(XEventDefine.XEvent_JoyStick_Stop, OnStopJoyStick);
+        RegisterEvent(XEventDefine.XEvent_JoyStick_Cancel, OnStopJoyStick);
     }
 
 

@@ -23,6 +23,7 @@ class XCameraActionComponent : XComponent
     private bool _auto = true;
     private const float speed = 0.06f;
 
+    private float _closeSpeed = 0.8f;//the value must be less 1f
 
     protected override UpdateState state
     {
@@ -42,6 +43,11 @@ class XCameraActionComponent : XComponent
         _camera_host = null;
     }
 
+    protected override void EventSubscribe()
+    {
+        base.EventSubscribe();
+        RegisterEvent(XEventDefine.XEvent_Gesture_Cancel, OnGestureCancel);
+    }
 
     public override void OnUpdate(float delta)
     {
@@ -73,18 +79,26 @@ class XCameraActionComponent : XComponent
 
         if (_auto)
         {
-            _auto_x += _tx - _auto_x;
-            _auto_y += _ty - _auto_y;
+            _auto_x = (_tx - _auto_x) * _closeSpeed;
+            _auto_y += (_ty - _auto_y) * _closeSpeed;
             if (_auto_y != 0) _camera_host.XRotate(-_auto_y);
-            if (_tx != 0) _camera_host.YRotate(_auto_x);
+            if (_auto_x != 0) _camera_host.YRotate(_auto_x);
         }
         else
         {
-            _manual_x += _tx - _manual_x;
-            _manual_y += _ty - _manual_y;
-            _camera_host.XRotateEx(_manual_x);
-            _camera_host.YRotateEx(_manual_y);
+            _manual_x = _manual_x * _closeSpeed;
+            if (_manual_x > 0.002f)
+            {
+                _camera_host.YRotate(_tx);
+            }
         }
+    }
+
+
+    private void OnGestureCancel(XEventArgs e)
+    {
+        _manual_x = _auto_x;
+        _auto = false;
     }
 
 }
