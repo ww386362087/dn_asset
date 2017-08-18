@@ -82,7 +82,7 @@ internal class XScene : XSingleton<XScene>
         SceneList sc = new SceneList();
         SceneList.RowData row = sc.GetItemID(_sceneid);
         XEntityMgr.singleton.CreatePlayer(row);
-        XPlayer player = XEntityMgr.singleton.player;
+        XPlayer player = XEntityMgr.singleton.Player;
         player.EnableCC(true);
         Debug.Log("player name: " + player.EntityObject.name);
     }

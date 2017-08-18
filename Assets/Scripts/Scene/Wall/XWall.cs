@@ -24,7 +24,7 @@ public abstract class XWall : MonoBehaviour
 
     void Update()
     {
-        XPlayer player = XEntityMgr.singleton.player;
+        XPlayer player = XEntityMgr.singleton.Player;
         if (player != null && player.EntityObject != null)
         {
             Vector3 pos = player.EntityObject.transform.position;

@@ -72,7 +72,7 @@ public class XCamera : XObject
 
     public void OnEnterSceneFinally()
     {
-        _target = XEntityMgr.singleton.player;
+        _target = XEntityMgr.singleton.Player;
         AttachComponent<XCameraActionComponent>();
         AttachComponent<XCameraCloseUpComponent>();
     }

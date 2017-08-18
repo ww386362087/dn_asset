@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// screen 右侧手势->camera旋转
+/// screen 右侧手势拖拽camera旋转
+/// 或者插值到设定的目标值
 /// </summary>
 
 class XCameraActionComponent : XComponent
@@ -14,7 +15,8 @@ class XCameraActionComponent : XComponent
     private float _auto_x = 0;
     private float _auto_y = 0;
 
-    private float _manual = 0;
+    private float _manual_x = 0;
+    private float _manual_y = 0;
 
     private float _tx = 0;
     private float _ty = 0;
@@ -22,7 +24,7 @@ class XCameraActionComponent : XComponent
     private bool _auto = true;
     private const float speed = 0.06f;
 
-    private float _flowSpeed = 0.8f;//the value must be less 1f
+    private float _flowSpeed = 0.1f;//the value must be less 1f
 
     protected override UpdateState state
     {
@@ -46,6 +48,7 @@ class XCameraActionComponent : XComponent
     {
         base.EventSubscribe();
         RegisterEvent(XEventDefine.XEvent_Gesture_Cancel, OnGestureCancel);
+        RegisterEvent(XEventDefine.XEvent_Camera_Action, OnCameraAction);
     }
 
     public override void OnUpdate(float delta)
@@ -85,10 +88,12 @@ class XCameraActionComponent : XComponent
         }
         else
         {
-            _manual = _manual * _flowSpeed;
-            if (_manual > 0.002f)
+            _manual_x += (_tx - _manual_x) * _flowSpeed / 8;
+            _manual_y += (_ty - _manual_y) * _flowSpeed / 8;
+            if (_manual_x > 0.01f)
             {
-                _camera.YRotate(_tx);
+                _camera.XRotateEx(_manual_x);
+                _camera.YRotateEx(_manual_y);
             }
         }
     }
@@ -96,8 +101,24 @@ class XCameraActionComponent : XComponent
 
     private void OnGestureCancel(XEventArgs e)
     {
-        _manual = _auto_x;
+        _manual_x = _camera.Root_R_X;
+        _manual_y = _camera.Root_R_Y;
+
+        int scale = 1 << 5;
+        _ty = _manual_y + _tx * scale;
+        _tx = _manual_x;
         _auto = false;
     }
 
+
+
+    private void OnCameraAction(XEventArgs e)
+    {
+        XCameraActionEvent ev = e as XCameraActionEvent;
+        _manual_x = _camera.Root_R_X;
+        _manual_y = _camera.Root_R_Y;
+        _tx = ev.To_Rot_X;
+        _ty = ev.To_Rot_Y;
+        _auto = false;
+    }
 }

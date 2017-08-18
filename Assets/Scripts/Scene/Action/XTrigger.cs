@@ -14,7 +14,7 @@ public abstract class XTrigger : MonoBehaviour
 
     void Update()
     {
-        XPlayer player = XEntityMgr.singleton.player;
+        XPlayer player = XEntityMgr.singleton.Player;
         if (player != null)
         {
             Vector3 pos = player.EntityObject.transform.position;

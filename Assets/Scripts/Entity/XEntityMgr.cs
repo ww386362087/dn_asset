@@ -8,7 +8,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
     private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
 
-    public XPlayer player;
+    public XPlayer Player;
 
     private XEntity CreateEntity(XAttributes attr, bool autoAdd)
     {
@@ -133,7 +133,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         float.TryParse(ss[2], out fp[2]);
         attr.AppearPostion = new Vector3(fp[0], fp[1], fp[2]);
         attr.AppearQuaternion = Quaternion.Euler(row.StartRot[0], row.StartRot[1], row.StartRot[2]);
-        player = PrepareEntity<XPlayer>(attr, false);
+        Player = PrepareEntity<XPlayer>(attr, false);
     }
 
 

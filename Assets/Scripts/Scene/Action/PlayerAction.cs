@@ -63,15 +63,15 @@ public class PlayerAction : IXPlayerAction
 
     public Vector3 PlayerPosition(bool notplayertrigger)
     {
-        if (XEntityMgr.singleton.player != null)
-            return XEntityMgr.singleton.player.EntityObject.transform.position;
+        if (XEntityMgr.singleton.Player != null)
+            return XEntityMgr.singleton.Player.EntityObject.transform.position;
         return Vector3.zero;
     }
 
     public Vector3 PlayerLastPosition(bool notplayertrigger)
     {
-        if (XEntityMgr.singleton.player != null)
-            return XEntityMgr.singleton.player.EntityObject.transform.position;
+        if (XEntityMgr.singleton.Player != null)
+            return XEntityMgr.singleton.Player.EntityObject.transform.position;
         return Vector3.zero;
     }
 

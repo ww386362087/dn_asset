@@ -7,6 +7,7 @@ public enum XEventDefine
     XEvent_Gesture_Cancel,
     XEvent_Camera_CloseUp,
     XEvent_Camera_CloseUpEnd,
+    XEvent_Camera_Action,
 
     XEvent_Num
 }
@@ -32,6 +33,8 @@ public class XGestureCancelEvent : XEventArgs
 
 public class XCameraCloseUpEvent : XEventArgs
 {
+    public XEntity Target;
+
     public XCameraCloseUpEvent() : base()
     {
         _eDefine = XEventDefine.XEvent_Camera_CloseUp;
@@ -48,6 +51,24 @@ public class XCameraCloseUpEndEvent : XEventArgs
     public override void Recycle()
     {
         base.Recycle();
+    }
+
+}
+
+public class XCameraActionEvent : XEventArgs
+{
+    public float To_Rot_X, To_Rot_Y = 0;
+
+    public XCameraActionEvent() : base()
+    {
+        _eDefine = XEventDefine.XEvent_Camera_Action;
+    }
+
+    public override void Recycle()
+    {
+        base.Recycle();
+        To_Rot_X = 0;
+        To_Rot_Y = 0;
     }
 
 }
