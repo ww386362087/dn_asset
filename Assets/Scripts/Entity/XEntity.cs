@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using XTable;
 
 public enum EnitityType
 {
@@ -20,6 +20,7 @@ public abstract class XEntity : XObject
 
     protected abstract EnitityType _eEntity_Type { get; }
     protected XAttributes _attr = null;
+    protected XEntityPresentation.RowData _present;
     protected GameObject _object = null;
     protected Transform _transf = null;
     protected int _layer = 0;
@@ -72,6 +73,11 @@ public abstract class XEntity : XObject
         get { return (_eEntity_Type & EnitityType.Entity_Npc) != 0; }
     }
 
+    public float Height
+    {
+        get { return _present != null ? _present.BoundHeight : 0f; }
+    }
+
     public GameObject EntityObject
     {
         get { return _object; }
@@ -120,6 +126,7 @@ public abstract class XEntity : XObject
         _object = o;
         _transf = o.transform;
         _attr = attr;
+        _present = XEntityPresentation.sington.GetItemID(_attr.PresentID);
         OnInitial();
     }
 

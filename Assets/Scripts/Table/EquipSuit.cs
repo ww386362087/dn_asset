@@ -9,8 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace XTable {
-    using UnityEngine;
-    using System.IO;
     
     
     public class EquipSuit : CVSReader {
@@ -36,11 +34,16 @@ namespace XTable {
 		}
 
 
-		public EquipSuit() { if (Table == null) Create(); }
+		private static EquipSuit s = null;
+
+		public static EquipSuit sington
+		{
+			get { if (s == null) { s = new EquipSuit(); s.Create(); } return s; }
+		}
 
 		public RowData[] Table { get { return table; } }
 
-		private static RowData[] table = null;
+		private RowData[] table = null;
 
 		public override string bytePath { get { return "Table/EquipSuit"; } }
         

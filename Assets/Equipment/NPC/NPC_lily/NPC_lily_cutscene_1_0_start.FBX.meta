@@ -1,0 +1,235 @@
+fileFormatVersion: 2
+guid: 1c463750b4e5b3d4898669d23f4e280d
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bip001 Head_lily
+    100002: Bip001 L Calf_lily
+    100004: Bip001 L Clavicle_lily
+    100006: Bip001 L Finger0_lily
+    100008: Bip001 L Foot_lily
+    100010: Bip001 L Forearm_lily
+    100012: Bip001 L Hand_lily
+    100014: Bip001 L Thigh_lily
+    100016: Bip001 L UpperArm_lily
+    100018: Bip001 Neck_lily
+    100020: Bip001 Pelvis_lily
+    100022: Bip001 R Calf_lily
+    100024: Bip001 R Clavicle_lily
+    100026: Bip001 R Finger0_lily
+    100028: Bip001 R Foot_lily
+    100030: Bip001 R Forearm_lily
+    100032: Bip001 R Hand_lily
+    100034: Bip001 R Thigh_lily
+    100036: Bip001 R UpperArm_lily
+    100038: Bip001 Spine1_lily
+    100040: Bip001 Spine_lily
+    100042: Bip001_lily
+    100044: Bone001_lily
+    100046: Bone002_lily
+    100048: Bone003(mirrored)_lily
+    100050: Bone003_lily
+    100052: //RootNode
+    100054: Bip001 L Toe0
+    100056: Bip001 L Toe01
+    100058: Bip001 L Toe02
+    100060: Bip001 R Toe0
+    400000: Bip001 Head_lily
+    400002: Bip001 L Calf_lily
+    400004: Bip001 L Clavicle_lily
+    400006: Bip001 L Finger0_lily
+    400008: Bip001 L Foot_lily
+    400010: Bip001 L Forearm_lily
+    400012: Bip001 L Hand_lily
+    400014: Bip001 L Thigh_lily
+    400016: Bip001 L UpperArm_lily
+    400018: Bip001 Neck_lily
+    400020: Bip001 Pelvis_lily
+    400022: Bip001 R Calf_lily
+    400024: Bip001 R Clavicle_lily
+    400026: Bip001 R Finger0_lily
+    400028: Bip001 R Foot_lily
+    400030: Bip001 R Forearm_lily
+    400032: Bip001 R Hand_lily
+    400034: Bip001 R Thigh_lily
+    400036: Bip001 R UpperArm_lily
+    400038: Bip001 Spine1_lily
+    400040: Bip001 Spine_lily
+    400042: Bip001_lily
+    400044: Bone001_lily
+    400046: Bone002_lily
+    400048: Bone003(mirrored)_lily
+    400050: Bone003_lily
+    400052: //RootNode
+    400054: Bip001 L Toe0
+    400056: Bip001 L Toe01
+    400058: Bip001 L Toe02
+    400060: Bip001 R Toe0
+    7400000: NPC_lily_cutscene_1_0_start
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: NPC_lily_cutscene_1_0_start
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 685
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bip001_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 L Thigh_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 L Thigh_lily/Bip001
+          L Calf_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 L Thigh_lily/Bip001
+          L Calf_lily/Bip001 L Foot_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 L Thigh_lily/Bip001
+          L Calf_lily/Bip001 L Foot_lily/Bip001 L Toe0
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 L Thigh_lily/Bip001
+          L Calf_lily/Bip001 L Foot_lily/Bip001 L Toe0/Bip001 L Toe01
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 L Thigh_lily/Bip001
+          L Calf_lily/Bip001 L Foot_lily/Bip001 L Toe0/Bip001 L Toe01/Bip001 L Toe02
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 R Thigh_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 R Thigh_lily/Bip001
+          R Calf_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 R Thigh_lily/Bip001
+          R Calf_lily/Bip001 R Foot_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 R Thigh_lily/Bip001
+          R Calf_lily/Bip001 R Foot_lily/Bip001 R Toe0
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 Head_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 L Clavicle_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 L Clavicle_lily/Bip001 L UpperArm_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 L Clavicle_lily/Bip001 L UpperArm_lily/Bip001 L Forearm_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 L Clavicle_lily/Bip001 L UpperArm_lily/Bip001 L Forearm_lily/Bip001
+          L Hand_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 L Clavicle_lily/Bip001 L UpperArm_lily/Bip001 L Forearm_lily/Bip001
+          L Hand_lily/Bip001 L Finger0_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 R Clavicle_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 R Clavicle_lily/Bip001 R UpperArm_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 R Clavicle_lily/Bip001 R UpperArm_lily/Bip001 R Forearm_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 R Clavicle_lily/Bip001 R UpperArm_lily/Bip001 R Forearm_lily/Bip001
+          R Hand_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bip001 Spine_lily/Bip001 Spine1_lily/Bip001
+          Neck_lily/Bip001 R Clavicle_lily/Bip001 R UpperArm_lily/Bip001 R Forearm_lily/Bip001
+          R Hand_lily/Bip001 R Finger0_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bone001_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bone002_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bone003(mirrored)_lily
+        weight: 1
+      - path: Bip001_lily/Bip001 Pelvis_lily/Bone003_lily
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

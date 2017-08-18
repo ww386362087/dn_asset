@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class XAttributes : XComponent
 {
@@ -9,6 +8,7 @@ public class XAttributes : XComponent
     private EnitityType _type = EnitityType.Entity_None;
     private Vector3 _appear_pos = Vector3.zero;
     private Quaternion _appear_qua = Quaternion.identity;
+    private uint _presentID = 2;
 
     public uint id
     {
@@ -45,6 +45,13 @@ public class XAttributes : XComponent
     {
         get { return _appear_qua; }
         set { _appear_qua = value; }
+    }
+
+
+    public uint PresentID
+    {
+        get { return _presentID; }
+        set { _presentID = value; }
     }
 
 }

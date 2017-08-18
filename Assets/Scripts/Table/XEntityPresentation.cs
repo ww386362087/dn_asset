@@ -9,8 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace XTable {
-    using UnityEngine;
-    using System.IO;
     
     
     public class XEntityPresentation : CVSReader {
@@ -99,11 +97,16 @@ namespace XTable {
 		}
 
 
-		public XEntityPresentation() { if (Table == null) Create(); }
+		private static XEntityPresentation s = null;
+
+		public static XEntityPresentation sington
+		{
+			get { if (s == null) { s = new XEntityPresentation(); s.Create(); } return s; }
+		}
 
 		public RowData[] Table { get { return table; } }
 
-		private static RowData[] table = null;
+		private RowData[] table = null;
 
 		public override string bytePath { get { return "Table/XEntityPresentation"; } }
         

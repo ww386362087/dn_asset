@@ -9,8 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace XTable {
-    using UnityEngine;
-    using System.IO;
     
     
     public class SceneList : CVSReader {
@@ -136,11 +134,16 @@ namespace XTable {
 		}
 
 
-		public SceneList() { if (Table == null) Create(); }
+		private static SceneList s = null;
+
+		public static SceneList sington
+		{
+			get { if (s == null) { s = new SceneList(); s.Create(); } return s; }
+		}
 
 		public RowData[] Table { get { return table; } }
 
-		private static RowData[] table = null;
+		private RowData[] table = null;
 
 		public override string bytePath { get { return "Table/SceneList"; } }
         

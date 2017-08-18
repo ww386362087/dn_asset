@@ -5,10 +5,11 @@ internal class XScene : XSingleton<XScene>
 {
     private XCamera _camera;
     private uint _sceneid;
-
+    private SceneList.RowData _scene_row;
     private Terrain _terrain;
 
-    public uint SceneID { get { return _sceneid; } }
+    public SceneList.RowData SceneRow { get { return _scene_row; } }
+
 
     public XCamera GameCamera
     {
@@ -39,6 +40,7 @@ internal class XScene : XSingleton<XScene>
         OnEnterScene(sceneid);
         //to-do 
         CreatePlayer();
+        CreateNPCs();
         CreateMonsters();
 
         OnEnterSceneFinally();
@@ -47,6 +49,7 @@ internal class XScene : XSingleton<XScene>
     private void OnEnterScene(uint sceneid)
     {
         _sceneid = sceneid;
+        _scene_row = SceneList.sington.GetItemID(_sceneid);
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
         GameCamera.Initial(camera);
         Documents.singleton.OnEnterScene();
@@ -79,9 +82,7 @@ internal class XScene : XSingleton<XScene>
 
     private void CreatePlayer()
     {
-        SceneList sc = new SceneList();
-        SceneList.RowData row = sc.GetItemID(_sceneid);
-        XEntityMgr.singleton.CreatePlayer(row);
+        XEntityMgr.singleton.CreatePlayer();
         XPlayer player = XEntityMgr.singleton.Player;
         player.EnableCC(true);
         Debug.Log("player name: " + player.EntityObject.name);
@@ -94,5 +95,9 @@ internal class XScene : XSingleton<XScene>
     }
 
 
-
+    private void CreateNPCs()
+    {
+        var row = XNpcList.sington.GetItemID(24);
+        XEntityMgr.singleton.CreateNPC(row);
+    }
 }

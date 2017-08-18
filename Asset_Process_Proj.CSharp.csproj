@@ -156,6 +156,7 @@
     <Compile Include="Assets\Scripts\Table\FashionSuit.cs" />
     <Compile Include="Assets\Scripts\Table\SceneList.cs" />
     <Compile Include="Assets\Scripts\Table\XEntityPresentation.cs" />
+    <Compile Include="Assets\Scripts\Table\XNpcList.cs" />
     <Compile Include="Assets\Scripts\Test\ITest.cs" />
     <Compile Include="Assets\Scripts\Test\TestAB.cs" />
     <Compile Include="Assets\Scripts\Test\TestCPP.cs" />

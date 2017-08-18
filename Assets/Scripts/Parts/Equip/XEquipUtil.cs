@@ -129,7 +129,7 @@ public class XEquipUtil
 
     public static void MakeEquip(string name, int[] fashionIDs, List<EquipPart> equipList, TempEquipSuit tmpFashionData, int suitID)
     {
-        FashionList fashionList = new FashionList();
+        FashionList fashionList = FashionList.sington;
         if (fashionIDs != null)
         {
             tmpFashionData.hash = 0;

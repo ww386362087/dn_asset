@@ -7,9 +7,6 @@ using System.Collections.Generic;
 
 public class TestAB : ITest
 {
-    private FashionSuit fashionSuit = new FashionSuit();
-    private EquipSuit equipSuit = new EquipSuit();
-
     private List<EquipPart> m_FashionList = null;
     private List<EquipPart> m_EquipList = null;
     private Vector2 fashionScrollPos = Vector2.zero;
@@ -33,9 +30,9 @@ public class TestAB : ITest
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
         m_FashionList = new List<EquipPart>();
-        for (int i = 0; i < fashionSuit.Table.Length; ++i)
+        for (int i = 0,max= FashionSuit.sington.Table.Length; i < max; ++i)
         {
-            FashionSuit.RowData row = fashionSuit.Table[i];
+            FashionSuit.RowData row = FashionSuit.sington.Table[i];
             if (row.FashionID != null)
             {
                 XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
@@ -44,9 +41,9 @@ public class TestAB : ITest
 
         //装备
         m_EquipList = new List<EquipPart>();
-        for (int i = 0; i < equipSuit.Table.Length; ++i)
+        for (int i = 0,max=EquipSuit.sington.Table.Length; i < max; ++i)
         {
-            EquipSuit.RowData row = equipSuit.Table[i];
+            EquipSuit.RowData row = EquipSuit.sington.Table[i];
             if (row.EquipID != null)
                 XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
         }

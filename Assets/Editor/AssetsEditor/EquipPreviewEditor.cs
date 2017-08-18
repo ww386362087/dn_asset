@@ -7,11 +7,7 @@ namespace XEditor
 {
     public class EquipPreviewEditor : EditorWindow
     {
-        private FashionSuit fashionSuit;
-        private EquipSuit equipSuit;
         private CombineConfig combineConfig = null;
-        private DefaultEquip defaultEquip = new DefaultEquip();
-      
 
         private int m_profession = 1;
         private List<EquipPart> m_FashionList = null;
@@ -26,7 +22,7 @@ namespace XEditor
             //1.mesh collection
             List<CombineInstance> ciList = new List<CombineInstance>();
             System.Object[] meshPrefab = new System.Object[8];
-            DefaultEquip.RowData data = defaultEquip.GetByProfID(m_profession + 1);
+            DefaultEquip.RowData data = DefaultEquip.sington.GetByProfID(m_profession + 1);
             string name = "";
             for (int i = 0; i < part.partPath.Length; ++i)
             {
@@ -113,24 +109,22 @@ namespace XEditor
 
         public void Init()
         {
-            fashionSuit = new FashionSuit();
-            equipSuit = new EquipSuit();
             combineConfig = FbxEditor.GetConfig();
             TempEquipSuit fashions = new TempEquipSuit();
             m_FashionList = new List<EquipPart>();
             m_EquipList = new List<EquipPart>();
            
-            for (int i = 0; i < fashionSuit.Table.Length; ++i)
+            for (int i = 0,max= FashionSuit.sington.Table.Length; i < max; ++i)
             {
-                FashionSuit.RowData row = fashionSuit.Table[i];
+                FashionSuit.RowData row = FashionSuit.sington.Table[i];
                 if (row.FashionID != null)
                 {
                     XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
                 }
             }
-            for (int i = 0; i < equipSuit.Table.Length; ++i)
+            for (int i = 0; i < EquipSuit.sington.Table.Length; ++i)
             {
-                EquipSuit.RowData row = equipSuit.Table[i];
+                EquipSuit.RowData row = EquipSuit.sington.Table[i];
                 if (row.EquipID != null)
                     XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
             }

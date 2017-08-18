@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using XTable;
 
 public class XEntityMgr : XSingleton<XEntityMgr>
 {
 
     private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
     private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
-
+    
     public XPlayer Player;
 
     private XEntity CreateEntity(XAttributes attr, bool autoAdd)
@@ -112,19 +113,22 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         attr.id = 10001;
         attr.Prefab = "Player";
         attr.Name = "Archer";
+        attr.PresentID = 2;
         attr.Type = EnitityType.Entity_Role;
         attr.AppearPostion = Vector3.zero;
         attr.AppearQuaternion = Quaternion.identity;
         return CreateRole(attr, false);
     }
 
-    public void CreatePlayer(XTable.SceneList.RowData row)
+    public void CreatePlayer()
     {
+        SceneList.RowData row = XScene.singleton.SceneRow;
         XAttributes attr = new XAttributes();
         attr.id = 10001;
         attr.Prefab = "Player";
         attr.Name = "Archer";
-        attr.Type = EnitityType.Entity_Role;
+        attr.PresentID = 2;
+        attr.Type = EnitityType.Entity_Player;
         string s = row.StartPos;
         string[] ss = s.Split('=');
         float[] fp = new float[3];
@@ -136,5 +140,21 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         Player = PrepareEntity<XPlayer>(attr, false);
     }
 
+
+    public XNPC CreateNPC(XNpcList.RowData row)
+    {
+        XAttributes attr = new XAttributes();
+        attr.id = row.PresentID;
+        attr.Name = row.NPCName;
+        var prow = XEntityPresentation.sington.GetItemID(row.PresentID);
+        attr.Prefab = prow.Prefab;
+        attr.Type = EnitityType.Entity_Npc;
+        attr.AppearPostion = Player.Position + new Vector3(0, 0, -2);// new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
+        attr.AppearQuaternion =  Quaternion.Euler(row.NPCRotation[0], row.NPCRotation[1], row.NPCRotation[2]);
+        return PrepareEntity<XNPC>(attr, false);
+    }
+
+
+    
 
 }

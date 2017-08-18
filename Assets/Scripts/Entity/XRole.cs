@@ -20,8 +20,7 @@ public class XRole : XEntity
         
         _layer = LayerMask.NameToLayer("Role");
         profession = 1;
-        DefaultEquip defaultEquip = new DefaultEquip();
-        defEquip = defaultEquip.GetByProfID(profession + 1);
+        defEquip = DefaultEquip.sington.GetByProfID(profession + 1);
         controller = EntityObject.GetComponent<CharacterController>();
         controller.enabled = false;
 

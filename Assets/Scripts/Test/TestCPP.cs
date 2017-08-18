@@ -17,9 +17,10 @@ public class TestCPP : ITest
     void TStart()
     {
         Profiler.BeginSample("ForList");
-        new XEntityPresentation();
-        new FashionSuit();
-        new DefaultEquip();
+        var t1 = XEntityPresentation.sington;
+        var t2 = FashionSuit.sington;
+        var t3 = DefaultEquip.sington;
+        Debug.Log("length: " + t1.Table.Length + " " + t2.Table.Length + " " + t3.Table.Length);
         Profiler.EndSample();
     }
 

@@ -63,6 +63,18 @@
             return null;
         }
 
+        public static XNpcList.RowData GetItemID(this XNpcList input, int id)
+        {
+            for (int i = 0, max = input.Table.Length; i < max; i++)
+            {
+                if (input.Table[i].NPCID == id)
+                {
+                    return input.Table[i];
+                }
+            }
+            return null;
+        }
+
 
     }
 

@@ -9,8 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace XTable {
-    using UnityEngine;
-    using System.IO;
     
     
     public class FashionList : CVSReader {
@@ -37,11 +35,16 @@ namespace XTable {
 		}
 
 
-		public FashionList() { if (Table == null) Create(); }
+		private static FashionList s = null;
+
+		public static FashionList sington
+		{
+			get { if (s == null) { s = new FashionList(); s.Create(); } return s; }
+		}
 
 		public RowData[] Table { get { return table; } }
 
-		private static RowData[] table = null;
+		private RowData[] table = null;
 
 		public override string bytePath { get { return "Table/FashionList"; } }
         

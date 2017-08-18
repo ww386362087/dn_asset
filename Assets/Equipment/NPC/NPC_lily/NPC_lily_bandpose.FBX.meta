@@ -1,0 +1,136 @@
+fileFormatVersion: 2
+guid: d3fd382db71ea354db00d7dac15d76cf
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip001 Head_lily
+    100002: Bip001 L Calf_lily
+    100004: Bip001 L Clavicle_lily
+    100006: Bip001 L Finger0_lily
+    100008: Bip001 L Foot_lily
+    100010: Bip001 L Forearm_lily
+    100012: Bip001 L Hand_lily
+    100014: Bip001 L Thigh_lily
+    100016: Bip001 L UpperArm_lily
+    100018: Bip001 Neck_lily
+    100020: Bip001 Pelvis_lily
+    100022: Bip001 R Calf_lily
+    100024: Bip001 R Clavicle_lily
+    100026: Bip001 R Finger0_lily
+    100028: Bip001 R Foot_lily
+    100030: Bip001 R Forearm_lily
+    100032: Bip001 R Hand_lily
+    100034: Bip001 R Thigh_lily
+    100036: Bip001 R UpperArm_lily
+    100038: Bip001 Spine1_lily
+    100040: Bip001 Spine_lily
+    100042: Bip001_lily
+    100044: Bone001_lily
+    100046: Bone002_lily
+    100048: Bone003(mirrored)_lily
+    100050: Bone003_lily
+    100052: Npc_lily
+    100054: //RootNode
+    100056: NPC_lily
+    400000: Bip001 Head_lily
+    400002: Bip001 L Calf_lily
+    400004: Bip001 L Clavicle_lily
+    400006: Bip001 L Finger0_lily
+    400008: Bip001 L Foot_lily
+    400010: Bip001 L Forearm_lily
+    400012: Bip001 L Hand_lily
+    400014: Bip001 L Thigh_lily
+    400016: Bip001 L UpperArm_lily
+    400018: Bip001 Neck_lily
+    400020: Bip001 Pelvis_lily
+    400022: Bip001 R Calf_lily
+    400024: Bip001 R Clavicle_lily
+    400026: Bip001 R Finger0_lily
+    400028: Bip001 R Foot_lily
+    400030: Bip001 R Forearm_lily
+    400032: Bip001 R Hand_lily
+    400034: Bip001 R Thigh_lily
+    400036: Bip001 R UpperArm_lily
+    400038: Bip001 Spine1_lily
+    400040: Bip001 Spine_lily
+    400042: Bip001_lily
+    400044: Bone001_lily
+    400046: Bone002_lily
+    400048: Bone003(mirrored)_lily
+    400050: Bone003_lily
+    400052: Npc_lily
+    400054: //RootNode
+    400056: NPC_lily
+    4300000: Npc_lily
+    4300002: NPC_lily
+    9500000: //RootNode
+    13700000: Npc_lily
+    13700002: NPC_lily
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
