@@ -30,9 +30,9 @@ public class XPlayer : XRole
     }
 
 
-    public override void Update(float delta)
+    public override void OnUpdate(float delta)
     {
-        base.Update(delta);
+        base.OnUpdate(delta);
         lastpos = EntityObject.transform.position;
         if(XVirtualTab.singleton.Feeding)
         {

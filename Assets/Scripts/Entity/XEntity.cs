@@ -148,9 +148,13 @@ public abstract class XEntity : XObject
 
     protected virtual void OnUnintial() { }
 
-    public virtual void Update(float delta)
+    public virtual void OnUpdate(float delta)
     {
         UpdateComponents(delta);
+    }
+
+    public virtual void OnLateUpdate()
+    {
     }
 
     public virtual void OnAttachToHost() { }

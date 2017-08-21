@@ -212,4 +212,10 @@ public class XCommon : XSingleton<XCommon>
         return r > 0;
     }
 
+
+    public float AngleToFloat(Vector3 dir)
+    {
+        float face = Vector3.Angle(Vector3.forward, dir);
+        return XCommon.singleton.Clockwise(Vector3.forward, dir) ? face : -face;
+    }
 }

@@ -66,13 +66,18 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         var e = _hash_entitys.GetEnumerator();
         while (e.MoveNext())
         {
-            e.Current.Update(delta);
+            e.Current.OnUpdate(delta);
         }
     }
 
 
     public void LateUpdate()
     {
+        var e = _hash_entitys.GetEnumerator();
+        while (e.MoveNext())
+        {
+            e.Current.OnLateUpdate();
+        }
     }
 
 
@@ -145,7 +150,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     public XNPC CreateNPC(XNpcList.RowData row)
     {
         XAttributes attr = new XAttributes();
-        attr.id = attr.PresentID = row.PresentID;
+        attr.id = (uint)row.NPCID;
+        attr.PresentID = row.PresentID;
         attr.Name = row.NPCName;
         var prow = XEntityPresentation.sington.GetItemID(row.PresentID);
         attr.Prefab = prow.Prefab;
