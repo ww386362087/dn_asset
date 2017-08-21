@@ -30,7 +30,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     {
         T x = Activator.CreateInstance<T>();
         GameObject o = XResourceMgr.Load<GameObject>("Prefabs/" + attr.Prefab, AssetType.Prefab);
-        o.name = attr.Name;
+        if (!Application.isMobilePlatform)
+            o.name = attr.Name;
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
@@ -144,13 +145,13 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     public XNPC CreateNPC(XNpcList.RowData row)
     {
         XAttributes attr = new XAttributes();
-        attr.id = row.PresentID;
+        attr.id = attr.PresentID = row.PresentID;
         attr.Name = row.NPCName;
         var prow = XEntityPresentation.sington.GetItemID(row.PresentID);
         attr.Prefab = prow.Prefab;
         attr.Type = EnitityType.Entity_Npc;
         attr.AppearPostion = Player.Position + new Vector3(0, 0, -2);// new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
-        attr.AppearQuaternion =  Quaternion.Euler(row.NPCRotation[0], row.NPCRotation[1], row.NPCRotation[2]);
+        attr.AppearQuaternion = Quaternion.Euler(row.NPCRotation[0], row.NPCRotation[1], row.NPCRotation[2]);
         return PrepareEntity<XNPC>(attr, false);
     }
 

@@ -20,10 +20,10 @@ public class XNPC : XEntity
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Npc");
         FindHead();
-        
+
         XAnimComponent anim = AttachComponent<XAnimComponent>();
-        anim.OverrideAnim("Idle", _present.AttackIdle);
-        anim.SetTrigger("ToStand");
+        anim.OverrideAnim("NPC_sidel_idle", _present.AnimLocation + _present.Idle);
+       // anim.SetTrigger("ToStand");
     }
 
 

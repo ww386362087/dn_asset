@@ -24,7 +24,8 @@ class XCameraActionComponent : XComponent
     private bool _auto = true;
     private const float speed = 0.06f;
 
-    private float _flowSpeed = 0.1f;//the value must be less 1f
+    private float _flowSpeed = 0.2f;//the value must be less 1f
+    
 
     protected override UpdateState state
     {

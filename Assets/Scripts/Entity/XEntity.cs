@@ -113,6 +113,11 @@ public abstract class XEntity : XObject
         get { return _transf != null ? _transf.rotation : Quaternion.identity; }
     }
 
+    public XEntityPresentation.RowData present
+    {
+        get { return _present; }
+    }
+
 
     public SkinnedMeshRenderer skin
     {

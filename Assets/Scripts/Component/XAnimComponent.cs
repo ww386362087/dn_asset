@@ -15,7 +15,7 @@ public class XAnimComponent : XComponent
     private float m_value = 0;
     private bool m_enable = true;
 
-    static XEntityPresentation.RowData epRow;
+    XEntityPresentation.RowData present;
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
@@ -31,11 +31,7 @@ public class XAnimComponent : XComponent
             m_Animator.runtimeAnimatorController = m_overrideController;
         }
         m_Animator.Rebind();
-        if (epRow == null)
-        {
-            uint archerid = 2;
-            epRow = XEntityPresentation.sington.GetItemID(archerid);
-        }
+        if (_obj is XEntity) present = (_obj as XEntity).present;
         OverrideAnims();
     }
 
@@ -48,29 +44,25 @@ public class XAnimComponent : XComponent
 
     public void OverrideAnims()
     {
-        if(xobj is XNPC)
+        if (xobj is XRole)
         {
-            OverrideAnim("Idle", "NPC_sidel/NPC_sidel_idle");
-        }
-        else if(xobj is XRole)
-        {
-            OverrideAnim("A", epRow.AnimLocation + epRow.A);
-            OverrideAnim("AA", epRow.AnimLocation + epRow.AA);
-            OverrideAnim("AAA", epRow.AnimLocation + "Player_archer_attack_run");
-            OverrideAnim("AAAA", epRow.AnimLocation + "Player_archer_attack_run");
-            OverrideAnim("AAAAA", epRow.AnimLocation + epRow.AAAAA);
-            OverrideAnim("Walk", epRow.AnimLocation + epRow.Walk);
-            OverrideAnim("Idle", epRow.AnimLocation + epRow.Idle);
-            OverrideAnim("Death", epRow.AnimLocation + epRow.Death);
-            OverrideAnim("Run", epRow.AnimLocation + epRow.Run);
-            OverrideAnim("RunLeft", epRow.AnimLocation + epRow.RunLeft);
-            OverrideAnim("RunRight", epRow.AnimLocation + epRow.RunRight);
-            OverrideAnim("Freezed", epRow.AnimLocation + epRow.Freeze);
-            OverrideAnim("HitLanding", epRow.AnimLocation + epRow.Hit_l);
-            OverrideAnim("Phase0", epRow.AnimLocation + "Player_archer_jump");
-            OverrideAnim("Phase1", epRow.AnimLocation + "Player_archer_attack_lifttwinshot");
-            OverrideAnim("Phase2", epRow.AnimLocation + "Player_archer_attack_aerialchainshot");
-            OverrideAnim("Art", epRow.AnimLocation + "Player_archer_victory");
+            OverrideAnim("A", present.AnimLocation + present.A);
+            OverrideAnim("AA", present.AnimLocation + present.AA);
+            OverrideAnim("AAA", present.AnimLocation + "Player_archer_attack_run");
+            OverrideAnim("AAAA", present.AnimLocation + "Player_archer_attack_run");
+            OverrideAnim("AAAAA", present.AnimLocation + present.AAAAA);
+            OverrideAnim("Walk", present.AnimLocation + present.Walk);
+            OverrideAnim("Idle", present.AnimLocation + present.Idle);
+            OverrideAnim("Death", present.AnimLocation + present.Death);
+            OverrideAnim("Run", present.AnimLocation + present.Run);
+            OverrideAnim("RunLeft", present.AnimLocation + present.RunLeft);
+            OverrideAnim("RunRight", present.AnimLocation + present.RunRight);
+            OverrideAnim("Freezed", present.AnimLocation + present.Freeze);
+            OverrideAnim("HitLanding", present.AnimLocation + present.Hit_l);
+            OverrideAnim("Phase0", present.AnimLocation + "Player_archer_jump");
+            OverrideAnim("Phase1", present.AnimLocation + "Player_archer_attack_lifttwinshot");
+            OverrideAnim("Phase2", present.AnimLocation + "Player_archer_attack_aerialchainshot");
+            OverrideAnim("Art", present.AnimLocation + "Player_archer_victory");
         }
     }
 
