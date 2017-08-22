@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -157,6 +155,7 @@
     <Compile Include="Assets\Scripts\Table\FashionSuit.cs" />
     <Compile Include="Assets\Scripts\Table\SceneList.cs" />
     <Compile Include="Assets\Scripts\Table\XEntityPresentation.cs" />
+    <Compile Include="Assets\Scripts\Table\XEntityStatistics.cs" />
     <Compile Include="Assets\Scripts\Table\XNpcList.cs" />
     <Compile Include="Assets\Scripts\Test\ITest.cs" />
     <Compile Include="Assets\Scripts\Test\TestAB.cs" />
@@ -299,6 +298,10 @@
     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendCutout.shader" />
     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendCutout_blend.shader" />
     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendNoCutout.shader" />
+    <None Include="Assets\Resources\Table\Level\1_0.txt" />
+    <None Include="Assets\Resources\Table\Level\1_0_sc.txt" />
+    <None Include="Assets\Resources\Table\Level\2_3.txt" />
+    <None Include="Assets\Resources\Table\Level\2_3_sc.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

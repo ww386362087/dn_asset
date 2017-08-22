@@ -1,0 +1,74 @@
+﻿
+func:Blockwall
+opendoor Blockwall
+
+func:Blockwall1
+opendoor Blockwall1
+
+func:Blockwall2
+opendoor Blockwall2
+
+func:closedoor
+opendoor Door
+
+func:talk1
+talkr 6 [ffebad]这是？许久不曾到访，没想到峡谷深处已经成了魔物的聚集地。 Audio/VO/lines/lines92
+talkl [player] [ffebad]魔物不能阻挡我们前行。 Audio/VO/Warrior/warrior2|Audio/VO/Archer/archer2|Audio/VO/Sorceress/sorceress2|Audio/VO/Cleric/cleric2|Audio/VO/Academic/academic2|Audio/VO/Assassin/assassin2
+talkr 6 [ffebad]你的身上有让人安心的力量，我很久没有过这种感受了…… Audio/VO/lines/lines93
+stoptalk
+
+func:npcpopspeek
+npcpopspeek 2 3003 小心！巡逻兵死亡惊动了防守卫兵和防御陷阱！ 7
+
+func:speak51205
+bubble 51205 代表兽人金大人惩罚你们！ 6
+
+func:speak51206
+bubble 51206 请兽人朴大人给我力量！杀了这些小贼 6
+
+func:orcking
+notice 兽人金：“倒下一个兽人，还有千千万万个兽人！” 3
+
+func:orcpiao
+notice 兽人朴：“让我们两兄弟来会会你！可不要哭鼻子啊!” 3
+
+func:expressionking
+bubble 51202 要求饶吗？你们肯定打不赢我的！ 6
+
+func:expressionking2
+bubble 51202 有两下子啊，我还没拿出真正实力呢！ 6
+
+func:expressionpiao
+bubble 51201 我这一棒子下去，你这身板吃不消！ 6
+
+func:expressionpiao2
+bubble 51201 三弟，这小子挺厉害，要撤退吗？ 6
+
+func:protect
+addbuff 0 110 1
+
+func:mayday
+addbuff 0 120 1
+
+func:box_collider_1
+opendoor box_collider_1 on
+
+
+func:talkorcbrother
+talkr 31 [ffebad]兽人朴：“别以为你赢了，下次叫我大哥一起打你！”
+talkl [player] [ffebad]别走啊！你们知道去袭击者巢穴的路吗？
+talkr 31 [ffebad]兽人金：“兽人三兄弟永不言败，下次一定赢你！”
+stoptalk
+
+func:tips
+notice 当心地刺，迅速的通过可以避免受伤 5
+
+
+
+
+
+info:Blockwall 155.9699|6.418892|74.20079|0 on 10 11.41889 0.1
+info:Blockwall1 165.5599|6.418892|64.59079|90.00001 on 10 11.41889 0.1
+info:Blockwall2 146.7399|6.418892|64.59079|90.00001 on 10 11.41889 0.1
+info:Door 155.9699|6.418892|55.30079|0 off 10 11.41889 0.1
+info:box_collider_1 156.3099|5.098892|54.18079|0 off 9.225229 19.65739 2.731782

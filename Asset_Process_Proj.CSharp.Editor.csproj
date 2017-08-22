@@ -160,6 +160,15 @@
     <Compile Include="Assets\Editor\AssetsEditor\TextureFindEditor.cs" />
     <Compile Include="Assets\Editor\AssetsEditor\XDataIO.cs" />
     <Compile Include="Assets\Editor\AssetsEditor\XResImportModelEditor.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\CalEnemyNum.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\Drawing.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\EnemyListEditor.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\LevelEditor.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\LevelLayoutManager.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\LevelWave.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\SerializeLevel.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\WaveWindow.cs" />
+    <Compile Include="Assets\Editor\XEditorPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Cache\cache.txt" />
@@ -289,6 +298,10 @@
     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendCutout.shader" />
     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendCutout_blend.shader" />
     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendNoCutout.shader" />
+    <None Include="Assets\Resources\Table\Level\1_0.txt" />
+    <None Include="Assets\Resources\Table\Level\1_0_sc.txt" />
+    <None Include="Assets\Resources\Table\Level\2_3.txt" />
+    <None Include="Assets\Resources\Table\Level\2_3_sc.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

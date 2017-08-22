@@ -44,7 +44,7 @@ public class TestManager
                     test = new TestScene();
                     break;
                 default:
-                    test = new TestAB();
+                    test = new TestScene();
                     break;
             }
             return test;

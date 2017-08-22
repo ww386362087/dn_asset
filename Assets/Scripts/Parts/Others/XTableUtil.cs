@@ -7,7 +7,7 @@
     public static class ExtTable
     {
 
-        public static EquipSuit.RowData GetByProfID(this EquipSuit input,int proID)
+        public static EquipSuit.RowData GetByProfID(this EquipSuit input, int proID)
         {
             for (int i = 0, max = input.Table.Length; i < max; i++)
             {
@@ -75,6 +75,18 @@
             return null;
         }
 
+
+        public static XEntityStatistics.RowData GetByID(this XEntityStatistics input, int id)
+        {
+            for (int i = 0, max = input.Table.Length; i < max; i++)
+            {
+                if (input.Table[i].id == id)
+                {
+                    return input.Table[i];
+                }
+            }
+            return null;
+        }
 
     }
 

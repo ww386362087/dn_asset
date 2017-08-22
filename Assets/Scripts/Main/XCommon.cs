@@ -218,4 +218,17 @@ public class XCommon : XSingleton<XCommon>
         float face = Vector3.Angle(Vector3.forward, dir);
         return XCommon.singleton.Clockwise(Vector3.forward, dir) ? face : -face;
     }
+
+    public Transform FindChildRecursively(Transform t, string name)
+    {
+        if (t.name == name)
+            return t;
+        for (int i = 0; i < t.childCount; i++)
+        {
+            Transform ct = FindChildRecursively(t.GetChild(i), name);
+            if (ct != null)
+                return ct;
+        }
+        return null;
+    }
 }

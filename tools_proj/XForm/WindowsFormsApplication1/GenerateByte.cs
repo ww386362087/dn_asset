@@ -51,6 +51,7 @@ namespace XForm
                     {
                         CSVStruct st = table.list[i];
                         st.parse.Write(write, st.content);
+                        st.parse.title = st.title;
                     }
 
                     fs.Seek(0, SeekOrigin.Begin);

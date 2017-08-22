@@ -14,7 +14,9 @@ namespace XForm
 
     public abstract class ValueParse
     {
-        protected string exMsg{ get { return string.Format("解析{0}错误,配值为", GetType().Name); } }
+        protected string exMsg { get { return string.Format("解析{0}类型{1}错误,配值为", title, GetType().Name); } }
+
+        public string title { get; set; }
 
         public abstract ValueType type { get; }
 
