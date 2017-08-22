@@ -13,11 +13,7 @@ public class SerializeLevel : ScriptableObject
 
     [NonSerialized]
     private LevelWave _toBeRemoved;
-
-    private GameObject _markPrefab;
-
-    public List<GameObject> _markGO;
-
+    
     public Dictionary<uint, int> _preLoadInfo;
     public Dictionary<uint, int> _lastCachePreloadInfo;
 
@@ -61,16 +57,7 @@ public class SerializeLevel : ScriptableObject
     public int CurrentEdit
     {
         get { return _currentEdit; }
-        set
-        {
-            int preID = _currentEdit;
-            _currentEdit = value;
-
-            if (preID != _currentEdit)
-            {
-                MarkEditWave();
-            }
-        }
+        set { _currentEdit = value; }
     }
 
     public void OnEnable()
@@ -78,15 +65,12 @@ public class SerializeLevel : ScriptableObject
         hideFlags = HideFlags.HideAndDontSave;
         if (_waves == null)
             _waves = new List<LevelWave>();
-        if (_markGO == null)
-            _markGO = new List<GameObject>();
         if (_preLoadInfo == null)
             _preLoadInfo = new Dictionary<uint, int>();
         if (_lastCachePreloadInfo == null)
             _lastCachePreloadInfo = new Dictionary<uint, int>();
         if (_layout == null) _layout = new LevelLayoutManager(this);
-
-        _markPrefab = Resources.Load("Common/EditorRes/EditorArrow") as GameObject;
+        
         _currentEdit = -1;
         _markGOHeight = 2.0f;
 
@@ -122,10 +106,6 @@ public class SerializeLevel : ScriptableObject
         {
             _markGOHeight = minh;
             _goStep = -_goStep;
-        }
-        foreach (GameObject go in _markGO)
-        {
-            go.transform.localPosition = new Vector3(0, _markGOHeight, 0);
         }
     }
 
@@ -399,7 +379,6 @@ public class SerializeLevel : ScriptableObject
         {
             _wave.RemoveSceneViewInstance();
         }
-        _markGO.Clear();
     }
 
     public void AddWave()
@@ -475,16 +454,6 @@ public class SerializeLevel : ScriptableObject
         return null;
     }
 
-    public void AddMonster(Vector3 pos)
-    {
-        foreach (LevelWave _wave in _waves)
-        {
-            if (_wave._id == _currentEdit)
-            {
-                _wave.AddMonsterAtPos(pos, _markPrefab);
-            }
-        }
-    }
 
     public void RemoveMonster(GameObject go)
     {
@@ -498,28 +467,6 @@ public class SerializeLevel : ScriptableObject
                 _wave.RemoveMonster(go);
             }
         }
-    }
-
-    protected void MarkEditWave()
-    {
-        foreach (GameObject go in _markGO)
-        {
-            DestroyImmediate(go);
-        }
-
-        _markGO.Clear();
-
-        if (_markPrefab != null)
-        {
-            foreach (LevelWave _wave in _waves)
-            {
-                if (_wave._id == CurrentEdit)
-                {
-                    _wave.SetWaveMarked(_markPrefab);
-                }
-            }
-        }
-
     }
 }
 

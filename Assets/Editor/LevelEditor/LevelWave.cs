@@ -495,7 +495,6 @@ public class LevelWave : ScriptableObject
 
         ParticleSystem[] systems = markgo.GetComponentsInChildren<ParticleSystem>();
         foreach (ParticleSystem system in systems) system.Play();
-        LevelMgr._markGO.Add(markgo);
     }
 
     public void SetWaveMarked(GameObject markPrefab)
@@ -521,19 +520,7 @@ public class LevelWave : ScriptableObject
         }
     }
 
-    public void AddMonsterAtPos(Vector3 pos, GameObject mark)
-    {
-        GameObject prefab = _prefab;
-        if (prefab != null)
-        {
-            int index = FindEmptySlot();
-            GameObject go = Instantiate(prefab);
-            go.name = GetMonsterName(_id, index);
-            go.transform.position = pos;
-            _prefabSlot.Add(index);
-            MarkMonster(go, mark);
-        }
-    }
+
     
 
     public void RemoveMonster(GameObject go)
