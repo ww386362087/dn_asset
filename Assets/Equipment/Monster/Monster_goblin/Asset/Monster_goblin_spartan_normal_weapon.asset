@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!43 &4300000
+Mesh:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Monster_goblin_spartan_normal_weapon
+  serializedVersion: 8
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 192
+    topology: 0
+    firstVertex: 0
+    vertexCount: 61
+    localAABB:
+      m_Center: {x: 0.000000039115548, y: -0.0000000060535967, z: 0.14902218}
+      m_Extent: {x: 0.049636953, y: 0.015581565, z: 0.22124775}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_MeshCompression: 3
+  m_IsReadable: 0
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexBuffer: 
+  m_Skin: []
+  m_VertexData:
+    m_CurrentChannels: 0
+    m_VertexCount: 0
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 0
+    _typelessdata: 
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 183
+      m_Range: 0.4424955
+      m_Start: -0.07222557
+      m_Data: 34a812110daaa064032e28d9804b441a91129146a4a0849125286164494434a812910db844a4ca3200913208401a91121146964464032e11d9800b4aaa2c93922acb00a411292869444a44185912114696a044ca20299132084034a882120daa44a4ca3229d9800b4a34a882122983a4a41129286164094ab30443e9429efcff50272b9e130a81cc80a2912bc468f4ca2294a692884680b4b2d821ad6824442bbecdb1caaf85a842431bb15c20462a5a48014a186e7492410fa4a4d105290040d18a18679cb24a33a434f00a2d2014a20a0dac6432c22bba44f4c72a11b1424944dc8c1211
+      m_BitSize: 10
+    m_UV:
+      m_NumItems: 244
+      m_Range: 0.99135685
+      m_Start: 0.0042938013
+      m_Data: 22f51cfd17fb1df222f51cfd17fb1df2261d211d1c012b01211d261d1df217fb02ef0be217fb1df21df217fb02ef0be217fb1df23b183801340230183801340225de49ff28c920c909b105b525de05b508c500b803d11ee972416e44784679496e447a4c6b47794984456d3370397240703992389241923892308209821e6d1f6d098209821e6d1f6d092c6119610a2e3e2e19612c616d096d1f062506036d1f6d096d096d1f062506036d1f6d095b8e4b5a385b288e4b5a385bb58beafefc68db5bc40fa90fb58ba90f88348d0f56447d9855ec64f46fdd7dda64f48ed873fd7dda6ac011f82df14fea2df12b9c559c2b9c049c
+      m_BitSize: 8
+    m_Normals:
+      m_NumItems: 122
+      m_Range: 1.9957371
+      m_Start: -0.9971419
+      m_Data: 8008888008887ff7777ff7771bb881dff77de4477edaaffde22ffe6aaff62440021dd001955009dff7811ff87de0077ee17f7e7be777ff56fa1bc001000990042888d3b9f97a2a021e10704ea7fd29787ba43f9d2020fe80d8017f07
+      m_BitSize: 6
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 61
+      m_Data: 00000cff03589200
+      m_BitSize: 1
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 192
+      m_Data: 40200803401486711048a22c88a2304bb330ce03450e0449d1144954655d946561577661dac6719de6695df77960288a233892600992e4688ea22986a67992a78982258aa6678a962a6aa22ab8aa66b89a6b08aa2bc8b6aefbb230fbbe312cc3713ccbad3cbbed3cd3eeebd2f14bd3732cb7352cd776ddb6b75de3f00de3b97debf9bdebf78deffc8ee3355fdb7ccedb
+      m_BitSize: 6
+    m_UVInfo: 85
+  m_LocalAABB:
+    m_Center: {x: 0.000000039115548, y: -0.0000000060535967, z: 0.14902218}
+    m_Extent: {x: 0.049636953, y: 0.015581565, z: 0.22124775}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshOptimized: 1

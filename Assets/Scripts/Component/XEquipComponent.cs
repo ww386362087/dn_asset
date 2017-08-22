@@ -47,6 +47,7 @@ public class XEquipComponent : XComponent
         SkinnedMeshRenderer skm = skinmesh.GetComponent<SkinnedMeshRenderer>();
         if (skm == null) skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         _combineMeshTask.skin = skm;
+        skm.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         e.skin = skm;
         EquipTest(m_FashionList[0]);
     }

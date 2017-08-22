@@ -28,6 +28,8 @@ public class XNPC : XEntity
         FindHead();
         XAnimComponent anim = AttachComponent<XAnimComponent>();
         anim.OverrideAnim("NPC_sidel_idle", _present.AnimLocation + _present.Idle);
+
+        EnableShadow(true);
     }
 
 
@@ -92,10 +94,13 @@ public class XNPC : XEntity
         }
     }
 
-    public override void OnAttachToHost()
+    private void EnableShadow(bool able)
     {
-        base.OnAttachToHost();
+        if (skin == null)
+        {
+            skin = EntityTransfer.GetComponentInChildren<SkinnedMeshRenderer>();
+            skin.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        }
     }
-
 
 }

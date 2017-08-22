@@ -79,7 +79,6 @@ class XCameraActionComponent : XComponent
                 _ty = 0;
             }
         }
-
         if (_auto)
         {
             _auto_x = (_tx - _auto_x) * _flowSpeed;
@@ -102,13 +101,15 @@ class XCameraActionComponent : XComponent
 
     private void OnGestureCancel(XEventArgs e)
     {
-        _manual_x = _camera.Root_R_X;
-        _manual_y = _camera.Root_R_Y;
-
-        int scale = 1 << 5;
-        _ty = _manual_y + _tx * scale;
-        _tx = _manual_x;
-        _auto = false;
+        if (XGesture.singleton.Working)
+        {
+            _manual_x = _camera.Root_R_X;
+            _manual_y = _camera.Root_R_Y;
+            int scale = 1 << 5;
+            _ty = _manual_y + _tx * scale;
+            _tx = _manual_x;
+            _auto = false;
+        }
     }
 
 

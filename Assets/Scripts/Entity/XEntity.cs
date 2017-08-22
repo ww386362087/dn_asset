@@ -26,7 +26,7 @@ public abstract class XEntity : XObject
     protected int _layer = 0;
     protected Vector3 _movement = Vector3.zero;
     public float speed = 0.02f;
-    private SkinnedMeshRenderer _skin = null;
+    protected SkinnedMeshRenderer _skin = null;
 
     public uint EntityID
     {

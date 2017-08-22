@@ -97,12 +97,12 @@ internal class XGesture : XSingleton<XGesture>
 
     public void Cancel()
     {
+        XEventMgr.singleton.FireEvent(new XGestureCancelEvent());
+
         _bTouch = false;
         _one = false;
         _bswype = false;
         _finger_id = -1;
-
-        XEventMgr.singleton.FireEvent(new XGestureCancelEvent());
     }
 
     
