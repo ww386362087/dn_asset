@@ -26,7 +26,7 @@ public class WaveWindow
     public WaveWindow(LevelWave _wv)
     {
         int ht = (_wv._id >= 1000 ? height2 : height);
-        _rect = new Rect(0, LevelLayoutManager.minViewHeight, width, ht);
+        _rect = new Rect(0, LevelLayout.minViewHeight, width, ht);
         _wave = _wv;
     }
 
@@ -57,7 +57,7 @@ public class WaveWindow
             GUILayout.Box(_icon64);
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(SelectEnemyButtonContent, LevelLayoutManager.miniButtonWidth))
+            if (GUILayout.Button(SelectEnemyButtonContent, LevelLayout.miniButtonWidth))
             {
                 _wave.LevelMgr.CurrentEdit = id;
                 OpenEnemyListWindow();
@@ -116,7 +116,7 @@ public class WaveWindow
             GUILayout.BeginHorizontal(new GUILayoutOption[] { GUILayout.Height(30) });
             if (_wave.HasDoodad) 
             {
-                Texture item = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/bx2.png", typeof(Texture)) as Texture;
+                Texture item = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/bx2.png", typeof(Texture)) as Texture;
                 GUILayout.Box(item);
             }
             GUILayout.EndHorizontal();
@@ -125,12 +125,12 @@ public class WaveWindow
 
             // operation
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(ToggleWaveButtonContent, LevelLayoutManager.miniButtonWidth))
+            if (GUILayout.Button(ToggleWaveButtonContent, LevelLayout.miniButtonWidth))
             {
                 _wave.VisibleInEditor = !_wave.VisibleInEditor;
             }
 
-            if (GUILayout.Button(RemoveWaveButtonContent, LevelLayoutManager.miniButtonWidth))
+            if (GUILayout.Button(RemoveWaveButtonContent, LevelLayout.miniButtonWidth))
             {
                 _wave.LevelMgr.RemoveWave(_wave._id);
                 _wave.RemoveSceneViewInstance();
@@ -144,7 +144,7 @@ public class WaveWindow
         {
             GUILayout.BeginHorizontal();
             _wave._script = EditorGUILayout.TextField(_wave._script, new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
-            if (GUILayout.Button(RemoveWaveButtonContent, LevelLayoutManager.miniButtonWidth))
+            if (GUILayout.Button(RemoveWaveButtonContent, LevelLayout.miniButtonWidth))
             {
                 _wave.LevelMgr.RemoveWave(_wave._id);
             }
@@ -174,7 +174,7 @@ public class WaveWindow
         _icon64 = null;
         if (_wave.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Player)
         {
-            Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/LevelPlayer.png", typeof(Texture)) as Texture;
+            Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelPlayer.png", typeof(Texture)) as Texture;
             Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
 
             if (icon128 != null)
@@ -185,7 +185,7 @@ public class WaveWindow
         }
         else if (_wave.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Random)
         {
-            Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/LevelRandom.png", typeof(Texture)) as Texture;
+            Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelRandom.png", typeof(Texture)) as Texture;
             Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
 
             if (icon128 != null)
@@ -196,7 +196,7 @@ public class WaveWindow
         }
         else if (_wave.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Buff)
         {
-            Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/buff.png", typeof(Texture)) as Texture;
+            Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/buff.png", typeof(Texture)) as Texture;
             Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
 
             if (icon128 != null)

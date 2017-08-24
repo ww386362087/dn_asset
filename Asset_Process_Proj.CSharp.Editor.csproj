@@ -164,7 +164,7 @@
     <Compile Include="Assets\Editor\LevelEditor\Drawing.cs" />
     <Compile Include="Assets\Editor\LevelEditor\EnemyListEditor.cs" />
     <Compile Include="Assets\Editor\LevelEditor\LevelEditor.cs" />
-    <Compile Include="Assets\Editor\LevelEditor\LevelLayoutManager.cs" />
+    <Compile Include="Assets\Editor\LevelEditor\LevelLayout.cs" />
     <Compile Include="Assets\Editor\LevelEditor\LevelWave.cs" />
     <Compile Include="Assets\Editor\LevelEditor\SerializeLevel.cs" />
     <Compile Include="Assets\Editor\LevelEditor\WaveWindow.cs" />

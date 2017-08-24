@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-class LevelLayoutManager
+class LevelLayout
 {
     public SerializeLevel _levelMgr;
 
@@ -44,7 +44,7 @@ class LevelLayoutManager
 
     protected Texture2D _grayText = null;
 
-    public LevelLayoutManager(SerializeLevel mgr)
+    public LevelLayout(SerializeLevel mgr)
     {
         _levelMgr = mgr;
         InitGrayTexture();
@@ -234,19 +234,19 @@ class LevelLayoutManager
                 GUILayout.BeginVertical();
                 if (wv.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Player)
                 {
-                    Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/LevelPlayer.png", typeof(Texture)) as Texture;
+                    Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelPlayer.png", typeof(Texture)) as Texture;
                     Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
                     GUILayout.Box(icon128);
                 }
                 else if (wv.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Random)
                 {
-                    Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/LevelRandom.png", typeof(Texture)) as Texture;
+                    Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelRandom.png", typeof(Texture)) as Texture;
                     Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
                     GUILayout.Box(icon128);
                 }
                 else if (wv.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Buff)
                 {
-                    Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/buff.png", typeof(Texture)) as Texture;
+                    Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/buff.png", typeof(Texture)) as Texture;
                     Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
                     GUILayout.Box(icon128);
                 }

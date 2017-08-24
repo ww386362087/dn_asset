@@ -6,13 +6,13 @@ using UnityEditor;
 public class LevelEditor : EditorWindow
 {
     private const string _autoSaveFile = "./Temp/__auto__leveleditor.txt";
-    private SerializeLevel _SerialziedLevel;
+    private SerializeLevel _serial;
     public Vector2 scrollPosition;
     RaycastHit _hitInfo;
 
     public SerializeLevel LevelMgr
     {
-        get { return _SerialziedLevel; }
+        get { return _serial; }
     }
 
 
@@ -27,19 +27,29 @@ public class LevelEditor : EditorWindow
     {
         if (EditorApplication.isPlayingOrWillChangePlaymode && EditorApplication.isPlaying)
         {
-            _SerialziedLevel.RemoveSceneViewInstance();
+            _serial.RemoveSceneViewInstance();
         }
+    }
+
+    void OnDestroy()
+    {
+        _serial.RemoveSceneViewInstance();
     }
 
     public void OnEnable()
     {
         hideFlags = HideFlags.HideAndDontSave;
-        if (_SerialziedLevel == null)
+        if (_serial == null)
         {
-            _SerialziedLevel = ScriptableObject.CreateInstance<SerializeLevel>();
-            _SerialziedLevel.Editor = this;
+            _serial = CreateInstance<SerializeLevel>();
+            _serial.Editor = this;
         }
         EditorApplication.hierarchyWindowItemOnGUI += HierarchyWindowItemOnGUI;
+    }
+
+    public void OnDisable()
+    {
+        _serial.SaveToFile(_autoSaveFile, true);
     }
 
     void HierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
@@ -53,7 +63,7 @@ public class LevelEditor : EditorWindow
                 while (monster.transform.parent != null) monster = monster.transform.parent.gameObject;
                 if (monster.name.IndexOf("Wave") != -1)
                 {
-                    _SerialziedLevel.RemoveMonster(monster);
+                    _serial.RemoveMonster(monster);
                 }
             }
         }
@@ -68,7 +78,7 @@ public class LevelEditor : EditorWindow
 
     void OnGUI()
     {
-        _SerialziedLevel.OnGUI();
+        _serial.OnGUI();
     }
     
 }

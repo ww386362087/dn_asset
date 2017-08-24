@@ -21,7 +21,7 @@ public class SerializeLevel : ScriptableObject
     private XEntityStatistics _data_info = null;
 
     [NonSerialized]
-    private LevelLayoutManager _layout;
+    private LevelLayout _layout;
 
     public static int maxSpawnTime = 180;
 
@@ -69,7 +69,7 @@ public class SerializeLevel : ScriptableObject
             _preLoadInfo = new Dictionary<uint, int>();
         if (_lastCachePreloadInfo == null)
             _lastCachePreloadInfo = new Dictionary<uint, int>();
-        if (_layout == null) _layout = new LevelLayoutManager(this);
+        if (_layout == null) _layout = new LevelLayout(this);
         
         _currentEdit = -1;
         _markGOHeight = 2.0f;
@@ -148,7 +148,6 @@ public class SerializeLevel : ScriptableObject
         }
         sw.Flush();
         sw.Close();
-
         AssetDatabase.Refresh();
     }
 
