@@ -300,8 +300,6 @@
     <None Include="Assets\Resources\Shader\Skin\Skin-RimLightBlendNoCutout.shader" />
     <None Include="Assets\Resources\Table\Level\1_0.txt" />
     <None Include="Assets\Resources\Table\Level\1_0_sc.txt" />
-    <None Include="Assets\Resources\Table\Level\2_3.txt" />
-    <None Include="Assets\Resources\Table\Level\2_3_sc.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
