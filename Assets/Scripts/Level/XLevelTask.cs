@@ -1,131 +1,137 @@
 ﻿using UnityEngine;
 
-internal class XLevelBaseTask
+
+namespace Level
 {
-    public int _id;
-    protected XLevelSpawnInfo _spawner;
 
-    public XLevelBaseTask(XLevelSpawnInfo ls)
+    internal class XLevelBaseTask
     {
-        _spawner = ls;
-    }
+        public int _id;
+        protected XLevelSpawnInfo _spawner;
 
-    public virtual bool Execute(float time)
-    {
-        return true;
-    }
-}
-
-
-internal class XLevelSpawnTask : XLevelBaseTask
-{
-    // level id
-    public uint _EnemyID;        // enemy template id 
-    public int _MonsterRotate;
-    public int _MonsterIndex;
-    public Vector3 _MonsterPos;
-    public LevelSpawnType _SpawnType;
-    public bool _IsSummonTask;
-
-    public XLevelSpawnTask(XLevelSpawnInfo ls)
-        : base(ls)
-    {
-        _IsSummonTask = false;
-    }
-
-    public XEntity CreateClientMonster(uint id, float yRotate, Vector3 pos, int _waveid)
-    {
-        Quaternion rotation = Quaternion.Euler(0, yRotate, 0);
-
-        XEntity entity = XEntityMgr.singleton.CreateEntity(id, pos, rotation, true);
-        if (entity != null)
+        public XLevelBaseTask(XLevelSpawnInfo ls)
         {
-            entity.Wave = _waveid;
-            entity.CreateTime = Time.realtimeSinceStartup;
-            XAIEventArgs aievent = new XAIEventArgs();
-            aievent.DepracatedPass = true;
-            aievent.EventType = 1;
-            aievent.EventArg = "SpawnMonster";
-            XEventMgr.singleton.FireEvent(aievent, 0.05f);
-            return entity;
+            _spawner = ls;
         }
-        return null;
+
+        public virtual bool Execute(float time)
+        {
+            return true;
+        }
     }
 
 
-    public XEntity CreateServerAttrMonster(object data, float yRotate, Vector3 pos, int _waveid)
+    internal class XLevelSpawnTask : XLevelBaseTask
     {
-        //to-do CreateServerAttrMonster
+        // level id
+        public uint _EnemyID;        // enemy template id 
+        public int _MonsterRotate;
+        public int _MonsterIndex;
+        public Vector3 _MonsterPos;
+        public LevelSpawnType _SpawnType;
+        public bool _IsSummonTask;
 
-        return null;
-    }
-
-
-    public override bool Execute(float time)
-    {
-        base.Execute(time);
-        XLevelDynamicInfo dInfo = null;
-        if (!_IsSummonTask)
+        public XLevelSpawnTask(XLevelSpawnInfo ls)
+            : base(ls)
         {
-            dInfo = _spawner.GetWaveDynamicInfo(_id);
-            if (dInfo == null) return true;
+            _IsSummonTask = false;
         }
 
-        XEntity enemy = null;
-        if (_SpawnType == LevelSpawnType.Spawn_Source_Monster)
+        public XEntity CreateClientMonster(uint id, float yRotate, Vector3 pos, int _waveid)
         {
-            // 从本地创建
-            enemy = CreateClientMonster(_EnemyID, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
-            XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(enemy.EntityID);
-        }
-        else if (_SpawnType == LevelSpawnType.Spawn_Source_Doodad)
-        {
-            // 单机现在不处理直接掉doodad
-        }
-        else
-        {
-            // 属性和外形来自服务器
-            //UnitAppearance data = XLevelSpawnMgr.singleton.GetCacheServerMonster((uint)_id);
-            //if (data != null) enemy = CreateServerAttrMonster(data, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
-            //XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(enemy.EntityID);
-        }
+            Quaternion rotation = Quaternion.Euler(0, yRotate, 0);
 
-        if (dInfo != null)
-        {
-            if (enemy != null)
+            XEntity entity = XEntityMgr.singleton.CreateEntity(id, pos, rotation, true);
+            if (entity != null)
             {
-                dInfo._generateCount++;
-                dInfo._enemyIds.Add(enemy.EntityID);
+                entity.Wave = _waveid;
+                entity.CreateTime = Time.realtimeSinceStartup;
+                XAIEventArgs aievent = new XAIEventArgs();
+                aievent.DepracatedPass = true;
+                aievent.EventType = 1;
+                aievent.EventArg = "SpawnMonster";
+                XEventMgr.singleton.FireEvent(aievent, 0.05f);
+                return entity;
             }
-            if (dInfo._generateCount == dInfo._TotalCount)
-            {
-                dInfo._generatetime = time;
-            }
-            if (enemy != null && enemy.IsBoss)
-            {
-              //  XTutorialHelper.singleton.HasBoss = true;
-                return false;
-            }
+            return null;
         }
 
-        return true;
+
+        public XEntity CreateServerAttrMonster(object data, float yRotate, Vector3 pos, int _waveid)
+        {
+            //to-do CreateServerAttrMonster
+
+            return null;
+        }
+
+
+        public override bool Execute(float time)
+        {
+            base.Execute(time);
+            XLevelDynamicInfo dInfo = null;
+            if (!_IsSummonTask)
+            {
+                dInfo = _spawner.GetWaveDynamicInfo(_id);
+                if (dInfo == null) return true;
+            }
+
+            XEntity enemy = null;
+            if (_SpawnType == LevelSpawnType.Spawn_Source_Monster)
+            {
+                // 从本地创建
+                enemy = CreateClientMonster(_EnemyID, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
+                XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(enemy.EntityID);
+            }
+            else if (_SpawnType == LevelSpawnType.Spawn_Source_Doodad)
+            {
+                // 单机现在不处理直接掉doodad
+            }
+            else
+            {
+                // 属性和外形来自服务器
+                //UnitAppearance data = XLevelSpawnMgr.singleton.GetCacheServerMonster((uint)_id);
+                //if (data != null) enemy = CreateServerAttrMonster(data, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
+                //XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(enemy.EntityID);
+            }
+
+            if (dInfo != null)
+            {
+                if (enemy != null)
+                {
+                    dInfo._generateCount++;
+                    dInfo._enemyIds.Add(enemy.EntityID);
+                }
+                if (dInfo._generateCount == dInfo._TotalCount)
+                {
+                    dInfo._generatetime = time;
+                }
+                if (enemy != null && enemy.IsBoss)
+                {
+                    //  XTutorialHelper.singleton.HasBoss = true;
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
-}
 
-internal class XLevelScriptTask : XLevelBaseTask
-{
-    public string _ScriptName;
-
-    public XLevelScriptTask(XLevelSpawnInfo ls)
-        : base(ls)
+    internal class XLevelScriptTask : XLevelBaseTask
     {
+        public string _ScriptName;
+
+        public XLevelScriptTask(XLevelSpawnInfo ls)
+            : base(ls)
+        {
+        }
+
+        public override bool Execute(float time)
+        {
+            base.Execute(time);
+            XLevelScriptMgr.singleton.RunScript(_ScriptName);
+            return false;
+
+        }
     }
 
-    public override bool Execute(float time)
-    {
-        base.Execute(time);
-        XLevelScriptMgr.singleton.RunScript(_ScriptName);
-        return false;
-
-    }
 }

@@ -75,7 +75,6 @@ internal class XScene : XSingleton<XScene>
         {
             return "DynamicScene/" + _scene_row.DynamicScene + "/";
         }
-
         return "";
     }
 
@@ -97,7 +96,7 @@ internal class XScene : XSingleton<XScene>
 
     public float TerrainY(Vector3 pos)
     {
-        if(_terrain!=null)
+        if (_terrain != null)
         {
             return _terrain.SampleHeight(pos);
         }
@@ -109,7 +108,6 @@ internal class XScene : XSingleton<XScene>
         XEntityMgr.singleton.CreatePlayer();
         XPlayer player = XEntityMgr.singleton.Player;
         player.EnableCC(true);
-        Debug.Log("player name: " + player.EntityObject.name);
     }
 
 
@@ -124,4 +122,5 @@ internal class XScene : XSingleton<XScene>
         var row = XNpcList.sington.GetItemID(24);
         XEntityMgr.singleton.CreateNPC(row);
     }
+
 }

@@ -104,64 +104,7 @@ namespace XEditor
             }
             return true;
         }
-
-        [MenuItem(@"Assets/Tool/Animation/ReduceKeyFrame")]
-        private static void ReduceKeyFrame()
-        {
-            Object[] clips = Selection.GetFiltered(typeof(AnimationClip), SelectionMode.DeepAssets);
-            if (clips != null)
-            {
-                for (int i = 0; i < clips.Length; ++i)
-                {
-                    AnimationClip clip = clips[i] as AnimationClip;
-                    if (clip != null)
-                    {
-                        AnimationClipCurveData[] accds = AnimationUtility.GetAllCurves(clip, true);
-                        foreach (AnimationClipCurveData accd in accds)
-                        {
-                            EditorCurveBinding ecb = new EditorCurveBinding();
-                            ecb.path = accd.path;
-                            ecb.propertyName = accd.propertyName;
-                            ecb.type = accd.type;
-                            AnimationCurve ac = AnimationUtility.GetEditorCurve(clip, ecb);
-                            Keyframe[] keys = ac.keys;
-                            if (keys.Length > 2)
-                            {
-                                Keyframe key0 = keys[0];
-                                int firstIn = (int)(key0.inTangent * 1000.0f);
-                                int firstOut = (int)(key0.outTangent * 1000.0f);
-                                int firstValue = (int)(key0.value * 1000.0f);
-                                bool same = true;
-                                for (int j = 1, jmax = keys.Length; j < jmax; ++j)
-                                {
-                                    Keyframe key = keys[j];
-                                    int inTangent = (int)(key.inTangent * 1000.0f);
-                                    int outTangent = (int)(key.outTangent * 1000.0f);
-                                    int value = (int)(key.value * 1000.0f);
-                                    if (inTangent != firstIn || outTangent != firstOut || value != firstValue)
-                                    {
-                                        same = false;
-                                    }
-                                }
-                                if (same)
-                                {
-                                    Keyframe keyn = keys[keys.Length - 1];
-                                    AnimationUtility.SetEditorCurve(clip,
-                                        EditorCurveBinding.FloatCurve(accd.path, accd.type, accd.propertyName),
-                                        AnimationCurve.Linear(key0.time, key0.value, keyn.time - key0.time, key0.value));
-                                    //Debug.Log(string.Format("Clip:{0} path:{1} propertyName:{2}", clip.name, ecb.path, ecb.propertyName));                                    
-                                }
-                            }
-                        }
-                    }
-                    //EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", title, i, prefabs.Length), path, (float)i / prefabs.Length);
-                }
-            }
-            AssetDatabase.Refresh();
-            AssetDatabase.SaveAssets();
-            EditorUtility.ClearProgressBar();
-            EditorUtility.DisplayDialog("Finish", "All Clips process finish", "OK");
-        }
+        
 
         [MenuItem(@"Assets/Tool/Animation/ClearTxt")]
         private static void ClearTxt()

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using XTable;
+using Level;
 
 public class WaveWindow
 {

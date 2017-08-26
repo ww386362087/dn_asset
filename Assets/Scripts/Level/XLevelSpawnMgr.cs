@@ -1,51 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class XLevelSpawnMgr : XSingleton<XLevelSpawnMgr>
+namespace Level
 {
-    private XLevelSpawnInfo _curSpawner;
-    public bool BossExtarScriptExecuting = false;
-    public bool NeedCheckLevelfinishScript { get; set; }
-    public bool IsCurrentLevelWin { get; set; }
-    public bool IsCurrentLevelFinished { get; set; }
 
-    public void Update(float deltaT)
+    public class XLevelSpawnMgr : XSingleton<XLevelSpawnMgr>
     {
-        if (NeedCheckLevelfinishScript)
+        private XLevelSpawnInfo _curSpawner;
+        public bool BossExtarScriptExecuting = false;
+        public bool NeedCheckLevelfinishScript { get; set; }
+        public bool IsCurrentLevelWin { get; set; }
+        public bool IsCurrentLevelFinished { get; set; }
+
+        public void Update(float deltaT)
         {
-            if (!XLevelSpawnMgr.singleton.BossExtarScriptExecuting)
+            if (NeedCheckLevelfinishScript)
             {
-                NeedCheckLevelfinishScript = false;
-                ForceLevelFinish(true);
+                if (!XLevelSpawnMgr.singleton.BossExtarScriptExecuting)
+                {
+                    NeedCheckLevelfinishScript = false;
+                    ForceLevelFinish(true);
+                }
             }
         }
-    }
-    
 
-    public void ForceLevelFinish(bool win)
-    {
-        IsCurrentLevelFinished = true;
-        if (win)
+
+        public void ForceLevelFinish(bool win)
         {
-            XLevelState ls = XLevelStatistics.singleton.ls;
-            IsCurrentLevelWin = true;
-            OnLevelFinish(ls._lastDieEntityPos + new Vector3(0.0f, ls._lastDieEntityHeight, 0.0f) / 2, ls._lastDieEntityPos, 500, 0, true);
+            IsCurrentLevelFinished = true;
+            if (win)
+            {
+                XLevelState ls = XLevelStatistics.singleton.ls;
+                IsCurrentLevelWin = true;
+                OnLevelFinish(ls._lastDieEntityPos + new Vector3(0.0f, ls._lastDieEntityHeight, 0.0f) / 2, ls._lastDieEntityPos, 500, 0, true);
+            }
+            else
+            {
+                OnLevelFailed();
+            }
+
         }
-        else
+
+        public void OnLevelFinish(Vector3 dropInitPos, Vector3 dropGounrdPos, uint money, uint itemCount, bool bKillOpponent)
         {
-            OnLevelFailed();
         }
 
-    }
 
-    public void OnLevelFinish(Vector3 dropInitPos, Vector3 dropGounrdPos, uint money, uint itemCount, bool bKillOpponent)
-    {
-    }
+        public void OnLevelFailed()
+        {
+        }
 
 
-    public void OnLevelFailed()
-    {
     }
 
 
