@@ -132,14 +132,14 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 
     public XRole CreateTestRole()
     {
-        XAttributes attr = InitAttrByPresent(2);
+        XAttributes attr = InitAttrFromClient(2);
         attr.Type = EnitityType.Entity_Role;
         attr.AppearPostion = Vector3.zero;
         attr.AppearQuaternion = Quaternion.identity;
         return CreateRole(attr, false);
     }
 
-    public void CreatePlayer()
+    public XPlayer CreatePlayer()
     {
         SceneList.RowData row = XScene.singleton.SceneRow;
         XAttributes attr = InitAttrFromClient(2);
@@ -152,7 +152,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         float.TryParse(ss[2], out fp[2]);
         attr.AppearPostion = new Vector3(fp[0], fp[1], fp[2]);
         attr.AppearQuaternion = Quaternion.Euler(row.StartRot[0], row.StartRot[1], row.StartRot[2]);
-        Player = PrepareEntity<XPlayer>(attr, false);
+        return Player = PrepareEntity<XPlayer>(attr, false);
     }
 
 

@@ -67,14 +67,14 @@ public class LevelWave : ScriptableObject
             {
                 _prefab = Resources.Load("Prefabs/NPC_pope") as GameObject;
                 _enemyid = 0;
-                if (_window != null) _window.RegenerateIcon64();
+                if (_window != null) _window.GenerateIcon();
             }
             if (_spawnType == LevelSpawnType.Spawn_Source_Random)
             {
                 _prefab = Resources.Load("Prefabs/NPC_Velskud_Wing") as GameObject;
                 _enemyid = 0;
                 if (_window != null)
-                    _window.RegenerateIcon64();
+                    _window.GenerateIcon();
             }
         }
     }
@@ -109,12 +109,12 @@ public class LevelWave : ScriptableObject
                         XEntityStatistics.RowData npcInfo = LevelMgr.EnemyList.GetByID((int)_enemyid);
                         if (npcInfo == null) return;
                         _prefab = Resources.Load("Prefabs/" + XEntityPresentation.sington.GetItemID((uint)npcInfo.PresentID).Prefab) as GameObject;
-                        if (_window != null) _window.RegenerateIcon64();
+                        if (_window != null) _window.GenerateIcon();
                     }
                     if (SpawnType == LevelSpawnType.Spawn_Source_Doodad)
                     {
                         _prefab = Resources.Load("Effects/FX_Particle/Roles/Lzg_Ty/Ty_buff_jx_m") as GameObject;
-                        if (_window != null) _window.RegenerateIcon64();
+                        if (_window != null) _window.GenerateIcon();
                     }
                 }
             }
@@ -131,7 +131,7 @@ public class LevelWave : ScriptableObject
                 _script = value;
                 _enemyid = 0;
                 if (_window != null)
-                    _window.RegenerateIcon64();
+                    _window.GenerateIcon();
             }
         }
     }

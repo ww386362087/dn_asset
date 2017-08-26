@@ -63,6 +63,7 @@ public class SerializeLevel : ScriptableObject
     public void OnEnable()
     {
         hideFlags = HideFlags.HideAndDontSave;
+        AssetPreview.SetPreviewTextureCacheSize(64);
         if (_waves == null)
             _waves = new List<LevelWave>();
         if (_preLoadInfo == null)

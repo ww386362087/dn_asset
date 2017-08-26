@@ -1,6 +1,4 @@
 ﻿#if TEST
-using XTable;
-using UnityEngine;
 
 public class TestScene : ITest
 {

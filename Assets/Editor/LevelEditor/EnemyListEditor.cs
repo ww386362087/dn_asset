@@ -37,9 +37,7 @@ public class EnemyListEditor : EditorWindow
         {
             string strPrefab = XEntityPresentation.sington.GetItemID((uint)_row.PresentID).Prefab;
             GameObject _prefab = Resources.Load("Prefabs/" + strPrefab) as GameObject;
-            Texture2D icon128 = AssetPreview.GetAssetPreview(_prefab);
-            Texture2D icon64 = new Texture2D(64, 64);
-            WaveWindow.Compress128To64(icon128, icon64);
+            Texture2D icon64 = AssetPreview.GetAssetPreview(_prefab);
             ID_ICON.Add((uint)_row.id, icon64);
         }
     }

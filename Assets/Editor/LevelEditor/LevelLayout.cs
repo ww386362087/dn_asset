@@ -37,9 +37,9 @@ class LevelLayout
         ClearButtonContent = new GUIContent("Clear", "Clear");
 
     public static int minViewHeight = 90;
-    public static int maxViewHeight = 740;
+    public static int maxViewHeight = 700;
     public static int minViewWidth = 5;
-    public static int maxViewWidth = 1600;
+    public static int maxViewWidth = 1900;
 
     public Vector2 scrollPosition = Vector2.zero;
 

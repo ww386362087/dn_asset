@@ -14,15 +14,13 @@ public class LevelEditor : EditorWindow
     {
         get { return _serial; }
     }
-
-
+    
     [MenuItem("Window/LevelEditor %L")]
     static void Init()
     {
         GetWindow(typeof(LevelEditor));
     }
-
-
+    
     void StateChange()
     {
         if (EditorApplication.isPlayingOrWillChangePlaymode && EditorApplication.isPlaying)

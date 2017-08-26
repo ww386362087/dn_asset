@@ -13,7 +13,7 @@ public class WaveWindow
     public static int height2 = 45;
 
 
-    protected Texture2D _icon64 = null;
+    protected Texture2D _icon = null;
 
     private static GUIContent
         RemoveWaveButtonContent = new GUIContent("X", "remove wave");
@@ -50,12 +50,12 @@ public class WaveWindow
         }
         if (_wave._id < 1000)//wave
         {
-            if (_icon64 == null) RegenerateIcon64();
+            if (_icon == null) GenerateIcon();
             GUILayout.BeginHorizontal();
 
             // icon & number
             GUILayout.BeginVertical(new GUILayoutOption[] { GUILayout.Width(70), GUILayout.Height(100) });
-            GUILayout.Box(_icon64);
+            GUILayout.Box(_icon);
 
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(SelectEnemyButtonContent, LevelLayout.miniButtonWidth))
@@ -155,65 +155,27 @@ public class WaveWindow
 
         GUI.DragWindow();
     }
-
-    public static void Compress128To64(Texture2D src, Texture2D dst)
+    
+    public void GenerateIcon()
     {
-        int x = 32;
-        int y = 32;
-        int width = 64;
-        int height = 64;
-
-        if (src == null) return;
-
-        Color[] pix = src.GetPixels(x, y, width, height);
-        dst.SetPixels(pix);
-        dst.Apply();
-    }
-
-    public void RegenerateIcon64()
-    {
-        _icon64 = null;
         if (_wave.SpawnType == LevelSpawnType.Spawn_Source_Player)
         {
             Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelPlayer.png", typeof(Texture)) as Texture;
-            Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
-
-            if (icon128 != null)
-            {
-                _icon64 = new Texture2D(64, 64);
-                Compress128To64(icon128, _icon64);
-            }
+            _icon = AssetPreview.GetAssetPreview(icon);
         }
         else if (_wave.SpawnType == LevelSpawnType.Spawn_Source_Random)
         {
             Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelRandom.png", typeof(Texture)) as Texture;
-            Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
-
-            if (icon128 != null)
-            {
-                _icon64 = new Texture2D(64, 64);
-                Compress128To64(icon128, _icon64);
-            }
+            _icon = AssetPreview.GetAssetPreview(icon);
         }
         else if (_wave.SpawnType == LevelSpawnType.Spawn_Source_Doodad)
         {
             Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/buff.png", typeof(Texture)) as Texture;
-            Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
-
-            if (icon128 != null)
-            {
-                _icon64 = new Texture2D(64, 64);
-                Compress128To64(icon128, _icon64);
-            }
+            _icon = AssetPreview.GetAssetPreview(icon);
         }
         else if (_wave.EnemyID > 0)
         {
-            Texture2D icon128 = AssetPreview.GetAssetPreview(_wave._prefab);
-            if (icon128 != null)
-            {
-                _icon64 = new Texture2D(64, 64);
-                Compress128To64(icon128, _icon64);
-            }
+            _icon = AssetPreview.GetAssetPreview(_wave._prefab);
         }
     }
 
