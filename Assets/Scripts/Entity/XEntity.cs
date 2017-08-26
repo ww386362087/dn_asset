@@ -125,6 +125,12 @@ public abstract class XEntity : XObject
         set { _skin = value; }
     }
 
+    public float CreateTime { get; set; }
+
+    public int Wave { get; set; }
+
+    public XAttributes Attributes { get { return _attr; } }
+
     public void Initilize(GameObject o, XAttributes attr)
     {
         base.Initilize();

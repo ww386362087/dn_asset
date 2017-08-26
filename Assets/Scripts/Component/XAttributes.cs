@@ -54,4 +54,10 @@ public class XAttributes : XComponent
         set { _presentID = value; }
     }
 
+
+    public double GetAttr(XAttributeDefine def)
+    {
+        return 0;
+    }
+
 }

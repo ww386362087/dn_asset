@@ -7,27 +7,7 @@ using XTable;
 [Serializable]
 public class LevelWave : ScriptableObject
 {
-    public enum InfoType
-    {
-        TypeNone,
-        TypeId,
-        TypeBaseInfo,
-        TypePreWave,
-        TypeEditor,
-        TypeMonsterInfo,
-        TypeScript,
-        TypeExString,
-        TypeSpawnType,
-    }
-
-    public enum LevelSpawnType
-    {
-        Spawn_Source_Monster,
-        Spawn_Source_Player,
-        Spawn_Source_Random,
-        Spawn_Source_Buff,
-    }
-
+ 
     [SerializeField]
     public int _id;
     [SerializeField]
@@ -130,7 +110,7 @@ public class LevelWave : ScriptableObject
                         _prefab = Resources.Load("Prefabs/" + XEntityPresentation.sington.GetItemID((uint)npcInfo.PresentID).Prefab) as GameObject;
                         if (_window != null) _window.RegenerateIcon64();
                     }
-                    if (SpawnType == LevelSpawnType.Spawn_Source_Buff)
+                    if (SpawnType == LevelSpawnType.Spawn_Source_Doodad)
                     {
                         _prefab = Resources.Load("Effects/FX_Particle/Roles/Lzg_Ty/Ty_buff_jx_m") as GameObject;
                         if (_window != null) _window.RegenerateIcon64();
@@ -431,24 +411,6 @@ public class LevelWave : ScriptableObject
         }
     }
 
-    public int FindEmptySlot()
-    {
-        for (int i = 0; i < 100; i++)
-        {
-            if (!_prefabSlot.Contains(i))
-                return i;
-        }
-        return 0;
-    }
-
-    public int GetMaxSlot()
-    {
-        int max = 0;
-        foreach (int i in _prefabSlot)
-            if (i > max) max = i;
-        return max;
-    }
-
     public void DrawWaveWindow()
     {
         _window.draw();
@@ -497,32 +459,7 @@ public class LevelWave : ScriptableObject
         foreach (ParticleSystem system in systems) system.Play();
     }
 
-    public void SetWaveMarked(GameObject markPrefab)
-    {
-        List<int> toberemove = new List<int>();
-        foreach (int i in _prefabSlot)
-        {
-            string name = GetMonsterName(_id, i);
-            GameObject go = GameObject.Find(name);
-            if (go == null)
-            {
-                // go may be deleted 
-                toberemove.Add(i);
-            }
-            else
-            {
-                MarkMonster(go, markPrefab);
-            }
-        }
-        foreach (int j in toberemove)
-        {
-            _prefabSlot.Remove(j);
-        }
-    }
-
-
     
-
     public void RemoveMonster(GameObject go)
     {
         int wave = 0;

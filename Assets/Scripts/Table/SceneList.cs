@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+
 namespace XTable {
     
     
@@ -274,5 +276,6 @@ namespace XTable {
 			Table[lineno] = row;
 			columnno = -1;
         }
+        
     }
 }

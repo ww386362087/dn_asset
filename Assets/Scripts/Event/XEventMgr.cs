@@ -74,7 +74,18 @@ public class XEventMgr : XSingleton<XEventMgr>
         }
         return false;
     }
-    
+
+
+    public bool FireEvent(XEventArgs args, float delay)
+    {
+        TimerManager.singleton.AddTimer((int)(delay * 1000), 0, OnTimer, args);
+        return true;
+    }
+
+    private void OnTimer(int seq, object obj)
+    {
+        FireEvent((XEventArgs)obj);
+    }
 
 }
 

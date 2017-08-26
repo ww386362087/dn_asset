@@ -72,3 +72,25 @@ public class XCameraActionEvent : XEventArgs
     }
 
 }
+
+
+public class XAIEventArgs : XEventArgs
+{
+    public bool DepracatedPass;
+    public int EventType;
+    public string EventArg;
+
+    public XAIEventArgs() : base()
+    {
+        _eDefine = XEventDefine.XEvent_Camera_Action;
+    }
+
+    public override void Recycle()
+    {
+        base.Recycle();
+        DepracatedPass = false;
+        EventType = 1;
+        EventArg = string.Empty;
+    }
+
+}

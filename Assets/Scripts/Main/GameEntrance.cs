@@ -15,6 +15,8 @@ public class GameEntrance : MonoBehaviour
 #endif
     }
 
+    
+
     void Update()
     {
         GameEnine.Update(Time.deltaTime);

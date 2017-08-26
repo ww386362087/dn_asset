@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.IO;
 
 /// <summary>
 /// 资源加载管理
@@ -28,6 +29,8 @@ public class XResourceMgr
         public Object obj;
         public bool fromAB;
     }
+
+    private static MemoryStream shareMemoryStream = new MemoryStream(8192);//512k
 
     //为了效率 避免update的时候重复计算list长度
     private static int _cnt = 0;
@@ -130,6 +133,50 @@ public class XResourceMgr
         else //resource.load 直接拿到texture,audio,material
         {
             return o as T;
+        }
+    }
+
+    public static Stream ReadText(string location, bool error = true)
+    {
+        TextAsset data = Load<TextAsset>(location,AssetType.Byte);
+
+        if (data == null)
+        {
+            if (error)
+                LoadErrorLog(location);
+            else
+                return null;
+        }
+        try
+        {
+            shareMemoryStream.SetLength(0);
+            shareMemoryStream.Write(data.bytes, 0, data.bytes.Length);
+            shareMemoryStream.Seek(0, SeekOrigin.Begin);
+            return shareMemoryStream;
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e.Message + location);
+            return shareMemoryStream;
+        }
+        finally
+        {
+            Resources.UnloadAsset(data);
+        }
+    }
+
+    public static void ClearStream(Stream s)
+    {
+        if (s != null)
+        {
+            if (s == shareMemoryStream)
+            {
+                shareMemoryStream.SetLength(0);
+            }
+            else
+            {
+                s.Close();
+            }
         }
     }
 
@@ -241,6 +288,11 @@ public class XResourceMgr
         node.cb.Clear();
         _asyn_list.Remove(node);
         _cnt--;
+    }
+
+    public static void LoadErrorLog(string prefab)
+    {
+        Debug.LogError("Load resource: " + prefab + " error!");
     }
 
 }

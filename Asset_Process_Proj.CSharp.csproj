@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -119,11 +121,22 @@
     <Compile Include="Assets\Scripts\Input\XTouch.cs" />
     <Compile Include="Assets\Scripts\Input\XTouchItem.cs" />
     <Compile Include="Assets\Scripts\Input\XVirtualTab.cs" />
+    <Compile Include="Assets\Scripts\Level\LevelCmd.cs" />
+    <Compile Include="Assets\Scripts\Level\LevelSpawnType.cs" />
+    <Compile Include="Assets\Scripts\Level\XLevelScriptMgr.cs" />
+    <Compile Include="Assets\Scripts\Level\XLevelSpawn.cs" />
+    <Compile Include="Assets\Scripts\Level\XLevelSpawnMgr.cs" />
+    <Compile Include="Assets\Scripts\Level\XLevelStatistics.cs" />
+    <Compile Include="Assets\Scripts\Level\XLevelTask.cs" />
     <Compile Include="Assets\Scripts\Main\CVSReader.cs" />
     <Compile Include="Assets\Scripts\Main\GameEnine.cs" />
     <Compile Include="Assets\Scripts\Main\GameEntrance.cs" />
-    <Compile Include="Assets\Scripts\Main\XCommon.cs" />
+    <Compile Include="Assets\Scripts\Parts\Common\XAttributeDefine.cs" />
+    <Compile Include="Assets\Scripts\Parts\Common\XCommon.cs" />
+    <Compile Include="Assets\Scripts\Parts\Common\XGlobalConfig.cs" />
     <Compile Include="Assets\Scripts\Parts\Anim\AnimParam.cs" />
+    <Compile Include="Assets\Scripts\Parts\Common\Timer.cs" />
+    <Compile Include="Assets\Scripts\Parts\Common\TimerManager.cs" />
     <Compile Include="Assets\Scripts\Parts\Equip\BaseLoadTask.cs" />
     <Compile Include="Assets\Scripts\Parts\Equip\CombineMeshTask.cs" />
     <Compile Include="Assets\Scripts\Parts\Equip\CombineMeshUtility.cs" />
@@ -140,6 +153,7 @@
     <Compile Include="Assets\Scripts\Scene\Action\PlayerAction.cs" />
     <Compile Include="Assets\Scripts\Scene\Action\XCylinderTrigger.cs" />
     <Compile Include="Assets\Scripts\Scene\Action\XTrigger.cs" />
+    <Compile Include="Assets\Scripts\Scene\SceneType.cs" />
     <Compile Include="Assets\Scripts\Scene\Wall\XCameraWall.cs" />
     <Compile Include="Assets\Scripts\Scene\Wall\XCutsceneWall.cs" />
     <Compile Include="Assets\Scripts\Scene\Wall\XHorseWall.cs" />

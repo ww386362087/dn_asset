@@ -186,7 +186,7 @@ public class CalEnemyNum
         //int sum = 0, res = 0;
         foreach (LevelWave wave in _wave)
         {
-            if (wave.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Buff)
+            if (wave.SpawnType == LevelSpawnType.Spawn_Source_Doodad)
                 continue;
 
             if (wave._id < 1000)

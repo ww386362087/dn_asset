@@ -118,7 +118,7 @@ public class EnemyListEditor : EditorWindow
         LevelEditor _levelInstance = (LevelEditor)GetWindow(typeof(LevelEditor));
         int curWave = _levelInstance.LevelMgr.CurrentEdit;
         LevelWave wv = _levelInstance.LevelMgr.GetWave(curWave);
-        wv.SpawnType = LevelWave.LevelSpawnType.Spawn_Source_Buff;
+        wv.SpawnType = LevelSpawnType.Spawn_Source_Doodad;
         wv.EnemyID = uint.Parse(_buff);
 
         EnemyListEditor _window = (EnemyListEditor)GetWindow(typeof(EnemyListEditor));

@@ -8,6 +8,20 @@ internal class XScene : XSingleton<XScene>
     private SceneList.RowData _scene_row;
     private Terrain _terrain;
 
+    public SceneType SceneType { get; set; }
+
+    public uint SceneID { get { return _sceneid; } }
+
+    /// <summary>
+    /// 0 单机，客户端刷怪
+    /// 1 联机，服务器刷怪和同步
+    /// 2 单机，服务器把刷怪数据给客户端，客户端刷怪
+    /// </summary>
+    private int SyncModeValue = 0;
+
+
+    public bool SyncMode { get { return SyncModeValue == 1; } }
+
     public SceneList.RowData SceneRow { get { return _scene_row; } }
 
 
@@ -53,6 +67,16 @@ internal class XScene : XSingleton<XScene>
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
         GameCamera.Initial(camera);
         Documents.singleton.OnEnterScene();
+    }
+
+    public string GetSceneDynamicPrefix()
+    {
+        if (_scene_row != null && _scene_row.DynamicScene != null)
+        {
+            return "DynamicScene/" + _scene_row.DynamicScene + "/";
+        }
+
+        return "";
     }
 
     private void OnEnterSceneFinally()

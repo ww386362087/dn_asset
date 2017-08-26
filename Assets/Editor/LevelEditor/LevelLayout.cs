@@ -232,19 +232,19 @@ class LevelLayout
                 GUILayout.BeginHorizontal();
 
                 GUILayout.BeginVertical();
-                if (wv.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Player)
+                if (wv.SpawnType == LevelSpawnType.Spawn_Source_Player)
                 {
                     Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelPlayer.png", typeof(Texture)) as Texture;
                     Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
                     GUILayout.Box(icon128);
                 }
-                else if (wv.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Random)
+                else if (wv.SpawnType == LevelSpawnType.Spawn_Source_Random)
                 {
                     Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelRandom.png", typeof(Texture)) as Texture;
                     Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
                     GUILayout.Box(icon128);
                 }
-                else if (wv.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Buff)
+                else if (wv.SpawnType == LevelSpawnType.Spawn_Source_Doodad)
                 {
                     Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/buff.png", typeof(Texture)) as Texture;
                     Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
@@ -265,7 +265,7 @@ class LevelLayout
                 GUILayout.BeginVertical();
 
                 GUILayout.BeginHorizontal();
-                wv.SpawnType = (LevelWave.LevelSpawnType)EditorGUILayout.EnumPopup("Spawn Type", wv.SpawnType);
+                wv.SpawnType = (LevelSpawnType)EditorGUILayout.EnumPopup("Spawn Type", wv.SpawnType);
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();

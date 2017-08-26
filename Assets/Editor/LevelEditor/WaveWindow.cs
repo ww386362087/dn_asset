@@ -67,7 +67,7 @@ public class WaveWindow
             gs.alignment = TextAnchor.LowerRight;
             gs.normal.textColor = Color.white;
             XEntityStatistics.RowData enemyData = XEntityStatistics.sington.GetByID((int)_wave.EnemyID);
-            if (enemyData != null && _wave.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Monster)
+            if (enemyData != null && _wave.SpawnType == LevelSpawnType.Spawn_Source_Monster)
             {
                 if (enemyData.Type == 1)
                 {
@@ -172,7 +172,7 @@ public class WaveWindow
     public void RegenerateIcon64()
     {
         _icon64 = null;
-        if (_wave.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Player)
+        if (_wave.SpawnType == LevelSpawnType.Spawn_Source_Player)
         {
             Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelPlayer.png", typeof(Texture)) as Texture;
             Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
@@ -183,7 +183,7 @@ public class WaveWindow
                 Compress128To64(icon128, _icon64);
             }
         }
-        else if (_wave.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Random)
+        else if (_wave.SpawnType == LevelSpawnType.Spawn_Source_Random)
         {
             Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelRandom.png", typeof(Texture)) as Texture;
             Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
@@ -194,7 +194,7 @@ public class WaveWindow
                 Compress128To64(icon128, _icon64);
             }
         }
-        else if (_wave.SpawnType == LevelWave.LevelSpawnType.Spawn_Source_Buff)
+        else if (_wave.SpawnType == LevelSpawnType.Spawn_Source_Doodad)
         {
             Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/buff.png", typeof(Texture)) as Texture;
             Texture2D icon128 = AssetPreview.GetAssetPreview(icon);

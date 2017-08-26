@@ -106,6 +106,23 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         }
     }
 
+    public XEntity GetEntity(uint id)
+    {
+        if (_dic_entities.ContainsKey(id))
+            return _dic_entities[id];
+        return null;
+    }
+
+
+    public XEntity CreateEntity(uint id,Vector3 pos,Quaternion rot,bool autoAdd)
+    {
+        XAttributes attr = InitAttrFromClient((int)id);
+        attr.AppearPostion = pos;
+        attr.AppearQuaternion = rot;
+        XEntity e = PrepareEntity<XEntity>(attr, autoAdd);
+        return e;
+    }
+
 
     public XRole CreateRole(XAttributes attr, bool autoAdd)
     {
@@ -115,11 +132,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 
     public XRole CreateTestRole()
     {
-        XAttributes attr = new XAttributes();
-        attr.id = 10001;
-        attr.Prefab = "Player";
-        attr.Name = "Archer";
-        attr.PresentID = 2;
+        XAttributes attr = InitAttrByPresent(2);
         attr.Type = EnitityType.Entity_Role;
         attr.AppearPostion = Vector3.zero;
         attr.AppearQuaternion = Quaternion.identity;
@@ -129,11 +142,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     public void CreatePlayer()
     {
         SceneList.RowData row = XScene.singleton.SceneRow;
-        XAttributes attr = new XAttributes();
-        attr.id = 10001;
-        attr.Prefab = "Player";
-        attr.Name = "Archer";
-        attr.PresentID = 2;
+        XAttributes attr = InitAttrFromClient(2);
         attr.Type = EnitityType.Entity_Player;
         string s = row.StartPos;
         string[] ss = s.Split('=');
@@ -149,12 +158,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 
     public XNPC CreateNPC(XNpcList.RowData row)
     {
-        XAttributes attr = new XAttributes();
-        attr.id = (uint)row.NPCID;
-        attr.PresentID = row.PresentID;
-        attr.Name = row.NPCName;
-        var prow = XEntityPresentation.sington.GetItemID(row.PresentID);
-        attr.Prefab = prow.Prefab;
+        XAttributes attr = InitAttrByPresent(row.PresentID);
         attr.Type = EnitityType.Entity_Npc;
         attr.AppearPostion = Player.Position + new Vector3(0, 0, -2);// new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
         attr.AppearQuaternion = Quaternion.Euler(row.NPCRotation[0], row.NPCRotation[1], row.NPCRotation[2]);
@@ -162,6 +166,30 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     }
 
 
-    
+    private XAttributes InitAttrFromClient(int entityID)
+    {
+        var entity = XEntityStatistics.sington.GetByID(entityID);
+        if (entity == null) throw new Exception("entity is nil with id: " + entityID);
+        XAttributes attr = new XAttributes();
+        var prow = XEntityPresentation.sington.GetItemID(entity.PresentID);
+        if (prow == null) throw new Exception("present is nil with id: " + entity.PresentID);
+        attr.Prefab = prow.Prefab;
+        attr.id = (uint)XCommon.singleton.New_id;
+        attr.PresentID = entity.PresentID;
+        attr.Name = prow.Name;
+        return attr;
+    }
+
+    private XAttributes InitAttrByPresent(uint presentID)
+    {
+        XAttributes attr = new XAttributes();
+        var prow = XEntityPresentation.sington.GetItemID(presentID);
+        if (prow == null) throw new Exception("present is nil with id: " + presentID);
+        attr.Prefab = prow.Prefab;
+        attr.id = (uint)XCommon.singleton.New_id;
+        attr.PresentID = presentID;
+        attr.Name = prow.Name;
+        return attr;
+    }
 
 }

@@ -16,7 +16,7 @@ namespace XTable {
         public class RowData{
 			public int id;
 			public string Name;
-			public int PresentID;
+			public uint PresentID;
 			public int Type;
 			public string Tag;
 			public int Fightgroup;
@@ -103,7 +103,7 @@ namespace XTable {
 			RowData row = new RowData();
 			Read<int>(reader, ref row.id, intParse); columnno = 0;
 			Read<string>(reader, ref row.Name, stringParse); columnno = 1;
-			Read<int>(reader, ref row.PresentID, intParse); columnno = 2;
+			Read<uint>(reader, ref row.PresentID, uintParse); columnno = 2;
 			Read<int>(reader, ref row.Type, intParse); columnno = 3;
 			Read<string>(reader, ref row.Tag, stringParse); columnno = 4;
 			Read<int>(reader, ref row.Fightgroup, intParse); columnno = 5;
