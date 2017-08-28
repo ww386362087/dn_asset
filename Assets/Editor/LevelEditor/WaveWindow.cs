@@ -175,7 +175,7 @@ public class WaveWindow
         }
         else if (_wave.EnemyID > 0)
         {
-            _icon = AssetPreview.GetAssetPreview(_wave._prefab);
+            _icon = AssetPreview.GetAssetPreview( _wave._prefab);
         }
     }
 

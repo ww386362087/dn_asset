@@ -79,15 +79,4 @@ public class XEditorPath
 
         return BuildPath(dictionary, _root);
     }
-
-    [MenuItem("XEditor/Preview")]
-    public static void testt()
-    {
-        Object asset = AssetDatabase.LoadMainAssetAtPath("Assets/Resources/Prefabs/Monster_goblin_blue.prefab");
-        Texture2D texture = AssetPreview.GetAssetPreview(asset);
-        Debug.Log("is loading: " + AssetPreview.IsLoadingAssetPreview(asset.GetInstanceID()));
-        if (texture != null) Debug.Log("size: " + texture.texelSize);
-        else Debug.LogError("load text is nil");
-    }
-
 }
