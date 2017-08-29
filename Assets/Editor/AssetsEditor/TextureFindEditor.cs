@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.IO;
-using XEditor;
 using System.Collections.Generic;
 
 using PrefabSet = System.Collections.Generic.HashSet<UnityEngine.GameObject>;
@@ -133,44 +132,32 @@ namespace XEditor
 
                 GameObject prefab = AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject)) as GameObject;
                 GameObject instance = GameObject.Instantiate(prefab) as GameObject;
-                bool isEquip = false;
-                XMeshTexData mtd = instance.GetComponent<XMeshTexData>();
-                if (mtd != null && mtd.tex != null)
-                {
-                    TryScanTex(mtd.tex);
-                    isEquip = true;
-                }
-                if (!isEquip)
-                {
-                    fileName[0] = prefabPath;
 
-                    string[] reses = AssetDatabase.GetDependencies(fileName);
-
-                    for (int j = 0; j < reses.Length; ++j)
+                fileName[0] = prefabPath;
+                string[] reses = AssetDatabase.GetDependencies(fileName);
+                for (int j = 0; j < reses.Length; ++j)
+                {
+                    string res = reses[j];
+                    string resLow = res.ToLower();
+                    if (resLow.EndsWith(".mat"))
                     {
-                        string res = reses[j];
-                        string resLow = res.ToLower();
-                        if (resLow.EndsWith(".mat"))
+                        m_texCache.Clear();
+                        Material mat = AssetDatabase.LoadAssetAtPath(res, typeof(Material)) as Material;
+                        MaterialEditor.GetMatTex(mat, m_texCache);
+                        for (int k = 0; k < m_texCache.Count; ++k)
                         {
-                            m_texCache.Clear();
-                            Material mat = AssetDatabase.LoadAssetAtPath(res, typeof(Material)) as Material;
-                            MaterialEditor.GetMatTex(mat, m_texCache);
-                            for (int k = 0; k < m_texCache.Count; ++k)
-                            {
-                                Texture t = m_texCache[k];
-                                TryScanTex(t);
-                                CacheTexMat(t, mat, prefab);
-                            }
-                            m_texCache.Clear();
+                            Texture t = m_texCache[k];
+                            TryScanTex(t);
+                            CacheTexMat(t, mat, prefab);
                         }
+                        m_texCache.Clear();
                     }
                 }
-
                 GameObject.DestroyImmediate(instance);
-
             }
             EditorUtility.ClearProgressBar();
         }
+
         private void TryScanTex(Texture tex)
         {
             if (tex != null)

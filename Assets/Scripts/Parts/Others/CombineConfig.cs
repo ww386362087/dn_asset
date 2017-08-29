@@ -64,8 +64,8 @@ public class CombineConfig : MonoBehaviour
             "player_assassin_bandpose" };
 
         this.PrefabName = new string[] { 
-            "ZJ_zhanshi_SkinnedMesh", 
-            "Player_archer_SkinnedMesh",
+            "ZJ_zhanshi_SkinnedMesh",
+            "Player_archer_SkinnedMesh_createchar",
             "Player_sorceress_SkinnedMesh",
             "Player_cleric_SkinnedMesh",
             "Player_academic_SkinnedMesh",

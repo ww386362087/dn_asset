@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public delegate void PartLoadCallback(BaseLoadTask part, bool needCombine);
 
-public delegate void LoadCallBack(UnityEngine.Object obj, System.Object cbOjb);
+public delegate void LoadCallBack(Object obj, System.Object cbOjb);
 
 public class PartLoadTask : BaseLoadTask
 {
     public GameObject go = null;
-    public XMeshTexData mtd = null;
+    public Mesh mesh = null;
+    public Texture tex = null;
     private PartLoadCallback m_PartLoadCb = null;
 
     public PartLoadTask(EPartType p, PartLoadCallback partLoadCb)
@@ -31,7 +32,8 @@ public class PartLoadTask : BaseLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                mtd = XResourceMgr.Load<XMeshTexData>(location,AssetType.Prefab);
+                mesh = XResourceMgr.Load<Mesh>(location,AssetType.Mesh);
+                tex = XResourceMgr.Load<Texture>(location, AssetType.TGA);
                 LoadFinish(go, this);
             }
             else if (m_PartLoadCb != null)
@@ -55,28 +57,28 @@ public class PartLoadTask : BaseLoadTask
 
     public void PostLoad(SkinnedMeshRenderer skin)
     {
-        if (skin == null || mtd == null) return;
-        skin.sharedMaterial.SetTexture(mtd._offset, mtd._tex);
+        if (skin == null || tex == null) return;
+        skin.sharedMaterial.SetTexture(XEquipUtil.GetPartOffset(part), tex);
     }
 
     public override void Reset()
     {
-        if (mtd != null)
+        if (tex != null)
         {
-            GameObject.Destroy(go);
-            XResourceMgr.UnloadAsset(location,AssetType.Prefab);
-            mtd = null;
+            XResourceMgr.UnloadAsset(tex);
+            tex = null;
+        }
+        if(mesh!=null)
+        {
+            XResourceMgr.UnloadAsset(mesh);
+            mesh = null;
         }
     }
 
     public bool HasMesh()
     {
-        return mtd != null && mtd.mesh != null;
+        return mesh != null;
     }
-
-    public Texture GetTexture()
-    {
-        return mtd == null ? null : mtd.tex;
-    }
+    
 
 }

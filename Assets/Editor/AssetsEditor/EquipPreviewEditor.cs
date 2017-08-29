@@ -21,7 +21,7 @@ namespace XEditor
         {
             //1.mesh collection
             List<CombineInstance> ciList = new List<CombineInstance>();
-            System.Object[] meshPrefab = new System.Object[8];
+            Texture[] m_tex = new Texture[8];
             DefaultEquip.RowData data = DefaultEquip.sington.GetByProfID(m_profession + 1);
             string name = "";
             for (int i = 0; i < part.partPath.Length; ++i)
@@ -42,12 +42,13 @@ namespace XEditor
                 }
                 if (!string.IsNullOrEmpty(path))
                 {
-                    path = "Assets/Resources/Equipments/" + path+AssetType.Prefab;
-                    XMeshTexData mtd = AssetDatabase.LoadAssetAtPath<XMeshTexData>(path);
-                    if (mtd != null && mtd.mesh != null)
+                    path = "Assets/Resources/Equipments/" + path;
+                    Mesh mesh = AssetDatabase.LoadAssetAtPath<Mesh>(path + AssetType.Mesh);
+                    Texture tex = AssetDatabase.LoadAssetAtPath<Texture>(path + AssetType.TGA);
+                    if (mesh != null)
                     {
-                        ci.mesh = mtd.mesh;
-                        meshPrefab[i] = mtd;
+                        ci.mesh = mesh;
+                        m_tex[i] = tex;
                     }
                     if (ci.mesh != null) ciList.Add(ci);
                 }
@@ -56,11 +57,10 @@ namespace XEditor
             if (ciList.Count > 0)
             {
                 if (newGo != null) GameObject.DestroyImmediate(newGo);
-                string skinPrfab = "Assets/Resources/Prefabs/" + combineConfig.PrefabName[m_profession]+AssetType.Prefab;
+                string skinPrfab = "Assets/Resources/Prefabs/" + combineConfig.PrefabName[m_profession] + AssetType.Prefab;
                 newGo = GameObject.Instantiate(AssetDatabase.LoadAssetAtPath<Object>(skinPrfab)) as GameObject;
                 if (name != "") newGo.name = name;
                 newGo.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-               
 
                 //2.combine
                 Transform t = newGo.transform;
@@ -70,14 +70,10 @@ namespace XEditor
 
                 //3.set material
                 Material mat = new Material(Shader.Find("Custom/Skin/RimlightBlend8"));
-                for (int i = 0; i < meshPrefab.Length; ++i)
+                for (int i = 0; i < m_tex.Length; ++i)
                 {
-                    System.Object obj = meshPrefab[i];
-                    if (obj is XMeshTexData)
-                    {
-                        XMeshTexData mtd = obj as XMeshTexData;
-                        mat.SetTexture("_Tex" + i.ToString(), mtd.tex);
-                    }
+
+                    mat.SetTexture("_Tex" + i.ToString(), m_tex[i]);
                 }
                 newSmr.sharedMaterial = mat;
 
@@ -92,8 +88,8 @@ namespace XEditor
                         {
                             path = data.Weapon;
                         }
-                      
-                        GameObject mainWeapon = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Equipments/" + path+AssetType.Prefab);
+
+                        GameObject mainWeapon = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Equipments/" + path + AssetType.Prefab);
                         if (mainWeapon != null)
                         {
                             GameObject instance = GameObject.Instantiate(mainWeapon) as GameObject;

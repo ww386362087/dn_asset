@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEditor;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine.Rendering;
 
 namespace XEditor
@@ -38,7 +35,6 @@ namespace XEditor
             window.Show();
         }
 
-      
         [MenuItem(@"Assets/Tool/Fbx/SaveSkinAsset %3")]
         private static void SaveSkinAsset()
         {
@@ -71,14 +67,14 @@ namespace XEditor
         private static void PreviewEquip()
         {
             EquipPreviewEditor window = (EquipPreviewEditor)EditorWindow.GetWindow(typeof(EquipPreviewEditor), true, "套装预览");
-           window.Show();
+            window.Show();
         }
 
 
         public delegate bool EnumFbxCallback(GameObject fbx, ModelImporter modelImporter, string path);
         public static void EnumFbx(EnumFbxCallback cb, string title)
         {
-            UnityEngine.Object[] fbxs = Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.DeepAssets);
+            Object[] fbxs = Selection.GetFiltered(typeof(Object), SelectionMode.DeepAssets);
             if (fbxs != null)
             {
                 for (int i = 0; i < fbxs.Length; ++i)
@@ -159,79 +155,33 @@ namespace XEditor
             }
         }
 
-        private static void SaveMeshAsset(Mesh mesh, Texture2D tex, int profession, string path, List<TexUVInfo> texuvList)
+        public static void CleanMesh(Mesh mesh)
         {
-            int uvOffsetX = -1;
-            if (texuvList != null)
-            {
-                for (int i = 0, imax = texuvList.Count; i < imax; ++i)
-                {
-                    TexUVInfo tuv = texuvList[i];
-                    if (tuv.tex != null && tuv.tex == tex)
-                    {
-                        uvOffsetX = tuv.uvOffset;
-                        break;
-                    }
-                }
-                if (uvOffsetX < 0)
-                {
-                    uvOffsetX = GetUVOffset(profession, mesh.name, s_CombineConfig);
-                }
-                if (uvOffsetX >= 0)
-                {
-                    ReCalculateUV(mesh, uvOffsetX);
-                    TexUVInfo tuv = new TexUVInfo();
-                    tuv.tex = tex;
-                    tuv.uvOffset = uvOffsetX;
-                    texuvList.Add(tuv);
-                }
-                else
-                {
-                    Debug.LogError("Find UV Error:" + mesh.name);
-                }
-            }
             mesh.uv2 = null;
+            mesh.uv3 = null;
+            mesh.uv4 = null;
+            mesh.colors = null;
+            mesh.colors32 = null;
             mesh.tangents = null;
+        }
+
+        private static void SaveMeshAsset(Mesh mesh, Texture2D tex, int profession, string path)
+        {
+            int uvOffsetX = GetUVOffset(profession, mesh.name, s_CombineConfig);
+
+            if (uvOffsetX >= 0) ReCalculateUV(mesh, uvOffsetX);
+            else Debug.LogError("Find UV Error:" + mesh.name);
+
+            CleanMesh(mesh);
             string meshPath = path + mesh.name + ".asset";
             AssetDatabase.CreateAsset(mesh, meshPath);
+            if (tex != null)
+            {
+                string srcTexPath = AssetDatabase.GetAssetPath(tex);
+                string destTexPath = "Assets/Resources/Equipments/" + tex.name + ".tga";
+                AssetDatabase.CopyAsset(srcTexPath, destTexPath);
+            }
             AssetDatabase.SaveAssets();
-            if (!File.Exists(meshPath)) { Debug.LogError(meshPath); return; }
-            Mesh loadMesh = AssetDatabase.LoadAssetAtPath(meshPath, typeof(Mesh)) as Mesh;
-            GameObject go = new GameObject(loadMesh.name);
-            XMeshTexData mtd = go.AddComponent<XMeshTexData>();
-            mtd._mesh = loadMesh;
-            mtd._tex = tex;
-            mtd._offset = "_Tex" + uvOffsetX.ToString();
-            PrefabUtility.CreatePrefab(path + mesh.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
-            GameObject.DestroyImmediate(go);
-        }
-
-        public struct TexUVInfo
-        {
-            public Texture2D tex;
-            public int uvOffset;
-        }
-
-        private static void SaveSkinWeaponAsset(SkinnedMeshRenderer smr, Mesh mesh, string saveRootPath)
-        {
-            mesh.UploadMeshData(true);
-            mesh.uv2 = null;
-            mesh.tangents = null;
-            string meshPath = saveRootPath + "weapon/" + mesh.name + ".asset";
-            AssetDatabase.CreateAsset(mesh, meshPath);
-            AssetDatabase.SaveAssets();
-            Mesh loadMesh = AssetDatabase.LoadAssetAtPath(meshPath, typeof(Mesh)) as Mesh;
-            GameObject weaponGo = new GameObject(mesh.name);
-            SkinnedMeshRenderer newSmr = weaponGo.AddComponent<SkinnedMeshRenderer>();
-            newSmr.sharedMesh = loadMesh;
-            newSmr.lightProbeUsage = LightProbeUsage.BlendProbes;
-            newSmr.shadowCastingMode = ShadowCastingMode.Off;
-            newSmr.receiveShadows = false;
-            newSmr.sharedMaterial = smr.sharedMaterial;
-            newSmr.localBounds = loadMesh.bounds;
-            newSmr.gameObject.layer = LayerMask.NameToLayer("Role");
-            PrefabUtility.CreatePrefab(saveRootPath + "weapon/" + mesh.name + ".prefab", weaponGo, ReplacePrefabOptions.ReplaceNameBased);
-            GameObject.DestroyImmediate(weaponGo);
         }
 
         private static CombineConfig s_CombineConfig = null;
@@ -256,21 +206,13 @@ namespace XEditor
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
             GameObject go = GameObject.Instantiate(fbx) as GameObject;
 
-            List<TexUVInfo> texuvList = new List<TexUVInfo>();
             SkinnedMeshRenderer[] smrs = go.GetComponentsInChildren<SkinnedMeshRenderer>();
             foreach (SkinnedMeshRenderer smr in smrs)
             {
-                Mesh mesh = UnityEngine.Object.Instantiate(smr.sharedMesh) as Mesh;
+                Mesh mesh = Object.Instantiate(smr.sharedMesh) as Mesh;
                 mesh.name = smr.sharedMesh.name;
-                if (smr.sharedMesh.name.EndsWith("_weapon"))
-                {
-                    SaveSkinWeaponAsset(smr, mesh, saveRootPath);
-                }
-                else
-                {
-                    mesh.UploadMeshData(false);
-                    SaveMeshAsset(mesh, smr.sharedMaterial.mainTexture as Texture2D, profession, saveRootPath, texuvList);
-                }
+                mesh.UploadMeshData(false);
+                SaveMeshAsset(mesh, smr.sharedMaterial.mainTexture as Texture2D, profession, saveRootPath);
             }
             modelImporter.isReadable = false;
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
@@ -279,7 +221,7 @@ namespace XEditor
             MeshFilter[] mfs = go.GetComponentsInChildren<MeshFilter>();
             foreach (MeshFilter mf in mfs)
             {
-                Mesh mesh = UnityEngine.Object.Instantiate(mf.sharedMesh) as Mesh;
+                Mesh mesh = Object.Instantiate(mf.sharedMesh) as Mesh;
                 mesh.name = mf.sharedMesh.name;
                 mesh.UploadMeshData(true);
                 mesh.uv2 = null;
@@ -360,7 +302,7 @@ namespace XEditor
             }
 
             Animator animator = go.GetComponent<Animator>();
-            animator.runtimeAnimatorController = XResourceMgr.Load("Controller/XMinorAnimator",AssetType.Controller) as RuntimeAnimatorController;
+            animator.runtimeAnimatorController = XResourceMgr.Load("Controller/XMinorAnimator", AssetType.Controller) as RuntimeAnimatorController;
             go.layer = LayerMask.NameToLayer("Role");
             PrefabUtility.CreatePrefab(saveRootPath + fbx.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
             GameObject.DestroyImmediate(go);
@@ -373,6 +315,5 @@ namespace XEditor
             GameObject go = AssetDatabase.LoadAssetAtPath("Assets/Editor/ImporterData/CombineConfig.prefab", typeof(GameObject)) as GameObject;
             return go.GetComponent<CombineConfig>();
         }
-
     }
 }

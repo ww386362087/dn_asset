@@ -125,6 +125,7 @@ public class XEquipComponent : XComponent
             PartLoadTask loadPart = _combineMeshTask.parts[(int)part] as PartLoadTask;
             loadPart.PostLoad(_combineMeshTask.skin);
         }
+
         for (EPartType part = EPartType.ECombinePartEnd; part < EPartType.EMountEnd; ++part)
         {
             MountLoadTask loadPart = _combineMeshTask.parts[(int)part] as MountLoadTask;

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class CombineMeshUtility :XSingleton<CombineMeshUtility>
@@ -59,9 +58,9 @@ public class CombineMeshUtility :XSingleton<CombineMeshUtility>
                 if (part.HasMesh())
                 {
                     CombineInstance ci = new CombineInstance();
-                    if (part.mtd != null)
+                    if (part.mesh != null)
                     {
-                        ci.mesh = part.mtd.mesh;
+                        ci.mesh = part.mesh;
                     }
                     ci.subMeshIndex = 0;
                     combineArray[index++] = ci;

@@ -107,9 +107,12 @@ public class XEquipUtil
                 mat.SetTexture("_Tex6", null);
                 mat.SetTexture("_Tex7", null);
             }
-            //if (Application.isPlaying && mat != null)
-            //    UnityEngine.Object.Destroy(mat);
         }
+    }
+
+    public static string GetPartOffset(EPartType partType)
+    {
+        return "_Tex" + (int)partType;
     }
 
     public static SkinnedMeshRenderer GetSmr(GameObject keyGo)

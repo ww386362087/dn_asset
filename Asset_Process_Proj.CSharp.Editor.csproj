@@ -168,10 +168,14 @@
     <Compile Include="Assets\Editor\LevelEditor\LevelWave.cs" />
     <Compile Include="Assets\Editor\LevelEditor\SerializeLevel.cs" />
     <Compile Include="Assets\Editor\LevelEditor\WaveWindow.cs" />
+    <Compile Include="Assets\Editor\MapEditor\MapEditor.cs" />
+    <Compile Include="Assets\Editor\MapEditor\MapGenerator.cs" />
+    <Compile Include="Assets\Editor\MapEditor\MapPresent.cs" />
     <Compile Include="Assets\Editor\XEditorPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Cache\cache.txt" />
+    <None Include="Assets\Editor\MapEditor\Res\VertextColor.shader" />
     <None Include="Assets\Resources\Shader\Common\AdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutAdditiveColor.shader" />
     <None Include="Assets\Resources\Shader\Common\CutoutDiffuse.shader" />

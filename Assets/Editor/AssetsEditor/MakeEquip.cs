@@ -9,7 +9,7 @@ namespace XEditor
     {
         public class ExtraSkinMeshTex
         {
-            public XMeshTexData mtd;
+            public Mesh mesh;
             public string name = "";
             public Texture2D tex;
         }
@@ -21,8 +21,8 @@ namespace XEditor
             public Texture2D tex;
             public Material srcMat;
         }
-        public UnityEngine.Object model = null;
-        protected UnityEngine.Object currentModel = null;
+        public Object model = null;
+        protected Object currentModel = null;
         protected Vector2 scrollPos = Vector2.zero;
         private string srcString = "01";
         private string replaceString = "02";
@@ -83,11 +83,13 @@ namespace XEditor
                         }
                         else
                         {
-                            XMeshTexData mtd = XResourceMgr.Load<XMeshTexData>(path,AssetType.Prefab);
-                            if (mtd != null)
+                            Mesh mesh = XResourceMgr.Load<Mesh>(path,AssetType.Mesh);
+                            Texture2D tex = XResourceMgr.Load<Texture2D>(path, AssetType.TGA);
+                            if (mesh != null)
                             {
                                 ExtraSkinMeshTex emt = new ExtraSkinMeshTex();
-                                emt.mtd = mtd;
+                                emt.mesh = mesh;
+                                emt.tex = tex;
                                 emt.name = "";
                                 mtdList.Add(emt);
                             }
@@ -120,10 +122,10 @@ namespace XEditor
             for (int i = 0, imax = mtdList.Count; i < imax; ++i)
             {
                 ExtraSkinMeshTex emt = mtdList[i];
-                if (emt.mtd != null)
+                if (emt.mesh != null)
                 {
                     GUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField(emt.mtd.mesh != null ? emt.mtd.mesh.name : "");
+                    EditorGUILayout.LabelField(emt.mesh.name);
                     GUILayout.EndHorizontal();
                 }
 
@@ -190,15 +192,15 @@ namespace XEditor
                 for (int i = 0, imax = mtdList.Count; i < imax; ++i)
                 {
                     ExtraSkinMeshTex emt = mtdList[i];
-                    if (emt.mtd != null)
+                    if (emt.mesh != null)
                     {
-                        if (emt.mtd.mesh != null)
+                        if (emt.mesh != null)
                         {
-                            emt.name = emt.mtd.mesh.name.Replace(srcString, replaceString);
+                            emt.name = emt.mesh.name.Replace(srcString, replaceString);
                         }
-                        if (emt.mtd.tex != null)
+                        if (emt.tex != null)
                         {
-                            string texName = emt.mtd.tex.name.Replace(srcString, replaceString);
+                            string texName = emt.tex.name.Replace(srcString, replaceString);
                             emt.tex = AssetDatabase.LoadAssetAtPath(modelPath + texName + ".tga", typeof(Texture2D)) as Texture2D;
                         }
                     }
@@ -231,14 +233,11 @@ namespace XEditor
                         if (emt.tex != null)
                         {
                             GameObject go = new GameObject(emt.name);
-                            if (emt.mtd != null)
+                            if (emt.mesh != null)
                             {
-                                XMeshTexData mtd = go.AddComponent<XMeshTexData>();
-                                mtd._mesh = emt.mtd.mesh;
-                                mtd._tex = emt.tex;
-                                mtd._offset = emt.mtd.offset;
-                                PrefabUtility.CreatePrefab(equipPath + emt.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
-
+                                FbxEditor.CleanMesh(emt.mesh);
+                                AssetDatabase.CreateAsset(emt.mesh, equipPath + emt.name + ".asset");
+                                AssetDatabase.SaveAssets();
                             }
                             GameObject.DestroyImmediate(go);
                         }

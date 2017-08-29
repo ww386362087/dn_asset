@@ -21,6 +21,8 @@ public class AssetType
 
     public static string Controller = ".controller";
 
+    public static string Mesh = ".asset";
+
 
     private string V;
 

@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 
 
 public class XEditorPath
@@ -10,7 +9,7 @@ public class XEditorPath
     public static readonly string Skp = "Assets/Resources/SkillPackage/";
     public static readonly string Crv = "Assets/Editor/EditorResources/Curve/";
     public static readonly string Cfg = "Assets/Editor/EditorResources/SkillPackage/";
-    public static readonly string Scb = "Assets/Resources/Table/SceneBlock/";
+    public static readonly string Sc = "Assets/Resources/Table/Scene/";
     public static readonly string Lev = "Assets/Resources/Table/Level/";
 
     private static readonly string _root = "Assets/Resources";
