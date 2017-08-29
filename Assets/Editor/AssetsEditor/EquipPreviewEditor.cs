@@ -72,7 +72,6 @@ namespace XEditor
                 Material mat = new Material(Shader.Find("Custom/Skin/RimlightBlend8"));
                 for (int i = 0; i < m_tex.Length; ++i)
                 {
-
                     mat.SetTexture("_Tex" + i.ToString(), m_tex[i]);
                 }
                 newSmr.sharedMaterial = mat;
