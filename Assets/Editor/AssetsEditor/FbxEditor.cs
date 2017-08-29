@@ -224,8 +224,7 @@ namespace XEditor
                 Mesh mesh = Object.Instantiate(mf.sharedMesh) as Mesh;
                 mesh.name = mf.sharedMesh.name;
                 mesh.UploadMeshData(true);
-                mesh.uv2 = null;
-                mesh.tangents = null;
+                CleanMesh(mesh);
                 string meshPath = saveRootPath + mesh.name + ".asset";
                 AssetDatabase.CreateAsset(mesh, meshPath);
                 AssetDatabase.SaveAssets();

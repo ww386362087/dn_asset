@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class AssetType
+﻿public class AssetType
 {
 
     public static string TGA = ".tga";
