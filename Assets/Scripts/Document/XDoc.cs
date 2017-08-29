@@ -1,6 +1,5 @@
 ﻿public abstract class XDoc : XObject
 {
-
     protected virtual string _name { get { return GetType().Name; } }
 
     public virtual uint ID { get { return XCommon.singleton.XHash(_name); } }
