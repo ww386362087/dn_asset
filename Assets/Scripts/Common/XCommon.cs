@@ -37,7 +37,7 @@ public class XCommon : XSingleton<XCommon>
         _idx = 5;
     }
 
-    public readonly float FrameStep = (1 / 30.0f);
+    public const float FrameStep = (1 / 30.0f);
     private static readonly float _eps = 0.0001f;
 
     public static float XEps
@@ -212,6 +212,10 @@ public class XCommon : XSingleton<XCommon>
         return r > 0;
     }
 
+    public Vector3 FloatToAngle(float angle)
+    {
+        return Quaternion.Euler(0, angle, 0) * Vector3.forward;
+    }
 
     public float AngleToFloat(Vector3 dir)
     {

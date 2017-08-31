@@ -5,10 +5,11 @@
 
 
 using System.Collections.Generic;
-using UnityEngine;
 
-public class TimerManager : XSingleton<TimerManager>
+public class XTimerMgr : XSingleton<XTimerMgr>
 {
+    //delegate
+    public delegate void OnTimeUpHandler(object obj);
 
     //Timer类型
     private enum enTimerType
@@ -19,7 +20,7 @@ public class TimerManager : XSingleton<TimerManager>
 
     //Timer List
     private List<Timer>[] m_timers;
-    private int m_timerSequence;
+    private uint m_timerSequence;
 
     //----------------------------------------------
     /// 初始化
@@ -73,24 +74,29 @@ public class TimerManager : XSingleton<TimerManager>
     }
 
 
-    public int AddTimer(float time, Timer.OnTimeUpHandler onTimeUpHandler)
+    public uint SetTimer(float time, OnTimeUpHandler onTimeUpHandler)
     {
-        return AddTimer((int)(time * 1000), onTimeUpHandler);
+        return SetTimer((int)(time * 1000), onTimeUpHandler);
     }
 
-    public int AddTimer(int time, Timer.OnTimeUpHandler onTimeUpHandler)
+    private uint SetTimer(int time, OnTimeUpHandler onTimeUpHandler)
     {
-        return AddTimer(time, onTimeUpHandler, null);
+        return SetTimer(time, onTimeUpHandler, null);
     }
 
-    public int AddTimer(float time, Timer.OnTimeUpHandler onTimeUpHandler, object param)
+    public uint SetTimer(float time, OnTimeUpHandler onTimeUpHandler, object param)
     {
-        return AddTimer((int)(time * 1000), 1, onTimeUpHandler, param);
+        return SetTimer((int)(time * 1000), 1, onTimeUpHandler, param);
     }
 
-    public int AddTimer(int time, Timer.OnTimeUpHandler onTimeUpHandler, object param)
+    public uint SetLoopTimer(float time, OnTimeUpHandler onTimeUpHandler, object param)
     {
-        return AddTimer(time, 1, onTimeUpHandler, param);
+        return SetTimer((int)(time * 1000), -1, onTimeUpHandler, param);
+    }
+
+    private uint SetTimer(int time, OnTimeUpHandler onTimeUpHandler, object param)
+    {
+        return SetTimer(time, 1, onTimeUpHandler, param);
     }
 
     //----------------------------------------------
@@ -100,9 +106,9 @@ public class TimerManager : XSingleton<TimerManager>
     /// @onTimeUpHandler    : 时间到时的回调函数
     /// @return sequence of timer
     //----------------------------------------------
-    public int AddTimer(int time, int loop, Timer.OnTimeUpHandler onTimeUpHandler, object param)
+    private uint SetTimer(int time, int loop, OnTimeUpHandler onTimeUpHandler, object param)
     {
-        return AddTimer(time, loop, onTimeUpHandler, param, false);
+        return SetTimer(time, loop, onTimeUpHandler, param, false);
     }
 
     //----------------------------------------------
@@ -113,7 +119,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// @useFrameSync       : 是否使用桢同步
     /// @return sequence of timer
     //----------------------------------------------
-    public int AddTimer(int time, int loop, Timer.OnTimeUpHandler onTimeUpHandler, object param, bool useFrameSync)
+    private uint SetTimer(int time, int loop, OnTimeUpHandler onTimeUpHandler, object param, bool useFrameSync)
     {
         m_timerSequence++;
         m_timers[(int)(useFrameSync ? enTimerType.FrameSync : enTimerType.Normal)].Add(new Timer(time, loop, onTimeUpHandler, m_timerSequence, param));
@@ -124,7 +130,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// 移除Timer
     /// @sequence
     //----------------------------------------------
-    public void RemoveTimer(int sequence)
+    public void RemoveTimer(uint sequence)
     {
         for (int i = 0; i < m_timers.Length; i++)
         {
@@ -137,7 +143,6 @@ public class TimerManager : XSingleton<TimerManager>
                     timers.RemoveAt(j);
                     return;
                 }
-
                 j++;
             }
         }
@@ -147,7 +152,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// 移除Timer
     /// @sequence: ref，移除后清空
     //----------------------------------------------
-    public void RemoveTimerSafely(ref int sequence)
+    public void RemoveTimerSafely(ref uint sequence)
     {
         if (sequence != 0)
         {
@@ -160,7 +165,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// 暂停Timer
     /// @sequence
     //----------------------------------------------
-    public void PauseTimer(int sequence)
+    public void PauseTimer(uint sequence)
     {
         Timer timer = GetTimer(sequence);
 
@@ -174,7 +179,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// 恢复Timer
     /// @sequence
     //----------------------------------------------
-    public void ResumeTimer(int sequence)
+    public void ResumeTimer(uint sequence)
     {
         Timer timer = GetTimer(sequence);
 
@@ -188,7 +193,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// 重置Timer
     /// @sequence
     //----------------------------------------------
-    public void ResetTimer(int sequence)
+    public void ResetTimer(uint sequence)
     {
         Timer timer = GetTimer(sequence);
 
@@ -202,7 +207,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// 获取Timer的当前时间
     /// @sequence
     //----------------------------------------------
-    public int GetTimerCurrent(int sequence)
+    public int GetTimerCurrent(uint sequence)
     {
         Timer timer = GetTimer(sequence);
 
@@ -217,7 +222,7 @@ public class TimerManager : XSingleton<TimerManager>
     //----------------------------------------------
     /// 返回指定sequence的Timer
     //----------------------------------------------
-    private Timer GetTimer(int sequence)
+    private Timer GetTimer(uint sequence)
     {
         for (int i = 0; i < m_timers.Length; i++)
         {
@@ -239,7 +244,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// 移除Timer
     /// @onTimeUpHandler
     //----------------------------------------------
-    public void RemoveTimer(Timer.OnTimeUpHandler onTimeUpHandler)
+    public void RemoveTimer(OnTimeUpHandler onTimeUpHandler)
     {
         RemoveTimer(onTimeUpHandler, false);
     }
@@ -249,7 +254,7 @@ public class TimerManager : XSingleton<TimerManager>
     /// @onTimeUpHandler
     /// @useFrameSync
     //----------------------------------------------
-    public void RemoveTimer(Timer.OnTimeUpHandler onTimeUpHandler, bool useFrameSync)
+    public void RemoveTimer(OnTimeUpHandler onTimeUpHandler, bool useFrameSync)
     {
         List<Timer> timers = m_timers[(int)(useFrameSync ? enTimerType.FrameSync : enTimerType.Normal)];
 

@@ -46,6 +46,8 @@ public class UIManager : XSingleton<UIManager>
 
     private void LoadRoot()
     {
+        GameObject temp = GameObject.Find("UIRoot");
+        if (temp != null) GameObject.Destroy(temp);
         string rootpath = "UI/UIRoot";
         GameObject go = XResourceMgr.Load<GameObject>(rootpath, AssetType.Prefab);
         GameObject.DontDestroyOnLoad(go);

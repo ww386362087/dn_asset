@@ -14,7 +14,7 @@ internal class XTouch : XSingleton<XTouch>
         Ray uiRay = UIManager.singleton.UiCamera.ScreenPointToRay(point);
         if (Physics.Raycast(uiRay, out hitinfo, Mathf.Infinity, 1 << 5))
         {
-            return !hitinfo.collider.CompareTag("ChatUI");
+            return true;// !hitinfo.collider.CompareTag("ChatUI");
         }
         else
         {

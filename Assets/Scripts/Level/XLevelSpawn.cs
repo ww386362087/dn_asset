@@ -363,7 +363,7 @@ namespace Level
                     if (XLevelScriptMgr.singleton.IsTalkScript(_waves[i]._levelscript))
                     {
                         XLevelSpawnMgr.singleton.BossExtarScriptExecuting = true;
-                        TimerManager.singleton.AddTimer(_waves[i]._time, RunExtraScript, _waves[i]._levelscript);
+                        XTimerMgr.singleton.SetTimer(_waves[i]._time, RunExtraScript, _waves[i]._levelscript);
                         return true;
                     }
                 }
@@ -371,7 +371,7 @@ namespace Level
             return false;
         }
 
-        protected void RunExtraScript(int seq, object o)
+        protected void RunExtraScript(object o)
         {
             string sc = (string)o;
             XLevelScriptMgr.singleton.RunScript(sc);

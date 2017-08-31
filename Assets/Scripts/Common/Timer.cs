@@ -7,9 +7,9 @@
 
 public class Timer
 {
-    //delegate
-    public delegate void OnTimeUpHandler(int seq, object obj);
-    private OnTimeUpHandler m_timeUpHandler;
+    
+    private XTimerMgr.OnTimeUpHandler m_timeUpHandler;
+
     private object m_param;
 
     //循环次数( < 0 表示无限循环)
@@ -26,13 +26,13 @@ public class Timer
     private bool m_isRunning;
 
     //序列号
-    private int m_sequence;
+    private uint m_sequence;
 
 
     //--------------------------------------
     /// 构造函数
     //--------------------------------------
-    public Timer(int time, int loop, OnTimeUpHandler timeUpHandler, int sequence,object param)
+    public Timer(int time, int loop, XTimerMgr.OnTimeUpHandler timeUpHandler, uint sequence,object param)
     {
         if (loop == 0)
         {
@@ -74,7 +74,7 @@ public class Timer
             {
                 if (m_timeUpHandler != null)
                 {
-                    m_timeUpHandler(m_sequence, m_param);
+                    m_timeUpHandler(m_param);
                 }
 
                 m_currentTime = 0;
@@ -123,7 +123,7 @@ public class Timer
     //--------------------------------------
     /// 检查sequence是否匹配
     //--------------------------------------
-    public bool IsSequenceMatched(int sequence)
+    public bool IsSequenceMatched(uint sequence)
     {
         return (m_sequence == sequence);
     }
@@ -131,7 +131,7 @@ public class Timer
     //--------------------------------------
     /// 检查delegate是否匹配
     //--------------------------------------
-    public bool IsDelegateMatched(OnTimeUpHandler timeUpHandler)
+    public bool IsDelegateMatched(XTimerMgr.OnTimeUpHandler timeUpHandler)
     {
         return (m_timeUpHandler == timeUpHandler);
     }

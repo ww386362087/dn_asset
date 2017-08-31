@@ -4,8 +4,8 @@
 public class XEditorPath
 {
 
-    public static readonly string Sce = "Assets/XScene/";
-    public static readonly string Cts = "Assets/Resources/CutScene/";
+    public static readonly string Sce = "Assets/Scenes/";
+    public static readonly string Cts = "Assets/Resources/Table/CutScene/";
     public static readonly string Skp = "Assets/Resources/SkillPackage/";
     public static readonly string Crv = "Assets/Editor/EditorResources/Curve/";
     public static readonly string Cfg = "Assets/Editor/EditorResources/SkillPackage/";
