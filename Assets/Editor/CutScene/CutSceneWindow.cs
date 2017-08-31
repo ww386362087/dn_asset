@@ -46,7 +46,7 @@ namespace XEditor
 
         private float _fov = 45;
         private float _length = 0;
-        private Trigger _trigger = Trigger.ToEffect;
+        private CameraTrigger _trigger = CameraTrigger.ToEffect;
 
         private XCutSceneData _run_data = null;
         private GUIStyle _labelstyle = null;
@@ -163,7 +163,7 @@ namespace XEditor
             _mourningborder = data.Mourningborder;
             _fov = data.FieldOfView;
             _length = data.Length;
-            _trigger = (Trigger)Enum.Parse(typeof(Trigger), data.Trigger);
+            _trigger = (CameraTrigger)Enum.Parse(typeof(CameraTrigger), data.Trigger);
 
             _clips.Clear();
             ActorList.Clear();
@@ -350,7 +350,7 @@ namespace XEditor
 
             EditorGUILayout.Space();
             _fov = EditorGUILayout.FloatField("FieldOfVeiw", _fov);
-            _trigger = (Trigger)EditorGUILayout.EnumPopup("Trigger", _trigger);
+            _trigger = (CameraTrigger)EditorGUILayout.EnumPopup("Trigger", _trigger);
             EditorGUILayout.Space();
             _override_bgm = EditorGUILayout.Toggle("Override BGM", _override_bgm);
             EditorGUILayout.Space();

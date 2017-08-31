@@ -1,0 +1,203 @@
+fileFormatVersion: 2
+guid: c84ad80a09d738c4bbd1000a9c3cbbdb
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bone001(mirrored)_velskud_wing
+    100002: Bone001_velskud_wing
+    100004: Bone003(mirrored)_velskud_wing
+    100006: Bone003_velskud_wing
+    100008: Bone004(mirrored)_velskud_wing
+    100010: Bone004_velskud_wing
+    100012: Bone005(mirrored)_velskud_wing
+    100014: Bone005_velskud_wing
+    100016: Bone006(mirrored)_velskud_wing
+    100018: Bone006_velskud_wing
+    100020: Bone007(mirrored)_velskud_wing
+    100022: Bone007_velskud_wing
+    100024: Bone009(mirrored)_velskud_wing
+    100026: Bone009_velskud_wing
+    100028: Bone011(mirrored)_velskud_wing
+    100030: Bone011_velskud_wing
+    100032: Bone013(mirrored)_velskud_wing
+    100034: Bone013_velskud_wing
+    100036: Bone014(mirrored)_velskud_wing
+    100038: Bone014_velskud_wing
+    100040: Bone015(mirrored)_velskud_wing
+    100042: Bone015_velskud_wing
+    100044: Bone017(mirrored)_velskud_wing
+    100046: Bone017_velskud_wing
+    100048: Bone032(mirrored)_velskud_wing
+    100050: Bone032_velskud_wing
+    100052: Dummy001_velskud_wing
+    100054: //RootNode
+    100056: Point002
+    400000: Bone001(mirrored)_velskud_wing
+    400002: Bone001_velskud_wing
+    400004: Bone003(mirrored)_velskud_wing
+    400006: Bone003_velskud_wing
+    400008: Bone004(mirrored)_velskud_wing
+    400010: Bone004_velskud_wing
+    400012: Bone005(mirrored)_velskud_wing
+    400014: Bone005_velskud_wing
+    400016: Bone006(mirrored)_velskud_wing
+    400018: Bone006_velskud_wing
+    400020: Bone007(mirrored)_velskud_wing
+    400022: Bone007_velskud_wing
+    400024: Bone009(mirrored)_velskud_wing
+    400026: Bone009_velskud_wing
+    400028: Bone011(mirrored)_velskud_wing
+    400030: Bone011_velskud_wing
+    400032: Bone013(mirrored)_velskud_wing
+    400034: Bone013_velskud_wing
+    400036: Bone014(mirrored)_velskud_wing
+    400038: Bone014_velskud_wing
+    400040: Bone015(mirrored)_velskud_wing
+    400042: Bone015_velskud_wing
+    400044: Bone017(mirrored)_velskud_wing
+    400046: Bone017_velskud_wing
+    400048: Bone032(mirrored)_velskud_wing
+    400050: Bone032_velskud_wing
+    400052: Dummy001_velskud_wing
+    400054: //RootNode
+    400056: Point002
+    7400000: NPC_Velskud_wing_body_idle
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: NPC_Velskud_wing_body_idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Dummy001_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001(mirrored)_velskud_wing/Bone003(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001(mirrored)_velskud_wing/Bone003(mirrored)_velskud_wing/Bone004(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001(mirrored)_velskud_wing/Bone003(mirrored)_velskud_wing/Bone004(mirrored)_velskud_wing/Bone006(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001(mirrored)_velskud_wing/Bone003(mirrored)_velskud_wing/Bone004(mirrored)_velskud_wing/Bone006(mirrored)_velskud_wing/Bone007(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001(mirrored)_velskud_wing/Bone003(mirrored)_velskud_wing/Bone004(mirrored)_velskud_wing/Bone006(mirrored)_velskud_wing/Bone007(mirrored)_velskud_wing/Bone005(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001(mirrored)_velskud_wing/Bone003(mirrored)_velskud_wing/Bone004(mirrored)_velskud_wing/Bone006(mirrored)_velskud_wing/Bone007(mirrored)_velskud_wing/Bone009(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001_velskud_wing/Bone003_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001_velskud_wing/Bone003_velskud_wing/Bone004_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001_velskud_wing/Bone003_velskud_wing/Bone004_velskud_wing/Bone006_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001_velskud_wing/Bone003_velskud_wing/Bone004_velskud_wing/Bone006_velskud_wing/Bone007_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001_velskud_wing/Bone003_velskud_wing/Bone004_velskud_wing/Bone006_velskud_wing/Bone007_velskud_wing/Bone005_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone001_velskud_wing/Bone003_velskud_wing/Bone004_velskud_wing/Bone006_velskud_wing/Bone007_velskud_wing/Bone009_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011(mirrored)_velskud_wing/Bone013(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011(mirrored)_velskud_wing/Bone013(mirrored)_velskud_wing/Bone014(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011(mirrored)_velskud_wing/Bone013(mirrored)_velskud_wing/Bone014(mirrored)_velskud_wing/Bone015(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011(mirrored)_velskud_wing/Bone013(mirrored)_velskud_wing/Bone014(mirrored)_velskud_wing/Bone017(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011(mirrored)_velskud_wing/Bone013(mirrored)_velskud_wing/Bone014(mirrored)_velskud_wing/Bone017(mirrored)_velskud_wing/Bone032(mirrored)_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011_velskud_wing/Bone013_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011_velskud_wing/Bone013_velskud_wing/Bone014_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011_velskud_wing/Bone013_velskud_wing/Bone014_velskud_wing/Bone015_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011_velskud_wing/Bone013_velskud_wing/Bone014_velskud_wing/Bone017_velskud_wing
+        weight: 1
+      - path: Dummy001_velskud_wing/Bone011_velskud_wing/Bone013_velskud_wing/Bone014_velskud_wing/Bone017_velskud_wing/Bone032_velskud_wing
+        weight: 1
+      - path: Point002
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

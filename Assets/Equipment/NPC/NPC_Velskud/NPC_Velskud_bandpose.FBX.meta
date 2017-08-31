@@ -1,0 +1,192 @@
+fileFormatVersion: 2
+guid: 28e6b32a7daab0c42a03a11a7e9991fe
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip001 Head_velskud
+    100002: Bip001 L Calf_velskud
+    100004: Bip001 L Clavicle_velskud
+    100006: Bip001 L Finger0_velskud
+    100008: Bip001 L Foot_velskud
+    100010: Bip001 L Forearm_velskud
+    100012: Bip001 L Hand_velskud
+    100014: Bip001 L Thigh_velskud
+    100016: Bip001 L UpperArm_velskud
+    100018: Bip001 Neck_velskud
+    100020: Bip001 Pelvis_velskud
+    100022: Bip001 R Calf_velskud
+    100024: Bip001 R Clavicle_velskud
+    100026: Bip001 R Finger0_velskud
+    100028: Bip001 R Foot_velskud
+    100030: Bip001 R Forearm_velskud
+    100032: Bip001 R Hand_velskud
+    100034: Bip001 R Thigh_velskud
+    100036: Bip001 R UpperArm_velskud
+    100038: Bip001 Spine1_velskud
+    100040: Bip001 Spine_velskud
+    100042: Bip001_velskud
+    100044: Bone001_velskud
+    100046: Bone002_velskud
+    100048: Bone003_velskud
+    100050: Bone005(mirrored)_velskud
+    100052: Bone005_velskud
+    100054: Bone006(mirrored)_velskud
+    100056: Bone006_velskud
+    100058: Bone007(mirrored)_velskud
+    100060: Bone007_velskud
+    100062: Bone009_velskud
+    100064: Bone010_velskud
+    100066: Bone011_velskud
+    100068: Bone013_velskud
+    100070: Bone014_velskud
+    100072: BOSS_darkknight_weapon
+    100074: BOSS_Velskud
+    100076: //RootNode
+    100078: BOSS_Velskud_cloak
+    100080: Point001_velskud
+    100082: Point_wing
+    100084: Object001
+    100086: Object002
+    100088: BOSS_Velskud_weapon
+    100090: NPC_Velskud
+    100092: NPC_Velskud_cloak
+    100094: NPC_Velskud_weapon
+    400000: Bip001 Head_velskud
+    400002: Bip001 L Calf_velskud
+    400004: Bip001 L Clavicle_velskud
+    400006: Bip001 L Finger0_velskud
+    400008: Bip001 L Foot_velskud
+    400010: Bip001 L Forearm_velskud
+    400012: Bip001 L Hand_velskud
+    400014: Bip001 L Thigh_velskud
+    400016: Bip001 L UpperArm_velskud
+    400018: Bip001 Neck_velskud
+    400020: Bip001 Pelvis_velskud
+    400022: Bip001 R Calf_velskud
+    400024: Bip001 R Clavicle_velskud
+    400026: Bip001 R Finger0_velskud
+    400028: Bip001 R Foot_velskud
+    400030: Bip001 R Forearm_velskud
+    400032: Bip001 R Hand_velskud
+    400034: Bip001 R Thigh_velskud
+    400036: Bip001 R UpperArm_velskud
+    400038: Bip001 Spine1_velskud
+    400040: Bip001 Spine_velskud
+    400042: Bip001_velskud
+    400044: Bone001_velskud
+    400046: Bone002_velskud
+    400048: Bone003_velskud
+    400050: Bone005(mirrored)_velskud
+    400052: Bone005_velskud
+    400054: Bone006(mirrored)_velskud
+    400056: Bone006_velskud
+    400058: Bone007(mirrored)_velskud
+    400060: Bone007_velskud
+    400062: Bone009_velskud
+    400064: Bone010_velskud
+    400066: Bone011_velskud
+    400068: Bone013_velskud
+    400070: Bone014_velskud
+    400072: BOSS_darkknight_weapon
+    400074: BOSS_Velskud
+    400076: //RootNode
+    400078: BOSS_Velskud_cloak
+    400080: Point001_velskud
+    400082: Point_wing
+    400084: Object001
+    400086: Object002
+    400088: BOSS_Velskud_weapon
+    400090: NPC_Velskud
+    400092: NPC_Velskud_cloak
+    400094: NPC_Velskud_weapon
+    2300000: BOSS_darkknight_weapon
+    2300002: Object001
+    2300004: BOSS_Velskud_weapon
+    2300006: NPC_Velskud_weapon
+    3300000: BOSS_darkknight_weapon
+    3300002: Object001
+    3300004: BOSS_Velskud_weapon
+    3300006: NPC_Velskud_weapon
+    4300000: BOSS_darkknight_weapon
+    4300002: BOSS_Velskud
+    4300004: BOSS_Velskud_cloak
+    4300006: Object001
+    4300008: Object002
+    4300010: BOSS_Velskud_weapon
+    4300012: NPC_Velskud_weapon
+    4300014: NPC_Velskud
+    4300016: NPC_Velskud_cloak
+    9500000: //RootNode
+    13700000: BOSS_Velskud
+    13700002: BOSS_Velskud_cloak
+    13700004: Object002
+    13700006: NPC_Velskud
+    13700008: NPC_Velskud_cloak
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCutSceneData>
+  <TotalFrame>420.000031</TotalFrame>
+  <CameraClip>Animation/Main_Camera/Cut_Scene/4_4_cutscene</CameraClip>
+  <Name>4_4_start</Name>
+  <Script />
+  <Scene>Assets/Scenes/DN/DN</Scene>
+  <TypeMask>-1</TypeMask>
+  <OverrideBGM>true</OverrideBGM>
+  <Mourningborder>true</Mourningborder>
+  <AutoEnd>true</AutoEnd>
+  <Length>14.000001</Length>
+  <FieldOfView>45</FieldOfView>
+  <Trigger>ToEffect</Trigger>
+  <GeneralShow>false</GeneralShow>
+  <GeneralBigGuy>false</GeneralBigGuy>
+  <Actors>
+    <XActorDataClip>
+      <Type>Actor</Type>
+      <TimeLineAt>0</TimeLineAt>
+      <Prefab>Prefabs/NPC_Velskud</Prefab>
+      <Clip>Animation/NPC_Velskud/NPC_Velskud_Cutscene_4-4</Clip>
+      <AppearX>113.44</AppearX>
+      <AppearY>0</AppearY>
+      <AppearZ>139.86</AppearZ>
+      <StatisticsID>0</StatisticsID>
+      <bUsingID>false</bUsingID>
+      <bToCommonPool>false</bToCommonPool>
+      <Tag />
+    </XActorDataClip>
+    <XActorDataClip>
+      <Type>Actor</Type>
+      <TimeLineAt>80</TimeLineAt>
+      <Prefab>Prefabs/NPC_geraint</Prefab>
+      <Clip>Animation/NPC_geraint/NPC_geraint_CutScene_4-4</Clip>
+      <AppearX>106.27</AppearX>
+      <AppearY>0</AppearY>
+      <AppearZ>139.79</AppearZ>
+      <StatisticsID>0</StatisticsID>
+      <bUsingID>false</bUsingID>
+      <bToCommonPool>false</bToCommonPool>
+      <Tag />
+    </XActorDataClip>
+  </Actors>
+  <Player />
+  <Fxs>
+    <XFxDataClip>
+      <Type>Fx</Type>
+      <TimeLineAt>0</TimeLineAt>
+      <Fx>Effects/FX_Particle/Scene/4_4_start_01</Fx>
+      <BindIdx>-1</BindIdx>
+      <Bone />
+      <Scale>1</Scale>
+      <Follow>true</Follow>
+      <Destroy_Delay>0</Destroy_Delay>
+      <AppearX>113.51</AppearX>
+      <AppearY>5.05</AppearY>
+      <AppearZ>139.86</AppearZ>
+      <Face>0</Face>
+    </XFxDataClip>
+    <XFxDataClip>
+      <Type>Fx</Type>
+      <TimeLineAt>301</TimeLineAt>
+      <Fx>Effects/FX_Particle/Scene/cs_jlt_t</Fx>
+      <BindIdx>-1</BindIdx>
+      <Bone />
+      <Scale>1</Scale>
+      <Follow>true</Follow>
+      <Destroy_Delay>0</Destroy_Delay>
+      <AppearX>113.4</AppearX>
+      <AppearY>6.73</AppearY>
+      <AppearZ>139.9</AppearZ>
+      <Face>0</Face>
+    </XFxDataClip>
+    <XFxDataClip>
+      <Type>Fx</Type>
+      <TimeLineAt>363</TimeLineAt>
+      <Fx>Effects/FX_Particle/Scene/cs_jlt_t</Fx>
+      <BindIdx>-1</BindIdx>
+      <Bone />
+      <Scale>1</Scale>
+      <Follow>true</Follow>
+      <Destroy_Delay>0</Destroy_Delay>
+      <AppearX>106.91</AppearX>
+      <AppearY>6.62</AppearY>
+      <AppearZ>139.9</AppearZ>
+      <Face>0</Face>
+    </XFxDataClip>
+  </Fxs>
+  <Audios>
+    <XAudioDataClip>
+      <Type>Audio</Type>
+      <TimeLineAt>0</TimeLineAt>
+      <Clip>Audio/cut_scene/4_4_start</Clip>
+      <BindIdx>0</BindIdx>
+      <Channel>Skill</Channel>
+    </XAudioDataClip>
+  </Audios>
+  <SubTitle>
+    <XSubTitleDataClip>
+      <Type>SubTitle</Type>
+      <TimeLineAt>22</TimeLineAt>
+      <Context>好久不见啊，杰兰特。</Context>
+      <Duration>50</Duration>
+    </XSubTitleDataClip>
+    <XSubTitleDataClip>
+      <Type>SubTitle</Type>
+      <TimeLineAt>95</TimeLineAt>
+      <Context>让我们了结一下五十年前的恩怨吧，贝思柯德！</Context>
+      <Duration>80</Duration>
+    </XSubTitleDataClip>
+    <XSubTitleDataClip>
+      <Type>SubTitle</Type>
+      <TimeLineAt>200</TimeLineAt>
+      <Context>别这么着急嘛，都不跟老朋友叙叙旧吗……</Context>
+      <Duration>110</Duration>
+    </XSubTitleDataClip>
+    <XSubTitleDataClip>
+      <Type>SubTitle</Type>
+      <TimeLineAt>350</TimeLineAt>
+      <Context>站住，贝思柯德！</Context>
+      <Duration>55</Duration>
+    </XSubTitleDataClip>
+  </SubTitle>
+  <Slash />
+</XCutSceneData>

@@ -17,7 +17,7 @@ namespace XEditor
             get { return _serial; }
         }
 
-        [MenuItem("Window/LevelEditor %L")]
+        [MenuItem("XEditor/LevelEditor %L")]
         static void Init()
         {
             GetWindow(typeof(LevelEditor));

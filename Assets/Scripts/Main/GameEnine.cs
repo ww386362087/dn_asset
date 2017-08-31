@@ -1,14 +1,15 @@
 ﻿using System.Collections;
+using UnityEngine;
 
 public class GameEnine : XObject
 {
 
-    private static GameEntrance _entrance;
+    private static MonoBehaviour _entrance;
     private static bool _init_finish = false;
 
-    public static GameEntrance entrance { get { return _entrance; } }
+    public static MonoBehaviour entrance { get { return _entrance; } }
 
-    public static void Init(GameEntrance en)
+    public static void Init(MonoBehaviour en)
     {
         _entrance = en;
 

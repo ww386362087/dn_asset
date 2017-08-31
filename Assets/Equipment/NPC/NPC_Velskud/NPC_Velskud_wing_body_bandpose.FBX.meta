@@ -1,0 +1,134 @@
+fileFormatVersion: 2
+guid: 5553acfcdab8e7646a85cd4c01f45379
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone001(mirrored)_velskud_wing
+    100002: Bone001_velskud_wing
+    100004: Bone003(mirrored)_velskud_wing
+    100006: Bone003_velskud_wing
+    100008: Bone004(mirrored)_velskud_wing
+    100010: Bone004_velskud_wing
+    100012: Bone005(mirrored)_velskud_wing
+    100014: Bone005_velskud_wing
+    100016: Bone006(mirrored)_velskud_wing
+    100018: Bone006_velskud_wing
+    100020: Bone007(mirrored)_velskud_wing
+    100022: Bone007_velskud_wing
+    100024: Bone009(mirrored)_velskud_wing
+    100026: Bone009_velskud_wing
+    100028: Bone011(mirrored)_velskud_wing
+    100030: Bone011_velskud_wing
+    100032: Bone013(mirrored)_velskud_wing
+    100034: Bone013_velskud_wing
+    100036: Bone014(mirrored)_velskud_wing
+    100038: Bone014_velskud_wing
+    100040: Bone015(mirrored)_velskud_wing
+    100042: Bone015_velskud_wing
+    100044: Bone017(mirrored)_velskud_wing
+    100046: Bone017_velskud_wing
+    100048: Bone032(mirrored)_velskud_wing
+    100050: Bone032_velskud_wing
+    100052: Dummy001_velskud_wing
+    100054: Npc_velskud_wing
+    100056: //RootNode
+    400000: Bone001(mirrored)_velskud_wing
+    400002: Bone001_velskud_wing
+    400004: Bone003(mirrored)_velskud_wing
+    400006: Bone003_velskud_wing
+    400008: Bone004(mirrored)_velskud_wing
+    400010: Bone004_velskud_wing
+    400012: Bone005(mirrored)_velskud_wing
+    400014: Bone005_velskud_wing
+    400016: Bone006(mirrored)_velskud_wing
+    400018: Bone006_velskud_wing
+    400020: Bone007(mirrored)_velskud_wing
+    400022: Bone007_velskud_wing
+    400024: Bone009(mirrored)_velskud_wing
+    400026: Bone009_velskud_wing
+    400028: Bone011(mirrored)_velskud_wing
+    400030: Bone011_velskud_wing
+    400032: Bone013(mirrored)_velskud_wing
+    400034: Bone013_velskud_wing
+    400036: Bone014(mirrored)_velskud_wing
+    400038: Bone014_velskud_wing
+    400040: Bone015(mirrored)_velskud_wing
+    400042: Bone015_velskud_wing
+    400044: Bone017(mirrored)_velskud_wing
+    400046: Bone017_velskud_wing
+    400048: Bone032(mirrored)_velskud_wing
+    400050: Bone032_velskud_wing
+    400052: Dummy001_velskud_wing
+    400054: Npc_velskud_wing
+    400056: //RootNode
+    4300000: Npc_velskud_wing
+    9500000: //RootNode
+    13700000: Npc_velskud_wing
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

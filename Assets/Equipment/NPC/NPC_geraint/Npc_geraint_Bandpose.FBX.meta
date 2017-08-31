@@ -1,0 +1,195 @@
+fileFormatVersion: 2
+guid: cd312ae21ceb26b4eacabe1223eec27e
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip001 Footsteps_geraint
+    100002: Bip001 Head_geraint
+    100004: Bip001 L Calf_geraint
+    100006: Bip001 L Clavicle_geraint
+    100008: Bip001 L Finger0_geraint
+    100010: Bip001 L Foot_geraint
+    100012: Bip001 L Forearm_geraint
+    100014: Bip001 L Hand_geraint
+    100016: Bip001 L Thigh_geraint
+    100018: Bip001 L UpperArm_geraint
+    100020: Bip001 Neck_geraint
+    100022: Bip001 Pelvis_geraint
+    100024: Bip001 R Calf_geraint
+    100026: Bip001 R Clavicle_geraint
+    100028: Bip001 R Finger0_geraint
+    100030: Bip001 R Foot_geraint
+    100032: Bip001 R Forearm_geraint
+    100034: Bip001 R Hand_geraint
+    100036: Bip001 R Thigh_geraint
+    100038: Bip001 R UpperArm_geraint
+    100040: Bip001 Spine1_geraint
+    100042: Bip001 Spine_geraint
+    100044: Bip001_geraint
+    100046: Bone001(mirrored)_geraint
+    100048: Bone001_geraint
+    100050: Bone006(mirrored)_geraint
+    100052: Bone006_geraint
+    100054: Bone008(mirrored)_geraint
+    100056: Bone008_geraint
+    100058: Bone009_geraint
+    100060: Bone011_geraint
+    100062: Bone013_geraint
+    100064: Bone014_geraint
+    100066: Bone015(mirrored)_geraint
+    100068: Bone015_geraint
+    100070: Bone017(mirrored)_geraint
+    100072: Bone017_geraint
+    100074: Bone018(mirrored)_geraint
+    100076: Bone018_geraint
+    100078: Bone019(mirrored)_geraint
+    100080: Bone019_geraint
+    100082: Bone021(mirrored)_geraint
+    100084: Bone021_geraint
+    100086: Bone023(mirrored)_geraint
+    100088: Bone023_geraint
+    100090: Bone024(mirrored)_geraint
+    100092: Bone024_geraint
+    100094: Bone025(mirrored)_geraint
+    100096: Bone025_geraint
+    100098: Dummy001_geraint
+    100100: NPC_geraint
+    100102: //RootNode
+    100104: Npc_geraint_weapon
+    100106: Point_weapon_geraint
+    100108: Object001_wing
+    100110: Npc_geraint_wing
+    400000: Bip001 Footsteps_geraint
+    400002: Bip001 Head_geraint
+    400004: Bip001 L Calf_geraint
+    400006: Bip001 L Clavicle_geraint
+    400008: Bip001 L Finger0_geraint
+    400010: Bip001 L Foot_geraint
+    400012: Bip001 L Forearm_geraint
+    400014: Bip001 L Hand_geraint
+    400016: Bip001 L Thigh_geraint
+    400018: Bip001 L UpperArm_geraint
+    400020: Bip001 Neck_geraint
+    400022: Bip001 Pelvis_geraint
+    400024: Bip001 R Calf_geraint
+    400026: Bip001 R Clavicle_geraint
+    400028: Bip001 R Finger0_geraint
+    400030: Bip001 R Foot_geraint
+    400032: Bip001 R Forearm_geraint
+    400034: Bip001 R Hand_geraint
+    400036: Bip001 R Thigh_geraint
+    400038: Bip001 R UpperArm_geraint
+    400040: Bip001 Spine1_geraint
+    400042: Bip001 Spine_geraint
+    400044: Bip001_geraint
+    400046: Bone001(mirrored)_geraint
+    400048: Bone001_geraint
+    400050: Bone006(mirrored)_geraint
+    400052: Bone006_geraint
+    400054: Bone008(mirrored)_geraint
+    400056: Bone008_geraint
+    400058: Bone009_geraint
+    400060: Bone011_geraint
+    400062: Bone013_geraint
+    400064: Bone014_geraint
+    400066: Bone015(mirrored)_geraint
+    400068: Bone015_geraint
+    400070: Bone017(mirrored)_geraint
+    400072: Bone017_geraint
+    400074: Bone018(mirrored)_geraint
+    400076: Bone018_geraint
+    400078: Bone019(mirrored)_geraint
+    400080: Bone019_geraint
+    400082: Bone021(mirrored)_geraint
+    400084: Bone021_geraint
+    400086: Bone023(mirrored)_geraint
+    400088: Bone023_geraint
+    400090: Bone024(mirrored)_geraint
+    400092: Bone024_geraint
+    400094: Bone025(mirrored)_geraint
+    400096: Bone025_geraint
+    400098: Dummy001_geraint
+    400100: NPC_geraint
+    400102: //RootNode
+    400104: Npc_geraint_weapon
+    400106: Point_weapon_geraint
+    400108: Object001_wing
+    400110: Npc_geraint_wing
+    2300000: Npc_geraint_weapon
+    3300000: Npc_geraint_weapon
+    4300000: NPC_geraint
+    4300002: Npc_geraint_weapon
+    4300004: Object001_wing
+    4300006: Npc_geraint_wing
+    9500000: //RootNode
+    13700000: NPC_geraint
+    13700002: Object001_wing
+    13700004: Npc_geraint_wing
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

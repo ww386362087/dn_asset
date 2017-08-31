@@ -1,0 +1,249 @@
+fileFormatVersion: 2
+guid: 1b4fb3f9eb50a3f4d85519565ca9d12d
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip001 Head_velskud
+    100002: Bip001 L Calf_velskud
+    100004: Bip001 L Clavicle_velskud
+    100006: Bip001 L Finger0_velskud
+    100008: Bip001 L Foot_velskud
+    100010: Bip001 L Forearm_velskud
+    100012: Bip001 L Hand_velskud
+    100014: Bip001 L Thigh_velskud
+    100016: Bip001 L UpperArm_velskud
+    100018: Bip001 Neck_velskud
+    100020: Bip001 Pelvis_velskud
+    100022: Bip001 R Calf_velskud
+    100024: Bip001 R Clavicle_velskud
+    100026: Bip001 R Finger0_velskud
+    100028: Bip001 R Foot_velskud
+    100030: Bip001 R Forearm_velskud
+    100032: Bip001 R Hand_velskud
+    100034: Bip001 R Thigh_velskud
+    100036: Bip001 R UpperArm_velskud
+    100038: Bip001 Spine1_velskud
+    100040: Bip001 Spine_velskud
+    100042: Bip001_velskud
+    100044: Bone001(mirrored)_velskud
+    100046: Bone001_velskud
+    100048: Bone003(mirrored)_velskud
+    100050: Bone003_velskud
+    100052: Bone004(mirrored)_velskud
+    100054: Bone004_velskud
+    100056: Bone005(mirrored)_velskud
+    100058: Bone005_velskud
+    100060: Bone006(mirrored)_velskud
+    100062: Bone006_velskud
+    100064: Bone007(mirrored)_velskud
+    100066: Bone007_velskud
+    100068: Bone009(mirrored)_velskud
+    100070: Bone009_velskud
+    100072: Bone011(mirrored)_velskud
+    100074: Bone011_velskud
+    100076: Bone013(mirrored)_velskud
+    100078: Bone013_velskud
+    100080: Bone014(mirrored)_velskud
+    100082: Bone014_velskud
+    100084: Bone015(mirrored)_velskud
+    100086: Bone015_velskud
+    100088: Bone017(mirrored)_velskud
+    100090: Bone017_velskud
+    100092: Bone022_velskud
+    100094: Bone024_velskud
+    100096: Bone025_velskud
+    100098: Bone027_velskud
+    100100: Bone029_velskud
+    100102: Bone032(mirrored)_velskud
+    100104: Bone032_velskud
+    100106: Dummy001_velskud
+    100108: Npc_velskud_wing
+    100110: //RootNode
+    100112: Npc_velskud_wing_weapon
+    100114: Point001_velskud
+    100116: Bone001(mirrored)_velskud_wing
+    100118: Bone001_velskud_wing
+    100120: Bone003(mirrored)_velskud_wing
+    100122: Bone003_velskud_wing
+    100124: Bone004(mirrored)_velskud_wing
+    100126: Bone004_velskud_wing
+    100128: Bone005(mirrored)_velskud_wing
+    100130: Bone005_velskud_wing
+    100132: Bone006(mirrored)_velskud_wing
+    100134: Bone006_velskud_wing
+    100136: Bone007(mirrored)_velskud_wing
+    100138: Bone007_velskud_wing
+    100140: Bone009(mirrored)_velskud_wing
+    100142: Bone009_velskud_wing
+    100144: Bone011(mirrored)_velskud_wing
+    100146: Bone011_velskud_wing
+    100148: Bone013(mirrored)_velskud_wing
+    100150: Bone013_velskud_wing
+    100152: Bone014(mirrored)_velskud_wing
+    100154: Bone014_velskud_wing
+    100156: Bone015(mirrored)_velskud_wing
+    100158: Bone015_velskud_wing
+    100160: Bone017(mirrored)_velskud_wing
+    100162: Bone017_velskud_wing
+    100164: Bone032(mirrored)_velskud_wing
+    100166: Bone032_velskud_wing
+    100168: Dummy001_velskud_wing
+    400000: Bip001 Head_velskud
+    400002: Bip001 L Calf_velskud
+    400004: Bip001 L Clavicle_velskud
+    400006: Bip001 L Finger0_velskud
+    400008: Bip001 L Foot_velskud
+    400010: Bip001 L Forearm_velskud
+    400012: Bip001 L Hand_velskud
+    400014: Bip001 L Thigh_velskud
+    400016: Bip001 L UpperArm_velskud
+    400018: Bip001 Neck_velskud
+    400020: Bip001 Pelvis_velskud
+    400022: Bip001 R Calf_velskud
+    400024: Bip001 R Clavicle_velskud
+    400026: Bip001 R Finger0_velskud
+    400028: Bip001 R Foot_velskud
+    400030: Bip001 R Forearm_velskud
+    400032: Bip001 R Hand_velskud
+    400034: Bip001 R Thigh_velskud
+    400036: Bip001 R UpperArm_velskud
+    400038: Bip001 Spine1_velskud
+    400040: Bip001 Spine_velskud
+    400042: Bip001_velskud
+    400044: Bone001(mirrored)_velskud
+    400046: Bone001_velskud
+    400048: Bone003(mirrored)_velskud
+    400050: Bone003_velskud
+    400052: Bone004(mirrored)_velskud
+    400054: Bone004_velskud
+    400056: Bone005(mirrored)_velskud
+    400058: Bone005_velskud
+    400060: Bone006(mirrored)_velskud
+    400062: Bone006_velskud
+    400064: Bone007(mirrored)_velskud
+    400066: Bone007_velskud
+    400068: Bone009(mirrored)_velskud
+    400070: Bone009_velskud
+    400072: Bone011(mirrored)_velskud
+    400074: Bone011_velskud
+    400076: Bone013(mirrored)_velskud
+    400078: Bone013_velskud
+    400080: Bone014(mirrored)_velskud
+    400082: Bone014_velskud
+    400084: Bone015(mirrored)_velskud
+    400086: Bone015_velskud
+    400088: Bone017(mirrored)_velskud
+    400090: Bone017_velskud
+    400092: Bone022_velskud
+    400094: Bone024_velskud
+    400096: Bone025_velskud
+    400098: Bone027_velskud
+    400100: Bone029_velskud
+    400102: Bone032(mirrored)_velskud
+    400104: Bone032_velskud
+    400106: Dummy001_velskud
+    400108: Npc_velskud_wing
+    400110: //RootNode
+    400112: Npc_velskud_wing_weapon
+    400114: Point001_velskud
+    400116: Bone001(mirrored)_velskud_wing
+    400118: Bone001_velskud_wing
+    400120: Bone003(mirrored)_velskud_wing
+    400122: Bone003_velskud_wing
+    400124: Bone004(mirrored)_velskud_wing
+    400126: Bone004_velskud_wing
+    400128: Bone005(mirrored)_velskud_wing
+    400130: Bone005_velskud_wing
+    400132: Bone006(mirrored)_velskud_wing
+    400134: Bone006_velskud_wing
+    400136: Bone007(mirrored)_velskud_wing
+    400138: Bone007_velskud_wing
+    400140: Bone009(mirrored)_velskud_wing
+    400142: Bone009_velskud_wing
+    400144: Bone011(mirrored)_velskud_wing
+    400146: Bone011_velskud_wing
+    400148: Bone013(mirrored)_velskud_wing
+    400150: Bone013_velskud_wing
+    400152: Bone014(mirrored)_velskud_wing
+    400154: Bone014_velskud_wing
+    400156: Bone015(mirrored)_velskud_wing
+    400158: Bone015_velskud_wing
+    400160: Bone017(mirrored)_velskud_wing
+    400162: Bone017_velskud_wing
+    400164: Bone032(mirrored)_velskud_wing
+    400166: Bone032_velskud_wing
+    400168: Dummy001_velskud_wing
+    2300000: Npc_velskud_wing_weapon
+    3300000: Npc_velskud_wing_weapon
+    4300000: Npc_velskud_wing
+    4300002: Npc_velskud_wing_weapon
+    9500000: //RootNode
+    13700000: Npc_velskud_wing
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

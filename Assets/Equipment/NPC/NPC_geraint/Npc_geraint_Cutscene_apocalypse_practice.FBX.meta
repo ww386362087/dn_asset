@@ -1,0 +1,313 @@
+fileFormatVersion: 2
+guid: 519a7accbc3b53245b14ac315cc75b6a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bip001 Head_geraint
+    100002: Bip001 L Calf_geraint
+    100004: Bip001 L Clavicle_geraint
+    100006: Bip001 L Finger0_geraint
+    100008: Bip001 L Foot_geraint
+    100010: Bip001 L Forearm_geraint
+    100012: Bip001 L Hand_geraint
+    100014: Bip001 L Thigh_geraint
+    100016: Bip001 L UpperArm_geraint
+    100018: Bip001 Neck_geraint
+    100020: Bip001 Pelvis_geraint
+    100022: Bip001 R Calf_geraint
+    100024: Bip001 R Clavicle_geraint
+    100026: Bip001 R Finger0_geraint
+    100028: Bip001 R Foot_geraint
+    100030: Bip001 R Forearm_geraint
+    100032: Bip001 R Hand_geraint
+    100034: Bip001 R Thigh_geraint
+    100036: Bip001 R UpperArm_geraint
+    100038: Bip001 Spine1_geraint
+    100040: Bip001 Spine_geraint
+    100042: Bip001_geraint
+    100044: Bone001(mirrored)_geraint
+    100046: Bone001_geraint
+    100048: Bone006(mirrored)_geraint
+    100050: Bone006_geraint
+    100052: Bone008(mirrored)_geraint
+    100054: Bone008_geraint
+    100056: Bone009_geraint
+    100058: Bone011_geraint
+    100060: Bone013_geraint
+    100062: Bone014_geraint
+    100064: Bone015(mirrored)_geraint
+    100066: Bone015_geraint
+    100068: Bone017(mirrored)_geraint
+    100070: Bone017_geraint
+    100072: Bone018(mirrored)_geraint
+    100074: Bone018_geraint
+    100076: Bone019(mirrored)_geraint
+    100078: Bone019_geraint
+    100080: Bone021(mirrored)_geraint
+    100082: Bone021_geraint
+    100084: Bone023(mirrored)_geraint
+    100086: Bone023_geraint
+    100088: Bone024(mirrored)_geraint
+    100090: Bone024_geraint
+    100092: Bone025(mirrored)_geraint
+    100094: Bone025_geraint
+    100096: Dummy001_geraint
+    100098: //RootNode
+    100100: Point_weapon_geraint
+    400000: Bip001 Head_geraint
+    400002: Bip001 L Calf_geraint
+    400004: Bip001 L Clavicle_geraint
+    400006: Bip001 L Finger0_geraint
+    400008: Bip001 L Foot_geraint
+    400010: Bip001 L Forearm_geraint
+    400012: Bip001 L Hand_geraint
+    400014: Bip001 L Thigh_geraint
+    400016: Bip001 L UpperArm_geraint
+    400018: Bip001 Neck_geraint
+    400020: Bip001 Pelvis_geraint
+    400022: Bip001 R Calf_geraint
+    400024: Bip001 R Clavicle_geraint
+    400026: Bip001 R Finger0_geraint
+    400028: Bip001 R Foot_geraint
+    400030: Bip001 R Forearm_geraint
+    400032: Bip001 R Hand_geraint
+    400034: Bip001 R Thigh_geraint
+    400036: Bip001 R UpperArm_geraint
+    400038: Bip001 Spine1_geraint
+    400040: Bip001 Spine_geraint
+    400042: Bip001_geraint
+    400044: Bone001(mirrored)_geraint
+    400046: Bone001_geraint
+    400048: Bone006(mirrored)_geraint
+    400050: Bone006_geraint
+    400052: Bone008(mirrored)_geraint
+    400054: Bone008_geraint
+    400056: Bone009_geraint
+    400058: Bone011_geraint
+    400060: Bone013_geraint
+    400062: Bone014_geraint
+    400064: Bone015(mirrored)_geraint
+    400066: Bone015_geraint
+    400068: Bone017(mirrored)_geraint
+    400070: Bone017_geraint
+    400072: Bone018(mirrored)_geraint
+    400074: Bone018_geraint
+    400076: Bone019(mirrored)_geraint
+    400078: Bone019_geraint
+    400080: Bone021(mirrored)_geraint
+    400082: Bone021_geraint
+    400084: Bone023(mirrored)_geraint
+    400086: Bone023_geraint
+    400088: Bone024(mirrored)_geraint
+    400090: Bone024_geraint
+    400092: Bone025(mirrored)_geraint
+    400094: Bone025_geraint
+    400096: Dummy001_geraint
+    400098: //RootNode
+    400100: Point_weapon_geraint
+    7400000: Npc_geraint_Cutscene_apocalypse_practice
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Npc_geraint_Cutscene_apocalypse_practice
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 180
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bip001_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 L Thigh_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 L Thigh_geraint/Bip001
+          L Calf_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 L Thigh_geraint/Bip001
+          L Calf_geraint/Bip001 L Foot_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 L Thigh_geraint/Bone009_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 L Thigh_geraint/Bone009_geraint/Bone013_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 L Thigh_geraint/Bone011_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 L Thigh_geraint/Bone011_geraint/Bone014_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 R Thigh_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 R Thigh_geraint/Bip001
+          R Calf_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 R Thigh_geraint/Bip001
+          R Calf_geraint/Bip001 R Foot_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 Head_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 L Clavicle_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 L Clavicle_geraint/Bip001 L UpperArm_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 L Clavicle_geraint/Bip001 L UpperArm_geraint/Bip001
+          L Forearm_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 L Clavicle_geraint/Bip001 L UpperArm_geraint/Bip001
+          L Forearm_geraint/Bip001 L Hand_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 L Clavicle_geraint/Bip001 L UpperArm_geraint/Bip001
+          L Forearm_geraint/Bip001 L Hand_geraint/Bip001 L Finger0_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 R Clavicle_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 R Clavicle_geraint/Bip001 R UpperArm_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 R Clavicle_geraint/Bip001 R UpperArm_geraint/Bip001
+          R Forearm_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 R Clavicle_geraint/Bip001 R UpperArm_geraint/Bip001
+          R Forearm_geraint/Bip001 R Hand_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bip001
+          Neck_geraint/Bip001 R Clavicle_geraint/Bip001 R UpperArm_geraint/Bip001
+          R Forearm_geraint/Bip001 R Hand_geraint/Bip001 R Finger0_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bone001(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bone001(mirrored)_geraint/Bone008(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bone001(mirrored)_geraint/Bone008(mirrored)_geraint/Bone006(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bone001_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bone001_geraint/Bone008_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Bone001_geraint/Bone008_geraint/Bone006_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone015(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone015(mirrored)_geraint/Bone018(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone015(mirrored)_geraint/Bone018(mirrored)_geraint/Bone017(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone015(mirrored)_geraint/Bone018(mirrored)_geraint/Bone017(mirrored)_geraint/Bone019(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone015_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone015_geraint/Bone018_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone015_geraint/Bone018_geraint/Bone017_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone015_geraint/Bone018_geraint/Bone017_geraint/Bone019_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone021(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone021(mirrored)_geraint/Bone025(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone021(mirrored)_geraint/Bone025(mirrored)_geraint/Bone023(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone021(mirrored)_geraint/Bone025(mirrored)_geraint/Bone023(mirrored)_geraint/Bone024(mirrored)_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone021_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone021_geraint/Bone025_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone021_geraint/Bone025_geraint/Bone023_geraint
+        weight: 1
+      - path: Bip001_geraint/Bip001 Pelvis_geraint/Bip001 Spine_geraint/Bip001 Spine1_geraint/Dummy001_geraint/Bone021_geraint/Bone025_geraint/Bone023_geraint/Bone024_geraint
+        weight: 1
+      - path: Point_weapon_geraint
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

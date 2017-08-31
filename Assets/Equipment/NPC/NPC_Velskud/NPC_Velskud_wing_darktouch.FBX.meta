@@ -1,0 +1,338 @@
+fileFormatVersion: 2
+guid: d20303c8a5a76264bb0934031b92a687
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bip001 Head_velskud
+    100002: Bip001 L Calf_velskud
+    100004: Bip001 L Clavicle_velskud
+    100006: Bip001 L Finger0_velskud
+    100008: Bip001 L Foot_velskud
+    100010: Bip001 L Forearm_velskud
+    100012: Bip001 L Hand_velskud
+    100014: Bip001 L Thigh_velskud
+    100016: Bip001 L UpperArm_velskud
+    100018: Bip001 Neck_velskud
+    100020: Bip001 Pelvis_velskud
+    100022: Bip001 R Calf_velskud
+    100024: Bip001 R Clavicle_velskud
+    100026: Bip001 R Finger0_velskud
+    100028: Bip001 R Foot_velskud
+    100030: Bip001 R Forearm_velskud
+    100032: Bip001 R Hand_velskud
+    100034: Bip001 R Thigh_velskud
+    100036: Bip001 R UpperArm_velskud
+    100038: Bip001 Spine1_velskud
+    100040: Bip001 Spine_velskud
+    100042: Bip001_velskud
+    100044: Bone001(mirrored)_velskud
+    100046: Bone001_velskud
+    100048: Bone003(mirrored)_velskud
+    100050: Bone003_velskud
+    100052: Bone004(mirrored)_velskud
+    100054: Bone004_velskud
+    100056: Bone005(mirrored)_velskud
+    100058: Bone005_velskud
+    100060: Bone006(mirrored)_velskud
+    100062: Bone006_velskud
+    100064: Bone007(mirrored)_velskud
+    100066: Bone007_velskud
+    100068: Bone009(mirrored)_velskud
+    100070: Bone009_velskud
+    100072: Bone011(mirrored)_velskud
+    100074: Bone011_velskud
+    100076: Bone013(mirrored)_velskud
+    100078: Bone013_velskud
+    100080: Bone014(mirrored)_velskud
+    100082: Bone014_velskud
+    100084: Bone015(mirrored)_velskud
+    100086: Bone015_velskud
+    100088: Bone017(mirrored)_velskud
+    100090: Bone017_velskud
+    100092: Bone022_velskud
+    100094: Bone024_velskud
+    100096: Bone025_velskud
+    100098: Bone027_velskud
+    100100: Bone029_velskud
+    100102: Bone032(mirrored)_velskud
+    100104: Bone032_velskud
+    100106: Dummy001_velskud
+    100108: //RootNode
+    100110: Point001_velskud
+    400000: Bip001 Head_velskud
+    400002: Bip001 L Calf_velskud
+    400004: Bip001 L Clavicle_velskud
+    400006: Bip001 L Finger0_velskud
+    400008: Bip001 L Foot_velskud
+    400010: Bip001 L Forearm_velskud
+    400012: Bip001 L Hand_velskud
+    400014: Bip001 L Thigh_velskud
+    400016: Bip001 L UpperArm_velskud
+    400018: Bip001 Neck_velskud
+    400020: Bip001 Pelvis_velskud
+    400022: Bip001 R Calf_velskud
+    400024: Bip001 R Clavicle_velskud
+    400026: Bip001 R Finger0_velskud
+    400028: Bip001 R Foot_velskud
+    400030: Bip001 R Forearm_velskud
+    400032: Bip001 R Hand_velskud
+    400034: Bip001 R Thigh_velskud
+    400036: Bip001 R UpperArm_velskud
+    400038: Bip001 Spine1_velskud
+    400040: Bip001 Spine_velskud
+    400042: Bip001_velskud
+    400044: Bone001(mirrored)_velskud
+    400046: Bone001_velskud
+    400048: Bone003(mirrored)_velskud
+    400050: Bone003_velskud
+    400052: Bone004(mirrored)_velskud
+    400054: Bone004_velskud
+    400056: Bone005(mirrored)_velskud
+    400058: Bone005_velskud
+    400060: Bone006(mirrored)_velskud
+    400062: Bone006_velskud
+    400064: Bone007(mirrored)_velskud
+    400066: Bone007_velskud
+    400068: Bone009(mirrored)_velskud
+    400070: Bone009_velskud
+    400072: Bone011(mirrored)_velskud
+    400074: Bone011_velskud
+    400076: Bone013(mirrored)_velskud
+    400078: Bone013_velskud
+    400080: Bone014(mirrored)_velskud
+    400082: Bone014_velskud
+    400084: Bone015(mirrored)_velskud
+    400086: Bone015_velskud
+    400088: Bone017(mirrored)_velskud
+    400090: Bone017_velskud
+    400092: Bone022_velskud
+    400094: Bone024_velskud
+    400096: Bone025_velskud
+    400098: Bone027_velskud
+    400100: Bone029_velskud
+    400102: Bone032(mirrored)_velskud
+    400104: Bone032_velskud
+    400106: Dummy001_velskud
+    400108: //RootNode
+    400110: Point001_velskud
+    7400000: NPC_Velskud_wing_darktouch
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: NPC_Velskud_wing_darktouch
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 140
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bip001_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 L Thigh_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 L Thigh_velskud/Bip001
+          L Calf_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 L Thigh_velskud/Bip001
+          L Calf_velskud/Bip001 L Foot_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 R Thigh_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 R Thigh_velskud/Bip001
+          R Calf_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 R Thigh_velskud/Bip001
+          R Calf_velskud/Bip001 R Foot_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 Head_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 Head_velskud/Bone022_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 Head_velskud/Bone022_velskud/Bone025_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 Head_velskud/Bone022_velskud/Bone025_velskud/Bone024_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 Head_velskud/Bone027_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 Head_velskud/Bone027_velskud/Bone029_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 L Clavicle_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 L Clavicle_velskud/Bip001 L UpperArm_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 L Clavicle_velskud/Bip001 L UpperArm_velskud/Bip001
+          L Forearm_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 L Clavicle_velskud/Bip001 L UpperArm_velskud/Bip001
+          L Forearm_velskud/Bip001 L Hand_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 L Clavicle_velskud/Bip001 L UpperArm_velskud/Bip001
+          L Forearm_velskud/Bip001 L Hand_velskud/Bip001 L Finger0_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 R Clavicle_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 R Clavicle_velskud/Bip001 R UpperArm_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 R Clavicle_velskud/Bip001 R UpperArm_velskud/Bip001
+          R Forearm_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 R Clavicle_velskud/Bip001 R UpperArm_velskud/Bip001
+          R Forearm_velskud/Bip001 R Hand_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Bip001
+          Neck_velskud/Bip001 R Clavicle_velskud/Bip001 R UpperArm_velskud/Bip001
+          R Forearm_velskud/Bip001 R Hand_velskud/Bip001 R Finger0_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001(mirrored)_velskud/Bone003(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001(mirrored)_velskud/Bone003(mirrored)_velskud/Bone004(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001(mirrored)_velskud/Bone003(mirrored)_velskud/Bone004(mirrored)_velskud/Bone006(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001(mirrored)_velskud/Bone003(mirrored)_velskud/Bone004(mirrored)_velskud/Bone006(mirrored)_velskud/Bone007(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001(mirrored)_velskud/Bone003(mirrored)_velskud/Bone004(mirrored)_velskud/Bone006(mirrored)_velskud/Bone007(mirrored)_velskud/Bone005(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001(mirrored)_velskud/Bone003(mirrored)_velskud/Bone004(mirrored)_velskud/Bone006(mirrored)_velskud/Bone007(mirrored)_velskud/Bone009(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001_velskud/Bone003_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001_velskud/Bone003_velskud/Bone004_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001_velskud/Bone003_velskud/Bone004_velskud/Bone006_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001_velskud/Bone003_velskud/Bone004_velskud/Bone006_velskud/Bone007_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001_velskud/Bone003_velskud/Bone004_velskud/Bone006_velskud/Bone007_velskud/Bone005_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone001_velskud/Bone003_velskud/Bone004_velskud/Bone006_velskud/Bone007_velskud/Bone009_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011(mirrored)_velskud/Bone013(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011(mirrored)_velskud/Bone013(mirrored)_velskud/Bone014(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011(mirrored)_velskud/Bone013(mirrored)_velskud/Bone014(mirrored)_velskud/Bone015(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011(mirrored)_velskud/Bone013(mirrored)_velskud/Bone014(mirrored)_velskud/Bone017(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011(mirrored)_velskud/Bone013(mirrored)_velskud/Bone014(mirrored)_velskud/Bone017(mirrored)_velskud/Bone032(mirrored)_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011_velskud/Bone013_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011_velskud/Bone013_velskud/Bone014_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011_velskud/Bone013_velskud/Bone014_velskud/Bone015_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011_velskud/Bone013_velskud/Bone014_velskud/Bone017_velskud
+        weight: 1
+      - path: Bip001_velskud/Bip001 Pelvis_velskud/Bip001 Spine_velskud/Bip001 Spine1_velskud/Dummy001_velskud/Bone011_velskud/Bone013_velskud/Bone014_velskud/Bone017_velskud/Bone032_velskud
+        weight: 1
+      - path: Point001_velskud
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
