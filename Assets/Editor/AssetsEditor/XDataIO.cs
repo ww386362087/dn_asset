@@ -1,12 +1,9 @@
 ﻿#if UNITY_EDITOR
 using System;
-using UnityEngine;
-
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using UnityEditor;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace XEditor
 {
@@ -54,7 +51,7 @@ namespace XEditor
                 using (FileStream reader = new FileStream(pathwithname, FileMode.Open))
                 {
                     //IFormatter formatter = new BinaryFormatter();
-                    System.Xml.Serialization.XmlSerializer formatter = new System.Xml.Serialization.XmlSerializer(typeof(T));
+                    XmlSerializer formatter = new XmlSerializer(typeof(T));
                     return (T)formatter.Deserialize(reader);
                 }
             }
@@ -69,7 +66,7 @@ namespace XEditor
             try
             {
                 //IFormatter formatter = new BinaryFormatter();
-                System.Xml.Serialization.XmlSerializer formatter = new System.Xml.Serialization.XmlSerializer(typeof(T));
+                XmlSerializer formatter = new XmlSerializer(typeof(T));
                 return (T)formatter.Deserialize(stream);
             }
             catch (Exception)
@@ -83,7 +80,7 @@ namespace XEditor
             using (FileStream reader = new FileStream(pathwithname, FileMode.Open))
             {
                 //IFormatter formatter = new BinaryFormatter();
-                System.Xml.Serialization.XmlSerializer formatter = new System.Xml.Serialization.XmlSerializer(typeof(T), types);
+                XmlSerializer formatter = new XmlSerializer(typeof(T), types);
                 return (T)formatter.Deserialize(reader);
             }
         }

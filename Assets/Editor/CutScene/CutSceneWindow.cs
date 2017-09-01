@@ -283,11 +283,11 @@ namespace XEditor
             if (data != null)
             {
                 _run_data = data;
-
                 string file = XEditorPath.Cts + data.Name + ".txt";
                 XDataIO<XCutSceneData>.singleton.SerializeData(file, data);
             }
         }
+
         //GameObject o = null;
         void OnGUI()
         {
@@ -314,7 +314,6 @@ namespace XEditor
                     _scene = file.Remove(0, file.IndexOf(XEditorPath.Sce));
 
                     Scene scene = EditorSceneManager.GetActiveScene();
-
                     if (scene.name.Length == 0 || !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                     {
                         EditorSceneManager.OpenScene(_scene + ".unity");

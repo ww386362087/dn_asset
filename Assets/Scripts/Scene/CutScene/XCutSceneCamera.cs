@@ -1,7 +1,4 @@
-﻿#if UNITY_EDITOR
-
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class XCutSceneCamera
 {
@@ -99,6 +96,6 @@ public class XCutSceneCamera
             _trigger = null;
         }
     }
-}
 
-#endif
+
+}

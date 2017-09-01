@@ -12,8 +12,8 @@ public class Documents : XSingleton<Documents>
     /// </summary>
     public void Initial()
     {
-        RegistDocument<XEquipDoc>();
-        RegistDocument<XMailDoc>();
+        RegistDocument<XEquipDocument>();
+        RegistDocument<XMailDocument>();
 
         //... 
     }
