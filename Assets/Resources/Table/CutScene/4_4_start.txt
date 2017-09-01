@@ -4,7 +4,7 @@
   <CameraClip>Animation/Main_Camera/Cut_Scene/4_4_cutscene</CameraClip>
   <Name>4_4_start</Name>
   <Script />
-  <Scene>Assets/Scenes/DN/DN</Scene>
+  <Scene>Assets/Scenes/DN_LV2_2_2/DN_LV2_2_2</Scene>
   <TypeMask>-1</TypeMask>
   <OverrideBGM>true</OverrideBGM>
   <Mourningborder>true</Mourningborder>

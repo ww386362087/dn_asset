@@ -412,11 +412,11 @@ namespace XEditor
             {
                 if (_name != null && _name.Length > 0 && _camera != null && !EditorApplication.isPlaying)
                 {
+                    EditorApplication.ExecuteMenuItem("Edit/Play");
                     GameObject _cameraObject = GameObject.Find(@"Main Camera");
                     XScriptStandalone xss = _cameraObject.AddComponent<XScriptStandalone>();
                     _run_data = GetCurrentData();
                     xss._cut_scene_data = _run_data;
-                    EditorApplication.ExecuteMenuItem("Edit/Play");
                 }
             }
 
