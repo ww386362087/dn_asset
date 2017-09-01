@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class XScriptStandalone : MonoBehaviour
 {
     private XCutSceneCamera _cut_scene_camera = null;

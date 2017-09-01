@@ -49,7 +49,7 @@ public class XPlayer : XRole
             XAnimComponent anim = GetComponent<XAnimComponent>();
             if (anim != null)
             {
-                anim.SetTrigger("ToMove");
+                anim.SetTrigger(AnimTriger.ToMove);
             }
             //方向
             _transf.forward = XVirtualTab.singleton.Direction;
@@ -66,8 +66,8 @@ public class XPlayer : XRole
         XAnimComponent anim = GetComponent<XAnimComponent>();
         if(anim!=null)
         {
-            anim.SetTrigger("ToMove", false);
-            anim.SetTrigger("ToStand");
+            anim.SetTrigger(AnimTriger.ToMove, false);
+            anim.SetTrigger(AnimTriger.ToStand);
         }
     }
 

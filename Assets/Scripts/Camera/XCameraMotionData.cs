@@ -38,10 +38,3 @@ public class XCameraMotionData : ICloneable
     }
 
 }
-
-
-public enum CameraMotionType
-{
-    AnchorBased = 0,
-    CameraBased = 1,
-}

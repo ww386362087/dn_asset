@@ -1,4 +1,4 @@
-﻿public class AnimParam
+﻿public class AnimTriger
 {
     public static string ToJump = "ToJump";
     public static string ToStand = "ToStand";
@@ -43,16 +43,16 @@
 
     private string V;
 
-    public AnimParam(string aa) { V = aa; }
+    public AnimTriger(string aa) { V = aa; }
 
-    public static implicit operator string(AnimParam id)
+    public static implicit operator string(AnimTriger id)
     {
         return id.ToString();
     }
 
-    public static implicit operator AnimParam(string id)
+    public static implicit operator AnimTriger(string id)
     {
-        return new AnimParam(id);
+        return new AnimTriger(id);
     }
 
     public override string ToString()

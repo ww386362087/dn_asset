@@ -1,7 +1,4 @@
-﻿#if UNITY_EDITOR
-
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using XTable;
 
 public class XActor
@@ -14,9 +11,8 @@ public class XActor
 
     public XActor(float x, float y, float z, string clip)
     {
-        string path = @"Assets/Editor/EditorResources/Prefabs/ZJ_zhanshi.prefab";
-        _go = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
-        _go = Object.Instantiate(_go) as GameObject;
+        string path = @"Prefabs/Player";
+        _go = XResourceMgr.Load<GameObject>(path, AssetType.Prefab);
         _go.transform.position = new Vector3(x, y, z);
         _ator = _go.GetComponent<Animator>();
         if (_ator != null) MakeActor(clip);
@@ -46,16 +42,11 @@ public class XActor
             XEntityPresentation.RowData raw_data = XEntityPresentation.sington.GetItemID(row.PresentID);
             if (raw_data == null) return null;
             string prefab = raw_data.Prefab;
-            int n = prefab.LastIndexOf("_SkinnedMesh");
-            int m = prefab.LastIndexOf("Loading");
-            return n < 0 || m > 0 ?
-                AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/" + prefab + ".prefab", typeof(GameObject)) as GameObject :
-                AssetDatabase.LoadAssetAtPath("Assets/Editor/EditorResources/Prefabs/" + prefab.Substring(0, n) + ".prefab", typeof(GameObject)) as GameObject;
-        }
+            return XResourceMgr.Load<GameObject>("Prefabs/" + prefab, AssetType.Prefab);
+           }
         return null;
     }
-
-
+    
     private void MakeActor(string clip)
     {
         DisablePhysic();
@@ -78,5 +69,3 @@ public class XActor
     }
     
 }
-
-#endif

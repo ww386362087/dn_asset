@@ -35,6 +35,7 @@ public class XCutSceneUI : XSingleton<XCutSceneUI>
     {
         m_text.text = text;
     }
+
     public void SetVisible(bool visible)
     {
         _objUI.SetActive(visible);
@@ -50,8 +51,7 @@ public class XCutSceneUI : XSingleton<XCutSceneUI>
                 m_anim.Play();
         }
     }
-
-
+    
     public void SetIntroPos(float x, float y)
     {
         if (m_intro != null)
