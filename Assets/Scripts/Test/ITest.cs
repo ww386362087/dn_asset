@@ -34,13 +34,13 @@ public class TestManager
            // Debug.Log("scene name: "+name);
             switch (name)
             {
-                case "cpp":
+                case "Cpp":
                     test = new TestCPP();
                     break;
-                case "asset":
+                case "Fashion":
                     test = new TestAB();
                     break;
-                case "DN":
+                case "World":
                     test = new TestScene();
                     break;
                 default:
