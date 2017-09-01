@@ -1,4 +1,4 @@
-﻿public class XMailDocument : XDoc
+﻿public class XMailDocument : XDocument
 {
     public override void OnReconnected()
     {

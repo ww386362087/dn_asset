@@ -1,4 +1,4 @@
-﻿public class XEquipDocument : XDoc
+﻿public class XEquipDocument : XDocument
 {
     
     public override void OnReconnected()

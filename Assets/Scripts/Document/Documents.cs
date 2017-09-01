@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Documents : XSingleton<Documents>
 {
 
-    private Dictionary<uint, XDoc> documents;
+    private Dictionary<uint, XDocument> documents;
 
 
     /// <summary>
@@ -33,9 +33,9 @@ public class Documents : XSingleton<Documents>
     }
 
 
-    public T RegistDocument<T>() where T : XDoc, new()
+    public T RegistDocument<T>() where T : XDocument, new()
     {
-        if (documents == null) documents = new Dictionary<uint, XDoc>();
+        if (documents == null) documents = new Dictionary<uint, XDocument>();
         uint uid = XCommon.singleton.XHash(typeof(T).Name);
         if (documents.ContainsKey(uid))
         {
@@ -52,7 +52,7 @@ public class Documents : XSingleton<Documents>
     }
 
 
-    public bool DetachDocument<T>() where T : XDoc, new()
+    public bool DetachDocument<T>() where T : XDocument, new()
     {
         return DetachDocument(typeof(T).Name);
     }
@@ -71,7 +71,7 @@ public class Documents : XSingleton<Documents>
     }
     
 
-    public T GetDocument<T>() where T : XDoc, new()
+    public T GetDocument<T>() where T : XDocument, new()
     {
         uint id = XCommon.singleton.XHash(typeof(T).Name);
         if (documents != null && documents.ContainsKey(id))

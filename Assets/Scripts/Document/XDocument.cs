@@ -1,4 +1,5 @@
-﻿public abstract class XDoc : XObject
+﻿
+public abstract class XDocument : XObject
 {
     protected virtual string _name { get { return GetType().Name; } }
 
