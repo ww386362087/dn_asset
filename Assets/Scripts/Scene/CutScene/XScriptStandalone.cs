@@ -103,17 +103,17 @@ public class XScriptStandalone : MonoBehaviour
     void Fx(object o)
     {
         XFxDataClip clip = o as XFxDataClip;
-        Transform transform = (clip.BindIdx < 0) ? null : _actors[clip.BindIdx].Actor.transform;
+        Transform trans = (clip.BindIdx < 0) ? null : _actors[clip.BindIdx].Actor.transform;
         if (clip.Bone != null && clip.Bone.Length > 0)
-            transform = transform.Find(clip.Bone);
+            trans = trans.Find(clip.Bone);
         else
-            transform = null;
-        //XFx fx = XFxMgr.singleton.CreateFx(clip.Fx);
-        //fx.DelayDestroy = clip.Destroy_Delay;
-        //if (transform != null)
-        //    fx.Play(transform, Vector3.zero, clip.Scale * Vector3.one, 1, clip.Follow);
-        //else
-        //    fx.Play(new Vector3(clip.AppearX, clip.AppearY, clip.AppearZ), XCommon.singleton.FloatToQuaternion(clip.Face), Vector3.one);
+            trans = null;
+        XFx fx = XFxMgr.singleton.CreateFx(clip.Fx);
+        fx.DelayDestroy = clip.Destroy_Delay;
+        if (trans != null)
+            fx.Play(trans.gameObject, Vector3.zero, clip.Scale * Vector3.one, 1);
+        else
+            fx.Play(new Vector3(clip.AppearX, clip.AppearY, clip.AppearZ), XCommon.singleton.FloatToQuaternion(clip.Face), Vector3.one);
     }
 
     void Audio(object o)

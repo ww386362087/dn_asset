@@ -223,6 +223,11 @@ public class XCommon : XSingleton<XCommon>
         return XCommon.singleton.Clockwise(Vector3.forward, dir) ? face : -face;
     }
 
+    public Quaternion FloatToQuaternion(float angle)
+    {
+        return Quaternion.Euler(0, angle, 0);
+    }
+
     public Transform FindChildRecursively(Transform t, string name)
     {
         if (t.name == name)

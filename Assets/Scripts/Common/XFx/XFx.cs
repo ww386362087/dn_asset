@@ -56,7 +56,7 @@ public class XFx
     }
 
 
-    public void CreateXFx(string location, bool async = true)
+    public void CreateXFx(string location, bool async)
     {
         _instanceID = GetGlobalFxID();
         if (string.IsNullOrEmpty(location) || location.EndsWith("empty"))
@@ -90,6 +90,16 @@ public class XFx
             Reset();
         }
         XTimerMgr.singleton.RemoveTimer(_token);
+    }
+
+    public void Play(Vector3 position, Quaternion rotation, Vector3 scale, float speed_ratio = 1)
+    {
+        _parent = null;
+        _pos = position;
+        _rot = rotation;
+        _scale = scale;
+        _speed_ratio = speed_ratio;
+        ReqPlay();
     }
 
     public void Play(GameObject parent, Vector3 offset, Vector3 scale, float speed_ratio = 1)

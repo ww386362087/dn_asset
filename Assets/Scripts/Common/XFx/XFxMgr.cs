@@ -17,7 +17,7 @@ public class XFxMgr : XSingleton<XFxMgr>
 
     public XFx CreateFx(string prefab_location)
     {
-        return CreateFx(prefab_location, true);
+        return CreateFx(prefab_location, false);
     }
 
     public XFx CreateFx(string prefab_location, bool async)
