@@ -295,4 +295,10 @@ public class XResourceMgr
         Debug.LogError("Load resource: " + prefab + " error!");
     }
 
+
+    public static void SafeDestroy(ref GameObject obj)
+    {
+        Object.Destroy(obj);
+        obj = null;
+    }
 }

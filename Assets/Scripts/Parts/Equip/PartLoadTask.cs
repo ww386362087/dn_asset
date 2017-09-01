@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public delegate void PartLoadCallback(BaseLoadTask part, bool needCombine);
 
-public delegate void LoadCallBack(Object obj, System.Object cbOjb);
+public delegate void LoadCallBack(Object obj);
 
 public class PartLoadTask : BaseLoadTask
 {
