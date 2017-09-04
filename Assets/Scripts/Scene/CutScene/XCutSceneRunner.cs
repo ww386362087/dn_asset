@@ -8,6 +8,7 @@ public class XCutSceneRunner : MonoBehaviour
 
     private List<XActor> _actors = new List<XActor>();
     private List<XFx> _fxs = new List<XFx>();
+    private List<uint> _times = new List<uint>();
     private uint _token = 0;
     
     const float FPS = 30.0f;
@@ -35,40 +36,43 @@ public class XCutSceneRunner : MonoBehaviour
 
         if (!cut_scene_data.GeneralShow)
         {
-            foreach (XActorDataClip clip in cut_scene_data.Actors)
+            for (int i = 0, max = cut_scene_data.Actors.Count; i < max; i++)
             {
+                XActorDataClip clip = cut_scene_data.Actors[i];
                 XResourceMgr.Load<AnimationClip>(clip.Clip, AssetType.Anim);
-                XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BeOnStage, clip);
+                _times.Add(XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BeOnStage, clip));
             }
-            foreach (XPlayerDataClip clip in cut_scene_data.Player)
+            for (int i = 0, max = cut_scene_data.Player.Count; i < max; i++)
             {
+                XPlayerDataClip clip = cut_scene_data.Player[i];
                 XResourceMgr.Load<AnimationClip>(clip.Clip1, AssetType.Anim);
-                XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BePlayerOnStage, clip);
+                _times.Add( XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BePlayerOnStage, clip));
             }
-            foreach (XFxDataClip clip in cut_scene_data.Fxs)
+            for (int i = 0, max = cut_scene_data.Fxs.Count; i < max; i++)
             {
-                XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Fx, clip);
+                _times.Add( XTimerMgr.singleton.SetTimer(cut_scene_data.Fxs[i].TimeLineAt / FPS, Fx, cut_scene_data.Fxs[i]));
             }
         }
-        foreach (XAudioDataClip clip in cut_scene_data.Audios)
+        for (int i = 0, max = cut_scene_data.Audios.Count; i < max; i++)
         {
-            XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Audio, clip);
+            XAudioDataClip clip = cut_scene_data.Audios[i];
+            _times.Add( XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Audio, clip));
         }
         if (cut_scene_data.AutoEnd)
         {
-            XTimerMgr.singleton.SetTimer((cut_scene_data.TotalFrame - 30) / FPS, EndShow, null);
+            _times.Add( XTimerMgr.singleton.SetTimer((cut_scene_data.TotalFrame - 30) / FPS, EndShow, null));
         }
         if (cut_scene_data.Mourningborder)
         {
             XCutSceneUI.singleton.SetVisible(true);
-
-            foreach (XSubTitleDataClip clip in cut_scene_data.SubTitle)
+            for (int i = 0, max = cut_scene_data.SubTitle.Count; i < max; i++)
             {
-                XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, SubTitle, clip);
+                XSubTitleDataClip clip = cut_scene_data.SubTitle[i];
+                _times.Add(XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, SubTitle, clip));
             }
-            foreach (XSlashDataClip clip in cut_scene_data.Slash)
+            for (int i = 0, max = cut_scene_data.Slash.Count; i < max; i++)
             {
-                XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Slash, clip);
+                _times.Add(XTimerMgr.singleton.SetTimer(cut_scene_data.Slash[i].TimeLineAt / FPS, Slash, cut_scene_data.Slash[i]));
             }
         }
     }
@@ -104,6 +108,12 @@ public class XCutSceneRunner : MonoBehaviour
             XFxMgr.singleton.DestroyFx(_fxs[i], true);
         }
         _fxs.Clear();
+
+        for(int i=0,max=_times.Count;i<_times.Count;i++)
+        {
+            XTimerMgr.singleton.RemoveTimer(_times[i]);
+        }
+        _times.Clear();
     }
 
     void BePlayerOnStage(object o)
