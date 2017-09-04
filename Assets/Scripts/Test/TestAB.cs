@@ -3,7 +3,7 @@
 using UnityEngine;
 using XTable;
 using System.Collections.Generic;
-
+using System;
 
 public class TestAB : ITest
 {
@@ -169,6 +169,10 @@ public class TestAB : ITest
     }
     
     public void Update() { }
+
+    public void LateUpdate()
+    {
+    }
 }
 
 

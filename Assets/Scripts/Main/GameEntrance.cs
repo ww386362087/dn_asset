@@ -30,6 +30,11 @@ public class GameEntrance : MonoBehaviour
     void LateUpdate()
     {
         GameEnine.LateUpdate();
+
+
+#if TEST
+        TestManager.Get().Update();
+#endif
     }
 
     void OnGUI()

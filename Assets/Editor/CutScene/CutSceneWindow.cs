@@ -142,7 +142,10 @@ namespace XEditor
                 !EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 GameObject _cameraObject = GameObject.Find(@"Main Camera");
-                DestroyImmediate(_cameraObject.GetComponent<XScriptStandalone>());
+                DestroyImmediate(_cameraObject.GetComponent<XCutSceneRunner>());
+
+                GameEntrance entrance = _cameraObject.GetComponent<GameEntrance>();
+                if (entrance != null) entrance.enabled = true;
             }
         }
 
@@ -413,12 +416,14 @@ namespace XEditor
                 {
                     EditorApplication.ExecuteMenuItem("Edit/Play");
                     GameObject _cameraObject = GameObject.Find(@"Main Camera");
-                    XScriptStandalone xss = _cameraObject.AddComponent<XScriptStandalone>();
+                    GameEntrance entrance = _cameraObject.GetComponent<GameEntrance>();
+                    if (entrance != null) entrance.enabled = false;
+                    XCutSceneRunner runner = _cameraObject.AddComponent<XCutSceneRunner>();
                     _run_data = GetCurrentData();
-                    xss._cut_scene_data = _run_data;
+                    runner.is_start_by_editor = true;
+                    runner.cut_scene_data = _run_data;
                 }
             }
-
             if (GUILayout.Button("Pause"))
             {
                 if (EditorApplication.isPlaying)

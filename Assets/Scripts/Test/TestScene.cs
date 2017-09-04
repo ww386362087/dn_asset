@@ -1,5 +1,7 @@
 ﻿#if TEST
 
+using System;
+
 public class TestScene : ITest
 {
    
@@ -15,7 +17,9 @@ public class TestScene : ITest
 
     public void Update() { }
 
-    
+    public void LateUpdate()
+    {
+    }
 }
 
 

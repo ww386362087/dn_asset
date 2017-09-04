@@ -1,5 +1,6 @@
 ﻿#if TEST
 
+using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Profiling;
@@ -43,6 +44,9 @@ public class TestCPP : ITest
 
     }
 
+    public void LateUpdate()
+    {
+    }
 }
 
 

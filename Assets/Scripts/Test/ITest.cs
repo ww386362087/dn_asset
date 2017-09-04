@@ -14,6 +14,9 @@ public interface ITest
 
     void Update();
 
+
+    void LateUpdate();
+
 }
 
 
@@ -42,6 +45,9 @@ public class TestManager
                     break;
                 case "World":
                     test = new TestScene();
+                    break;
+                case "CutScene":
+                    test = new TestCutScene();
                     break;
                 default:
                     test = new TestScene();

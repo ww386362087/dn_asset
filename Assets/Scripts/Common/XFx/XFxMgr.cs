@@ -60,7 +60,7 @@ public class XFxMgr : XSingleton<XFxMgr>
     }
 
 
-    private void DestroyFx(XFx fx, bool bImmediately)
+    public void DestroyFx(XFx fx, bool bImmediately)
     {
         fx.DestroyXFx();
         RemoveFx(fx);

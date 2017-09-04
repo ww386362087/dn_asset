@@ -15,10 +15,6 @@ public class XCutSceneCamera
     private Vector3 _root_pos = Vector3.zero;
     private Quaternion _idle_root_rotation = Quaternion.identity;
     private Vector3 _dummyCamera_pos = Vector3.zero;
-    private XCameraMotionData _motion = new XCameraMotionData();
-
-    public XActor Target = null;
-
     private string _trigger = null;
 
     public Camera UnityCamera
@@ -51,39 +47,32 @@ public class XCutSceneCamera
         {
             _root_pos = _dummyCamera.position;
             _root_pos_inited = true;
-            _idle_root_rotation = _motion.Follow_Position ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
         }
         InnerUpdateEx();
         TriggerEffect();
     }
-
-
+    
     private void InnerUpdateEx()
     {
         _dummyCamera_pos = _idle_root_rotation * (_dummyCamera.position - _dummyObject.transform.position) + _dummyObject.transform.position;
-        Vector3 v_self_p = Target == null ? Vector3.zero : Target.Actor.transform.position;
         Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
         Quaternion q = Quaternion.LookRotation(forward, _dummyCamera.up);
-        Vector3 delta = _dummyCamera_pos - _root_pos;
-        Vector3 target_pos = _root_pos + (_motion.Follow_Position ? v_self_p : Vector3.zero);
         _cameraTransform.rotation = _idle_root_rotation * q;
+
+        Vector3 delta = _dummyCamera_pos - _root_pos;
+        Vector3 target_pos = _root_pos;
         target_pos += delta;
         _cameraTransform.position = target_pos;
     }
 
-    public void Effect(XCameraMotionData motion)
+    public void Effect(string motion)
     {
-        AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion.Motion, AssetType.Anim);
+        AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion, AssetType.Anim);
         if (clip != null)
         {
             _trigger = CameraTrigger.ToEffect.ToString();
             if (_overrideController["CameraEffect"] != clip)
                 _overrideController["CameraEffect"] = clip;
-
-            _motion.Follow_Position = motion.Follow_Position;
-            _motion.AutoSync_At_Begin = motion.AutoSync_At_Begin;
-            _motion.LookAt_Target = motion.LookAt_Target;
-            _motion.Motion = motion.Motion;
         }
     }
 
@@ -92,10 +81,8 @@ public class XCutSceneCamera
         if (_trigger != null && !_ator.IsInTransition(0))
         {
             _ator.SetTrigger(_trigger);
-            _root_pos_inited = false;
             _trigger = null;
         }
     }
-
 
 }

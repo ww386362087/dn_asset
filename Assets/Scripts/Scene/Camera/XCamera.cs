@@ -11,7 +11,8 @@ public class XCamera : XObject
     private GameObject _cameraObject = null;
     private Animator _ator = null;
     private AnimatorOverrideController _overrideController;
-    
+
+    private string _trigger = null;
 
     //basic root
     private bool _pos_inited = false;
@@ -25,6 +26,8 @@ public class XCamera : XObject
     
 
     public Transform CameraTrans { get { return _cameraTransform; } }
+
+    public GameObject CameraObject { get { return _camera.gameObject; } }
 
     public Vector3 Position { get { return _cameraTransform.position; } }
 
@@ -102,26 +105,50 @@ public class XCamera : XObject
             _root_quat = Quaternion.identity;
             _pos_inited = true;
         }
-       
-        if (_target != null) InnerUpdateEx();
+        InnerUpdateEx();
     }
 
     private void InnerUpdateEx()
     {
         Vector3 forward = Vector3.Cross(_dummyCamera.forward, _dummyCamera.up);
         _dummyCamera_quat = Quaternion.LookRotation(forward, _dummyCamera.up);
-        _cameraTransform.rotation =_root_quat * _dummyCamera_quat ;
-        
+        _cameraTransform.rotation = _root_quat * _dummyCamera_quat;
+
         Vector3 _dir = _dummyCamera.position - _dummyObject.transform.position;
         float _dis = _dir.magnitude;
         _dir.Normalize();
         if (_dis <= 0) _dis = 0.1f;
         _dummyCamera_pos = _root_quat * (_dis * _dir) + _dummyObject.transform.position;
-        _cameraTransform.position = _dummyCamera_pos + _target.Position;
+        _cameraTransform.position = _dummyCamera_pos + (_target != null ? _target.Position : Vector3.zero);
         LookAtTarget();
     }
-    
-    
+
+    public void Effect(string motion)
+    {
+        AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion, AssetType.Anim);
+        if (clip != null)
+        {
+            _trigger = CameraTrigger.ToEffect.ToString();
+            if (_overrideController["CameraEffect"] != clip)
+                _overrideController["CameraEffect"] = clip;
+        }
+    }
+
+    public void ResetIdle()
+    {
+        if (_ator != null)
+            _ator.SetTrigger(CameraTrigger.ToIdle.ToString());
+    }
+
+    public void TriggerEffect()
+    {
+        if (_trigger != null && !_ator.IsInTransition(0))
+        {
+            _ator.SetTrigger(_trigger);
+            _trigger = null;
+        }
+    }
+
     public void XRotate(float addation)
     {
         if (addation != 0)

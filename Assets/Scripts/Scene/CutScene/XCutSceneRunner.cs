@@ -1,71 +1,72 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class XScriptStandalone : MonoBehaviour
+public class XCutSceneRunner : MonoBehaviour
 {
+
     private XCutSceneCamera _cut_scene_camera = null;
+
     private List<XActor> _actors = new List<XActor>();
-
+    private List<XFx> _fxs = new List<XFx>();
     private uint _token = 0;
-    private const float FPS = 30.0f;
+    
+    const float FPS = 30.0f;
 
-    [SerializeField]
-    public XCutSceneData _cut_scene_data = null;
+    public bool is_start_by_editor = false;
+    public XCutSceneData cut_scene_data = null;
 
     void Start()
     {
-        GameEnine.Init(this);
-
-        _cut_scene_camera = new XCutSceneCamera();
-        _cut_scene_camera.Initialize();
-
-        XCameraMotionData m = new XCameraMotionData();
-        m.AutoSync_At_Begin = false;
-        m.Follow_Position = _cut_scene_data.GeneralShow;
-        m.LookAt_Target = false;
-        m.At = 0;
-        m.Motion = _cut_scene_data.CameraClip;
-
+        if (is_start_by_editor)
+        {
+            GameEnine.Init(this);
+            _cut_scene_camera = new XCutSceneCamera();
+            _cut_scene_camera.Initialize();
+            _cut_scene_camera.Effect(cut_scene_data.CameraClip);
+            _cut_scene_camera.UnityCamera.fieldOfView = cut_scene_data.FieldOfView;
+        }
+        else
+        {
+            XScene.singleton.GameCamera.Effect(cut_scene_data.CameraClip);
+            XScene.singleton.GameCamera.UnityCamera.fieldOfView = cut_scene_data.FieldOfView;
+        }
         XCutSceneUI.singleton.Init();
         XCutSceneUI.singleton.SetText("");
 
-        _cut_scene_camera.Effect(m);
-        _cut_scene_camera.UnityCamera.fieldOfView = _cut_scene_data.FieldOfView;
-
-        if (!_cut_scene_data.GeneralShow)
+        if (!cut_scene_data.GeneralShow)
         {
-            foreach (XActorDataClip clip in _cut_scene_data.Actors)
+            foreach (XActorDataClip clip in cut_scene_data.Actors)
             {
                 XResourceMgr.Load<AnimationClip>(clip.Clip, AssetType.Anim);
                 XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BeOnStage, clip);
             }
-            foreach (XPlayerDataClip clip in _cut_scene_data.Player)
+            foreach (XPlayerDataClip clip in cut_scene_data.Player)
             {
                 XResourceMgr.Load<AnimationClip>(clip.Clip1, AssetType.Anim);
                 XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BePlayerOnStage, clip);
             }
-            foreach (XFxDataClip clip in _cut_scene_data.Fxs)
+            foreach (XFxDataClip clip in cut_scene_data.Fxs)
             {
                 XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Fx, clip);
             }
         }
-        foreach (XAudioDataClip clip in _cut_scene_data.Audios)
+        foreach (XAudioDataClip clip in cut_scene_data.Audios)
         {
             XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Audio, clip);
         }
-        if (_cut_scene_data.AutoEnd)
+        if (cut_scene_data.AutoEnd)
         {
-            XTimerMgr.singleton.SetTimer((_cut_scene_data.TotalFrame - 30) / FPS, EndShow, null);
+            XTimerMgr.singleton.SetTimer((cut_scene_data.TotalFrame - 30) / FPS, EndShow, null);
         }
-        if (_cut_scene_data.Mourningborder)
+        if (cut_scene_data.Mourningborder)
         {
             XCutSceneUI.singleton.SetVisible(true);
 
-            foreach (XSubTitleDataClip clip in _cut_scene_data.SubTitle)
+            foreach (XSubTitleDataClip clip in cut_scene_data.SubTitle)
             {
                 XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, SubTitle, clip);
             }
-            foreach (XSlashDataClip clip in _cut_scene_data.Slash)
+            foreach (XSlashDataClip clip in cut_scene_data.Slash)
             {
                 XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Slash, clip);
             }
@@ -74,12 +75,35 @@ public class XScriptStandalone : MonoBehaviour
 
     void Update()
     {
-        GameEnine.Update(Time.deltaTime);
+        if (is_start_by_editor) GameEnine.Update(Time.deltaTime);
     }
+
 
     void LateUpdate()
     {
-        _cut_scene_camera.PostUpdate(Time.deltaTime);
+        if (is_start_by_editor)
+        {
+            _cut_scene_camera.PostUpdate(Time.deltaTime);
+        }
+        else
+            XScene.singleton.GameCamera.TriggerEffect();
+    }
+
+    public void UnLoad()
+    {
+        XTimerMgr.singleton.RemoveTimer(_token);
+        XCutSceneUI.singleton.SetVisible(false);
+        for (int i = 0, max = _actors.Count; i < max; i++)
+        {
+            Destroy(_actors[i].Actor.gameObject);
+        }
+        _actors.Clear();
+
+        for (int i = 0, max = _fxs.Count; i < max; i++)
+        {
+            XFxMgr.singleton.DestroyFx(_fxs[i], true);
+        }
+        _fxs.Clear();
     }
 
     void BePlayerOnStage(object o)
@@ -114,6 +138,8 @@ public class XScriptStandalone : MonoBehaviour
             fx.Play(trans.gameObject, Vector3.zero, clip.Scale * Vector3.one, 1);
         else
             fx.Play(new Vector3(clip.AppearX, clip.AppearY, clip.AppearZ), XCommon.singleton.FloatToQuaternion(clip.Face), Vector3.one);
+
+        _fxs.Add(fx);
     }
 
     void Audio(object o)
@@ -157,5 +183,6 @@ public class XScriptStandalone : MonoBehaviour
     {
         XCutSceneUI.singleton.SetText("");
     }
+
 }
 

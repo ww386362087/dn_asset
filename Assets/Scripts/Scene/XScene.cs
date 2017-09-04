@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using XTable;
 
-internal class XScene : XSingleton<XScene>
+public class XScene : XSingleton<XScene>
 {
     private XCamera _camera;
     private uint _sceneid;
     private SceneList.RowData _scene_row;
+
+    private XCutSceneData _cutscene_data = null;
+    private XCutSceneRunner _cutscene_runer = null;
     private Terrain _terrain;
 
     public SceneType SceneType { get; set; }
@@ -24,6 +27,7 @@ internal class XScene : XSingleton<XScene>
 
     public SceneList.RowData SceneRow { get { return _scene_row; } }
 
+    public bool IsPlayCutScene { get { return _cutscene_data != null; } }
 
     public XCamera GameCamera
     {
@@ -110,6 +114,30 @@ internal class XScene : XSingleton<XScene>
         player.EnableCC(true);
     }
 
+    public void AttachCutScene(XCutSceneData csd)
+    {
+        if (!IsPlayCutScene)
+        {
+            _cutscene_data = csd;
+            GameCamera.Target = null;
+            _cutscene_runer = GameCamera.CameraObject.AddComponent<XCutSceneRunner>();
+            _cutscene_runer.cut_scene_data = _cutscene_data;
+        }
+        else
+        {
+            Debug.LogError("Is Playing Cutscene");
+        }
+    }
+
+
+    public void DetachCutScene()
+    {
+        GameCamera.Target = XEntityMgr.singleton.Player;
+        GameCamera.ResetIdle();
+        _cutscene_runer.UnLoad();
+        GameObject.Destroy(_cutscene_runer);
+        _cutscene_data = null;
+    }
 
     private void CreateMonsters()
     {
