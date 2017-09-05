@@ -123,12 +123,12 @@ public class XCamera : XObject
         LookAtTarget();
     }
 
-    public void Effect(string motion)
+    public void Effect(string motion,string trigger)
     {
         AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion, AssetType.Anim);
         if (clip != null)
         {
-            _trigger = CameraTrigger.ToEffect.ToString();
+            _trigger = trigger;
             if (_overrideController["CameraEffect"] != clip)
                 _overrideController["CameraEffect"] = clip;
         }

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Only used by cutscene editor tool
+/// </summary>
 public class XCutSceneCamera
 {
     private GameObject _cameraObject = null;
@@ -65,12 +68,12 @@ public class XCutSceneCamera
         _cameraTransform.position = target_pos;
     }
 
-    public void Effect(string motion)
+    public void Effect(string motion,string trigger)
     {
         AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion, AssetType.Anim);
         if (clip != null)
         {
-            _trigger = CameraTrigger.ToEffect.ToString();
+            _trigger = trigger;
             if (_overrideController["CameraEffect"] != clip)
                 _overrideController["CameraEffect"] = clip;
         }

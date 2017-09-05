@@ -12,9 +12,15 @@ public class XCutSceneRunner : MonoBehaviour
     private uint _token = 0;
     
     const float FPS = 30.0f;
-
+    float start_play_time = 0;
     public bool is_start_by_editor = false;
     public XCutSceneData cut_scene_data = null;
+
+
+    public bool IsPlaying
+    {
+        get { return cut_scene_data != null ? Time.time - start_play_time < cut_scene_data.TotalFrame : false; }
+    }
 
     void Start()
     {
@@ -23,14 +29,15 @@ public class XCutSceneRunner : MonoBehaviour
             GameEnine.Init(this);
             _cut_scene_camera = new XCutSceneCamera();
             _cut_scene_camera.Initialize();
-            _cut_scene_camera.Effect(cut_scene_data.CameraClip);
+            _cut_scene_camera.Effect(cut_scene_data.CameraClip, cut_scene_data.Trigger);
             _cut_scene_camera.UnityCamera.fieldOfView = cut_scene_data.FieldOfView;
         }
         else
         {
-            XScene.singleton.GameCamera.Effect(cut_scene_data.CameraClip);
+            XScene.singleton.GameCamera.Effect(cut_scene_data.CameraClip, cut_scene_data.Trigger);
             XScene.singleton.GameCamera.UnityCamera.fieldOfView = cut_scene_data.FieldOfView;
         }
+        start_play_time = Time.time;
         XCutSceneUI.singleton.Init();
         XCutSceneUI.singleton.SetText("");
 
