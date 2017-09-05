@@ -108,6 +108,11 @@ public abstract class XEntity : XObject
         get { return _transf != null ? _transf.position : Vector3.zero; }
     }
 
+    public Vector3 Forward
+    {
+        get { return Rotation * Vector3.forward; }
+    }
+
     public Quaternion Rotation
     {
         get { return _transf != null ? _transf.rotation : Quaternion.identity; }
