@@ -24,9 +24,12 @@ public abstract class XEntity : XObject
     protected GameObject _object = null;
     protected Transform _transf = null;
     protected int _layer = 0;
-    protected Vector3 _movement = Vector3.zero;
     public float speed = 0.02f;
     protected SkinnedMeshRenderer _skin = null;
+
+    protected Vector3 _forward = Vector3.zero;
+    protected bool _force_move = false;
+    private Vector3 _pos = Vector3.zero;
 
     public uint EntityID
     {
@@ -63,14 +66,14 @@ public abstract class XEntity : XObject
         get { return (_eEntity_Type & EnitityType.Entity_Boss) != 0; }
     }
 
-    public bool IsElite
-    {
-        get { return (_eEntity_Type & EnitityType.Entity_Elite) != 0; }
-    }
-
     public bool IsNpc
     {
         get { return (_eEntity_Type & EnitityType.Entity_Npc) != 0; }
+    }
+
+    public float Radius
+    {
+        get { return _present != null ? _present.BoundRadius : 0f; }
     }
 
     public float Height
@@ -162,6 +165,14 @@ public abstract class XEntity : XObject
     public virtual void OnUpdate(float delta)
     {
         UpdateComponents(delta);
+
+        if (_force_move && _transf != null)
+        {
+            _transf.forward = _forward;
+            _pos = Position + _forward.normalized * speed;
+            _pos.y = XScene.singleton.TerrainY(_pos) + 0.02f;
+            _transf.position = _pos;
+        }
     }
 
     public virtual void OnLateUpdate()
@@ -193,6 +204,30 @@ public abstract class XEntity : XObject
                 return GeometryUtility.TestPlanesAABB(planes, bound);
         }
         return false;
+    }
+
+
+    public void MoveForward(Vector3 forward)
+    {
+        _forward = forward;
+        _force_move = true;
+        XAnimComponent anim = GetComponent<XAnimComponent>();
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimTriger.ToMove);
+        }
+    }
+
+    public void StopMove()
+    {
+        _force_move = false;
+        _forward = Vector3.zero;
+        XAnimComponent anim = GetComponent<XAnimComponent>();
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimTriger.ToMove, false);
+            anim.SetTrigger(AnimTriger.ToStand);
+        }
     }
 
 }

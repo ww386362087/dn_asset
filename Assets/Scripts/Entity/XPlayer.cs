@@ -11,8 +11,6 @@ public class XPlayer : XRole
     public static int PlayerLayer = LayerMask.NameToLayer("Player");
 
     public Vector3 lastpos = Vector3.zero;
-
-    private Vector3 _v3 = Vector3.zero;
     private XRole _watch_to = null;
 
     public XRole WatchTo { get { return _watch_to != null && !_watch_to.Deprecated ? _watch_to : null; } }
@@ -34,7 +32,7 @@ public class XPlayer : XRole
     {
         base.OnUpdate(delta);
         lastpos = EntityObject.transform.position;
-        if(XVirtualTab.singleton.Feeding)
+        if (XVirtualTab.singleton.Feeding)
         {
             ApplyJoyStickMove();
         }
@@ -46,29 +44,13 @@ public class XPlayer : XRole
         XCamera camera = XScene.singleton.GameCamera;
         if (camera != null && XVirtualTab.singleton.Direction != Vector3.zero)
         {
-            XAnimComponent anim = GetComponent<XAnimComponent>();
-            if (anim != null)
-            {
-                anim.SetTrigger(AnimTriger.ToMove);
-            }
-            //方向
-            _transf.forward = XVirtualTab.singleton.Direction;
-
-            //位置
-            _v3 = _transf.position + _transf.forward * speed;
-            _v3.y = XScene.singleton.TerrainY(Position);
-            _transf.position = _v3;
+            MoveForward(XVirtualTab.singleton.Direction);
         }
     }
 
     private void OnStopJoyStick(XEventArgs e)
     {
-        XAnimComponent anim = GetComponent<XAnimComponent>();
-        if(anim!=null)
-        {
-            anim.SetTrigger(AnimTriger.ToMove, false);
-            anim.SetTrigger(AnimTriger.ToStand);
-        }
+        StopMove();
     }
 
 

@@ -7,7 +7,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 {
 
     private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
-    private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
+    public HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
     
     public XPlayer Player;
 
