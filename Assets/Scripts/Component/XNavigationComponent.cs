@@ -4,7 +4,6 @@ using UnityEngine.AI;
 
 public class XNavigationComponent : XComponent
 {
-
     private NavMeshAgent _nav = null;
     private NavMeshPath _path = new NavMeshPath();
     private Vector3 _destination = Vector3.zero;
@@ -12,8 +11,7 @@ public class XNavigationComponent : XComponent
     private IEnumerator<Vector3> _nodes = null;
     private bool _bFoundNext = false;
     private bool _bNav = false;
-
-    XEntity _entity;
+    private XEntity _entity;
 
     public bool IsOnNav { get { return _bNav; } }
 
@@ -32,7 +30,7 @@ public class XNavigationComponent : XComponent
 
     public override void OnUninit()
     {
-        Interrupt();
+        NavEnd();
         if (_nav != null)
         {
             GameObject.Destroy(_nav);
@@ -62,7 +60,6 @@ public class XNavigationComponent : XComponent
     {
         if (_bFoundNext)
         {
-            Vector3 last = _destination;
             _destination = _nodes.Current;
             _bFoundNext = _nodes.MoveNext();
 
@@ -70,23 +67,18 @@ public class XNavigationComponent : XComponent
             {
                 Vector3 vec = _entity.Position - _destination;
                 Vector3 forward = XCommon.singleton.Horizontal(vec);
-                if (vec.magnitude < 1)
-                {
-                    _destination = last;
-                }
-                else
-                    _destination += forward;
+                _destination += forward;
             }
         }
         else
         {
-            _bNav = false;
-            _entity.StopMove();
+            NavEnd();
         }
     }
 
-    public void Interrupt()
+    public void NavEnd()
     {
+        _entity.StopMove();
         _path.ClearCorners();
         _bNav = false;
     }
@@ -107,7 +99,7 @@ public class XNavigationComponent : XComponent
     }
 
 
-    public void DrawPath()
+    public void DebugDrawPath()
     {
 #if UNITY_EDITOR
         if (_path.corners.Length > 0)

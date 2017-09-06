@@ -48,7 +48,7 @@ public class XRole : XEntity
         {
             nav = GetComponent<XNavigationComponent>();
         }
-        nav.DrawPath();
+        nav.DebugDrawPath();
     }
 
     public void EnableCC(bool enable)
