@@ -5,7 +5,7 @@ public class XCutSceneUI : XSingleton<XCutSceneUI>
 {
 
     private Text m_text;
-    private Text m_skip;
+    private Transform m_skip;
     private Text m_name;
     private Transform m_intro;
     private Animation m_anim;
@@ -25,11 +25,18 @@ public class XCutSceneUI : XSingleton<XCutSceneUI>
         m_anim = _objUI.GetComponent<Animation>();
         m_text = _objUI.transform.FindChild("DownBG/Text").GetComponent<Text>();
         m_name = _objUI.transform.FindChild("Intro/Name").GetComponent<Text>();
-
+        m_skip = _objUI.transform.FindChild("UpBG/Skip");
         m_text.text = "";
+        UIEvent.Get(m_skip.gameObject).onClick = OnSkipClick;
         return base.Init();
     }
 
+
+    public override void Uninit()
+    {
+        UIEvent.Get(m_skip.gameObject).onClick = null;
+        base.Uninit();
+    }
 
     public void SetText(string text)
     {
@@ -56,6 +63,12 @@ public class XCutSceneUI : XSingleton<XCutSceneUI>
     {
         if (m_intro != null)
             m_intro.localPosition = new Vector3(x, y, 0);
+    }
+
+
+    private void OnSkipClick(GameObject go)
+    {
+        XScene.singleton.DetachCutScene();
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UIManager : XSingleton<UIManager>
 {
@@ -49,11 +50,18 @@ public class UIManager : XSingleton<UIManager>
         GameObject temp = GameObject.Find("UIRoot");
         if (temp != null) GameObject.Destroy(temp);
         string rootpath = "UI/UIRoot";
+
         GameObject go = XResourceMgr.Load<GameObject>(rootpath, AssetType.Prefab);
         GameObject.DontDestroyOnLoad(go);
+      
         XResourceMgr.UnloadAsset(rootpath, AssetType.Prefab);
         _uiCamera = go.GetComponent<Camera>();
         _canvas = go.transform.GetChild(0).GetComponent<Canvas>();
+
+        go = new GameObject("EventSystem");
+        go.AddComponent<EventSystem>();
+        go.AddComponent<StandaloneInputModule>();
+        GameObject.DontDestroyOnLoad(go);
     }
 
     private bool Exist(IUIDlg dlg)

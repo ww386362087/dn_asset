@@ -113,6 +113,7 @@ public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
         _load = false;
         _show = false;
     }
+    
 
     public void SetVisible(bool visble)
     {
