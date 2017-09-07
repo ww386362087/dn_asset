@@ -9,7 +9,7 @@ public enum DlgType
     Fixed     //固定层级的 depth只由prefab上的设定决定
 }
 
-public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
+public abstract class UIDlg<TDlg, TBehaviour> : UIEventPacher, IUIDlg
     where TBehaviour : DlgBehaviourBase
     where TDlg :  IUIDlg, new()
 {
@@ -94,22 +94,26 @@ public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
     {
         _load = true;
         _show = true;
+       
     }
 
     public virtual void OnShow()
     {
+        Regist();
         _show = true;
     }
 
 
     public virtual void OnHide()
     {
+        UnRegist();
         _show = false;
     }
 
 
     public virtual void OnDestroy()
     {
+        UnRegist();
         _load = false;
         _show = false;
     }
@@ -135,5 +139,5 @@ public abstract class UIDlg<TDlg, TBehaviour> : IUIDlg
         OnLoad();
     }
 
-
+  
 }

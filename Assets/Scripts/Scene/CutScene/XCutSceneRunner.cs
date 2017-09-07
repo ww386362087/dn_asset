@@ -38,8 +38,7 @@ public class XCutSceneRunner : MonoBehaviour
             XScene.singleton.GameCamera.UnityCamera.fieldOfView = cut_scene_data.FieldOfView;
         }
         start_play_time = Time.time;
-        XCutSceneUI.singleton.Init();
-        XCutSceneUI.singleton.SetText("");
+        XCutSceneUI.singleton.Initial();
 
         if (!cut_scene_data.GeneralShow)
         {

@@ -21,8 +21,7 @@ public class XScene : XSingleton<XScene>
     /// 2 单机，服务器把刷怪数据给客户端，客户端刷怪
     /// </summary>
     private int SyncModeValue = 0;
-
-
+    
     public bool SyncMode { get { return SyncModeValue == 1; } }
 
     public SceneList.RowData SceneRow { get { return _scene_row; } }
@@ -50,8 +49,7 @@ public class XScene : XSingleton<XScene>
         if (_camera != null)
             _camera.LateUpdate();
     }
-
-
+    
     public void Enter(uint sceneid)
     {
         _sceneid = sceneid;
@@ -134,8 +132,11 @@ public class XScene : XSingleton<XScene>
     {
         GameCamera.Target = XEntityMgr.singleton.Player;
         GameCamera.ResetIdle();
-        _cutscene_runer.UnLoad();
-        GameObject.Destroy(_cutscene_runer);
+        if (_cutscene_runer != null)
+        {
+            _cutscene_runer.UnLoad();
+            GameObject.Destroy(_cutscene_runer);
+        }
         _cutscene_data = null;
     }
 
