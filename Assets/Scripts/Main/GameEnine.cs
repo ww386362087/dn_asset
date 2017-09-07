@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameEnine : XObject
 {
@@ -21,8 +20,7 @@ public class GameEnine : XObject
         _init_finish = true;
     }
 
-
-
+    
 
     public static void Update(float delta)
     {
@@ -36,6 +34,7 @@ public class GameEnine : XObject
         XResourceMgr.Update();
         XEntityMgr.singleton.Update(delta);
         XScene.singleton.Update(delta);
+        XAutoFade.Update();
     }
 
 

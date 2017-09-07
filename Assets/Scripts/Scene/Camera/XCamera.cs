@@ -19,11 +19,11 @@ public class XCamera : XObject
     private float _angle_x = 0;
     private float _angle_y = 0;
     private Quaternion _root_quat = Quaternion.identity;
-   
+
     //position & rotation
     private Vector3 _dummyCamera_pos = Vector3.zero;
     private Quaternion _dummyCamera_quat = Quaternion.identity;
-    
+
 
     public Transform CameraTrans { get { return _cameraTransform; } }
 
@@ -32,7 +32,7 @@ public class XCamera : XObject
     public Vector3 Position { get { return _cameraTransform.position; } }
 
     public Quaternion Rotaton { get { return _cameraTransform.rotation; } }
-    
+
     public Camera UnityCamera { get { return _camera; } }
 
     public Animator Ator { get { return _ator; } }
@@ -123,8 +123,9 @@ public class XCamera : XObject
         LookAtTarget();
     }
 
-    public void Effect(string motion,string trigger)
+    public void Effect(string motion, string trigger)
     {
+        _root_quat = Quaternion.identity;
         AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion, AssetType.Anim);
         if (clip != null)
         {
@@ -151,7 +152,7 @@ public class XCamera : XObject
 
     public void XRotate(float addation)
     {
-        if (addation != 0)
+        if (addation != 0 && _target != null)
         {
             _angle_x += addation;
             ReCaleRoot();
@@ -160,7 +161,7 @@ public class XCamera : XObject
 
     public void YRotate(float addation)
     {
-        if (addation != 0)
+        if (addation != 0 && _target != null)
         {
             _angle_y += addation;
             ReCaleRoot();
@@ -169,14 +170,20 @@ public class XCamera : XObject
 
     public void XRotateEx(float x)
     {
-        _angle_x = x;
-        ReCaleRoot();
+        if (_target != null)
+        {
+            _angle_x = x;
+            ReCaleRoot();
+        }
     }
 
     public void YRotateEx(float y)
     {
-        _angle_y = y;
-        ReCaleRoot();
+        if (_target != null)
+        {
+            _angle_y = y;
+            ReCaleRoot();
+        }
     }
 
     public void ReCaleRoot()
@@ -211,7 +218,7 @@ public class XCamera : XObject
             _overrideController[motion] = null;
         }
     }
-    
+
     public void SetCameraLayer(int layer, bool show)
     {
         if (show)

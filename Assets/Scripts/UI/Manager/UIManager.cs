@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class UIManager : XSingleton<UIManager>
@@ -16,6 +17,7 @@ public class UIManager : XSingleton<UIManager>
 
     private Camera _uiCamera;
     private Canvas _canvas;
+    private Image _image;
     private int _sort = 100;
     private const int _gap = 10;
     private const int _top = 800000;
@@ -27,6 +29,8 @@ public class UIManager : XSingleton<UIManager>
     public Camera UiCamera { get { return _uiCamera; } }
 
     public Canvas Canvas { get { return _canvas; } }
+
+    public Image FadeImage { get { return _image; } }
 
     public void Initial()
     {
@@ -57,7 +61,8 @@ public class UIManager : XSingleton<UIManager>
         XResourceMgr.UnloadAsset(rootpath, AssetType.Prefab);
         _uiCamera = go.GetComponent<Camera>();
         _canvas = go.transform.GetChild(0).GetComponent<Canvas>();
-
+        _image = _canvas.transform.GetChild(0).GetComponent<Image>();
+        _image.color = new Color(1, 1, 1, 0);
         go = new GameObject("EventSystem");
         go.AddComponent<EventSystem>();
         go.AddComponent<StandaloneInputModule>();

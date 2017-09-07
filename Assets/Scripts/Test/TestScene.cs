@@ -37,6 +37,18 @@ public class TestScene : ITest
         {
             XEntityMgr.singleton.Player.DrawNavPath();
         }
+        if(GUI.Button(new Rect(20,140,120,40),"FadeIn"))
+        {
+            XAutoFade.FadeIn(2);
+        }
+        if(GUI.Button(new Rect(20,200,120,40),"FadeOut"))
+        {
+            XAutoFade.FadeOut(2);
+        }
+        if(GUI.Button(new Rect(20,260,120,40),"FadeOutIn"))
+        {
+            XAutoFade.FadeOut2In(1, 1);
+        }
     }
 
 
