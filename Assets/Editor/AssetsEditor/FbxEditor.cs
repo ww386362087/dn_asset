@@ -13,7 +13,7 @@ namespace XEditor
         {
             GameObject go = new GameObject("CombineConfig");
             go.AddComponent<CombineConfig>();
-            PrefabUtility.CreatePrefab("Assets/Editor/ImporterData/CombineConfig.prefab", go, ReplacePrefabOptions.ReplaceNameBased);
+            PrefabUtility.CreatePrefab(XEditorPath.Comb, go, ReplacePrefabOptions.ReplaceNameBased);
             GameObject.DestroyImmediate(go);
         }
 
@@ -311,7 +311,7 @@ namespace XEditor
 
         public static CombineConfig GetConfig()
         {
-            GameObject go = AssetDatabase.LoadAssetAtPath("Assets/Editor/ImporterData/CombineConfig.prefab", typeof(GameObject)) as GameObject;
+            GameObject go = AssetDatabase.LoadAssetAtPath(XEditorPath.Comb, typeof(GameObject)) as GameObject;
             return go.GetComponent<CombineConfig>();
         }
     }

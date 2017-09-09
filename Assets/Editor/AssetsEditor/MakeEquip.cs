@@ -83,7 +83,7 @@ namespace XEditor
                         }
                         else
                         {
-                            Mesh mesh = XResourceMgr.Load<Mesh>(path,AssetType.Mesh);
+                            Mesh mesh = XResourceMgr.Load<Mesh>(path,AssetType.Asset);
                             Texture2D tex = XResourceMgr.Load<Texture2D>(path, AssetType.TGA);
                             if (mesh != null)
                             {

@@ -5,6 +5,11 @@
 /// </summary>
 public class GameEntrance : MonoBehaviour
 {
+    void Awake()
+    {
+      
+    }
+
 
     void Start()
     {

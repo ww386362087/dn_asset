@@ -220,7 +220,7 @@ public class XCommon : XSingleton<XCommon>
     public float AngleToFloat(Vector3 dir)
     {
         float face = Vector3.Angle(Vector3.forward, dir);
-        return XCommon.singleton.Clockwise(Vector3.forward, dir) ? face : -face;
+        return Clockwise(Vector3.forward, dir) ? face : -face;
     }
 
     public Quaternion FloatToQuaternion(float angle)
@@ -239,5 +239,45 @@ public class XCommon : XSingleton<XCommon>
                 return ct;
         }
         return null;
+    }
+
+    public Quaternion VectorToQuaternion(Vector3 v)
+    {
+        return FloatToQuaternion(AngleWithSign(Vector3.forward, v));
+    }
+
+    public float AngleWithSign(Vector3 from, Vector3 to)
+    {
+        float angle = Vector3.Angle(from, to);
+        return Clockwise(from, to) ? angle : -angle;
+    }
+
+    /*
+        * distance: the distance to be move.
+        * timespan: the time to use
+        * nearenough: the value considered as we got the destination
+        */
+    public float GetSmoothFactor(float distance, float timespan, float nearenough)
+    {
+        float _hitFactor = 0;
+        distance = Mathf.Abs(distance);
+        if (distance > XEps)
+        {
+            float deltaT = Time.smoothDeltaTime;
+            float div = nearenough / distance;
+            float frame = timespan / deltaT;
+
+            if (frame > 1)
+            {
+                float q = Mathf.Pow(div, 1.0f / frame);
+                _hitFactor = (1 - q) / deltaT;
+            }
+            else
+            {
+                _hitFactor = Mathf.Infinity;
+            }
+        }
+
+        return _hitFactor;
     }
 }

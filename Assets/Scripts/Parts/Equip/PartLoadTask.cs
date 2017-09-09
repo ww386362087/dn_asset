@@ -32,7 +32,7 @@ public class PartLoadTask : BaseLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                mesh = XResourceMgr.Load<Mesh>(location,AssetType.Mesh);
+                mesh = XResourceMgr.Load<Mesh>(location,AssetType.Asset);
                 tex = XResourceMgr.Load<Texture>(location, AssetType.TGA);
                 LoadFinish(go, this);
             }

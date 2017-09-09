@@ -18,9 +18,8 @@
     public static string Byte = ".bytes";
 
     public static string Controller = ".controller";
-
-    public static string Mesh = ".asset";
-
+    
+    public static string Fbx = ".fbx";
 
     private string V;
 

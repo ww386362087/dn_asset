@@ -43,7 +43,7 @@ namespace XEditor
                 if (!string.IsNullOrEmpty(path))
                 {
                     path = "Assets/Resources/Equipments/" + path;
-                    Mesh mesh = AssetDatabase.LoadAssetAtPath<Mesh>(path + AssetType.Mesh);
+                    Mesh mesh = AssetDatabase.LoadAssetAtPath<Mesh>(path + AssetType.Asset);
                     Texture tex = AssetDatabase.LoadAssetAtPath<Texture>(path + AssetType.TGA);
                     if (mesh != null)
                     {
