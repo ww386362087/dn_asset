@@ -40,14 +40,20 @@ public class XScene : XSingleton<XScene>
 
     public void Update(float deltaTime)
     {
-        if (_camera != null)
-            _camera.Update(deltaTime);
+        if(_sceneid>0)
+        {
+            if (_camera != null)
+                _camera.Update(deltaTime);
+        }
     }
 
     public void LateUpdate()
     {
-        if (_camera != null)
-            _camera.LateUpdate();
+        if(_sceneid>0)
+        {
+            if (_camera != null)
+                _camera.LateUpdate();
+        }
     }
     
     public void Enter(uint sceneid)
