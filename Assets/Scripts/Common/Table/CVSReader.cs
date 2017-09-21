@@ -13,7 +13,7 @@ public abstract class CVSReader
 
     public virtual string bytePath { get { return string.Empty; } }
 
-  
+    public bool isDone = false;
     public void Create()
     {
         try
@@ -22,6 +22,7 @@ public abstract class CVSReader
             FileStream fs = new FileStream(path, FileMode.Open,FileAccess.Read);
             ReadFile(fs);
             fs.Close();
+            isDone = true;
         }
         catch { }
     }

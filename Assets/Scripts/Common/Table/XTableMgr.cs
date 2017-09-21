@@ -10,8 +10,6 @@ public class XTableMgr
 
     public static System.Action tableLoaded;
     static bool loadFinish = false;
-    static int loadIndex = 0;
-    static int tableCNT = 0;
 
     public static void Initial()
     { 
@@ -24,10 +22,8 @@ public class XTableMgr
         Add<XEntityStatistics>();
         Add<XEntityPresentation>();
         Add<XNpcList>();
-
-        loadIndex = 0;
+        
         loadFinish = false;
-        tableCNT = readers.Count;
         ThreadLoad();
     }
 
@@ -38,11 +34,23 @@ public class XTableMgr
 
     private static void CheckFinish()
     {
-        if (loadIndex >= tableCNT )
+        if (readers != null)
         {
-            loadFinish = true;
-            if(tableLoaded != null) tableLoaded();
-          //  XDebug.LogGreen("All Table loadfinish!");
+            bool finish = true;
+            var e = readers.GetEnumerator();
+            while (e.MoveNext())
+            {
+                if (!e.Current.Value.isDone)
+                {
+                    finish = false;
+                    break;
+                }
+            }
+            if (finish)
+            {
+                loadFinish = true;
+                if (tableLoaded != null) tableLoaded();
+            }
         }
     }
 
@@ -74,8 +82,6 @@ public class XTableMgr
     public static void LoadTable(object reader)
     {
         (reader as CVSReader).Create();
-        loadIndex++;
-      //  XDebug.Log("load: " + reader.GetType().Name + " idnex: " + loadIndex);
     }
 
     public static T GetTable<T>() where T : CVSReader, new()
@@ -83,6 +89,7 @@ public class XTableMgr
         uint uid = XCommon.singleton.XHash(typeof(T).Name);
         if (!readers.ContainsKey(uid))
         {
+            //此情况下主要是编辑器模式会用到 一开始并没有读取所有的表格
             Add<T>();
             readers[uid].Create();
         }
