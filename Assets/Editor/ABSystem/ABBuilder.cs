@@ -134,7 +134,7 @@ namespace ABSystem
         public void AddRootTargets(FileInfo file)
         {
             AssetTarget target = AssetBundleUtil.Load(file);
-            if (target == null) Debug.LogError(file);
+            if (target == null)  XDebug.LogError(file);
             target.exportType = AssetBundleExportType.Root;
         }
 
@@ -191,7 +191,7 @@ namespace ABSystem
                 FileInfo fi = abFiles[i];
                 if (usedSet.Add(fi.Name))
                 {
-                    Debug.Log("Remove unused AB : " + fi.Name);
+                     XDebug.Log("Remove unused AB : " , fi.Name);
                     fi.Delete();
                     File.Delete(fi.FullName + ".manifest");
                 }

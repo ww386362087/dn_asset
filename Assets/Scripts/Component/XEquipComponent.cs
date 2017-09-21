@@ -97,7 +97,7 @@ public class XEquipComponent : XComponent
     {
         if (fashionList == null)
         {
-            Debug.LogError("null fashion list");
+             XDebug.LogError("null fashion list");
             return;
         }
         _combineMeshTask.BeginCombine();

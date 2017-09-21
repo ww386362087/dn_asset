@@ -370,7 +370,7 @@ namespace XEditor
                             XEntityStatistics.RowData sData = XEntityStatistics.sington.GetByID((int)_enemyid);
                             if (sData == null)
                             {
-                                Debug.Log("enemy id not exist:" + _enemyid);
+                                 XDebug.Log("enemy id not exist:" , _enemyid);
                                 break;
                             }
                             if (sData.PresentID > 0)

@@ -17,11 +17,11 @@ namespace Level
 
         public void RunScript(string funcName)
         {
-            // Debug.Log("add script " + funcName);
+            //  XDebug.Log("add script " + funcName);
             if (!_LevelScripts.ContainsKey(funcName)) return;
             if (_CmdQueue != null && _CmdQueue.Count > 0)
             {
-                Debug.Log("script function append");
+                 XDebug.Log("script function append");
             }
             if (_CmdQueue.Count == 0) _currentCmd = null;
             List<LevelCmdDesc> funcCmds = _LevelScripts[funcName];
@@ -389,7 +389,7 @@ namespace Level
                             }
                             else
                             {
-                                //Debug.Log("level script error!" + line);
+                                // XDebug.Log("level script error!" + line);
                             }
                         }
                         else if (line.StartsWith("aicommand"))
@@ -453,7 +453,7 @@ namespace Level
                 _currentCmd = _CmdQueue.Count > 0 ? _CmdQueue[0] : null;
                 if (_currentCmd == null)
                 {
-                    //Debug.Log("level script end");
+                    // XDebug.Log("level script end");
                 }
                 else
                 {
@@ -477,7 +477,7 @@ namespace Level
             _currentCmd = _CmdQueue.Count > 0 ? _CmdQueue[0] : null;
             if (_currentCmd == null)
             {
-                //Debug.Log("level script end");
+                // XDebug.Log("level script end");
             }
             else
             {
@@ -621,7 +621,7 @@ namespace Level
                     break;
                 case LevelCmd.Level_Cmd_KillAlly:
                     {
-                        Debug.LogError("找小邹: kill ally");
+                         XDebug.LogError("找小邹: kill ally");
                         // XEntityMgr.singleton.KillAlly(XEntityMgr.singleton.Player);
                         _currentCmd.state = XCmdState.Cmd_Finished;
                     }
@@ -736,7 +736,7 @@ namespace Level
         {
             if (!_LevelScripts.ContainsKey(funcName))
             {
-                Debug.LogError("invalid script func");
+                 XDebug.LogError("invalid script func");
                 return false;
             }
             LevelCmdDesc top = _LevelScripts[funcName][0];
@@ -790,7 +790,7 @@ namespace Level
             Transform go = XCommon.singleton.FindChildRecursively(dynamicRoot.transform, name);
             if (go == null)
             {
-                Debug.LogError("Wall no exists: " + name);
+                 XDebug.LogError("Wall no exists: " , name);
                 return;
             }
             go.gameObject.SetActive(isOn);

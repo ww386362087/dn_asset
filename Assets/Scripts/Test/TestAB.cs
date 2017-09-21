@@ -149,10 +149,10 @@ public class TestAB : ITest
     {
 
         Mesh mesh = t.GetComponent<MeshFilter>().mesh;
-        Debug.Log("mesh v: " + mesh.vertices.Length + " tri: " + mesh.triangles.Length + " uv: " + mesh.uv.Length);
-        for (int i = 0; i < mesh.vertices.Length; i++) Debug.Log("v" + i + ":" + mesh.vertices[i]);
-        for (int i = 0; i < mesh.uv.Length; i++) Debug.Log("uv" + i + ":" + mesh.uv[i]);
-        for (int i = 0; i < mesh.triangles.Length; i++) Debug.Log("tri" + i + ":" + mesh.triangles[i]);
+         XDebug.Log("mesh v: " + mesh.vertices.Length , " tri: " , mesh.triangles.Length , " uv: " + mesh.uv.Length);
+        for (int i = 0; i < mesh.vertices.Length; i++)  XDebug.Log("v" , i , ":" , mesh.vertices[i]);
+        for (int i = 0; i < mesh.uv.Length; i++)  XDebug.Log("uv" , i , ":" , mesh.uv[i]);
+        for (int i = 0; i < mesh.triangles.Length; i++)  XDebug.Log("tri" , i , ":" , mesh.triangles[i]);
         mesh = new Mesh();
         mesh.Clear();
 

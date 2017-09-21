@@ -10,7 +10,7 @@ public abstract class XPanel
 
     private GUIStyle _style = null;
 
-   private GUILayoutOption[] _line;
+    private GUILayoutOption[] _line;
 
     protected GUILayoutOption[] line
     {
@@ -23,9 +23,7 @@ public abstract class XPanel
 
     public XSkillHoster Hoster { get; set; }
 
-    public virtual void Init()
-    {
-    }
+    public virtual void Init() { }
 
     public void OnGUI()
     {
@@ -49,50 +47,8 @@ public abstract class XPanel
         }
     }
 
-    public void Add<T>()
-        where T : XBaseData, new()
-    {
-        T data = new T();
-        Type t = typeof(T);
+    public abstract void Add();
 
-        if (t == typeof(XResultData)) { if (Hoster.SkillData.Result == null) Hoster.SkillData.Result = new List<XResultData>(); Hoster.SkillData.Result.Add(data as XResultData); }
-        else if (t == typeof(XJAData)) { if (Hoster.SkillData.Ja == null) Hoster.SkillData.Ja = new List<XJAData>(); Hoster.SkillData.Ja.Add(data as XJAData); }
-        else if (t == typeof(XHitData)) { if (Hoster.SkillData.Hit == null) Hoster.SkillData.Hit = new List<XHitData>(); Hoster.SkillData.Hit.Add(data as XHitData); }
-        else if (t == typeof(XFxData)) { if (Hoster.SkillData.Fx == null) Hoster.SkillData.Fx = new List<XFxData>(); Hoster.SkillData.Fx.Add(data as XFxData); }
-       else if (t == typeof(XWarningData)) { if (Hoster.SkillData.Warning == null) Hoster.SkillData.Warning = new List<XWarningData>(); Hoster.SkillData.Warning.Add(data as XWarningData); }
-        else if (t == typeof(XMobUnitData)) { if (Hoster.SkillData.Mob == null) Hoster.SkillData.Mob = new List<XMobUnitData>(); Hoster.SkillData.Mob.Add(data as XMobUnitData); }
-       
-        Hoster.EditorData.ToggleFold<T>(true);
-
-        if (t == typeof(XResultData))
-        {
-            AddExtra<XResultDataExtra>();
-            AddExtraEx<XResultDataExtraEx>();
-        }
-        else if (t == typeof(XJAData))
-        {
-            AddExtra<XJADataExtra>();
-            AddExtraEx<XJADataExtraEx>();
-        }
-        else if (t == typeof(XFxData)) AddExtraEx<XFxDataExtra>();
-        else if (t == typeof(XWarningData)) AddExtraEx<XWarningDataExtra>();
-        else if (t == typeof(XMobUnitData)) AddExtraEx<XMobUnitDataExtra>();
-        else if (t == typeof(XHitData))AddExtraEx<XHitDataExtraEx>();
-    }
-
-    private void AddExtra<T>()
-        where T : XBaseDataExtra, new()
-    {
-        T data = new T();
-        Hoster.ConfigData.Add<T>(data);
-    }
-
-    private void AddExtraEx<T>()
-        where T : XBaseDataExtra, new()
-    {
-        T data = new T();
-        Hoster.SkillDataExtra.Add<T>(data);
-    }
 
     protected abstract void OnInnerGUI();
     protected virtual void OnInnerUpdate() { }

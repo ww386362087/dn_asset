@@ -156,7 +156,7 @@ public class XResourceMgr
         }
         catch (System.Exception e)
         {
-            Debug.Log(e.Message + location);
+             XDebug.Log(e.Message , location);
             return shareMemoryStream;
         }
         finally
@@ -292,7 +292,7 @@ public class XResourceMgr
 
     public static void LoadErrorLog(string prefab)
     {
-        Debug.LogError("Load resource: " + prefab + " error!");
+         XDebug.LogError("Load resource: " , prefab , " error!");
     }
 
 

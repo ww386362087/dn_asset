@@ -188,7 +188,7 @@ public class UIManager : XSingleton<UIManager>
                 }
                 else
                 {
-                    Debug.LogError("dlg is not in stack " + dlg.fileName);
+                     XDebug.LogError("dlg is not in stack " , dlg.fileName);
                 }
             }
             else

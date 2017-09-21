@@ -129,7 +129,7 @@ public class XScene : XSingleton<XScene>
         }
         else
         {
-            Debug.LogError("Is Playing Cutscene");
+            XDebug.LogError("Is Playing Cutscene");
         }
     }
 

@@ -160,7 +160,7 @@ namespace XEditor
                     {
                         if (map.ContainsKey(int.Parse(pre)) == false)
                         {
-                            if (PrintLog) Debug.LogError(string.Format("Wave {0} is rely on Wave {1}, but Wave {1} is not exist!!!", wave._id, pre));
+                            if (PrintLog)  XDebug.LogError(string.Format("Wave {0} is rely on Wave {1}, but Wave {1} is not exist!!!", wave._id, pre));
                             continue;
                         }
                         if (Percent == 0)
@@ -174,7 +174,7 @@ namespace XEditor
                     }
                     else
                     {
-                        if (PrintLog) Debug.LogError(string.Format("Wave {0} PreWave String Can't be Parse!!!", wave._id));
+                        if (PrintLog)  XDebug.LogError(string.Format("Wave {0} PreWave String Can't be Parse!!!", wave._id));
                     }
                 }
             }
@@ -203,7 +203,7 @@ namespace XEditor
 
                         if (tmp >= 10)
                         {
-                            if (PrintLog) Debug.LogError(string.Format("EnemyID {0} will preload {1}!!!", wave.EnemyID, tmp));
+                            if (PrintLog)  XDebug.LogError(string.Format("EnemyID {0} will preload {1}!!!", wave.EnemyID, tmp));
                         }
                     }
                 }

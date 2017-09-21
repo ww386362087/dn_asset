@@ -1,10 +1,21 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
 public class XMobPanel : XPanel
 {
-  
+
+
+    public override void Add()
+    {
+        if (Hoster.SkillData.Mob == null) Hoster.SkillData.Mob = new List<XMobUnitData>();
+        Hoster.SkillData.Mob.Add(new  XMobUnitData());
+        Hoster.SkillDataExtra.Add<XMobUnitDataExtra>();
+        Hoster.EditorData.XMob_foldout = true;
+    }
+
     protected override void OnInnerGUI()
     {
         if (Hoster.SkillData.Mob == null) return;

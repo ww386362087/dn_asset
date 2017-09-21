@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -19,6 +21,14 @@ public class XWarningPanel : XPanel
     protected override string PanelName
     {
         get { return "Warning"; }
+    }
+
+    public override void Add()
+    {
+        if (Hoster.SkillData.Warning == null) Hoster.SkillData.Warning = new List<XWarningData>();
+        Hoster.SkillData.Warning.Add(new XWarningData());
+        Hoster.SkillDataExtra.Add<XWarningDataExtra>();
+        Hoster.EditorData.XWarning_foldout = true;
     }
 
     protected override void OnInnerGUI()

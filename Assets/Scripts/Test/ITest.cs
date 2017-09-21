@@ -34,7 +34,7 @@ public class TestManager
         else
         {
             string name = SceneManager.GetActiveScene().name;
-           // Debug.Log("scene name: "+name);
+           //  XDebug.Log("scene name: "+name);
             switch (name)
             {
                 case "Cpp":

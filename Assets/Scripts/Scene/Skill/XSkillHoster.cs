@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using XEditor;
 using XTable;
 
-public class XSkillHoster : MonoBehaviour
+public partial class XSkillHoster : MonoBehaviour
 {
     [SerializeField]
     private XSkillData _xData = null;
@@ -41,20 +42,41 @@ public class XSkillHoster : MonoBehaviour
     [HideInInspector]
     public float or = 0;
 
+    public float defaultFov = 45;
+
     private XEntityPresentation.RowData _present_data = null;
+    private XSkillData _xOuterData = null;
+    private float _to = 0;
+    private float _from = 0;
+    private float _time_offset = 0;
+    private float _fire_time = 0;
 
-
-    private enum DummyState { Idle, Move, Fire };
+    public enum DummyState { Idle, Move, Fire };
 
     private DummyState _state = DummyState.Idle;
-
     private Animator _ator = null;
-
-     private XSkillCamera _camera = null;
+    private XSkillCamera _camera = null;
 
     private XSkillData _current = null;
+    private string _trigger = null;
+    private bool _execute = false;
+    private bool _anim_init = false;
+    private bool _skill_when_move = false;
+    protected List<XFx> _fx = new List<XFx>();
+    protected List<XFx> _outer_fx = new List<XFx>();
+    public List<Vector3>[] WarningPosAt = null;
+    private XSkillManipulate _manipulate = null;
+    
 
-    public float defaultFov = 45;
+    private List<uint> _combinedToken = new List<uint>();
+    private List<uint> _presentToken = new List<uint>();
+    private List<uint> _logicalToken = new List<uint>();
+
+
+    public XSkillResult skillResult;
+    public XSkillManipulate skillManip;
+    public XSkillMob skillMob;
+
 
     public XConfigData ConfigData
     {
@@ -105,6 +127,8 @@ public class XSkillHoster : MonoBehaviour
         get { return _state == DummyState.Fire ? _current : SkillData; }
     }
 
+    public DummyState state { get { return _state; } }
+   
 
     void Awake()
     {
@@ -358,47 +382,341 @@ public class XSkillHoster : MonoBehaviour
         GUI.Label(_rect, "Action Frame: " + _action_framecount);
     }
 
-    private int _comboskill_index = 0;
+
+    private void Execute()
+    {
+        _execute = true;
+        if (_xEditorData.XAutoSelected)
+            Selection.activeObject = gameObject;
+        if (_current.Result != null)
+        {
+            foreach (XResultData data in _current.Result)
+            {
+            }
+        }
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        int nh = 0; int nv = 0;
+        Vector3 h = Vector3.right;
+        Vector3 up = Vector3.up;
+        Vector3 v = SceneView.lastActiveSceneView != null ? SceneView.lastActiveSceneView.rotation * Vector3.forward : Vector3.forward;
+        v.y = 0;
+        if (_state != DummyState.Fire)
         {
-            if (_comboskill_index < ComboSkills.Count)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                //XSkillData data = ComboSkills[_comboskill_index];
-                //if (CanReplacedBy(data))
-                //{
-                //    _comboskill_index++;
-                //    StopFire();
-
-                //    _xOuterData = data;
-                //    _current = data;
-
-                //    if (data.TypeToken != 3)
-                //    {
-                //        oVerrideController["Art"] = XResourceLoaderMgr.singleton.GetSharedResource<AnimationClip>(data.ClipName, ".anim");
-                //        _trigger = "ToArtSkill";
-                //    }
-                //    else
-                //    {
-                //        _combinedlist.Clear();
-                //        for (int i = 0; i < data.Combined.Count; i++)
-                //        {
-                //            XSkillData x = XResourceLoaderMgr.singleton.GetData<XSkillData>("SkillPackage/" + XAnimationLibrary.AssociatedAnimations((uint)_xConfigData.Player).SkillLocation + data.Combined[i].Name);
-                //            AnimationClip c = Resources.Load(x.ClipName) as AnimationClip;
-                //            oVerrideController[XSkillData.CombinedOverrideMap[i]] = c;
-                //            _combinedlist.Add(x);
-                //        }
-                //        _trigger = XSkillData.Combined_Command[0];
-                //        Combined(0);
-                //    }
-
-                //    _state = DummyState.Fire;
-                //    _fire_time = Time.time;
-                //    _delta = 0;
-                //    if (_ator != null) _ator.speed = 0;
-                //}
+                if (_xData.TypeToken == 1 && ComboSkills.Count > 0) oVerrideController["Art"] = Resources.Load(_xData.ClipName) as AnimationClip;
+                _xOuterData = _xData;
+                Fire();
             }
+        }
+        else
+        {
+            if (_execute || _xOuterData.TypeToken == 3)
+            {
+                if (nh != 0 || nv != 0)
+                {
+                    Vector3 MoveDir = h * nh + v * nv;
+                    if (CanAct(MoveDir))
+                    {
+                        Move(MoveDir);
+                    }
+                }
+                else if (_skill_when_move)
+                {
+                    _trigger = "ToStand";
+                    _skill_when_move = false;
+                }
+            }
+            if (_anim_init) Execute();
+            _anim_init = false;
+        }
+    }
+
+    void LateUpdate()
+    {
+        //face to
+        UpdateRotation();
+
+        if (_trigger != null && _ator != null && !_ator.IsInTransition(0))
+        {
+            if (_trigger != "ToStand" && _trigger != "ToMove" && _trigger != "EndSkill" && _trigger != "ToUltraShow")
+                _anim_init = true; // is casting
+
+            _ator.speed = 1;
+            if (SkillData.TypeToken == 3)
+            {
+                int i = 0;
+                for (; i < XSkillData.Combined_Command.Length; i++)
+                {
+                    if (_trigger == XSkillData.Combined_Command[i]) break;
+                }
+                if (i < XSkillData.Combined_Command.Length)
+                    _ator.Play(XSkillData.CombinedOverrideMap[i], 1, _time_offset);
+                else
+                    _ator.SetTrigger(_trigger);
+            }
+            else
+            {
+                _ator.SetTrigger(_trigger);
+            }
+            _trigger = null;
+        }
+    }
+
+    private float rotate_speed = 0;
+    private void UpdateRotation()
+    {
+        if (_from != _to)
+        {
+            _from += (_to - _from) * Mathf.Min(1.0f, Time.deltaTime * rotate_speed);
+            transform.rotation = Quaternion.Euler(0, _from, 0);
+        }
+    }
+    
+    private void Fire()
+    {
+        _current = _xOuterData;
+        _skill_when_move = _state == DummyState.Move;
+        _state = DummyState.Fire;
+        _fire_time = Time.time;
+
+        if (_xOuterData.TypeToken == 0)
+            _trigger = _xOuterData.SkillPosition > 0 ? XSkillData.JA_Command[_xOuterData.SkillPosition] : "ToSkill";
+        else if (_xOuterData.TypeToken == 1)
+            _trigger = "ToArtSkill";
+        else if (_xOuterData.TypeToken == 3)
+            Combined(0);
+        else
+            _trigger = "ToUltraShow";
+
+        FocusTarget();
+        _anim_init = false;
+    }
+
+    private void StopFire(bool cleanup = true)
+    {
+        if (_state != DummyState.Fire) return;
+        _state = DummyState.Idle;
+        _trigger = "EndSkill";
+        _execute = false;
+
+        for (int i = 0; i < _fx.Count; i++)
+            XFxMgr.singleton.DestroyFx(_fx[i], false);
+        _fx.Clear();
+
+        if (_manipulate != null) _manipulate.Remove(0);
+      
+     
+        if (cleanup)
+        {
+            _action_framecount = 0;
+            for (int i = 0; i < _outer_fx.Count; i++)
+                XFxMgr.singleton.DestroyFx(_outer_fx[i], false);
+            _outer_fx.Clear();
+            
+            _camera.EndEffect(null);
+            foreach (uint token in _combinedToken)
+            {
+                XTimerMgr.singleton.RemoveTimer(token);
+            }
+            _combinedToken.Clear();
+        }
+
+        foreach (uint token in _presentToken)
+        {
+            XTimerMgr.singleton.RemoveTimer(token);
+        }
+        _presentToken.Clear();
+
+        foreach (uint token in _logicalToken)
+        {
+            XTimerMgr.singleton.RemoveTimer(token);
+        }
+        _logicalToken.Clear();
+        _manipulate = null;
+
+        nResultForward = Vector3.zero;
+        Time.timeScale = 1;
+        if (_ator != null)
+            _ator.speed = 1;
+        
+        _current = null;
+    }
+
+    private void Combined(object param)
+    {
+    }
+
+    private void FocusTarget()
+    {
+        XSkillHit hit = GameObject.FindObjectOfType<XSkillHit>();
+        _target = (_xOuterData.NeedTarget && hit != null) ? hit.gameObject : null;
+        if (_target != null && IsInAttckField(_xOuterData, transform.position, transform.forward, _target))
+        {
+            PrepareRotation(XCommon.singleton.Horizontal(_target.transform.position - transform.position), _xConfigData.RotateSpeed);
+        }
+    }
+
+    public bool IsInField(XSkillData data, int triggerTime, Vector3 pos, Vector3 forward, Vector3 target, float angle, float distance)
+    {
+        bool log = true;
+        if (data.Warning != null && data.Warning.Count > 0)
+        {
+            for (int i = 0; i < data.Warning.Count; i++)
+            {
+                if (data.Warning[i].RandomWarningPos || data.Warning[i].Type == XWarningType.Warning_Multiple)
+                {
+                    log = false; break;
+                }
+            }
+        }
+
+        if (data.Result[triggerTime].Sector_Type)
+        {
+            if (!(distance>= data.Result[triggerTime].Low_Range &&
+                   distance < data.Result[triggerTime].Range &&
+                    angle <= data.Result[triggerTime].Scope * 0.5f))
+            {
+                if (log)
+                {
+                     XDebug.Log("-----------------------------------");
+                     XDebug.Log("At " + triggerTime , " Hit missing: distance is " + distance.ToString("F3") , " ( >= " + data.Result[triggerTime].Low_Range.ToString("F3") + ")");
+                     XDebug.Log("At " + triggerTime , " Hit missing: distance is " + distance.ToString("F3") , " ( < " + data.Result[triggerTime].Range.ToString("F3") + ")");
+                     XDebug.Log("At " + triggerTime , " Hit missing: dir is " + angle.ToString("F3") , " ( < " + (data.Result[triggerTime].Scope * 0.5f).ToString("F3") + ")");
+                }
+
+                return false;
+            }
+        }
+        else
+        {
+            if (!IsInAttackRect(target, pos, forward, data.Result[triggerTime].Range, data.Result[triggerTime].Scope, data.Result[triggerTime].Rect_HalfEffect, data.Result[triggerTime].None_Sector_Angle_Shift))
+            {
+                float d = data.Result[triggerTime].Range;
+                float w = data.Result[triggerTime].Scope;
+
+                Vector3[] vecs = new Vector3[4];
+                vecs[0] = new Vector3(-w / 2.0f, 0, data.Result[triggerTime].Rect_HalfEffect ? 0 : (-d / 2.0f));
+                vecs[1] = new Vector3(-w / 2.0f, 0, d / 2.0f);
+                vecs[2] = new Vector3(w / 2.0f, 0, d / 2.0f);
+                vecs[3] = new Vector3(w / 2.0f, 0, data.Result[triggerTime].Rect_HalfEffect ? 0 : (-d / 2.0f));
+
+                if (log)
+                {
+                     XDebug.Log("-----------------------------------");
+                     XDebug.Log("Not in rect " + vecs[0] , " " + vecs[1] , " " + vecs[2] , " " + vecs[3]);
+                }
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsInAttckField(XSkillData data, Vector3 pos, Vector3 forward, GameObject target)
+    {
+        forward = XCommon.singleton.HorizontalRotateVetor3(forward, data.Cast_Scope_Shift);
+        Vector3 targetPos = target.transform.position;
+
+        if (data.Cast_Range_Rect)
+        {
+            pos.x += data.Cast_Offset_X;
+            pos.z += data.Cast_Offset_Z;
+            return IsInAttackRect(targetPos, pos, forward, data.Cast_Range_Upper, data.Cast_Scope, false, 0);
+        }
+        else
+        {
+            Vector3 dir = targetPos - pos;
+            dir.y = 0;
+            float distance = dir.magnitude;
+            //normalize
+            dir.Normalize();
+            float angle = (distance == 0) ? 0 : Vector3.Angle(forward, dir);
+            return distance <= data.Cast_Range_Upper &&
+                distance >= data.Cast_Range_Lower &&
+                angle <= data.Cast_Scope * 0.5f;
+        }
+    }
+
+    private bool IsInAttackRect(Vector3 target, Vector3 anchor, Vector3 forward, float d, float w, bool half, float shift)
+    {
+        Quaternion rotation = XCommon.singleton.VectorToQuaternion(XCommon.singleton.HorizontalRotateVetor3(forward, shift));
+        Rect rect = new Rect();
+        rect.xMin = -w / 2.0f;
+        rect.xMax = w / 2.0f;
+        rect.yMin = half ? 0 : (-d / 2.0f);
+        rect.yMax = d / 2.0f;
+
+        return XCommon.singleton.IsInRect(target - anchor, rect, Vector3.zero, rotation);
+    }
+
+    private bool CanAct(Vector3 dir)
+    {
+        bool can = false;
+        float now = Time.time - _fire_time;
+
+        XLogicalData logic = (SkillData.TypeToken == 3) ? SkillData.Logical : _current.Logical;
+
+        can = true;
+
+        if (now < logic.Not_Move_End &&
+            now > logic.Not_Move_At)
+        {
+            can = false;
+        }
+
+        if (can) StopFire();
+        else
+        {
+            if (now < logic.Rotate_End &&
+                now > logic.Rotate_At)
+            {
+                //perform rotate
+                PrepareRotation(XCommon.singleton.Horizontal(dir), logic.Rotate_Speed > 0 ? logic.Rotate_Speed : _xConfigData.RotateSpeed);
+            }
+        }
+        return can;
+    }
+
+    private void Move(Vector3 dir)
+    {
+        PrepareRotation(dir, _xConfigData.RotateSpeed);
+        transform.Translate(dir * Time.deltaTime * ConfigData.Speed, Space.World);
+    }
+
+    public void PrepareRotation(Vector3 targetDir, float speed)
+    {
+        Vector3 from = transform.forward;
+
+        _from = YRotation(from);
+        float angle = Vector3.Angle(from, targetDir);
+
+        if (XCommon.singleton.Clockwise(from, targetDir))
+        {
+            _to = _from + angle;
+        }
+        else
+        {
+            _to = _from - angle;
+        }
+
+        rotate_speed = speed;
+    }
+
+    private float YRotation(Vector3 dir)
+    {
+        float r = Vector3.Angle(Vector3.forward, dir);
+        if (XCommon.singleton.Clockwise(Vector3.forward, dir))
+        {
+            return r;
+        }
+        else
+        {
+            return 360.0f - r;
         }
     }
 
@@ -434,13 +752,13 @@ public class XSkillHoster : MonoBehaviour
                 if (ja.Ja != null && ja.Ja.Name.Length > 0) oVerrideController[XSkillData.JaOverrideMap[ja.Ja.SkillPosition]] = Resources.Load(ja.Ja.ClipName) as AnimationClip;
             }
         }
-        //else if (SkillData.TypeToken == 3)
-        //{
-        //    for (int i = 0; i < SkillData.Combined.Count; i++)
-        //    {
-        //        oVerrideController[XSkillData.CombinedOverrideMap[i]] = SkillDataExtra.CombinedEx[i].Clip;
-        //    }
-        //}
+        else if (SkillData.TypeToken == 3)
+        {
+            //    for (int i = 0; i < SkillData.Combined.Count; i++)
+            //    {
+            //        oVerrideController[XSkillData.CombinedOverrideMap[i]] = SkillDataExtra.CombinedEx[i].Clip;
+            //    }
+        }
         else
         {
             oVerrideController["Art"] = clip;
@@ -463,6 +781,77 @@ public class XSkillHoster : MonoBehaviour
         //XDataBuilder.singleton.HotBuildEx(this, _xConfigData);
     }
 
+    public Vector3 GetRotateTo()
+    {
+        return XCommon.singleton.FloatToAngle(_to);
+    }
 
+    public void AddedTimerToken(uint token, bool logical)
+    {
+        if (logical)
+            _logicalToken.Add(token);
+        else
+            _presentToken.Add(token);
+    }
+
+    /// <summary>
+    /// 绘制攻击范围
+    /// </summary>
+    private void DrawManipulationFileds()
+    {
+        if (_xData.Manipulation != null)
+        {
+            foreach (XManipulationData data in _xData.Manipulation)
+            {
+                if (data.Radius <= 0 || !_xDataExtra.ManipulationEx[data.Index].Present) continue;
+
+                Vector3 offset = transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
+
+                Color defaultColor = Gizmos.color;
+                Gizmos.color = Color.red;
+
+                Matrix4x4 defaultMatrix = Gizmos.matrix;
+                transform.position += offset;
+                Gizmos.matrix = transform.localToWorldMatrix;
+                transform.position -= offset;
+
+                float m_Theta = 0.01f;
+
+                Vector3 beginPoint = Vector3.zero;
+                Vector3 firstPoint = Vector3.zero;
+
+                for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
+                {
+                    float x = data.Radius / transform.localScale.y * Mathf.Cos(theta);
+                    float z = data.Radius / transform.localScale.y * Mathf.Sin(theta);
+                    Vector3 endPoint = new Vector3(x, 0, z);
+                    if (theta == 0)
+                    {
+                        firstPoint = endPoint;
+                    }
+                    else
+                    {
+                        if (Vector3.Angle(endPoint, transform.forward) < data.Degree * 0.5f)
+                            Gizmos.DrawLine(beginPoint, endPoint);
+                    }
+                    beginPoint = endPoint;
+                }
+
+                if (data.Degree == 360)
+                    Gizmos.DrawLine(firstPoint, beginPoint);
+                else
+                {
+                    Gizmos.DrawLine(Vector3.zero, XCommon.singleton.HorizontalRotateVetor3(transform.forward, data.Degree * 0.5f, true) * (data.Radius / transform.localScale.y));
+                    Gizmos.DrawLine(Vector3.zero, XCommon.singleton.HorizontalRotateVetor3(transform.forward, -data.Degree * 0.5f, true) * (data.Radius / transform.localScale.y));
+                }
+
+                Gizmos.matrix = defaultMatrix;
+                Gizmos.color = defaultColor;
+            }
+        }
+    }
+
+  
+    
 }
 

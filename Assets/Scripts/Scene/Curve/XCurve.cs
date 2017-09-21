@@ -22,11 +22,17 @@ public class XCurve : MonoBehaviour, IXCurve
         return Curve[index].time;
     }
 
+    /// <summary>
+    /// 曲线最大值
+    /// </summary>
     public float GetMaxValue()
     {
         return Max_Value;
     }
 
+    /// <summary>
+    /// 返回的是着陆时间
+    /// </summary>
     public float GetLandValue()
     {
         return Land_Value;

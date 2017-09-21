@@ -101,7 +101,7 @@ namespace XEditor
         {
             if (matName.Contains(mat.name))
             {
-                Debug.Log(string.Format("Same Mat:{0}", mat.name));
+                 XDebug.Log(string.Format("Same Mat:{0}", mat.name));
             }
             else
             {
@@ -135,10 +135,10 @@ namespace XEditor
             {
                 if (kvp.Value.Count > 1)
                 {
-                    Debug.Log(string.Format("Tex:{0}----------------------", kvp.Key));
+                     XDebug.Log(string.Format("Tex:{0}----------------------", kvp.Key));
                     foreach (string mat in kvp.Value)
                     {
-                        Debug.Log(string.Format("Mat:{0}", mat));
+                         XDebug.Log(string.Format("Mat:{0}", mat));
                     }
                 }
             }
@@ -180,7 +180,7 @@ namespace XEditor
             PrefabEditor.EnumPrefab(_FindUnusedMat, "FindUnusedMat");
             foreach (string path in matName)
             {
-                Debug.Log(path);
+                 XDebug.Log(path);
             }
         }
 

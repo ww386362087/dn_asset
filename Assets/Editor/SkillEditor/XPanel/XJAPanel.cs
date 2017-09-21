@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using XEditor;
 
@@ -7,6 +8,16 @@ public class XJAPanel : XPanel
     protected override int Count
     {
         get { return Hoster.SkillData.Ja != null ? Hoster.SkillData.Ja.Count : -1; }
+    }
+
+
+    public override void Add()
+    {
+        if (Hoster.SkillData.Ja == null) Hoster.SkillData.Ja = new List<XJAData>();
+        Hoster.SkillData.Ja.Add(new XJAData());
+        Hoster.ConfigData.Add<XJADataExtra>();
+        Hoster.SkillDataExtra.Add<XJADataExtraEx>();
+        Hoster.EditorData.XJA_foldout = true;
     }
 
     protected override void OnInnerGUI()
@@ -106,8 +117,7 @@ public class XJAPanel : XPanel
             GUILayout.Label("(frame)");
             GUILayout.Label("", GUILayout.MaxWidth(30));
             EditorGUILayout.EndHorizontal();
-            if (ja_end < ja_at)
-                ja_end = ja_at;
+            if (ja_end < ja_at) ja_end = ja_at;
             Hoster.ConfigData.Ja[i].JA_End_Ratio = ja_end / Hoster.SkillDataExtra.SkillClip_Frame;
             if (Hoster.ConfigData.Ja[i].JA_End_Ratio > 1) Hoster.ConfigData.Ja[i].JA_End_Ratio = 1;
             EditorGUILayout.BeginHorizontal();

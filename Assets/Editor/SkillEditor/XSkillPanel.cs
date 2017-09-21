@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using XEditor;
 
+
 [CustomEditor(typeof(XSkillHoster))]
 public class XSkillPanel : Editor
 {
@@ -17,6 +18,7 @@ public class XSkillPanel : Editor
     private XResultPanel _result = new XResultPanel();
     private XJAPanel _ja = new XJAPanel();
     private XHitPanel _hit = new XHitPanel();
+    private XManipulationPanel _manip = new XManipulationPanel();
     private XFxPanel _fx = new XFxPanel();
     private XMobPanel _mob = new XMobPanel();
     private XWarningPanel _warning = new XWarningPanel();
@@ -43,18 +45,13 @@ public class XSkillPanel : Editor
         }
 
         AddPanels();
-
         _xOptions.Clear();
         _xOptions.Add("ResultAt");
-        _xOptions.Add("ChargeTo");
         _xOptions.Add("Hit");
         _xOptions.Add("Manipulation");
         _xOptions.Add("Fx");
-        _xOptions.Add("Audio");
-        _xOptions.Add("Camera Shake");
         _xOptions.Add("Warning");
         _xOptions.Add("Mobs");
-
         foreach (XPanel panel in _panels)
         {
             panel.Hoster = _hoster;
@@ -124,11 +121,8 @@ public class XSkillPanel : Editor
         EditorGUILayout.Space();
         _hoster.SkillData.Time = EditorGUILayout.FloatField("Skill Time", _hoster.SkillData.Time);
         _hoster.SkillData.CoolDown = EditorGUILayout.FloatField("Cool Down", _hoster.SkillData.CoolDown);
-
         _hoster.SkillData.TypeToken = EditorGUILayout.Popup("Skill Type", _hoster.SkillData.TypeToken, XSkillData.Skills);
-
         if (_hoster.SkillData.TypeToken != 3 && _hoster.SkillDataExtra.SkillClip == null) return;
-
         if (_hoster.SkillData.TypeToken == 0)
         {
             _hoster.SkillData.SkillPosition = (int)EditorGUILayout.Popup("Position", _hoster.SkillData.SkillPosition, XSkillData.JA_Command);
@@ -164,8 +158,7 @@ public class XSkillPanel : Editor
         }
 
         EditorGUILayout.Space();
-
-        _hoster.SkillData.ForCombinedOnly = EditorGUILayout.Toggle("Combined Only", _hoster.SkillData.ForCombinedOnly);
+        
         EditorGUILayout.BeginHorizontal();
         _hoster.SkillData.CameraTurnBack = EditorGUILayout.FloatField("Camera Tail Speed Ratio", _hoster.SkillData.CameraTurnBack);
         EditorGUILayout.LabelField("(multiplied by)", GUILayout.MaxWidth(90));
@@ -184,59 +177,42 @@ public class XSkillPanel : Editor
             _hoster.SkillData.BackTowardsDecline = EditorGUILayout.Slider("Backwards Decline", _hoster.SkillData.BackTowardsDecline, 0, 1);
         }
         EditorGUILayout.Space();
-
-
         EditorGUILayout.Space();
+
+        /*****Timer*****/
+        GUILayout.Label("Timer :", _labelstyle);
+        EditorGUILayout.BeginHorizontal();
+        if (_hoster.SkillData.TypeToken == 3)
         {
-            /*****Timer*****/
-            GUILayout.Label("Timer :", _labelstyle);
-            EditorGUILayout.BeginHorizontal();
+            _option = EditorGUILayout.Popup("Create", _option, new string[] { "Combined", "Fx", "Audio", "Camera Shake" });
+        }
+        else
+            _option = EditorGUILayout.Popup("Create", _option, _xOptions.ToArray());
+
+        if (GUILayout.Button(_content_add, GUILayout.MaxWidth(30)))
+        {
             if (_hoster.SkillData.TypeToken == 3)
             {
-                _option = EditorGUILayout.Popup("Create", _option, new string[] { "Combined", "Fx", "Audio", "Camera Shake" });
+                switch (_option)
+                {
+                    case 1: _fx.Add(); break;
+                }
             }
             else
-                _option = EditorGUILayout.Popup("Create", _option, _xOptions.ToArray());
-
-            if (GUILayout.Button(_content_add, GUILayout.MaxWidth(30)))
             {
-                if (_hoster.SkillData.TypeToken == 3)
+                switch (_option)
                 {
-                    switch (_option)
-                    {
-                        case 1: _fx.Add<XFxData>(); break;
-                    }
-                }
-                else
-                {
-                    if (_xOptions.Contains("Combos"))
-                    {
-                        switch (_option)
-                        {
-                            case 0: _result.Add<XResultData>(); break;
-                            case 2: _ja.Add<XJAData>(); break;
-                            case 3: _hit.Add<XHitData>(); break;
-                            case 5: _fx.Add<XFxData>(); break;
-                            case 8: _warning.Add<XWarningData>(); break;
-                            case 9: _mob.Add<XMobUnitData>(); break;
-                        }
-                    }
-                    else
-                    {
-                        switch (_option)
-                        {
-                            case 0: _result.Add<XResultData>(); break;
-                            case 2: _hit.Add<XHitData>(); break;
-                            case 4: _fx.Add<XFxData>(); break;
-                            case 7: _warning.Add<XWarningData>(); break;
-                            case 8: _mob.Add<XMobUnitData>(); break;
-                        }
-                    }
+                    case 0: _result.Add(); break;
+                    case 1: _hit.Add(); break;
+                    case 2: _manip.Add(); break;
+                    case 3: _fx.Add(); break;
+                    case 4: _warning.Add(); break;
+                    case 5: _mob.Add(); break;
                 }
             }
-            EditorGUILayout.EndHorizontal();
         }
-
+        EditorGUILayout.EndHorizontal();
+        
         EditorGUILayout.Space();
         if (_hoster.SkillData.TypeToken == 3)
         {
@@ -250,7 +226,6 @@ public class XSkillPanel : Editor
             foreach (XPanel panel in _panels)
             {
                 if (_hoster.SkillData.TypeToken != 0 && panel is XJAPanel) continue;
-
                 panel.OnGUI();
                 EditorGUILayout.Space();
             }
@@ -302,6 +277,9 @@ public class XSkillPanel : Editor
         }
     }
 
+    /// <summary>
+    /// 绘制攻击范围和前方箭头
+    /// </summary>
     void OnSceneGUI()
     {
         if (_hoster.nHotID < 0 || _hoster.CurrentSkillData.Result == null || _hoster.nHotID >= _hoster.CurrentSkillData.Result.Count) return;
@@ -524,7 +502,6 @@ public class XSkillPanel : Editor
     private void AddPanels()
     {
         _panels.Clear();
-
         _panels.Add(_result);
         _panels.Add(_hit);
         _panels.Add(_ja);

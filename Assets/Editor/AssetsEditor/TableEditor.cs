@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
-using System;
 using System.IO;
 
 namespace XEditor
@@ -130,7 +128,7 @@ namespace XEditor
             exep.Start();
             string output = exep.StandardOutput.ReadToEnd();
             exep.WaitForExit();
-            if (output != "")Debug.Log(output);
+            if (output != "") XDebug.Log(output);
 #endif
         }
 

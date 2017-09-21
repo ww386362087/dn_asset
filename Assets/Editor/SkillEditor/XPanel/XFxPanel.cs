@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -19,6 +20,14 @@ public class XFxPanel : XPanel
     protected override string PanelName
     {
         get { return "Fx"; }
+    }
+
+    public override void Add()
+    {
+        if (Hoster.SkillData.Fx == null) Hoster.SkillData.Fx = new List<XFxData>();
+        Hoster.SkillData.Fx.Add(new XFxData());
+        Hoster.SkillDataExtra.Add<XFxDataExtra>();
+        Hoster.EditorData.XFx_foldout = true;
     }
 
     protected override void OnInnerGUI()

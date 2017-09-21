@@ -95,7 +95,7 @@ namespace ABSystem
             if (_cacheInfo != null)
             {
                 _bundleCrc = _cacheInfo.bundleCrc;
-                if (_isFileChanged) Debug.Log("File was changed : " + assetPath);
+                if (_isFileChanged) XDebug.Log("File was changed : ", assetPath);
             }
 
             Object[] deps = EditorUtility.CollectDependencies(new Object[] { asset });
@@ -109,7 +109,7 @@ namespace ABSystem
             {
                 if (!File.Exists(paths[i]) && !paths[i].Contains("unity_builtin_extra"))
                 {
-                    Debug.Log("invalid:" + paths[i]);
+                     XDebug.Log("invalid:" , paths[i]);
                     continue;
                 }
                 FileInfo fi = new FileInfo(paths[i]);
@@ -214,7 +214,7 @@ namespace ABSystem
             set
             {
                 _isNewBuild = value != _bundleCrc;
-                if (_isNewBuild) Debug.Log("Export AB : " + bundleShortName);
+                if (_isNewBuild)  XDebug.Log("Export AB : " , bundleShortName);
                 _bundleCrc = value;
             }
         }

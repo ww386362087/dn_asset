@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -19,6 +21,14 @@ public class XHitPanel : XPanel
     protected override string PanelName
     {
         get { return Hoster.SkillData.TypeToken == 3 ? "Hit Dummy Settings" : "Hit Effect"; }
+    }
+
+    public override void Add()
+    {
+        if (Hoster.SkillData.Hit == null) Hoster.SkillData.Hit = new List<XHitData>();
+        Hoster.SkillData.Hit.Add(new XHitData());
+        Hoster.SkillDataExtra.Add<XHitDataExtraEx>();
+        Hoster.EditorData.XHit_foldout = true;
     }
 
     GUIStyle _myStyle = null;
@@ -42,7 +52,7 @@ public class XHitPanel : XPanel
 
             if (GUILayout.Button("add"))
             {
-                GameObject hitter = Object.Instantiate(Hoster.SkillDataExtra.Dummy, Hoster.transform.position, Quaternion.identity) as GameObject;
+                GameObject hitter = UnityEngine.Object.Instantiate(Hoster.SkillDataExtra.Dummy, Hoster.transform.position, Quaternion.identity) as GameObject;
                 hitter.AddComponent<XSkillHit>().PresentID = (int)Hoster.ConfigData.Dummy;
             }
         }

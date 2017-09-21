@@ -44,6 +44,24 @@ public class XSkillData
             "ToJA_QTE"
        };
 
+    public static readonly string[] Combined_Command = new string[]
+      {
+            "ToPhase",
+            "ToPhase1", "ToPhase2", "ToPhase3", "ToPhase4",
+            "ToPhase5", "ToPhase6",
+            "ToPhase7", "ToPhase8",
+            "ToPhase9"
+      };
+
+    public static readonly string[] CombinedOverrideMap =
+       {
+            "Phase0",
+            "Phase1", "Phase2", "Phase3", "Phase4",
+            "Phase5", "Phase6",
+            "Phase7", "Phase8",
+            "Phase9"
+        };
+
     public XSkillData()
     {
         TypeToken = 1;
@@ -69,8 +87,6 @@ public class XSkillData
     [SerializeField, DefaultValueAttribute(false)]
     public bool OnceOnly;
     [SerializeField, DefaultValueAttribute(false)]
-    public bool ForCombinedOnly;
-    [SerializeField, DefaultValueAttribute(false)]
     public bool MultipleAttackSupported;
     [SerializeField, DefaultValueAttribute(0.75f)]
     public float BackTowardsDecline;
@@ -82,12 +98,16 @@ public class XSkillData
     [SerializeField]
     public List<XHitData> Hit;
     [SerializeField]
+    public List<XManipulationData> Manipulation;
+    [SerializeField]
     public List<XFxData> Fx;
     [SerializeField]
     public List<XWarningData> Warning;
     [SerializeField]
     public List<XMobUnitData> Mob;
 
+    [SerializeField]
+    public XLogicalData Logical;
 
     [SerializeField, DefaultValueAttribute(1.0f)]
     public float CoolDown;

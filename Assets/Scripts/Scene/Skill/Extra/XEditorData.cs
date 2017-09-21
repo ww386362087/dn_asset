@@ -4,13 +4,14 @@ using UnityEngine;
 [Serializable]
 public class XEditorData
 {
-    //for serialized
     [SerializeField]
     public bool XResult_foldout;
     [SerializeField]
     public bool XHit_foldout;
     [SerializeField]
     public bool XJA_foldout;
+    [SerializeField]
+    public bool XManipulation_foldout;
     [SerializeField]
     public bool XMob_foldout;
     [SerializeField]
@@ -19,7 +20,10 @@ public class XEditorData
     public bool XWarning_foldout;
     [SerializeField]
     public bool XHitDummy_foldout;
-
+    [SerializeField]
+    public bool XQTEStatus_foldout;
+    [SerializeField]
+    public bool XLogical_foldout;
 
     [SerializeField]
     public bool XAutoSelected;
@@ -27,18 +31,6 @@ public class XEditorData
     public bool XFrameByFrame;
     [SerializeField]
     public bool XAutoJA = false;
-
-    public void ToggleFold<T>(bool b) where T : XBaseData
-    {
-        Type t = typeof(T);
-
-        if (t == typeof(XResultData)) XResult_foldout = b;
-        else if (t == typeof(XJAData)) XJA_foldout = b;
-        else if (t == typeof(XHitData)) XHit_foldout = b;
-        else if (t == typeof(XFxData)) XFx_foldout = b;
-        else if (t == typeof(XWarningData)) XWarning_foldout = b;
-        else if (t == typeof(XMobUnitData)) XMob_foldout = b;
-    }
 }
 
 public class XHitConfLibrary

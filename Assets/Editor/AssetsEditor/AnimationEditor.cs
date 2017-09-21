@@ -75,9 +75,9 @@ namespace XEditor
                     int processCount = 0;
                     foreach (var data in allCurves)
                     {
-                        //Debug.Log("path" + data.path);
-                        //Debug.Log("propertyName" + data.propertyName);
-                        //Debug.Log("type" + data.type);
+                        // XDebug.Log("path" + data.path);
+                        // XDebug.Log("propertyName" + data.propertyName);
+                        // XDebug.Log("type" + data.type);
 
                         if (data.type == typeof(UnityEngine.MeshRenderer))
                         {
@@ -99,12 +99,12 @@ namespace XEditor
                 }
                 else
                 {
-                    Debug.Log("clip not found:" + controllerPath);
+                    XDebug.Log("clip not found:", controllerPath);
                 }
             }
             return true;
         }
-        
+
 
         [MenuItem(@"Assets/Tool/Animation/ClearTxt")]
         private static void ClearTxt()
@@ -133,20 +133,20 @@ namespace XEditor
                 if (asm.states.Length == 1)
                 {
                     AnimatorState state = asm.defaultState;
-                    Debug.Log("state name: "+state.name+" cotroll: "+controller.name);
+                    XDebug.Log("state name: ", state.name, " cotroll: ", controller.name);
                     if (state.name != controller.name)
                     {
-                        Debug.LogError(string.Format("Animator name error controller name:{0} state name:{1} path:{2}", controller.name, state.name, path));
+                        XDebug.LogError(string.Format("Animator name error controller name:{0} state name:{1} path:{2}", controller.name, state.name, path));
                     }
                 }
             }
             else
             {
-                Debug.LogError(string.Format("Not 1 layer:{0} Count:{1}", controller.name, controller.layers.Length));
+                XDebug.LogError(string.Format("Not 1 layer:{0} Count:{1}", controller.name, controller.layers.Length));
             }
             return true;
         }
-        
+
 
     }
 

@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class XVector3
@@ -20,7 +22,6 @@ public class XVector3
 
 class XResultPanel : XPanel
 {
-   
  
     GUIStyle _myLabelStyle2 = null;
 
@@ -40,6 +41,15 @@ class XResultPanel : XPanel
     {
         get { return Hoster.EditorData.XResult_foldout; }
         set { Hoster.EditorData.XResult_foldout = value; }
+    }
+
+    public override void Add()
+    {
+        if (Hoster.SkillData.Result == null) Hoster.SkillData.Result = new List<XResultData>();
+        Hoster.SkillData.Result.Add(new XResultData());
+        Hoster.ConfigData.Add<XResultDataExtra>();
+        Hoster.SkillDataExtra.Add<XResultDataExtraEx>();
+        Hoster.EditorData.XResult_foldout = true;
     }
 
     protected override void OnInnerGUI()

@@ -214,7 +214,7 @@ public abstract class CVSReader
             long pos = reader.BaseStream.Position;
             if (pos != fileSize)
             {
-                Debug.LogError("read table error: " + this.GetType().Name + " size:" + fileSize + " pos:" + pos + " stream: " + stream.Length);
+                 XDebug.LogError("read table error: " + this.GetType().Name , " size:" + fileSize , " pos:" + pos , " stream: " + stream.Length);
             }
         }
         reader.Close();

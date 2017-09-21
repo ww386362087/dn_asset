@@ -178,7 +178,7 @@ namespace XEditor
             TextureImporter texImport = assetImport as TextureImporter;
             if (texImport == null)
             {
-                Debug.LogError(texPath);
+                 XDebug.LogError(texPath);
                 return;
             }
             int texSize = 0;

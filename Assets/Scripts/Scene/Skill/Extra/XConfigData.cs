@@ -28,12 +28,14 @@ public class XConfigData
     public List<XResultDataExtra> Result = new List<XResultDataExtra>();
     [SerializeField]
     public List<XJADataExtra> Ja = new List<XJADataExtra>();
+    [SerializeField]
+    public XLogicalDataExtra Logical = new XLogicalDataExtra();
 
-    public void Add<T>(T data) where T : XBaseDataExtra
+
+    public void Add<T>() where T : XBaseDataExtra, new()
     {
-        Type t = typeof(T);
-
-        if (t == typeof(XResultDataExtra)) Result.Add(data as XResultDataExtra);
-        else if (t == typeof(XJADataExtra)) Ja.Add(data as XJADataExtra);
+        XBaseDataExtra data = new T();
+        if (data is XResultDataExtra) Result.Add(data as XResultDataExtra);
+        else if (data is XJADataExtra) Ja.Add(data as XJADataExtra);
     }
 }

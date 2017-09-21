@@ -304,7 +304,7 @@ namespace XEditor
                         _PrcessSceneMat(mat, recover);
                     else
                     {
-                        Debug.LogError("Null mat:" + meshRender.name);
+                         XDebug.LogError("Null mat:" , meshRender.name);
                     }
                 }
             }

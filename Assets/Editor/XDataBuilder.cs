@@ -20,14 +20,14 @@ namespace XEditor
                 string path = XEditorPath.GetCfgFromSkp(pathwithname);
                 XConfigData conf = XDataIO<XConfigData>.singleton.DeserializeData(path);
                 GameObject prefab = XEditorLibrary.GetDummy((uint)conf.Player);
-                if (prefab == null) { Debug.LogError("Prefab not found by id: " + conf.Player); return; }
+                if (prefab == null) { XDebug.LogError("Prefab not found by id: ", conf.Player); return; }
                 ColdBuild(prefab, conf);
                 prefixPath = pathwithname.Substring(0, pathwithname.IndexOf("/Skill"));
                 Time = File.GetLastWriteTime(pathwithname);
             }
             catch (Exception e)
             {
-                Debug.LogError("Error occurred during loading config file: " + pathwithname + " with error: " + e.Message);
+                XDebug.LogError("Error occurred during loading config file: " , pathwithname , " with error: " , e.Message);
             }
         }
 
@@ -118,6 +118,15 @@ namespace XEditor
                     }
                     fxe.Ratio = fx.At / data.Time;
                     edata.Fx.Add(fxe);
+                }
+            }
+
+            if (data.Manipulation != null)
+            {
+                foreach (XManipulationData manipulation in data.Manipulation)
+                {
+                    XManipulationDataExtra me = new XManipulationDataExtra();
+                    edata.ManipulationEx.Add(me);
                 }
             }
             if (data.Warning != null)

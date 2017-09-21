@@ -44,7 +44,7 @@ namespace XEditor
                 tableName = path.Replace("Assets/Resources/Table/", "");
                 tableName = tableName.Replace(".bytes", "");
                 Assembly ass = Assembly.Load("Assembly-CSharp");
-                if (ass == null) Debug.LogError("asse is null");
+                if (ass == null)  XDebug.LogError("asse is null");
                 tableType = ass.GetType("XTable." + tableName);
                 if (tableType != null)
                 {
@@ -119,7 +119,7 @@ namespace XEditor
                 }
                 else
                 {
-                    Debug.LogError("table: " + tableName + " assem is " + Assembly.GetExecutingAssembly().GetName().Name);
+                     XDebug.LogError("table: " , tableName , " assem is " + Assembly.GetExecutingAssembly().GetName().Name);
                 }
             }
         }

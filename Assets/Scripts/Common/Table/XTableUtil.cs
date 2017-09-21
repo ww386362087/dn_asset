@@ -88,6 +88,18 @@
             return null;
         }
 
+
+        public static QteStatusList.RowData GetByID(this QteStatusList input,int qte)
+        {
+            for(int i =0,max=input.Table.Length;i<max;i++)
+            {
+                if(input.Table[i].Value == qte)
+                {
+                    return input.Table[i];
+                }
+            }
+            return null;
+        }
     }
 
 }

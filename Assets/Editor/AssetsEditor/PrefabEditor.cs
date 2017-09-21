@@ -76,7 +76,7 @@ namespace XEditor
                 {
                     if (render.receiveShadows || render.shadowCastingMode== UnityEngine.Rendering.ShadowCastingMode.On)
                     {
-                        Debug.LogError(string.Format("Error Shadow cast:{0} render:{1}", go.name, render.name));
+                         XDebug.LogError(string.Format("Error Shadow cast:{0} render:{1}", go.name, render.name));
                     }
                     if (render.sharedMaterials.Length > 1)
                     {
@@ -102,7 +102,7 @@ namespace XEditor
         {
             str = "";
             EnumPrefab(_Check, "Check");
-            Debug.LogError(str);
+             XDebug.LogError(str);
         }
 
         static Dictionary<string, List<string>> fxPath = new Dictionary<string, List<string>>();
@@ -118,7 +118,7 @@ namespace XEditor
                 {
                     if (ps.GetComponent<Renderer>() == null || ps.GetComponent<Renderer>().sharedMaterial == null)
                     {
-                        Debug.LogError("ps render error:" + currentFxPath);
+                         XDebug.LogError("ps render error:" , currentFxPath);
                     }
                     else
                     {
@@ -169,7 +169,7 @@ namespace XEditor
                         str += prefab + "\r\n";
                     }
                     full += str + "\r\n";
-                    Debug.LogWarning(str);
+                     XDebug.LogWarning(str);
                 }
             }
             File.WriteAllText("Assets/Resources/Effects/Fx.txt", full);

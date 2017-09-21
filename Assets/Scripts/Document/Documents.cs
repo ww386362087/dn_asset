@@ -39,7 +39,7 @@ public class Documents : XSingleton<Documents>
         uint uid = XCommon.singleton.XHash(typeof(T).Name);
         if (documents.ContainsKey(uid))
         {
-            Debug.Log("has registed document " + typeof(T).Name);
+             XDebug.Log("has registed document " , typeof(T).Name);
             return documents[uid] as T;
         }
         else
@@ -65,7 +65,7 @@ public class Documents : XSingleton<Documents>
             return documents.ContainsKey(id);
         else
         {
-            Debug.LogError("not initial for documents with " + name);
+             XDebug.LogError("not initial for documents with " , name);
             return false;
         }
     }

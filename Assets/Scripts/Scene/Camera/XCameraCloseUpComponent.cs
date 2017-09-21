@@ -32,7 +32,7 @@ class XCameraCloseUpComponent : XComponent
 
     private void OnCloseUp(XEventArgs e)
     {
-        Debug.Log(_camera.CameraTrans);
+         XDebug.Log(_camera.CameraTrans);
 
         XCameraCloseUpEvent ev = e as XCameraCloseUpEvent;
         XEntity target = ev.Target;

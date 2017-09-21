@@ -21,6 +21,8 @@ public class XSkillDataExtra
     [SerializeField]
     public List<XFxDataExtra> Fx = new List<XFxDataExtra>();
     [SerializeField]
+    public List<XManipulationDataExtra> ManipulationEx = new List<XManipulationDataExtra>();
+    [SerializeField]
     public List<XWarningDataExtra> Warning = new List<XWarningDataExtra>();
     [SerializeField]
     public List<XMobUnitDataExtra> Mob = new List<XMobUnitDataExtra>();
@@ -29,22 +31,22 @@ public class XSkillDataExtra
     [SerializeField]
     public List<XHitDataExtraEx> HitEx = new List<XHitDataExtraEx>();
 
-    public void Add<T>(T data) where T : XBaseDataExtra
+    public void Add<T>() where T : XBaseDataExtra, new()
     {
-        Type t = typeof(T);
+        XBaseDataExtra data = new T();
 
-        if (t == typeof(XFxDataExtra)) Fx.Add(data as XFxDataExtra);
-        else if (t == typeof(XWarningDataExtra)) Warning.Add(data as XWarningDataExtra);
-        else if (t == typeof(XMobUnitDataExtra)) Mob.Add(data as XMobUnitDataExtra);
-        else if (t == typeof(XJADataExtraEx)) JaEx.Add(data as XJADataExtraEx);
-        else if (t == typeof(XHitDataExtraEx)) HitEx.Add(data as XHitDataExtraEx);
-        else if (t == typeof(XResultDataExtraEx)) ResultEx.Add(data as XResultDataExtraEx);
+        if (data is XFxDataExtra) Fx.Add(data as XFxDataExtra);
+        else if (data is XWarningDataExtra) Warning.Add(data as XWarningDataExtra);
+        else if (data is XMobUnitDataExtra) Mob.Add(data as XMobUnitDataExtra);
+        else if (data is XJADataExtraEx) JaEx.Add(data as XJADataExtraEx);
+        else if (data is XHitDataExtraEx) HitEx.Add(data as XHitDataExtraEx);
+        else if (data is XResultDataExtraEx) ResultEx.Add(data as XResultDataExtraEx);
     }
 }
 
 
 [Serializable]
-public class XBaseDataExtra { }
+public class XBaseDataExtra{}
 
 [Serializable]
 public class XResultDataExtra : XBaseDataExtra
@@ -110,6 +112,18 @@ public class XFxDataExtra : XBaseDataExtra
 }
 
 [Serializable]
+public class XManipulationDataExtra : XBaseDataExtra
+{
+    [SerializeField]
+    public float At_Ratio = 0;
+    [SerializeField]
+    public float End_Ratio = 0;
+    [SerializeField]
+    public bool Present = true;
+}
+
+
+[Serializable]
 public class XWarningDataExtra : XBaseDataExtra
 {
     [SerializeField]
@@ -123,4 +137,45 @@ public class XHitDataExtraEx : XBaseDataExtra
 {
     [SerializeField]
     public GameObject Fx = null;
+}
+
+
+[Serializable]
+public class XQTEDataExtra
+{
+    [SerializeField]
+    public float QTE_At_Ratio = 0;
+    [SerializeField]
+    public float QTE_End_Ratio = 0;
+}
+
+[Serializable]
+public class XLogicalDataExtra : XBaseDataExtra
+{
+    [SerializeField]
+    public float Not_Move_At_Ratio = 0;
+    [SerializeField]
+    public float Not_Move_End_Ratio = 0;
+    [SerializeField]
+    public float Not_Dash_At_Ratio = 0;
+    [SerializeField]
+    public float Not_Dash_End_Ratio = 0;
+    [SerializeField]
+    public float Rotate_At_Ratio = 0;
+    [SerializeField]
+    public float Rotate_End_Ratio = 0;
+    [SerializeField]
+    public List<XQTEDataExtra> QTEDataEx = new List<XQTEDataExtra>();
+    [SerializeField]
+    public float Cancel_At_Ratio = 0;
+    [SerializeField]
+    public float Preserved_Ratio = 0;
+    [SerializeField]
+    public float Preserved_End_Ratio = 0;
+    [SerializeField]
+    public float ExString_Ratio = 0;
+    [SerializeField]
+    public float Not_Selected_At_Ratio = 0;
+    [SerializeField]
+    public float Not_Selected_End_Ratio = 0;
 }

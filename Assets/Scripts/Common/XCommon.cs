@@ -228,6 +228,34 @@ public class XCommon : XSingleton<XCommon>
         return Quaternion.Euler(0, angle, 0);
     }
 
+    /*
+        * rect point sequence:
+        * left-bottom-->left-top-->right-top-->right-bottom
+        * 
+        * the center of rect is the (0, 0) for axis
+        */
+    public bool IsInRect(Vector3 point, Rect rect, Vector3 center, Quaternion rotation)
+    {
+        float y = -(rotation.eulerAngles.y % 360) / 180.0f * Mathf.PI;
+        /*
+         * Quaternion = (xi + yj + zk + w ) = (x, y, z, w)
+         * Q = cos (a/2) + i (x * sin(a/2)) + j (y * sin(a/2)) + k (z * sin(a/2))    (a 为旋转角度)
+         * Q.w = cos (angle / 2) 
+         * Q.x = axis.x * sin (angle / 2)
+         * Q.y = axis.y * sin (angle / 2)
+         * Q.z = axis.z * sin (angle / 2)
+         */
+        Quaternion q = Quaternion.identity;
+        q.w = Mathf.Cos(y / 2.0f);
+        q.x = 0;
+        q.y = Mathf.Sin(y / 2.0f);
+        q.z = 0;
+
+        point = q * (point - center);
+        //return (point.x > rect[0].x && point.x < rect[3].x && point.z > rect[0].z && point.z < rect[2].z);
+        return (point.x > rect.xMin && point.x < rect.xMax && point.z > rect.yMin && point.z < rect.yMax);
+    }
+
     public Transform FindChildRecursively(Transform t, string name)
     {
         if (t.name == name)
@@ -250,6 +278,12 @@ public class XCommon : XSingleton<XCommon>
     {
         float angle = Vector3.Angle(from, to);
         return Clockwise(from, to) ? angle : -angle;
+    }
+
+    public bool IsRectCycleCross(float rectw, float recth, Vector3 c, float r)
+    {
+        Vector3 u = new Vector3(Mathf.Max(Mathf.Abs(c.x) - rectw, 0.0f), 0, Mathf.Max(Mathf.Abs(c.z) - recth, 0.0f));
+        return u.sqrMagnitude < r * r;
     }
 
     /*

@@ -21,13 +21,14 @@ public class TestCPP : ITest
         var t1 = XEntityPresentation.sington;
         var t2 = FashionSuit.sington;
         var t3 = DefaultEquip.sington;
-        Debug.Log("length: " + t1.Table.Length + " " + t2.Table.Length + " " + t3.Table.Length);
+         XDebug.Log("length: " + t1.Table.Length , " " + t2.Table.Length , " " , t3.Table.Length);
         Profiler.EndSample();
     }
 
 
     public void Start()
     {
+      //   XDebug.Log("bb"+Vector3.Cross(Vector3.up, Vector3.forward));
     }
 
 
