@@ -79,7 +79,7 @@ namespace XEditor
                 _id = EditorGUILayout.IntField("ID", _id);
                 if (EditorGUI.EndChangeCheck())
                 {
-                    XEntityStatistics.RowData row = XEntityStatistics.sington.GetByID(_id);
+                    XEntityStatistics.RowData row = XTableMgr.GetTable<XEntityStatistics>().GetByID(_id);
                     if (row != null)
                     {
                         _name = row.Name;

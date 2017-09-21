@@ -147,12 +147,7 @@ namespace XForm
                 content2.Append("\n\t\t\tpublic "+types[i]+" "+titles[i]+";");
             }
             content2.Append("\r\n\t\t}\r\n");
-           
-            content2.Append("\r\n\n\t\tprivate static " + name + " s = null;");
-            content2.Append("\r\n\n\t\tpublic static " + name + " sington");
-            content2.Append("\r\n\t\t{");
-            content2.Append("\r\n\t\t\tget { if (s == null) { s = new " + name + "(); s.Create(); } return s; }");
-            content2.Append("\r\n\t\t}");
+        
             content2.Append("\r\n\r\n\t\tpublic RowData[] Table { get { return table; } }");
             content2.Append("\r\n\r\n\t\tprivate RowData[] table = null;");
             content2.Append("\r\n\r\n\t\tpublic override string bytePath { get { return \"Table/" + name + "\"; } }");

@@ -331,7 +331,7 @@ namespace XEditor
                 { 
                     using (MemoryStream ms = new MemoryStream(ta.bytes))
                     {
-                        DefaultEquip.sington.ReadFile(ms);
+                        XTableMgr.GetTable<DefaultEquip>().ReadFile(ms);
                         for (int i = 0; i < combineConfig.BandposeName.Length; ++i)
                         {
                             if (model.name.ToLower() == combineConfig.BandposeName[i])

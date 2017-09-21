@@ -24,7 +24,7 @@ public class XNPC : XEntity
 
         _target = XEntityMgr.singleton.Player;
         _head_rotate = EntityTransfer.forward;
-        _uGazing = XNpcList.sington.GetItemID((int)_attr.id).Gazing;
+        _uGazing = XTableMgr.GetTable<XNpcList>().GetItemID((int)_attr.id).Gazing;
         FindHead();
         XAnimComponent anim = AttachComponent<XAnimComponent>();
         anim.OverrideAnim("NPC_sidel_idle", _present.AnimLocation + _present.Idle);

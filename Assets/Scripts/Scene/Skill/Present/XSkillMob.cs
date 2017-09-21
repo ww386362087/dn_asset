@@ -12,8 +12,8 @@ public class XSkillMob : XSkill
     {
         XMobUnitData mob = param as XMobUnitData;
 
-        uint id = XEntityStatistics.sington.GetByID(mob.TemplateID).PresentID;
-        XEntityPresentation.RowData data = XEntityPresentation.sington.GetItemID(id);
+        uint id = XTableMgr.GetTable<XEntityStatistics>().GetByID(mob.TemplateID).PresentID;
+        XEntityPresentation.RowData data = XTableMgr.GetTable<XEntityPresentation>().GetItemID(id);
 
         GameObject mob_unit = GameObject.Instantiate(Resources.Load("Prefabs/" + data.Prefab)) as GameObject;
 

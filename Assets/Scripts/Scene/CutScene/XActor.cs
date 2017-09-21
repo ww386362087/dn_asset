@@ -36,14 +36,14 @@ public class XActor
 
     public GameObject GetDummy(uint statictid)
     {
-        XEntityStatistics.RowData row = XEntityStatistics.sington.GetByID((int)statictid);
+        XEntityStatistics.RowData row = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)statictid);
         if (row != null)
         {
-            XEntityPresentation.RowData raw_data = XEntityPresentation.sington.GetItemID(row.PresentID);
+            XEntityPresentation.RowData raw_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID(row.PresentID);
             if (raw_data == null) return null;
             string prefab = raw_data.Prefab;
             return XResourceMgr.Load<GameObject>("Prefabs/" + prefab, AssetType.Prefab);
-           }
+        }
         return null;
     }
     

@@ -13,6 +13,8 @@ public class GameEnine : XObject
         _entrance = en;
 
         XTimerMgr.singleton.Init();
+        XGlobalConfig.Initial();
+        XTableMgr.Initial();
         ABManager.singleton.Initial();
         Documents.singleton.Initial();
         UIManager.singleton.Initial();
@@ -24,13 +26,13 @@ public class GameEnine : XObject
 
     public static void Update(float delta)
     {
-
         if (!_init_finish) return;
 
         //xtouch must be update first
         XTouch.singleton.Update(delta);
 
         XTimerMgr.singleton.Update(delta);
+        XTableMgr.Update();
         XResourceMgr.Update();
         XEntityMgr.singleton.Update(delta);
         XScene.singleton.Update(delta);

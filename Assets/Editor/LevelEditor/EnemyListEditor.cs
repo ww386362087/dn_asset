@@ -37,7 +37,7 @@ namespace XEditor
         {
             foreach (XEntityStatistics.RowData _row in _data_info.Table)
             {
-                string strPrefab = XEntityPresentation.sington.GetItemID((uint)_row.PresentID).Prefab;
+                string strPrefab = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_row.PresentID).Prefab;
                 GameObject _prefab = Resources.Load("Prefabs/" + strPrefab) as GameObject;
                 Texture2D icon64 = AssetPreview.GetAssetPreview(_prefab);
                 ID_ICON.Add((uint)_row.id, icon64);

@@ -155,7 +155,7 @@ namespace XEditor
             if (hoster != null) GameObject.DestroyImmediate(hoster);
 
             hoster = UnityEngine.Object.Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
-            hoster.transform.localScale = Vector3.one * XEntityPresentation.sington.GetItemID((uint)conf.Player).Scale;
+            hoster.transform.localScale = Vector3.one * XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)conf.Player).Scale;
             hoster.AddComponent<XSkillHoster>();
             hoster.GetComponent<CharacterController>().enabled = false;
             UnityEngine.AI.NavMeshAgent agent = hoster.GetComponent<UnityEngine.AI.NavMeshAgent>();

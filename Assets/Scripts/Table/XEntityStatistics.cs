@@ -81,13 +81,6 @@ namespace XTable {
 		}
 
 
-		private static XEntityStatistics s = null;
-
-		public static XEntityStatistics sington
-		{
-			get { if (s == null) { s = new XEntityStatistics(); s.Create(); } return s; }
-		}
-
 		public RowData[] Table { get { return table; } }
 
 		private RowData[] table = null;

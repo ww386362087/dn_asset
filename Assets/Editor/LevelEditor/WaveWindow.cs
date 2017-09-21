@@ -72,7 +72,7 @@ namespace XEditor
                 GUIStyle gs = new GUIStyle();
                 gs.alignment = TextAnchor.LowerRight;
                 gs.normal.textColor = Color.white;
-                XEntityStatistics.RowData enemyData = XEntityStatistics.sington.GetByID((int)_wave.EnemyID);
+                XEntityStatistics.RowData enemyData = XTableMgr.GetTable < XEntityStatistics>().GetByID((int)_wave.EnemyID);
                 if (enemyData != null && _wave.SpawnType == LevelSpawnType.Spawn_Source_Monster)
                 {
                     if (enemyData.Type == 1)

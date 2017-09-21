@@ -18,8 +18,8 @@ public abstract class CVSReader
     {
         try
         {
-            string path = Application.dataPath + "/Resources/" + bytePath + ".bytes";
-            FileStream fs = new FileStream(path, FileMode.Open);
+            string path = XGlobalConfig.res_path + bytePath + ".bytes";
+            FileStream fs = new FileStream(path, FileMode.Open,FileAccess.Read);
             ReadFile(fs);
             fs.Close();
         }

@@ -41,13 +41,6 @@ namespace XTable {
 		}
 
 
-		private static FashionSuit s = null;
-
-		public static FashionSuit sington
-		{
-			get { if (s == null) { s = new FashionSuit(); s.Create(); } return s; }
-		}
-
 		public RowData[] Table { get { return table; } }
 
 		private RowData[] table = null;

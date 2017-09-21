@@ -764,7 +764,7 @@ public partial class XSkillHoster : MonoBehaviour
             oVerrideController["Art"] = clip;
         }
 
-        _present_data = XEntityPresentation.sington.GetItemID((uint)_xConfigData.Player);
+        _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_xConfigData.Player);
 
         oVerrideController["Idle"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle) as AnimationClip;
         oVerrideController["Run"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackRun) as AnimationClip;

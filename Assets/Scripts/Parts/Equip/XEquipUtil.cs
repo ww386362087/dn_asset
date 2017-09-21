@@ -132,7 +132,7 @@ public class XEquipUtil
 
     public static void MakeEquip(string name, int[] fashionIDs, List<EquipPart> equipList, TempEquipSuit tmpFashionData, int suitID)
     {
-        FashionList fashionList = FashionList.sington;
+        FashionList fashionList = XTableMgr.GetTable < FashionList>();
         if (fashionIDs != null)
         {
             tmpFashionData.hash = 0;

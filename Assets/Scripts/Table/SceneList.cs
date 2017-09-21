@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
 namespace XTable {
     
     
@@ -135,13 +133,6 @@ namespace XTable {
 			public string VipReviveLimit;
 		}
 
-
-		private static SceneList s = null;
-
-		public static SceneList sington
-		{
-			get { if (s == null) { s = new SceneList(); s.Create(); } return s; }
-		}
 
 		public RowData[] Table { get { return table; } }
 
@@ -276,6 +267,5 @@ namespace XTable {
 			Table[lineno] = row;
 			columnno = -1;
         }
-        
     }
 }

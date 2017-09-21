@@ -10,6 +10,7 @@ public class TestScene : ITest
 
     public void Start()
     {
+        XDebug.LogGreen("testscene start");
         XScene.singleton.Enter(sceneid);
     }
 

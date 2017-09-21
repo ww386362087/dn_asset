@@ -34,13 +34,6 @@ namespace XTable {
 		}
 
 
-		private static EquipSuit s = null;
-
-		public static EquipSuit sington
-		{
-			get { if (s == null) { s = new EquipSuit(); s.Create(); } return s; }
-		}
-
 		public RowData[] Table { get { return table; } }
 
 		private RowData[] table = null;

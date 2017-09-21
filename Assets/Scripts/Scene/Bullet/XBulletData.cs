@@ -34,7 +34,7 @@ internal class XBulletData
 
         _warning = _warning_pos.sqrMagnitude > 0;
 
-        float height = XEntityPresentation.sington.GetItemID((uint)_hoster.ConfigData.Player).BoundHeight;
+        float height = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_hoster.ConfigData.Player).BoundHeight;
 
         Vector3 begin = _hoster.gameObject.transform.position; begin.y += height * 0.5f;
         Vector3 dir = _warning ? (_warning_pos - _hoster.gameObject.transform.position) : firer.transform.forward;

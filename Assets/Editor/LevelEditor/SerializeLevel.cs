@@ -79,7 +79,7 @@ namespace XEditor
             _markGOHeight = 2.0f;
 
             if (_data_info == null)
-                _data_info = XEntityStatistics.sington;
+                _data_info = XTableMgr.GetTable<XEntityStatistics>();
         }
 
         public void OnGUI()

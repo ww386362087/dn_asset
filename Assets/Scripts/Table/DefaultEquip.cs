@@ -37,13 +37,6 @@ namespace XTable {
 		}
 
 
-		private static DefaultEquip s = null;
-
-		public static DefaultEquip sington
-		{
-			get { if (s == null) { s = new DefaultEquip(); s.Create(); } return s; }
-		}
-
 		public RowData[] Table { get { return table; } }
 
 		private RowData[] table = null;

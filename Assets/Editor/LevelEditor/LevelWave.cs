@@ -111,7 +111,7 @@ namespace XEditor
                         {
                             XEntityStatistics.RowData npcInfo = LevelMgr.EnemyList.GetByID((int)_enemyid);
                             if (npcInfo == null) return;
-                            _prefab = Resources.Load("Prefabs/" + XEntityPresentation.sington.GetItemID((uint)npcInfo.PresentID).Prefab) as GameObject;
+                            _prefab = Resources.Load("Prefabs/" + XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)npcInfo.PresentID).Prefab) as GameObject;
                             if (_window != null) _window.GenerateIcon();
                         }
                         if (SpawnType == LevelSpawnType.Spawn_Source_Doodad)
@@ -367,15 +367,15 @@ namespace XEditor
                             go.transform.position = pos;
                             go.transform.Rotate(0, rotateY, 0);
 
-                            XEntityStatistics.RowData sData = XEntityStatistics.sington.GetByID((int)_enemyid);
+                            XEntityStatistics.RowData sData = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)_enemyid);
                             if (sData == null)
                             {
-                                 XDebug.Log("enemy id not exist:" , _enemyid);
+                                XDebug.Log("enemy id not exist:", _enemyid);
                                 break;
                             }
                             if (sData.PresentID > 0)
                             {
-                                XEntityPresentation.RowData pData = XEntityPresentation.sington.GetItemID((uint)sData.PresentID);
+                                XEntityPresentation.RowData pData = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)sData.PresentID);
                                 go.transform.localScale = Vector3.one * pData.Scale;
                             }
                         }

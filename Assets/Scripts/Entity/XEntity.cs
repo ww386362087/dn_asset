@@ -145,7 +145,7 @@ public abstract class XEntity : XObject
         _object = o;
         _transf = o.transform;
         _attr = attr;
-        _present = XEntityPresentation.sington.GetItemID(_attr.PresentID);
+        _present = XTableMgr.GetTable<XEntityPresentation>().GetItemID(_attr.PresentID);
         OnInitial();
     }
 

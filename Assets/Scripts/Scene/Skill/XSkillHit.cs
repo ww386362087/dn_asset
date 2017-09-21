@@ -12,7 +12,7 @@ public class XSkillHit : MonoBehaviour {
 
     void Start()
     {
-        _present_data = XEntityPresentation.sington.GetItemID((uint)PresentID);
+        _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)PresentID);
 
         if (_oVerrideController == null) BuildOverride();
         _oVerrideController["Idle"] = XResourceMgr.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle, AssetType.Anim);

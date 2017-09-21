@@ -97,13 +97,6 @@ namespace XTable {
 		}
 
 
-		private static XEntityPresentation s = null;
-
-		public static XEntityPresentation sington
-		{
-			get { if (s == null) { s = new XEntityPresentation(); s.Create(); } return s; }
-		}
-
 		public RowData[] Table { get { return table; } }
 
 		private RowData[] table = null;

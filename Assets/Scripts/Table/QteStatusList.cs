@@ -20,13 +20,6 @@ namespace XTable {
 		}
 
 
-		private static QteStatusList s = null;
-
-		public static QteStatusList sington
-		{
-			get { if (s == null) { s = new QteStatusList(); s.Create(); } return s; }
-		}
-
 		public RowData[] Table { get { return table; } }
 
 		private RowData[] table = null;

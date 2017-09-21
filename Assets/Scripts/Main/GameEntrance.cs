@@ -7,20 +7,23 @@ public class GameEntrance : MonoBehaviour
 {
     void Awake()
     {
-      
+        XTableMgr.tableLoaded += ToStartTest;
     }
 
 
     void Start()
     {
-        GameEnine.Init(this);
+        GameEnine.Init(this);  
+    }
 
+
+    void ToStartTest()
+    {
 #if TEST
         TestManager.Get().Start();
 #endif
     }
 
-    
 
     void Update()
     {

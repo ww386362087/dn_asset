@@ -71,7 +71,7 @@ public class XScene : XSingleton<XScene>
     private void OnEnterScene(uint sceneid)
     {
         _sceneid = sceneid;
-        _scene_row = SceneList.sington.GetItemID(_sceneid);
+        _scene_row = XTableMgr.GetTable<SceneList>().GetItemID(_sceneid);
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
         GameCamera.Initial(camera);
         Documents.singleton.OnEnterScene();
@@ -154,7 +154,7 @@ public class XScene : XSingleton<XScene>
 
     private void CreateNPCs()
     {
-        var row = XNpcList.sington.GetItemID(24);
+        var row = XTableMgr.GetTable < XNpcList>().GetItemID(24);
         XEntityMgr.singleton.CreateNPC(row);
     }
 

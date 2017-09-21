@@ -30,9 +30,9 @@ public class TestAB : ITest
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
         m_FashionList = new List<EquipPart>();
-        for (int i = 0,max= FashionSuit.sington.Table.Length; i < max; ++i)
+        for (int i = 0,max= XTableMgr.GetTable<FashionSuit>().Table.Length; i < max; ++i)
         {
-            FashionSuit.RowData row = FashionSuit.sington.Table[i];
+            FashionSuit.RowData row = XTableMgr.GetTable<FashionSuit>().Table[i];
             if (row.FashionID != null)
             {
                 XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
@@ -41,9 +41,9 @@ public class TestAB : ITest
 
         //装备
         m_EquipList = new List<EquipPart>();
-        for (int i = 0,max=EquipSuit.sington.Table.Length; i < max; ++i)
+        for (int i = 0,max= XTableMgr.GetTable<EquipSuit>().Table.Length; i < max; ++i)
         {
-            EquipSuit.RowData row = EquipSuit.sington.Table[i];
+            EquipSuit.RowData row = XTableMgr.GetTable<EquipSuit>().Table[i];
             if (row.EquipID != null)
                 XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
         }

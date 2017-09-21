@@ -30,8 +30,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     {
         T x = Activator.CreateInstance<T>();
         GameObject o = XResourceMgr.Load<GameObject>("Prefabs/" + attr.Prefab, AssetType.Prefab);
-        if (!Application.isMobilePlatform)
-            o.name = attr.Name;
+        if (!Application.isMobilePlatform) o.name = attr.Name;
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
@@ -168,10 +167,10 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 
     private XAttributes InitAttrFromClient(int entityID)
     {
-        var entity = XEntityStatistics.sington.GetByID(entityID);
+        var entity = XTableMgr.GetTable<XEntityStatistics>().GetByID(entityID);
         if (entity == null) throw new Exception("entity is nil with id: " + entityID);
         XAttributes attr = new XAttributes();
-        var prow = XEntityPresentation.sington.GetItemID(entity.PresentID);
+        var prow = XTableMgr.GetTable<XEntityPresentation>().GetItemID(entity.PresentID);
         if (prow == null) throw new Exception("present is nil with id: " + entity.PresentID);
         attr.Prefab = prow.Prefab;
         attr.id = (uint)XCommon.singleton.New_id;
@@ -183,7 +182,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     private XAttributes InitAttrByPresent(uint presentID)
     {
         XAttributes attr = new XAttributes();
-        var prow = XEntityPresentation.sington.GetItemID(presentID);
+        var prow = XTableMgr.GetTable<XEntityPresentation>().GetItemID(presentID);
         if (prow == null) throw new Exception("present is nil with id: " + presentID);
         attr.Prefab = prow.Prefab;
         attr.id = (uint)XCommon.singleton.New_id;

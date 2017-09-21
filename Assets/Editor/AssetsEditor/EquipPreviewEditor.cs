@@ -22,7 +22,7 @@ namespace XEditor
             //1.mesh collection
             List<CombineInstance> ciList = new List<CombineInstance>();
             Texture[] m_tex = new Texture[8];
-            DefaultEquip.RowData data = DefaultEquip.sington.GetByProfID(m_profession + 1);
+            DefaultEquip.RowData data = XTableMgr.GetTable<DefaultEquip>().GetByProfID(m_profession + 1);
             string name = "";
             for (int i = 0; i < part.partPath.Length; ++i)
             {
@@ -108,18 +108,18 @@ namespace XEditor
             TempEquipSuit fashions = new TempEquipSuit();
             m_FashionList = new List<EquipPart>();
             m_EquipList = new List<EquipPart>();
-           
-            for (int i = 0,max= FashionSuit.sington.Table.Length; i < max; ++i)
+
+            for (int i = 0, max = XTableMgr.GetTable<FashionSuit>().Table.Length; i < max; ++i)
             {
-                FashionSuit.RowData row = FashionSuit.sington.Table[i];
+                FashionSuit.RowData row = XTableMgr.GetTable<FashionSuit>().Table[i];
                 if (row.FashionID != null)
                 {
                     XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
                 }
             }
-            for (int i = 0; i < EquipSuit.sington.Table.Length; ++i)
+            for (int i = 0; i < XTableMgr.GetTable<EquipSuit>().Table.Length; ++i)
             {
-                EquipSuit.RowData row = EquipSuit.sington.Table[i];
+                EquipSuit.RowData row = XTableMgr.GetTable<EquipSuit>().Table[i];
                 if (row.EquipID != null)
                     XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
             }
