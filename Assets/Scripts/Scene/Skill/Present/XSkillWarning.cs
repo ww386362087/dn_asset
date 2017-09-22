@@ -7,15 +7,18 @@ public class XSkillWarning : XSkill
 
     public XSkillWarning(XSkillHoster _host) : base(_host)
     {
-        if (current.Warning!=null && current.Warning.Count > 0)
-            WarningPosAt = new List<Vector3>[current.Warning.Count];
+        
     }
 
     public override void Execute()
     {
         base.Execute();
+
         if (current.Warning != null)
         {
+            if (current.Warning.Count > 0)
+                WarningPosAt = new List<Vector3>[current.Warning.Count];
+
             for (int i = 0, max = current.Warning.Count; i < max; i++)
             {
                 var data = current.Warning[i];
