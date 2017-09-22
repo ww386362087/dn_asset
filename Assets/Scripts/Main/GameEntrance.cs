@@ -5,6 +5,9 @@
 /// </summary>
 public class GameEntrance : MonoBehaviour
 {
+
+    private bool start = false;
+
     void Awake()
     {
         XTableMgr.tableLoaded += ToStartTest;
@@ -20,6 +23,7 @@ public class GameEntrance : MonoBehaviour
     void ToStartTest()
     {
 #if TEST
+        start = true;
         TestManager.Get().Start();
 #endif
     }
@@ -27,29 +31,41 @@ public class GameEntrance : MonoBehaviour
 
     void Update()
     {
-        GameEnine.Update(Time.deltaTime);
+
+        XTableMgr.Update();
+
+         if (start)
+        {
+            GameEnine.Update(Time.deltaTime);
 
 #if TEST
-        TestManager.Get().Update();
+            TestManager.Get().Update();
 #endif
+        }
     }
 
 
     void LateUpdate()
     {
-        GameEnine.LateUpdate();
+        if (start)
+        {
+            GameEnine.LateUpdate();
 
 
 #if TEST
-        TestManager.Get().Update();
+            TestManager.Get().Update();
 #endif
+        }
     }
 
     void OnGUI()
     {
+        if (start)
+        {
 #if TEST
-        TestManager.Get().OnGUI();
+            TestManager.Get().OnGUI();
 #endif
+        }
     }
 
 

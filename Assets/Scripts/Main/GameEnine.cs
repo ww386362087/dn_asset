@@ -4,7 +4,6 @@ public class GameEnine : XObject
 {
 
     private static MonoBehaviour _entrance;
-    private static bool _init_finish = false;
 
     public static MonoBehaviour entrance { get { return _entrance; } }
 
@@ -18,21 +17,17 @@ public class GameEnine : XObject
         ABManager.singleton.Initial();
         Documents.singleton.Initial();
         UIManager.singleton.Initial();
-
-        _init_finish = true;
+        
     }
 
     
 
     public static void Update(float delta)
     {
-        if (!_init_finish) return;
-
         //xtouch must be update first
         XTouch.singleton.Update(delta);
 
         XTimerMgr.singleton.Update(delta);
-        XTableMgr.Update();
         XResourceMgr.Update();
         XEntityMgr.singleton.Update(delta);
         XScene.singleton.Update(delta);
@@ -42,8 +37,6 @@ public class GameEnine : XObject
 
     public static void LateUpdate()
     {
-        if (!_init_finish) return;
-
         XEntityMgr.singleton.LateUpdate();
         XScene.singleton.LateUpdate();
     }
