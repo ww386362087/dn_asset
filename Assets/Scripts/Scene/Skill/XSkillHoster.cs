@@ -9,14 +9,14 @@ public partial class XSkillHoster : MonoBehaviour
     [SerializeField]
     private XSkillData _xData = null;
     [SerializeField]
-    private XSkillDataExtra _xDataExtra = null;
+    public XSkillDataExtra xDataExtra = null;
     [SerializeField]
     private XEditorData _xEditorData = null;
     [SerializeField]
     private XConfigData _xConfigData = null;
 
     GameObject _target = null;
-    
+
     [HideInInspector]
     public GameObject Target { get { return _target; } }
     [HideInInspector]
@@ -45,38 +45,34 @@ public partial class XSkillHoster : MonoBehaviour
     public float defaultFov = 45;
 
     private XEntityPresentation.RowData _present_data = null;
-    private XSkillData _xOuterData = null;
+    public XSkillData xOuterData = null;
     private float _to = 0;
     private float _from = 0;
     private float _time_offset = 0;
-    private float _fire_time = 0;
-
+    public float fire_time = 0;
+    public string trigger = null;
+    public Animator ator = null;
     public enum DummyState { Idle, Move, Fire };
 
     private DummyState _state = DummyState.Idle;
-    private Animator _ator = null;
     private XSkillCamera _camera = null;
-
     private XSkillData _current = null;
-    private string _trigger = null;
+
     private bool _execute = false;
     private bool _anim_init = false;
     private bool _skill_when_move = false;
-    protected List<XFx> _fx = new List<XFx>();
-    protected List<XFx> _outer_fx = new List<XFx>();
-    public List<Vector3>[] WarningPosAt = null;
-    private XSkillManipulate _manipulate = null;
     
-
     private List<uint> _combinedToken = new List<uint>();
     private List<uint> _presentToken = new List<uint>();
     private List<uint> _logicalToken = new List<uint>();
-
-
+    
     public XSkillResult skillResult;
-    public XSkillManipulate skillManip;
     public XSkillMob skillMob;
-
+    public XSkillFx skillFx;
+    public XSkillManipulate skillManip;
+    public XSkillJA skillJa;
+    public XSkillWarning skillWarning;
+    public List<XSkill> skills = new List<XSkill>();
 
     public XConfigData ConfigData
     {
@@ -104,8 +100,8 @@ public partial class XSkillHoster : MonoBehaviour
     {
         get
         {
-            if (_xDataExtra == null) _xDataExtra = new XSkillDataExtra();
-            return _xDataExtra;
+            if (xDataExtra == null) xDataExtra = new XSkillDataExtra();
+            return xDataExtra;
         }
     }
 
@@ -116,10 +112,7 @@ public partial class XSkillHoster : MonoBehaviour
             if (_xData == null) _xData = new XSkillData();
             return _xData;
         }
-        set
-        {
-            _xData = value;
-        }
+        set { _xData = value; }
     }
 
     public XSkillData CurrentSkillData
@@ -127,8 +120,8 @@ public partial class XSkillHoster : MonoBehaviour
         get { return _state == DummyState.Fire ? _current : SkillData; }
     }
 
-    public DummyState state { get { return _state; } }
-   
+    public DummyState state { get { return _state; } set { _state = value; } }
+
 
     void Awake()
     {
@@ -149,6 +142,7 @@ public partial class XSkillHoster : MonoBehaviour
         light.type = LightType.Directional;
         light.intensity = 0.5f;
 
+        InitHost();
     }
 
     void OnDrawGizmos()
@@ -159,12 +153,9 @@ public partial class XSkillHoster : MonoBehaviour
 
         float offset_x = CurrentSkillData.Result[nHotID].LongAttackEffect ? CurrentSkillData.Result[nHotID].LongAttackData.At_X : CurrentSkillData.Result[nHotID].Offset_X;
         float offset_z = CurrentSkillData.Result[nHotID].LongAttackEffect ? CurrentSkillData.Result[nHotID].LongAttackData.At_Z : CurrentSkillData.Result[nHotID].Offset_Z;
-
         Vector3 offset = ShownTransform.rotation * new Vector3(offset_x, 0, offset_z);
-
         Color defaultColor = Gizmos.color;
         Gizmos.color = Color.red;
-
         Matrix4x4 defaultMatrix = Gizmos.matrix;
         if (ShownTransform == transform)
         {
@@ -180,10 +171,8 @@ public partial class XSkillHoster : MonoBehaviour
             if (CurrentSkillData.Result[nHotID].LongAttackData.TriggerAtEnd)
             {
                 float m_Theta = 0.01f;
-
                 Vector3 beginPoint = Vector3.zero;
                 Vector3 firstPoint = Vector3.zero;
-
                 for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
                 {
                     float x = CurrentSkillData.Result[nHotID].Range / ShownTransform.localScale.y * Mathf.Cos(theta);
@@ -199,16 +188,13 @@ public partial class XSkillHoster : MonoBehaviour
                     }
                     beginPoint = endPoint;
                 }
-
                 Gizmos.DrawLine(firstPoint, beginPoint);
 
                 if (CurrentSkillData.Result[nHotID].Low_Range > 0)
                 {
                     m_Theta = 0.01f;
-
                     beginPoint = Vector3.zero;
                     firstPoint = Vector3.zero;
-
                     for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
                     {
                         float x = CurrentSkillData.Result[nHotID].Low_Range / ShownTransform.localScale.y * Mathf.Cos(theta);
@@ -224,7 +210,6 @@ public partial class XSkillHoster : MonoBehaviour
                         }
                         beginPoint = endPoint;
                     }
-
                     Gizmos.DrawLine(firstPoint, beginPoint);
                 }
             }
@@ -257,7 +242,6 @@ public partial class XSkillHoster : MonoBehaviour
 
                     Vector3 beginPoint2 = Vector3.zero;
                     Vector3 firstPoint2 = Vector3.zero;
-
                     for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
                     {
                         float x = or / ShownTransform.localScale.y * Mathf.Cos(theta);
@@ -273,16 +257,13 @@ public partial class XSkillHoster : MonoBehaviour
                         }
                         beginPoint2 = endPoint;
                     }
-
                     Gizmos.DrawLine(firstPoint2, beginPoint2);
                 }
                 else
                 {
                     float m_Theta = 0.01f;
-
                     Vector3 beginPoint = Vector3.zero;
                     Vector3 firstPoint = Vector3.zero;
-
                     for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
                     {
                         float x = CurrentSkillData.Result[nHotID].LongAttackData.Radius / ShownTransform.localScale.y * Mathf.Cos(theta);
@@ -298,7 +279,6 @@ public partial class XSkillHoster : MonoBehaviour
                         }
                         beginPoint = endPoint;
                     }
-
                     Gizmos.DrawLine(firstPoint, beginPoint);
                 }
             }
@@ -308,7 +288,6 @@ public partial class XSkillHoster : MonoBehaviour
             if (CurrentSkillData.Result[nHotID].Sector_Type)
             {
                 float m_Theta = 0.01f;
-
                 Vector3 beginPoint = Vector3.zero;
                 Vector3 firstPoint = Vector3.zero;
 
@@ -333,10 +312,8 @@ public partial class XSkillHoster : MonoBehaviour
                 if (CurrentSkillData.Result[nHotID].Low_Range > 0)
                 {
                     m_Theta = 0.01f;
-
                     beginPoint = Vector3.zero;
                     firstPoint = Vector3.zero;
-
                     for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
                     {
                         float x = CurrentSkillData.Result[nHotID].Range / ShownTransform.localScale.y * Mathf.Cos(theta);
@@ -352,7 +329,6 @@ public partial class XSkillHoster : MonoBehaviour
                         }
                         beginPoint = endPoint;
                     }
-
                     Gizmos.DrawLine(firstPoint, beginPoint);
                 }
             }
@@ -379,20 +355,31 @@ public partial class XSkillHoster : MonoBehaviour
 
     void OnGUI()
     {
+#if UNITY_EDITOR
         GUI.Label(_rect, "Action Frame: " + _action_framecount);
+#endif
     }
 
+
+    private void InitHost()
+    {
+        skills.Clear();
+        skillResult = new XSkillResult(this);
+        skillMob = new XSkillMob(this);
+        skillFx = new XSkillFx(this);
+        skillManip = new XSkillManipulate(this);
+        skillJa = new XSkillJA(this);
+        skillWarning = new XSkillWarning(this);
+    }
 
     private void Execute()
     {
         _execute = true;
-        if (_xEditorData.XAutoSelected)
-            Selection.activeObject = gameObject;
-        if (_current.Result != null)
+        if (_xEditorData.XAutoSelected) Selection.activeObject = gameObject;
+        if (_current == null) return;
+        for(int i=0,max= skills.Count;i<max;i++)
         {
-            foreach (XResultData data in _current.Result)
-            {
-            }
+            skills[i].Execute();
         }
     }
 
@@ -408,13 +395,15 @@ public partial class XSkillHoster : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (_xData.TypeToken == 1 && ComboSkills.Count > 0) oVerrideController["Art"] = Resources.Load(_xData.ClipName) as AnimationClip;
-                _xOuterData = _xData;
+                xOuterData = _xData;
                 Fire();
             }
+            _action_framecount = 0;
         }
         else
         {
-            if (_execute || _xOuterData.TypeToken == 3)
+            _action_framecount += Time.deltaTime;
+            if (_execute || xOuterData.TypeToken == 3)
             {
                 if (nh != 0 || nv != 0)
                 {
@@ -426,12 +415,13 @@ public partial class XSkillHoster : MonoBehaviour
                 }
                 else if (_skill_when_move)
                 {
-                    _trigger = "ToStand";
+                    trigger = "ToStand";
                     _skill_when_move = false;
                 }
             }
             if (_anim_init) Execute();
             _anim_init = false;
+
         }
     }
 
@@ -439,30 +429,32 @@ public partial class XSkillHoster : MonoBehaviour
     {
         //face to
         UpdateRotation();
-
-        if (_trigger != null && _ator != null && !_ator.IsInTransition(0))
+        if (!string.IsNullOrEmpty(trigger) && ator != null && !ator.IsInTransition(0))
         {
-            if (_trigger != "ToStand" && _trigger != "ToMove" && _trigger != "EndSkill" && _trigger != "ToUltraShow")
+            if (trigger != "ToStand" &&
+                trigger != "ToMove" &&
+                trigger != "EndSkill" &&
+                trigger != "ToUltraShow")
                 _anim_init = true; // is casting
 
-            _ator.speed = 1;
+            ator.speed = 1;
             if (SkillData.TypeToken == 3)
             {
                 int i = 0;
                 for (; i < XSkillData.Combined_Command.Length; i++)
                 {
-                    if (_trigger == XSkillData.Combined_Command[i]) break;
+                    if (trigger == XSkillData.Combined_Command[i]) break;
                 }
                 if (i < XSkillData.Combined_Command.Length)
-                    _ator.Play(XSkillData.CombinedOverrideMap[i], 1, _time_offset);
+                    ator.Play(XSkillData.CombinedOverrideMap[i], 1, _time_offset);
                 else
-                    _ator.SetTrigger(_trigger);
+                    ator.SetTrigger(trigger);
             }
-            else
+            else 
             {
-                _ator.SetTrigger(_trigger);
+                ator.SetTrigger(trigger);
             }
-            _trigger = null;
+            trigger = null;
         }
     }
 
@@ -475,74 +467,44 @@ public partial class XSkillHoster : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, _from, 0);
         }
     }
-    
+
     private void Fire()
     {
-        _current = _xOuterData;
+        _current = xOuterData;
         _skill_when_move = _state == DummyState.Move;
         _state = DummyState.Fire;
-        _fire_time = Time.time;
+        fire_time = Time.time;
 
-        if (_xOuterData.TypeToken == 0)
-            _trigger = _xOuterData.SkillPosition > 0 ? XSkillData.JA_Command[_xOuterData.SkillPosition] : "ToSkill";
-        else if (_xOuterData.TypeToken == 1)
-            _trigger = "ToArtSkill";
-        else if (_xOuterData.TypeToken == 3)
+        if (xOuterData.TypeToken == 0)
+            trigger = xOuterData.SkillPosition > 0 ? XSkillData.JA_Command[xOuterData.SkillPosition] : "ToSkill";
+        else if (xOuterData.TypeToken == 1)
+            trigger = "ToArtSkill";
+        else if (xOuterData.TypeToken == 3)
             Combined(0);
         else
-            _trigger = "ToUltraShow";
+            trigger = "ToUltraShow";
 
         FocusTarget();
         _anim_init = false;
     }
 
-    private void StopFire(bool cleanup = true)
+    public void StopFire()
     {
         if (_state != DummyState.Fire) return;
         _state = DummyState.Idle;
-        _trigger = "EndSkill";
+        trigger = "EndSkill";
         _execute = false;
 
-        for (int i = 0; i < _fx.Count; i++)
-            XFxMgr.singleton.DestroyFx(_fx[i], false);
-        _fx.Clear();
-
-        if (_manipulate != null) _manipulate.Remove(0);
-      
-     
-        if (cleanup)
+        for (int i = 0, max = skills.Count; i < max; i++)
         {
-            _action_framecount = 0;
-            for (int i = 0; i < _outer_fx.Count; i++)
-                XFxMgr.singleton.DestroyFx(_outer_fx[i], false);
-            _outer_fx.Clear();
-            
-            _camera.EndEffect(null);
-            foreach (uint token in _combinedToken)
-            {
-                XTimerMgr.singleton.RemoveTimer(token);
-            }
-            _combinedToken.Clear();
+            skills[i].Clear();
         }
-
-        foreach (uint token in _presentToken)
-        {
-            XTimerMgr.singleton.RemoveTimer(token);
-        }
-        _presentToken.Clear();
-
-        foreach (uint token in _logicalToken)
-        {
-            XTimerMgr.singleton.RemoveTimer(token);
-        }
-        _logicalToken.Clear();
-        _manipulate = null;
-
+        _action_framecount = 0;
+        _camera.EndEffect(null);
+        CleanTokens();
         nResultForward = Vector3.zero;
         Time.timeScale = 1;
-        if (_ator != null)
-            _ator.speed = 1;
-        
+        if (ator != null) ator.speed = 1;
         _current = null;
     }
 
@@ -553,11 +515,18 @@ public partial class XSkillHoster : MonoBehaviour
     private void FocusTarget()
     {
         XSkillHit hit = GameObject.FindObjectOfType<XSkillHit>();
-        _target = (_xOuterData.NeedTarget && hit != null) ? hit.gameObject : null;
-        if (_target != null && IsInAttckField(_xOuterData, transform.position, transform.forward, _target))
+        _target = (xOuterData.NeedTarget && hit != null) ? hit.gameObject : null;
+        if (_target != null && IsInAttckField(xOuterData, transform.position, transform.forward, _target))
         {
             PrepareRotation(XCommon.singleton.Horizontal(_target.transform.position - transform.position), _xConfigData.RotateSpeed);
         }
+    }
+
+    public bool IsPickedInRange(int n, int d)
+    {
+        if (n >= d) return true;
+        int i = Random.Range(0, d);
+        return i < n;
     }
 
     public bool IsInField(XSkillData data, int triggerTime, Vector3 pos, Vector3 forward, Vector3 target, float angle, float distance)
@@ -576,16 +545,16 @@ public partial class XSkillHoster : MonoBehaviour
 
         if (data.Result[triggerTime].Sector_Type)
         {
-            if (!(distance>= data.Result[triggerTime].Low_Range &&
+            if (!(distance >= data.Result[triggerTime].Low_Range &&
                    distance < data.Result[triggerTime].Range &&
                     angle <= data.Result[triggerTime].Scope * 0.5f))
             {
                 if (log)
                 {
-                     XDebug.Log("-----------------------------------");
-                     XDebug.Log("At " + triggerTime , " Hit missing: distance is " + distance.ToString("F3") , " ( >= " + data.Result[triggerTime].Low_Range.ToString("F3") + ")");
-                     XDebug.Log("At " + triggerTime , " Hit missing: distance is " + distance.ToString("F3") , " ( < " + data.Result[triggerTime].Range.ToString("F3") + ")");
-                     XDebug.Log("At " + triggerTime , " Hit missing: dir is " + angle.ToString("F3") , " ( < " + (data.Result[triggerTime].Scope * 0.5f).ToString("F3") + ")");
+                    XDebug.Log("-----------------------------------");
+                    XDebug.Log("At " + triggerTime, " Hit missing: distance is " + distance.ToString("F3"), " ( >= " + data.Result[triggerTime].Low_Range.ToString("F3") + ")");
+                    XDebug.Log("At " + triggerTime, " Hit missing: distance is " + distance.ToString("F3"), " ( < " + data.Result[triggerTime].Range.ToString("F3") + ")");
+                    XDebug.Log("At " + triggerTime, " Hit missing: dir is " + angle.ToString("F3"), " ( < " + (data.Result[triggerTime].Scope * 0.5f).ToString("F3") + ")");
                 }
 
                 return false;
@@ -606,8 +575,8 @@ public partial class XSkillHoster : MonoBehaviour
 
                 if (log)
                 {
-                     XDebug.Log("-----------------------------------");
-                     XDebug.Log("Not in rect " + vecs[0] , " " + vecs[1] , " " + vecs[2] , " " + vecs[3]);
+                    XDebug.Log("-----------------------------------");
+                    XDebug.Log("Not in rect " + vecs[0], " " + vecs[1], " " + vecs[2], " " + vecs[3]);
                 }
 
                 return false;
@@ -650,30 +619,23 @@ public partial class XSkillHoster : MonoBehaviour
         rect.xMax = w / 2.0f;
         rect.yMin = half ? 0 : (-d / 2.0f);
         rect.yMax = d / 2.0f;
-
         return XCommon.singleton.IsInRect(target - anchor, rect, Vector3.zero, rotation);
     }
 
     private bool CanAct(Vector3 dir)
     {
         bool can = false;
-        float now = Time.time - _fire_time;
-
+        float now = Time.time - fire_time;
         XLogicalData logic = (SkillData.TypeToken == 3) ? SkillData.Logical : _current.Logical;
-
         can = true;
-
-        if (now < logic.Not_Move_End &&
-            now > logic.Not_Move_At)
+        if (now < logic.Not_Move_End && now > logic.Not_Move_At)
         {
             can = false;
         }
-
         if (can) StopFire();
         else
         {
-            if (now < logic.Rotate_End &&
-                now > logic.Rotate_At)
+            if (now < logic.Rotate_End && now > logic.Rotate_At)
             {
                 //perform rotate
                 PrepareRotation(XCommon.singleton.Horizontal(dir), logic.Rotate_Speed > 0 ? logic.Rotate_Speed : _xConfigData.RotateSpeed);
@@ -691,7 +653,6 @@ public partial class XSkillHoster : MonoBehaviour
     public void PrepareRotation(Vector3 targetDir, float speed)
     {
         Vector3 from = transform.forward;
-
         _from = YRotation(from);
         float angle = Vector3.Angle(from, targetDir);
 
@@ -703,7 +664,6 @@ public partial class XSkillHoster : MonoBehaviour
         {
             _to = _from - angle;
         }
-
         rotate_speed = speed;
     }
 
@@ -723,21 +683,18 @@ public partial class XSkillHoster : MonoBehaviour
     private void BuildOverride()
     {
         oVerrideController = new AnimatorOverrideController();
-
-        _ator = GetComponent<Animator>();
-        if (_ator != null)
+        ator = GetComponent<Animator>();
+        if (ator != null)
         {
-            oVerrideController.runtimeAnimatorController = _ator.runtimeAnimatorController;
-            _ator.runtimeAnimatorController = oVerrideController;
+            oVerrideController.runtimeAnimatorController = ator.runtimeAnimatorController;
+            ator.runtimeAnimatorController = oVerrideController;
         }
     }
 
     public void RebuildSkillAniamtion()
     {
         AnimationClip clip = Resources.Load(SkillData.ClipName) as AnimationClip;
-
         if (oVerrideController == null) BuildOverride();
-
         if (SkillData.TypeToken == 0)
         {
             string motion = XSkillData.JaOverrideMap[SkillData.SkillPosition];
@@ -754,10 +711,6 @@ public partial class XSkillHoster : MonoBehaviour
         }
         else if (SkillData.TypeToken == 3)
         {
-            //    for (int i = 0; i < SkillData.Combined.Count; i++)
-            //    {
-            //        oVerrideController[XSkillData.CombinedOverrideMap[i]] = SkillDataExtra.CombinedEx[i].Clip;
-            //    }
         }
         else
         {
@@ -794,6 +747,35 @@ public partial class XSkillHoster : MonoBehaviour
             _presentToken.Add(token);
     }
 
+    public void AddedCombinedToken(uint token)
+    {
+        _combinedToken.Add(token);
+    }
+
+    private void CleanTokens()
+    {
+        foreach (uint token in _combinedToken)
+        {
+            XTimerMgr.singleton.RemoveTimer(token);
+        }
+        _combinedToken.Clear();
+        foreach (uint token in _presentToken)
+        {
+            XTimerMgr.singleton.RemoveTimer(token);
+        }
+        _presentToken.Clear();
+        foreach (uint token in _logicalToken)
+        {
+            XTimerMgr.singleton.RemoveTimer(token);
+        }
+        _logicalToken.Clear();
+    }
+
+    public void SetCurrData(XSkillData data)
+    {
+        _current = data;
+    }
+
     /// <summary>
     /// 绘制攻击范围
     /// </summary>
@@ -803,7 +785,7 @@ public partial class XSkillHoster : MonoBehaviour
         {
             foreach (XManipulationData data in _xData.Manipulation)
             {
-                if (data.Radius <= 0 || !_xDataExtra.ManipulationEx[data.Index].Present) continue;
+                if (data.Radius <= 0 || !xDataExtra.ManipulationEx[data.Index].Present) continue;
 
                 Vector3 offset = transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
 
@@ -816,10 +798,8 @@ public partial class XSkillHoster : MonoBehaviour
                 transform.position -= offset;
 
                 float m_Theta = 0.01f;
-
                 Vector3 beginPoint = Vector3.zero;
                 Vector3 firstPoint = Vector3.zero;
-
                 for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
                 {
                     float x = data.Radius / transform.localScale.y * Mathf.Cos(theta);
@@ -851,7 +831,5 @@ public partial class XSkillHoster : MonoBehaviour
         }
     }
 
-  
-    
 }
 

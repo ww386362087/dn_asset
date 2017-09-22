@@ -8,8 +8,26 @@ public class XSkillResult : XSkill
     public List<Vector3>[] WarningPosAt = null;
     private List<HashSet<XSkillHit>> _hurt_target = new List<HashSet<XSkillHit>>();
 
+    public XSkillResult(XSkillHoster _host) : base(_host)
+    {
+    }
 
-    protected override void OnTrigger(object param)
+    public override void Execute()
+    {
+        base.Execute();
+        if (current.Result != null)
+        {
+            int index = 0;
+            for (int i = 0, max = current.Result.Count; i < max; i++)
+            {
+                var data = current.Result[i];
+                data.Token = index++;
+                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), true);
+            }
+        }
+    }
+
+    public override void OnTrigger(object param)
     {
         if (host.state != XSkillHoster.DummyState.Fire) return;
 
@@ -41,7 +59,7 @@ public class XSkillResult : XSkill
         }
     }
     
-    protected override void Clear()
+    public override void Clear()
     {
     }
     

@@ -43,28 +43,24 @@ internal class XBullet
     {
         if (_tail_results != 0)
         {
-            if (_tail_results >= _data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count)
-                return true;
-            else
-                return false;
+            return _tail_results >= _data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count;
         }
 
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.IsPingPong && !_pingponged)
         {
-            if (_elapsed> _data.Life) _pingponged = true;
+            if (_elapsed > _data.Life) _pingponged = true;
         }
-
         bool expired = (!_active || (!_pingponged && _elapsed > _data.Life));
-
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count <= 0)
+        {
             return expired;
+        }
         else
         {
             if (expired)
             {
                 _active = false;
                 OnTailResult(null);
-
                 return false;
             }
             else
@@ -94,9 +90,7 @@ internal class XBullet
         if (_tail_results < _data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count)
         {
             _tail_results++;
-
             TailResult(_tail_results == 1);
-
             XTimerMgr.singleton.RemoveTimer(_tail_results_token);
             _tail_results_token = XTimerMgr.singleton.SetTimer(_data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Cycle, OnTailResult, this);
         }
@@ -121,7 +115,6 @@ internal class XBullet
             if (_data.Skill.Result[_data.Sequnce].LongAttackData.EndFx_Ground) pos.y = 0;
             fx.transform.position = pos;
             fx.transform.rotation = _bullet.transform.rotation;
-
             GameObject.Destroy(fx, _data.Skill.Result[_data.Sequnce].LongAttackData.EndFx_LifeTime);
         }
 
@@ -135,9 +128,7 @@ internal class XBullet
         {
             Vector3 pos = _bullet.transform.position;
             Quaternion quat = _bullet.transform.rotation;
-
             GameObject.Destroy(_bullet);
-
             _bullet = new GameObject("fakeBullet");
             _bullet.transform.position = pos;
             _bullet.transform.rotation = quat;
@@ -161,12 +152,10 @@ internal class XBullet
         {
             GameObject.Destroy(_bullet);
         }
-
         foreach (XBulletTarget bt in _hurt_target.Values)
         {
             XTimerMgr.singleton.RemoveTimer(bt.TimerToken);
         }
-
         _bullet = null;
         _data = null;
     }
@@ -230,55 +219,43 @@ internal class XBullet
     public void Update(float fDeltaT)
     {
         if (!_active) return;
-
         _elapsed += fDeltaT;
-
         float dis = 0; Vector3 dir = Vector3.forward;
-
         switch (_data.Skill.Result[_data.Sequnce].LongAttackData.Type)
         {
             case XResultBulletType.Ring:
-                {
-                    _bullet.transform.position = _data.Firer.transform.position;
-                }
+                _bullet.transform.position = _data.Firer.transform.position;
                 break;
             case XResultBulletType.Sphere:
             case XResultBulletType.Plane:
-                {
-                    dis = (_elapsed > _data.Runningtime && _elapsed < _data.Life) ? 0 : _data.Velocity * fDeltaT;
-                    dir = _bullet.transform.forward;
-                }
+                dis = (_elapsed > _data.Runningtime && _elapsed < _data.Life) ? 0 : _data.Velocity * fDeltaT;
+                dir = _bullet.transform.forward;
                 break;
             case XResultBulletType.Satellite:
+                if (_elapsed - fDeltaT == 0)
                 {
-                    if (_elapsed - fDeltaT == 0)
-                    {
-                        _bullet.transform.position = _data.Firer.transform.position + _data.BulletRay.direction * _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
+                    _bullet.transform.position = _data.Firer.transform.position + _data.BulletRay.direction * _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
+                    dis = 0;
+                    dir = XCommon.singleton.HorizontalRotateVetor3(_data.Firer.transform.forward, _data.Skill.Result[_data.Sequnce].LongAttackData.Palstance < 0 ? -90 : 90);
+                }
+                else
+                {
+                    Vector3 curr = XCommon.singleton.HorizontalRotateVetor3(_data.BulletRay.direction, _data.Skill.Result[_data.Sequnce].LongAttackData.Palstance * (_elapsed - fDeltaT)) * _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
+                    Vector3 next = XCommon.singleton.HorizontalRotateVetor3(_data.BulletRay.direction, _data.Skill.Result[_data.Sequnce].LongAttackData.Palstance * _elapsed) * _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
 
-                        dis = 0;
-                        dir = XCommon.singleton.HorizontalRotateVetor3(_data.Firer.transform.forward, _data.Skill.Result[_data.Sequnce].LongAttackData.Palstance < 0 ? -90 : 90);
-                    }
-                    else
-                    {
-                        Vector3 curr = XCommon.singleton.HorizontalRotateVetor3(_data.BulletRay.direction, _data.Skill.Result[_data.Sequnce].LongAttackData.Palstance * (_elapsed - fDeltaT)) * _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
-                        Vector3 next = XCommon.singleton.HorizontalRotateVetor3(_data.BulletRay.direction, _data.Skill.Result[_data.Sequnce].LongAttackData.Palstance * _elapsed) * _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
-
-                        _bullet.transform.rotation = XCommon.singleton.VectorToQuaternion(XCommon.singleton.Horizontal(next - curr));
-
-                        next += _data.Firer.transform.position;
-
-                        Vector3 d = next - _bullet.transform.position; d.y = 0;
-                        dis = d.magnitude;
-                        dir = d.normalized;
-                    }
+                    _bullet.transform.rotation = XCommon.singleton.VectorToQuaternion(XCommon.singleton.Horizontal(next - curr));
+                    next += _data.Firer.transform.position;
+                    Vector3 d = next - _bullet.transform.position; d.y = 0;
+                    dis = d.magnitude;
+                    dir = d.normalized;
                 }
                 break;
         }
 
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.IsPingPong && _pingponged)
         {
-            Vector3 v = _data.Firer.transform.position - _bullet.transform.position; v.y = 0;
-
+            Vector3 v = _data.Firer.transform.position - _bullet.transform.position;
+            v.y = 0;
             if (dis >= Vector3.Magnitude(v))
             {
                 dis = Vector3.Magnitude(v);
@@ -301,7 +278,6 @@ internal class XBullet
         if (_active)
         {
             _bullet.transform.position += move;
-
             if (_data.Skill.Result[_data.Sequnce].LongAttackData.Manipulation)
             {
                 XSkillHit[] hits = GameObject.FindObjectsOfType<XSkillHit>();
@@ -324,35 +300,29 @@ internal class XBullet
             switch (_data.Skill.Result[_data.Sequnce].LongAttackData.Type)
             {
                 case XResultBulletType.Ring:
-                    {
-                        float t = _elapsed > _data.Life ? 0 : (_data.Skill.Result[_data.Sequnce].LongAttackData.RingFull ? (_elapsed > _data.Life * 0.5f ? (_data.Life - _elapsed) : _elapsed) : _elapsed);
-                        float ir = t * _data.Skill.Result[_data.Sequnce].LongAttackData.RingVelocity;
-                        float or = ir + _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
-                        _data.Firer.ir = ir;
-                        _data.Firer.or = or;
-                        RingCollideUnit(ir, or, _data.Firer.transform.position, this);
-                    }
+                    float t = _elapsed > _data.Life ? 0 : (_data.Skill.Result[_data.Sequnce].LongAttackData.RingFull ? (_elapsed > _data.Life * 0.5f ? (_data.Life - _elapsed) : _elapsed) : _elapsed);
+                    float ir = t * _data.Skill.Result[_data.Sequnce].LongAttackData.RingVelocity;
+                    float or = ir + _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
+                    _data.Firer.ir = ir;
+                    _data.Firer.or = or;
+                    RingCollideUnit(ir, or, _data.Firer.transform.position, this);
                     break;
                 case XResultBulletType.Sphere:
                 case XResultBulletType.Satellite:
-                    {
-                        Vector3 project = new Vector3(move.x, 0, move.z);
-                        float hlen = project.magnitude * 0.5f;
-                        dir.y = 0;
-                        float rotation = (dir.sqrMagnitude == 0) ? 0 : Vector3.Angle(Vector3.right, dir);
-                        if (rotation > 0 && XCommon.singleton.Clockwise(Vector3.right, dir)) rotation = -rotation;
-                        BulletCollideUnit(
-                            new Vector3(_origin.x + dir.x * hlen, 0, _origin.z + dir.z * hlen),
-                            hlen,
-                            rotation,
-                            _data.Radius,
-                            this);
-                    }
+                    Vector3 project = new Vector3(move.x, 0, move.z);
+                    float hlen = project.magnitude * 0.5f;
+                    dir.y = 0;
+                    float rotation = (dir.sqrMagnitude == 0) ? 0 : Vector3.Angle(Vector3.right, dir);
+                    if (rotation > 0 && XCommon.singleton.Clockwise(Vector3.right, dir)) rotation = -rotation;
+                    BulletCollideUnit(
+                        new Vector3(_origin.x + dir.x * hlen, 0, _origin.z + dir.z * hlen),
+                        hlen,
+                        rotation,
+                        _data.Radius,
+                        this);
                     break;
                 case XResultBulletType.Plane:
-                    {
-                        PlaneBulletCollideUnit(_origin, move, _data.Radius, this);
-                    }
+                    PlaneBulletCollideUnit(_origin, move, _data.Radius, this);
                     break;
             }
         }
@@ -361,15 +331,12 @@ internal class XBullet
     private static void RingCollideUnit(float ir, float or, Vector3 center, XBullet bullet)
     {
         XSkillHit[] ents = GameObject.FindObjectsOfType<XSkillHit>();
-
         for (int i = 0; i < ents.Length; i++)
         {
             bool collided = false;
-
             Vector3 v = ents[i].transform.position - center; v.y = 0;
             float dis = v.sqrMagnitude;
             collided = dis > (ir * ir) && dis < (or * or);
-
             if (collided) bullet.Result(ents[i]);
             if (bullet.IsExpired()) break;
         }
@@ -378,16 +345,14 @@ internal class XBullet
     private static void BulletCollideUnit(Vector3 rectcenter, float hlen, float rotation, float r, XBullet bullet)
     {
         XSkillHit[] ents = GameObject.FindObjectsOfType<XSkillHit>();
-
         for (int i = 0; i < ents.Length; i++)
         {
             bool collided = false;
-
-            Vector3 cycle = ents[i].RadiusCenter; cycle -= rectcenter; cycle.y = 0;
+            Vector3 cycle = ents[i].RadiusCenter;
+            cycle -= rectcenter;
+            cycle.y = 0;
             cycle = XCommon.singleton.HorizontalRotateVetor3(cycle, rotation, false);
-
             collided = XCommon.singleton.IsRectCycleCross(hlen, r, cycle, ents[i].Radius) || Vector3.SqrMagnitude(cycle) < r * r;
-
             if (collided) bullet.Result(ents[i]);
             if (bullet.IsExpired()) break;
         }
@@ -404,14 +369,12 @@ internal class XBullet
         for (int i = 0; i < ents.Length; i++)
         {
             bool collided = false;
-
             Vector3 pos = ents[i].RadiusCenter;
-
             collided = XCommon.singleton.IsLineSegmentCross(pos, pos - move, left, right);
-
             if (collided) bullet.Result(ents[i]);
             if (bullet.IsExpired()) break;
         }
     }
+
 }
 

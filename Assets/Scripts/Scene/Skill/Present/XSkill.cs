@@ -1,31 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class XSkill
+﻿public class XSkill
 {
 
-   protected  XSkillHoster host;
+    protected XSkillHoster host;
 
     protected XSkillData current
     {
         get { return host.CurrentSkillData; }
     }
 
-    public void Attach(XSkillHoster _host)
+    public XSkill(XSkillHoster _host)
     {
         host = _host;
+        host.skills.Add(this);
     }
 
 
-    protected virtual void OnTrigger(object param)
+    protected void AddedTimerToken(uint token, bool logical)
+    {
+        host.AddedTimerToken(token, logical);
+    }
+
+    public virtual void Execute()
+    {
+
+    }
+
+    public virtual void OnTrigger(object param)
     {
 
     }
 
 
-    protected virtual void Clear()
+    public virtual void Clear()
     {
 
     }
+
 }

@@ -8,7 +8,24 @@ public class XSkillMob : XSkill
 
     List<GameObject> _mob_unit = new List<GameObject>();
 
-    protected override void OnTrigger(object param)
+    public XSkillMob(XSkillHoster _host) : base(_host)
+    {
+    }
+
+    public override void Execute()
+    {
+        base.Execute();
+        if (current.Mob != null)
+        {
+            for (int i = 0, max = current.Mob.Count; i < max; i++)
+            {
+                var data = current.Mob[i];
+                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), true);
+            }
+        }
+    }
+
+    public override void OnTrigger(object param)
     {
         XMobUnitData mob = param as XMobUnitData;
 
@@ -26,7 +43,7 @@ public class XSkillMob : XSkill
     }
 
 
-    protected override void Clear()
+    public override void Clear()
     {
         if (_mob_unit.Count > 0)
         {

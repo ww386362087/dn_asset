@@ -29,7 +29,7 @@ internal class XBulletData
         }
         else if (data.Result[idx].Warning)
         {
-            _warning_pos = firer.WarningPosAt[data.Result[idx].Warning_Idx][wid];
+            _warning_pos = firer.skillWarning.WarningPosAt[data.Result[idx].Warning_Idx][wid];
         }
 
         _warning = _warning_pos.sqrMagnitude > 0;

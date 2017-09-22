@@ -1,16 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class XSkillManipulate
+public class XSkillManipulate : XSkill
 {
-    private XSkillHoster _hoster = null;
 
     private Dictionary<long, XManipulationData> _item = new Dictionary<long, XManipulationData>();
+
+    public XSkillManipulate(XSkillHoster _host) : base(_host)
+    {
+    }
+
     public Dictionary<long, XManipulationData> Set { get { return _item; } }
 
-    public XSkillManipulate(XSkillHoster hoster)
+    
+    public override void Execute()
     {
-        _hoster = hoster;
+        base.Execute();
+        if (current.Manipulation != null)
+        {
+            for (int i = 0, max = current.Manipulation.Count; i < max; i++)
+            {
+                var data = current.Manipulation[i];
+                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), true);
+            }
+        }
+    }
+
+    public override void OnTrigger(object param)
+    {
+        XManipulationData data = param as XManipulationData;
+        long token = XCommon.singleton.UniqueToken;
+        Add(token, data);
+        host.AddedTimerToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillManipulate, token), true);
+    }
+
+    public override void Clear()
+    {
+        Remove(0);
+    }
+
+    public void KillManipulate(object param)
+    {
+        Remove((long)param);
     }
 
     public void Add(long token, XManipulationData data)
@@ -36,14 +67,14 @@ public class XSkillManipulate
 
         foreach (XManipulationData data in _item.Values)
         {
-            Vector3 center = _hoster.transform.position + _hoster.transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
+            Vector3 center = host.transform.position + host.transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
 
             foreach (XSkillHit hit in hits)
             {
                 Vector3 gap = center - hit.transform.position; gap.y = 0;
                 float dis = gap.magnitude;
 
-                if (dis < data.Radius && (dis == 0 || Vector3.Angle(-gap, _hoster.transform.forward) <= data.Degree * 0.5f))
+                if (dis < data.Radius && (dis == 0 || Vector3.Angle(-gap, host.transform.forward) <= data.Degree * 0.5f))
                 {
                     float len = data.Force * deltaTime;
 

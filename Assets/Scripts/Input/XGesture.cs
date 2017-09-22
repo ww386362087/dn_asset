@@ -10,7 +10,7 @@ internal class XGesture : XSingleton<XGesture>
     private bool _one = false;
     private bool _one_up = false;
     private bool _bswype = false;
-
+    private float _last_swype_at = 0;
     private bool _bFreeze = false;
     
     private float _swype_dis = 0;
@@ -39,19 +39,9 @@ internal class XGesture : XSingleton<XGesture>
         get { return _finger_id != -1; }
     }
 
-    public bool Gestured
+    public float LastSwypeAt
     {
-        get { return _bswype || _one || _one_up; }
-    }
-
-    public bool OneTouch
-    {
-        get { return _one; }
-    }
-
-    public bool OneUpTouch
-    {
-        get { return _one_up; }
+        get { return _last_swype_at; }
     }
 
     public Vector3 GesturePosition
@@ -169,6 +159,7 @@ internal class XGesture : XSingleton<XGesture>
                 _swypedir.z = delta.y;
                 _swypedir.Normalize();
                 _gesturepos = _end;
+                _last_swype_at = endAt;
                 return true;
             }
         }
