@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
 using System.Text;
@@ -59,13 +57,13 @@ namespace XForm
         {
             try
             {
-                _content.Clear();
+                ClearContent();
                 AppendContent("正在生成表格中.");
                 string dest = unity_bytes_path;
                 GenerateByte.sington.GenerateAllBytes(this);
                 string str = "生成表格完毕!";
                 AppendContent(str);
-                MessageBox.Show(str);
+               // MessageBox.Show(str);
             }
             catch (Exception ex)
             {
@@ -76,17 +74,17 @@ namespace XForm
 
         private void makeCodeBtn_Click(object sender, EventArgs e)
         {
-            _content.Clear();
+            ClearContent();
             AppendContent("正在生成代码中.");
             GenerateCode.sington.GenerateAll(this);
             string str = "生成代码完毕!";
             AppendContent(str);
-            MessageBox.Show(str);
+            //MessageBox.Show(str);
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
-            _content.Clear();
+            ClearContent();
             AppendContent("正在清除表格和代码中.");
             DirectoryInfo dir = new DirectoryInfo(unity_bytes_path);
             FileInfo[] files = dir.GetFiles();
@@ -107,6 +105,20 @@ namespace XForm
             _content = _content.Append(str);
             _content = _content.Append("\n");
             contentLbl.Text = _content.ToString();
+        }
+
+
+        private void ClearContent()
+        {
+            _content.Clear();
+            contentLbl.Text = "";
+        }
+
+        private void build_Click(object sender, EventArgs e)
+        {
+            ClearContent();
+            AppendContent("开始编译表格代码.");
+            BuildCode.Build(this);
         }
 
     }

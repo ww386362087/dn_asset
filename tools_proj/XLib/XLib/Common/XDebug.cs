@@ -10,7 +10,7 @@ public class XDebug
 {
     static StringBuilder sb = new StringBuilder();
 
-    public enum LogLevel
+    enum LogLevel
     {
         None, // 不输出log
         Log,

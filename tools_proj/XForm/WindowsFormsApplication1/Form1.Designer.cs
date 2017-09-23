@@ -34,6 +34,7 @@
             this.contentLbl = new System.Windows.Forms.RichTextBox();
             this.makeCodeBtn = new System.Windows.Forms.Button();
             this.clearBtn = new System.Windows.Forms.Button();
+            this.buildBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +75,7 @@
             // 
             // makeCodeBtn
             // 
-            this.makeCodeBtn.Location = new System.Drawing.Point(169, 73);
+            this.makeCodeBtn.Location = new System.Drawing.Point(151, 73);
             this.makeCodeBtn.Name = "makeCodeBtn";
             this.makeCodeBtn.Size = new System.Drawing.Size(75, 23);
             this.makeCodeBtn.TabIndex = 4;
@@ -84,7 +85,7 @@
             // 
             // clearBtn
             // 
-            this.clearBtn.Location = new System.Drawing.Point(314, 73);
+            this.clearBtn.Location = new System.Drawing.Point(412, 73);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(75, 23);
             this.clearBtn.TabIndex = 5;
@@ -92,11 +93,22 @@
             this.clearBtn.UseVisualStyleBackColor = true;
             this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
+            // buildBtn
+            // 
+            this.buildBtn.Location = new System.Drawing.Point(283, 73);
+            this.buildBtn.Name = "buildBtn";
+            this.buildBtn.Size = new System.Drawing.Size(75, 23);
+            this.buildBtn.TabIndex = 6;
+            this.buildBtn.Text = "Build";
+            this.buildBtn.UseVisualStyleBackColor = true;
+            this.buildBtn.Click += new System.EventHandler(this.build_Click);
+            // 
             // XCForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 417);
+            this.Controls.Add(this.buildBtn);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.makeCodeBtn);
             this.Controls.Add(this.contentLbl);
@@ -118,6 +130,7 @@
         private System.Windows.Forms.RichTextBox contentLbl;
         private System.Windows.Forms.Button makeCodeBtn;
         private System.Windows.Forms.Button clearBtn;
+        private System.Windows.Forms.Button buildBtn;
     }
 }
 

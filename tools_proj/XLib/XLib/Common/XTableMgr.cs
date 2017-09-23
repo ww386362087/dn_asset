@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using XTable;
 using System.Collections.Generic;
 
@@ -19,11 +19,10 @@ public class XTableMgr
         Add<FashionSuit>();
         Add<QteStatusList>();
         Add<SceneList>();
-        Add<XEntityStatistics>();
         Add<XEntityPresentation>();
-        Add<XNpcList>();
-        
-        loadFinish = false;
+		Add<XEntityStatistics>();
+		Add<XNpcList>();
+		loadFinish = false;
         ThreadLoad();
     }
 

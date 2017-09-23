@@ -18,7 +18,7 @@ public abstract class CVSReader
         try
         {
             string path = XConfig.res_path + bytePath + ".bytes";
-            FileStream fs = new FileStream(path, FileMode.Open,FileAccess.Read);
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             ReadFile(fs);
             fs.Close();
             isDone = true;

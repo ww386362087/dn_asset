@@ -4,21 +4,6 @@ using UnityEditor;
 using UnityEngine;
 using XEditor;
 
-[CustomEditor(typeof(TestSerial))]
-public class XTest : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        if (GUILayout.Button("Open", GUILayout.MaxWidth(150)))
-        {
-            (target as TestSerial).a.a = 3;
-            (target as TestSerial).a.str = "xxxx";
-        }
-        GUILayout.Label((target as TestSerial).a.a.ToString());
-        GUILayout.Label((target as TestSerial).a.str);
-    }
-}
-
 
 [CustomEditor(typeof(XSkillHoster))]
 public class XSkillPanel : Editor
