@@ -4,10 +4,12 @@
 
 **/tools_proj/XForm/WindowsFormsApplication1/bin/
 **/tools_proj/XForm/WindowsFormsApplication1/obj/
-**/tools_proj/DnTable/Debug/
-**/tools_proj/DnTable/DnTable/Debug/
-**/tools_proj/DnTable/DnTable/x64/
-**/tools_proj/DnTable/x64/
+**/tools_proj/CPPTable/Debug/
+**/tools_proj/CPPTable/DnTable/Debug/
+**/tools_proj/CPPTable/DnTable/x64/
+**/tools_proj/CPPTable/x64/
+**/tools_proj/XLib/XLib/bin/
+**/tools_proj/XLib/XLib/obj/
 
 **/[Ll]ibrary/
 **/[Tt]emp/
