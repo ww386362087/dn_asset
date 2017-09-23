@@ -9,7 +9,7 @@ public class XGlobalConfig
     public static readonly char[] SpaceSeparator = new char[] { ' ' };
     public static readonly char[] TabSeparator = new char[] { ' ', '\t' };
 
-    public static string res_path;
+    public static string res_path { get; set; }
 
     public static void Initial()
     {

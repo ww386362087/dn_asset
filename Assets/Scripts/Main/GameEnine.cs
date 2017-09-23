@@ -13,6 +13,7 @@ public class GameEnine : XObject
 
         XTimerMgr.singleton.Init();
         XGlobalConfig.Initial();
+        XConfig.Initial();
         XTableMgr.Initial();
         ABManager.singleton.Initial();
         Documents.singleton.Initial();

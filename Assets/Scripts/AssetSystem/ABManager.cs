@@ -32,7 +32,7 @@ public class ABManager : XSingleton<ABManager>
             }
             else
             {
-                 XDebug.LogError("depFile not exist! " , depFile);
+                XDebug.LogError("depFile not exist! " , depFile);
             }
         }
     }

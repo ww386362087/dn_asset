@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.IO;
+﻿using System.IO;
 
 
 public abstract class CVSReader
@@ -18,7 +17,7 @@ public abstract class CVSReader
     {
         try
         {
-            string path = XGlobalConfig.res_path + bytePath + ".bytes";
+            string path = XConfig.res_path + bytePath + ".bytes";
             FileStream fs = new FileStream(path, FileMode.Open,FileAccess.Read);
             ReadFile(fs);
             fs.Close();
@@ -215,7 +214,7 @@ public abstract class CVSReader
             long pos = reader.BaseStream.Position;
             if (pos != fileSize)
             {
-                 XDebug.LogError("read table error: " + this.GetType().Name , " size:" + fileSize , " pos:" + pos , " stream: " + stream.Length);
+                XDebug.LogError("read table error: " + this.GetType().Name , " size:" + fileSize , " pos:" + pos , " stream: " + stream.Length);
             }
         }
         reader.Close();

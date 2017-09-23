@@ -170,7 +170,7 @@ namespace XEditor
             int uvOffsetX = GetUVOffset(profession, mesh.name, s_CombineConfig);
 
             if (uvOffsetX >= 0) ReCalculateUV(mesh, uvOffsetX);
-            else  XDebug.LogError("Find UV Error:" , mesh.name);
+            else XDebug.LogError("Find UV Error:" , mesh.name);
 
             CleanMesh(mesh);
             string meshPath = path + mesh.name + ".asset";

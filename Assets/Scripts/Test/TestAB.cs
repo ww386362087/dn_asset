@@ -3,7 +3,6 @@
 using UnityEngine;
 using XTable;
 using System.Collections.Generic;
-using System;
 
 public class TestAB : ITest
 {

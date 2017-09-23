@@ -87,7 +87,7 @@ public class XTableMgr
     public static T GetTable<T>() where T : CVSReader, new()
     {
         uint uid = XCommon.singleton.XHash(typeof(T).Name);
-        if (!readers.ContainsKey(uid))
+        if (readers == null)
         {
             //此情况下主要是编辑器模式会用到 一开始并没有读取所有的表格
             Add<T>();

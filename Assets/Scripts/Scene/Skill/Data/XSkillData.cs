@@ -10,6 +10,7 @@ public class XBaseData
     public int Index = 0;
 }
 
+[Serializable]
 public class XSkillData
 {
     public static readonly string[] Skills =

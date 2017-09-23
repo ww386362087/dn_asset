@@ -4,7 +4,7 @@ using UnityEngine;
 using XEditor;
 using XTable;
 
-public partial class XSkillHoster : MonoBehaviour
+public class XSkillHoster : MonoBehaviour
 {
     [SerializeField]
     private XSkillData _xData = null;

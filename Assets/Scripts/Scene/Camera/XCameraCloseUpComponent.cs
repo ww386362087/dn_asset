@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 class XCameraCloseUpComponent : XComponent
 {
     private XCamera _camera = null;

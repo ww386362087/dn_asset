@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Text;
-
+﻿using System.Text;
+using UnityEngine;
 
 /// <summary>
 /// log输出
@@ -10,7 +9,7 @@ using System.Text;
 public class XDebug
 {
     static StringBuilder sb = new StringBuilder();
-    
+
     public enum LogLevel
     {
         None, // 不输出log
@@ -19,7 +18,7 @@ public class XDebug
         Warn,
         Error
     }
-    
+
     static readonly LogLevel loglevel = LogLevel.Error;
 
     public static void Log(object param)
@@ -43,7 +42,7 @@ public class XDebug
     public static void Log(object param1, object param2, object param3, object param4)
     {
         if (loglevel >= LogLevel.Log)
-             Debug.Log(Append(param1, param2, param3, param4));
+            Debug.Log(Append(param1, param2, param3, param4));
     }
 
     public static void LogGreen(object param)
@@ -67,7 +66,7 @@ public class XDebug
     public static void LogGreen(object param1, object param2, object param3, object param4)
     {
         if (loglevel >= LogLevel.Green)
-             Debug.Log(GreenAppend(param1, param2, param3, param4));
+            Debug.Log(GreenAppend(param1, param2, param3, param4));
     }
 
     public static void LogWarning(object param)
@@ -90,9 +89,9 @@ public class XDebug
     public static void LogWarning(object param1, object param2, object param3, object param4)
     {
         if (loglevel >= LogLevel.Warn)
-             Debug.LogWarning(Append(param1, param2, param3, param4));
+            Debug.LogWarning(Append(param1, param2, param3, param4));
     }
-    
+
     public static void LogError(object param)
     {
         if (loglevel >= LogLevel.Error)
@@ -114,7 +113,7 @@ public class XDebug
     public static void LogError(object param1, object param2, object param3, object param4)
     {
         if (loglevel >= LogLevel.Error)
-             Debug.LogError(Append(param1, param2, param3, param4));
+            Debug.LogError(Append(param1, param2, param3, param4));
     }
 
     private static string Append(object param1, object param2, object param3, object param4)

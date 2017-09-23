@@ -31,7 +31,7 @@ public class XMobPanel : XPanel
             if (GUILayout.Button(_content_remove, GUILayout.MaxWidth(30)))
             {
                 Hoster.SkillData.Mob.RemoveAt(i);
-                Hoster.SkillDataExtra.Mob.RemoveAt(i);
+                Hoster.SkillDataExtra.MobEx.RemoveAt(i);
             }
             EditorGUILayout.EndHorizontal();
 
@@ -44,15 +44,15 @@ public class XMobPanel : XPanel
                 GUILayout.Label("", GUILayout.MaxWidth(30));
                 EditorGUILayout.EndHorizontal();
 
-                Hoster.SkillDataExtra.Mob[i].Ratio = mob_at / Hoster.SkillDataExtra.SkillClip_Frame;
-                if (Hoster.SkillDataExtra.Mob[i].Ratio > 1) Hoster.SkillDataExtra.Mob[i].Ratio = 1;
+                Hoster.SkillDataExtra.MobEx[i].Ratio = mob_at / Hoster.SkillDataExtra.SkillClip_Frame;
+                if (Hoster.SkillDataExtra.MobEx[i].Ratio > 1) Hoster.SkillDataExtra.MobEx[i].Ratio = 1;
 
                 EditorGUILayout.BeginHorizontal();
-                Hoster.SkillDataExtra.Mob[i].Ratio = EditorGUILayout.Slider("Ratio", Hoster.SkillDataExtra.Mob[i].Ratio, 0, 1);
+                Hoster.SkillDataExtra.MobEx[i].Ratio = EditorGUILayout.Slider("Ratio", Hoster.SkillDataExtra.MobEx[i].Ratio, 0, 1);
                 GUILayout.Label("(0~1)", EditorStyles.miniLabel);
                 EditorGUILayout.EndHorizontal();
 
-                Hoster.SkillData.Mob[i].At = (Hoster.SkillDataExtra.Mob[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+                Hoster.SkillData.Mob[i].At = (Hoster.SkillDataExtra.MobEx[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
                 Hoster.SkillData.Mob[i].LifewithinSkill = EditorGUILayout.Toggle("Life with in Skill", Hoster.SkillData.Mob[i].LifewithinSkill);
                 EditorGUILayout.Space();
                 Hoster.SkillData.Mob[i].Offset_At_X = EditorGUILayout.FloatField("OffsetX", Hoster.SkillData.Mob[i].Offset_At_X);

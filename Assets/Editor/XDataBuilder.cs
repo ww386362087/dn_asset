@@ -136,7 +136,7 @@ namespace XEditor
                     XWarningDataExtra we = new XWarningDataExtra();
                     we.Fx = Resources.Load(warning.Fx) as GameObject;
                     we.Ratio = warning.At / data.Time;
-                    edata.Warning.Add(we);
+                    edata.WarningEx.Add(we);
                 }
             }
             if (data.Mob != null)
@@ -145,7 +145,7 @@ namespace XEditor
                 {
                     XMobUnitDataExtra me = new XMobUnitDataExtra();
                     me.Ratio = mob.At / data.Time;
-                    edata.Mob.Add(me);
+                    edata.MobEx.Add(me);
                 }
             }
         }

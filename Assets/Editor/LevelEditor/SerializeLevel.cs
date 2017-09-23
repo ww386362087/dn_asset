@@ -397,7 +397,7 @@ namespace XEditor
             }
             else
             {
-                 XDebug.Log("More than 100 waves?");
+                XDebug.Log("More than 100 waves?");
             }
         }
 

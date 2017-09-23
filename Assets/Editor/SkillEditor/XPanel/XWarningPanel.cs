@@ -45,31 +45,31 @@ public class XWarningPanel : XPanel
             warning_at = EditorGUILayout.FloatField("Warning At", warning_at);
             GUILayout.Label("(frame)");
 
-            Hoster.SkillDataExtra.Warning[i].Ratio = warning_at / Hoster.SkillDataExtra.SkillClip_Frame;
-            if (Hoster.SkillDataExtra.Warning[i].Ratio > 1) Hoster.SkillDataExtra.Warning[i].Ratio = 1;
+            Hoster.SkillDataExtra.WarningEx[i].Ratio = warning_at / Hoster.SkillDataExtra.SkillClip_Frame;
+            if (Hoster.SkillDataExtra.WarningEx[i].Ratio > 1) Hoster.SkillDataExtra.WarningEx[i].Ratio = 1;
 
             if (GUILayout.Button(_content_remove, GUILayout.MaxWidth(30), GUILayout.MinWidth(30)))
             {
                 Hoster.SkillData.Warning.RemoveAt(i);
-                Hoster.SkillDataExtra.Warning.RemoveAt(i);
+                Hoster.SkillDataExtra.WarningEx.RemoveAt(i);
                 EditorGUILayout.EndHorizontal();
                 continue;
             }
             EditorGUILayout.EndHorizontal();
 
-            Hoster.SkillDataExtra.Warning[i].Ratio = EditorGUILayout.Slider("Ratio", Hoster.SkillDataExtra.Warning[i].Ratio, 0, 1);
-            Hoster.SkillData.Warning[i].At = (Hoster.SkillDataExtra.Warning[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+            Hoster.SkillDataExtra.WarningEx[i].Ratio = EditorGUILayout.Slider("Ratio", Hoster.SkillDataExtra.WarningEx[i].Ratio, 0, 1);
+            Hoster.SkillData.Warning[i].At = (Hoster.SkillDataExtra.WarningEx[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
             EditorGUILayout.Space();
 
-            Hoster.SkillDataExtra.Warning[i].Fx = EditorGUILayout.ObjectField("Fx Object", Hoster.SkillDataExtra.Warning[i].Fx, typeof(GameObject), true) as GameObject;
+            Hoster.SkillDataExtra.WarningEx[i].Fx = EditorGUILayout.ObjectField("Fx Object", Hoster.SkillDataExtra.WarningEx[i].Fx, typeof(GameObject), true) as GameObject;
 
-            if (null == Hoster.SkillDataExtra.Warning[i].Fx || !AssetDatabase.GetAssetPath(Hoster.SkillDataExtra.Warning[i].Fx).Contains("Resources/Effects/"))
+            if (null == Hoster.SkillDataExtra.WarningEx[i].Fx || !AssetDatabase.GetAssetPath(Hoster.SkillDataExtra.WarningEx[i].Fx).Contains("Resources/Effects/"))
             {
-                Hoster.SkillDataExtra.Warning[i].Fx = null;
+                Hoster.SkillDataExtra.WarningEx[i].Fx = null;
             }
-            if (null != Hoster.SkillDataExtra.Warning[i].Fx)
+            if (null != Hoster.SkillDataExtra.WarningEx[i].Fx)
             {
-                string path = AssetDatabase.GetAssetPath(Hoster.SkillDataExtra.Warning[i].Fx).Remove(0, 17);
+                string path = AssetDatabase.GetAssetPath(Hoster.SkillDataExtra.WarningEx[i].Fx).Remove(0, 17);
                 Hoster.SkillData.Warning[i].Fx = path.Remove(path.LastIndexOf('.'));
                 EditorGUILayout.LabelField("Fx Name", Hoster.SkillData.Warning[i].Fx);
 

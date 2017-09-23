@@ -23,9 +23,9 @@ public class XSkillDataExtra
     [SerializeField]
     public List<XManipulationDataExtra> ManipulationEx = new List<XManipulationDataExtra>();
     [SerializeField]
-    public List<XWarningDataExtra> Warning = new List<XWarningDataExtra>();
+    public List<XWarningDataExtra> WarningEx = new List<XWarningDataExtra>();
     [SerializeField]
-    public List<XMobUnitDataExtra> Mob = new List<XMobUnitDataExtra>();
+    public List<XMobUnitDataExtra> MobEx = new List<XMobUnitDataExtra>();
     [SerializeField]
     public List<XJADataExtraEx> JaEx = new List<XJADataExtraEx>();
     [SerializeField]
@@ -36,8 +36,8 @@ public class XSkillDataExtra
         XBaseDataExtra data = new T();
 
         if (data is XFxDataExtra) Fx.Add(data as XFxDataExtra);
-        else if (data is XWarningDataExtra) Warning.Add(data as XWarningDataExtra);
-        else if (data is XMobUnitDataExtra) Mob.Add(data as XMobUnitDataExtra);
+        else if (data is XWarningDataExtra) WarningEx.Add(data as XWarningDataExtra);
+        else if (data is XMobUnitDataExtra) MobEx.Add(data as XMobUnitDataExtra);
         else if (data is XJADataExtraEx) JaEx.Add(data as XJADataExtraEx);
         else if (data is XHitDataExtraEx) HitEx.Add(data as XHitDataExtraEx);
         else if (data is XResultDataExtraEx) ResultEx.Add(data as XResultDataExtraEx);

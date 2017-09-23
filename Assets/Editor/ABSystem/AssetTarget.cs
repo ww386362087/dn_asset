@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-
 namespace ABSystem
 {
     public class AssetTarget : System.IComparable<AssetTarget>
