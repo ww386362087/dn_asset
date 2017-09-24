@@ -8,7 +8,7 @@ public class XTableMgr
 
     static Dictionary<uint, CVSReader> readers;
 
-    public static System.Action tableLoaded;
+    public static System.Action<bool> tableLoaded;
     static bool loadFinish = false;
 
     public static void Initial()
@@ -36,7 +36,7 @@ public class XTableMgr
         if (readers != null)
         {
             bool finish = true;
-            var e = readers.GetEnumerator();
+            Dictionary<uint,CVSReader>.Enumerator e = readers.GetEnumerator();
             while (e.MoveNext())
             {
                 if (!e.Current.Value.isDone)
@@ -48,7 +48,7 @@ public class XTableMgr
             if (finish)
             {
                 loadFinish = true;
-                if (tableLoaded != null) tableLoaded();
+                if (tableLoaded != null) tableLoaded(true);
             }
         }
     }
@@ -68,10 +68,11 @@ public class XTableMgr
     public static void ThreadLoad()
     {
         ThreadPool.SetMaxThreads(ThreadCnt, ThreadCnt);
-        var e = readers.GetEnumerator();
+        Dictionary<uint, CVSReader>.Enumerator e= readers.GetEnumerator();
         while (e.MoveNext())
         {
-            ThreadPool.QueueUserWorkItem(LoadTable, e.Current.Value);
+            //ThreadPool.QueueUserWorkItem(LoadTable, e.Current.Value);
+            LoadTable(e.Current.Value);
         }
         e.Dispose();
         Thread.Sleep(1);

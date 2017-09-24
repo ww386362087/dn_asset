@@ -3,7 +3,7 @@
 public class XConfig 
 {
 
-    public static string res_path { get; set; }
+    public static string res_path;
 
     public static void Initial()
     {

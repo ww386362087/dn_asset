@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Text;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 
 
 
@@ -135,7 +135,12 @@ public class XCommon : XSingleton<XCommon>
         v.Normalize();
     }
 
-    public Vector2 HorizontalRotateVetor2(Vector2 v, float degree, bool normalized = true)
+    public Vector2 HorizontalRotateVetor2(Vector2 v, float degree)
+    {
+        return HorizontalRotateVetor2(v, degree, true);
+    }
+
+    public Vector2 HorizontalRotateVetor2(Vector2 v, float degree, bool normalized )
     {
         degree = -degree;
 
@@ -151,7 +156,13 @@ public class XCommon : XSingleton<XCommon>
         return normalized ? v.normalized : v;
     }
 
-    public Vector3 HorizontalRotateVetor3(Vector3 v, float degree, bool normalized = true)
+
+    public Vector3 HorizontalRotateVetor3(Vector3 v, float degree)
+    {
+        return HorizontalRotateVetor3( v, degree,true);
+    }
+
+    public Vector3 HorizontalRotateVetor3(Vector3 v, float degree, bool normalized )
     {
         degree = -degree;
 

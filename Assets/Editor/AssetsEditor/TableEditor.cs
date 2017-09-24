@@ -9,21 +9,21 @@ namespace XEditor
         [MenuItem(@"Assets/Tool/Table/MakeSelect2Bytes")]
         private static void MakeTableBytes()
         {
-            UnityEngine.Object[] objs = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
+            Object[] objs = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
             Table2Bytes(objs);
         }
 
         [MenuItem(@"Assets/Tool/Table/MakeSelect2Codes")]
         private static void MakeTableCodes()
         {
-            UnityEngine.Object[] objs = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
+            Object[] objs = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
             Table2Codes(objs);
         }
 
         [MenuItem(@"Assets/Tool/Table/MakeAll2Bytes")]
         private static void AllTable2Bytes()
         {
-            UnityEngine.Object[] objects = XResourceMgr.LoadAll<UnityEngine.Object>("Table");
+            Object[] objects = XResourceMgr.LoadAll<Object>("Table");
             Table2Bytes(objects);
             EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
         }
@@ -33,7 +33,7 @@ namespace XEditor
 
         private static void EnumBytesTable(EnumBytesTableCallback cb, string title)
         {
-            UnityEngine.Object[] tables = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
+            Object[] tables = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
             if (tables != null)
             {
                 for (int i = 0; i < tables.Length; ++i)
@@ -75,7 +75,7 @@ namespace XEditor
                 }
                 if (tables != "")
                 {
-                    ExeTable2Bytes(tables);
+                    ExeTable2Bytes(tables, "-t ");
                     deal = true;
                 }
             }
@@ -108,18 +108,13 @@ namespace XEditor
             }
             return "";
         }
-
-        private static string GetTableName(UnityEngine.Object target)
-        {
-            return GetTableName(AssetDatabase.GetAssetPath(target));
-        }
-
-        private static void ExeTable2Bytes(string tables, string arg0 = "-t ")
+        
+        private static void ExeTable2Bytes(string tables, string arg0)
         {
 #if UNITY_EDITOR_WIN
             System.Diagnostics.Process exep = new System.Diagnostics.Process();
             exep.StartInfo.FileName = Application.dataPath.Replace("Assets", "") 
-                + @"tools_proj/XForm/WindowsFormsApplication1/bin/Debug/XForm.exe";
+                + @"tools_proj/XForm/XForm/bin/Debug/XForm.exe";
             exep.StartInfo.Arguments = arg0 + tables;
             exep.StartInfo.CreateNoWindow = true;
             exep.StartInfo.UseShellExecute = false;
@@ -128,19 +123,19 @@ namespace XEditor
             exep.Start();
             string output = exep.StandardOutput.ReadToEnd();
             exep.WaitForExit();
-            if (output != "") XDebug.Log(output);
+            if (!string.IsNullOrEmpty(output)) XDebug.Log(output);
 #endif
         }
 
 
-        public static void Table2Bytes(UnityEngine.Object target)
+        public static void Table2Bytes(Object target)
         {
-            UnityEngine.Object[] targets = new UnityEngine.Object[1];
+            Object[] targets = new Object[1];
             targets[0] = target;
             Table2Bytes(targets);
         }
 
-        public static void Table2Bytes(UnityEngine.Object[] targets)
+        public static void Table2Bytes(Object[] targets)
         {
 #if UNITY_EDITOR_WIN
             string tables = MakeTableByObjects(targets);
@@ -153,15 +148,15 @@ namespace XEditor
 #endif
         }
 
-        public static void Table2Codes(UnityEngine.Object target)
+        public static void Table2Codes(Object target)
         {
-            UnityEngine.Object[] targets = new UnityEngine.Object[1];
+            Object[] targets = new Object[1];
             targets[0] = target;
             Table2Codes(targets);
         }
 
 
-        public static void Table2Codes(UnityEngine.Object[] targets)
+        public static void Table2Codes(Object[] targets)
         {
 #if UNITY_EDITOR_WIN
             string tables = MakeTableByObjects(targets);
@@ -175,7 +170,7 @@ namespace XEditor
         }
 
 
-        private static string MakeTableByObjects(UnityEngine.Object[] targets)
+        private static string MakeTableByObjects(Object[] targets)
         {
             string tables = "";
             if (targets != null)

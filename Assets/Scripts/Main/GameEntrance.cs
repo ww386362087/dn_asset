@@ -20,7 +20,7 @@ public class GameEntrance : MonoBehaviour
     }
 
 
-    void ToStartTest()
+    void ToStartTest(bool st)
     {
 #if TEST
         start = true;

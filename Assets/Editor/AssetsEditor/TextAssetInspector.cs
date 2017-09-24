@@ -78,7 +78,7 @@ namespace XEditor
                             }
                         }
                         GUILayout.Space(12);
-                        Assembly ass = Assembly.Load("Assembly-CSharp");
+                        Assembly ass = Assembly.Load("XLib");
                         Type type = ass.GetType("XTable." + target.name);
                         string str = "字段列表:\n";
                         if (type != null)

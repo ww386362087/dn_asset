@@ -2,8 +2,9 @@
 **/Win32/
 **/xcode_proj/
 
-**/tools_proj/XForm/WindowsFormsApplication1/bin/
-**/tools_proj/XForm/WindowsFormsApplication1/obj/
+**/tools_proj/XForm/XForm/bin/
+**/tools_proj/XForm/XForm/obj/
+**/tools_proj/XForm/
 **/tools_proj/CPPTable/Debug/
 **/tools_proj/CPPTable/DnTable/Debug/
 **/tools_proj/CPPTable/DnTable/x64/
