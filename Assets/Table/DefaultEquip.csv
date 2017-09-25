@@ -1,5 +1,6 @@
 ProfID,ProfName,Face,Hair,Helmet,Body,Leg,Glove,Boots,Weapon,SecondWeapon,Wing,Tail,Decal,WeaponPoint,SecondWeaponPoint,WingPoint,TailPoint,FishingPoint,SideWeaponPoint
 职业ID,职业名,脸,头发,头盔,身体,腿,手套,鞋子,武器,副武器,翅膀,尾巴,纹身,武器挂点,服务器挂点,翅膀挂点,尾巴挂点,鱼竿挂点,副武器挂点
+A,C,C,C,C,C,C,C,C,C,C,C,C,C,C,S,A,A,A,A
 uint,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string
 1,战士,Player_warrior_face,Player_warrior_hair01,,Player_warrior_body,Player_warrior_leg,Player_warrior_glove,Player_warrior_boots,weapon/Player_warrior_sword_weapon,Player_warrior_gauntlet,,,,Point001_zhanshi,,Point_wing_zhanshi,Point_tail_zhanshi,Point_fishing_zhanshi,weapon_fx
 2,弓手,Player_archer_head,Player_archer_hair,,Player_archer_body,Player_archer_leg,Player_archer_glove,Player_archer_boots,weapon/Player_archer_weapon_archer,Player_archer_quiver,,,,BoxBone01_archer,,Point_wing_archer,Point_tail_archer,Point_fishing_archer,weapon_fx01|weapon_fx02

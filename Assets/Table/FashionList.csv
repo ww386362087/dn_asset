@@ -1,5 +1,6 @@
 ItemID,ItemName,EquipPos,Profession,level,quality,DirectoryComment,ModelPrefabWarrior,ModelPrefabArcher,ModelPrefabSorcer,ModelPrefabCleric,ModelPrefab5,ModelPrefab6,ModelPrefab7,ModelPrefab8,PresentID,ReplaceID,AgainReplaceID
 道具ID,道具名称,装备部位,职业,等级,品质,目录注释,模型路径-战士,模型路径-弓箭手,模型路径-魔法师,模型路径-牧师,模型路径-学者,模型路径-刺客,模型路径-7,模型路径-8,表现ID,穿上主体装备时同时穿上replace装备,特殊癖好
+A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A
 uint,string,int,int,int,string,string,string,string,string,string,string,string,string,string,string,int[],string
 10001,法师初始腿部（特殊）,2,,,,,,,Player_sorceress_leg_a,,,,,,,,
 10002,糖果童话用头发,11,,,,,Player_warrior_hair_03,Player_archer_hair_03,Player_sorceress_hair_03,cl_normal02_hair_03,Player_academic_hair_03,Player_assassin_hair_03,,,,,

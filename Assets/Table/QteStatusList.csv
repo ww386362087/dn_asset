@@ -1,5 +1,6 @@
 Comment,Name,Value
 备注,名称,值(0 - 12为保留值)
+C,A,A
 string,string,int
 默认状态,None,0
 击退位移,HitBackPresent,1

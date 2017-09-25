@@ -29,7 +29,6 @@ namespace XTable {
 			public string Tail;
 			public string Decal;
 			public string WeaponPoint;
-			public string SecondWeaponPoint;
 			public string WingPoint;
 			public string TailPoint;
 			public string FishingPoint;
@@ -68,11 +67,10 @@ namespace XTable {
 			Read<string>(reader, ref row.Tail, stringParse); columnno = 12;
 			Read<string>(reader, ref row.Decal, stringParse); columnno = 13;
 			Read<string>(reader, ref row.WeaponPoint, stringParse); columnno = 14;
-			Read<string>(reader, ref row.SecondWeaponPoint, stringParse); columnno = 15;
-			Read<string>(reader, ref row.WingPoint, stringParse); columnno = 16;
-			Read<string>(reader, ref row.TailPoint, stringParse); columnno = 17;
-			Read<string>(reader, ref row.FishingPoint, stringParse); columnno = 18;
-			Read<string>(reader, ref row.SideWeaponPoint, stringParse); columnno = 19;
+			Read<string>(reader, ref row.WingPoint, stringParse); columnno = 15;
+			Read<string>(reader, ref row.TailPoint, stringParse); columnno = 16;
+			Read<string>(reader, ref row.FishingPoint, stringParse); columnno = 17;
+			Read<string>(reader, ref row.SideWeaponPoint, stringParse); columnno = 18;
 			row.sortID = (int)row.ProfID;
 			Table[lineno] = row;
 			columnno = -1;

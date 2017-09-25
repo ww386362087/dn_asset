@@ -1,5 +1,6 @@
 NPCID,NPCName,PresentID,NPCIcon,NPCPortrait,NPCScene,NPCPosition,NPCRotation,RequiredTaskID,Content,FunctionList,Gazing,OnlyHead,Voice,ShowUp,DisappearTask,NPCType
 NPCID,NPC名字,表现ID,NPC图标(UI/common/SmallAvatar),NPC半身像(UI/common/2DAvatar),NPC所在场景,NPC坐标,NPC旋转,NPC开放前置任务,NPC对话,NPC功能,最大注视角度,,语音,表演动作,消失任务,"1.普通NPC,2.家园田地3.妖精4.公会集字NPC 5.公会集字抽奖机 6.婚宴小女孩 7.婚宴小男孩"
+A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A
 int,string,uint,string,string,int,float[],float[],int,string,string,int,bool,string,string,int,int
 1,战士导师钱德勒,21,TXNPCicon_04,chandler,1,113.4|0|75.34,0|-80|0,0,只有不断磨练自己，才不至于在战斗中丧命！|不用担心，有我在你身边。,,50,TRUE,Audio/Npc/chandler1|Audio/Npc/chandler2,Animation/NPC_chandler/NPC_chandler_talk,,1
 2,阿尔杰塔,24,TXNPCicon_01,algeta,1,85.3|0|87.2,0|0|0,15,我的使命是，守护这片大陆。,,50,TRUE,Audio/Npc/argenta1|Audio/Npc/argenta2|Audio/Npc/argenta3,Animation/NPC_argent/NPC_argent_talk,,1

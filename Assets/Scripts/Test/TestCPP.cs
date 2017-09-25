@@ -38,6 +38,8 @@ public class TestCPP : ITest
         {
             XDebug.Log(list[i]);
         }
+        DefaultEquip t = XTableMgr.GetTable<DefaultEquip>();
+        XDebug.LogGreen("len: " + t.Table.Length);
     }
 
 
