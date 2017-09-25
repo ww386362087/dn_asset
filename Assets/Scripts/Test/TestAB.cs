@@ -16,6 +16,7 @@ public class TestAB : ITest
 
     public void Start()
     {
+        XDebug.LogGreen("ab test start");
         TestAvatar();
         TestUIAB();
     }

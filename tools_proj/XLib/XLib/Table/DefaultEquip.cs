@@ -13,7 +13,7 @@ namespace XTable {
     
     public class DefaultEquip : CVSReader {
         
-        public class RowData{
+        public class RowData :BaseRow {
 			public uint ProfID;
 			public string ProfName;
 			public string Face;
@@ -37,15 +37,18 @@ namespace XTable {
 		}
 
 
-		public RowData[] Table { get { return table; } }
-
-		private RowData[] table = null;
+		public RowData[] Table;
 
 		public override string bytePath { get { return "Table/DefaultEquip"; } }
         
+        // 二分法查找
+        public virtual RowData GetByUID(int id) {
+			return BinarySearch(Table, 0, Table.Length - 1, id) as RowData;
+        }
+        
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) table = new RowData[lineCount];
-			else table = null;
+			if (lineCount > 0) Table = new RowData[lineCount];
+			else Table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {
@@ -70,6 +73,7 @@ namespace XTable {
 			Read<string>(reader, ref row.TailPoint, stringParse); columnno = 17;
 			Read<string>(reader, ref row.FishingPoint, stringParse); columnno = 18;
 			Read<string>(reader, ref row.SideWeaponPoint, stringParse); columnno = 19;
+			row.sortID = (int)row.ProfID;
 			Table[lineno] = row;
 			columnno = -1;
         }

@@ -1,6 +1,6 @@
 ﻿#if TEST
 
-using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Profiling;
@@ -29,6 +29,15 @@ public class TestCPP : ITest
     public void Start()
     {
         //   XDebug.Log("bb"+Vector3.Cross(Vector3.up, Vector3.forward));
+        List<int> list = new List<int>();
+        list.Add(3);
+        list.Add(5);
+        list.Add(4);
+        list.Sort((x, y) => x - y);
+        for(int i=0;i<3;i++)
+        {
+            XDebug.Log(list[i]);
+        }
     }
 
 

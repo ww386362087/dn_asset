@@ -13,8 +13,8 @@ namespace XTable {
     
     public class XEntityStatistics : CVSReader {
         
-        public class RowData{
-			public int id;
+        public class RowData :BaseRow {
+			public int UID;
 			public string Name;
 			public uint PresentID;
 			public int Type;
@@ -81,20 +81,23 @@ namespace XTable {
 		}
 
 
-		public RowData[] Table { get { return table; } }
-
-		private RowData[] table = null;
+		public RowData[] Table;
 
 		public override string bytePath { get { return "Table/XEntityStatistics"; } }
         
+        // 二分法查找
+        public virtual RowData GetByUID(int id) {
+			return BinarySearch(Table, 0, Table.Length - 1, id) as RowData;
+        }
+        
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) table = new RowData[lineCount];
-			else table = null;
+			if (lineCount > 0) Table = new RowData[lineCount];
+			else Table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {
 			RowData row = new RowData();
-			Read<int>(reader, ref row.id, intParse); columnno = 0;
+			Read<int>(reader, ref row.UID, intParse); columnno = 0;
 			Read<string>(reader, ref row.Name, stringParse); columnno = 1;
 			Read<uint>(reader, ref row.PresentID, uintParse); columnno = 2;
 			Read<int>(reader, ref row.Type, intParse); columnno = 3;
@@ -158,6 +161,7 @@ namespace XTable {
 			Read<string>(reader, ref row.PandoraDropIDs, stringParse); columnno = 61;
 			Read<string>(reader, ref row.DropIDs, stringParse); columnno = 62;
 			Read<string>(reader, ref row.BigMeleePoints, stringParse); columnno = 63;
+			row.sortID = (int)row.UID;
 			Table[lineno] = row;
 			columnno = -1;
         }

@@ -75,7 +75,7 @@ namespace XEditor
                 }
                 if (tables != "")
                 {
-                    ExeTable2Bytes(tables, "-t ");
+                    ExecuteWithArg(tables, "-t ");
                     deal = true;
                 }
             }
@@ -109,7 +109,7 @@ namespace XEditor
             return "";
         }
         
-        private static void ExeTable2Bytes(string tables, string arg0)
+        private static void ExecuteWithArg(string tables, string arg0)
         {
 #if UNITY_EDITOR_WIN
             System.Diagnostics.Process exep = new System.Diagnostics.Process();
@@ -141,7 +141,7 @@ namespace XEditor
             string tables = MakeTableByObjects(targets);
             if (tables != "")
             {
-                ExeTable2Bytes(tables, "-t ");
+                ExecuteWithArg(tables, "-t ");
             }
             AssetDatabase.Refresh();
             EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
@@ -162,7 +162,7 @@ namespace XEditor
             string tables = MakeTableByObjects(targets);
             if (tables != "")
             {
-                ExeTable2Bytes(tables, "-c ");
+                ExecuteWithArg(tables, "-c ");
             } 
             AssetDatabase.Refresh();
             EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");

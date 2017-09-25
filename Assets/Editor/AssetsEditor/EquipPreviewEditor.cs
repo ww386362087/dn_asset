@@ -22,7 +22,7 @@ namespace XEditor
             //1.mesh collection
             List<CombineInstance> ciList = new List<CombineInstance>();
             Texture[] m_tex = new Texture[8];
-            DefaultEquip.RowData data = XTableMgr.GetTable<DefaultEquip>().GetByProfID(m_profession + 1);
+            DefaultEquip.RowData data = XTableMgr.GetTable<DefaultEquip>().GetByUID(m_profession + 1);
             string name = "";
             for (int i = 0; i < part.partPath.Length; ++i)
             {

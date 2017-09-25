@@ -1,6 +1,6 @@
 SuitID,SuitName,Level,ProfID,SuitQuality,IsCreateShow,EquipID,Effect1,Effect2,Effect3,Effect4,Effect5,Effect6,Effect7,Effect8,Effect9,Effect10
 套装ID,套装名字,等级,所属职业,套装品质,装备制作系统中是否显示,装备ID,1件效果,2件效果,3件效果,4件效果,5件效果,6件效果,7件效果,8件效果,9件效果,10件效果
-int,string,int,int,int,bool,int[],string,string,string,string,string,string,string,string,string,string
+int,string,int,int,int,bool,int[],string,uint<>,uint<>,uint<>,uint<>,uint<>,uint<>,uint<>,uint<>,uint<>
 16001,兽人套,12,1,2,TRUE,116370|116371|116372|116373|116374|116375|116376,,13=450,12=45,22=45,4=9,1=12,11=30,,,
 16002,地精套,12,2,2,TRUE,216370|216371|216372|216373|216374|216375|216376,,13=450,12=45,22=45,4=9,2=12,11=30,,,
 16003,克洛伯套,12,3,2,TRUE,316370|316371|316372|316373|316374|316375|316376,,13=450,12=45,22=45,4=9,3=12,21=30,,,

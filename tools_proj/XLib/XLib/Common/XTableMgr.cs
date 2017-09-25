@@ -2,6 +2,12 @@ using System.Threading;
 using XTable;
 using System.Collections.Generic;
 
+
+public class BaseRow
+{
+    public int sortID;
+}
+
 public class XTableMgr
 {
     const int ThreadCnt = 2;
@@ -36,7 +42,7 @@ public class XTableMgr
         if (readers != null)
         {
             bool finish = true;
-            Dictionary<uint,CVSReader>.Enumerator e = readers.GetEnumerator();
+            Dictionary<uint, CVSReader>.Enumerator e = readers.GetEnumerator();
             while (e.MoveNext())
             {
                 if (!e.Current.Value.isDone)
@@ -48,7 +54,11 @@ public class XTableMgr
             if (finish)
             {
                 loadFinish = true;
-                if (tableLoaded != null) tableLoaded(true);
+                if(tableLoaded!=null)
+                {
+                    tableLoaded(true);
+                }
+                //tableLoaded?.Invoke(true);
             }
         }
     }

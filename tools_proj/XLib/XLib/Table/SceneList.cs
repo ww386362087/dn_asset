@@ -13,7 +13,7 @@ namespace XTable {
     
     public class SceneList : CVSReader {
         
-        public class RowData{
+        public class RowData :BaseRow {
 			public int SceneID;
 			public string Comment;
 			public int SceneType;
@@ -134,15 +134,18 @@ namespace XTable {
 		}
 
 
-		public RowData[] Table { get { return table; } }
-
-		private RowData[] table = null;
+		public RowData[] Table;
 
 		public override string bytePath { get { return "Table/SceneList"; } }
         
+        // 二分法查找
+        public virtual RowData GetByUID(int id) {
+			return BinarySearch(Table, 0, Table.Length - 1, id) as RowData;
+        }
+        
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) table = new RowData[lineCount];
-			else table = null;
+			if (lineCount > 0) Table = new RowData[lineCount];
+			else Table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {
@@ -264,6 +267,7 @@ namespace XTable {
 			Read<string>(reader, ref row.SpactivityActiveDrop, stringParse); columnno = 114;
 			Read<string>(reader, ref row.SpActivityDrop, stringParse); columnno = 115;
 			Read<string>(reader, ref row.VipReviveLimit, stringParse); columnno = 116;
+			row.sortID = (int)row.SceneID;
 			Table[lineno] = row;
 			columnno = -1;
         }

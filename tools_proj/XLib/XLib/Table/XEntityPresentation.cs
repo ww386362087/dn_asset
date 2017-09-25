@@ -13,8 +13,8 @@ namespace XTable {
     
     public class XEntityPresentation : CVSReader {
         
-        public class RowData{
-			public uint ID;
+        public class RowData :BaseRow {
+			public uint UID;
 			public string Prefab;
 			public string Name;
 			public string BoneSuffix;
@@ -97,20 +97,23 @@ namespace XTable {
 		}
 
 
-		public RowData[] Table { get { return table; } }
-
-		private RowData[] table = null;
+		public RowData[] Table;
 
 		public override string bytePath { get { return "Table/XEntityPresentation"; } }
         
+        // 二分法查找
+        public virtual RowData GetByUID(int id) {
+			return BinarySearch(Table, 0, Table.Length - 1, id) as RowData;
+        }
+        
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) table = new RowData[lineCount];
-			else table = null;
+			if (lineCount > 0) Table = new RowData[lineCount];
+			else Table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {
 			RowData row = new RowData();
-			Read<uint>(reader, ref row.ID, uintParse); columnno = 0;
+			Read<uint>(reader, ref row.UID, uintParse); columnno = 0;
 			Read<string>(reader, ref row.Prefab, stringParse); columnno = 1;
 			Read<string>(reader, ref row.Name, stringParse); columnno = 2;
 			Read<string>(reader, ref row.BoneSuffix, stringParse); columnno = 3;
@@ -190,6 +193,7 @@ namespace XTable {
 			Read<string>(reader, ref row.RecoveryFX, stringParse); columnno = 77;
 			Read<string>(reader, ref row.RecoveryHitSlowFX, stringParse); columnno = 78;
 			Read<string>(reader, ref row.RecoveryHitStopFX, stringParse); columnno = 79;
+			row.sortID = (int)row.UID;
 			Table[lineno] = row;
 			columnno = -1;
         }

@@ -13,22 +13,20 @@ namespace XTable {
     
     public class QteStatusList : CVSReader {
         
-        public class RowData{
+        public class RowData {
 			public string Comment;
 			public string Name;
 			public int Value;
 		}
 
 
-		public RowData[] Table { get { return table; } }
-
-		private RowData[] table = null;
+		public RowData[] Table;
 
 		public override string bytePath { get { return "Table/QteStatusList"; } }
         
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) table = new RowData[lineCount];
-			else table = null;
+			if (lineCount > 0) Table = new RowData[lineCount];
+			else Table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {

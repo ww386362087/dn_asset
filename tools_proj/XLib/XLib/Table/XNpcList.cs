@@ -13,7 +13,7 @@ namespace XTable {
     
     public class XNpcList : CVSReader {
         
-        public class RowData{
+        public class RowData :BaseRow {
 			public int NPCID;
 			public string NPCName;
 			public uint PresentID;
@@ -34,15 +34,18 @@ namespace XTable {
 		}
 
 
-		public RowData[] Table { get { return table; } }
-
-		private RowData[] table = null;
+		public RowData[] Table;
 
 		public override string bytePath { get { return "Table/XNpcList"; } }
         
+        // 二分法查找
+        public virtual RowData GetByUID(int id) {
+			return BinarySearch(Table, 0, Table.Length - 1, id) as RowData;
+        }
+        
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) table = new RowData[lineCount];
-			else table = null;
+			if (lineCount > 0) Table = new RowData[lineCount];
+			else Table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {
@@ -64,6 +67,7 @@ namespace XTable {
 			Read<string>(reader, ref row.ShowUp, stringParse); columnno = 14;
 			Read<int>(reader, ref row.DisappearTask, intParse); columnno = 15;
 			Read<int>(reader, ref row.NPCType, intParse); columnno = 16;
+			row.sortID = (int)row.NPCID;
 			Table[lineno] = row;
 			columnno = -1;
         }

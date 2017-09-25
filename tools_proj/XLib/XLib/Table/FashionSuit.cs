@@ -13,7 +13,7 @@ namespace XTable {
     
     public class FashionSuit : CVSReader {
         
-        public class RowData{
+        public class RowData :BaseRow {
 			public uint SuitID;
 			public string SuitName;
 			public int SuitQuality;
@@ -41,15 +41,18 @@ namespace XTable {
 		}
 
 
-		public RowData[] Table { get { return table; } }
-
-		private RowData[] table = null;
+		public RowData[] Table;
 
 		public override string bytePath { get { return "Table/FashionSuit"; } }
         
+        // 二分法查找
+        public virtual RowData GetByUID(int id) {
+			return BinarySearch(Table, 0, Table.Length - 1, id) as RowData;
+        }
+        
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) table = new RowData[lineCount];
-			else table = null;
+			if (lineCount > 0) Table = new RowData[lineCount];
+			else Table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {
@@ -78,6 +81,7 @@ namespace XTable {
 			Read<bool>(reader, ref row.NoSale, boolParse); columnno = 21;
 			Read<int>(reader, ref row.ShowLevel, intParse); columnno = 22;
 			Read<int>(reader, ref row.OverAll, intParse); columnno = 23;
+			row.sortID = (int)row.SuitID;
 			Table[lineno] = row;
 			columnno = -1;
         }

@@ -13,7 +13,7 @@ namespace XTable {
     
     public class EquipSuit : CVSReader {
         
-        public class RowData{
+        public class RowData :BaseRow {
 			public int SuitID;
 			public string SuitName;
 			public int Level;
@@ -22,27 +22,30 @@ namespace XTable {
 			public bool IsCreateShow;
 			public int[] EquipID;
 			public string Effect1;
-			public string Effect2;
-			public string Effect3;
-			public string Effect4;
-			public string Effect5;
-			public string Effect6;
-			public string Effect7;
-			public string Effect8;
-			public string Effect9;
-			public string Effect10;
+			public Sequence<uint> Effect2;
+			public Sequence<uint> Effect3;
+			public Sequence<uint> Effect4;
+			public Sequence<uint> Effect5;
+			public Sequence<uint> Effect6;
+			public Sequence<uint> Effect7;
+			public Sequence<uint> Effect8;
+			public Sequence<uint> Effect9;
+			public Sequence<uint> Effect10;
 		}
 
 
-		public RowData[] Table { get { return table; } }
-
-		private RowData[] table = null;
+		public RowData[] Table;
 
 		public override string bytePath { get { return "Table/EquipSuit"; } }
         
+        // 二分法查找
+        public virtual RowData GetByUID(int id) {
+			return BinarySearch(Table, 0, Table.Length - 1, id) as RowData;
+        }
+        
         public override void OnClear(int lineCount) {
-			if (lineCount > 0) table = new RowData[lineCount];
-			else table = null;
+			if (lineCount > 0) Table = new RowData[lineCount];
+			else Table = null;
         }
         
         public override void ReadLine(System.IO.BinaryReader reader) {
@@ -55,15 +58,16 @@ namespace XTable {
 			Read<bool>(reader, ref row.IsCreateShow, boolParse); columnno = 5;
 			ReadArray<int>(reader, ref row.EquipID, intParse); columnno = 6;
 			Read<string>(reader, ref row.Effect1, stringParse); columnno = 7;
-			Read<string>(reader, ref row.Effect2, stringParse); columnno = 8;
-			Read<string>(reader, ref row.Effect3, stringParse); columnno = 9;
-			Read<string>(reader, ref row.Effect4, stringParse); columnno = 10;
-			Read<string>(reader, ref row.Effect5, stringParse); columnno = 11;
-			Read<string>(reader, ref row.Effect6, stringParse); columnno = 12;
-			Read<string>(reader, ref row.Effect7, stringParse); columnno = 13;
-			Read<string>(reader, ref row.Effect8, stringParse); columnno = 14;
-			Read<string>(reader, ref row.Effect9, stringParse); columnno = 15;
-			Read<string>(reader, ref row.Effect10, stringParse); columnno = 16;
+			ReadSequence<uint>(reader, ref row.Effect2, uintParse); columnno = 8;
+			ReadSequence<uint>(reader, ref row.Effect3, uintParse); columnno = 9;
+			ReadSequence<uint>(reader, ref row.Effect4, uintParse); columnno = 10;
+			ReadSequence<uint>(reader, ref row.Effect5, uintParse); columnno = 11;
+			ReadSequence<uint>(reader, ref row.Effect6, uintParse); columnno = 12;
+			ReadSequence<uint>(reader, ref row.Effect7, uintParse); columnno = 13;
+			ReadSequence<uint>(reader, ref row.Effect8, uintParse); columnno = 14;
+			ReadSequence<uint>(reader, ref row.Effect9, uintParse); columnno = 15;
+			ReadSequence<uint>(reader, ref row.Effect10, uintParse); columnno = 16;
+			row.sortID = (int)row.SuitID;
 			Table[lineno] = row;
 			columnno = -1;
         }

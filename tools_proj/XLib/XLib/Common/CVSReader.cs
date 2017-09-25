@@ -1,5 +1,5 @@
 ﻿using System.IO;
-
+using XTable;
 
 public abstract class CVSReader
 {
@@ -24,6 +24,21 @@ public abstract class CVSReader
             isDone = true;
         }
         catch { }
+    }
+    
+    public BaseRow BinarySearch(BaseRow[] table, int low, int high, int key)
+    {
+        if (low > high) return null;
+        else
+        {
+            int mid = (low + high) / 2;
+            if (table[mid].sortID == key)
+                return table[mid];
+            else if (table[mid].sortID > key)
+                return BinarySearch(table, low, mid - 1, key);
+            else
+                return BinarySearch(table, mid + 1, high, key);
+        }
     }
 
     public sealed class UIntParse : ValueParse<uint>
@@ -190,7 +205,7 @@ public abstract class CVSReader
     {
     }
 
-    
+
     private static string LookupInterString(uint hash, string value)
     {
         return string.Intern(value);
@@ -214,7 +229,7 @@ public abstract class CVSReader
             long pos = reader.BaseStream.Position;
             if (pos != fileSize)
             {
-                XDebug.LogError("read table error: " + this.GetType().Name , " size:" + fileSize , " pos:" + pos , " stream: " + stream.Length);
+                XDebug.LogError("read table error: " + this.GetType().Name, " size:" + fileSize, " pos:" + pos, " stream: " + stream.Length);
             }
         }
         reader.Close();
@@ -247,7 +262,17 @@ public abstract class CVSReader
         return true;
     }
 
-    
+    protected bool ReadSequence<T>(BinaryReader stream, ref Sequence<T> v, ValueParse<T> parse)
+    {
+        v = new Sequence<T>();
+        T v1 = v[0]; T v2 = v[1];
+        parse.Read(stream, ref v1);
+        parse.Read(stream, ref v2);
+        v.Set(v1, v2);
+        return true;
+    }
+
+
     public abstract void OnClear(int lineCount);
 
     public virtual void ReadLine(BinaryReader reader) { }

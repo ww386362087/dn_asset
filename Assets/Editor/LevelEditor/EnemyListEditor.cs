@@ -40,7 +40,7 @@ namespace XEditor
                 string strPrefab = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_row.PresentID).Prefab;
                 GameObject _prefab = Resources.Load("Prefabs/" + strPrefab) as GameObject;
                 Texture2D icon64 = AssetPreview.GetAssetPreview(_prefab);
-                ID_ICON.Add((uint)_row.id, icon64);
+                ID_ICON.Add((uint)_row.UID, icon64);
             }
         }
 
@@ -77,10 +77,10 @@ namespace XEditor
             {
                 if (_searchText != null && _searchText.Length > 0)
                 {
-                    if (_searchText != _row.id.ToString()) continue;
+                    if (_searchText != _row.UID.ToString()) continue;
                 }
                 Rect _rect = new Rect((i % windowPerRow) * width, ((i / windowPerRow) * height + 100), width, height);
-                GUI.Window(_row.id, _rect, doWindow, _row.Name);
+                GUI.Window(_row.UID, _rect, doWindow, _row.Name);
                 i++;
                 if (i >= pageCount) break;
             }
@@ -96,7 +96,7 @@ namespace XEditor
             {
                 GUILayout.Box(_icon);
             }
-            if (GUILayout.Button(npcInfo.id.ToString(), GUILayout.Width(80f)))
+            if (GUILayout.Button(npcInfo.UID.ToString(), GUILayout.Width(80f)))
             {
                 OnEnemyClick((uint)id);
             }
