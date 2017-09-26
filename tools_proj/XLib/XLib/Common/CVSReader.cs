@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using UnityEngine;
 
 public abstract class CVSReader
 {
@@ -15,19 +16,11 @@ public abstract class CVSReader
     public bool isDone = false;
     public void Create()
     {
-        try
-        {
-            string path = XConfig.res_path + bytePath + ".bytes";
-            XDebug.Log("create cvs: ", bytePath);
-            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-            ReadFile(fs);
-            fs.Close();
-            isDone = true;
-        }
-        catch(Exception e)
-        {
-            XDebug.LogError("cvs error: " + e.Message);
-        }
+        string path = XConfig.stream_path + @"/" + bytePath + ".bytes";
+        FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+        ReadFile(stream);
+        stream.Close();
+        isDone = true;
     }
     
     public BaseRow BinarySearch(BaseRow[] table, int low, int high, int key)
