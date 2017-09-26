@@ -1,5 +1,5 @@
-﻿using System.IO;
-using XTable;
+﻿using System;
+using System.IO;
 
 public abstract class CVSReader
 {
@@ -18,12 +18,16 @@ public abstract class CVSReader
         try
         {
             string path = XConfig.res_path + bytePath + ".bytes";
+            XDebug.Log("create cvs: ", bytePath);
             FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             ReadFile(fs);
             fs.Close();
             isDone = true;
         }
-        catch { }
+        catch(Exception e)
+        {
+            XDebug.LogError("cvs error: " + e.Message);
+        }
     }
     
     public BaseRow BinarySearch(BaseRow[] table, int low, int high, int key)

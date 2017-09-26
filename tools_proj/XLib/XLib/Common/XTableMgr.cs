@@ -29,6 +29,7 @@ public class XTableMgr
 		Add<XEntityStatistics>();
 		Add<XNpcList>();
 		loadFinish = false;
+        XDebug.Log("table mgr init");
         ThreadLoad();
     }
 
@@ -56,6 +57,7 @@ public class XTableMgr
                 loadFinish = true;
                 if(tableLoaded!=null)
                 {
+                    XDebug.Log("load finish");
                     tableLoaded(true);
                 }
                 //tableLoaded?.Invoke(true);
