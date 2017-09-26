@@ -51,6 +51,10 @@ public class ABManager : XSingleton<ABManager>
                 depStream.Position = 0;
                 depInfoReader.Read(depStream);
             }
+            else
+            {
+                XDebug.LogError("not find dep");
+            }
         }
         depStream.Close();
     }

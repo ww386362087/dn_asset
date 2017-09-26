@@ -82,40 +82,25 @@ public class AssetBundlePathResolver
             if (cacheDir == null)
             {
                 string dir;
+                bool is_test = false;
+#if TEST
+                is_test = true;
+#endif
                 switch (Application.platform)
                 {
                     case RuntimePlatform.Android:
-                        dir = string.Format("{0}/update/AssetBundles", Application.persistentDataPath);
+                        dir = string.Format("{0}/update/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
                         break;
                     case RuntimePlatform.IPhonePlayer:
-                        dir = string.Format("{0}/update/AssetBundles", Application.persistentDataPath);
+                        dir = string.Format("{0}/update/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
                         break;
                     default:
-#if DEBUG
-                        RuntimePlatform platform = Application.platform;
-                        switch (platform)
-                        {
-                            case RuntimePlatform.Android:
-                                dir = string.Format("{0}/update/Android/AssetBundles", Application.streamingAssetsPath);
-                                break;
-                            case RuntimePlatform.IPhonePlayer:
-                                dir = string.Format("{0}/update/iOS/AssetBundles", Application.streamingAssetsPath);
-                                break;
-                            default:
-                                dir = string.Format("{0}/update/AssetBundles", Application.streamingAssetsPath);
-                                break;
-                        }
-#else
-                            dir = string.Format("{0}/update/AssetBundles", Application.persistentDataPath);
-#endif
+                        dir = string.Format("{0}/update/AssetBundles", Application.streamingAssetsPath);
                         break;
-
                 }
                 cacheDir = new DirectoryInfo(dir);
-                if (!cacheDir.Exists)
-                    cacheDir.Create();
+                if (!cacheDir.Exists) cacheDir.Create();
             }
-
             return cacheDir.FullName;
         }
     }
