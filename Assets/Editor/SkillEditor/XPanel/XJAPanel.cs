@@ -39,7 +39,7 @@ public class XJAPanel : XPanel
             }
             if (GUILayout.Button("Browser", GUILayout.MaxWidth(70)))
             {
-                string file = EditorUtility.OpenFilePanel("Select Skp file", XEditorPath.Skp, "txt");
+                string file = EditorUtility.OpenFilePanel("Select Skp file", XEditorLibrary.Skp, "txt");
                 if (file.Length > 0)
                 {
                     int s = file.LastIndexOf('/');
@@ -77,7 +77,7 @@ public class XJAPanel : XPanel
             }
             if (GUILayout.Button("Browser", GUILayout.MaxWidth(70)))
             {
-                string file = EditorUtility.OpenFilePanel("Select Skp file", XEditorPath.Skp, "txt");
+                string file = EditorUtility.OpenFilePanel("Select Skp file", XEditorLibrary.Skp, "txt");
                 if (file.Length > 0)
                 {
                     int s = file.LastIndexOf('/');

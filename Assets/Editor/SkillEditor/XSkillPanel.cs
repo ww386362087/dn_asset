@@ -484,7 +484,7 @@ public class XSkillPanel : Editor
         StripData(_hoster.SkillData);
 
         XDataIO<XSkillData>.singleton.SerializeData(file, _hoster.SkillData);
-        XDataIO<XConfigData>.singleton.SerializeData(XEditorPath.GetCfgFromSkp(file), _hoster.ConfigData);
+        XDataIO<XConfigData>.singleton.SerializeData(XEditorLibrary.GetCfgFromSkp(file), _hoster.ConfigData);
 
         XDataBuilder.Time = File.GetLastWriteTime(file);
         _status = "already saved.";
@@ -492,7 +492,7 @@ public class XSkillPanel : Editor
 
     private void DeserializeData(string file)
     {
-        _hoster.ConfigData = XDataIO<XConfigData>.singleton.DeserializeData(XEditorPath.GetCfgFromSkp(file));
+        _hoster.ConfigData = XDataIO<XConfigData>.singleton.DeserializeData(XEditorLibrary.GetCfgFromSkp(file));
         _hoster.SkillData = XDataIO<XSkillData>.singleton.DeserializeData(file);
 
         XDataBuilder.singleton.HotBuild(_hoster, _hoster.ConfigData);

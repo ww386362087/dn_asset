@@ -115,7 +115,7 @@ namespace XEditor
 
         public void SaveToFile()
         {
-            string path = EditorUtility.SaveFilePanel("Select a file to save", XEditorPath.Lev, "temp.txt", "txt");
+            string path = EditorUtility.SaveFilePanel("Select a file to save", XEditorLibrary.Lev, "temp.txt", "txt");
             SaveToFile(path, false);
         }
 
@@ -172,7 +172,7 @@ namespace XEditor
         public void LoadFromFile()
         {
             current_level = "";
-            string path = EditorUtility.OpenFilePanel("Select a file to load", XEditorPath.Lev, "txt");
+            string path = EditorUtility.OpenFilePanel("Select a file to load", XEditorLibrary.Lev, "txt");
             RemoveSceneViewInstance();
             _waves.Clear();
             _preLoadInfo.Clear();
@@ -227,13 +227,13 @@ namespace XEditor
         public void OpenLevelScriptFile()
         {
             if (string.IsNullOrEmpty(current_level)) return;
-            System.Diagnostics.Process.Start("notepad.exe", "./" + XEditorPath.Lev + current_level + "_sc.txt");
+            System.Diagnostics.Process.Start("notepad.exe", "./" + XEditorLibrary.Lev + current_level + "_sc.txt");
         }
 
         public void LoadWallInfo()
         {
             if (string.IsNullOrEmpty(current_level)) return;
-            string fileName = "./" + XEditorPath.Lev + current_level + "_sc.txt";
+            string fileName = "./" + XEditorLibrary.Lev + current_level + "_sc.txt";
             if (!File.Exists(fileName)) return;
             string content = File.ReadAllText(fileName);
             string[] commands = content.Split(new char[] { '\n' });
@@ -288,7 +288,7 @@ namespace XEditor
         {
             if (string.IsNullOrEmpty(current_level)) return;
 
-            string fileName = "./" + XEditorPath.Lev + current_level + "_sc.txt";
+            string fileName = "./" + XEditorLibrary.Lev + current_level + "_sc.txt";
             if (!File.Exists(fileName)) return;
             string content = File.ReadAllText(fileName);
             string final = "";

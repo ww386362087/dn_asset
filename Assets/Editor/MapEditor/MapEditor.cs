@@ -56,13 +56,13 @@ namespace XEditor
         {
             UnityEngine.SceneManagement.Scene scene = EditorSceneManager.GetActiveScene();
             //Application.loadedLevelName
-            string path = EditorUtility.SaveFilePanel("Select a file to save", XEditorPath.Sc, scene.name + ".bytes", "bytes");
+            string path = EditorUtility.SaveFilePanel("Select a file to save", XEditorLibrary.Sc, scene.name + ".bytes", "bytes");
             if (!string.IsNullOrEmpty(path)) _map_generate.Generate(path);
         }
 
         private void LoadMapHeight()
         {
-            string path = EditorUtility.OpenFilePanel("Select a file to load", XEditorPath.Sc, "bytes");
+            string path = EditorUtility.OpenFilePanel("Select a file to load", XEditorLibrary.Sc, "bytes");
             if (!string.IsNullOrEmpty(path)) _map_generate.LoadFromFile(path);
         }
 

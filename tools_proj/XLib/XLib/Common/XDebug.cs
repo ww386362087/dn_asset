@@ -1,25 +1,39 @@
 ﻿using System.Text;
 using UnityEngine;
+using System.IO;
+
+public enum LogLevel
+{
+    Log,
+    Green,
+    Warn,
+    Error,
+    None, // 不输出log
+}
 
 /// <summary>
 /// log输出
 /// 1. log控制开关
 /// 2. 字符串拼接 没有额外开销
+/// 3. 输出本地文件 outlevel
 /// </summary>
 public class XDebug
 {
     static StringBuilder sb = new StringBuilder();
 
-    enum LogLevel
-    {
-        None, // 不输出log
-        Log,
-        Green,
-        Warn,
-        Error
-    }
+    internal static LogLevel loglevel = LogLevel.Error;
 
-    static readonly LogLevel loglevel = LogLevel.Error;
+    internal static LogLevel outlevel = LogLevel.None;
+
+    internal static string log_file_path;
+
+    internal static void Init(LogLevel log, LogLevel tofile)
+    {
+        loglevel = log;
+        outlevel = tofile;
+        log_file_path = XConfig.cache_path + @"/log.txt";
+        CleanLogFile();
+    }
 
     public static void Log(object param)
     {
@@ -41,8 +55,11 @@ public class XDebug
 
     public static void Log(object param1, object param2, object param3, object param4)
     {
+        Append(param1, param2, param3, param4);
         if (loglevel >= LogLevel.Log)
-            Debug.Log(Append(param1, param2, param3, param4));
+            Debug.Log(sb);
+        if (outlevel >= LogLevel.Log)
+            Write(sb);
     }
 
     public static void LogGreen(object param)
@@ -65,8 +82,11 @@ public class XDebug
 
     public static void LogGreen(object param1, object param2, object param3, object param4)
     {
+        GreenAppend(param1, param2, param3, param4);
         if (loglevel >= LogLevel.Green)
-            Debug.Log(GreenAppend(param1, param2, param3, param4));
+            Debug.Log(sb);
+        if (outlevel >= LogLevel.Green)
+            Write(sb);
     }
 
     public static void LogWarning(object param)
@@ -88,8 +108,11 @@ public class XDebug
 
     public static void LogWarning(object param1, object param2, object param3, object param4)
     {
+        Append(param1, param2, param3, param4);
         if (loglevel >= LogLevel.Warn)
-            Debug.LogWarning(Append(param1, param2, param3, param4));
+            Debug.LogWarning(sb);
+        if (outlevel >= LogLevel.Warn)
+            Write(sb);
     }
 
     public static void LogError(object param)
@@ -112,11 +135,14 @@ public class XDebug
 
     public static void LogError(object param1, object param2, object param3, object param4)
     {
+        Append(param1, param2, param3, param4);
         if (loglevel >= LogLevel.Error)
-            Debug.LogError(Append(param1, param2, param3, param4));
+            Debug.LogError(sb);
+        if (outlevel >= LogLevel.Error)
+            Write(sb);
     }
 
-    private static string Append(object param1, object param2, object param3, object param4)
+    private static void Append(object param1, object param2, object param3, object param4)
     {
         sb.Length = 0;
         sb.Append(param1);
@@ -126,11 +152,10 @@ public class XDebug
             sb.Append(param3);
         if (param4 != null)
             sb.Append(param4);
-        return sb.ToString();
     }
 
 
-    private static string GreenAppend(object param1, object param2, object param3, object param4)
+    private static void GreenAppend(object param1, object param2, object param3, object param4)
     {
         sb.Length = 0;
         sb.Append("<color=green>");
@@ -142,7 +167,30 @@ public class XDebug
         if (param4 != null)
             sb.Append(param4);
         sb.Append("</color>");
-        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 如果由 path 指定的文件不存在，则创建该文件。如果该文件存在，则对 StreamWriter 的写入操作将文本追加到该文件。
+    /// 允许其他线程在文件打开后读取该文件。
+    /// </summary>
+    private static void Write(StringBuilder sb)
+    {
+        if (!string.IsNullOrEmpty(log_file_path))
+        {
+            using (StreamWriter writer = File.AppendText(log_file_path))
+            {
+                writer.WriteLine(sb.ToString());
+            }
+        }
+    }
+
+
+    private static void CleanLogFile()
+    {
+        if(File.Exists(log_file_path))
+        {
+            File.Delete(log_file_path);
+        }
     }
 
 }

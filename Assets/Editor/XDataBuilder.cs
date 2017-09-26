@@ -17,7 +17,7 @@ namespace XEditor
             try
             {
                 XSkillHoster.Quit = false;
-                string path = XEditorPath.GetCfgFromSkp(pathwithname);
+                string path = XEditorLibrary.GetCfgFromSkp(pathwithname);
                 XConfigData conf = XDataIO<XConfigData>.singleton.DeserializeData(path);
                 GameObject prefab = XEditorLibrary.GetDummy((uint)conf.Player);
                 if (prefab == null) { XDebug.LogError("Prefab not found by id: ", conf.Player); return; }
@@ -27,7 +27,7 @@ namespace XEditor
             }
             catch (Exception e)
             {
-                XDebug.LogError("Error occurred during loading config file: " , pathwithname , " with error: " , e.Message);
+                XDebug.LogError("Error occurred during loading config file: " , pathwithname , " with error:\n" , e.StackTrace);
             }
         }
 
@@ -163,7 +163,7 @@ namespace XEditor
 
             XSkillHoster component = hoster.GetComponent<XSkillHoster>();
             string directory = conf.Directory[conf.Directory.Length - 1] == '/' ? conf.Directory.Substring(0, conf.Directory.Length - 1) : conf.Directory;
-            string path = XEditorPath.GetPath("Skill" + "/" + directory);
+            string path = XEditorLibrary.GetPath("Skill" + "/" + directory);
 
             component.ConfigData = conf;
             component.SkillData = XDataIO<XSkillData>.singleton.DeserializeData(path + conf.SkillName + ".txt");
@@ -195,7 +195,7 @@ namespace XEditor
                                             "Skill has been Modified outside, Press 'OK' to reload file or 'Ignore' to maintain your change. (Make sure the '.config' file for skill script has been well synchronized)",
                                             "Ok", "Ignore"))
                 {
-                    hoster.ConfigData = XDataIO<XConfigData>.singleton.DeserializeData(XEditorPath.GetCfgFromSkp(pathwithname));
+                    hoster.ConfigData = XDataIO<XConfigData>.singleton.DeserializeData(XEditorLibrary.GetCfgFromSkp(pathwithname));
                     hoster.SkillData = XDataIO<XSkillData>.singleton.DeserializeData(pathwithname);
 
                     HotBuild(hoster, hoster.ConfigData);

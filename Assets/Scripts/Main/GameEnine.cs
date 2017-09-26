@@ -12,13 +12,12 @@ public class GameEnine : XObject
         _entrance = en;
 
         XTimerMgr.singleton.Init();
+        XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();
-        XConfig.Initial();
         XTableMgr.Initial();
         ABManager.singleton.Initial();
         Documents.singleton.Initial();
         UIManager.singleton.Initial();
-        
     }
 
     

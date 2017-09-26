@@ -134,7 +134,7 @@ internal class XInnerEditor : EditorWindow
 
     public static void OpenSkill()
     {
-        string file = EditorUtility.OpenFilePanel("Select skill file", XEditorPath.Skp, "txt");
+        string file = EditorUtility.OpenFilePanel("Select skill file", XEditorLibrary.Skp, "txt");
         if (file.Length != 0)
         {
             Scene scene = EditorSceneManager.GetActiveScene();
@@ -190,8 +190,8 @@ internal class XInnerEditor : EditorWindow
 
     private string PreStoreData()
     {
-        string skp = XEditorPath.GetPath("Skill" + "/" + _directory) + _name + ".txt";
-        string config = XEditorPath.GetEditorBasedPath("Skill" + "/" + _directory) + _name + ".config";
+        string skp = XEditorLibrary.GetPath("Skill" + "/" + _directory) + _name + ".txt";
+        string config = XEditorLibrary.GetEditorBasedPath("Skill" + "/" + _directory) + _name + ".config";
 
         XConfigData conf = new XConfigData();
 

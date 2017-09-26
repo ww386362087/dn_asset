@@ -286,7 +286,7 @@ namespace XEditor
             if (data != null)
             {
                 _run_data = data;
-                string file = XEditorPath.Cts + data.Name + ".txt";
+                string file = XEditorLibrary.Cts + data.Name + ".txt";
                 XDataIO<XCutSceneData>.singleton.SerializeData(file, data);
             }
         }
@@ -309,12 +309,12 @@ namespace XEditor
             EditorGUILayout.LabelField("Scene", _scene);
             if (GUILayout.Button("Browser", GUILayout.MaxWidth(80)))
             {
-                string file = EditorUtility.OpenFilePanel("Select unity scene file", XEditorPath.Sce, "unity");
+                string file = EditorUtility.OpenFilePanel("Select unity scene file", XEditorLibrary.Sce, "unity");
 
                 if (file.Length != 0)
                 {
                     file = file.Remove(file.LastIndexOf("."));
-                    _scene = file.Remove(0, file.IndexOf(XEditorPath.Sce));
+                    _scene = file.Remove(0, file.IndexOf(XEditorLibrary.Sce));
 
                     Scene scene = EditorSceneManager.GetActiveScene();
                     if (scene.name.Length == 0 || !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
@@ -445,7 +445,7 @@ namespace XEditor
 
             if (GUILayout.Button("Open"))
             {
-                _file = EditorUtility.OpenFilePanel("Select cutscene file", XEditorPath.Cts, "txt");
+                _file = EditorUtility.OpenFilePanel("Select cutscene file", XEditorLibrary.Cts, "txt");
                 if (_file.Length != 0)
                 {
                     _open_scene = true;
