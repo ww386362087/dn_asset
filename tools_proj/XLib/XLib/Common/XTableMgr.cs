@@ -81,8 +81,7 @@ public class XTableMgr
         Dictionary<uint, CVSReader>.Enumerator e= readers.GetEnumerator();
         while (e.MoveNext())
         {
-            //ThreadPool.QueueUserWorkItem(LoadTable, e.Current.Value);
-            LoadTable(e.Current.Value);
+            ThreadPool.QueueUserWorkItem(LoadTable, e.Current.Value);
         }
         e.Dispose();
         Thread.Sleep(1);

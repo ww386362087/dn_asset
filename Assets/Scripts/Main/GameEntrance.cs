@@ -23,6 +23,7 @@ public class GameEntrance : MonoBehaviour
     void ToStartTest(bool st)
     {
 #if TEST
+        XDebug.LogGreen("callback: " + st);
         start = true;
         TestManager.Get().Start();
 #endif

@@ -37,108 +37,108 @@ public class XDebug
 
     public static void Log(object param)
     {
-        if (loglevel >= LogLevel.Log)
+        if (loglevel <= LogLevel.Log)
             Log(param, null);
     }
 
     public static void Log(object param1, object param2)
     {
-        if (loglevel >= LogLevel.Log)
+        if (loglevel <= LogLevel.Log)
             Log(param1, param2, null);
     }
 
     public static void Log(object param1, object param2, object param3)
     {
-        if (loglevel >= LogLevel.Log)
+        if (loglevel <= LogLevel.Log)
             Log(param1, param2, param3, null);
     }
 
     public static void Log(object param1, object param2, object param3, object param4)
     {
         Append(param1, param2, param3, param4);
-        if (loglevel >= LogLevel.Log)
+        if (loglevel <= LogLevel.Log)
             Debug.Log(sb);
-        if (outlevel >= LogLevel.Log)
+        if (outlevel <= LogLevel.Log)
             Write(sb);
     }
 
     public static void LogGreen(object param)
     {
-        if (loglevel >= LogLevel.Green)
+        if (loglevel <= LogLevel.Green)
             LogGreen(param, null);
     }
 
     public static void LogGreen(object param1, object param2)
     {
-        if (loglevel >= LogLevel.Green)
+        if (loglevel <= LogLevel.Green)
             LogGreen(param1, param2, null);
     }
 
     public static void LogGreen(object param1, object param2, object param3)
     {
-        if (loglevel >= LogLevel.Green)
+        if (loglevel <= LogLevel.Green)
             LogGreen(param1, param2, param3, null);
     }
 
     public static void LogGreen(object param1, object param2, object param3, object param4)
     {
         GreenAppend(param1, param2, param3, param4);
-        if (loglevel >= LogLevel.Green)
+        if (loglevel <= LogLevel.Green)
             Debug.Log(sb);
-        if (outlevel >= LogLevel.Green)
+        if (outlevel <= LogLevel.Green)
             Write(sb);
     }
 
     public static void LogWarning(object param)
     {
-        if (loglevel >= LogLevel.Warn)
+        if (loglevel <= LogLevel.Warn)
             LogWarning(param, null);
     }
     public static void LogWarning(object param1, object param2)
     {
-        if (loglevel >= LogLevel.Warn)
+        if (loglevel <= LogLevel.Warn)
             LogWarning(param1, param2, null);
     }
 
     public static void LogWarning(object param1, object param2, object param3)
     {
-        if (loglevel >= LogLevel.Warn)
+        if (loglevel <= LogLevel.Warn)
             LogWarning(param1, param2, param3, null);
     }
 
     public static void LogWarning(object param1, object param2, object param3, object param4)
     {
         Append(param1, param2, param3, param4);
-        if (loglevel >= LogLevel.Warn)
+        if (loglevel <= LogLevel.Warn)
             Debug.LogWarning(sb);
-        if (outlevel >= LogLevel.Warn)
+        if (outlevel <= LogLevel.Warn)
             Write(sb);
     }
 
     public static void LogError(object param)
     {
-        if (loglevel >= LogLevel.Error)
+        if (loglevel <= LogLevel.Error)
             LogError(param, null);
     }
 
     public static void LogError(object param1, object param2)
     {
-        if (loglevel >= LogLevel.Error)
+        if (loglevel <= LogLevel.Error)
             LogError(param1, param2, null);
     }
 
     public static void LogError(object param1, object param2, object param3)
     {
-        if (loglevel >= LogLevel.Error)
+        if (loglevel <= LogLevel.Error)
             LogError(param1, param2, param3, null);
     }
 
     public static void LogError(object param1, object param2, object param3, object param4)
     {
         Append(param1, param2, param3, param4);
-        if (loglevel >= LogLevel.Error)
+        if (loglevel <= LogLevel.Error)
             Debug.LogError(sb);
-        if (outlevel >= LogLevel.Error)
+        if (outlevel <= LogLevel.Error)
             Write(sb);
     }
 
