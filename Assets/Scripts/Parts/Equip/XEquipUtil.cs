@@ -141,7 +141,7 @@ public class XEquipUtil
             for (int i = 0; i < fashionIDs.Length; ++i)
             {
                 int fashionID = fashionIDs[i];
-                FashionList.RowData row = fashionList.GetByItemID(fashionID);
+                FashionList.RowData row = fashionList.GetByUID(fashionID);
                 if (row != null)
                 {
                     List<ThreePart> tpLst = new List<ThreePart>();
@@ -158,7 +158,7 @@ public class XEquipUtil
                     {
                         if (row.ReplaceID != null && row.ReplaceID.Length > 1)
                         {
-                            FashionList.RowData replace = fashionList.GetByItemID(row.ReplaceID[1]);
+                            FashionList.RowData replace = fashionList.GetByUID(row.ReplaceID[1]);
                             if (replace != null)
                             {
                                 if (replace.EquipPos == row.EquipPos) row = replace;
