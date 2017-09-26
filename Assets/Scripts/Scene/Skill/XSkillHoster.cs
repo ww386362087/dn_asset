@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using XEditor;
 using XTable;
@@ -375,7 +374,7 @@ public class XSkillHoster : MonoBehaviour
     private void Execute()
     {
         _execute = true;
-        if (_xEditorData.XAutoSelected) Selection.activeObject = gameObject;
+        //if (_xEditorData.XAutoSelected) Selection.activeObject = gameObject;
         if (_current == null) return;
         for(int i=0,max= skills.Count;i<max;i++)
         {
@@ -388,8 +387,8 @@ public class XSkillHoster : MonoBehaviour
         int nh = 0; int nv = 0;
         Vector3 h = Vector3.right;
         Vector3 up = Vector3.up;
-        Vector3 v = SceneView.lastActiveSceneView != null ? SceneView.lastActiveSceneView.rotation * Vector3.forward : Vector3.forward;
-        v.y = 0;
+        //Vector3 v = SceneView.lastActiveSceneView != null ? SceneView.lastActiveSceneView.rotation * Vector3.forward : Vector3.forward;
+        //v.y = 0;
         if (_state != DummyState.Fire)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -407,7 +406,7 @@ public class XSkillHoster : MonoBehaviour
             {
                 if (nh != 0 || nv != 0)
                 {
-                    Vector3 MoveDir = h * nh + v * nv;
+                    Vector3 MoveDir = h * nh;// + v * nv;
                     if (CanAct(MoveDir))
                     {
                         Move(MoveDir);
