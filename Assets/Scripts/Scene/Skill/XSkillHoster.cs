@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using XEditor;
 using XTable;
 
 public class XSkillHoster : MonoBehaviour
