@@ -24,9 +24,6 @@ public class XEditorData
     public bool XQTEStatus_foldout;
     [SerializeField]
     public bool XLogical_foldout;
-
-    [SerializeField]
-    public bool XAutoSelected;
     [SerializeField]
     public bool XFrameByFrame;
     [SerializeField]

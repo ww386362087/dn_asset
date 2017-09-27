@@ -15,13 +15,13 @@ public class GameEnine : XObject
         XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();
         XTableMgr.Initial();
-      
+
         ABManager.singleton.Initial();
         UIManager.singleton.Initial();
         Documents.singleton.Initial();
     }
 
-    
+
 
     public static void Update(float delta)
     {
@@ -44,10 +44,13 @@ public class GameEnine : XObject
 
     public static void OnUnintial()
     {
-
     }
 
 
-
+    public static void OnApplicationQuit()
+    {
+        XDebug.Log("game quit!");
+    }
 
 }
+

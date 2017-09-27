@@ -50,7 +50,8 @@ public class TestManager
                     test = new TestCutScene();
                     break;
                 default:
-                    test = new TestScene();
+                    XDebug.Log("test do nothing");
+                    test = new Test();
                     break;
             }
             return test;

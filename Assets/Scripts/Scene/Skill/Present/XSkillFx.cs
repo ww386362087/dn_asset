@@ -26,11 +26,11 @@ public class XSkillFx : XSkill
     public override void OnTrigger(object param)
     {
         XFxData data = param as XFxData;
-        if (data.Shield) return;
+        if (data.Shield || data.Fx == null) return;
 
         Transform trans = host.transform;
         Vector3 offset = new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
-
+        
         XFx fx = XFxMgr.singleton.CreateFx(data.Fx);
         fx.DelayDestroy = data.Destroy_Delay;
 

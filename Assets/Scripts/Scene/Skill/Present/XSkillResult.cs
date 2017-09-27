@@ -32,7 +32,6 @@ public class XSkillResult : XSkill
         if (host.state != XSkillHoster.DummyState.Fire) return;
 
         XResultData data = param as XResultData;
-
         if (data.Loop)
         {
             int i = (data.Index << 16) | 0;
@@ -97,7 +96,6 @@ public class XSkillResult : XSkill
         }
 
         ++execute_cout;
-
         if (current.Result[count].Loop_Count > execute_cout)
            host.AddedTimerToken(XTimerMgr.singleton.SetTimer(current.Result[count].Cycle, LoopResults, ((count << 16) | execute_cout)), true);
     }
@@ -108,7 +106,6 @@ public class XSkillResult : XSkill
 
         int i = (int)param;
         int count = i >> 16;
-
         int group_cout = i & 0x00FF;
         int loop_cout = (i & 0xFF00) >> 8;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using XTable;
+using System.Collections;
 
 public class XSkillHoster : MonoBehaviour
 {
@@ -59,11 +60,11 @@ public class XSkillHoster : MonoBehaviour
     private bool _execute = false;
     private bool _anim_init = false;
     private bool _skill_when_move = false;
-    
+
     private List<uint> _combinedToken = new List<uint>();
     private List<uint> _presentToken = new List<uint>();
     private List<uint> _logicalToken = new List<uint>();
-    
+
     public XSkillResult skillResult;
     public XSkillMob skillMob;
     public XSkillFx skillFx;
@@ -119,19 +120,18 @@ public class XSkillHoster : MonoBehaviour
     }
 
     public DummyState state { get { return _state; } set { _state = value; } }
-
-
+    
     void Awake()
     {
         ShownTransform = transform;
-        GameEnine.Init(this);
+        gameObject.AddComponent<GameEntrance>();
     }
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return null;
         _state = DummyState.Idle;
         if (oVerrideController == null) BuildOverride();
-
         _camera = new XSkillCamera(gameObject);
         _camera.Initialize();
         _camera.UnityCamera.fieldOfView = defaultFov;
@@ -141,14 +141,13 @@ public class XSkillHoster : MonoBehaviour
         light.intensity = 0.5f;
 
         InitHost();
+        //XLoading.Show(false);
     }
 
     void OnDrawGizmos()
     {
         if (nHotID < 0 || CurrentSkillData.Result == null || nHotID >= CurrentSkillData.Result.Count) return;
-
         if (ShownTransform == null) ShownTransform = transform;
-
         float offset_x = CurrentSkillData.Result[nHotID].LongAttackEffect ? CurrentSkillData.Result[nHotID].LongAttackData.At_X : CurrentSkillData.Result[nHotID].Offset_X;
         float offset_z = CurrentSkillData.Result[nHotID].LongAttackEffect ? CurrentSkillData.Result[nHotID].LongAttackData.At_Z : CurrentSkillData.Result[nHotID].Offset_Z;
         Vector3 offset = ShownTransform.rotation * new Vector3(offset_x, 0, offset_z);
@@ -176,14 +175,8 @@ public class XSkillHoster : MonoBehaviour
                     float x = CurrentSkillData.Result[nHotID].Range / ShownTransform.localScale.y * Mathf.Cos(theta);
                     float z = CurrentSkillData.Result[nHotID].Range / ShownTransform.localScale.y * Mathf.Sin(theta);
                     Vector3 endPoint = new Vector3(x, 0, z);
-                    if (theta == 0)
-                    {
-                        firstPoint = endPoint;
-                    }
-                    else
-                    {
-                        Gizmos.DrawLine(beginPoint, endPoint);
-                    }
+                    if (theta == 0) firstPoint = endPoint;
+                    else Gizmos.DrawLine(beginPoint, endPoint);
                     beginPoint = endPoint;
                 }
                 Gizmos.DrawLine(firstPoint, beginPoint);
@@ -198,14 +191,8 @@ public class XSkillHoster : MonoBehaviour
                         float x = CurrentSkillData.Result[nHotID].Low_Range / ShownTransform.localScale.y * Mathf.Cos(theta);
                         float z = CurrentSkillData.Result[nHotID].Low_Range / ShownTransform.localScale.y * Mathf.Sin(theta);
                         Vector3 endPoint = new Vector3(x, 0, z);
-                        if (theta == 0)
-                        {
-                            firstPoint = endPoint;
-                        }
-                        else
-                        {
-                            Gizmos.DrawLine(beginPoint, endPoint);
-                        }
+                        if (theta == 0) firstPoint = endPoint;
+                        else Gizmos.DrawLine(beginPoint, endPoint);
                         beginPoint = endPoint;
                     }
                     Gizmos.DrawLine(firstPoint, beginPoint);
@@ -216,23 +203,15 @@ public class XSkillHoster : MonoBehaviour
                 if (CurrentSkillData.Result[nHotID].LongAttackData.Type == XResultBulletType.Ring)
                 {
                     float m_Theta = 0.01f;
-
                     Vector3 beginPoint = Vector3.zero;
                     Vector3 firstPoint = Vector3.zero;
-
                     for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
                     {
                         float x = ir / ShownTransform.localScale.y * Mathf.Cos(theta);
                         float z = ir / ShownTransform.localScale.y * Mathf.Sin(theta);
                         Vector3 endPoint = new Vector3(x, 0, z);
-                        if (theta == 0)
-                        {
-                            firstPoint = endPoint;
-                        }
-                        else
-                        {
-                            Gizmos.DrawLine(beginPoint, endPoint);
-                        }
+                        if (theta == 0) firstPoint = endPoint;
+                        else Gizmos.DrawLine(beginPoint, endPoint);
                         beginPoint = endPoint;
                     }
 
@@ -245,14 +224,8 @@ public class XSkillHoster : MonoBehaviour
                         float x = or / ShownTransform.localScale.y * Mathf.Cos(theta);
                         float z = or / ShownTransform.localScale.y * Mathf.Sin(theta);
                         Vector3 endPoint = new Vector3(x, 0, z);
-                        if (theta == 0)
-                        {
-                            firstPoint2 = endPoint;
-                        }
-                        else
-                        {
-                            Gizmos.DrawLine(beginPoint2, endPoint);
-                        }
+                        if (theta == 0) firstPoint2 = endPoint;
+                        else Gizmos.DrawLine(beginPoint2, endPoint);
                         beginPoint2 = endPoint;
                     }
                     Gizmos.DrawLine(firstPoint2, beginPoint2);
@@ -357,8 +330,7 @@ public class XSkillHoster : MonoBehaviour
         GUI.Label(_rect, "Action Frame: " + _action_framecount);
 #endif
     }
-
-
+    
     private void InitHost()
     {
         skills.Clear();
@@ -373,9 +345,8 @@ public class XSkillHoster : MonoBehaviour
     private void Execute()
     {
         _execute = true;
-        //if (_xEditorData.XAutoSelected) Selection.activeObject = gameObject;
         if (_current == null) return;
-        for(int i=0,max= skills.Count;i<max;i++)
+        for (int i = 0, max = skills.Count; i < max; i++)
         {
             skills[i].Execute();
         }
@@ -386,8 +357,6 @@ public class XSkillHoster : MonoBehaviour
         int nh = 0; int nv = 0;
         Vector3 h = Vector3.right;
         Vector3 up = Vector3.up;
-        //Vector3 v = SceneView.lastActiveSceneView != null ? SceneView.lastActiveSceneView.rotation * Vector3.forward : Vector3.forward;
-        //v.y = 0;
         if (_state != DummyState.Fire)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -405,7 +374,7 @@ public class XSkillHoster : MonoBehaviour
             {
                 if (nh != 0 || nv != 0)
                 {
-                    Vector3 MoveDir = h * nh;// + v * nv;
+                    Vector3 MoveDir = h * nh;
                     if (CanAct(MoveDir))
                     {
                         Move(MoveDir);
@@ -419,7 +388,6 @@ public class XSkillHoster : MonoBehaviour
             }
             if (_anim_init) Execute();
             _anim_init = false;
-
         }
     }
 
@@ -448,7 +416,7 @@ public class XSkillHoster : MonoBehaviour
                 else
                     ator.SetTrigger(trigger);
             }
-            else 
+            else
             {
                 ator.SetTrigger(trigger);
             }
@@ -540,7 +508,6 @@ public class XSkillHoster : MonoBehaviour
                 }
             }
         }
-
         if (data.Result[triggerTime].Sector_Type)
         {
             if (!(distance >= data.Result[triggerTime].Low_Range &&
@@ -554,7 +521,6 @@ public class XSkillHoster : MonoBehaviour
                     XDebug.Log("At " + triggerTime, " Hit missing: distance is " + distance.ToString("F3"), " ( < " + data.Result[triggerTime].Range.ToString("F3") + ")");
                     XDebug.Log("At " + triggerTime, " Hit missing: dir is " + angle.ToString("F3"), " ( < " + (data.Result[triggerTime].Scope * 0.5f).ToString("F3") + ")");
                 }
-
                 return false;
             }
         }
@@ -576,11 +542,9 @@ public class XSkillHoster : MonoBehaviour
                     XDebug.Log("-----------------------------------");
                     XDebug.Log("Not in rect " + vecs[0], " " + vecs[1], " " + vecs[2], " " + vecs[3]);
                 }
-
                 return false;
             }
         }
-
         return true;
     }
 
@@ -653,29 +617,16 @@ public class XSkillHoster : MonoBehaviour
         Vector3 from = transform.forward;
         _from = YRotation(from);
         float angle = Vector3.Angle(from, targetDir);
-
-        if (XCommon.singleton.Clockwise(from, targetDir))
-        {
-            _to = _from + angle;
-        }
-        else
-        {
-            _to = _from - angle;
-        }
+        bool clockwise = XCommon.singleton.Clockwise(from, targetDir);
+        _to = clockwise ? _from + angle : _from - angle;
         rotate_speed = speed;
     }
 
     private float YRotation(Vector3 dir)
     {
         float r = Vector3.Angle(Vector3.forward, dir);
-        if (XCommon.singleton.Clockwise(Vector3.forward, dir))
-        {
-            return r;
-        }
-        else
-        {
-            return 360.0f - r;
-        }
+        bool clockwise = XCommon.singleton.Clockwise(Vector3.forward, dir);
+        return clockwise ? r : 360.0f - r;
     }
 
     private void BuildOverride()
@@ -707,16 +658,13 @@ public class XSkillHoster : MonoBehaviour
                 if (ja.Ja != null && ja.Ja.Name.Length > 0) oVerrideController[XSkillData.JaOverrideMap[ja.Ja.SkillPosition]] = Resources.Load(ja.Ja.ClipName) as AnimationClip;
             }
         }
-        else if (SkillData.TypeToken == 3)
-        {
-        }
+        else if (SkillData.TypeToken == 3) { }
         else
         {
             oVerrideController["Art"] = clip;
         }
 
         _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_xConfigData.Player);
-
         oVerrideController["Idle"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle) as AnimationClip;
         oVerrideController["Run"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackRun) as AnimationClip;
         oVerrideController["Walk"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackWalk) as AnimationClip;
@@ -828,6 +776,5 @@ public class XSkillHoster : MonoBehaviour
             }
         }
     }
-
 }
 

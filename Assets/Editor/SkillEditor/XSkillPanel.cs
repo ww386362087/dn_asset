@@ -87,8 +87,7 @@ public class XSkillPanel : Editor
         _hoster.ConfigData.RotateSpeed = EditorGUILayout.FloatField("Rotate Speed", _hoster.ConfigData.RotateSpeed);
 
         EditorGUILayout.Space();
-        _hoster.EditorData.XAutoSelected = EditorGUILayout.Toggle("Auto Selection", _hoster.EditorData.XAutoSelected);
-        _hoster.EditorData.XFrameByFrame = EditorGUILayout.Toggle("Frame By Frame", _hoster.EditorData.XFrameByFrame);
+         _hoster.EditorData.XFrameByFrame = EditorGUILayout.Toggle("Frame By Frame", _hoster.EditorData.XFrameByFrame);
         EditorGUILayout.Space();
 
         /*****Skill Settings*****/
