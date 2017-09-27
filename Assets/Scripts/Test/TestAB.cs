@@ -16,11 +16,9 @@ public class TestAB : ITest
 
     public void Start()
     {
-        XDebug.LogGreen("ab test start");
         TestAvatar();
         TestUIAB();
     }
-
 
     private void TestAvatar()
     {
@@ -30,7 +28,7 @@ public class TestAB : ITest
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
         m_FashionList = new List<EquipPart>();
-        for (int i = 0,max= XTableMgr.GetTable<FashionSuit>().Table.Length; i < max; ++i)
+        for (int i = 0, max = XTableMgr.GetTable<FashionSuit>().Table.Length; i < max; ++i)
         {
             FashionSuit.RowData row = XTableMgr.GetTable<FashionSuit>().Table[i];
             if (row.FashionID != null)
@@ -41,7 +39,7 @@ public class TestAB : ITest
 
         //装备
         m_EquipList = new List<EquipPart>();
-        for (int i = 0,max= XTableMgr.GetTable<EquipSuit>().Table.Length; i < max; ++i)
+        for (int i = 0, max = XTableMgr.GetTable<EquipSuit>().Table.Length; i < max; ++i)
         {
             EquipSuit.RowData row = XTableMgr.GetTable<EquipSuit>().Table[i];
             if (row.EquipID != null)
@@ -74,7 +72,8 @@ public class TestAB : ITest
         "ar_duya_d02_bigbow_weapon",
         "ar_tamasama_d_bigbow_weapon",
         "ar_ziyo_d03_bigbow_weapon",
-        "ar_pajamas_a03_bigbow_weapon"};
+        "ar_pajamas_a03_bigbow_weapon"
+    };
 
     public void OnGUI()
     {
@@ -159,10 +158,10 @@ public class TestAB : ITest
     {
 
         Mesh mesh = t.GetComponent<MeshFilter>().mesh;
-         XDebug.Log("mesh v: " + mesh.vertices.Length , " tri: " , mesh.triangles.Length , " uv: " + mesh.uv.Length);
-        for (int i = 0; i < mesh.vertices.Length; i++)  XDebug.Log("v" , i , ":" , mesh.vertices[i]);
-        for (int i = 0; i < mesh.uv.Length; i++)  XDebug.Log("uv" , i , ":" , mesh.uv[i]);
-        for (int i = 0; i < mesh.triangles.Length; i++)  XDebug.Log("tri" , i , ":" , mesh.triangles[i]);
+        XDebug.Log("mesh v: " + mesh.vertices.Length, " tri: ", mesh.triangles.Length, " uv: " + mesh.uv.Length);
+        for (int i = 0; i < mesh.vertices.Length; i++) XDebug.Log("v", i, ":", mesh.vertices[i]);
+        for (int i = 0; i < mesh.uv.Length; i++) XDebug.Log("uv", i, ":", mesh.uv[i]);
+        for (int i = 0; i < mesh.triangles.Length; i++) XDebug.Log("tri", i, ":", mesh.triangles[i]);
         mesh = new Mesh();
         mesh.Clear();
 
@@ -177,12 +176,13 @@ public class TestAB : ITest
         t.GetComponent<MeshFilter>().mesh = mesh;
 
     }
-    
+
     public void Update() { }
 
     public void LateUpdate()
     {
     }
+
 }
 
 

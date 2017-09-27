@@ -15,9 +15,10 @@ public class GameEnine : XObject
         XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();
         XTableMgr.Initial();
+      
         ABManager.singleton.Initial();
-        Documents.singleton.Initial();
         UIManager.singleton.Initial();
+        Documents.singleton.Initial();
     }
 
     

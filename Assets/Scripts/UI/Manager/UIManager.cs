@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+
+
 public class UIManager : XSingleton<UIManager>
 {
 
@@ -16,7 +18,9 @@ public class UIManager : XSingleton<UIManager>
 
     private Camera _uiCamera;
     private Canvas _canvas;
-    private Image _image;
+    private Image _fade;
+    private Image _loadimg;
+    private Text _loadtxt;
     private int _sort = 100;
     private const int _gap = 10;
     private const int _top = 800000;
@@ -29,7 +33,11 @@ public class UIManager : XSingleton<UIManager>
 
     public Canvas Canvas { get { return _canvas; } }
 
-    public Image FadeImage { get { return _image; } }
+    public Image FadeImage { get { return _fade; } }
+
+    public Image LoadImage { get { return _loadimg; } }
+
+    public Text LoadText { get { return _loadtxt; } }
 
     public void Initial()
     {
@@ -56,12 +64,16 @@ public class UIManager : XSingleton<UIManager>
 
         GameObject go = XResourceMgr.Load<GameObject>(rootpath, AssetType.Prefab);
         GameObject.DontDestroyOnLoad(go);
-      
+
         XResourceMgr.UnloadAsset(rootpath, AssetType.Prefab);
         _uiCamera = go.GetComponent<Camera>();
         _canvas = go.transform.GetChild(0).GetComponent<Canvas>();
-        _image = _canvas.transform.GetChild(0).GetComponent<Image>();
-        _image.color = new Color(1, 1, 1, 0);
+        _fade = _canvas.transform.GetChild(0).GetComponent<Image>();
+        _fade.color = new Color(1, 1, 1, 0);
+        _loadimg = _canvas.transform.GetChild(1).GetComponent<Image>();
+        _loadtxt = _loadimg.transform.GetChild(0).GetComponent<Text>();
+        XLoading.Show(true);
+        XTableMgr.tableLoaded += XLoading.OnLoadFinish;
         go = new GameObject("EventSystem");
         go.AddComponent<EventSystem>();
         go.AddComponent<StandaloneInputModule>();
