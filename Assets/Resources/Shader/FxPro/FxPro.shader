@@ -47,7 +47,8 @@
 		//#pragma target 3.0
 		#pragma glsl
 		#pragma fragmentoption ARB_precision_hint_fastest
-		#pragma multi_compile __ FXPRO_HDR_ON
+
+		#pragma multi_compile FXPRO_HDR_ON FXPRO_HDR_OFF
 
 		//+++++++++++++++++++++++++++
 		//USER-DEFINED PARAMETERS

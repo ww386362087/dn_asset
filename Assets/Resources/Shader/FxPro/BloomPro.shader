@@ -21,7 +21,7 @@
 		#pragma glsl
 		#pragma fragmentoption ARB_precision_hint_fastest
 		
-		#pragma multi_compile __ FXPRO_HDR_ON
+		#pragma multi_compile FXPRO_HDR_ON FXPRO_HDR_OFF
 
 
 		sampler2D _MainTex;
@@ -101,7 +101,7 @@
 			#pragma vertex vert_img_aa
 			#pragma fragment frag
  	
-			#pragma multi_compile __ BLOOM_SAMPLES_5
+			#pragma multi_compile BLOOM_SAMPLES_3 BLOOM_SAMPLES_5
  			
 			sampler2D _DsTex1;
 			sampler2D _DsTex2;

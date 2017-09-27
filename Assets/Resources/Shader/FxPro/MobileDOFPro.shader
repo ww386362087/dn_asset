@@ -15,6 +15,7 @@ SubShader {
 		#pragma multi_compile  BLUR_RADIUS_5 BLUR_RADIUS_3
 		#pragma multi_compile DOF_ALL_ON DOF_FAR_ONLY_ON DOF_NEAR_ONLY_ON
 
+		//#pragma multi_compile FXPRO_HDR_ON FXPRO_HDR_OFF
 
 		//#pragma target 3.0
 		#pragma glsl

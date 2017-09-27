@@ -1,110 +1,43 @@
-Shader "Custom/Scene/DiffuseEmisSin" 
-{
-	Properties 
-	{
-		_MainTex ("Base (RGB)", 2D) = "white" {}
-		_Mask ("Mask (B)", 2D) = "white" {}
-		_Emission("EmisColor(RGB) Intensity(A)",COLOR)=(0,0,0,1)
-		_EmisVector("X:Speed Y:Min  Z:Distance  W:Direction   ",vector)=(1,1,0,1)
-	}
+// Simplified Diffuse shader. Differences from regular Diffuse one:
+// - no Main Color
+// - fully supports only 1 directional light. Other lights can affect it, but it will be per-vertex/SH.
+
+Shader "Custom/Scene/DiffuseEmisSin" {
+Properties {
+	_MainTex ("Base (RGB)", 2D) = "white" {}
+	_MaskTex ("Mask (B)", 2D) = "white" {}
+	_Emission("EmisColor(RGB) Intensity(A)",COLOR)=(0,0,0,1)
+	_EmisVector("X:Speed Y:Min  Z:Distance  W:Direction   ",vector)=(1,1,0,1)
+}
+SubShader {
+	Tags { "RenderType"="Opaque" }
+	LOD 150
+
+CGPROGRAM
+#pragma surface surf Lambert noforwardadd
+
+sampler2D _MainTex;
+sampler2D _MaskTex;
+fixed4 _Emission;
+half4 _EmisVector;
+
+struct Input {
+	float2 uv_MainTex;
+	float3 worldPos;
+};	
+
+void surf (Input IN, inout SurfaceOutput o) {
+	fixed4 c = tex2D(_MainTex, IN.uv_MainTex);
+	fixed4 mask = tex2D(_MaskTex, IN.uv_MainTex);
+	o.Albedo = c.rgb;
+	float SinPos= sin(_Time.y*_EmisVector.x+lerp(IN.worldPos.x,IN.worldPos.z,saturate( _EmisVector.w))*0.01*_EmisVector.z)*0.5+0.5;
 
 
-	SubShader 
-	{
-		Tags { "RenderType"="Opaque" }
-		LOD 200
-		Pass 
-		{
-			Tags { "LightMode" = "Vertex" }
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#define WP
-			#define MASKTEX
-			#define EMISSION
-			#pragma multi_compile_fog
-			#include "../Include/SceneHead_Include.cginc"
-			fixed4 _Emission;
-			half4 _EmisVector;
-			fixed3 EmissionColor(v2f i,fixed4 col,fixed4 mask)
-			{
-				float sinPos= sin(_Time.y*_EmisVector.x+lerp(i.worldPos.x,i.worldPos.z,saturate( _EmisVector.w))*0.01*_EmisVector.z)*0.5+0.5;
-				fixed3 emissive = _Emission.rgb*_Emission.a*mask.b*min((sinPos+_EmisVector.y),1);
-				return col.rgb + emissive;
-			}
-			#include "../Include/Scene_Include.cginc"
-			ENDCG 
-		}
+	o.Emission=_Emission*_Emission.a*mask.b*min((SinPos+_EmisVector.y),1);
+	o.Alpha = c.a;
+}
+ENDCG
+}
 
-		Pass 
-		{
-			Tags { "LightMode" = "VertexLMRGBM" }
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#define WP
-			#define MASKTEX
-			#define LM
-			#define EMISSION
-			#pragma multi_compile_fog
-			#include "../Include/SceneHead_Include.cginc"
-			fixed4 _Emission;
-			half4 _EmisVector;
-			fixed3 EmissionColor(v2f i,fixed4 col,fixed4 mask)
-			{
-				float sinPos= sin(_Time.y*_EmisVector.x+lerp(i.worldPos.x,i.worldPos.z,saturate( _EmisVector.w))*0.01*_EmisVector.z)*0.5+0.5;
-				fixed3 emissive = _Emission.rgb*_Emission.a*mask.b*min((sinPos+_EmisVector.y),1);
-				return col.rgb + emissive;
-			}	
-			#include "../Include/Scene_Include.cginc"
-			ENDCG 
-		}
-		Pass 
-		{  
-			//Moblie
-			Tags { "LightMode" = "VertexLM" }
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#define WP
-			#define MASKTEX
-			#define LM
-			#define EMISSION
-			#pragma multi_compile_fog
-			#include "../Include/SceneHead_Include.cginc"
-			fixed4 _Emission;
-			half4 _EmisVector;
-			fixed3 EmissionColor(v2f i,fixed4 col,fixed4 mask)
-			{
-				float sinPos= sin(_Time.y*_EmisVector.x+lerp(i.worldPos.x,i.worldPos.z,saturate( _EmisVector.w))*0.01*_EmisVector.z)*0.5+0.5;
-				fixed3 emissive = _Emission.rgb*_Emission.a*mask.b*min((sinPos+_EmisVector.y),1);
-				return col.rgb + emissive;
-			}	
-			#include "../Include/Scene_Include.cginc"		
-			ENDCG
-		}
-		
-		UsePass "Custom/Common/META"
-	}
-	SubShader 
-	{
-		Tags { "RenderType"="Opaque" }
-		LOD 100		
-		Pass 
-		{  
-			//Moblie
-			Tags { "LightMode" = "VertexLM" }
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#define MASKTEX
-			#define LM
-			#pragma multi_compile_fog
-			#include "../Include/SceneHead_Include.cginc"
-			#include "../Include/Scene_Include.cginc"		
-			ENDCG
-		}
-		
-		UsePass "Custom/Common/META"
-	}
+Fallback "Mobile/VertexLit"
 }

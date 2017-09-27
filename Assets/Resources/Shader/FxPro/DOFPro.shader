@@ -19,6 +19,7 @@ SubShader {
 	CGINCLUDE	
 		#pragma multi_compile BLUR_RADIUS_10 BLUR_RADIUS_5 BLUR_RADIUS_3
 
+		//#pragma multi_compile FXPRO_HDR_ON FXPRO_HDR_OFF
 
 		#pragma target 3.0
 		#pragma glsl
