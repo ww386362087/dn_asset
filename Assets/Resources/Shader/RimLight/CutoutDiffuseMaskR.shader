@@ -1,69 +1,59 @@
-﻿Shader "Custom/RimLight/CutoutDiffuseMaskR" {
-Properties {
-	_MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
-	_Mask ("Mask (A)", 2D) = "white" {}
-	_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
-	_RimColor ("Rim Color", Color) = (0.353, 0.353, 0.353,0.0)
-	_LightArgs("x:MainColor Scale y:Light Scale z:Unused w: Rim Power",Vector) = (1.0,0.21,0.0,3.0)
-	_UIRimMask("UI Rim Mask",Vector) = (1,1,0,0)
-}
-SubShader {  
-	Tags { "Queue"="AlphaTest" "IgnoreProjector"="True" "RenderType"="TransparentCutout"  }
-	LOD 100            
-	Pass {  
-	Name "Basic"
-                  
-		Cull Back  
-		Lighting On
+﻿Shader "Custom/RimLight/CutoutDiffuseMaskR" 
+{
+	Properties 
+	{	
+		_MainTex ("Base (RGB)", 2D) = "white" {}
+		_Mask ("Mask (A)", 2D) = "white" {}		
+		_RimColor ("Rim Color", Color) = (0.353, 0.353, 0.353,0.0)
+		_LightArgs("x:MainColor Scale y:Light Scale z:Add Power w: Rim Power",Vector) = (1.0,0.21,0.0,3.0)
+		[HideInInspector]_Color("Effect Color", Color) = (1, 1, 1, 0)
+		[HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.15
 
-        CGPROGRAM 
-		//define
-		#define CUTOUT
-		#define LIGHTON
-		//#define SHLIGHTON
-		#define RIMLIGHT
-		#define UIRIM
-		#define VERTEXLIGHTON
-		//head
-		#include "../Include/CommonHead_Include.cginc"
-		//vertex&fragment
-		#pragma vertex vert
-        #pragma fragment frag 
-
-		sampler2D _MainTex;
-		sampler2D _Mask;
-
-		//custom frag fun
-		fixed4 BasicColor(in v2f i)
-		{
-			fixed4 c = tex2D(_MainTex, i.uv);
-			fixed4 a = tex2D(_Mask, i.uv);
-			c.a = a.r;
-			return c;
-		}
-		//include
-        #include "UnityCG.cginc"  
-        #include "../Include/CommonBasic_Include.cginc"
-        ENDCG
-	}  
-
-	Pass 
-	{
-		Name "ShadowCaster"
-		Tags { "LightMode" = "ShadowCaster" }
-		
-		Fog {Mode Off}
-		ZWrite On ZTest LEqual Cull Off
-		Offset 1, 1
-
-		CGPROGRAM
-		#define CUTOUT
-		//include
-		#include "../Include/Shadow_Include.cginc"
-		#pragma vertex vertCast
-		#pragma fragment fragCast
-		#pragma multi_compile_shadowcaster
-		ENDCG 
+		_MainTex1 ("Texture1", 2D) = "white" {}
+		_Mask1 ("Mask (A)", 2D) = "white" {}		
+		_UVScale("UV Scale", Vector) = (-0.5, 0.0, 2, 1.0)
+		_UVRange("UV Range", Vector) = (1.0, 1.0, 0.5, 0.0)
+		[Toggle(ENABLE_SPLIT)] _Split ("Split?", Float) = 0
+		[HideInInspector] _H ("__H", Float) = 0.0
 	}
-} 
+	Category
+	{
+		Tags{ "Queue" = "AlphaTest" "IgnoreProjector" = "True" "RenderType" = "TransparentCutout" }
+		Cull Back
+		SubShader
+		{
+			LOD 200
+			Pass
+			{
+				Name "BASIC"
+				Tags{ "LightMode" = "ForwardBase" }
+				CGPROGRAM
+				//define
+				#define CUTOUT
+				#define MASKTEX
+				#define RIMLIGHT
+				#define VERTEXLIGHTON
+				#define DEFAULTBASECOLOR
+				//multicompile
+				#pragma multi_compile __ BLINK
+				#pragma multi_compile __ UIRIM
+				#pragma shader_feature ENABLE_SPLIT
+				//head
+				#include "../Include/CommonHead_Include.cginc"
+				//vertex&fragment
+				#pragma vertex vert
+				#pragma fragment frag
+				//include
+				fixed4 _Color;
+				#include "../Include/CommonBasic_Include.cginc"
+				ENDCG
+			}
+		}
+		SubShader
+		{
+			LOD 100
+			UsePass "Custom/Common/CutoutDiffuseMaskR/BASIC"
+		} 
+	}
+	CustomEditor "CustomShaderGUI"
 }

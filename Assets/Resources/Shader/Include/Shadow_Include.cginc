@@ -1,51 +1,86 @@
 #ifndef SHADOW_INCLUDED
-#define SHADOW_INCLUDED
-	
-#define SHADOW_COLLECTOR_PASS
+#define SHADOW_INCLUDED	
+
 #include "UnityCG.cginc"
-struct appdata {
+struct appdata 
+{
 	float4 vertex : POSITION;
 	half2 texcoord : TEXCOORD0;
 };
-struct v2fCast { 
-	V2F_SHADOW_CASTER;
+
+struct v2fCast 
+{ 
+	float4 pos : SV_POSITION;
 	float2  uv : TEXCOORD1;
-};
-struct v2fColl {
-	V2F_SHADOW_COLLECTOR;
+	float2  screenuv : TEXCOORD2;
 };
 
-v2fCast vertCast( appdata v )
+sampler2D _ShadowMask;
+
+v2fCast vertCustomCast(appdata v)
 {
 	v2fCast o;
-	TRANSFER_SHADOW_CASTER(o)
+	o.pos = UnityObjectToClipPos(v.vertex.xyz);
+	o.pos = UnityApplyLinearShadowBias(o.pos);
 	o.uv = v.texcoord;
+	o.pos.xy = o.pos.xy + float2(0.3, 0.0);
+	o.screenuv = (o.pos.xy + float2(1, 1))*float2(0.5, 0.5);
 	return o;
 }
 
-#ifdef CUTOUT
-uniform sampler2D _Mask;
-uniform fixed _Cutoff;
-#endif
-
-fixed4 fragCast( v2fCast i ) : SV_Target
+sampler2D _Mask;
+fixed4 fragCustomCastR(v2fCast i) : SV_Target
 {
-#ifdef CUTOUT
-	fixed4 texcol = tex2D( _Mask, i.uv );
-	clip( texcol.r- _Cutoff );
-#endif
-	SHADOW_CASTER_FRAGMENT(i)
+	fixed4 mask = tex2D(_ShadowMask, i.screenuv);
+	return fixed4(mask.r, 0, 0, 1);
+}
+fixed4 fragCustomCastG(v2fCast i) : SV_Target
+{
+	fixed4 mask = tex2D(_ShadowMask, i.screenuv);
+	return fixed4(0, mask.r, 0, 1);
 }
 
-v2fColl vertColl (appdata v)
+fixed4 fragCustomCastB(v2fCast i) : SV_Target
 {
-	v2fColl o;
-	TRANSFER_SHADOW_COLLECTOR(o)
-	return o;
+	fixed4 mask = tex2D(_ShadowMask, i.screenuv);
+	return fixed4(0, 0, mask.r, 1);
 }
 
-fixed4 fragColl (v2fColl i) : SV_Target
+fixed4 fragCustomCastA(v2fCast i) : SV_Target
 {
-	SHADOW_COLLECTOR_FRAGMENT(i)
+	fixed4 mask = tex2D(_ShadowMask, i.screenuv);
+	return fixed4(0, 0, 0, mask.r);
+}
+
+fixed4 fragCustomCastRCutout(v2fCast i) : SV_Target
+{
+	fixed a = tex2D(_Mask, i.uv).r;
+	clip(a - 0.5);
+	fixed4 mask = tex2D(_ShadowMask, i.screenuv);
+	return fixed4(mask.r, 0, 0, 1);
+}
+
+fixed4 fragCustomCastGCutout(v2fCast i) : SV_Target
+{
+	fixed a = tex2D(_Mask, i.uv).r;
+	clip(a - 0.5);
+	fixed4 mask = tex2D(_ShadowMask, i.screenuv);
+	return fixed4(0, mask.r, 0, 1);
+}
+
+fixed4 fragCustomCastBCutout(v2fCast i) : SV_Target
+{
+	fixed a = tex2D(_Mask, i.uv).r;
+	clip(a - 0.5);
+	fixed4 mask = tex2D(_ShadowMask, i.screenuv);
+return fixed4(0, 0, mask.r, 1);
+}
+
+fixed4 fragCustomCastACutout(v2fCast i) : SV_Target
+{
+	fixed a = tex2D(_Mask, i.uv).r;
+	clip(a - 0.5);
+	fixed4 mask = tex2D(_ShadowMask, i.screenuv);
+	return fixed4(0, 0, 0, mask.r);
 }
 #endif //SHADOW_INCLUDED

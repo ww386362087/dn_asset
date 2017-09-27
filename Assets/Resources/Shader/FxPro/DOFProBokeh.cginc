@@ -77,7 +77,7 @@ float penta(float2 coords) //pentagonal shape
 fixed3 color(sampler2D tex, float2 coords, fixed coc) //processing the sample
 {
 	//fixed3 col = tex2Dlod(tex, float4(coords + float2(0.0, 1.0) * _MainTex_TexelSize.xy * fringe * coc, 0.0, 0.0) ).rgb;
-	fixed3 col = tex2D(tex, float2(coords.xy) ).rgb;
+	fixed3 col = tex2Dlod(tex, float4(coords.xy, 0.0, 0.0) ).rgb;
 
 	fixed lum = Luminance(col.rgb);
 	float thresh = max((lum - _BokehThreshold) * _BokehGain, 0.0);
@@ -98,7 +98,7 @@ fixed3 DOFWithBokeh(sampler2D mainTex, float2 uv, fixed coc){
 
 	// calculation of final color
 
-	fixed3 col = tex2D(mainTex, float2(uv.xy) ).rgb;
+	fixed3 col = tex2Dlod(mainTex, float4(uv.xy, 0.0, 0.0) ).rgb;
 	
 	float s = 1.0;
 	int ringsamples;

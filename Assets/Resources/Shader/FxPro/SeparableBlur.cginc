@@ -14,7 +14,7 @@
 #endif
 
 //No radius defined?
-#if !defined(BLUR_RADIUS_5) && !defined(BLUR_RADIUS_3) && !defined(BLUR_RADIUS_2) && !defined(BLUR_RADIUS_1)
+#if !defined(BLUR_RADIUS_10) && !defined(BLUR_RADIUS_5) && !defined(BLUR_RADIUS_3) && !defined(BLUR_RADIUS_2) && !defined(BLUR_RADIUS_1)
 	#define BLUR_RADIUS_5
 #endif
 
@@ -41,7 +41,7 @@ half4 _SeparableBlurOffsets;
 //}
 
 inline fixed4 SampleTex(sampler2D _tex, half2 _uv) {
-	fixed4 tex = tex2D(_tex, _uv);
+	fixed4 tex = tex2Dlod(_tex, half4(_uv.x, _uv.y, 0, 0) );
 	
 	#ifdef RGBM_DECODE
 	return fixed4(tex.rgb * tex.a * 8, tex.a);
@@ -52,15 +52,15 @@ inline fixed4 SampleTex(sampler2D _tex, half2 _uv) {
 
 inline fixed4 BlurTex(sampler2D _tex, v2f_img input, half _stepSizeScale) {
 	#ifdef GAUSSIAN_KERNEL
-		//#ifdef BLUR_RADIUS_10
-		//	#ifndef SQRT_KERNEL
-		//	const half blurKernel[21] = {0.0000009536743, 0.00001907349, 0.0001811981, 0.001087189, 0.004620552, 0.01478577, 0.03696442, 0.07392883, 0.1201344, 0.1601791, 0.1761971,
-		//								0.1601791, 0.1201344, 0.07392883, 0.03696442, 0.01478577, 0.004620552, 0.001087189, 0.0001811981, 0.00001907349, 0.0000009536743};
-		//	#else
-		//	const half blurKernel[21] = {0.00029375321, 0.00131370447, 0.00404910851, 0.00991825158, 0.02044699669, 0.03657670408, 0.0578328432, 0.08178798567, 0.10425965597, 0.1203886433, 0.12626470656,
-		//								0.1203886433, 0.10425965597, 0.08178798567, 0.0578328432, 0.03657670408, 0.02044699669, 0.00991825158, 0.00404910851, 0.00131370447, 0.00029375321};
-		//	#endif
-		//#endif
+		#ifdef BLUR_RADIUS_10
+			#ifndef SQRT_KERNEL
+			const half blurKernel[21] = {0.0000009536743, 0.00001907349, 0.0001811981, 0.001087189, 0.004620552, 0.01478577, 0.03696442, 0.07392883, 0.1201344, 0.1601791, 0.1761971,
+										0.1601791, 0.1201344, 0.07392883, 0.03696442, 0.01478577, 0.004620552, 0.001087189, 0.0001811981, 0.00001907349, 0.0000009536743};
+			#else
+			const half blurKernel[21] = {0.00029375321, 0.00131370447, 0.00404910851, 0.00991825158, 0.02044699669, 0.03657670408, 0.0578328432, 0.08178798567, 0.10425965597, 0.1203886433, 0.12626470656,
+										0.1203886433, 0.10425965597, 0.08178798567, 0.0578328432, 0.03657670408, 0.02044699669, 0.00991825158, 0.00404910851, 0.00131370447, 0.00029375321};
+			#endif
+		#endif
 		
 		#ifdef BLUR_RADIUS_5
 		const half blurKernel[11] = {0.0009765625, 0.009765625, 0.04394531, 0.1171875, 0.2050781, 0.2460938, 0.2050781, 0.1171875, 0.04394531, 0.009765625, 0.0009765625};
@@ -79,9 +79,9 @@ inline fixed4 BlurTex(sampler2D _tex, v2f_img input, half _stepSizeScale) {
 		#endif
 	#endif
 
-	//#ifdef BLUR_RADIUS_10
-	//const int blurRadius = 10;
-	//#endif
+	#ifdef BLUR_RADIUS_10
+	const int blurRadius = 10;
+	#endif
 	
 	#ifdef BLUR_RADIUS_5
 	const int blurRadius = 5;

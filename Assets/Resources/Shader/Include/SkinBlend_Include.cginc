@@ -1,24 +1,35 @@
 #ifndef SKINBLEND_INCLUDED
 #define SKINBLEND_INCLUDED
-	
-inline fixed MaskUV(half2 uv,inout fixed4 uvMask)
+#include "CommonHead_Include.cginc"
+inline fixed MaskUV(half2 uv,inout half4 uvMask)
 {
 	uvMask.x = uvMask.x + 1.0;
 	uvMask.z = uvMask.z + 1.0;	
-	half2 inside = step(uvMask.xy, uv.xy) * step(uv.xy, uvMask.zw);
-	return inside.x * inside.y;
+	half2 inside1 = step(uvMask.xy, uv.xy);
+	half2 inside2 = step(uv.xy, uvMask.zw);
+	//half2 inside = half2(0.0,0.0);
+	return inside1.x * inside1.y * inside2.x * inside2.y;
+	//return 0.1f;
 }
 inline void SkinUVMask(inout v2f o)
 {
-	fixed4 uvMask = fixed4(0.0,0.0,0.0,0.0);		
-	uvMask.xy = fixed2(-1.0,0.0);
-	uvMask.zw = fixed2(0.0,1.0);
+	half4 uvMask = half4(-1.0,0.0,0.0, 1.0);
+	//uvMask.xy = half2(-1.0,0.0);
+	//uvMask.zw = half2(0.0,1.0);
 	o.mask0.x = MaskUV(o.uv,uvMask);
 	o.mask0.y = MaskUV(o.uv,uvMask);
+#ifdef BLENDCUTOUT
+	o.mask0.z = MaskUV(o.uv, uvMask);
+	uvMask.xy = half2(6.0, 0.0);
+	uvMask.zw = half2(7.0, 1.0);
+	o.mask0.w = MaskUV(o.uv, uvMask);
+#else
 #ifndef MASK2
-	o.mask0.z = MaskUV(o.uv,uvMask);
-	o.mask0.w = MaskUV(o.uv,uvMask);
+	o.mask0.z = MaskUV(o.uv, uvMask);
+	o.mask0.w = MaskUV(o.uv, uvMask);
 #endif //MASK2
+#endif //BlendCutout
+
 #ifdef SKINTEX8
 	o.mask1.x = MaskUV(o.uv,uvMask);
 	o.mask1.y = MaskUV(o.uv,uvMask);

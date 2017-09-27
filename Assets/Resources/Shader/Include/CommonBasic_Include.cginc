@@ -1,263 +1,192 @@
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 #ifndef COMMONBASIC_INCLUDED
 #define COMMONBASIC_INCLUDED 
-	
+
 #include "CommonHead_Include.cginc"
-//inline fixed MaskUV(half2 uv,inout fixed4 uvMask)
-//{
-//	uvMask.x = uvMask.x + 1.0;
-//	uvMask.z = uvMask.z + 1.0;	
-//	half2 inside = step(uvMask.xy, uv.xy) * step(uv.xy, uvMask.zw);
-//	return inside.x * inside.y;
-//}
+
 #ifdef LIGHTON
 fixed4 _LightColor0 = fixed4(1,1,1,1);
 #endif //LIGHTON
-#ifdef UIRIM
-fixed4 _UIRimMask;
-#endif
-v2f vert(a2v v) {  
-	v2f o = (v2f)0;  
-	  
+
+v2f vert(a2v v) 
+{  
+	v2f o = (v2f)0;
 	o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-	o.uv = v.texcoord;	
+	o.uv = v.texcoord;
 #ifdef UV2
-	o.uv1 = v.texcoord1;
+	o.uv1 = VertexUV2(v);
 #endif//UV2
+
 #ifdef SKINTEX
 	SkinUVMask(o);
 #endif//SKINTEX
-//#ifdef SKINTEX
-//	fixed4 uvMask = fixed4(0.0,0.0,0.0,0.0);		
-//	uvMask.xy = fixed2(-1.0,0.0);
-//	uvMask.zw = fixed2(0.0,1.0);
-//	o.mask0.x = MaskUV(o.uv,uvMask);
-//	o.mask0.y = MaskUV(o.uv,uvMask);
-//	o.mask0.z = MaskUV(o.uv,uvMask);
-//	o.mask0.w = MaskUV(o.uv,uvMask);
-//#ifdef SKINTEX8
-//	o.mask1.x = MaskUV(o.uv,uvMask);
-//	o.mask1.y = MaskUV(o.uv,uvMask);
-//	o.mask1.z = MaskUV(o.uv,uvMask);
-//	o.mask1.w = MaskUV(o.uv,uvMask);
-//#endif//SKINTEX8
-//#endif//SKINTEX
-#ifndef NONORMAL	
-//1.calc normal
+
+#ifndef NONORMAL
+	//1.calc normal
 	o.normal = normalize(mul((float3x3)unity_ObjectToWorld, SCALED_NORMAL));
-#ifdef MATCAP
-	half2 capCoord;
-	capCoord.x = dot(UNITY_MATRIX_IT_MV[0].xyz, v.normal);
-	capCoord.y = dot(UNITY_MATRIX_IT_MV[1].xyz, v.normal);
-	o.cap = capCoord * 0.5 + 0.5;
-#endif
-#endif
-#ifdef LIGHTON	
-	//2.calc view
-#if defined(RIMLIGHT)|defined(REFLECT)|defined(METALREFLCUBE)|defined(GLASS)|defined(GLASSCUBE)
-	o.viewDir = WorldSpaceViewDir( v.vertex );
-#ifdef UIRIM
-	o.viewDir.xy *=_UIRimMask.xy;
-	o.viewDir.z -=_UIRimMask.z;
-#endif//UIRIM
-	o.viewDir = normalize(o.viewDir);
-#endif //RIMLIGHT|BLINNPHONG
 
+	#ifdef VIEWDIR
+		#ifdef UIRIM
+			o.viewDir.xyz = half3(0, 0, -1);
+		#else
+			o.viewDir = WorldSpaceViewDir(v.vertex);
+		#endif
+		
+		#ifdef REFLECTUV
+			o.refluv = reflect(-o.viewDir, o.normal);
+		#endif //REFLECTUV
+	#endif //GLASSVIEW 
 
+	#ifdef MATCAP
+			half2 capCoord;
+			capCoord.x = dot(UNITY_MATRIX_IT_MV[0].xyz, v.normal);
+			capCoord.y = dot(UNITY_MATRIX_IT_MV[1].xyz, v.normal);
+			o.cap = capCoord * 0.5 + 0.5;
+	#endif//MATCAP
+#endif//NONORMAL
 
-
-
-	//3. vertex lighting
+#ifdef LIGHTON
 	o.vertexLighting = fixed3(0,0,0);
-	//3.1 SHLight
-#ifdef SHLIGHTON
-	o.vertexLighting = saturate(ShadeSH9 (normalize(float4(o.normal, 1.0))));
-#endif	//SHLIGHTON
-	//3.1 vertex light 
-#ifdef VERTEXLIGHTON
-	fixed3 ambientLighting = UNITY_LIGHTMODEL_AMBIENT.rgb;
-	fixed3 diffuseReflection = _LightColor0.rgb * max(0.001, dot(o.normal, _WorldSpaceLightPos0.xyz))*2;
-	o.vertexLighting += ambientLighting + diffuseReflection;
-	//4. blinn phong or cube
-#if defined(REFLECT)|defined(METALREFLCUBE)|defined(GLASSCUBE)
-	o.refluv = reflect(-o.viewDir, o.normal);
-	//o.refluv = mul(UNITY_MATRIX_MV, float4(o.refluv,0)).rgb;
-	//#else METALREFLCUBE
-#endif //REFLECT
-#endif //VERTEXLIGHTON  
-#else
-
-//#ifdef METALREFLCUBE
-//	o.refluv = reflect(-o.viewDir, o.normal);
-//	o.refluv = mul(UNITY_MATRIX_MV, float4(o.refluv,0)).rgb;
-//#endif
-
-#if defined(GLASS)|defined(GLASSCUBE)
-	o.viewDir = WorldSpaceViewDir( v.vertex );
-#endif //GLASS 
+	//SHLight
+	#ifdef SHLIGHTON
+		o.vertexLighting = saturate(ShadeSH9 (normalize(float4(o.normal, 1.0))));
+	#endif	//SHLIGHTON
+	//vertex light 
+	#ifdef VERTEXLIGHTON
+		fixed3 ambientLighting = UNITY_LIGHTMODEL_AMBIENT.rgb;
+		fixed3 diffuseReflection = _LightColor0.rgb * max(0.001, dot(o.normal, _WorldSpaceLightPos0.xyz))*2;
+		o.vertexLighting += ambientLighting + diffuseReflection;
+	#endif //VERTEXLIGHTON 
 #endif //LIGHTON
 	
-
-//	#ifdef METALREFLCUBE
-//	o.refluv = reflect(-o.viewDir, o.normal);
-//	o.refluv = mul(UNITY_MATRIX_MV, float4(o.refluv,0)).rgb;
-//#endif
-
-
 	return o;  
 } 
 
-
 #ifdef RIMLIGHT
 fixed4 _RimColor;
-#endif
+#endif//RIMLIGHT
 
 #ifdef BLINNPHONG
 fixed4 _SpecColor;
 #endif //BLINNPHONG
 
-#ifdef MATCAP
-sampler2D _MatCap;
+#if defined(GLASS)|defined(METALREFL)|defined(MATCAP)
+#include "Effect_Include.cginc"
+#endif //GLASS|METALREFL|MATCAP
+
+
+
+
+#ifdef DEFAULTBASECOLOR
+sampler2D _MainTex;
+fixed4 BasicColor(in v2f i, inout fixed4 maskColor)
+{
+#ifdef ENABLE_SPLIT
+	fixed4 c = Combine2Tex(_MainTex,_MainTex1,i.uv,_UVScale,_UVRange);
+#else
+	fixed4 c = tex2D(_MainTex, i.uv);
+#endif//ENABLE_SPLIT
+
+#ifdef MASKTEX
+	#ifdef ENABLE_SPLIT
+		maskColor = Combine2Tex(_Mask,_Mask1,i.uv,_UVScale,_UVRange);
+	#else
+		maskColor = tex2D(_Mask, i.uv);
+	#endif//ENABLE_SPLIT
+#endif//MASKTEX
+
+#ifdef CUTOUT
+	#ifdef CUTOUTG
+		c.a = maskColor.g;
+	#else
+		c.a = maskColor.r;
+	#endif
+#else
+	c.a = 1;
+#endif//CUTOUT
+
+	return c;
+}
 #endif
-
-#ifdef METALREFL
- 
-fixed4 _CubeColor; 
-//sampler2D _Mask;
-#endif
-
-#ifdef GLASS
-//sampler2D _Mask;
-#endif //GLASS 
-
-
-
-#ifdef METALREFLCUBE
-samplerCUBE _Cube; 
-fixed4 _CubeColor; 
-//sampler2D _Mask;
-#endif
-
-#ifdef GLASSCUBE
-samplerCUBE _Cube; 
-#endif //GLASSCUBE
 
 fixed4 frag(v2f i) : COLOR 
-{  
-	fixed4 _BasicColor = BasicColor(i);
-	fixed4 c=_BasicColor;
-	 
-#if defined(CUTOUT)|defined(METALREFLCUTOUT)
-	clip(c.a - _Cutoff);
+{
+	fixed4 maskColor = fixed4(1,1,1,1);
+	fixed4 basicColor = BasicColor(i, maskColor);	
+
+#ifdef CUTOUT
+	clip(basicColor.a - 0.15);
 #endif //CUTOUT 
 
-#ifdef MATCAP
-#ifdef METALREFL
-#ifdef GLASS 
-	fixed4 mask = tex2D(_Mask, i.uv);
-	fixed4 mc = tex2D(_MatCap, i.cap);
-	fixed4 R = mc*mask.r*_LightArgs.z;
-	half rim = pow(1.0 - saturate(dot (i.viewDir, i.normal)),_LightArgs.w);
-	c = lerp(c, lerp(R, R*c * 2, mask.g), mask.r);
-//c=rim*_LightArgs.z;
-	c.a = Luminance(R.rgb) + mask.b+rim*_LightArgs.y;
+#ifdef BLINK
+	basicColor.rgb = basicColor.rgb + fixed3(_Color.w, _Color.w, _Color.w);
+#endif//BLINK 
+
+	fixed4 c = basicColor;
+
+#if defined(GLASS)|defined(METALREFL)|defined(MATCAP)
+	Effect(i, maskColor, c);
+#endif //MATCAP
+
+#ifdef LIGHTON 	
+	#ifdef VERTEXLIGHTON
+
+		#ifndef ORIGINAL_LIGHT
+			c.rgb *= _LightArgs.x + _LightArgs.y*(i.vertexLighting.rgb);
+		#else
+			c.rgb *= i.vertexLighting.rgb;
+		#endif//ORIGINAL_LIGHT
+		
+		#ifdef TESTLIGHTING
+			c.rgb = basicColor.rgb;
+		#endif //TESTLIGHTING
+	#else//VERTEXLIGHTON
+		#ifdef LAMBERT	
+			//lighting	
+			fixed3 ambientLighting = UNITY_LIGHTMODEL_AMBIENT.rgb;
+			fixed3 lightDirection = _WorldSpaceLightPos0.xyz;
+			float nDl = max(0.0, dot(i.normal, _WorldSpaceLightPos0.xyz));
+			fixed3 diffuseReflection = _LightColor0.rgb * nDl*1.8;
+#ifndef ORIGINAL_LIGHT
+			c.rgb *= _LightArgs.x + _LightArgs.y*(ambientLighting + diffuseReflection + i.vertexLighting);
 #else
-	
-	fixed4 mask = tex2D(_Mask, i.uv);
-	fixed4 mc = tex2D(_MatCap, i.cap);
-	fixed4 R = mc*mask.r*_CubeColor*_LightArgs.z;
-#ifdef METALREFLCUTOUT
-	c = lerp(c,R, mask.r);
-	#else
-	c = lerp(c, lerp(R, R*c * 2, mask.g), mask.r);
-	#endif
-#endif //GLASS
-#else 
-	fixed4 mc = tex2D(_MatCap, i.cap);
-	c = fixed4(c.rgb*mc.rgb*_LightArgs.z, c.a);
-#endif //METALREFL
-
-	#endif //MATCAP
-
-
-#ifdef METALREFLCUBE
-	fixed4 mask = tex2D(_Mask, i.uv);
-	fixed4 mc = texCUBE (_Cube, i.refluv);
-	fixed4 R = mc*mask.r*_CubeColor*_LightArgs.z;
-#ifdef METALREFLCUTOUT
-	c = lerp(c,R, mask.r);
-	#else
-	c = lerp(c, lerp(R, R*c * 2, mask.g), mask.r);
-	#endif
-#endif //METALREFLCUBE
-
-#ifdef GLASSCUBE
-	fixed4 mask = tex2D(_Mask, i.uv);
-	fixed4 mc = texCUBE(_Cube, i.refluv);
-	fixed4 R = mc*mask.r*_LightArgs.z;
-	half rim = pow(1.0 - saturate(dot (i.viewDir, i.normal)),_LightArgs.w);
-	c = lerp(c, lerp(R, R*c * 2, mask.g), mask.r);
-	c.a = Luminance(R.rgb) + mask.b+rim*_LightArgs.y;
-	//c=float4(i.refluv.xyz,1);
-
-
-#endif //GLASSCUBE
-
-
-
-#ifdef LIGHTON 
-
-
-#ifdef VERTEXLIGHTON
-	c.rgb *= _LightArgs.x + _LightArgs.y*(i.vertexLighting.rgb);
-#ifdef TESTLIGHTING
-	c.rgb = i.normal.rgb;
-#endif //TESTLIGHTING
-#else
-#ifdef LAMBERT	
-	//lighting	
-	fixed3 ambientLighting = UNITY_LIGHTMODEL_AMBIENT.rgb;
-	fixed3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
-	fixed3 diffuseReflection = _LightColor0.rgb * max(0.0, dot(i.normal, _WorldSpaceLightPos0.xyz))*2;
-	c.rgb *= _LightArgs.x* + _LightArgs.y*(ambientLighting + diffuseReflection + i.vertexLighting);
-#ifdef TESTLIGHTING
-	c.rgb = _LightColor0.rgb * 2;
-#endif //TESTLIGHTING
-#else
-#ifdef BLINNPHONG
-	float3 lightDirection = _WorldSpaceLightPos0.xyz;
-	half3 h = normalize (lightDirection + i.viewDir);	
-	fixed diff = max (0, dot (i.normal, lightDirection));	
-	float nh = max (0, dot (i.normal, h));
-	float spec = pow (nh, _LightArgs.x*128.0) * _LightArgs.y;
-#ifdef TESTLIGHTING
-	c.rgb = (_LightColor0.rgb * diff + _LightColor0.rgb * _SpecColor.rgb * spec) * 2;
-#else
-	c.rgb = (c.rgb*_LightArgs.w + (1-_LightArgs.w)*c.rgb *_LightColor0.rgb * diff + _LightColor0.rgb * _SpecColor.rgb * spec) * 2;
+			c.rgb *= ambientLighting + diffuseReflection + i.vertexLighting;
 #endif
-#endif //BLINNPHONG
-
-#endif //LAMBERT
-
-#endif //VERTEXLIGHTON
-
-#ifdef RIMLIGHT
-	half rim = 1.0 - saturate(dot (i.viewDir, i.normal));
-	c.rgb += saturate(_RimColor.rgb * pow (rim, _LightArgs.w));
+			
+			#ifdef TESTLIGHTING
+				c.rgb = basicColor.rgb;
+			#endif //TESTLIGHTING
+		#else//LAMBERT
+			#ifdef BLINNPHONG
+				float3 lightDirection = _WorldSpaceLightPos0.xyz;
+				half3 h = normalize (lightDirection + i.viewDir);	
+				fixed diff = max (0, dot (i.worldNormal, lightDirection));
+				float nh = max (0, dot (i.worldNormal, h));
+#ifndef ORIGINAL_LIGHT
+				float spec = pow (nh, _LightArgs.x*128.0) * _LightArgs.y;
+#else
+				float spec = pow (nh, 128.0);
 #endif
+				#ifdef TESTLIGHTING
+					c.rgb = (_LightColor0.rgb * diff + _LightColor0.rgb * _SpecColor.rgb * spec) * 2;
+				#else
+					c.rgb = (c.rgb*_LightArgs.w + (1-_LightArgs.w)*c.rgb *_LightColor0.rgb * diff + _LightColor0.rgb * _SpecColor.rgb * spec) * 2;
+				#endif//TESTLIGHTING
+			#endif //BLINNPHONG
+		#endif //LAMBERT
+	#endif //VERTEXLIGHTON
 
 #endif //LIGHTON
-#ifdef BLEND
-fixed a= Alpha(i);
-c.a=a;
-#endif //BLEND
+
+#ifdef RIMLIGHT
+	half rim = 1.0 - saturate(dot(i.viewDir, i.normal));
+	c.rgb += saturate(_RimColor.rgb * pow(rim, _LightArgs.w));
+#endif//RIMLIGHT
 
 #ifdef EMISSION
-fixed4 e=EmissionColor(i,_BasicColor);
-c=c+e;
+	fixed4 e = EmissionColor(i,c, maskColor);
+	c = c + e;
 #endif //EMISSION
-
 
 	return c;  
 } 

@@ -1,151 +1,73 @@
-﻿// Upgrade NOTE: commented out 'float4 unity_LightmapST', a built-in variable
-// Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
-// Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
-
-
-Shader "Custom/Scene/CutoutDiffuseMaskLM" {
-Properties {
-	_MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
-	_Mask ("Mask (A)", 2D) = "white" {}
-	_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
-}
-SubShader {  
-	Tags { "Queue"="AlphaTest" "IgnoreProjector"="True" "RenderType"="TransparentCutout"  }
-	LOD 300    
-	
-	Pass {
+﻿//Scene cutout lightmap
+Shader "Custom/Scene/CutoutDiffuseMaskLM" 
+{
+	Properties 
+	{
+		//[HideInInspector]_Color("Main Color",Color)=(1,1,1,1)
+		_MainTex ("Base (RGB) ", 2D) = "white" {}
+		_Mask ("Mask (R)", 2D) = "white" {}
+	}
+	SubShader 
+	{  
+		Tags { "Queue"="AlphaTest" "IgnoreProjector"="True" "RenderType"="TransparentCutout"  }	  
+		LOD 100
+		Pass 
+		{
 			Tags { "LightMode" = "Vertex" }
 			CGPROGRAM
+			//define
+			#define CUTOUT
+			#define MASKTEX
+			#define SHLIGHTON
+			#define LAMBERT
+			#define DEFAULTBASECOLOR
+			#define ORIGINAL_LIGHT
+			//head
+			#include "../Include/CommonHead_Include.cginc"
+			//vertex&fragment
 			#pragma vertex vert
 			#pragma fragment frag
-
-			#include "UnityCG.cginc"
-			sampler2D _MainTex;
-			sampler2D _Mask;
-			struct appdata_t {
-				float4 vertex : POSITION;
-				float2 texcoord : TEXCOORD0;
-			};
-
-			struct v2f {
-				half4 vertex : SV_POSITION;
-				half2 texcoord : TEXCOORD0;
-			};
-			
-			half4 _MainTex_ST;
-			
-			v2f vert (appdata_t v)
-			{
-				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-				o.texcoord = TRANSFORM_TEX(v.texcoord,_MainTex);
-				return o;
-			}
-			half _Cutoff;
-			fixed4 frag (v2f i) : SV_Target
-			{				
-				fixed alpha = tex2D (_Mask, i.texcoord).r;
-				clip(alpha -_Cutoff);
-				fixed4 col = tex2D(_MainTex, i.texcoord);			
-				col.a = alpha;
-				
-				return col;
-			}
+			//include
+			#include "../Include/CommonBasic_Include.cginc"
 			ENDCG 
 		}
-	Pass {  
-	Tags { "LightMode" = "VertexLMRGBM" }
-		CGPROGRAM
+
+		Pass 
+		{
+			//Pc
+			Tags { "LightMode" = "VertexLMRGBM" }
+			CGPROGRAM
+			
 			#pragma vertex vert
 			#pragma fragment frag
+			#pragma multi_compile_fog
+			#define CUTOUT
+			#define MASKTEX
+			#define LM
+			#include "../Include/SceneHead_Include.cginc"
+			#include "../Include/Scene_Include.cginc"
+			ENDCG
+		}
+
+		Pass 
+		{  
+			//Moblie
+			Tags { "LightMode" = "VertexLM" }
+			CGPROGRAM
 			
-			#include "UnityCG.cginc"
-
-			struct appdata_t {
-				float4 vertex : POSITION;
-				float2 texcoord : TEXCOORD0;
-				half2 uv2 : TEXCOORD1;
-			};
-
-			struct v2f {
-				float4 vertex : SV_POSITION;
-				half2 texcoord : TEXCOORD0;
-				half2 uv2 : TEXCOORD1;
-			};
-
-			sampler2D _MainTex;
-			sampler2D _Mask;
-			// sampler2D unity_Lightmap;
-			// float4 unity_LightmapST;
-			half _Cutoff;
-			v2f vert (appdata_t v)
-			{
-				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-				o.texcoord = v.texcoord;
-				o.uv2.xy = v.uv2.xy * unity_LightmapST.xy + unity_LightmapST.zw;
-				return o;
-			}
-			
-			fixed4 frag (v2f i) : SV_Target
-			{
-				fixed alpha = tex2D (_Mask, i.texcoord).r;
-				clip(alpha -_Cutoff);
-				fixed4 col = tex2D(_MainTex, i.texcoord);		
-				col.rgb *= DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, i.uv2.xy)).rgb;		
-				col.a = alpha+0.01;
-				
-				return col;
-			}
-		ENDCG
-	}	        
-
-
-	Pass {  
-	Tags { "LightMode" = "VertexLM" }
-		CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-			
-			#include "UnityCG.cginc"
-
-			struct appdata_t {
-				float4 vertex : POSITION;
-				float2 texcoord : TEXCOORD0;
-				half2 uv2 : TEXCOORD1;
-			};
-
-			struct v2f {
-				float4 vertex : SV_POSITION;
-				half2 texcoord : TEXCOORD0;
-				half2 uv2 : TEXCOORD1;
-			};
-
-			sampler2D _MainTex;
-			sampler2D _Mask;
-			// sampler2D unity_Lightmap;
-			// float4 unity_LightmapST;
-			half _Cutoff;
-			v2f vert (appdata_t v)
-			{
-				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-				o.texcoord = v.texcoord;
-				o.uv2.xy = v.uv2.xy * unity_LightmapST.xy + unity_LightmapST.zw;
-				return o;
-			}
-			
-			fixed4 frag (v2f i) : SV_Target
-			{
-				fixed alpha = tex2D (_Mask, i.texcoord).r;
-				clip(alpha -_Cutoff);
-				fixed4 col = tex2D(_MainTex, i.texcoord);		
-				col.rgb *= DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, i.uv2.xy)).rgb;		
-				col.a = alpha+0.01;
-				
-				return col;
-			}
-		ENDCG
-	}	      
-} 
+			#pragma multi_compile_fog 
+			#define CUTOUT
+			#define MASKTEX
+			#define LM
+			#include "../Include/SceneHead_Include.cginc"
+			#include "../Include/Scene_Include.cginc"			
+			ENDCG
+		}
+		
+		UsePass "Custom/Common/META"
+		UsePass "Custom/Common/CASTSHADOWCUTOUT"
+	} 
+	FallBack Off
 }

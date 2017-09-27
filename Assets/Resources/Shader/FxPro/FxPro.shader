@@ -1,6 +1,7 @@
 ﻿Shader "Hidden/FxPro" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
+		_RgbTex("LUT (RGB)", 2D) = "" {}
 		_ChromAberrTex ("Chromatic Aberration (RGB)", 2D) = "black" {}
 		_LensDirtTex ("Lens Dirt Texture", 2D) = "black" {}
 		_DirtIntensity ("Lens Dirt Intensity", Float) = .1
@@ -8,9 +9,8 @@
 
 		_BloomTex("Bloom (RGBA)", 2D) = "black" {}
 		_MobileDOFTex ("MobileDOFTex", 2D) = "black" {}
-		_DOF_FadeInFadeOut ("_DOF_FadeInFadeOut", Range (0,1)) = 1
-		//_DOFTex("DOF (RGB), COC(A)", 2D) = "black" {}
-		//_COCTex("COC Texture (RGBA)", 2D) = "white" {}
+		_DOFTex("DOF (RGB), COC(A)", 2D) = "black" {}
+		_COCTex("COC Texture (RGBA)", 2D) = "white" {}
 //		_DOFStrength("DOF Strength", Float) = .5
 
 		_SCurveIntensity ("S-Curve Intensity", Float) = .5
@@ -47,8 +47,7 @@
 		//#pragma target 3.0
 		#pragma glsl
 		#pragma fragmentoption ARB_precision_hint_fastest
-
-		#pragma multi_compile FXPRO_HDR_ON FXPRO_HDR_OFF
+		#pragma multi_compile __ FXPRO_HDR_ON
 
 		//+++++++++++++++++++++++++++
 		//USER-DEFINED PARAMETERS
@@ -337,82 +336,29 @@
 				#include "LensCurvature.cginc"
 			ENDCG
 		}
+
+
 		
-		Pass {	//[Pass 5]
-			name "color_effects"
-			CGPROGRAM
-				#pragma vertex vert_img_aa
-				#pragma fragment frag
-				
-				#pragma multi_compile USE_CAMERA_DEPTH_TEXTURE DONT_USE_CAMERA_DEPTH_TEXTURE
-				
-				#ifdef USE_CAMERA_DEPTH_TEXTURE
-			    sampler2D _CameraDepthTexture;
-			    half _OneOverDepthScale;
-			    #endif
-			    
-			    fixed GetDepth(sampler2D mainTex, float2 uv) {
-			    #ifdef USE_CAMERA_DEPTH_TEXTURE
-				    return Linear01Depth( tex2D(_CameraDepthTexture, uv).r ) * _OneOverDepthScale;
-			    #else
-				    return tex2D(mainTex, uv).a;
-			    #endif
-			    }
-			    
-			    fixed4 _CloseTint;
-			    fixed4 _FarTint;
-			    
-			    fixed _CloseTintStrength, _FarTintStrength;
-			    fixed _DesaturateDarksStrength;
-			    fixed _DesaturateFarObjsStrength;
-			    
-			    
-			    fixed4 _FogTint;
-			    fixed _FogStrength;
+		Pass{  //[Pass 5]
+			CGPROGRAM 
+			#pragma vertex vert
+			#pragma fragment frag
 
-				fixed _SCurveIntensity;
+			#include "Common.cginc"
 
-				fixed4 frag (v2f_img_aa i) : COLOR  {
-					fixed4 mainTex = tex2D(_MainTex, i.uv);
-					fixed depth = saturate(GetDepth(_MainTex, i.uv2));
-					
-					fixed lum = Luminance( mainTex.rgb );
-					
-					fixed3 resColor = mainTex.rgb;
-					
-					//Apply distance color grading
-					//Closer = warmer, further = colder
-					fixed3 closeColor = lerp( resColor, resColor * _CloseTint, _CloseTintStrength );
-					fixed3 farColor = lerp( resColor, resColor * _FarTint, _FarTintStrength );
-					
-					resColor = lerp( closeColor, farColor, depth );
-					
-					//Desaturate darks
-					resColor = lerp( resColor, fixed3(lum, lum, lum), saturate( lum * _DesaturateDarksStrength ) );
-										
-					//Desaturate far away objects
-					resColor = lerp( resColor, fixed3(lum, lum, lum), saturate( depth * _DesaturateFarObjsStrength ) );
-					
-					//Fog
-					fixed fogAmount = 1 - depth;
-					
-					//for (int i = 0; i < FOG_DENSITY; i ++)
-						fogAmount *= fogAmount;
-					
-					fogAmount = 1 - fogAmount;
-					
-					fixed3 fogColor = lerp( resColor, _FogTint, _FogStrength );
-					resColor = lerp( resColor, fogColor, fogAmount );
-					
-					#ifdef S_CURVE_ON
-					fixed3 adjColor = Overlay(resColor, resColor);
+			inline float4 frag_ldr_gamma(v2f i, const bool mobile)
+			{
+				float4 color = fetch_process_ldr_gamma(i, mobile);
+				color = apply(color, mobile);
+				return output_ldr_gamma(color);
+			}
+			
 
-					resColor = lerp(resColor, adjColor, _SCurveIntensity);
-					#endif
-
-					return fixed4(resColor, mainTex.a);
-				}
-			ENDCG
+			float4 frag(v2f i) : SV_Target
+			{ 
+				return frag_ldr_gamma(i, true); 
+			} 
+			ENDCG 
 		}
 	}
 	
