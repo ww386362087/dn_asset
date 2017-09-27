@@ -56,7 +56,16 @@ public class TestAB : ITest
     }
 
     int space = 30;
-    string[] anims = { "ToSkill", "EndSkill", "ToMove" };
+    string[] anims = {
+        "ToArtSkill",
+        "EndSkill",
+        XSkillData.Combined_Command[0],
+        XSkillData.Combined_Command[1],
+        XSkillData.Combined_Command[2],
+        "ToMove",
+        "ToStand"
+    };
+
     string[] weapons = {
         "Player_archer_weapon_archer",
         "ar_costume_baseball_a_bigbow_weapon",
@@ -66,6 +75,7 @@ public class TestAB : ITest
         "ar_tamasama_d_bigbow_weapon",
         "ar_ziyo_d03_bigbow_weapon",
         "ar_pajamas_a03_bigbow_weapon"};
+
     public void OnGUI()
     {
         GUILayout.BeginHorizontal();
