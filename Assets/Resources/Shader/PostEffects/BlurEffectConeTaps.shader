@@ -1,7 +1,13 @@
-Shader "Hidden/BlurEffectConeTap" {
-	Properties { _MainTex ("", any) = "" {} }
-	SubShader { 
-		Pass {
+Shader "Hidden/BlurEffectConeTap" 
+{
+	Properties 
+	{ 
+		_MainTex ("", any) = "" {} 
+	}
+	SubShader 
+	{ 
+		Pass 
+		{
 			ZTest Always Cull Off ZWrite Off Fog { Mode Off }
 			SetTexture [_MainTex] {constantColor (0,0,0,0.25) combine texture * constant alpha}
 			SetTexture [_MainTex] {constantColor (0,0,0,0.25) combine texture * constant + previous}
@@ -11,7 +17,8 @@ Shader "Hidden/BlurEffectConeTap" {
 	}
 	CGINCLUDE
 	#include "UnityCG.cginc"
-	struct v2f {
+	struct v2f 
+	{
 		float4 pos : SV_POSITION;
 		half2 uv : TEXCOORD0;
 		half2 taps[4] : TEXCOORD1; 
@@ -19,7 +26,8 @@ Shader "Hidden/BlurEffectConeTap" {
 	sampler2D _MainTex;
 	half4 _MainTex_TexelSize;
 	half4 _BlurOffsets;
-	v2f vert( appdata_img v ) {
+	v2f vert( appdata_img v ) 
+	{
 		v2f o; 
 		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 		o.uv = v.texcoord - _BlurOffsets.xy * _MainTex_TexelSize.xy; // hack, see BlurEffect.cs for the reason for this. let's make a new blur effect soon
@@ -29,7 +37,9 @@ Shader "Hidden/BlurEffectConeTap" {
 		o.taps[3] = o.uv - _MainTex_TexelSize * _BlurOffsets.xy * half2(1,-1);
 		return o;
 	}
-	half4 frag(v2f i) : SV_Target {
+
+	half4 frag(v2f i) : SV_Target 
+	{
 		half4 color = tex2D(_MainTex, i.taps[0]);
 		color += tex2D(_MainTex, i.taps[1]);
 		color += tex2D(_MainTex, i.taps[2]);
@@ -37,8 +47,11 @@ Shader "Hidden/BlurEffectConeTap" {
 		return color * 0.25;
 	}
 	ENDCG
-	SubShader {
-		 Pass {
+
+	SubShader 
+	{
+		 Pass 
+		 {
 			  ZTest Always Cull Off ZWrite Off
 			  Fog { Mode off }      
 
