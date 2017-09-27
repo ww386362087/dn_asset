@@ -10,9 +10,7 @@ public class XConfig
 
     public static void Initial(LogLevel print, LogLevel file)
     {
-        res_path = Application.dataPath + "/Resources/";
-        cache_path = Application.temporaryCachePath + "/Log";
-        stream_path = Application.streamingAssetsPath;
+        InitPath();
         if (!Directory.Exists(cache_path))
         {
             Directory.CreateDirectory(cache_path);
@@ -20,4 +18,11 @@ public class XConfig
         XDebug.Init(print, file);
     }
 
+
+    public static void InitPath()
+    {
+        res_path = Application.dataPath + "/Resources/";
+        cache_path = Application.temporaryCachePath + "/Log";
+        stream_path = Application.streamingAssetsPath;
+    }
 }
