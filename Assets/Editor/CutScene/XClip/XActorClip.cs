@@ -61,7 +61,6 @@ namespace XEditor
                 Vector3 Appear = Vector3FieldEx("Appear At", new Vector3(_data.AppearX, _data.AppearY, _data.AppearZ), ref _appear_fold);
                 _data.AppearX = Appear.x; _data.AppearY = Appear.y; _data.AppearZ = Appear.z;
             }
-
             if (_using_id)
             {
                 EditorGUILayout.Space();

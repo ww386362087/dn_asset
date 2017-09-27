@@ -57,6 +57,7 @@ public class XActor
         _shadow = _go.transform.Find("Shadow");
         if (_shadow != null) _shadow.GetComponent<Renderer>().enabled = true;
         _ator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+
     }
 
     private void DisablePhysic()

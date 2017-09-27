@@ -417,7 +417,7 @@ namespace XEditor
                     EditorApplication.ExecuteMenuItem("Edit/Play");
                     GameObject _cameraObject = GameObject.Find(@"Main Camera");
                     GameEntrance entrance = _cameraObject.GetComponent<GameEntrance>();
-                    if (entrance != null) entrance.enabled = false;
+                    entrance.enabled = false;
                     XCutSceneRunner runner = _cameraObject.AddComponent<XCutSceneRunner>();
                     _run_data = GetCurrentData();
                     runner.is_start_by_editor = true;

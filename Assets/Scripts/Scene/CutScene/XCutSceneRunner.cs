@@ -31,6 +31,7 @@ public class XCutSceneRunner : MonoBehaviour
             _cut_scene_camera.Initialize();
             _cut_scene_camera.Effect(cut_scene_data.CameraClip, cut_scene_data.Trigger);
             _cut_scene_camera.UnityCamera.fieldOfView = cut_scene_data.FieldOfView;
+            XLoading.Show(false);
         }
         else
         {
@@ -52,21 +53,21 @@ public class XCutSceneRunner : MonoBehaviour
             {
                 XPlayerDataClip clip = cut_scene_data.Player[i];
                 XResourceMgr.Load<AnimationClip>(clip.Clip1, AssetType.Anim);
-                _times.Add( XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BePlayerOnStage, clip));
+                _times.Add(XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BePlayerOnStage, clip));
             }
             for (int i = 0, max = cut_scene_data.Fxs.Count; i < max; i++)
             {
-                _times.Add( XTimerMgr.singleton.SetTimer(cut_scene_data.Fxs[i].TimeLineAt / FPS, Fx, cut_scene_data.Fxs[i]));
+                _times.Add(XTimerMgr.singleton.SetTimer(cut_scene_data.Fxs[i].TimeLineAt / FPS, Fx, cut_scene_data.Fxs[i]));
             }
         }
         for (int i = 0, max = cut_scene_data.Audios.Count; i < max; i++)
         {
             XAudioDataClip clip = cut_scene_data.Audios[i];
-            _times.Add( XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Audio, clip));
+            _times.Add(XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS, Audio, clip));
         }
         if (cut_scene_data.AutoEnd)
         {
-            _times.Add( XTimerMgr.singleton.SetTimer((cut_scene_data.TotalFrame - 30) / FPS, EndShow, null));
+            _times.Add(XTimerMgr.singleton.SetTimer((cut_scene_data.TotalFrame - 30) / FPS, EndShow, null));
         }
         if (cut_scene_data.Mourningborder)
         {
