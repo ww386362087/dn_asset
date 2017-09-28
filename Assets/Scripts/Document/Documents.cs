@@ -28,6 +28,7 @@ public class Documents : XSingleton<Documents>
                 e.Current.Value.OnUninitial();
             }
             documents.Clear();
+            e.Dispose();
         }
     }
 
@@ -102,6 +103,7 @@ public class Documents : XSingleton<Documents>
             {
                 e.Current.Value.OnEnterScene();
             }
+            e.Dispose();
         }
     }
 
@@ -114,6 +116,7 @@ public class Documents : XSingleton<Documents>
             {
                 e.Current.Value.OnEnterSceneFinally();
             }
+            e.Dispose();
         }
     }
 
@@ -127,6 +130,7 @@ public class Documents : XSingleton<Documents>
             {
                 e.Current.Value.OnLeaveScene();
             }
+            e.Dispose();
         }
     }
 
@@ -139,6 +143,7 @@ public class Documents : XSingleton<Documents>
             {
                 e.Current.Value.OnAttachToHost();
             }
+            e.Dispose();
         }
     }
 
@@ -151,6 +156,7 @@ public class Documents : XSingleton<Documents>
             {
                 e.Current.Value.OnDeatchToHost();
             }
+            e.Dispose();
         }
     }
     
@@ -163,6 +169,7 @@ public class Documents : XSingleton<Documents>
             {
                 e.Current.Value.OnReconnected();
             }
+            e.Dispose();
         }
     }
 

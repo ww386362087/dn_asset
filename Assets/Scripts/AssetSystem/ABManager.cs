@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-public class ABManager : XSingleton<ABManager>
+public sealed class ABManager : XSingleton<ABManager>
 {
 
     public AssetBundleDataReader depInfoReader;
@@ -15,8 +15,9 @@ public class ABManager : XSingleton<ABManager>
     /// <summary>
     /// bundle的引用
     /// </summary>
-    private Dictionary<uint, XAssetBundle> bundles;
+    private List<XAssetBundle> bundles;
 
+    private bool m_update = true;
     private int bundle_cnt = 0;
     private float update_time = 0;
     private float update_frequency = 0.5f;
@@ -29,7 +30,7 @@ public class ABManager : XSingleton<ABManager>
 
     public void Update()
     {
-        if (bundle_cnt > 0)
+        if (bundle_cnt > 0 && m_update)
         {
             if (Time.time - update_time > update_frequency)
             {
@@ -145,35 +146,43 @@ public class ABManager : XSingleton<ABManager>
     }
 
 
-
     private void UpdateBundles()
     {
-        var e = bundles.GetEnumerator();
-        while (e.MoveNext())
+        for (int i = bundle_cnt - 1; i >= 0; i--)
         {
-            e.Current.Value.Update();
+            bundles[i].Update();
         }
+    }
+
+    private bool ContainsBundle(uint hash)
+    {
+        for (int i = 0; i < bundle_cnt; i++)
+        {
+            if (bundles[i].hash == hash) return true;
+        }
+        return false;
     }
 
     public bool CacheBundle(XAssetBundle bundle)
     {
-        if (bundles == null) bundles = new Dictionary<uint, XAssetBundle>();
-        if (bundle != null && !bundles.ContainsKey(bundle.hash))
+        if (bundles == null) bundles = new List<XAssetBundle>();
+        if (bundle != null && !ContainsBundle(bundle.hash))
         {
-            bundles.Add(bundle.hash, bundle);
-            bundle_cnt = bundles.Count;
+            bundles.Add(bundle);
+            bundle_cnt++;
             return true;
         }
         return false;
     }
 
 
-    public bool RemvBundle(uint hash)
+    public bool RemvBundle(XAssetBundle bundle)
     {
-        if (bundle_cnt > 0 && bundles.ContainsKey(hash))
+        if (bundle_cnt > 0 && ContainsBundle(bundle.hash))
         {
-            bundles.Remove(hash);
-            bundle_cnt = bundles.Count;
+            //先减后删
+            --bundle_cnt;
+            bundles.Remove(bundle);
             return true;
         }
         return false;
@@ -182,15 +191,19 @@ public class ABManager : XSingleton<ABManager>
     public XAssetBundle GetBundle(string path)
     {
         uint hash = XCommon.singleton.XHash(path);
-        if (bundle_cnt > 0 && bundles.ContainsKey(hash))
+        if (bundle_cnt > 0)
         {
-            XAssetBundle b = bundles[hash];
-            b.OnReuse();
-            return b;
+            for (int i = 0; i < bundle_cnt; i++)
+            {
+                if (bundles[i].hash == hash)
+                {
+                    XAssetBundle b = bundles[i];
+                    b.OnReuse();
+                    return b;
+                }
+            }
         }
-        else
-        {
-            return new XAssetBundle(path);
-        }
+        return new XAssetBundle(path);
     }
+
 }

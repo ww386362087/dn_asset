@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GameEnine : XObject
+public sealed class GameEnine : XObject
 {
 
     private static MonoBehaviour _entrance;

@@ -36,6 +36,7 @@ public class XAssetBundle
     {
         if (bundle == null)
         {
+            //XDebug.Log("load name: " + loadName);
             bundle = AssetBundle.LoadFromFile(ab_apth);
             born_time = Time.time;
             ABManager.singleton.CacheBundle(this);
@@ -48,7 +49,7 @@ public class XAssetBundle
     {
         if (bundle != null)
         {
-            ABManager.singleton.RemvBundle(hash);
+            ABManager.singleton.RemvBundle(this);
             bundle.Unload(unloadall);
             bundle = null;
             return true;

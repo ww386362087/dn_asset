@@ -8,8 +8,8 @@ public class XLogicalPanel : XPanel
 
     // private List<string> _states = new List<string>();
 
-    private int _defualt_mask_value;
-    private int _states_mask_value;
+    //private int _defualt_mask_value;
+    //private int _states_mask_value;
 
     protected override int Count
     {

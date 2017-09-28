@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 418695402
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a1026f370b3b22fe7131c262f23af242
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 189ea49457fee455dd67458895b48280
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/UI/Canvas1.prefab
+Dependencies:
+- D:/projects/dn_asset/Assets/StreamingAssets/update/AssetBundles/749732696.ab

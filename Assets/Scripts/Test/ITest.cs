@@ -1,6 +1,5 @@
 ﻿#if TEST
 
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public interface ITest
@@ -41,7 +40,7 @@ public class TestManager
                     test = new TestCPP();
                     break;
                 case "Fashion":
-                    test = new TestAB();
+                    test = new TestFashion();
                     break;
                 case "World":
                     test = new TestScene();
