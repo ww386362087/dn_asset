@@ -30,10 +30,8 @@ public class XSkillFx : XSkill
 
         Transform trans = host.transform;
         Vector3 offset = new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
-        
         XFx fx = XFxMgr.singleton.CreateFx(data.Fx);
         fx.DelayDestroy = data.Destroy_Delay;
-
         if (data.StickToGround)
         {
             switch (data.Type)
@@ -86,17 +84,16 @@ public class XSkillFx : XSkill
             }
             fx.Play(trans.gameObject, offset, new Vector3(data.ScaleX, data.ScaleY, data.ScaleZ), 1);
         }
-
         if (data.Combined)
         {
             if (data.End > 0)
-               host.AddedCombinedToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillFx, fx));
+                host.AddedCombinedToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillFx, fx));
             _outer_fx.Add(fx);
         }
         else
         {
             if (data.End > 0)
-               host.AddedTimerToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillFx, fx), false);
+                host.AddedTimerToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillFx, fx), false);
             _fx.Add(fx);
         }
     }

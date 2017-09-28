@@ -1,7 +1,4 @@
-﻿using System;
-
-
-public enum EPartType
+﻿public enum EPartType
 {
     ECombinePartStart = 0,
     EFace = 0,

@@ -37,8 +37,7 @@ public class XResourceMgr
 
     //记录resource 里的异步资源列表
     private static List<AsynAsset> _asyn_list;
-
-
+    
     private static List<Asset> _syn_list;
 
     private static bool useAB = true;
@@ -117,8 +116,7 @@ public class XResourceMgr
         }
         return Obj2T<T>(obt);
     }
-
-
+    
     private static T Obj2T<T>(Object o) where T : Object
     {
         if (typeof(T) == typeof(GameObject)
@@ -277,8 +275,7 @@ public class XResourceMgr
             _cnt = _asyn_list.Count;
         }
     }
-
-
+    
     private static void DownloadDone(AsynAsset node)
     {
         for (int i = 0, max = node.cb.Count; i < max; i++)
@@ -294,8 +291,7 @@ public class XResourceMgr
     {
          XDebug.LogError("Load resource: " , prefab , " error!");
     }
-
-
+    
     public static void SafeDestroy(ref GameObject obj)
     {
         Object.Destroy(obj);

@@ -11,8 +11,7 @@ public class MountLoadTask : BaseLoadTask
     public bool transferRef = false;
     public Renderer mainRender = null;
 
-    public MountLoadTask(EPartType p, XEquipComponent e)
-        : base(p)
+    public MountLoadTask(EPartType p, XEquipComponent e) : base(p)
     {
         component = e;
     }
@@ -24,7 +23,7 @@ public class MountLoadTask : BaseLoadTask
             if (MakePath(ref newFpi, loadedPath))
             {
                 if (goInstance != null) GameObject.Destroy(goInstance);
-                goInstance = XResourceMgr.Load<GameObject>(location,AssetType.Prefab);
+                goInstance = XResourceMgr.Load<GameObject>(location, AssetType.Prefab);
                 LoadFinish(this);
                 ProcessTransfer();
             }
@@ -91,7 +90,7 @@ public class MountLoadTask : BaseLoadTask
         goInstance.transform.localPosition = Vector3.zero;
         goInstance.transform.localRotation = Quaternion.identity;
         goInstance.transform.localScale = Vector3.one;
-        
+
     }
 
     private string GetMountPoint()
@@ -115,5 +114,5 @@ public class MountLoadTask : BaseLoadTask
         return point;
     }
 
-
 }
+

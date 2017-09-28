@@ -7,13 +7,11 @@ public class XSkillWarning : XSkill
 
     public XSkillWarning(XSkillHoster _host) : base(_host)
     {
-        
     }
 
     public override void Execute()
     {
         base.Execute();
-
         if (current.Warning != null)
         {
             if (current.Warning.Count > 0)
@@ -139,9 +137,7 @@ public class XSkillWarning : XSkill
                     }
                     else
                     {
-
                         Vector3 offset = host.transform.rotation * new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
-
                         XFxMgr.singleton.CreateAndPlay(
                                 data.Fx,
                                 host.gameObject,
@@ -177,8 +173,5 @@ public class XSkillWarning : XSkill
     public override void Clear()
     {
     }
-
-    
-
 }
 

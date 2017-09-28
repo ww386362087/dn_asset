@@ -4,14 +4,39 @@ using UnityEngine;
 
 public class ABManager : XSingleton<ABManager>
 {
-    
+
     public AssetBundleDataReader depInfoReader;
+
+    /// <summary>
+    /// ab加载出来的对象
+    /// </summary>
     private Dictionary<uint, Object> map;
+
+    /// <summary>
+    /// bundle的引用
+    /// </summary>
+    private Dictionary<uint, XAssetBundle> bundles;
+
+    private int bundle_cnt = 0;
+    private float update_time = 0;
+    private float update_frequency = 0.5f;
 
     public void Initial()
     {
         map = new Dictionary<uint, Object>();
         LoadDepInfo();
+    }
+
+    public void Update()
+    {
+        if (bundle_cnt > 0)
+        {
+            if (Time.time - update_time > update_frequency)
+            {
+                UpdateBundles();
+                update_time = Time.time;
+            }
+        }
     }
 
     void LoadDepInfo()
@@ -32,7 +57,7 @@ public class ABManager : XSingleton<ABManager>
             }
             else
             {
-                XDebug.LogError("depFile not exist! " , depFile);
+                XDebug.LogError("depFile not exist! ", depFile);
             }
         }
     }
@@ -119,4 +144,53 @@ public class ABManager : XSingleton<ABManager>
         return null;
     }
 
+
+
+    private void UpdateBundles()
+    {
+        var e = bundles.GetEnumerator();
+        while (e.MoveNext())
+        {
+            e.Current.Value.Update();
+        }
+    }
+
+    public bool CacheBundle(XAssetBundle bundle)
+    {
+        if (bundles == null) bundles = new Dictionary<uint, XAssetBundle>();
+        if (bundle != null && !bundles.ContainsKey(bundle.hash))
+        {
+            bundles.Add(bundle.hash, bundle);
+            bundle_cnt = bundles.Count;
+            return true;
+        }
+        return false;
+    }
+
+
+    public bool RemvBundle(uint hash)
+    {
+        if (bundle_cnt > 0 && bundles.ContainsKey(hash))
+        {
+            bundles.Remove(hash);
+            bundle_cnt = bundles.Count;
+            return true;
+        }
+        return false;
+    }
+
+    public XAssetBundle GetBundle(string path)
+    {
+        uint hash = XCommon.singleton.XHash(path);
+        if (bundle_cnt > 0 && bundles.ContainsKey(hash))
+        {
+            XAssetBundle b = bundles[hash];
+            b.OnReuse();
+            return b;
+        }
+        else
+        {
+            return new XAssetBundle(path);
+        }
+    }
 }

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.IO;
 using UnityEngine;
@@ -17,7 +16,6 @@ public class LoaderBase
         mono = GameEnine.entrance;
         depsCnt = data.dependencies.Length;
     }
- 
 }
 
 
@@ -26,12 +24,8 @@ public class LoaderBase
 /// </summary>
 public class Loader : LoaderBase
 {
-    public Loader(AssetBundleData d) 
-        : base(d)
-    {
-    }
-
-
+    public Loader(AssetBundleData d) : base(d) { }
+    
     public UnityEngine.Object LoadImm()
     {
         if (depsCnt > 0)
@@ -68,24 +62,19 @@ public class Loader : LoaderBase
 
     private UnityEngine.Object LoadFromCacheFile(uint bundleName)
     {
-
         string file = Path.Combine(AssetBundlePathResolver.BundleCacheDir, bundleName + ".ab");
-        AssetBundle bundle = AssetBundle.LoadFromFile(file);
-        UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
-       // bundle.Unload(false);
-        return obj;
+        XAssetBundle bundle = ABManager.singleton.GetBundle(file);
+        return bundle.LoadAsset(data.loadName);
     }
 
     /// <summary>
-    /// 从源文件(安装包里)加载
+    /// 从源文件(安装包里)加载 
     /// </summary>
     private UnityEngine.Object LoadFromPackage(uint bundleName)
     {
         string file = AssetBundlePathResolver.GetBundleSourceFile(bundleName + ".ab", false);
-        AssetBundle bundle = AssetBundle.LoadFromFile(file);
-        UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
-    //    bundle.Unload(false);
-        return obj;
+        XAssetBundle bundle = ABManager.singleton.GetBundle(file);
+        return bundle.LoadAsset(data.loadName);
     }
 }
 
@@ -98,8 +87,7 @@ public class AsyncLoader : LoaderBase
 
     int loadCnt;
 
-    public AsyncLoader(AssetBundleData d)
-        : base(d)
+    public AsyncLoader(AssetBundleData d) : base(d)
     {
         loadCnt = depsCnt;
     }
@@ -132,7 +120,6 @@ public class AsyncLoader : LoaderBase
         loadCnt++;
     }
 
-
     private void LoadAsset()
     {
         uint hash = data.hash;
@@ -158,9 +145,7 @@ public class AsyncLoader : LoaderBase
         {
             loadCB(obj);
         }
-
     }
-
 
     private IEnumerator LoadFromCacheFile(uint bundleName, Action<uint, UnityEngine.Object> cb)
     {
@@ -187,6 +172,5 @@ public class AsyncLoader : LoaderBase
         cb(bundleName, bundle.LoadAsset(data.loadName));
         bundle.Unload(false);
     }
-
 
 }

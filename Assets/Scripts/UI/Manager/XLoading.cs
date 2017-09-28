@@ -7,9 +7,7 @@ public sealed class XLoading
     private static Image loadimg { get { return UIManager.singleton.LoadImage; } }
 
     private static Text loadtxt { get { return UIManager.singleton.LoadText; } }
-
-
-
+    
     public static void SetText(string txt)
     {
         if (loadtxt != null)
@@ -51,5 +49,4 @@ public sealed class XLoading
         }
     }
     
-
 }

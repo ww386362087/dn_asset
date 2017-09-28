@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum DlgType
 {
@@ -102,15 +101,13 @@ public abstract class UIDlg<TDlg, TBehaviour> : UIEventPacher, IUIDlg
         Regist();
         _show = true;
     }
-
-
+    
     public virtual void OnHide()
     {
         UnRegist();
         _show = false;
     }
-
-
+    
     public virtual void OnDestroy()
     {
         UnRegist();
@@ -118,7 +115,6 @@ public abstract class UIDlg<TDlg, TBehaviour> : UIEventPacher, IUIDlg
         _show = false;
     }
     
-
     public void SetVisible(bool visble)
     {
         if (visble)
@@ -130,14 +126,13 @@ public abstract class UIDlg<TDlg, TBehaviour> : UIEventPacher, IUIDlg
             UIManager.singleton.Hide(this as IUIDlg);
         }
     }
-
-
+    
     public void SetBehaviour(GameObject _go)
     {
         _uibehaviour = _go.AddComponent<TBehaviour>();
         _go.SetActive(true);
         OnLoad();
     }
-
-  
+    
 }
+
