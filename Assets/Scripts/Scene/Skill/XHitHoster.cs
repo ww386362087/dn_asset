@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using XTable;
 
-public class XSkillHit : MonoBehaviour {
+public class XHitHoster : MonoBehaviour {
 
     [SerializeField]
     public int PresentID = 0;

@@ -63,13 +63,13 @@ public class XSkillManipulate : XSkill
 
     public void Update(float deltaTime)
     {
-        XSkillHit[] hits = GameObject.FindObjectsOfType<XSkillHit>();
+        XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
 
         foreach (XManipulationData data in _item.Values)
         {
             Vector3 center = host.transform.position + host.transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
 
-            foreach (XSkillHit hit in hits)
+            foreach (XHitHoster hit in hits)
             {
                 Vector3 gap = center - hit.transform.position; gap.y = 0;
                 float dis = gap.magnitude;

@@ -6,7 +6,7 @@ public class XSkillResult : XSkill
     public int nHotID = 0;
     public Vector3 nResultForward = Vector3.zero;
     public List<Vector3>[] WarningPosAt = null;
-    private List<HashSet<XSkillHit>> _hurt_target = new List<HashSet<XSkillHit>>();
+    private List<HashSet<XHitHoster>> _hurt_target = new List<HashSet<XHitHoster>>();
 
     public XSkillResult(XSkillHoster _host) : base(_host)
     {
@@ -62,13 +62,13 @@ public class XSkillResult : XSkill
     {
     }
     
-    private void AddHurtTarget(XSkillData data, XSkillHit id, int triggerTime)
+    private void AddHurtTarget(XSkillData data, XHitHoster id, int triggerTime)
     {
         if (!data.Result[triggerTime].Loop && /*for multiple trigger end*/!data.Result[triggerTime].LongAttackEffect)
             _hurt_target[triggerTime].Add(id);
     }
 
-    private bool IsHurtEntity(XSkillHit id, int triggerTime)
+    private bool IsHurtEntity(XHitHoster id, int triggerTime)
     {
         /*
          * this section not as same as client shows
@@ -130,7 +130,7 @@ public class XSkillResult : XSkill
         }
     }
 
-    public void InnerResult(int triggerTime, Vector3 forward, Vector3 pos, XSkillData data, XSkillHit hitted = null)
+    public void InnerResult(int triggerTime, Vector3 forward, Vector3 pos, XSkillData data, XHitHoster hitted = null)
     {
         nHotID = triggerTime;
 
@@ -139,9 +139,9 @@ public class XSkillResult : XSkill
             pos += XCommon.singleton.VectorToQuaternion(host.transform.forward) * new Vector3(data.Result[triggerTime].Offset_X, 0, data.Result[triggerTime].Offset_Z);
             nResultForward = forward;
 
-            XSkillHit[] hits = GameObject.FindObjectsOfType<XSkillHit>();
+            XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
 
-            foreach (XSkillHit hit in hits)
+            foreach (XHitHoster hit in hits)
             {
                 if (IsHurtEntity(hit, triggerTime)) continue;
 
@@ -181,7 +181,7 @@ public class XSkillResult : XSkill
     {
         if (param.Attack_All)
         {
-            XSkillHit[] hits = GameObject.FindObjectsOfType<XSkillHit>();
+            XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
 
             for (int i = 0; i < hits.Length; i++)
             {

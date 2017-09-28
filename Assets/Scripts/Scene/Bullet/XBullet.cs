@@ -25,7 +25,7 @@ internal class XBullet
     private RaycastHit _hitInfo;
     private Vector3 _origin = Vector3.zero;
 
-    private Dictionary<XSkillHit, XBulletTarget> _hurt_target = new Dictionary<XSkillHit, XBulletTarget>();
+    private Dictionary<XHitHoster, XBulletTarget> _hurt_target = new Dictionary<XHitHoster, XBulletTarget>();
 
     public XBullet(XBulletData data)
     {
@@ -68,7 +68,7 @@ internal class XBullet
         }
     }
 
-    public bool IsHurtEntity(XSkillHit id)
+    public bool IsHurtEntity(XHitHoster id)
     {
         XBulletTarget target;
         if (id != null && _hurt_target.TryGetValue(id, out target))
@@ -168,7 +168,7 @@ internal class XBullet
     private void OnRefined(object o)
     {
         XBulletTarget bt;
-        XSkillHit id = (XSkillHit)o;
+        XHitHoster id = (XHitHoster)o;
 
         if (_hurt_target.TryGetValue(id, out bt))
         {
@@ -180,7 +180,7 @@ internal class XBullet
         }
     }
 
-    public void Result(XSkillHit hit)
+    public void Result(XHitHoster hit)
     {
         if (IsHurtEntity(hit)) return;
 
@@ -280,9 +280,9 @@ internal class XBullet
             _bullet.transform.position += move;
             if (_data.Skill.Result[_data.Sequnce].LongAttackData.Manipulation)
             {
-                XSkillHit[] hits = GameObject.FindObjectsOfType<XSkillHit>();
+                XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
                 Vector3 center = _bullet.transform.position;
-                foreach (XSkillHit hit in hits)
+                foreach (XHitHoster hit in hits)
                 {
                     Vector3 gap = center - hit.transform.position;
                     gap.y = 0;
@@ -330,7 +330,7 @@ internal class XBullet
 
     private static void RingCollideUnit(float ir, float or, Vector3 center, XBullet bullet)
     {
-        XSkillHit[] ents = GameObject.FindObjectsOfType<XSkillHit>();
+        XHitHoster[] ents = GameObject.FindObjectsOfType<XHitHoster>();
         for (int i = 0; i < ents.Length; i++)
         {
             bool collided = false;
@@ -344,7 +344,7 @@ internal class XBullet
 
     private static void BulletCollideUnit(Vector3 rectcenter, float hlen, float rotation, float r, XBullet bullet)
     {
-        XSkillHit[] ents = GameObject.FindObjectsOfType<XSkillHit>();
+        XHitHoster[] ents = GameObject.FindObjectsOfType<XHitHoster>();
         for (int i = 0; i < ents.Length; i++)
         {
             bool collided = false;
@@ -364,7 +364,7 @@ internal class XBullet
         Vector3 left = origin + side * r;
         Vector3 right = origin - side * r;
 
-        XSkillHit[] ents = GameObject.FindObjectsOfType<XSkillHit>();
+        XHitHoster[] ents = GameObject.FindObjectsOfType<XHitHoster>();
 
         for (int i = 0; i < ents.Length; i++)
         {

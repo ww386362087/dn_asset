@@ -41,7 +41,7 @@ public class XSkillWarning : XSkill
                 {
                     case XWarningType.Warning_All:
                     case XWarningType.Warning_Multiple:
-                        XSkillHit[] hits = GameObject.FindObjectsOfType<XSkillHit>();
+                        XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
                         int n = (data.Type == XWarningType.Warning_All) ? hits.Length : data.MaxRandomTarget;
                         for (int i = 0; i < hits.Length; i++)
                         {
@@ -81,7 +81,7 @@ public class XSkillWarning : XSkill
             }
             else if (data.Type == XWarningType.Warning_Multiple)
             {
-                XSkillHit[] hits = GameObject.FindObjectsOfType<XSkillHit>();
+                XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
                 int n = data.MaxRandomTarget;
                 for (int i = 0; i < hits.Length; i++)
                 {
@@ -153,7 +153,7 @@ public class XSkillWarning : XSkill
                     }
                     break;
                 case XWarningType.Warning_All:
-                    XSkillHit[] hits = GameObject.FindObjectsOfType<XSkillHit>();
+                    XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
 
                     for (int i = 0; i < hits.Length; i++)
                     {

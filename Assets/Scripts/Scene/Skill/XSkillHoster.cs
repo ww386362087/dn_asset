@@ -56,7 +56,7 @@ public class XSkillHoster : MonoBehaviour
     private DummyState _state = DummyState.Idle;
     private XSkillCamera _camera = null;
     private XSkillData _current = null;
-
+    
     private bool _execute = false;
     private bool _anim_init = false;
     private bool _skill_when_move = false;
@@ -140,8 +140,9 @@ public class XSkillHoster : MonoBehaviour
         light.type = LightType.Directional;
         light.intensity = 0.5f;
 
+        RebuildSkillAniamtion();
+        Application.targetFrameRate = 30;
         InitHost();
-        //XLoading.Show(false);
     }
 
     void OnDrawGizmos()
@@ -370,6 +371,7 @@ public class XSkillHoster : MonoBehaviour
         else
         {
             _action_framecount += Time.deltaTime;
+            if (_action_framecount > _current.Time) StopFire();
             if (_execute || xOuterData.TypeToken == 3)
             {
                 if (nh != 0 || nv != 0)
@@ -480,7 +482,7 @@ public class XSkillHoster : MonoBehaviour
 
     private void FocusTarget()
     {
-        XSkillHit hit = GameObject.FindObjectOfType<XSkillHit>();
+        XHitHoster hit = GameObject.FindObjectOfType<XHitHoster>();
         _target = (xOuterData.NeedTarget && hit != null) ? hit.gameObject : null;
         if (_target != null && IsInAttckField(xOuterData, transform.position, transform.forward, _target))
         {
