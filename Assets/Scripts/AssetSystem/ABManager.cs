@@ -9,11 +9,15 @@ public sealed class ABManager : XSingleton<ABManager>
 
     /// <summary>
     /// ab加载出来的对象
+    /// UnityEngine.Object，但是Asset-Object和Cloned-Object本质是不同的
+    /// 例如，如果对Asset-Object执行Destroy 会报错：Destroying assets is not permitted to avoid data loss
+    /// 加载完cache 切场景卸载
     /// </summary>
     private Dictionary<uint, Object> map;
 
     /// <summary>
-    /// bundle的引用
+    /// bundle的引用 
+    /// bundle是加载完即刻卸载的 和map里的正好相反
     /// </summary>
     private List<XAssetBundle> bundles;
 
@@ -37,6 +41,32 @@ public sealed class ABManager : XSingleton<ABManager>
                 UpdateBundles();
                 update_time = Time.time;
             }
+        }
+    }
+
+    /// <summary>
+    /// 一般是切换场景的时候调用 如：OnLeaveScene
+    /// </summary>
+    public void UnloadAll()
+    {
+        if (bundle_cnt > 0)
+        {
+            for (int i = 0; i < bundle_cnt; i++)
+            {
+                bundles[i].Unload(true, true);
+            }
+            bundle_cnt = 0;
+            bundles.Clear();
+        }
+        if (map != null)
+        {
+            var e = map.GetEnumerator();
+            while (e.MoveNext())
+            {
+                XResourceMgr.UnloadAsset(e.Current.Value);
+            }
+            e.Dispose();
+            map.Clear();
         }
     }
 
@@ -131,8 +161,7 @@ public sealed class ABManager : XSingleton<ABManager>
             map[hash] = obj;
         }
     }
-
-
+    
     public bool IsCached(uint hash)
     {
         return map.ContainsKey(hash);
@@ -188,9 +217,9 @@ public sealed class ABManager : XSingleton<ABManager>
         return false;
     }
 
-    public XAssetBundle GetBundle(string path)
+    public XAssetBundle GetBundle(AssetBundleData data)
     {
-        uint hash = XCommon.singleton.XHash(path);
+        uint hash = XCommon.singleton.XHash(data.assetpath);
         if (bundle_cnt > 0)
         {
             for (int i = 0; i < bundle_cnt; i++)
@@ -203,7 +232,7 @@ public sealed class ABManager : XSingleton<ABManager>
                 }
             }
         }
-        return new XAssetBundle(path);
+        return new XAssetBundle(data);
     }
 
 }

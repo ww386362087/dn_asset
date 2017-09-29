@@ -50,32 +50,36 @@ public class Loader : LoaderBase
         uint hash = data.hash;
         if (ABManager.singleton.IsCached(hash))
         {
-            return ABManager.singleton.GetCache(hash);
+            //if (data.compositeType == AssetBundleExportType.Standalone)
+            //{
+            //    //被依赖的bundle要重新load 不能直接从cache列表取 否则最终的prefab会缺少依赖的资源
+            //    //为了避免内存里有多个对象 要把之前cache的卸载掉
+            //    //直接Unload时,若依然有物体用该图，那么物体就变全黑 
+            //    UnityEngine.Object obj = ABManager.singleton.GetCache(hash);
+            //    //XResourceMgr.UnloadAsset(obj);
+            //    obj = LoadFromBundle(data);
+            //    ABManager.singleton.CacheObject(hash, obj);
+            //    return obj;
+            //}
+            //else
+            {
+                return ABManager.singleton.GetCache(hash);
+            }
         }
         else
         {
-            UnityEngine.Object obj = Application.isEditor ? LoadFromCacheFile(hash) : LoadFromPackage(hash);
+            UnityEngine.Object obj = LoadFromBundle(data);
             ABManager.singleton.CacheObject(hash, obj);
             return obj;
         }
     }
 
-    private UnityEngine.Object LoadFromCacheFile(uint bundleName)
+    private UnityEngine.Object LoadFromBundle(AssetBundleData data)
     {
-        string file = Path.Combine(AssetBundlePathResolver.BundleCacheDir, bundleName + ".ab");
-        XAssetBundle bundle = ABManager.singleton.GetBundle(file);
+        XAssetBundle bundle = ABManager.singleton.GetBundle(data);
         return bundle.LoadAsset(data.loadName);
     }
-
-    /// <summary>
-    /// 从源文件(安装包里)加载 
-    /// </summary>
-    private UnityEngine.Object LoadFromPackage(uint bundleName)
-    {
-        string file = AssetBundlePathResolver.GetBundleSourceFile(bundleName + ".ab", false);
-        XAssetBundle bundle = ABManager.singleton.GetBundle(file);
-        return bundle.LoadAsset(data.loadName);
-    }
+    
 }
 
 /// <summary>
@@ -129,7 +133,7 @@ public class AsyncLoader : LoaderBase
         }
         else
         {
-            IEnumerator etor = Application.isEditor ? LoadFromCacheFile(hash, OnComplete) : LoadFromPackage(hash, OnComplete);
+            IEnumerator etor = LoadFromCacheFile(hash, OnComplete);
             mono.StartCoroutine(etor);
         }
     }
@@ -150,21 +154,6 @@ public class AsyncLoader : LoaderBase
     private IEnumerator LoadFromCacheFile(uint bundleName, Action<uint, UnityEngine.Object> cb)
     {
         string file = Path.Combine(AssetBundlePathResolver.BundleCacheDir, bundleName + ".ab");
-        AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(file);
-        while (!req.isDone) yield return null;
-        AssetBundle bundle = req.assetBundle;
-        ABManager.singleton.CacheObject(bundleName, bundle);
-        cb(bundleName, bundle.LoadAsset(data.loadName));
-        bundle.Unload(false);
-    }
-
-    /// <summary>
-    /// 从源文件(安装包里)加载
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator LoadFromPackage(uint bundleName, Action<uint, UnityEngine.Object> cb)
-    {
-        string file = AssetBundlePathResolver.GetBundleSourceFile(bundleName + ".ab", false);
         AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(file);
         while (!req.isDone) yield return null;
         AssetBundle bundle = req.assetBundle;

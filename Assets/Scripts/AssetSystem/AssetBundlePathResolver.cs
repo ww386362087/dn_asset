@@ -35,35 +35,6 @@ public class AssetBundlePathResolver
         return string.Format("{0}.{1}", abName.Substring(0, last), abName.Substring(last + 1));
     }
 
-    /// <summary>
-    /// 获取 AB 源文件路径（打包进安装包的）
-    /// </summary>
-    public static string GetBundleSourceFile(string path, bool forWWW = true)
-    {
-        string filePath = null;
-        switch (Application.platform)
-        {
-            case RuntimePlatform.Android:
-                if (forWWW)
-                    filePath = string.Format("jar:file://{0}!/assets/update/Android/{1}/{2}", Application.dataPath, BundleSaveDirName, path);
-                else
-                    filePath = string.Format("{0}!assets/update/Android/{1}/{2}", Application.dataPath, BundleSaveDirName, path);
-                break;
-            case RuntimePlatform.IPhonePlayer:
-                if (forWWW)
-                    filePath = string.Format("file://{0}/Raw/update/iOS/{1}/{2}", Application.dataPath, BundleSaveDirName, path);
-                else
-                    filePath = string.Format("{0}/Raw/update/iOS/{1}/{2}", Application.dataPath, BundleSaveDirName, path);
-                break;
-            default:
-                if (forWWW)
-                    filePath = string.Format("file://{0}/StreamingAssets/update/{1}/{2}", Application.dataPath, BundleSaveDirName, path);
-                else
-                    filePath = string.Format("{0}/StreamingAssets/update/{1}/{2}", Application.dataPath, BundleSaveDirName, path);
-                break;
-        }
-        return filePath;
-    }
 
     /// <summary>
     /// AB 依赖信息文件名
@@ -89,10 +60,10 @@ public class AssetBundlePathResolver
                 switch (Application.platform)
                 {
                     case RuntimePlatform.Android:
-                        dir = string.Format("{0}/update/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
+                        dir = string.Format("{0}/update/Android/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
                         break;
                     case RuntimePlatform.IPhonePlayer:
-                        dir = string.Format("{0}/update/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
+                        dir = string.Format("{0}/update/iOS/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
                         break;
                     default:
                         dir = string.Format("{0}/update/AssetBundles", Application.streamingAssetsPath);

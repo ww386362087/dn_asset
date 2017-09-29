@@ -207,6 +207,9 @@ public class XResourceMgr
         RemoveInSynPool(path, type);
     }
 
+    /// <summary>
+    /// 针对的是Asset-Object 而非Cloned-Object
+    /// </summary>
     public static void UnloadAsset(Object assetToUnload)
     {
         if (assetToUnload != null)
@@ -222,7 +225,7 @@ public class XResourceMgr
             }
             else
             {
-                //当使用Resources.UnloadAsset后，若依然有物体用该图，那么物体就变全黑
+                //当使用Resources.UnloadAsset后，若依然有物体用该图，那么物体就变全黑 谨慎使用
                 Resources.UnloadAsset(assetToUnload);
             }
         }

@@ -58,18 +58,20 @@ public class XTimerMgr : XSingleton<XTimerMgr>
 
     private void AdvanceTimer(int delta, enTimerType timerType)
     {
-        List<Timer> timers = m_timers[(int)timerType];
-
-        for (int i = 0; i < timers.Count;)
+        if (m_timers != null)
         {
-            if (timers[i].IsFinished())
+            List<Timer> timers = m_timers[(int)timerType];
+            for (int i = 0; i < timers.Count;)
             {
-                timers.RemoveAt(i);
-                continue;
-            }
+                if (timers[i].IsFinished())
+                {
+                    timers.RemoveAt(i);
+                    continue;
+                }
 
-            timers[i].Update(delta);
-            i++;
+                timers[i].Update(delta);
+                i++;
+            }
         }
     }
 

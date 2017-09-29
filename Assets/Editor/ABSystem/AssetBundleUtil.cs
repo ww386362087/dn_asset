@@ -76,7 +76,6 @@ namespace ABSystem
         public static void LoadCache()
         {
             string cacheTxtFilePath = GetCacheFile();
-
             if (File.Exists(cacheTxtFilePath))
             {
                 string value = File.ReadAllText(cacheTxtFilePath);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 
 
 public class XAssetBundle
@@ -18,41 +19,52 @@ public class XAssetBundle
     private float life_cycle;
 
     /// <summary>
-    /// ab 路径
+    /// ab 路径 ex:D:\projects\dn_asset\Assets\StreamingAssets\update\AssetBundles\1792139362.ab
     /// </summary>
     private string ab_apth;
 
+    /// <summary>
+    /// data.assetpath ex:Assets\Resources\UI\Canvas2.prefab
+    /// </summary>
+    private AssetBundleData ab_data;
+
     public uint hash;
 
-    public XAssetBundle(string path)
+    public XAssetBundle(AssetBundleData data)
     {
-        ab_apth = path;
+        ab_apth = Path.Combine(AssetBundlePathResolver.BundleCacheDir, data.hash + ".ab");
         life_cycle = 2f;
-        hash = XCommon.singleton.XHash(path);
+        ab_data = data;
+        hash = XCommon.singleton.XHash(data.assetpath);
     }
 
 
     public Object LoadAsset(string loadName)
     {
         if (bundle == null)
-        {
-            //XDebug.Log("load name: " + loadName);
+        { 
             bundle = AssetBundle.LoadFromFile(ab_apth);
             born_time = Time.time;
             ABManager.singleton.CacheBundle(this);
+           // XDebug.Log("ab load name: " + loadName , " path: " + ab_apth , " assetpath: " + ab_data.assetpath);
         }
         return bundle.LoadAsset(loadName);
     }
 
 
-    public bool Unload(bool unloadall)
+    public bool Unload(bool unloadall, bool force)
     {
         if (bundle != null)
         {
-            ABManager.singleton.RemvBundle(this);
-            bundle.Unload(unloadall);
-            bundle = null;
-            return true;
+            //默认公共资源不会卸载 除非force=true强制卸载（切场景时候用）
+            if (ab_data.compositeType != AssetBundleExportType.Standalone || force)
+            {
+                //XDebug.LogGreen("ab unload ", load_name);
+                ABManager.singleton.RemvBundle(this);
+                bundle.Unload(unloadall);
+                bundle = null;
+                return true;
+            }
         }
         return false;
     }
@@ -62,7 +74,7 @@ public class XAssetBundle
     {
         if (Time.time - born_time >= life_cycle)
         {
-            Unload(false);
+            Unload(false,false);
         }
     }
 

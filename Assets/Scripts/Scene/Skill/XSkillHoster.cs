@@ -317,13 +317,12 @@ public class XSkillHoster : MonoBehaviour
                 Gizmos.DrawLine(br, fr);
             }
         }
-
         Gizmos.matrix = defaultMatrix;
         Gizmos.color = defaultColor;
     }
 
     private float _action_framecount = 0;
-    private Rect _rect = new Rect(10, 10, 150, 20);
+    private Rect _rect;
 
     void OnGUI()
     {
@@ -334,6 +333,7 @@ public class XSkillHoster : MonoBehaviour
     
     private void InitHost()
     {
+        _rect = new Rect(10, 10, 150, 20);
         skills.Clear();
         skillResult = new XSkillResult(this);
         skillMob = new XSkillMob(this);
