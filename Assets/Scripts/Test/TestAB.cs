@@ -8,7 +8,7 @@ using UnityEngine;
 /// Canvas1 Canvas2 Canvas12 三个prefab共同引用2张图
 /// 所以生成ab的时候是5个 
 /// 正确的加载关系是先加载2张图 再加载prefab
-/// 卸载 只卸载根 公共资源不释放（选一个合适的时机释放-切场景）
+/// 卸载 只卸载根 公共资源不释放（游戏中选一个合适的时机释放--切场景）
 /// </summary>
 public class TestAB : MonoBehaviour
 {
@@ -33,7 +33,6 @@ public class TestAB : MonoBehaviour
         if (GUI.Button(new Rect(30, 30, 140, 80), "AsynLoad1"))
         {
             XResources.LoadAsync<GameObject>(path1, AssetType.Prefab, OnLoad1Complete);
-            //go1.name = "Load1";
         }
         if (GUI.Button(new Rect(30, 130, 140, 80), "ImmLoad2"))
         {

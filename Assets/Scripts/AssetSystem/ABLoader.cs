@@ -100,10 +100,7 @@ public class AsyncLoader : LoaderBase
         {
             LoadDeps();
         }
-        else
-        {
-            LoadAsset();
-        }
+        LoadAsset();
     }
 
     protected void LoadDeps()
