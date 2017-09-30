@@ -59,7 +59,7 @@ public class XCamera : XObject
 
             if (_dummyObject == null)
             {
-                _dummyObject = XResourceMgr.Load<GameObject>("Prefabs/DummyCamera", AssetType.Prefab);
+                _dummyObject = XResources.Load<GameObject>("Prefabs/DummyCamera", AssetType.Prefab);
                 _dummyObject.name = "Dummy Camera";
             }
             _dummyCamera = _dummyObject.transform.GetChild(0);
@@ -126,7 +126,7 @@ public class XCamera : XObject
     public void Effect(string motion, string trigger)
     {
         _root_quat = Quaternion.identity;
-        AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion, AssetType.Anim);
+        AnimationClip clip = XResources.Load<AnimationClip>(motion, AssetType.Anim);
         if (clip != null)
         {
             _trigger = trigger;

@@ -46,13 +46,13 @@ public class XCutSceneRunner : MonoBehaviour
             for (int i = 0, max = cut_scene_data.Actors.Count; i < max; i++)
             {
                 XActorDataClip clip = cut_scene_data.Actors[i];
-                XResourceMgr.Load<AnimationClip>(clip.Clip, AssetType.Anim);
+                XResources.Load<AnimationClip>(clip.Clip, AssetType.Anim);
                 _times.Add(XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BeOnStage, clip));
             }
             for (int i = 0, max = cut_scene_data.Player.Count; i < max; i++)
             {
                 XPlayerDataClip clip = cut_scene_data.Player[i];
-                XResourceMgr.Load<AnimationClip>(clip.Clip1, AssetType.Anim);
+                XResources.Load<AnimationClip>(clip.Clip1, AssetType.Anim);
                 _times.Add(XTimerMgr.singleton.SetTimer(clip.TimeLineAt / FPS - 0.016f, BePlayerOnStage, clip));
             }
             for (int i = 0, max = cut_scene_data.Fxs.Count; i < max; i++)

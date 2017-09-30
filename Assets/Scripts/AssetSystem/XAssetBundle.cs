@@ -32,12 +32,26 @@ public class XAssetBundle
 
     public XAssetBundle(AssetBundleData data)
     {
+        Init(data);
+    }
+
+
+    //异步加载的构造函数 
+    public XAssetBundle(AssetBundleData data, AssetBundle b)
+    {
+        Init(data);
+        born_time = Time.time;
+        bundle = b;
+        ABManager.singleton.CacheBundle(this);
+    }
+
+    private void Init(AssetBundleData data)
+    {
         ab_apth = Path.Combine(AssetBundlePathResolver.BundleCacheDir, data.hash + ".ab");
         life_cycle = 2f;
         ab_data = data;
-        hash = XCommon.singleton.XHash(data.assetpath);
+        hash = data.hash;
     }
-
 
     public Object LoadAsset(string loadName)
     {

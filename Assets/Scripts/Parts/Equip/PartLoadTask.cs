@@ -32,8 +32,8 @@ public class PartLoadTask : BaseLoadTask
         {
             if (MakePath(ref newFpi, loadedPath))
             {
-                mesh = XResourceMgr.Load<Mesh>(location,AssetType.Asset);
-                tex = XResourceMgr.Load<Texture>(location, AssetType.TGA);
+                mesh = XResources.Load<Mesh>(location,AssetType.Asset);
+                tex = XResources.Load<Texture>(location, AssetType.TGA);
                 LoadFinish(go, this);
             }
             else if (m_PartLoadCb != null)
@@ -65,12 +65,12 @@ public class PartLoadTask : BaseLoadTask
     {
         if (tex != null)
         {
-            XResourceMgr.UnloadAsset(tex);
+            XResources.UnloadAsset(tex);
             tex = null;
         }
-        if(mesh!=null)
+        if (mesh != null)
         {
-            XResourceMgr.UnloadAsset(mesh);
+            XResources.UnloadAsset(mesh);
             mesh = null;
         }
     }

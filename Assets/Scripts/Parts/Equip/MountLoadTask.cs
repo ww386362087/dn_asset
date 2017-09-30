@@ -23,7 +23,7 @@ public class MountLoadTask : BaseLoadTask
             if (MakePath(ref newFpi, loadedPath))
             {
                 if (goInstance != null) GameObject.Destroy(goInstance);
-                goInstance = XResourceMgr.Load<GameObject>(location, AssetType.Prefab);
+                goInstance = XResources.Load<GameObject>(location, AssetType.Prefab);
                 LoadFinish(this);
                 ProcessTransfer();
             }
@@ -59,7 +59,7 @@ public class MountLoadTask : BaseLoadTask
     public override void Reset()
     {
         if (goInstance != null) GameObject.Destroy(goInstance);
-        XResourceMgr.UnloadAsset(location, AssetType.Prefab);
+        XResources.UnloadAsset(location, AssetType.Prefab);
         transferRef = false;
     }
 

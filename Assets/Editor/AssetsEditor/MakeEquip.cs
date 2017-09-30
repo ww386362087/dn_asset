@@ -83,8 +83,8 @@ namespace XEditor
                         }
                         else
                         {
-                            Mesh mesh = XResourceMgr.Load<Mesh>(path,AssetType.Asset);
-                            Texture2D tex = XResourceMgr.Load<Texture2D>(path, AssetType.TGA);
+                            Mesh mesh = XResources.Load<Mesh>(path,AssetType.Asset);
+                            Texture2D tex = XResources.Load<Texture2D>(path, AssetType.TGA);
                             if (mesh != null)
                             {
                                 ExtraSkinMeshTex emt = new ExtraSkinMeshTex();

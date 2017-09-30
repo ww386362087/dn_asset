@@ -21,7 +21,7 @@ public sealed class XLoading
     {
         if(loadimg!=null)
         {
-            Sprite spr = XResourceMgr.Load<Sprite>(name, AssetType.PNG);
+            Sprite spr = XResources.Load<Sprite>(name, AssetType.PNG);
             loadimg.sprite = spr;
         }
     }

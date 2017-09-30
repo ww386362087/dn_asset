@@ -54,19 +54,19 @@ public class XEquipUtil
     {
         if (shader == _skin_cutout)
         {
-            return XResourceMgr.Load<Material>("Materials/Char/RimLightBlendCutout",AssetType.Mat);//mat
+            return XResources.Load<Material>("Materials/Char/RimLightBlendCutout",AssetType.Mat);//mat
         }
         else if (shader == _skin_nocutout)
         {
-            return XResourceMgr.Load<Material>("Materials/Char/RimLightBlendNoCutout",AssetType.Mat);
+            return XResources.Load<Material>("Materials/Char/RimLightBlendNoCutout",AssetType.Mat);
         }
         else if (shader == _skin_blend)
         {
-            return XResourceMgr.Load<Material>("Materials/Char/RimLightBlend",AssetType.Mat);
+            return XResources.Load<Material>("Materials/Char/RimLightBlend",AssetType.Mat);
         }
         else if (shader == _skin8)
         {
-            return XResourceMgr.Load<Material>("Materials/Char/RimLightBlend8",AssetType.Mat);
+            return XResources.Load<Material>("Materials/Char/RimLightBlend8",AssetType.Mat);
         }
         return new Material(shader);
     }

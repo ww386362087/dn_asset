@@ -62,10 +62,10 @@ public class UIManager : XSingleton<UIManager>
         if (temp != null) GameObject.Destroy(temp);
         string rootpath = "UI/UIRoot";
 
-        GameObject go = XResourceMgr.Load<GameObject>(rootpath, AssetType.Prefab);
+        GameObject go = XResources.Load<GameObject>(rootpath, AssetType.Prefab);
         GameObject.DontDestroyOnLoad(go);
 
-        XResourceMgr.UnloadAsset(rootpath, AssetType.Prefab);
+        XResources.UnloadAsset(rootpath, AssetType.Prefab);
         _uiCamera = go.GetComponent<Camera>();
         _canvas = go.transform.GetChild(0).GetComponent<Canvas>();
         _fade = _canvas.transform.GetChild(0).GetComponent<Image>();
@@ -116,7 +116,7 @@ public class UIManager : XSingleton<UIManager>
             }
             else
             {
-                GameObject go = XResourceMgr.Load<GameObject>(dlg.fileName, AssetType.Prefab);
+                GameObject go = XResources.Load<GameObject>(dlg.fileName, AssetType.Prefab);
                 go.transform.SetParent(dlg.shareCanvas ? _canvas.transform : _uiCamera.transform);
                 if (!dlg.shareCanvas)
                 {
@@ -224,7 +224,7 @@ public class UIManager : XSingleton<UIManager>
     {
         dlg.OnDestroy();
         GameObject.Destroy(dlg.innerBehaviour.gameObject);
-        XResourceMgr.UnloadAsset(dlg.fileName, AssetType.Prefab);
+        XResources.UnloadAsset(dlg.fileName, AssetType.Prefab);
     }
 
 

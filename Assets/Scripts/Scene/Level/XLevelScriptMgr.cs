@@ -49,7 +49,7 @@ namespace Level
         {
             Reset();
             ClearWallInfo();
-            Stream s = XResourceMgr.ReadText("Table/" + file);
+            Stream s = XResources.ReadText("Table/" + file);
             {
                 StreamReader sr = new StreamReader(s);
                 {
@@ -436,7 +436,7 @@ namespace Level
                     }
                 }
             }
-            XResourceMgr.ClearStream(s);
+            XResources.ClearStream(s);
         }
 
         public List<XLevelInfo> GetLevelScriptInfos()

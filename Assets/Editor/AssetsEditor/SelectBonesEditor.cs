@@ -265,11 +265,11 @@ namespace XEditor
                 {
                     if (srcAni != null && srcAni.runtimeAnimatorController != null)
                     {
-                        desAni.runtimeAnimatorController = XResourceMgr.Load("Controller/" + srcAni.runtimeAnimatorController.name,AssetType.Controller) as RuntimeAnimatorController;
+                        desAni.runtimeAnimatorController = XResources.Load("Controller/" + srcAni.runtimeAnimatorController.name,AssetType.Controller) as RuntimeAnimatorController;
                     }
                     else
                     {
-                        desAni.runtimeAnimatorController = XResourceMgr.Load("Controller/XAnimator",AssetType.Controller) as RuntimeAnimatorController;
+                        desAni.runtimeAnimatorController = XResources.Load("Controller/XAnimator",AssetType.Controller) as RuntimeAnimatorController;
                     }
                 }
             }

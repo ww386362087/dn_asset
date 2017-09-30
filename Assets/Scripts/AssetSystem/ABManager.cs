@@ -13,7 +13,7 @@ public sealed class ABManager : XSingleton<ABManager>
     /// 例如，如果对Asset-Object执行Destroy 会报错：Destroying assets is not permitted to avoid data loss
     /// 加载完cache 切场景卸载
     /// </summary>
-    private Dictionary<uint, Object> map;
+    private Dictionary<uint, Asset> map;
 
     /// <summary>
     /// bundle的引用 
@@ -28,7 +28,7 @@ public sealed class ABManager : XSingleton<ABManager>
 
     public void Initial()
     {
-        map = new Dictionary<uint, Object>();
+        map = new Dictionary<uint, Asset>();
         LoadDepInfo();
     }
 
@@ -63,7 +63,7 @@ public sealed class ABManager : XSingleton<ABManager>
             var e = map.GetEnumerator();
             while (e.MoveNext())
             {
-                XResourceMgr.UnloadAsset(e.Current.Value);
+                XResources.UnloadAsset(e.Current.Value.obt);
             }
             e.Dispose();
             map.Clear();
@@ -115,6 +115,20 @@ public sealed class ABManager : XSingleton<ABManager>
         depStream.Close();
     }
 
+    public void Unload(string path, AssetType type)
+    {
+        AssetBundleData data = MakePath(path, type);
+        if (map != null && map.ContainsKey(data.hash))
+        {
+            map[data.hash].ref_cnt--;
+            if (map[data.hash].ref_cnt <= 0)
+            {
+                XResources.UnloadAsset(map[data.hash].obt);
+                map[data.hash].obt = null;
+                map.Remove(data.hash);
+            }
+        }
+    }
 
     public bool Exist(uint hash)
     {
@@ -142,7 +156,7 @@ public sealed class ABManager : XSingleton<ABManager>
         return loader.LoadImm();
     }
 
-    public void LoadImm(string location, AssetType type, System.Action<Object> cb)
+    public void LoadAsyn(string location, AssetType type, System.Action<Object> cb)
     {
         AssetBundleData data = MakePath(location, type);
         AsyncLoader loader = new AsyncLoader(data);
@@ -152,13 +166,13 @@ public sealed class ABManager : XSingleton<ABManager>
 
     public void CacheObject(uint hash, Object obj)
     {
-        if (!map.ContainsKey(hash))
+        if (!IsCached(hash))
         {
-            map.Add(hash, obj);
+            map.Add(hash, new Asset() { obt = obj, ref_cnt = 1 });
         }
         else
         {
-            map[hash] = obj;
+            throw new System.Exception("the asset has cached!");
         }
     }
     
@@ -168,7 +182,7 @@ public sealed class ABManager : XSingleton<ABManager>
     }
 
 
-    public Object GetCache(uint hash)
+    public Asset GetCache(uint hash)
     {
         if (IsCached(hash)) return map[hash];
         return null;
@@ -209,7 +223,6 @@ public sealed class ABManager : XSingleton<ABManager>
     {
         if (bundle_cnt > 0 && ContainsBundle(bundle.hash))
         {
-            //先减后删
             --bundle_cnt;
             bundles.Remove(bundle);
             return true;
@@ -219,12 +232,11 @@ public sealed class ABManager : XSingleton<ABManager>
 
     public XAssetBundle GetBundle(AssetBundleData data)
     {
-        uint hash = XCommon.singleton.XHash(data.assetpath);
         if (bundle_cnt > 0)
         {
             for (int i = 0; i < bundle_cnt; i++)
             {
-                if (bundles[i].hash == hash)
+                if (bundles[i].hash == data.hash)
                 {
                     XAssetBundle b = bundles[i];
                     b.OnReuse();

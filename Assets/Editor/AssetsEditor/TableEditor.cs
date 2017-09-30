@@ -23,7 +23,7 @@ namespace XEditor
         [MenuItem(@"Assets/Tool/Table/MakeAll2Bytes")]
         private static void AllTable2Bytes()
         {
-            Object[] objects = XResourceMgr.LoadAll<Object>("Table");
+            Object[] objects = XResources.LoadAll<Object>("Table");
             Table2Bytes(objects);
             EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
         }

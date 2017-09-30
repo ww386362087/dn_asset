@@ -29,8 +29,7 @@ public sealed class GameEnine : XObject
         XTouch.singleton.Update(delta);
 
         XTimerMgr.singleton.Update(delta);
-        ABManager.singleton.Update();
-        XResourceMgr.Update();
+        XResources.Update();
         XEntityMgr.singleton.Update(delta);
         XScene.singleton.Update(delta);
         XAutoFade.Update();

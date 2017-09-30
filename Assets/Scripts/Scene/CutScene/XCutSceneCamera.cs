@@ -33,7 +33,7 @@ public class XCutSceneCamera
             _camera = _cameraObject.GetComponent<Camera>();
             _cameraTransform = _cameraObject.transform;
             GameObject.DestroyImmediate(_dummyObject);
-            _dummyObject = XResourceMgr.Load<GameObject>("Prefabs/DummyCamera", AssetType.Prefab);
+            _dummyObject = XResources.Load<GameObject>("Prefabs/DummyCamera", AssetType.Prefab);
             _dummyObject.name = "Dummy Camera";
             _dummyCamera = _dummyObject.transform.GetChild(0);
             _ator = _dummyObject.GetComponent<Animator>();
@@ -70,7 +70,7 @@ public class XCutSceneCamera
 
     public void Effect(string motion,string trigger)
     {
-        AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion, AssetType.Anim);
+        AnimationClip clip = XResources.Load<AnimationClip>(motion, AssetType.Anim);
         if (clip != null)
         {
             _trigger = trigger;

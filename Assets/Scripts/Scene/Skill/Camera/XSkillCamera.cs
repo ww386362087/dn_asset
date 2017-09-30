@@ -103,9 +103,9 @@ public class XSkillCamera
             _camera = _cameraObject.GetComponent<Camera>();
             _cameraTransform = _cameraObject.transform;
 
-            XResourceMgr.SafeDestroy(ref _dummyObject);
+            XResources.SafeDestroy(ref _dummyObject);
 
-            _dummyObject = XResourceMgr.Load<GameObject>("Prefabs/DummyCamera", AssetType.Prefab);
+            _dummyObject = XResources.Load<GameObject>("Prefabs/DummyCamera", AssetType.Prefab);
             _dummyObject.name = "Dummy Camera";
 
             _dummyCamera = _dummyObject.transform.GetChild(0);
@@ -140,7 +140,7 @@ public class XSkillCamera
     public void OverrideAnimClip(string motion, string clipname)
     {
         //get override clip
-        AnimationClip animClip = XResourceMgr.Load<AnimationClip>(clipname, AssetType.Anim);
+        AnimationClip animClip = XResources.Load<AnimationClip>(clipname, AssetType.Anim);
         OverrideAnimClip(motion, animClip);
     }
 
@@ -245,7 +245,7 @@ public class XSkillCamera
     public void Effect(XCameraMotionData motion, bool overrideclip)
     {
         //must be called from UPDATE pass
-        AnimationClip clip = XResourceMgr.Load<AnimationClip>(motion.Motion3D, AssetType.Anim);
+        AnimationClip clip = XResources.Load<AnimationClip>(motion.Motion3D, AssetType.Anim);
 
         if (clip != null)
         {

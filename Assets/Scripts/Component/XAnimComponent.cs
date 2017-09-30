@@ -171,7 +171,7 @@ public class XAnimComponent : XComponent
     {
         if (string.IsNullOrEmpty(clippath) || m_Animator == null || m_overrideController == null)
             return;
-        m_overrideController[key] = XResourceMgr.Load<AnimationClip>("Animation/" + clippath, AssetType.Anim);
+        m_overrideController[key] = XResources.Load<AnimationClip>("Animation/" + clippath, AssetType.Anim);
     }
 
     public void Reset()

@@ -67,11 +67,11 @@ public class XFx
         {
             if (async)
             {
-                XResourceMgr.LoadAsync<GameObject>(location, AssetType.Prefab, OnLoadFinish);
+                XResources.LoadAsync<GameObject>(location, AssetType.Prefab, OnLoadFinish);
             }
             else
             {
-                GameObject go = XResourceMgr.Load<GameObject>(location, AssetType.Prefab);
+                GameObject go = XResources.Load<GameObject>(location, AssetType.Prefab);
                 OnLoadFinish(go);
             }
         }
@@ -352,7 +352,7 @@ public class XFx
         _scale = Vector3.one;
         _callback = 0;
         m_LoadStatus = 0;
-        XResourceMgr.SafeDestroy(ref m_GameObject);
+        XResources.SafeDestroy(ref m_GameObject);
     }
 
 

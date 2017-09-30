@@ -29,7 +29,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     private T PrepareEntity<T>(XAttributes attr, bool autoAdd) where T : XEntity
     {
         T x = Activator.CreateInstance<T>();
-        GameObject o = XResourceMgr.Load<GameObject>("Prefabs/" + attr.Prefab, AssetType.Prefab);
+        GameObject o = XResources.Load<GameObject>("Prefabs/" + attr.Prefab, AssetType.Prefab);
         if (!Application.isMobilePlatform) o.name = attr.Name;
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;

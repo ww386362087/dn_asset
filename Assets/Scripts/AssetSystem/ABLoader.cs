@@ -50,8 +50,6 @@ public class Loader : LoaderBase
         uint hash = data.hash;
         if (ABManager.singleton.IsCached(hash))
         {
-            //if (data.compositeType == AssetBundleExportType.Standalone)
-            //{
             //    //被依赖的bundle要重新load 不能直接从cache列表取 否则最终的prefab会缺少依赖的资源
             //    //为了避免内存里有多个对象 要把之前cache的卸载掉
             //    //直接Unload时,若依然有物体用该图，那么物体就变全黑 
@@ -60,15 +58,14 @@ public class Loader : LoaderBase
             //    obj = LoadFromBundle(data);
             //    ABManager.singleton.CacheObject(hash, obj);
             //    return obj;
-            //}
-            //else
-            {
-                return ABManager.singleton.GetCache(hash);
-            }
+            var asset = ABManager.singleton.GetCache(hash);
+            asset.ref_cnt++;
+            return asset.obt;
         }
         else
         {
-            UnityEngine.Object obj = LoadFromBundle(data);
+            XAssetBundle bundle = ABManager.singleton.GetBundle(data);
+            UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
             ABManager.singleton.CacheObject(hash, obj);
             return obj;
         }
@@ -129,7 +126,9 @@ public class AsyncLoader : LoaderBase
         uint hash = data.hash;
         if (ABManager.singleton.IsCached(hash))
         {
-            OnComplete(hash, ABManager.singleton.GetCache(hash));
+            var asset = ABManager.singleton.GetCache(hash);
+            asset.ref_cnt++;
+            OnComplete(hash, asset.obt);
         }
         else
         {
@@ -159,7 +158,7 @@ public class AsyncLoader : LoaderBase
         AssetBundle bundle = req.assetBundle;
         ABManager.singleton.CacheObject(bundleName, bundle);
         cb(bundleName, bundle.LoadAsset(data.loadName));
-        bundle.Unload(false);
+        new XAssetBundle(data, bundle);
     }
 
 }

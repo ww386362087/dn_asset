@@ -15,8 +15,8 @@ public class XHitHoster : MonoBehaviour {
         _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)PresentID);
 
         if (_oVerrideController == null) BuildOverride();
-        _oVerrideController["Idle"] = XResourceMgr.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle, AssetType.Anim);
-        _oVerrideController["HitLanding"] = _present_data.HitFly != null && _present_data.HitFly.Length == 0 ? null : XResourceMgr.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.HitFly[1], AssetType.Anim);
+        _oVerrideController["Idle"] = XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle, AssetType.Anim);
+        _oVerrideController["HitLanding"] = _present_data.HitFly != null && _present_data.HitFly.Length == 0 ? null : XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.HitFly[1], AssetType.Anim);
 
         _radius = _present_data.BoundRadius;
         _dummy_height = _present_data.BoundHeight;
@@ -294,13 +294,13 @@ public class XHitHoster : MonoBehaviour {
                 if (_present_data.HitFly != null && _present_data.HitCurves != null)
                 {
                     IXCurve raw_h = ((_change_to_fly || _data.State == XBeHitState.Hit_Fly) && _present_data.HitFly.Length > 0) ?
-                        XResourceMgr.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[4], AssetType.Prefab) : null;
+                        XResources.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[4], AssetType.Prefab) : null;
                     IXCurve raw_v = ((_change_to_fly || _data.State == XBeHitState.Hit_Fly) && _present_data.HitFly.Length > 0) ?
-                                     XResourceMgr.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[3], AssetType.Prefab) :
+                                     XResources.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[3], AssetType.Prefab) :
                                      ((_data.State == XBeHitState.Hit_Roll && _present_data.Hit_Roll.Length > 0) ?
-                                       XResourceMgr.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[5], AssetType.Prefab) :
-                                       (_data.State == XBeHitState.Hit_Back ? XResourceMgr.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[(int)data.State_Animation], AssetType.Prefab) :
-                                        XResourceMgr.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[0], AssetType.Prefab)));
+                                       XResources.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[5], AssetType.Prefab) :
+                                       (_data.State == XBeHitState.Hit_Back ? XResources.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[(int)data.State_Animation], AssetType.Prefab) :
+                                        XResources.Load<XCurve>("Curve/" + _present_data.CurveLocation + _present_data.HitCurves[0], AssetType.Prefab)));
 
                     _curve_h = raw_h != null ? raw_h : null;
                     _curve_v = raw_v;
@@ -385,7 +385,7 @@ public class XHitHoster : MonoBehaviour {
                     if (_data.FreezePresent)
                     {
                         string freeze = "Animation/" + _present_data.AnimLocation + _present_data.Freeze;
-                        AnimationClip freeze_clip = XResourceMgr.Load<AnimationClip>(freeze, AssetType.Anim);
+                        AnimationClip freeze_clip = XResources.Load<AnimationClip>(freeze, AssetType.Anim);
                         _present_anim_time = freeze_clip.length;
                         _oVerrideController["Freezed"] = freeze_clip;
                     }
@@ -397,14 +397,14 @@ public class XHitHoster : MonoBehaviour {
         int idx = 0;
 
         string clipname = "Animation/" + _present_data.AnimLocation + anims[idx++];
-        AnimationClip clip = XResourceMgr.Load<AnimationClip>(clipname, AssetType.Anim);
+        AnimationClip clip = XResources.Load<AnimationClip>(clipname, AssetType.Anim);
         _present_anim_time = clip.length;
         _oVerrideController["PresentStraight"] = clip;
 
         if ((_change_to_fly || data.State == XBeHitState.Hit_Fly) && _present_data.HitFly != null && _present_data.HitFly.Length > 0)
         {
             clipname = "Animation/" + _present_data.AnimLocation + anims[idx++];
-            clip = XResourceMgr.Load<AnimationClip>(clipname, AssetType.Anim);
+            clip = XResources.Load<AnimationClip>(clipname, AssetType.Anim);
             _landing_time = clip.length;
         }
         else
@@ -413,13 +413,13 @@ public class XHitHoster : MonoBehaviour {
         }
 
         clipname = "Animation/" + _present_data.AnimLocation + anims[idx++];
-        clip = XResourceMgr.Load<AnimationClip>(clipname, AssetType.Anim);
+        clip = XResources.Load<AnimationClip>(clipname, AssetType.Anim);
         _oVerrideController["HardStraight"] = clip;
         _loop_hard = (clip.wrapMode == WrapMode.Loop);
         _hard_straight_time = clip.length;
 
         clipname = "Animation/" + _present_data.AnimLocation + anims[idx++];
-        clip = XResourceMgr.Load<AnimationClip>(clipname, AssetType.Anim);
+        clip = XResources.Load<AnimationClip>(clipname, AssetType.Anim);
         _getup_time = clip.length;
         _oVerrideController["GetUp"] = clip;
     }
