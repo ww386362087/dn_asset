@@ -5,6 +5,7 @@ public class Asset
 {
     public Object obt;
     public int ref_cnt;
+    public bool isGameObject;
 }
 
 
@@ -35,7 +36,7 @@ public class XResourceMgr : XSingleton<XResourceMgr>
     {
         if (asyn_loading_cnt > 0)
         {
-            for (int i = asyn_loading_cnt - 1; i >= 0; i++)
+            for (int i = asyn_loading_cnt - 1; i >= 0; i--)
             {
                 if (asyn_list[i].request.isDone)
                 {

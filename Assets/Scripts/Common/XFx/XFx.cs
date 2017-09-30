@@ -269,7 +269,7 @@ public class XFx
 
     private void OnLoadFinish(Object obj)
     {
-        m_GameObject = obj as GameObject;
+        m_GameObject = GameObject.Instantiate(obj) as GameObject;
         m_LoadStatus = 1;
         if (m_GameObject != null)
         {

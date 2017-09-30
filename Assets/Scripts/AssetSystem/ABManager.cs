@@ -160,7 +160,7 @@ public sealed class ABManager : XSingleton<ABManager>
     {
         AssetBundleData data = MakePath(location, type);
         AsyncLoader loader = new AsyncLoader(data);
-        loader.LoadImm(cb);
+        loader.LoadAsyn(cb);
     }
 
 

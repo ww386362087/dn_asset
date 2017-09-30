@@ -153,12 +153,6 @@ public class XResources
 
     public static void LoadAsync<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
     {
-        AddSysnLoad<T>(path, type, cb);
-    }
-    
-
-    private static void AddSysnLoad<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
-    {
         if (ABManager.singleton.Exist(path, type))
         {
             ABManager.singleton.LoadAsyn(path, type, cb);
@@ -168,6 +162,7 @@ public class XResources
             XResourceMgr.singleton.AsynLoad(path, type, cb);
         }
     }
+    
     
     public static void SafeDestroy(ref GameObject obj)
     {

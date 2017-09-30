@@ -8,7 +8,7 @@ using UnityEngine;
 /// Canvas1 Canvas2 Canvas12 三个prefab共同引用2张图
 /// 所以生成ab的时候是5个 
 /// 正确的加载关系是先加载2张图 再加载prefab
-/// 卸载顺序与加载顺序相同
+/// 卸载 只卸载根 公共资源不释放（选一个合适的时机释放-切场景）
 /// </summary>
 public class TestAB : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class TestAB : MonoBehaviour
 
     void Start()
     {
+        GameEnine.SetMonoForTest(this);
         XTimerMgr.singleton.Init();
         XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();
@@ -29,17 +30,17 @@ public class TestAB : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(30, 30, 140, 80), "Load1"))
+        if (GUI.Button(new Rect(30, 30, 140, 80), "AsynLoad1"))
         {
-            go1 = XResources.Load<GameObject>(path1, AssetType.Prefab);
-            go1.name = "Load1";
+            XResources.LoadAsync<GameObject>(path1, AssetType.Prefab, OnLoad1Complete);
+            //go1.name = "Load1";
         }
-        if (GUI.Button(new Rect(30, 130, 140, 80), "Load2"))
+        if (GUI.Button(new Rect(30, 130, 140, 80), "ImmLoad2"))
         {
             go2 = XResources.Load<GameObject>(path2, AssetType.Prefab);
             go2.name = "Load2";
         }
-        if (GUI.Button(new Rect(30, 230, 140, 80), "Load12"))
+        if (GUI.Button(new Rect(30, 230, 140, 80), "ImmLoad12"))
         {
             go12 = XResources.Load<GameObject>(path12, AssetType.Prefab);
             go12.name = "Load12";
@@ -62,6 +63,12 @@ public class TestAB : MonoBehaviour
     {
         XTimerMgr.singleton.Update(Time.deltaTime);
         XResources.Update();
+    }
+
+    private void OnLoad1Complete(Object o)
+    {
+        GameObject go = Instantiate(o) as GameObject;
+        go.name = "load1";
     }
 
 }

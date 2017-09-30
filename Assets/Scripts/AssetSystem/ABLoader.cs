@@ -93,7 +93,7 @@ public class AsyncLoader : LoaderBase
         loadCnt = depsCnt;
     }
 
-    public void LoadImm(Action<UnityEngine.Object> cb)
+    public void LoadAsyn(Action<UnityEngine.Object> cb)
     {
         loadCB = cb;
         if (depsCnt > 0)
@@ -112,7 +112,7 @@ public class AsyncLoader : LoaderBase
         {
             AssetBundleData ad = ABManager.singleton.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
             AsyncLoader loader = new AsyncLoader(ad);
-            loader.LoadImm(OnDepLoadFinish);
+            loader.LoadAsyn(OnDepLoadFinish);
         }
     }
 

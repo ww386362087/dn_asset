@@ -45,11 +45,15 @@ public sealed class GameEnine : XObject
     public static void OnUnintial()
     {
     }
-
-
+    
     public static void OnApplicationQuit()
     {
         XDebug.Log("game quit!");
+    }
+
+    public static void SetMonoForTest(MonoBehaviour mono)
+    {
+        _entrance = mono;
     }
 
 }
