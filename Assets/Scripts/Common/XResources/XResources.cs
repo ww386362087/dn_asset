@@ -16,17 +16,17 @@ public class XResources
         ABManager.singleton.Update();
         XResourceMgr.singleton.Update();
     }
-    
+
     /// <summary>
     /// 加载 GameObject 深复制（Instantiate） 注意卸载
-    /// Texture, Material, Audio等是共享的 (不会Instantiate)
+    /// Texture, Material, Mesh, Audio等是共享的 (不会Instantiate)
     /// </summary>
     public static T Load<T>(string path, AssetType type) where T : Object
     {
         Object obt = null;
-        if ( ABManager.singleton.Exist(path, type))
+        if (ABManager.singleton.Exist(path, type))
         {
-            obt = ABManager.singleton.LoadImm(path, type);
+            obt = ABManager.singleton.Load<T>(path, type);
         }
         else
         {
@@ -52,68 +52,29 @@ public class XResources
         }
     }
 
-    public static Stream ReadText(string location, bool error = true)
-    {
-        TextAsset data = Load<TextAsset>(location,AssetType.Byte);
-        if (data == null)
-        {
-            if (error) XDebug.LogError("Load resource: ", location, " error!");
-            return null;
-        }
-        try
-        {
-            shareMemoryStream.SetLength(0);
-            shareMemoryStream.Write(data.bytes, 0, data.bytes.Length);
-            shareMemoryStream.Seek(0, SeekOrigin.Begin);
-            return shareMemoryStream;
-        }
-        catch (System.Exception e)
-        {
-             XDebug.Log(e.Message , location);
-            return shareMemoryStream;
-        }
-        finally
-        {
-            Resources.UnloadAsset(data);
-        }
-    }
-
-    public static void ClearStream(Stream s)
-    {
-        if (s != null)
-        {
-            if (s == shareMemoryStream)
-            {
-                shareMemoryStream.SetLength(0);
-            }
-            else
-            {
-                s.Close();
-            }
-        }
-    }
-
-    public static Object[] LoadAll(string path, AssetType type)
-    {
-        return Resources.LoadAll(path);
-    }
-
+    
+    /// <summary>
+    /// 只能编辑器使用 
+    /// 这个接口不走ab
+    /// </summary>
     public static T[] LoadAll<T>(string path) where T : Object
     {
         return Resources.LoadAll<T>(path);
     }
-
-    public static Object Load(string path, AssetType type)
+    
+    
+    public static void LoadAsync<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
     {
-        if ( ABManager.singleton.Exist(path, type))
+        if (ABManager.singleton.Exist(path, type))
         {
-            return ABManager.singleton.LoadImm(path, type);
+            ABManager.singleton.LoadAsyn<T>(path, type, cb);
         }
         else
         {
-            return Resources.Load(path);
+            XResourceMgr.singleton.AsynLoad<T>(path, type, cb);
         }
     }
+
 
     public static void UnloadAsset(string path, AssetType type)
     {
@@ -150,23 +111,60 @@ public class XResources
             }
         }
     }
+    
 
-    public static void LoadAsync<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
-    {
-        if (ABManager.singleton.Exist(path, type))
-        {
-            ABManager.singleton.LoadAsyn(path, type, cb);
-        }
-        else
-        {
-            XResourceMgr.singleton.AsynLoad(path, type, cb);
-        }
-    }
-    
-    
     public static void SafeDestroy(ref GameObject obj)
     {
         Object.Destroy(obj);
         obj = null;
+    }
+
+
+    public static bool IsCloneAsset<T>()
+    {
+        return typeof(T) == typeof(GameObject) 
+            || typeof(T) == typeof(Transform);
+    }
+
+
+    public static Stream ReadText(string location, bool error = true)
+    {
+        TextAsset data = Load<TextAsset>(location, AssetType.Byte);
+        if (data == null)
+        {
+            if (error) XDebug.LogError("Load resource: ", location, " error!");
+            return null;
+        }
+        try
+        {
+            shareMemoryStream.SetLength(0);
+            shareMemoryStream.Write(data.bytes, 0, data.bytes.Length);
+            shareMemoryStream.Seek(0, SeekOrigin.Begin);
+            return shareMemoryStream;
+        }
+        catch (System.Exception e)
+        {
+            XDebug.Log(e.Message, location);
+            return shareMemoryStream;
+        }
+        finally
+        {
+            Resources.UnloadAsset(data);
+        }
+    }
+
+    public static void ClearStream(Stream s)
+    {
+        if (s != null)
+        {
+            if (s == shareMemoryStream)
+            {
+                shareMemoryStream.SetLength(0);
+            }
+            else
+            {
+                s.Close();
+            }
+        }
     }
 }

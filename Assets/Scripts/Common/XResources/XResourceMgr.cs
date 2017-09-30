@@ -5,31 +5,46 @@ public class Asset
 {
     public Object obt;
     public int ref_cnt;
+
+    /// <summary>
+    /// 主要异步加载用到
+    /// </summary>
+    public bool is_clone_asset;
 }
 
 
-/// <summary>
-/// 异步资源
-/// </summary>
 public struct AsynAsset
 {
+    /// <summary>
+    /// resources路径
+    /// </summary>
     public string path;
+    /// <summary>
+    /// 目前就是Gameobject or Transform两种类型
+    /// </summary>
+    public bool is_clone_asset;
+    /// <summary>
+    /// 资源格式 后缀名
+    /// </summary>
     public AssetType type;
+
     public ResourceRequest request;
+    /// <summary>
+    /// 回调列表
+    /// </summary>
     public List<System.Action<Object>> cb;
 }
 
 
 public class XResourceMgr : XSingleton<XResourceMgr>
 {
-
     private Dictionary<uint, Asset> map = new Dictionary<uint, Asset>();
 
-    //异步资源列表
-    private static List<AsynAsset> asyn_list = new List<AsynAsset>();
+    //正在加载中的异步资源列表
+    private List<AsynAsset> asyn_list = new List<AsynAsset>();
 
     //为了效率 避免update的时候重复计算list长度
-    private static int asyn_loading_cnt = 0;
+    private int asyn_loading_cnt = 0;
 
     public void Update()
     {
@@ -39,7 +54,7 @@ public class XResourceMgr : XSingleton<XResourceMgr>
             {
                 if (asyn_list[i].request.isDone)
                 {
-                    DownloadDone(asyn_list[i]);
+                    OnLoaded(asyn_list[i]);
                     break;
                 }
             }
@@ -52,38 +67,48 @@ public class XResourceMgr : XSingleton<XResourceMgr>
         uint hash = XCommon.singleton.XHash(path + type);
         if (map.ContainsKey(hash))
         {
-          //  XDebug.Log("contain:" + path, " type: " + type);
+            //XDebug.Log("contain:" + path, " type: " + type);
             map[hash].ref_cnt++;
             return map[hash].obt;
         }
         else
         {
             T obt = Resources.Load<T>(path);
-            Asset asset = new Asset { obt = obt, ref_cnt = 1 };
+            bool isClone = XResources.IsCloneAsset<T>();
+            Asset asset = new Asset { obt = obt, ref_cnt = 1, is_clone_asset = isClone };
             map.Add(hash, asset);
             return obt;
         }
     }
 
-    public void AsynLoad(string path, AssetType type, System.Action<Object> cb)
+    public void AsynLoad<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
     {
         uint hash = XCommon.singleton.XHash(path + type);
         AsynAsset asset;
         if (map.ContainsKey(hash)) //已经加载的 计数器加一 
         {
             map[hash].ref_cnt++;
-            cb(map[hash].obt);
+            if (map[hash].is_clone_asset)
+            {
+                GameObject go = GameObject.Instantiate(map[hash].obt) as GameObject;
+                cb(go);
+            }
+            else
+            {
+                cb(map[hash].obt);
+            }
         }
         else if (IsAsynLoading(path, out asset)) //已正在加载的 回调cache
         {
             asset.cb.Add(cb);
         }
-        else//没有加载的 开始加载
+        else //没有加载的 开始加载
         {
             AsynAsset node = new AsynAsset();
             node.path = path;
             node.type = type;
-            node.request = Resources.LoadAsync(path);
+            node.is_clone_asset = XResources.IsCloneAsset<T>();
+            node.request = Resources.LoadAsync<T>(path);
             node.cb = new List<System.Action<Object>>();
             node.cb.Add(cb);
             asyn_list.Add(node);
@@ -123,19 +148,27 @@ public class XResourceMgr : XSingleton<XResourceMgr>
     }
 
 
-    private void DownloadDone(AsynAsset node)
+    private void OnLoaded(AsynAsset node)
     {
-        Asset asset = new Asset { obt = node.request.asset, ref_cnt = node.cb.Count };
+        Asset asset = new Asset { obt = node.request.asset, ref_cnt = node.cb.Count, is_clone_asset = node.is_clone_asset };
         uint hash = XCommon.singleton.XHash(node.path + node.type);
         map.Add(hash, asset);
         for (int i = 0, max = node.cb.Count; i < max; i++)
         {
-            node.cb[i](node.request.asset);
+            if (node.is_clone_asset)
+            {
+                GameObject go = GameObject.Instantiate(node.request.asset) as GameObject;
+                node.cb[i](go);
+            }
+            else
+            {
+                node.cb[i](node.request.asset);
+            }
         }
         node.cb.Clear();
         asyn_list.Remove(node);
         asyn_loading_cnt--;
     }
-
+    
 }
 

@@ -141,30 +141,29 @@ public sealed class ABManager : XSingleton<ABManager>
         AssetBundleData data = MakePath(path, type);
         return data != null && Exist(data.hash);
     }
-
-
+    
     private AssetBundleData MakePath(string location, AssetType type)
     {
         string path = @"Assets\Resources\" + location.Replace("/", "\\") + type;
         return depInfoReader.GetAssetBundleInfoByAssetpath(path);
     }
 
-    public Object LoadImm(string location, AssetType type)
+    public Object Load<T>(string location, AssetType type)
     {
         AssetBundleData data = MakePath(location, type);
         Loader loader = new Loader(data);
-        return loader.LoadImm();
+        return loader.Load<T>();
     }
 
-    public void LoadAsyn(string location, AssetType type, System.Action<Object> cb)
+    public void LoadAsyn<T>(string location, AssetType type, System.Action<Object> cb) where T : Object
     {
         AssetBundleData data = MakePath(location, type);
         AsyncLoader loader = new AsyncLoader(data);
-        loader.LoadAsyn(cb);
+        loader.LoadAsyn<T>(cb);
     }
 
 
-    public void CacheObject(uint hash, Object obj)
+    public void CacheObject(uint hash, Object obj,bool isClone)
     {
         if (!IsCached(hash))
         {

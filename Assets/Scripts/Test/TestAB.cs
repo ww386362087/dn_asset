@@ -66,8 +66,8 @@ public class TestAB : MonoBehaviour
 
     private void OnLoad1Complete(Object o)
     {
-        GameObject go = Instantiate(o) as GameObject;
-        go.name = "load1";
+        go1 = o as GameObject;
+        go1.name = "load1";
     }
 
 }

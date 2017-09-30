@@ -3,12 +3,16 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 
-
 public class LoaderBase
 {
     protected AssetBundleData data;
     protected MonoBehaviour mono;
     protected int depsCnt = 0;
+    /// <summary>
+    /// 依赖的资源都是false
+    /// 根只有是GameObject的时候为true
+    /// </summary>
+    protected bool isCloneAsset = false;
 
     public LoaderBase(AssetBundleData d)
     {
@@ -18,7 +22,6 @@ public class LoaderBase
     }
 }
 
-
 /// <summary>
 /// 同步加载
 /// </summary>
@@ -26,7 +29,13 @@ public class Loader : LoaderBase
 {
     public Loader(AssetBundleData d) : base(d) { }
     
-    public UnityEngine.Object LoadImm()
+    public UnityEngine.Object Load<T>()
+    {
+        isCloneAsset = XResources.IsCloneAsset<T>();
+        return InnerLoad();
+    }
+
+    private UnityEngine.Object InnerLoad()
     {
         if (depsCnt > 0)
         {
@@ -41,7 +50,7 @@ public class Loader : LoaderBase
         {
             AssetBundleData ad = ABManager.singleton.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
             Loader loader = new Loader(ad);
-            loader.LoadImm();
+            loader.InnerLoad();
         }
     }
 
@@ -66,7 +75,7 @@ public class Loader : LoaderBase
         {
             XAssetBundle bundle = ABManager.singleton.GetBundle(data);
             UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
-            ABManager.singleton.CacheObject(hash, obj);
+            ABManager.singleton.CacheObject(hash, obj,isCloneAsset);
             return obj;
         }
     }
@@ -86,16 +95,17 @@ public class AsyncLoader : LoaderBase
 {
     Action<UnityEngine.Object> loadCB;
 
-    int loadCnt;
+    public AsyncLoader(AssetBundleData d) : base(d) { }
 
-    public AsyncLoader(AssetBundleData d) : base(d)
+    public void LoadAsyn<T>(Action<UnityEngine.Object> cb)
     {
-        loadCnt = depsCnt;
+        isCloneAsset = XResources.IsCloneAsset<T>();
+        loadCB = cb;
+        InnerLoad();
     }
 
-    public void LoadAsyn(Action<UnityEngine.Object> cb)
+    private void InnerLoad()
     {
-        loadCB = cb;
         if (depsCnt > 0)
         {
             LoadDeps();
@@ -109,13 +119,8 @@ public class AsyncLoader : LoaderBase
         {
             AssetBundleData ad = ABManager.singleton.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
             AsyncLoader loader = new AsyncLoader(ad);
-            loader.LoadAsyn(OnDepLoadFinish);
+            loader.InnerLoad();
         }
-    }
-
-    private void OnDepLoadFinish(UnityEngine.Object obj)
-    {
-        loadCnt++;
     }
 
     private void LoadAsset()
@@ -125,36 +130,39 @@ public class AsyncLoader : LoaderBase
         {
             var asset = ABManager.singleton.GetCache(hash);
             asset.ref_cnt++;
-            OnComplete(hash, asset.obt);
+            OnComplete(hash, asset.obt, asset.is_clone_asset);
         }
         else
         {
-            IEnumerator etor = LoadFromCacheFile(hash, OnComplete);
+            IEnumerator etor = LoadFromBundle(hash, OnComplete);
             mono.StartCoroutine(etor);
         }
     }
 
-    private void OnComplete(uint hash, UnityEngine.Object obj)
+    private void OnComplete(uint hash, UnityEngine.Object obj, bool isClone)
     {
-        loadCnt++;
-        if (depsCnt == loadCnt)  //所有依赖加载完毕
+        if (loadCB != null)
         {
-            LoadAsset();
-        }
-        else if (loadCnt > depsCnt)
-        {
-            loadCB(obj);
+            if (isClone)
+            {
+                GameObject go = GameObject.Instantiate(obj) as GameObject;
+                loadCB(obj);
+            }
+            else
+            {
+                loadCB(obj);
+            }
         }
     }
 
-    private IEnumerator LoadFromCacheFile(uint bundleName, Action<uint, UnityEngine.Object> cb)
+    private IEnumerator LoadFromBundle(uint bundleName, Action<uint, UnityEngine.Object, bool> cb)
     {
         string file = Path.Combine(AssetBundlePathResolver.BundleCacheDir, bundleName + ".ab");
         AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(file);
         while (!req.isDone) yield return null;
         AssetBundle bundle = req.assetBundle;
-        ABManager.singleton.CacheObject(bundleName, bundle);
-        cb(bundleName, bundle.LoadAsset(data.loadName));
+        ABManager.singleton.CacheObject(bundleName, bundle, isCloneAsset);
+        cb(bundleName, bundle.LoadAsset(data.loadName), isCloneAsset);
         new XAssetBundle(data, bundle);
     }
 
