@@ -4,7 +4,6 @@ using System.Text;
 using UnityEngine;
 
 
-
 public class XCommon : XSingleton<XCommon>
 {
     public XCommon()

@@ -47,24 +47,23 @@ public class XResourceMgr : XSingleton<XResourceMgr>
     }
 
 
-    public Object Load(string path, AssetType type)
+    public Object Load<T>(string path, AssetType type) where T : Object
     {
         uint hash = XCommon.singleton.XHash(path + type);
         if (map.ContainsKey(hash))
         {
-            XDebug.Log("contain:" + path, " type: " + type);
+          //  XDebug.Log("contain:" + path, " type: " + type);
             map[hash].ref_cnt++;
             return map[hash].obt;
         }
         else
         {
-            Object obj = Resources.Load(path);
-            Asset asset = new Asset { obt = obj, ref_cnt = 1 };
+            T obt = Resources.Load<T>(path);
+            Asset asset = new Asset { obt = obt, ref_cnt = 1 };
             map.Add(hash, asset);
-            return obj;
+            return obt;
         }
     }
-
 
     public void AsynLoad(string path, AssetType type, System.Action<Object> cb)
     {

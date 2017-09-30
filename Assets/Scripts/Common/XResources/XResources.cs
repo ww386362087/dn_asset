@@ -16,8 +16,7 @@ public class XResources
         ABManager.singleton.Update();
         XResourceMgr.singleton.Update();
     }
-
-
+    
     /// <summary>
     /// 加载 GameObject 深复制（Instantiate） 注意卸载
     /// Texture, Material, Audio等是共享的 (不会Instantiate)
@@ -31,7 +30,7 @@ public class XResources
         }
         else
         {
-            obt = Resources.Load<T>(path);
+            obt = XResourceMgr.singleton.Load<T>(path, type);
         }
         return Obj2T<T>(obt);
     }
