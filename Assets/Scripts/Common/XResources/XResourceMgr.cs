@@ -5,7 +5,6 @@ public class Asset
 {
     public Object obt;
     public int ref_cnt;
-    public bool isGameObject;
 }
 
 
