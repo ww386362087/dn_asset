@@ -352,7 +352,7 @@ public class XFx
         _scale = Vector3.one;
         _callback = 0;
         m_LoadStatus = 0;
-        XResources.SafeDestroy(ref m_GameObject);
+        XResources.SafeDestroy(m_GameObject);
     }
 
 

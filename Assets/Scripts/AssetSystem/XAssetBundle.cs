@@ -88,7 +88,9 @@ public class XAssetBundle
     {
         if (Time.time - born_time >= life_cycle)
         {
+            ABManager.singleton.Debug();
             Unload(false,false);
+            ABManager.singleton.Debug();
         }
     }
 

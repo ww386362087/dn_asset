@@ -5,10 +5,6 @@ public class Asset
 {
     public Object obt;
     public int ref_cnt;
-
-    /// <summary>
-    /// 主要异步加载用到
-    /// </summary>
     public bool is_clone_asset;
 }
 
@@ -62,12 +58,11 @@ public class XResourceMgr : XSingleton<XResourceMgr>
     }
 
 
-    public Object Load<T>(string path, AssetType type) where T : Object
+    public Object Load<T>(string path, AssetType type,out uint hash) where T : Object
     {
-        uint hash = XCommon.singleton.XHash(path + type);
+        hash = XCommon.singleton.XHash(path + type);
         if (map.ContainsKey(hash))
         {
-            //XDebug.Log("contain:" + path, " type: " + type);
             map[hash].ref_cnt++;
             return map[hash].obt;
         }
@@ -85,17 +80,19 @@ public class XResourceMgr : XSingleton<XResourceMgr>
     {
         uint hash = XCommon.singleton.XHash(path + type);
         AsynAsset asset;
-        if (map.ContainsKey(hash)) //已经加载的 计数器加一 
+        if (map.ContainsKey(hash) && map[hash].obt != null) //已经加载的 计数器加一 
         {
             map[hash].ref_cnt++;
             if (map[hash].is_clone_asset)
             {
                 GameObject go = GameObject.Instantiate(map[hash].obt) as GameObject;
+                XResources.SetAsynAssetIndex(go.GetInstanceID(), hash);
                 cb(go);
             }
             else
             {
                 cb(map[hash].obt);
+                XResources.SetAsynAssetIndex(map[hash].obt.GetInstanceID(), hash);
             }
         }
         else if (IsAsynLoading(path, out asset)) //已正在加载的 回调cache
@@ -132,10 +129,9 @@ public class XResourceMgr : XSingleton<XResourceMgr>
     }
 
 
-    public void Unload(string path, AssetType type)
+    public bool Unload(uint hash)
     {
-        uint hash = XCommon.singleton.XHash(path + type);
-        if (map.ContainsKey(hash))
+        if (map != null && map.ContainsKey(hash))
         {
             map[hash].ref_cnt--;
             if (map[hash].ref_cnt <= 0)
@@ -143,10 +139,25 @@ public class XResourceMgr : XSingleton<XResourceMgr>
                 XResources.UnloadAsset(map[hash].obt);
                 map[hash].obt = null;
                 map.Remove(hash);
+                return true;
             }
         }
+        return false;
     }
 
+    /// <summary>
+    /// 一般是切换场景的时候调用 如：OnLeaveScene
+    /// </summary>
+    public void UnloadAll()
+    {
+        var e = map.GetEnumerator();
+        while (e.MoveNext())
+        {
+            XResources.UnloadAsset(e.Current.Value.obt);
+        }
+        e.Dispose();
+        map.Clear();
+    }
 
     private void OnLoaded(AsynAsset node)
     {

@@ -115,22 +115,23 @@ public sealed class ABManager : XSingleton<ABManager>
         depStream.Close();
     }
 
-    public void Unload(string path, AssetType type)
+    public bool Unload(uint hash)
     {
-        AssetBundleData data = MakePath(path, type);
-        if (map != null && map.ContainsKey(data.hash))
+        if (map.ContainsKey(hash))
         {
-            map[data.hash].ref_cnt--;
-            if (map[data.hash].ref_cnt <= 0)
+            map[hash].ref_cnt--;
+            if (map[hash].ref_cnt <= 0)
             {
-                XResources.UnloadAsset(map[data.hash].obt);
-                map[data.hash].obt = null;
-                map.Remove(data.hash);
+                XResources.UnloadAsset(map[hash].obt);
+                map[hash].obt = null;
+                map.Remove(hash);
+                return true;
             }
         }
+        return false;
     }
 
-    public bool Exist(uint hash)
+    private bool Exist(uint hash)
     {
         return depInfoReader.GetAssetBundleInfo(hash) != null;
     }
@@ -141,6 +142,12 @@ public sealed class ABManager : XSingleton<ABManager>
         AssetBundleData data = MakePath(path, type);
         return data != null && Exist(data.hash);
     }
+
+    public bool ExistLoadBundle(uint hash)
+    {
+        if (map == null) return false;
+        return map.ContainsKey(hash);
+    }
     
     private AssetBundleData MakePath(string location, AssetType type)
     {
@@ -148,9 +155,10 @@ public sealed class ABManager : XSingleton<ABManager>
         return depInfoReader.GetAssetBundleInfoByAssetpath(path);
     }
 
-    public Object Load<T>(string location, AssetType type)
+    public Object Load<T>(string location, AssetType type,out uint hash)
     {
         AssetBundleData data = MakePath(location, type);
+        hash = data.hash;
         Loader loader = new Loader(data);
         return loader.Load<T>();
     }
@@ -163,11 +171,11 @@ public sealed class ABManager : XSingleton<ABManager>
     }
 
 
-    public void CacheObject(uint hash, Object obj,bool isClone)
+    public void CacheObject(uint hash, Object obj, bool isClone)
     {
         if (!IsCached(hash))
         {
-            map.Add(hash, new Asset() { obt = obj, ref_cnt = 1 });
+            map.Add(hash, new Asset() { obt = obj, ref_cnt = 1, is_clone_asset = isClone });
         }
         else
         {
@@ -244,6 +252,15 @@ public sealed class ABManager : XSingleton<ABManager>
             }
         }
         return new XAssetBundle(data);
+    }
+
+    public void Debug()
+    {
+        foreach(var item in map)
+        {
+            XDebug.Log("name: " + item.Key);
+            XDebug.LogGreen("obj: " + item.Value.obt == null);
+        }
     }
 
 }

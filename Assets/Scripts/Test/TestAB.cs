@@ -32,6 +32,7 @@ public class TestAB : MonoBehaviour
     {
         if (GUI.Button(new Rect(30, 30, 140, 80), "AsynLoad1"))
         {
+            XDebug.Log(go1 != null);
             XResources.LoadAsync<GameObject>(path1, AssetType.Prefab, OnLoad1Complete);
         }
         if (GUI.Button(new Rect(30, 130, 140, 80), "ImmLoad2"))
@@ -46,15 +47,15 @@ public class TestAB : MonoBehaviour
         }
         if (GUI.Button(new Rect(30, 330, 140, 80), "Unload1"))
         {
-            XResources.SafeDestroy(ref go1);
+            XResources.SafeDestroy(go1);
         }
         if (GUI.Button(new Rect(30, 430, 140, 80), "Unload2"))
         {
-            XResources.SafeDestroy(ref go2);
+            XResources.SafeDestroy(go2);
         }
         if (GUI.Button(new Rect(30, 530, 140, 80), "Unload12"))
         {
-            XResources.SafeDestroy(ref go12);
+            XResources.SafeDestroy(go12);
         }
     }
 

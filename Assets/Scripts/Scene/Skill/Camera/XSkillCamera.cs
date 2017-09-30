@@ -103,7 +103,7 @@ public class XSkillCamera
             _camera = _cameraObject.GetComponent<Camera>();
             _cameraTransform = _cameraObject.transform;
 
-            XResources.SafeDestroy(ref _dummyObject);
+            XResources.SafeDestroy(_dummyObject);
 
             _dummyObject = XResources.Load<GameObject>("Prefabs/DummyCamera", AssetType.Prefab);
             _dummyObject.name = "Dummy Camera";

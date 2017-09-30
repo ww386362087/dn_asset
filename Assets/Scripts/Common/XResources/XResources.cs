@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
 
 /// <summary>
 /// 资源加载管理
@@ -9,7 +10,12 @@ using System.IO;
 public class XResources
 {
     private static MemoryStream shareMemoryStream = new MemoryStream(8192);//512k
-    
+
+    /// <summary>
+    /// 资源映射列表 - 主要为了删除时快读定位
+    /// key Clone-Object的InstanceID, value是ABManager或者XResourceMgr的hash值
+    /// </summary>
+    private static Dictionary<int, uint> all_asset_map = new Dictionary<int, uint>();
 
     public static void Update()
     {
@@ -23,16 +29,22 @@ public class XResources
     /// </summary>
     public static T Load<T>(string path, AssetType type) where T : Object
     {
-        Object obt = null;
+        Object obt; uint hash = 0;
         if (ABManager.singleton.Exist(path, type))
         {
-            obt = ABManager.singleton.Load<T>(path, type);
+            obt = ABManager.singleton.Load<T>(path, type, out hash);
         }
         else
         {
-            obt = XResourceMgr.singleton.Load<T>(path, type);
+            obt = XResourceMgr.singleton.Load<T>(path, type, out hash);
         }
-        return Obj2T<T>(obt);
+        T t = Obj2T<T>(obt);
+        if (t != null)
+        {
+            int instance = t.GetInstanceID();
+            all_asset_map[instance] = hash;
+        }
+        return t;
     }
 
     private static T Obj2T<T>(Object o) where T : Object
@@ -52,6 +64,11 @@ public class XResources
         }
     }
 
+
+    public static void SetAsynAssetIndex(int key,uint hash)
+    {
+        all_asset_map[key] = hash;
+    }
     
     /// <summary>
     /// 只能编辑器使用 
@@ -75,16 +92,18 @@ public class XResources
         }
     }
 
-
-    public static void UnloadAsset(string path, AssetType type)
+    /// <summary>
+    /// 返回true 表示没有引用了
+    /// </summary>
+    private static bool UnloadAsset(uint hash)
     {
-        if (ABManager.singleton.Exist(path, type))
+        if (ABManager.singleton.ExistLoadBundle(hash))
         {
-             ABManager.singleton.Unload(path, type);
+            return ABManager.singleton.Unload(hash);
         }
         else
         {
-             XResourceMgr.singleton.Unload(path, type);
+            return XResourceMgr.singleton.Unload(hash);
         }
     }
 
@@ -104,19 +123,39 @@ public class XResources
                 GameObject.DestroyImmediate(assetToUnload);
 #endif
             }
-            else
+            else 
             {
-                //当使用Resources.UnloadAsset后，若依然有物体用该图，那么物体就变全黑 谨慎使用
+                XDebug.Log(assetToUnload.GetType().Name);
+                //当使用Resources.UnloadAsset后，若依然有物体用该图，那么物体就变全黑 (异步执行的) 谨慎使用
                 Resources.UnloadAsset(assetToUnload);
             }
         }
     }
-    
 
-    public static void SafeDestroy(ref GameObject obj)
+    /// <summary>
+    /// 一般是切换场景的时候调用 如：OnLeaveScene
+    /// </summary>
+    public void UnloadAll()
     {
-        Object.Destroy(obj);
-        obj = null;
+        XResourceMgr.singleton.UnloadAll();
+        ABManager.singleton.UnloadAll();
+    }
+
+
+    /// <summary>
+    /// 先根据GameObject的intanceid 确定AB引用次数 引用为0卸载asset-object
+    /// 然后再销毁close-object
+    /// </summary>
+    public static void SafeDestroy(Object obj)
+    {
+        uint hash = 0;
+        all_asset_map.TryGetValue(obj.GetInstanceID(), out hash);
+        if (hash != 0) UnloadAsset(hash);
+        if (obj is GameObject || obj is Transform)
+        {
+            GameObject.Destroy(obj);
+            obj = null;
+        }
     }
 
 

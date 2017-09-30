@@ -13,7 +13,7 @@ public class LoaderBase
     /// 根只有是GameObject的时候为true
     /// </summary>
     protected bool isCloneAsset = false;
-
+    
     public LoaderBase(AssetBundleData d)
     {
         data = d;
@@ -141,15 +141,17 @@ public class AsyncLoader : LoaderBase
 
     private void OnComplete(uint hash, UnityEngine.Object obj, bool isClone)
     {
-        if (loadCB != null)
+        if (loadCB != null && obj != null)
         {
             if (isClone)
             {
                 GameObject go = GameObject.Instantiate(obj) as GameObject;
-                loadCB(obj);
+                XResources.SetAsynAssetIndex(go.GetInstanceID(), hash);
+                loadCB(go);
             }
             else
             {
+                XResources.SetAsynAssetIndex(obj.GetInstanceID(), hash);
                 loadCB(obj);
             }
         }

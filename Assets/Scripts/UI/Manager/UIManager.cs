@@ -64,8 +64,7 @@ public class UIManager : XSingleton<UIManager>
 
         GameObject go = XResources.Load<GameObject>(rootpath, AssetType.Prefab);
         GameObject.DontDestroyOnLoad(go);
-
-        XResources.UnloadAsset(rootpath, AssetType.Prefab);
+        
         _uiCamera = go.GetComponent<Camera>();
         _canvas = go.transform.GetChild(0).GetComponent<Canvas>();
         _fade = _canvas.transform.GetChild(0).GetComponent<Image>();
@@ -223,8 +222,7 @@ public class UIManager : XSingleton<UIManager>
     private void DestroyDlg(IUIDlg dlg)
     {
         dlg.OnDestroy();
-        GameObject.Destroy(dlg.innerBehaviour.gameObject);
-        XResources.UnloadAsset(dlg.fileName, AssetType.Prefab);
+        XResources.SafeDestroy(dlg.innerBehaviour.gameObject);
     }
 
 

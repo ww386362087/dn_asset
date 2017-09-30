@@ -58,8 +58,10 @@ public class MountLoadTask : BaseLoadTask
 
     public override void Reset()
     {
-        if (goInstance != null) GameObject.Destroy(goInstance);
-        XResources.UnloadAsset(location, AssetType.Prefab);
+        if (goInstance != null)
+        {
+            XResources.SafeDestroy(goInstance);
+        }
         transferRef = false;
     }
 
