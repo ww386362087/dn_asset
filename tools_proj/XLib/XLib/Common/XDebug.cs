@@ -16,6 +16,7 @@ public enum LogLevel
 /// 1. log控制开关
 /// 2. 字符串拼接 没有额外开销
 /// 3. 输出本地文件 outlevel
+/// 4. 实现双击log跳转到对应的逻辑代码 而不是debug
 /// </summary>
 public class XDebug
 {
@@ -58,19 +59,9 @@ public class XDebug
 
     public static void Log(object param1, object param2, object param3, object param4, object param5)
     {
-        Log(param1, param2, param3, param4, param5, null);
-    }
-
-    public static void Log(object param1, object param2, object param3, object param4, object param5, object param6)
-    {
-        Log(param1, param2, param3, param4, param5, param6, null);
-    }
-
-    public static void Log(object param1, object param2, object param3, object param4, object param5, object param6, object param7)
-    {
         if (loglevel <= LogLevel.Log)
         {
-            Append(param1, param2, param3, param4, param5, param6, param7);
+            Append(param1, param2, param3, param4, param5);
             Debug.Log(shareSB);
             Write(shareSB);
         }
@@ -98,24 +89,14 @@ public class XDebug
 
     public static void LogGreen(object param1, object param2, object param3, object param4, object param5)
     {
-        LogGreen(param1, param2, param3, param4, param5, null);
-    }
-
-    public static void LogGreen(object param1, object param2, object param3, object param4, object param5, object param6)
-    {
-        LogGreen(param1, param2, param3, param4, param5, param6, null);
-    }
-
-    public static void LogGreen(object param1, object param2, object param3, object param4, object param5, object param6, object param7)
-    {
         if (loglevel <= LogLevel.Green)
         {
-            GreenAppend(param1, param2, param3, param4,param5,param6,param7);
+            GreenAppend(param1, param2, param3, param4, param5);
             Debug.Log(shareSB);
             Write(shareSB);
         }
     }
-
+    
     public static void LogWarning(object param)
     {
         LogWarning(param, null);
@@ -137,24 +118,14 @@ public class XDebug
 
     public static void LogWarning(object param1, object param2, object param3, object param4, object param5)
     {
-        LogWarning(param1, param2, param3, param4, param5, null);
-    }
-
-    public static void LogWarning(object param1, object param2, object param3, object param4, object param5, object param6)
-    {
-        LogWarning(param1, param2, param3, param4, param5, param6, null);
-    }
-
-    public static void LogWarning(object param1, object param2, object param3, object param4, object param5, object param6, object param7)
-    {
         if (loglevel <= LogLevel.Warn)
         {
-            Append(param1, param2, param3, param4, param5, param6, param7);
+            Append(param1, param2, param3, param4, param5);
             Debug.LogWarning(shareSB);
             Write(shareSB);
         }
     }
-
+    
     public static void LogError(object param)
     {
         LogError(param, null);
@@ -177,25 +148,15 @@ public class XDebug
 
     public static void LogError(object param1, object param2, object param3, object param4, object param5)
     {
-        LogError(param1, param2, param3, param4, param5, null);
-    }
-
-    public static void LogError(object param1, object param2, object param3, object param4, object param5, object param6)
-    {
-        LogError(param1, param2, param3, param4, param5, param6, null);
-    }
-
-    public static void LogError(object param1, object param2, object param3, object param4, object param5, object param6, object param7)
-    {
         if (loglevel <= LogLevel.Error)
         {
-            Append(param1, param2, param3, param4, param5, param6, param7);
+            Append(param1, param2, param3, param4, param5);
             Debug.LogError(shareSB);
             Write(shareSB);
         }
     }
-
-    private static void Append(object param1, object param2, object param3, object param4, object param5, object param6, object param7)
+    
+    private static void Append(object param1, object param2, object param3, object param4, object param5)
     {
         shareSB.Length = 0;
         shareSB.Append(param1);
@@ -207,14 +168,10 @@ public class XDebug
             shareSB.Append(param4);
         if (param5 != null)
             shareSB.Append(param5);
-        if (param6 != null)
-            shareSB.Append(param6);
-        if (param7 != null)
-            shareSB.Append(param7);
     }
 
 
-    private static void GreenAppend(object param1, object param2, object param3, object param4, object param5, object param6, object param7)
+    private static void GreenAppend(object param1, object param2, object param3, object param4, object param5)
     {
         shareSB.Length = 0;
         shareSB.Append("<color=green>");
@@ -227,10 +184,6 @@ public class XDebug
             shareSB.Append(param4);
         if (param5 != null)
             shareSB.Append(param5);
-        if (param6 != null)
-            shareSB.Append(param6);
-        if (param7 != null)
-            shareSB.Append(param7);
         shareSB.Append("</color>");
     }
 
