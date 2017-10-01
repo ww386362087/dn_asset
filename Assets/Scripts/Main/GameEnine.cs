@@ -16,7 +16,7 @@ public sealed class GameEnine : XObject
         XGlobalConfig.Initial();
         XTableMgr.Initial();
 
-        ABManager.singleton.Initial();
+        XResources.Init();
         UIManager.singleton.Initial();
         Documents.singleton.Initial();
     }

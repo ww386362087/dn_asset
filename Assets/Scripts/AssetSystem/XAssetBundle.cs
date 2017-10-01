@@ -73,7 +73,7 @@ public class XAssetBundle
             //默认公共资源不会卸载 除非force=true强制卸载（切场景时候用）
             if (ab_data.compositeType != AssetBundleExportType.Standalone || force)
             {
-                //XDebug.LogGreen("ab unload ", load_name);
+                //XDebug.LogGreen("ab unload ",ab_data.assetpath);
                 ABManager.singleton.RemvBundle(this);
                 bundle.Unload(unloadall);
                 bundle = null;
@@ -88,9 +88,9 @@ public class XAssetBundle
     {
         if (Time.time - born_time >= life_cycle)
         {
-            ABManager.singleton.Debug();
+           // ABManager.singleton.Debug();
             Unload(false,false);
-            ABManager.singleton.Debug();
+            //ABManager.singleton.Debug();
         }
     }
 

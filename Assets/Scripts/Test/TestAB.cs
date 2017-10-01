@@ -25,7 +25,7 @@ public class TestAB : MonoBehaviour
         XTimerMgr.singleton.Init();
         XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();
-        ABManager.singleton.Initial();
+        XResources.Init();
     }
 
     void OnGUI()
@@ -47,6 +47,7 @@ public class TestAB : MonoBehaviour
         }
         if (GUI.Button(new Rect(30, 330, 140, 80), "Unload1"))
         {
+            ABManager.singleton.Debug();
             XResources.SafeDestroy(go1);
         }
         if (GUI.Button(new Rect(30, 430, 140, 80), "Unload2"))
@@ -56,6 +57,11 @@ public class TestAB : MonoBehaviour
         if (GUI.Button(new Rect(30, 530, 140, 80), "Unload12"))
         {
             XResources.SafeDestroy(go12);
+        }
+
+        if (GUI.Button(new Rect(230, 30, 140, 80), "Debug"))
+        {
+            ABManager.singleton.Debug();
         }
     }
 
@@ -67,6 +73,7 @@ public class TestAB : MonoBehaviour
 
     private void OnLoad1Complete(Object o)
     {
+        XDebug.Log("OnLoad1Complete");
         go1 = o as GameObject;
         go1.name = "load1";
     }

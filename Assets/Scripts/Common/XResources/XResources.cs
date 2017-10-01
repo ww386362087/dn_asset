@@ -17,6 +17,12 @@ public class XResources
     /// </summary>
     private static Dictionary<int, uint> all_asset_map = new Dictionary<int, uint>();
 
+    public static void Init()
+    {
+        ABManager.singleton.Initial();
+    }
+
+
     public static void Update()
     {
         ABManager.singleton.Update();
@@ -110,24 +116,23 @@ public class XResources
     /// <summary>
     /// 针对的是Asset-Object 而非Cloned-Object
     /// </summary>
-    public static void UnloadAsset(Object assetToUnload)
+    public static void UnloadAsset(Asset asset)
     {
-        if (assetToUnload != null)
+        if (asset != null)
         {
-            if (assetToUnload is GameObject)
+            if (asset.is_clone_asset)
             {
 #if UNITY_EDITOR
                 // 在编辑器模式下无法卸载go物体，否则会报错让改用DestroyImmediate(obj, true)
                 // 但这样做会连文件夹里的原始Asset一并删除
 #else
-                GameObject.DestroyImmediate(assetToUnload);
+                GameObject.DestroyImmediate(asset.obt);
 #endif
             }
             else 
             {
-                XDebug.Log(assetToUnload.GetType().Name);
                 //当使用Resources.UnloadAsset后，若依然有物体用该图，那么物体就变全黑 (异步执行的) 谨慎使用
-                Resources.UnloadAsset(assetToUnload);
+                Resources.UnloadAsset(asset.obt);
             }
         }
     }

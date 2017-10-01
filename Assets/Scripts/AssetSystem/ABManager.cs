@@ -63,7 +63,7 @@ public sealed class ABManager : XSingleton<ABManager>
             var e = map.GetEnumerator();
             while (e.MoveNext())
             {
-                XResources.UnloadAsset(e.Current.Value.obt);
+                XResources.UnloadAsset(e.Current.Value);
             }
             e.Dispose();
             map.Clear();
@@ -122,7 +122,7 @@ public sealed class ABManager : XSingleton<ABManager>
             map[hash].ref_cnt--;
             if (map[hash].ref_cnt <= 0)
             {
-                XResources.UnloadAsset(map[hash].obt);
+                XResources.UnloadAsset(map[hash]);
                 map[hash].obt = null;
                 map.Remove(hash);
                 return true;
@@ -256,10 +256,14 @@ public sealed class ABManager : XSingleton<ABManager>
 
     public void Debug()
     {
-        foreach(var item in map)
+        foreach (var item in map)
         {
-            XDebug.Log("name: " + item.Key);
-            XDebug.LogGreen("obj: " + item.Value.obt == null);
+            XDebug.Log("name: ", item.Key);
+
+            if (item.Key == 2123369345)
+            {
+                XDebug.LogGreen("obj: ", (item.Value.obt == null), " equal: ", item.Value.obt.Equals(null));
+            }
         }
     }
 

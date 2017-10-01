@@ -136,7 +136,7 @@ public class XResourceMgr : XSingleton<XResourceMgr>
             map[hash].ref_cnt--;
             if (map[hash].ref_cnt <= 0)
             {
-                XResources.UnloadAsset(map[hash].obt);
+                XResources.UnloadAsset(map[hash]);
                 map[hash].obt = null;
                 map.Remove(hash);
                 return true;
@@ -153,7 +153,7 @@ public class XResourceMgr : XSingleton<XResourceMgr>
         var e = map.GetEnumerator();
         while (e.MoveNext())
         {
-            XResources.UnloadAsset(e.Current.Value.obt);
+            XResources.UnloadAsset(e.Current.Value);
         }
         e.Dispose();
         map.Clear();

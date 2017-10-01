@@ -59,14 +59,14 @@ b18e61ca3597667b750e6598c7f2fece3fb76ba9
 a59a2077a633bb8061d09d523f4b7192
 0
 ***************************************
-Assets\Res\fgx_04.png
-1bdcce80c5113c22e9a1688b13fa6bec92d0f15f
+Assets\Res\l_chat_next.png
+4a9693d41d330c4203fdd63c07ea93a1769b261e
 0
 
 0
 ***************************************
-Assets\Res\l_chat_next.png
-4a9693d41d330c4203fdd63c07ea93a1769b261e
+Assets\Res\fgx_04.png
+1bdcce80c5113c22e9a1688b13fa6bec92d0f15f
 0
 
 0
