@@ -121,4 +121,9 @@ public class BaseLoadTask
         location = "";
     }
 
+    public virtual void PostLoad()
+    {
+
+    }
+
 }

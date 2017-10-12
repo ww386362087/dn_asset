@@ -12,11 +12,13 @@ public class PartLoadTask : BaseLoadTask
     public Mesh mesh = null;
     public Texture tex = null;
     private PartLoadCallback m_PartLoadCb = null;
+    private SkinnedMeshRenderer m_skin = null;
 
-    public PartLoadTask(EPartType p, PartLoadCallback partLoadCb)
+    public PartLoadTask(EPartType p, SkinnedMeshRenderer skin, PartLoadCallback partLoadCb)
         : base(p)
     {
         m_PartLoadCb = partLoadCb;
+        m_skin = skin;
     }
 
     public override void Load(ref FashionPositionInfo newFpi, HashSet<string> loadedPath)
@@ -55,10 +57,11 @@ public class PartLoadTask : BaseLoadTask
         }
     }
 
-    public void PostLoad(SkinnedMeshRenderer skin)
+    public override void PostLoad()
     {
-        if (skin == null || tex == null) return;
-        skin.sharedMaterial.SetTexture(XEquipUtil.GetPartOffset(part), tex);
+        base.PostLoad();
+        if (m_skin == null || tex == null) return;
+        m_skin.sharedMaterial.SetTexture(XEquipUtil.GetPartOffset(part), tex);
     }
 
     public override void Reset()

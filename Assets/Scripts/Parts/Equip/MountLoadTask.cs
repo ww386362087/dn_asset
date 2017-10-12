@@ -52,8 +52,9 @@ public class MountLoadTask : BaseLoadTask
     }
 
 
-    public void PostLoad()
+    public override void PostLoad()
     {
+        base.PostLoad();
     }
 
     public override void Reset()

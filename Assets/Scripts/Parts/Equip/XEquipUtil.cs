@@ -31,7 +31,6 @@ public class ThreePart
 
 public class XEquipUtil
 {
-    public static CombineMeshUtility _CombineMeshUtility = null;
 
     public static readonly Shader _flow_Spec = Shader.Find("Custom/Skin/FlowTexSpec");
     public static readonly Shader _flow_Diffuse = Shader.Find("Custom/Skin/FlowTexDiff");
@@ -132,7 +131,7 @@ public class XEquipUtil
 
     public static void MakeEquip(string name, int[] fashionIDs, List<EquipPart> equipList, TempEquipSuit tmpFashionData, int suitID)
     {
-        FashionList fashionList = XTableMgr.GetTable < FashionList>();
+        FashionList fashionList = XTableMgr.GetTable<FashionList>();
         if (fashionIDs != null)
         {
             tmpFashionData.hash = 0;

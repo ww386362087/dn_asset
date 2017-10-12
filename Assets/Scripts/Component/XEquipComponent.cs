@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using XTable;
 
+
 public class XEquipComponent : XComponent
 {
     private List<EquipPart> m_FashionList = null;
     private List<EquipPart> m_EquipList = null;
 
-    private CombineMeshTask _combineMeshTask = null;
-   
+    public BaseLoadTask[] parts = new BaseLoadTask[(int)EPartType.ENum];
+    private PartLoadCallback m_PartLoaded = null;
+    public SkinnedMeshRenderer skin = null;
+    public MaterialPropertyBlock mpb = null;
+
     List<FashionPositionInfo> fashionList = null;
+
+    public static int MaxPartCount = 8;
+    private List<CombineInstance[]> matCombineInstanceArrayCache = new List<CombineInstance[]>();
+    
     public XEquipComponent()
     {
-        _combineMeshTask = new CombineMeshTask(this);
+        mpb = new MaterialPropertyBlock();
+        
+        for (int i = 0; i < MaxPartCount; ++i)
+        {
+            matCombineInstanceArrayCache.Add(new CombineInstance[i + 1]);
+        }
     }
 
     public override void OnInitial(XObject o)
@@ -24,7 +37,7 @@ public class XEquipComponent : XComponent
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
         m_FashionList = new List<EquipPart>();
-        for (int i = 0,max= XTableMgr.GetTable<FashionSuit>().Table.Length; i < max; ++i)
+        for (int i = 0, max = XTableMgr.GetTable<FashionSuit>().Table.Length; i < max; ++i)
         {
             FashionSuit.RowData row = XTableMgr.GetTable<FashionSuit>().Table[i];
             if (row.FashionID != null)
@@ -35,23 +48,31 @@ public class XEquipComponent : XComponent
 
         //装备
         m_EquipList = new List<EquipPart>();
-        for (int i = 0,max= XTableMgr.GetTable<EquipSuit>().Table.Length; i < max; ++i)
+        for (int i = 0, max = XTableMgr.GetTable<EquipSuit>().Table.Length; i < max; ++i)
         {
             EquipSuit.RowData row = XTableMgr.GetTable<EquipSuit>().Table[i];
             if (row.EquipID != null)
                 XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
         }
 
-
         Transform skinmesh = e.EntityObject.transform;
-        SkinnedMeshRenderer skm = skinmesh.GetComponent<SkinnedMeshRenderer>();
-        if (skm == null) skm = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
-        _combineMeshTask.skin = skm;
-        skm.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-        e.skin = skm;
+        skin = skinmesh.GetComponent<SkinnedMeshRenderer>();
+        if (skin == null) skin = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
+        skin.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        e.skin = skin;
+        
+
+        for (EPartType part = EPartType.ECombinePartStart; part < EPartType.ECombinePartEnd; ++part)
+        {
+            parts[(int)part] = new PartLoadTask(part, skin, m_PartLoaded);
+        }
+        for (EPartType part = EPartType.ECombinePartEnd; part < EPartType.EMountEnd; ++part)
+        {
+            parts[(int)part] = new MountLoadTask(part, this);
+        }
+
         EquipTest(m_FashionList[0]);
     }
-
 
 
     public void EquipTest(EquipPart part)
@@ -77,11 +98,11 @@ public class XEquipComponent : XComponent
 
     public void AttachWeapon(string path)
     {
-        if(fashionList!=null)
+        if (fashionList != null)
         {
             FashionPositionInfo fpi = new FashionPositionInfo();
-            fpi.equipName = "weapon/"+path;
-            if (fashionList.Count>8)
+            fpi.equipName = "weapon/" + path;
+            if (fashionList.Count > 8)
             {
                 fashionList[8] = fpi;
             }
@@ -92,46 +113,105 @@ public class XEquipComponent : XComponent
             EquipAll(fashionList.ToArray());
         }
     }
-
+    
     public void EquipAll(FashionPositionInfo[] fashionList)
     {
         if (fashionList == null)
         {
-             XDebug.LogError("null fashion list");
+            XDebug.LogError("null fashion list");
             return;
         }
-        _combineMeshTask.BeginCombine();
         HashSet<string> loadPath = new HashSet<string>();
         for (int i = 0, imax = fashionList.Length; i < imax; ++i)
         {
             FashionPositionInfo fpi = fashionList[i];
-            BaseLoadTask task = _combineMeshTask.parts[i];
+            BaseLoadTask task = parts[i];
             task.Load(ref fpi, loadPath);
         }
-        CombineMesh();
+        Combine();
     }
+    
 
-    private void CombineMesh()
+    /// <summary>
+    /// 处理mesh和tex的对应关系，并处理uv
+    /// </summary>
+    public bool Combine()
     {
-        if (_combineMeshTask.needCombine)
+        int partCount = 0;
+        for (int i = (int)EPartType.ECombinePartStart; i < (int)EPartType.ECombinePartEnd; ++i)
         {
-            CombineMeshUtility.singleton.Combine(_combineMeshTask);
+            PartLoadTask part = parts[i] as PartLoadTask;
+            if (part.HasMesh()) partCount++;
         }
-        _combineMeshTask.combineStatus = ECombineStatus.ECombined;
-
-
-        for (EPartType part = EPartType.ECombinePartStart; part < EPartType.ECombinePartEnd; ++part)
+        CombineInstance[] combineArray = GetMatCombineInstanceArray(partCount);
+        if (combineArray != null)
         {
-            PartLoadTask loadPart = _combineMeshTask.parts[(int)part] as PartLoadTask;
-            loadPart.PostLoad(_combineMeshTask.skin);
-        }
+            //1.mesh collection
+            int index = 0;
+            for (int i = (int)EPartType.ECombinePartStart; i < (int)EPartType.ECombinePartEnd; ++i)
+            {
+                PartLoadTask part = parts[i] as PartLoadTask;
+                if (part.HasMesh())
+                {
+                    CombineInstance ci = new CombineInstance();
+                    if (part.mesh != null)
+                    {
+                        ci.mesh = part.mesh;
+                    }
+                    ci.subMeshIndex = 0;
+                    combineArray[index++] = ci;
+                }
+            }
+            //2.combine
+            if (skin.sharedMesh == null)
+            {
+                skin.sharedMesh = new Mesh();
+            }
+            else
+            {
+                skin.sharedMesh.Clear(true);
+            }
+            skin.gameObject.SetActive(false);
+            skin.sharedMesh.CombineMeshes(combineArray, true, false);
+            skin.gameObject.SetActive(true);
 
-        for (EPartType part = EPartType.ECombinePartEnd; part < EPartType.EMountEnd; ++part)
-        {
-            MountLoadTask loadPart = _combineMeshTask.parts[(int)part] as MountLoadTask;
-            loadPart.PostLoad();
+            //3.set material
+            if (skin != null)
+            {
+                XEquipUtil.ReturnMaterial(skin.sharedMaterial);
+            }
+            skin.sharedMaterial = XEquipUtil.GetRoleMat();
+            skin.GetPropertyBlock(mpb);
+
+            //4. postload
+            for (EPartType part = EPartType.ECombinePartStart; part < EPartType.EMountEnd; ++part)
+            {
+                parts[(int)part].PostLoad();
+            }
+            return true;
         }
+        return false;
     }
 
+
+    /// <summary>
+    /// 根据combineinstantce的长度获取对应的array
+    /// </summary>
+    private CombineInstance[] GetMatCombineInstanceArray(int partCount)
+    {
+        int combineArrayIndex = partCount - 1;
+        if (combineArrayIndex >= 0)
+        {
+            if (combineArrayIndex >= matCombineInstanceArrayCache.Count)
+            {
+                return new CombineInstance[partCount];
+            }
+            else
+            {
+                return matCombineInstanceArrayCache[combineArrayIndex];
+            }
+        }
+        return null;
+    }
 
 }

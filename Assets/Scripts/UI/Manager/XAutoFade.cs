@@ -142,4 +142,14 @@ public sealed class XAutoFade
         _fadeToClear = null;
     }
 
+
+    public static void Debug()
+    {
+        XDebug.Log("bef field in value: ", _in);
+    }
+
+    public static void Debug2()
+    {
+        XDebug.LogGreen("aft field in value:", _in);
+    }
 }
