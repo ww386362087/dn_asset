@@ -8,7 +8,8 @@ public enum XEventDefine
     XEvent_Camera_CloseUp,
     XEvent_Camera_CloseUpEnd,
     XEvent_Camera_Action,
-
+    XEvent_Attach_Host,
+    XEvent_Detach_Host,
     XEvent_Num
 }
 
@@ -52,7 +53,6 @@ public class XCameraCloseUpEndEvent : XEventArgs
     {
         base.Recycle();
     }
-
 }
 
 public class XCameraActionEvent : XEventArgs
@@ -70,7 +70,6 @@ public class XCameraActionEvent : XEventArgs
         To_Rot_X = 0;
         To_Rot_Y = 0;
     }
-
 }
 
 
@@ -92,5 +91,28 @@ public class XAIEventArgs : XEventArgs
         EventType = 1;
         EventArg = string.Empty;
     }
+}
 
+public class XAttachEventArgs : XEventArgs
+{
+    public XAttachEventArgs() : base()
+    {
+        _eDefine = XEventDefine.XEvent_Attach_Host;
+    }
+
+    public override void Recycle()
+    {
+    }
+}
+
+public class XDetachEventArgs:XEventArgs
+{
+    public XDetachEventArgs() : base()
+    {
+        _eDefine = XEventDefine.XEvent_Detach_Host;
+    }
+
+    public override void Recycle()
+    {
+    }
 }

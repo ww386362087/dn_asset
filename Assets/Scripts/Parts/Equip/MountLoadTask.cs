@@ -59,6 +59,7 @@ public class MountLoadTask : BaseLoadTask
 
     public override void Reset()
     {
+        base.Reset();
         if (goInstance != null)
         {
             XResources.SafeDestroy(goInstance);

@@ -86,11 +86,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     /// </summary>
     public void AttachToHost()
     {
-        var e = _hash_entitys.GetEnumerator();
-        while (e.MoveNext())
-        {
-            e.Current.OnAttachToHost();
-        }
+        XAttachEventArgs e = new XAttachEventArgs();
+        XEventMgr.singleton.FireEvent(e);
     }
 
     /// <summary>
@@ -98,11 +95,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     /// </summary>
     public void DetachFromHost()
     {
-        var e = _hash_entitys.GetEnumerator();
-        while (e.MoveNext())
-        {
-            e.Current.OnDeatchToHost();
-        }
+        XDetachEventArgs e = new XDetachEventArgs();
+        XEventMgr.singleton.FireEvent(e);
     }
 
     public XEntity GetEntity(uint id)

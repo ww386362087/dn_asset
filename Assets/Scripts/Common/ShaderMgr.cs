@@ -17,6 +17,7 @@ public class ShaderMgr
     public static int shaderHairID;
     public static int shaderBodyID;
     public static int shaderAlphaID;
+    public static int shaderHairColorID;
 
 
     public static void Init()
@@ -34,7 +35,7 @@ public class ShaderMgr
         shaderHairID = Shader.PropertyToID("_Hair");
         shaderBodyID = Shader.PropertyToID("_Body");
         shaderAlphaID = Shader.PropertyToID("_Alpha");
-
+        shaderHairColorID = Shader.PropertyToID("_HairColor");
         for (int i = 0, max = shaderSkinID.Length; i < max; i++)
         {
             shaderSkinID[i] = Shader.PropertyToID("_Tex" + i);

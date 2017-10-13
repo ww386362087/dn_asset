@@ -67,10 +67,10 @@ public class XEquipComponent : XComponent
         {
             parts[(int)part] = new MountLoadTask(part, this);
         }
+        RegisterEvent(XEventDefine.XEvent_Detach_Host, OnDetachHost);
         
         EquipPart(m_FashionList[0]);
     }
-
 
     public void EquipPart(EquipPart part)
     {
@@ -127,6 +127,24 @@ public class XEquipComponent : XComponent
         }
         Combine();
     }
+
+    public void ChangeHairColor(Color color)
+    {
+        if (skin != null)
+        {
+            mpb.SetColor(ShaderMgr.shaderHairColorID, color);
+            skin.SetPropertyBlock(mpb);
+        }
+    }
+
+    private void OnDetachHost(XEventArgs e)
+    {
+        for (EPartType part = EPartType.ECombinePartStart; part < EPartType.EMountEnd; ++part)
+        {
+            var p = parts[(int)part];
+            if (p != null) p.Reset();
+        }
+    }
     
 
     /// <summary>
@@ -180,7 +198,7 @@ public class XEquipComponent : XComponent
             skin.sharedMaterial = XEquipUtil.GetRoleMat();
             skin.GetPropertyBlock(mpb);
 
-            //4. postload
+            //4. postload - set texture
             for (EPartType part = EPartType.ECombinePartStart; part < EPartType.EMountEnd; ++part)
             {
                 parts[(int)part].PostLoad();

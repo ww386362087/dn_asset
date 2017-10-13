@@ -75,6 +75,17 @@ public class TestFashion : ITest
         "ar_pajamas_a03_bigbow_weapon"
     };
 
+    Color[] colors = new Color[]
+    {
+        Color.white,
+        Color.green,
+        Color.grey,
+        Color.yellow,
+        Color.blue,
+        Color.gray,
+        Color.red
+    };
+
     public void OnGUI()
     {
         GUILayout.BeginHorizontal();
@@ -141,6 +152,11 @@ public class TestFashion : ITest
             if (GUILayout.Button(weapons[i])) role.GetComponent<XEquipComponent>().AttachWeapon(weapons[i]);
         }
         GUILayout.Space(10);
+        GUILayout.Label("发型");
+        for (int i=0,max=colors.Length;i<max;i++)
+        {
+            if (GUILayout.Button(colors[i].ToString())) role.GetComponent<XEquipComponent>().ChangeHairColor(colors[i]);
+        }
 
         GUILayout.EndVertical();
 

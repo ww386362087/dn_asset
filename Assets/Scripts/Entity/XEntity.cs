@@ -179,10 +179,6 @@ public abstract class XEntity : XObject
     {
     }
 
-    public virtual void OnAttachToHost() { }
-
-    public virtual void OnDeatchToHost() { }
-
     public bool TestVisible(Plane[] planes, bool fully)
     {
         if (_skin != null)
