@@ -150,7 +150,7 @@ public class TestFashion : ITest
 
     private void Preview(EquipPart part)
     {
-        role.GetComponent<XEquipComponent>().EquipTest(part);
+        role.GetComponent<XEquipComponent>().EquipPart(part);
     }
 
 

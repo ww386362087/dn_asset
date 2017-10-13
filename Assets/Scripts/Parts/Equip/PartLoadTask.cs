@@ -4,21 +4,19 @@ using System.Collections.Generic;
 
 public delegate void PartLoadCallback(BaseLoadTask part, bool needCombine);
 
-public delegate void LoadCallBack(Object obj);
-
 public class PartLoadTask : BaseLoadTask
 {
     public GameObject go = null;
     public Mesh mesh = null;
     public Texture tex = null;
     private PartLoadCallback m_PartLoadCb = null;
-    private SkinnedMeshRenderer m_skin = null;
+    private XEquipComponent m_equip = null;
 
-    public PartLoadTask(EPartType p, SkinnedMeshRenderer skin, PartLoadCallback partLoadCb)
+    public PartLoadTask(EPartType p, XEquipComponent equip, PartLoadCallback partLoadCb)
         : base(p)
     {
         m_PartLoadCb = partLoadCb;
-        m_skin = skin;
+        m_equip = equip;
     }
 
     public override void Load(ref FashionPositionInfo newFpi, HashSet<string> loadedPath)
@@ -60,8 +58,9 @@ public class PartLoadTask : BaseLoadTask
     public override void PostLoad()
     {
         base.PostLoad();
-        if (m_skin == null || tex == null) return;
-        m_skin.sharedMaterial.SetTexture(XEquipUtil.GetPartOffset(part), tex);
+        if (m_equip == null || m_equip.skin == null || tex == null) return;
+        m_equip.mpb.SetTexture(ShaderMgr.GetPartOffset(part),tex);
+        m_equip.skin.SetPropertyBlock(m_equip.mpb);
     }
 
     public override void Reset()

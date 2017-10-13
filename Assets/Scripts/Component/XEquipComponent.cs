@@ -21,7 +21,6 @@ public class XEquipComponent : XComponent
     public XEquipComponent()
     {
         mpb = new MaterialPropertyBlock();
-        
         for (int i = 0; i < MaxPartCount; ++i)
         {
             matCombineInstanceArrayCache.Add(new CombineInstance[i + 1]);
@@ -31,7 +30,6 @@ public class XEquipComponent : XComponent
     public override void OnInitial(XObject o)
     {
         base.OnInitial(o);
-
         XEntity e = o as XEntity;
 
         //时装
@@ -61,21 +59,20 @@ public class XEquipComponent : XComponent
         skin.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         e.skin = skin;
         
-
         for (EPartType part = EPartType.ECombinePartStart; part < EPartType.ECombinePartEnd; ++part)
         {
-            parts[(int)part] = new PartLoadTask(part, skin, m_PartLoaded);
+            parts[(int)part] = new PartLoadTask(part, this, m_PartLoaded);
         }
         for (EPartType part = EPartType.ECombinePartEnd; part < EPartType.EMountEnd; ++part)
         {
             parts[(int)part] = new MountLoadTask(part, this);
         }
-
-        EquipTest(m_FashionList[0]);
+        
+        EquipPart(m_FashionList[0]);
     }
 
 
-    public void EquipTest(EquipPart part)
+    public void EquipPart(EquipPart part)
     {
         fashionList = new List<FashionPositionInfo>();
         FashionPositionInfo fpi = new FashionPositionInfo();
@@ -135,7 +132,7 @@ public class XEquipComponent : XComponent
     /// <summary>
     /// 处理mesh和tex的对应关系，并处理uv
     /// </summary>
-    public bool Combine()
+    private bool Combine()
     {
         int partCount = 0;
         for (int i = (int)EPartType.ECombinePartStart; i < (int)EPartType.ECombinePartEnd; ++i)

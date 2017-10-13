@@ -31,71 +31,53 @@ public class ThreePart
 
 public class XEquipUtil
 {
-
-    public static readonly Shader _flow_Spec = Shader.Find("Custom/Skin/FlowTexSpec");
-    public static readonly Shader _flow_Diffuse = Shader.Find("Custom/Skin/FlowTexDiff");
-    public static readonly Shader _skin_cube = Shader.Find("Custom/Skin/Cube");
-    public static readonly Shader _skin_cube_nomask = Shader.Find("Custom/Skin/CubeNoMask");
-    public static readonly Shader _skin_cutout = Shader.Find("Custom/Skin/RimlightBlendCutout");
-    public static readonly Shader _skin_nocutout = Shader.Find("Custom/Skin/RimlightBlendNoCutout");
-    public static readonly Shader _skin_blend = Shader.Find("Custom/Skin/RimlightBlend");
-    public static readonly Shader _skin8 = Shader.Find("Custom/Skin/RimlightBlend8");
-
-    private static Shader _EquipShader = null;
-
-
+    
     public static Material GetRoleMat()
     {
-        return GetMaterial(_skin8);
+        return GetMaterial(ShaderMgr.skin8);
     }
 
     private static Material GetMaterial(Shader shader)
     {
-        if (shader == _skin_cutout)
+        if (shader == ShaderMgr.skin_cutout)
         {
             return XResources.Load<Material>("Materials/Char/RimLightBlendCutout",AssetType.Mat);//mat
         }
-        else if (shader == _skin_nocutout)
+        else if (shader == ShaderMgr.skin_nocutout)
         {
             return XResources.Load<Material>("Materials/Char/RimLightBlendNoCutout",AssetType.Mat);
         }
-        else if (shader == _skin_blend)
+        else if (shader == ShaderMgr.skin_blend)
         {
             return XResources.Load<Material>("Materials/Char/RimLightBlend",AssetType.Mat);
         }
-        else if (shader == _skin8)
+        else if (shader == ShaderMgr.skin8)
         {
             return XResources.Load<Material>("Materials/Char/RimLightBlend8",AssetType.Mat);
         }
         return new Material(shader);
     }
-
-    public static Shader GetEquipShader()
-    {
-        if (_EquipShader == null)
-            _EquipShader = _skin8;
-        return _EquipShader;
-    }
+    
 
     public static void ReturnMaterial(Material mat)
     {
         if (mat != null)
         {
             Shader shader = mat.shader;
-            if (shader == _skin_cutout || shader == _skin_nocutout)
+            if (shader == ShaderMgr.skin_cutout || shader == ShaderMgr.skin_nocutout)
             {
                 mat.SetTexture("_Face", null);
                 mat.SetTexture("_Hair", null);
                 mat.SetTexture("_Body", null);
                 mat.SetTexture("_Alpha", null);
             }
-            else if (shader == _skin_blend)
+            else if (shader == ShaderMgr.skin_blend)
             {
                 mat.SetTexture("_Face", null);
                 mat.SetTexture("_Hair", null);
                 mat.SetTexture("_Body", null);
             }
-            else if (shader == _skin8)
+            else if (shader == ShaderMgr.skin8)
             {
                 mat.SetTexture("_Tex0", null);
                 mat.SetTexture("_Tex1", null);
