@@ -13,7 +13,7 @@ public sealed class ABManager : XSingleton<ABManager>
     /// 例如，如果对Asset-Object执行Destroy 会报错：Destroying assets is not permitted to avoid data loss
     /// 加载完cache 切场景卸载
     /// </summary>
-    private Dictionary<uint, Asset> map;
+    public Dictionary<uint, Asset> map = new Dictionary<uint, Asset>();
 
     /// <summary>
     /// bundle的引用 
@@ -28,7 +28,6 @@ public sealed class ABManager : XSingleton<ABManager>
 
     public void Initial()
     {
-        map = new Dictionary<uint, Asset>();
         LoadDepInfo();
     }
 
@@ -253,18 +252,6 @@ public sealed class ABManager : XSingleton<ABManager>
         }
         return new XAssetBundle(data);
     }
-
-    public void Debug()
-    {
-        foreach (var item in map)
-        {
-            XDebug.Log("name: ", item.Key);
-
-            if (item.Key == 2123369345)
-            {
-                XDebug.LogGreen("obj: ", (item.Value.obt == null), " equal: ", item.Value.obt.Equals(null));
-            }
-        }
-    }
+    
 
 }

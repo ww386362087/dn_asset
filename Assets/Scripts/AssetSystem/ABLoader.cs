@@ -163,8 +163,9 @@ public class AsyncLoader : LoaderBase
         AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(file);
         while (!req.isDone) yield return null;
         AssetBundle bundle = req.assetBundle;
-        ABManager.singleton.CacheObject(bundleName, bundle, isCloneAsset);
-        cb(bundleName, bundle.LoadAsset(data.loadName), isCloneAsset);
+        UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
+        ABManager.singleton.CacheObject(bundleName, obj, isCloneAsset);
+        cb(bundleName, obj, isCloneAsset);
         new XAssetBundle(data, bundle);
     }
 

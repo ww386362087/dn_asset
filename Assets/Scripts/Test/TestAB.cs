@@ -18,51 +18,64 @@ public class TestAB : MonoBehaviour
     string path12 = "UI/Canvas12";
 
     GameObject go1, go2, go12;
-
+    GUILayoutOption[] option;
     void Start()
     {
+        option = new GUILayoutOption[] { GUILayout.Width(140), GUILayout.Height(80) };
         GameEnine.SetMonoForTest(this);
         XTimerMgr.singleton.Init();
         XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();
         XResources.Init();
     }
+    
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(30, 30, 140, 80), "AsynLoad1"))
+        GUILayout.Space(10);
+        GUILayout.BeginVertical();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Space(10);
+        if (GUILayout.Button("AsynLoad1", option))
         {
-            XDebug.Log(go1 != null);
             XResources.LoadAsync<GameObject>(path1, AssetType.Prefab, OnLoad1Complete);
         }
-        if (GUI.Button(new Rect(30, 130, 140, 80), "ImmLoad2"))
+        if (GUILayout.Button("Unload1", option))
+        {
+            XResources.SafeDestroy(go1);
+        }
+        GUILayout.EndHorizontal();
+        GUILayout.Space(20);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Space(10);
+        if (GUILayout.Button("ImmLoad2", option))
         {
             go2 = XResources.Load<GameObject>(path2, AssetType.Prefab);
             go2.name = "Load2";
         }
-        if (GUI.Button(new Rect(30, 230, 140, 80), "ImmLoad12"))
+        if (GUILayout.Button("Unload2", option))
+        {
+            XResources.SafeDestroy(go2);
+        }
+        GUILayout.EndHorizontal();
+        GUILayout.Space(20);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Space(10);
+        if (GUILayout.Button("ImmLoad12", option))
         {
             go12 = XResources.Load<GameObject>(path12, AssetType.Prefab);
             go12.name = "Load12";
         }
-        if (GUI.Button(new Rect(30, 330, 140, 80), "Unload1"))
-        {
-            ABManager.singleton.Debug();
-            XResources.SafeDestroy(go1);
-        }
-        if (GUI.Button(new Rect(30, 430, 140, 80), "Unload2"))
-        {
-            XResources.SafeDestroy(go2);
-        }
-        if (GUI.Button(new Rect(30, 530, 140, 80), "Unload12"))
+        if (GUILayout.Button("Unload12", option))
         {
             XResources.SafeDestroy(go12);
         }
+        GUILayout.EndHorizontal();
 
-        if (GUI.Button(new Rect(230, 30, 140, 80), "Debug"))
-        {
-            ABManager.singleton.Debug();
-        }
+        GUILayout.EndVertical();
     }
 
     void Update()
@@ -73,7 +86,7 @@ public class TestAB : MonoBehaviour
 
     private void OnLoad1Complete(Object o)
     {
-        XDebug.Log("OnLoad1Complete");
+       // XDebug.Log("OnLoad1Complete");
         go1 = o as GameObject;
         go1.name = "load1";
     }
