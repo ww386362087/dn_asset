@@ -87,7 +87,6 @@ namespace XTable {
         
         // 二分法查找
         public virtual RowData GetByUID(int id) {
-            XDebug.Log("id is: " + id);
 			return BinarySearch(Table, 0, Table.Length - 1, id) as RowData;
         }
         

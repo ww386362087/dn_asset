@@ -153,6 +153,7 @@ public class XResources
     /// </summary>
     public static void SafeDestroy(Object obj)
     {
+        if (obj == null) return;
         uint hash = 0;
         all_asset_map.TryGetValue(obj.GetInstanceID(), out hash);
         if (hash != 0) UnloadAsset(hash);
