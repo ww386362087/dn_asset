@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using XTable;
 
 public class XHitHoster : MonoBehaviour {
@@ -10,12 +11,14 @@ public class XHitHoster : MonoBehaviour {
     private XHitData _data = null;
     private AnimatorOverrideController _oVerrideController = null;
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return null;
         _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)PresentID);
 
         if (_oVerrideController == null) BuildOverride();
-        _oVerrideController["Idle"] = XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle, AssetType.Anim);
+        AnimationClip clip = XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle, AssetType.Anim);
+        _oVerrideController["Idle"] = clip;
         _oVerrideController["HitLanding"] = _present_data.HitFly != null && _present_data.HitFly.Length == 0 ? null : XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.HitFly[1], AssetType.Anim);
 
         _radius = _present_data.BoundRadius;
