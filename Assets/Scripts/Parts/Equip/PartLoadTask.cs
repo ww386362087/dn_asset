@@ -53,12 +53,12 @@ public class PartLoadTask : BaseLoadTask
         base.Reset();
         if (tex != null)
         {
-            XResources.SafeDestroy(tex);
+            XResources.Destroy(tex);
             tex = null;
         }
         if (mesh != null)
         {
-            XResources.SafeDestroy(mesh);
+            XResources.Destroy(mesh);
             mesh = null;
         }
     }

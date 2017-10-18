@@ -222,7 +222,7 @@ public class UIManager : XSingleton<UIManager>
     private void DestroyDlg(IUIDlg dlg)
     {
         dlg.OnDestroy();
-        XResources.SafeDestroy(dlg.innerBehaviour.gameObject);
+        XResources.Destroy(dlg.innerBehaviour.gameObject);
     }
 
 

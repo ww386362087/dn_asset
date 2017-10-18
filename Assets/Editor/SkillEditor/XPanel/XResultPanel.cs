@@ -385,19 +385,20 @@ class XResultPanel : XPanel
                 }
 
                 GameObject fx = EditorGUILayout.ObjectField("End Fx", Hoster.SkillDataExtra.ResultEx[i].BulletEndFx, typeof(GameObject), true) as GameObject;
+                if (fx == null || !AssetDatabase.GetAssetPath(fx).Contains("Resources/Effects/"))
                 {
-                    if (fx == null || !AssetDatabase.GetAssetPath(fx).Contains("Resources/Effects/"))
-                    {
-                        Hoster.SkillData.Result[i].LongAttackData.End_Fx = null;
-                        Hoster.SkillDataExtra.ResultEx[i].BulletEndFx = null;
-                    }
-                    else
-                    {
-                        Hoster.SkillDataExtra.ResultEx[i].BulletEndFx = fx;
-                        string path = AssetDatabase.GetAssetPath(fx).Remove(0, 17);
-                        Hoster.SkillData.Result[i].LongAttackData.End_Fx = path.Remove(path.LastIndexOf('.'));
-                    }
+                    Hoster.SkillData.Result[i].LongAttackData.End_Fx = null;
+                    Hoster.SkillDataExtra.ResultEx[i].BulletEndFx = null;
                 }
+                else
+                {
+                    Hoster.SkillDataExtra.ResultEx[i].BulletEndFx = fx;
+                    string path = AssetDatabase.GetAssetPath(fx);
+                    path = path.Remove(0, path.IndexOf("Effects/"));
+                    path = path.Remove(path.LastIndexOf('.'));
+                    Hoster.SkillData.Result[i].LongAttackData.End_Fx = path;
+                }
+
                 if (Hoster.SkillData.Result[i].LongAttackData.End_Fx != null)
                 {
                     Hoster.SkillData.Result[i].LongAttackData.EndFx_LifeTime = EditorGUILayout.FloatField("End Fx Duration", Hoster.SkillData.Result[i].LongAttackData.EndFx_LifeTime);

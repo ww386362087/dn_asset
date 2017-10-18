@@ -9,24 +9,32 @@ using System.Collections.Generic;
 /// </summary>
 public class XResources
 {
-    private static MemoryStream shareMemoryStream = new MemoryStream(8192);//512k
-
+   
     /// <summary>
     /// 资源映射列表 - 主要为了删除时快读定位
     /// key Clone-Object的InstanceID, value是ABManager或者XResourceMgr的hash值
     /// </summary>
-    private static Dictionary<int, uint> all_asset_map = new Dictionary<int, uint>();
+    private static Dictionary<int, uint> _asset_map = new Dictionary<int, uint>();
+
+    private static MemoryStream _share_stream = new MemoryStream(8192);//512k
+
+    private static XResController _res;
+    private static XABController _ab;
+
+    public static XABController ab { get { return _ab; } }
 
     public static void Init()
     {
-        ABManager.singleton.Initial();
+        _res = new XResController();
+        _ab = new XABController();
+        _ab.Initial();
     }
 
 
     public static void Update()
     {
-        ABManager.singleton.Update();
-        XResourceMgr.singleton.Update();
+        _ab.Update();
+        _res.Update();
     }
 
     /// <summary>
@@ -36,19 +44,19 @@ public class XResources
     public static T Load<T>(string path, AssetType type) where T : Object
     {
         Object obt; uint hash = 0;
-        if (ABManager.singleton.Exist(path, type))
+        if (_ab.Exist(path, type))
         {
-            obt = ABManager.singleton.Load<T>(path, type, out hash);
+            obt = _ab.Load<T>(path, type, out hash);
         }
         else
         {
-            obt = XResourceMgr.singleton.Load<T>(path, type, out hash);
+            obt = _res.Load<T>(path, type, out hash);
         }
         T t = Obj2T<T>(obt);
         if (t != null)
         {
             int instance = t.GetInstanceID();
-            all_asset_map[instance] = hash;
+            _asset_map[instance] = hash;
         }
         return t;
     }
@@ -71,11 +79,11 @@ public class XResources
     }
 
 
-    public static void SetAsynAssetIndex(int key,uint hash)
+    public static void SetAsynAssetIndex(int key, uint hash)
     {
-        all_asset_map[key] = hash;
+        _asset_map[key] = hash;
     }
-    
+
     /// <summary>
     /// 只能编辑器使用 
     /// 这个接口不走ab
@@ -84,17 +92,17 @@ public class XResources
     {
         return Resources.LoadAll<T>(path);
     }
-    
-    
+
+
     public static void LoadAsync<T>(string path, AssetType type, System.Action<Object> cb) where T : Object
     {
-        if (ABManager.singleton.Exist(path, type))
+        if (_ab.Exist(path, type))
         {
-            ABManager.singleton.LoadAsyn<T>(path, type, cb);
+            _ab.LoadAsyn<T>(path, type, cb);
         }
         else
         {
-            XResourceMgr.singleton.AsynLoad<T>(path, type, cb);
+            _res.AsynLoad<T>(path, type, cb);
         }
     }
 
@@ -103,13 +111,13 @@ public class XResources
     /// </summary>
     private static bool UnloadAsset(uint hash)
     {
-        if (ABManager.singleton.ExistLoadBundle(hash))
+        if (_ab.ExistLoadBundle(hash))
         {
-            return ABManager.singleton.Unload(hash);
+            return _ab.Unload(hash);
         }
         else
         {
-            return XResourceMgr.singleton.Unload(hash);
+            return _res.Unload(hash);
         }
     }
 
@@ -129,7 +137,7 @@ public class XResources
                 GameObject.DestroyImmediate(asset.obt);
 #endif
             }
-            else 
+            else
             {
                 //当使用Resources.UnloadAsset后，若依然有物体用该图，那么物体就变全黑 (异步执行的) 谨慎使用
                 Resources.UnloadAsset(asset.obt);
@@ -142,8 +150,8 @@ public class XResources
     /// </summary>
     public void UnloadAll()
     {
-        XResourceMgr.singleton.UnloadAll();
-        ABManager.singleton.UnloadAll();
+        _res.UnloadAll();
+        _ab.UnloadAll();
     }
 
 
@@ -151,26 +159,33 @@ public class XResources
     /// 先根据GameObject的intanceid 确定AB引用次数 引用为0卸载asset-object
     /// 然后再销毁close-object
     /// </summary>
-    public static void SafeDestroy(Object obj)
+    public static void Destroy(Object obj)
     {
         if (obj == null) return;
         uint hash = 0;
-        all_asset_map.TryGetValue(obj.GetInstanceID(), out hash);
+        _asset_map.TryGetValue(obj.GetInstanceID(), out hash);
         if (hash != 0) UnloadAsset(hash);
-        if (obj is GameObject || obj is Transform)
+        if (IsCloneAsset(obj))
         {
             GameObject.Destroy(obj);
             obj = null;
         }
     }
 
+    public static void Destroy(Object obj, float delay)
+    {
+        XTimerMgr.singleton.SetTimer(delay, (param) => Destroy(obj));
+    }
 
     public static bool IsCloneAsset<T>()
     {
-        return typeof(T) == typeof(GameObject) 
-            || typeof(T) == typeof(Transform);
+        return typeof(T) == typeof(GameObject) || typeof(T) == typeof(Transform);
     }
 
+    private static bool IsCloneAsset(Object obj)
+    {
+        return obj is GameObject || obj is Transform;
+    }
 
     public static Stream ReadText(string location, bool error = true)
     {
@@ -182,15 +197,15 @@ public class XResources
         }
         try
         {
-            shareMemoryStream.SetLength(0);
-            shareMemoryStream.Write(data.bytes, 0, data.bytes.Length);
-            shareMemoryStream.Seek(0, SeekOrigin.Begin);
-            return shareMemoryStream;
+            _share_stream.SetLength(0);
+            _share_stream.Write(data.bytes, 0, data.bytes.Length);
+            _share_stream.Seek(0, SeekOrigin.Begin);
+            return _share_stream;
         }
         catch (System.Exception e)
         {
             XDebug.Log(e.Message, location);
-            return shareMemoryStream;
+            return _share_stream;
         }
         finally
         {
@@ -202,9 +217,9 @@ public class XResources
     {
         if (s != null)
         {
-            if (s == shareMemoryStream)
+            if (s == _share_stream)
             {
-                shareMemoryStream.SetLength(0);
+                _share_stream.SetLength(0);
             }
             else
             {
@@ -212,4 +227,5 @@ public class XResources
             }
         }
     }
+
 }

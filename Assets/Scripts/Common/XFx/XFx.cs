@@ -14,8 +14,8 @@ public class XFx
     private static int globalFxID = 0;
     private int _instanceID = -1;
     private short m_LoadStatus = 0;
-    private GameObject m_GameObject = null;
-    private Transform m_TransformCache = null;
+    private GameObject _gameObject = null;
+    private Transform _transformCache = null;
     private Animation _animation = null;
     private AnimationState _animState = null;
     private Animator _animator = null;
@@ -28,6 +28,7 @@ public class XFx
     private Vector3 _pos;
     private Quaternion _rot;
     private Vector3 _scale;
+    private Vector3 _offset;
     private int _layer = -1;
     private float _speed_ratio = 0.0f;
     private float _startSize = 1;
@@ -108,6 +109,7 @@ public class XFx
         _pos = Vector3.zero;
         _rot = Quaternion.identity;
         _scale = scale;
+        _offset = offset;
         _speed_ratio = speed_ratio;
         ReqPlay();
     }
@@ -129,8 +131,8 @@ public class XFx
         SetTransform();
         if (_enable)
         {
-            if (m_GameObject != null && !m_GameObject.activeSelf)
-                m_GameObject.SetActive(true);
+            if (_gameObject != null && !_gameObject.activeSelf)
+                _gameObject.SetActive(true);
             if (_animation != null)
             {
                 _animation.enabled = true;
@@ -200,29 +202,29 @@ public class XFx
 
     private void SetTransform()
     {
-        if (m_TransformCache != null)
+        if (_transformCache != null)
         {
             if (_parent == null)
             {
-                m_TransformCache.position = _pos;
-                m_TransformCache.rotation = _rot;
-                m_TransformCache.localScale = _scale;
+                _transformCache.position = _pos + _offset;
+                _transformCache.rotation = _rot;
+                _transformCache.localScale = _scale;
             }
             else
             {
-                m_TransformCache.parent = _parent;
-                m_TransformCache.localPosition = Vector3.zero;
-                m_TransformCache.localRotation = Quaternion.identity;
-                m_TransformCache.localScale = _scale;
+                _transformCache.parent = _parent;
+                _transformCache.localPosition = Vector3.zero + _parent.rotation * _offset;
+                _transformCache.localRotation = Quaternion.identity;
+                _transformCache.localScale = _scale;
             }
         }
     }
 
     public void Stop()
     {
-        if (m_GameObject != null && m_GameObject.transform != null)
+        if (_gameObject != null && _gameObject.transform != null)
         {
-            m_GameObject.transform.localScale = Vector3.one;
+            _gameObject.transform.localScale = Vector3.one;
         }
         if (_animation != null)
         {
@@ -269,13 +271,13 @@ public class XFx
 
     private void OnLoadFinish(Object obj)
     {
-        m_GameObject = GameObject.Instantiate(obj) as GameObject;
+        _gameObject = obj as GameObject;
         m_LoadStatus = 1;
-        if (m_GameObject != null)
+        if (_gameObject != null)
         {
-            m_TransformCache = m_GameObject.transform;
-            _animation = m_TransformCache.GetComponentInChildren<Animation>();
-            _animator = m_TransformCache.GetComponentInChildren<Animator>();
+            _transformCache = _gameObject.transform;
+            _animation = _transformCache.GetComponentInChildren<Animation>();
+            _animator = _transformCache.GetComponentInChildren<Animator>();
             if (_animator != null)
             {
                 _animator.enabled = true;
@@ -287,7 +289,7 @@ public class XFx
             _particles.Clear();
             _projectors.Clear();
 
-            Component[] tmp = m_TransformCache.GetComponentsInChildren<Component>(true);
+            Component[] tmp = _transformCache.GetComponentsInChildren<Component>(true);
             for (int i = 0, max = tmp.Length; i < max; i++)
             {
                 Component com = tmp[i];
@@ -309,8 +311,8 @@ public class XFx
                 }
             }
 
-            if ((_callback & (int)ECallbackCmd.ESyncLayer) != 0) SyncLayer();
             if ((_callback & (int)ECallbackCmd.ESyncPlay) != 0) RealPlay();
+            if ((_callback & (int)ECallbackCmd.ESyncLayer) != 0) SyncLayer();
             if ((_callback & (int)ECallbackCmd.ESyncRenderQueue) != 0) RefreshUIRenderQueue();
         }
     }
@@ -324,17 +326,14 @@ public class XFx
                 go.SetActive(false);
             return false;
         }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
 
     public void Reset()
     {
         _instanceID = -1;
-        m_TransformCache = null;
+        _transformCache = null;
         _animation = null;
         _animator = null;
         _particles.Clear();
@@ -348,25 +347,20 @@ public class XFx
         _parent = null;
         _layer = -1;
         _pos = Far_Far_Away;
+        _offset = Vector3.zero;
         _rot = Quaternion.identity;
         _scale = Vector3.one;
         _callback = 0;
         m_LoadStatus = 0;
-        XResources.SafeDestroy(m_GameObject);
+        XResources.Destroy(_gameObject);
     }
-
-
-    private void InnerDestroyFx()
-    {
-        XFxMgr.singleton.RemoveFx(this);
-        DestroyXFx();
-    }
+    
 
     public void RefreshUIRenderQueue()
     {
         if (IsLoaded)
         {
-            if (m_GameObject != null)
+            if (_gameObject != null)
             {
                 for (int i = 0; i < _particles.Count; ++i)
                 {

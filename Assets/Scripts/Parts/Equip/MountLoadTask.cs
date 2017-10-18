@@ -62,7 +62,7 @@ public class MountLoadTask : BaseLoadTask
         base.Reset();
         if (goInstance != null)
         {
-            XResources.SafeDestroy(goInstance);
+            XResources.Destroy(goInstance);
         }
         transferRef = false;
     }

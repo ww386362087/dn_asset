@@ -13,7 +13,6 @@ internal class XBullet
 
     private bool _active = true;
     private bool _pingponged = false;
-    private bool _collided = false;
 
     private uint _tail_results_token = 0;
     private int _tail_results = 0;
@@ -30,12 +29,11 @@ internal class XBullet
     public XBullet(XBulletData data)
     {
         _data = data;
-
         _elapsed = 0.0f;
-
-        GameObject o = Resources.Load(_data.Prefab) as GameObject;
-        _bullet = GameObject.Instantiate(o, _data.BulletRay.origin, _data.Velocity > 0 ? Quaternion.LookRotation(_data.BulletRay.direction) : Quaternion.LookRotation(_data.Firer.transform.forward)) as GameObject;
-
+        
+        _bullet = XResources.Load<GameObject>(data.Prefab, AssetType.Prefab);
+        _bullet.transform.position = _data.BulletRay.origin;
+        _bullet.transform.rotation = _data.Velocity > 0 ? Quaternion.LookRotation(_data.BulletRay.direction) : Quaternion.LookRotation(_data.Firer.transform.forward);
         _data.Firer.ShownTransform = _bullet.transform;
     }
 
@@ -51,21 +49,12 @@ internal class XBullet
             if (_elapsed > _data.Life) _pingponged = true;
         }
         bool expired = (!_active || (!_pingponged && _elapsed > _data.Life));
-        if (_data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count <= 0)
+        if (_data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count > 0 && expired)
         {
-            return expired;
+            _active = false;
+            OnTailResult(null);
         }
-        else
-        {
-            if (expired)
-            {
-                _active = false;
-                OnTailResult(null);
-                return false;
-            }
-            else
-                return expired;
-        }
+        return expired;
     }
 
     public bool IsHurtEntity(XHitHoster id)
@@ -108,16 +97,13 @@ internal class XBullet
 
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx != null && _data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx.Length > 0)
         {
-            GameObject o = Resources.Load(_data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx) as GameObject;
-            GameObject fx = GameObject.Instantiate(o) as GameObject;
-
+            GameObject fx = XResources.Load<GameObject>(_data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx, AssetType.Prefab);
             Vector3 pos = _bullet.transform.position;
             if (_data.Skill.Result[_data.Sequnce].LongAttackData.EndFx_Ground) pos.y = 0;
             fx.transform.position = pos;
             fx.transform.rotation = _bullet.transform.rotation;
-            GameObject.Destroy(fx, _data.Skill.Result[_data.Sequnce].LongAttackData.EndFx_LifeTime);
+            XResources.Destroy(fx, _data.Skill.Result[_data.Sequnce].LongAttackData.EndFx_LifeTime);
         }
-
         if (_data.Firer.ShownTransform == _bullet.transform)
             _data.Firer.ShownTransform = _data.Firer.transform;
     }
@@ -139,16 +125,14 @@ internal class XBullet
     public void Destroy()
     {
         XTimerMgr.singleton.RemoveTimer(_tail_results_token);
-
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.Type == XResultBulletType.Ring)
         {
             _data.Firer.ir = 0;
             _data.Firer.or = 0;
         }
-
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count == 0) TailResult(true);
 
-        if (null != _bullet)
+        if (_bullet != null)
         {
             GameObject.Destroy(_bullet);
         }
@@ -159,11 +143,7 @@ internal class XBullet
         _bullet = null;
         _data = null;
     }
-
-    public bool Collided
-    {
-        get { return _collided; }
-    }
+    
 
     private void OnRefined(object o)
     {

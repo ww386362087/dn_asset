@@ -42,7 +42,7 @@ public class XAssetBundle
         Init(data);
         born_time = Time.time;
         bundle = b;
-        ABManager.singleton.CacheBundle(this);
+        XResources.ab.CacheBundle(this);
     }
 
     private void Init(AssetBundleData data)
@@ -59,7 +59,7 @@ public class XAssetBundle
         { 
             bundle = AssetBundle.LoadFromFile(ab_apth);
             born_time = Time.time;
-            ABManager.singleton.CacheBundle(this);
+            XResources.ab.CacheBundle(this);
            // XDebug.Log("ab load name: " + loadName , " path: " + ab_apth , " assetpath: " + ab_data.assetpath);
         }
         return bundle.LoadAsset(loadName);
@@ -74,7 +74,7 @@ public class XAssetBundle
             if (ab_data.compositeType != AssetBundleExportType.Standalone || force)
             {
                 //XDebug.LogGreen("ab unload ",ab_data.assetpath);
-                ABManager.singleton.RemvBundle(this);
+                XResources.ab.RemvBundle(this);
                 bundle.Unload(unloadall);
                 bundle = null;
                 return true;

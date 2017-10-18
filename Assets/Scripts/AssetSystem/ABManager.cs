@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-public sealed class ABManager : XSingleton<ABManager>
+public sealed class XABController 
 {
 
     public AssetBundleDataReader depInfoReader;

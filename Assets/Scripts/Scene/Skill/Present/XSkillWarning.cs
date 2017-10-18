@@ -4,7 +4,6 @@ using UnityEngine;
 public class XSkillWarning : XSkill
 {
    
-
     public XSkillWarning(XSkillHoster _host) : base(_host)
     {
     }
@@ -16,15 +15,15 @@ public class XSkillWarning : XSkill
         {
             if (current.Warning.Count > 0)
                host.warningPosAt = new List<Vector3>[current.Warning.Count];
-
             for (int i = 0, max = current.Warning.Count; i < max; i++)
             {
+                host.warningPosAt[i] = new List<Vector3>();
                 var data = current.Warning[i];
                 AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), false);
             }
         }
     }
-
+    
     public override void OnTrigger(object param)
     {
         XWarningData data = param as XWarningData;
@@ -108,7 +107,6 @@ public class XSkillWarning : XSkill
                 case XWarningType.Warning_None:
                     {
                         Vector3 offset = host.transform.rotation * new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
-
                         XFxMgr.singleton.CreateAndPlay(
                                 data.Fx,
                                 host.gameObject,

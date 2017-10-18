@@ -25,7 +25,6 @@ public class XSkillEditor : MonoBehaviour
     static void SelectHot()
     {
         XSkillHoster[] hosters = GameObject.FindObjectsOfType<XSkillHoster>();
-
         if (hosters.Length > 0)
         {
             Selection.activeObject = hosters[0];
@@ -34,7 +33,6 @@ public class XSkillEditor : MonoBehaviour
             EditorWindow gameview = EditorWindow.GetWindow(type);
             gameview.Focus();
         }
-
         foreach (XSkillHoster hoster in hosters)
             EditorGUIUtility.PingObject(hoster);
     }

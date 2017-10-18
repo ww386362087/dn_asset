@@ -43,7 +43,7 @@ public class TestAB : MonoBehaviour
         }
         if (GUILayout.Button("Unload1", option))
         {
-            XResources.SafeDestroy(go1);
+            XResources.Destroy(go1);
         }
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
@@ -57,7 +57,7 @@ public class TestAB : MonoBehaviour
         }
         if (GUILayout.Button("Unload2", option))
         {
-            XResources.SafeDestroy(go2);
+            XResources.Destroy(go2);
         }
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
@@ -71,7 +71,7 @@ public class TestAB : MonoBehaviour
         }
         if (GUILayout.Button("Unload12", option))
         {
-            XResources.SafeDestroy(go12);
+            XResources.Destroy(go12);
         }
         GUILayout.EndHorizontal();
 

@@ -169,7 +169,9 @@ public class XSkillResult : XSkill
             }
         }
         else
+        {
             XBulletMgr.singleton.ShootBullet(GenerateBullet(param, host.Target, additionalAngle));
+        }
     }
 
     private XBullet GenerateBullet(XResultData data, GameObject target, int additionalAngle, int wid = -1)

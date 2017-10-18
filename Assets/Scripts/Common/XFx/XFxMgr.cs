@@ -34,7 +34,6 @@ public class XFxMgr : XSingleton<XFxMgr>
         fx.CreateXFx(location, async);
         fx.Play(parent, offset, scale, speed_ratio);
         fx.DelayDestroy = duration;
-        DestroyFx(fx, false);
         return fx;
     }
 

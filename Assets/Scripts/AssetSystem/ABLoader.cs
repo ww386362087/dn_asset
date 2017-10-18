@@ -13,6 +13,8 @@ public class LoaderBase
     /// 根只有是GameObject的时候为true
     /// </summary>
     protected bool isCloneAsset = false;
+
+    protected XABController ab { get { return XResources.ab; } }
     
     public LoaderBase(AssetBundleData d)
     {
@@ -48,7 +50,7 @@ public class Loader : LoaderBase
     {
         for (int i = 0; i < depsCnt; i++)
         {
-            AssetBundleData ad = ABManager.singleton.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
+            AssetBundleData ad = ab.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
             Loader loader = new Loader(ad);
             loader.InnerLoad();
         }
@@ -57,7 +59,7 @@ public class Loader : LoaderBase
     private UnityEngine.Object LoadAsset()
     {
         uint hash = data.hash;
-        if (ABManager.singleton.IsCached(hash))
+        if (ab.IsCached(hash))
         {
             //    //被依赖的bundle要重新load 不能直接从cache列表取 否则最终的prefab会缺少依赖的资源
             //    //为了避免内存里有多个对象 要把之前cache的卸载掉
@@ -67,22 +69,22 @@ public class Loader : LoaderBase
             //    obj = LoadFromBundle(data);
             //    ABManager.singleton.CacheObject(hash, obj);
             //    return obj;
-            var asset = ABManager.singleton.GetCache(hash);
+            var asset = ab.GetCache(hash);
             asset.ref_cnt++;
             return asset.obt;
         }
         else
         {
-            XAssetBundle bundle = ABManager.singleton.GetBundle(data);
+            XAssetBundle bundle = ab.GetBundle(data);
             UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
-            ABManager.singleton.CacheObject(hash, obj,isCloneAsset);
+            ab.CacheObject(hash, obj,isCloneAsset);
             return obj;
         }
     }
 
     private UnityEngine.Object LoadFromBundle(AssetBundleData data)
     {
-        XAssetBundle bundle = ABManager.singleton.GetBundle(data);
+        XAssetBundle bundle = ab.GetBundle(data);
         return bundle.LoadAsset(data.loadName);
     }
     
@@ -94,7 +96,7 @@ public class Loader : LoaderBase
 public class AsyncLoader : LoaderBase
 {
     Action<UnityEngine.Object> loadCB;
-
+    
     public AsyncLoader(AssetBundleData d) : base(d) { }
 
     public void LoadAsyn<T>(Action<UnityEngine.Object> cb)
@@ -117,7 +119,7 @@ public class AsyncLoader : LoaderBase
     {
         for (int i = 0; i < depsCnt; i++)
         {
-            AssetBundleData ad = ABManager.singleton.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
+            AssetBundleData ad = ab.depInfoReader.GetAssetBundleInfo(data.dependencies[i]);
             AsyncLoader loader = new AsyncLoader(ad);
             loader.InnerLoad();
         }
@@ -126,9 +128,9 @@ public class AsyncLoader : LoaderBase
     private void LoadAsset()
     {
         uint hash = data.hash;
-        if (ABManager.singleton.IsCached(hash))
+        if (ab.IsCached(hash))
         {
-            var asset = ABManager.singleton.GetCache(hash);
+            var asset = ab.GetCache(hash);
             asset.ref_cnt++;
             OnComplete(hash, asset.obt, asset.is_clone_asset);
         }
@@ -164,7 +166,7 @@ public class AsyncLoader : LoaderBase
         while (!req.isDone) yield return null;
         AssetBundle bundle = req.assetBundle;
         UnityEngine.Object obj = bundle.LoadAsset(data.loadName);
-        ABManager.singleton.CacheObject(bundleName, obj, isCloneAsset);
+        ab.CacheObject(bundleName, obj, isCloneAsset);
         cb(bundleName, obj, isCloneAsset);
         new XAssetBundle(data, bundle);
     }

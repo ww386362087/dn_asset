@@ -32,7 +32,7 @@ public struct AsynAsset
 }
 
 
-public class XResourceMgr : XSingleton<XResourceMgr>
+public class XResController 
 {
     private Dictionary<uint, Asset> map = new Dictionary<uint, Asset>();
 
@@ -41,6 +41,7 @@ public class XResourceMgr : XSingleton<XResourceMgr>
 
     //为了效率 避免update的时候重复计算list长度
     private int asyn_loading_cnt = 0;
+    
 
     public void Update()
     {

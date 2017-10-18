@@ -24,7 +24,7 @@ public abstract class XEntity : XObject
     protected GameObject _object = null;
     protected Transform _transf = null;
     protected int _layer = 0;
-    public float speed = 0.02f;
+    public float speed = 0.05f;
     protected SkinnedMeshRenderer _skin = null;
 
     protected Vector3 _forward = Vector3.zero;
