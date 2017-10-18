@@ -602,7 +602,6 @@ public class XSkillHoster : MonoBehaviour
         {
             if (now < logic.Rotate_End && now > logic.Rotate_At)
             {
-                //perform rotate
                 PrepareRotation(XCommon.singleton.Horizontal(dir), logic.Rotate_Speed > 0 ? logic.Rotate_Speed : _xConfigData.RotateSpeed);
             }
         }

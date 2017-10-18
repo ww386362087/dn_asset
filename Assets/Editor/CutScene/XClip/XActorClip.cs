@@ -44,7 +44,7 @@ namespace XEditor
             else
             {
                 _id = EditorGUILayout.IntField("Statistics ID", _id);
-                _prefab = XEditorLibrary.GetDummy((uint)_id);
+                _prefab = XEditorLibrary.GetStatics((uint)_id);
                 if (_prefab != null)
                 {
                     EditorGUILayout.ObjectField("Prefab", _prefab, typeof(GameObject), true);
@@ -86,7 +86,7 @@ namespace XEditor
 
         public override void Flush()
         {
-            _prefab = _data.bUsingID ? XEditorLibrary.GetDummy((uint)_data.StatisticsID) : Resources.Load(_data.Prefab) as GameObject;
+            _prefab = _data.bUsingID ? XEditorLibrary.GetStatics((uint)_data.StatisticsID) : Resources.Load(_data.Prefab) as GameObject;
             _clip = Resources.Load(_data.Clip, typeof(AnimationClip)) as AnimationClip;
             _using_id = _data.bUsingID;
             _id = _data.StatisticsID;

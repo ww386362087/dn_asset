@@ -25,21 +25,24 @@ internal class XEditorLibrary
     private static readonly string _editor_res_root = "Assets/Editor/EditorResources";
 
 
-    public static GameObject GetDummy(uint statictid)
+    public static GameObject GetStatics(uint statictid)
     {
         XEntityStatistics.RowData row = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)statictid);
-        if (row != null)
-        {
-            XEntityPresentation.RowData raw_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID(row.PresentID);
-            if (raw_data == null) return null;
-            string prefab = raw_data.Prefab;
-            int n = prefab.LastIndexOf("_SkinnedMesh");
-            int m = prefab.LastIndexOf("Loading");
-            return n < 0 || m > 0 ?
-                AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/" + prefab + ".prefab", typeof(GameObject)) as GameObject :
-                AssetDatabase.LoadAssetAtPath("Assets/Editor/EditorResources/Prefabs/" + prefab.Substring(0, n) + ".prefab", typeof(GameObject)) as GameObject;
-        }
+        if (row != null) return GetDummy(row.PresentID);
         return null;
+    }
+
+
+    public static GameObject GetDummy(uint presentid)
+    {
+        XEntityPresentation.RowData raw_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID(presentid);
+        if (raw_data == null) return null;
+        string prefab = raw_data.Prefab;
+        int n = prefab.LastIndexOf("_SkinnedMesh");
+        int m = prefab.LastIndexOf("Loading");
+        return n < 0 || m > 0 ?
+            AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/" + prefab + ".prefab", typeof(GameObject)) as GameObject :
+            AssetDatabase.LoadAssetAtPath("Assets/Editor/EditorResources/Prefabs/" + prefab.Substring(0, n) + ".prefab", typeof(GameObject)) as GameObject;
     }
 
 

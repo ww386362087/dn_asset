@@ -17,6 +17,7 @@ public class XHitHoster : MonoBehaviour
         _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)PresentID);
         if (_oVerrideController == null) BuildOverride();
         AnimationClip clip = XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle, AssetType.Anim);
+       // XDebug.LogGreen("id: " + PresentID + " anim: " + _present_data.AnimLocation + _present_data.AttackIdle);
         _oVerrideController["Idle"] = clip;
         _oVerrideController["HitLanding"] = _present_data.HitFly != null && _present_data.HitFly.Length == 0 ? null : XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.HitFly[1], AssetType.Anim);
         _radius = _present_data.BoundRadius;
