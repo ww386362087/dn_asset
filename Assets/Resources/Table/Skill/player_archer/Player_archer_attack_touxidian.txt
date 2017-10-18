@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XSkillData>
+  <Name>Player_archer_attack_touxidian</Name>
+  <ClipName>Animation/Player_archer/Player_archer_attack_cheatingpoint</ClipName>
+  <Result>
+    <XResultData>
+      <LongAttackEffect>true</LongAttackEffect>
+      <At>0.5666667</At>
+      <Range>1</Range>
+      <Scope>360</Scope>
+      <LongAttackData>
+        <Type>Sphere</Type>
+        <WithCollision>false</WithCollision>
+        <Runningtime>0.5</Runningtime>
+        <Velocity>8</Velocity>
+        <Prefab>Prefabs/Bullets/Player_archer_attack_touxidian_preview_Clip04</Prefab>
+        <Audio>Audio/Player_archer/Player_archer_attack_touxidian_FX</Audio>
+        <Audio_Channel>Motion</Audio_Channel>
+        <End_Audio>Audio/Player_archer/Player_archer_attack_touxidian_hit</End_Audio>
+        <End_Audio_Channel>Motion</End_Audio_Channel>
+        <AimTargetCenter>false</AimTargetCenter>
+        <StaticCollider>false</StaticCollider>
+      </LongAttackData>
+      <Affect_Direction>AttackDir</Affect_Direction>
+    </XResultData>
+  </Result>
+  <Hit>
+    <XHitData>
+      <Time_Present_Straight>0.001</Time_Present_Straight>
+      <Time_Hard_Straight>0.001</Time_Hard_Straight>
+      <Offset>0.001</Offset>
+      <State>Hit_Free</State>
+      <State_Animation>Hit_Back_Front</State_Animation>
+      <Fx>Effects/FX_Particle/NPC/xiaobing/Jz_putong</Fx>
+      <CurveUsing>true</CurveUsing>
+    </XHitData>
+  </Hit>
+  <Manipulation />
+  <Fx>
+    <XFxData>
+      <Type>FirerBased</Type>
+      <At>0.4666667</At>
+      <End>2.16666675</End>
+      <Fx>Effects/FX_Particle/Roles/Ar_attack_a1</Fx>
+      <OffsetY>0.617</OffsetY>
+      <OffsetZ>0.302</OffsetZ>
+      <Follow>false</Follow>
+    </XFxData>
+  </Fx>
+  <Mob>
+    <XMobUnitData>
+      <At>1.06666672</At>
+      <TemplateID>221</TemplateID>
+      <Offset_At_Z>5</Offset_At_Z>
+    </XMobUnitData>
+  </Mob>
+  <Logical>
+    <StrickenMask>Cease</StrickenMask>
+    <Not_Move_End>1.16666675</Not_Move_End>
+    <QTEData>
+      <XQTEData>
+        <QTE>20</QTE>
+        <End>2.16666675</End>
+      </XQTEData>
+    </QTEData>
+    <CanCancelAt>1.16666675</CanCancelAt>
+    <Association_Skill />
+    <Exstring />
+  </Logical>
+  <CoolDown>10</CoolDown>
+  <Time>2.16666675</Time>
+  <Cast_Range_Upper>5</Cast_Range_Upper>
+  <Cast_Scope>360</Cast_Scope>
+  <CameraTurnBack>1.5</CameraTurnBack>
+</XSkillData>
