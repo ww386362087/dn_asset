@@ -19,7 +19,6 @@ public class XHitHoster : MonoBehaviour
         AnimationClip clip = XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle, AssetType.Anim);
         _oVerrideController["Idle"] = clip;
         _oVerrideController["HitLanding"] = _present_data.HitFly != null && _present_data.HitFly.Length == 0 ? null : XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.HitFly[1], AssetType.Anim);
-
         _radius = _present_data.BoundRadius;
         _dummy_height = _present_data.BoundHeight;
     }
@@ -55,8 +54,7 @@ public class XHitHoster : MonoBehaviour
     private float _factor = 0;
     private float _elapsed = 0;
     private float _time_total = 0;
-
-    //private bool _running = false;
+    
     private bool _bcurve = false;
     private bool _loop_hard = true;
     private bool _change_to_fly = false;
@@ -97,8 +95,7 @@ public class XHitHoster : MonoBehaviour
     void Update()
     {
         if (_hoster == null) return;
-
-        //trigger and present
+        
         if (!string.IsNullOrEmpty(_trigger) && !_ator.IsInTransition(0))
         {
             if (_trigger == "ToBeHit")
@@ -187,10 +184,8 @@ public class XHitHoster : MonoBehaviour
         _deltaH = 0;
         _ator.speed = 1;
         DestroyFx();
-
         _data = null;
         _hoster = null;
-
         _ator.SetTrigger("ToStand");
     }
 
