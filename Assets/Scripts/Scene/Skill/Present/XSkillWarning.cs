@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class XSkillWarning : XSkill
 {
-   
+
+    private List<XFx> list;
+
     public XSkillWarning(XSkillHoster _host) : base(_host)
     {
     }
@@ -11,10 +13,12 @@ public class XSkillWarning : XSkill
     public override void Execute()
     {
         base.Execute();
+
         if (current.Warning != null)
         {
+            if (list == null) list = new List<XFx>();
             if (current.Warning.Count > 0)
-               host.warningPosAt = new List<Vector3>[current.Warning.Count];
+                host.warningPosAt = new List<Vector3>[current.Warning.Count];
             for (int i = 0, max = current.Warning.Count; i < max; i++)
             {
                 host.warningPosAt[i] = new List<Vector3>();
@@ -64,13 +68,14 @@ public class XSkillWarning : XSkill
                         Vector3 v = r * XCommon.singleton.HorizontalRotateVetor3(Vector3.forward, d);
                         if (!string.IsNullOrEmpty(data.Fx))
                         {
-                            XFxMgr.singleton.CreateAndPlay(
+                           var fx= XFxMgr.singleton.CreateAndPlay(
                                     data.Fx,
                                     item[i].gameObject,
                                     new Vector3(v.x, 0.05f - item[i].transform.position.y, v.z),
                                     data.Scale * Vector3.one,
                                     1,
                                     data.FxDuration);
+                            list.Add(fx);
                         }
                         host.warningPosAt[data.Index].Add(item[i].transform.position + v);
                     }
@@ -87,13 +92,14 @@ public class XSkillWarning : XSkill
                         n--;
                         if (!string.IsNullOrEmpty(data.Fx))
                         {
-                            XFxMgr.singleton.CreateAndPlay(
+                          var fx=  XFxMgr.singleton.CreateAndPlay(
                                     data.Fx,
                                     hits[i].gameObject,
                                     new Vector3(0, 0.05f - hits[i].transform.position.y, 0),
                                     data.Scale * Vector3.one,
                                     1,
                                     data.FxDuration);
+                            list.Add(fx);
                         }
                         host.warningPosAt[data.Index].Add(hits[i].transform.position);
                     }
@@ -107,14 +113,14 @@ public class XSkillWarning : XSkill
                 case XWarningType.Warning_None:
                     {
                         Vector3 offset = host.transform.rotation * new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
-                        XFxMgr.singleton.CreateAndPlay(
+                        var fx = XFxMgr.singleton.CreateAndPlay(
                                 data.Fx,
                                 host.gameObject,
                                 offset,
                                 data.Scale * Vector3.one,
                                 1,
                                 data.FxDuration);
-
+                        list.Add(fx);
                         host.warningPosAt[data.Index].Add(host.transform.position + offset);
                     }
                     break;
@@ -123,26 +129,28 @@ public class XSkillWarning : XSkill
                     {
                         if (!string.IsNullOrEmpty(data.Fx))
                         {
-                            XFxMgr.singleton.CreateAndPlay(
+                           var fx= XFxMgr.singleton.CreateAndPlay(
                                     data.Fx,
                                     host.Target.gameObject,
                                     new Vector3(0, 0.05f - host.Target.transform.position.y, 0),
                                     data.Scale * Vector3.one,
                                     1,
                                     data.FxDuration);
+                            list.Add(fx);
                         }
                         host.warningPosAt[data.Index].Add(host.Target.transform.position);
                     }
                     else
                     {
                         Vector3 offset = host.transform.rotation * new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
-                        XFxMgr.singleton.CreateAndPlay(
+                        var fx = XFxMgr.singleton.CreateAndPlay(
                                 data.Fx,
                                 host.gameObject,
                                 offset,
                                 data.Scale * Vector3.one,
                                 1,
                                 data.FxDuration);
+                        list.Add(fx);
                         host.warningPosAt[data.Index].Add(host.transform.position + offset);
                     }
                     break;
@@ -170,6 +178,15 @@ public class XSkillWarning : XSkill
 
     public override void Clear()
     {
+        if (list != null)
+        {
+            for (int i = 0, max = list.Count; i < max; i++)
+            {
+                list[i].DestroyXFx();
+            }
+            list.Clear();
+            host.warningPosAt = null;
+        }
     }
 }
 
