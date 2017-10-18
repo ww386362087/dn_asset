@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+
 public class XSkillManipulate : XSkill
 {
 
@@ -55,20 +56,15 @@ public class XSkillManipulate : XSkill
     public void Remove(long token)
     {
         if (token == 0) _item.Clear();
-        else
-        {
-            _item.Remove(token);
-        }
+        else _item.Remove(token);
     }
 
     public void Update(float deltaTime)
     {
         XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
-
         foreach (XManipulationData data in _item.Values)
         {
             Vector3 center = host.transform.position + host.transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
-
             foreach (XHitHoster hit in hits)
             {
                 Vector3 gap = center - hit.transform.position; gap.y = 0;
@@ -77,10 +73,8 @@ public class XSkillManipulate : XSkill
                 if (dis < data.Radius && (dis == 0 || Vector3.Angle(-gap, host.transform.forward) <= data.Degree * 0.5f))
                 {
                     float len = data.Force * deltaTime;
-
                     Vector3 dir = gap.normalized;
                     Vector3 move = dir * Mathf.Min(dis, len);
-
                     hit.transform.Translate(move, Space.World);
                 }
             }

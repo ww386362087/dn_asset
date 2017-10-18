@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class XSkillWarning : XSkill
 {
-    public List<Vector3>[] WarningPosAt = null;
+   
 
     public XSkillWarning(XSkillHoster _host) : base(_host)
     {
@@ -15,7 +15,7 @@ public class XSkillWarning : XSkill
         if (current.Warning != null)
         {
             if (current.Warning.Count > 0)
-                WarningPosAt = new List<Vector3>[current.Warning.Count];
+               host.warningPosAt = new List<Vector3>[current.Warning.Count];
 
             for (int i = 0, max = current.Warning.Count; i < max; i++)
             {
@@ -28,7 +28,7 @@ public class XSkillWarning : XSkill
     public override void OnTrigger(object param)
     {
         XWarningData data = param as XWarningData;
-        WarningPosAt[data.Index].Clear();
+        host.warningPosAt[data.Index].Clear();
 
         if (data.RandomWarningPos || data.Type == XWarningType.Warning_Multiple)
         {
@@ -73,7 +73,7 @@ public class XSkillWarning : XSkill
                                     1,
                                     data.FxDuration);
                         }
-                        WarningPosAt[data.Index].Add(item[i].transform.position + v);
+                        host.warningPosAt[data.Index].Add(item[i].transform.position + v);
                     }
                 }
             }
@@ -96,7 +96,7 @@ public class XSkillWarning : XSkill
                                     1,
                                     data.FxDuration);
                         }
-                        WarningPosAt[data.Index].Add(hits[i].transform.position);
+                        host.warningPosAt[data.Index].Add(hits[i].transform.position);
                     }
                 }
             }
@@ -117,7 +117,7 @@ public class XSkillWarning : XSkill
                                 1,
                                 data.FxDuration);
 
-                        WarningPosAt[data.Index].Add(host.transform.position + offset);
+                        host.warningPosAt[data.Index].Add(host.transform.position + offset);
                     }
                     break;
                 case XWarningType.Warning_Target:
@@ -133,7 +133,7 @@ public class XSkillWarning : XSkill
                                     1,
                                     data.FxDuration);
                         }
-                        WarningPosAt[data.Index].Add(host.Target.transform.position);
+                        host.warningPosAt[data.Index].Add(host.Target.transform.position);
                     }
                     else
                     {
@@ -145,7 +145,7 @@ public class XSkillWarning : XSkill
                                 data.Scale * Vector3.one,
                                 1,
                                 data.FxDuration);
-                        WarningPosAt[data.Index].Add(host.transform.position + offset);
+                        host.warningPosAt[data.Index].Add(host.transform.position + offset);
                     }
                     break;
                 case XWarningType.Warning_All:
@@ -163,7 +163,7 @@ public class XSkillWarning : XSkill
                                     1,
                                     data.FxDuration);
                         }
-                        WarningPosAt[data.Index].Add(hits[i].transform.position);
+                        host.warningPosAt[data.Index].Add(hits[i].transform.position);
                     }
                     break;
             }

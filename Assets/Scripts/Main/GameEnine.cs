@@ -33,6 +33,7 @@ public sealed class GameEnine : XObject
         XEntityMgr.singleton.Update(delta);
         XScene.singleton.Update(delta);
         XAutoFade.Update();
+        XBulletMgr.singleton.Update(delta);
     }
 
 

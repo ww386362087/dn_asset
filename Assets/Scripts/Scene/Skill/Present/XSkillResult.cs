@@ -5,7 +5,6 @@ public class XSkillResult : XSkill
 {
     public int nHotID = 0;
     public Vector3 nResultForward = Vector3.zero;
-    public List<Vector3>[] WarningPosAt = null;
     private List<HashSet<XHitHoster>> _hurt_target = new List<HashSet<XHitHoster>>();
 
     public XSkillResult(XSkillHoster _host) : base(_host)
@@ -29,39 +28,31 @@ public class XSkillResult : XSkill
 
     public override void OnTrigger(object param)
     {
-        if (host.state != XSkillHoster.DummyState.Fire) return;
-
         XResultData data = param as XResultData;
         if (data.Loop)
         {
-            int i = (data.Index << 16) | 0;
+            int i = data.Index << 16;
             LoopResults(i);
+        }
+        else if (data.Group)
+        {
+            int i = data.Index << 16;
+            GroupResults(i);
+        }
+        else if (data.LongAttackEffect)
+        {
+            Project(data);
         }
         else
         {
-            if (data.Group)
-            {
-                int i = (data.Index << 16) | 0;
-                GroupResults(i);
-            }
-            else
-            {
-                if (data.LongAttackEffect)
-                {
-                    Project(data);
-                }
-                else
-                {
-                    InnerResult(data.Index, host.transform.forward, host.transform.position, current);
-                }
-            }
+            InnerResult(data.Index, host.transform.forward, host.transform.position, current);
         }
     }
-    
+
     public override void Clear()
     {
     }
-    
+
     private void AddHurtTarget(XSkillData data, XHitHoster id, int triggerTime)
     {
         if (!data.Result[triggerTime].Loop && /*for multiple trigger end*/!data.Result[triggerTime].LongAttackEffect)
@@ -80,53 +71,46 @@ public class XSkillResult : XSkill
     public void LoopResults(object param)
     {
         int i = (int)param;
-        int count = i >> 16;
+        int index = i >> 16;
         int execute_cout = i & 0xFFFF;
 
-        if (!current.Result[count].Loop || current.Result[count].Loop_Count <= execute_cout || current.Result[count].Cycle <= 0)
-            return;
+        if (!current.Result[index].Loop || current.Result[index].Loop_Count <= execute_cout || current.Result[index].Cycle <= 0) return;
 
-        if (current.Result[count].Group)
-            GroupResults((count << 16) | (execute_cout << 8) | 0);
-        else if (current.Result[count].LongAttackEffect)
-            Project(current.Result[count]);
+        if (current.Result[index].Group)
+            GroupResults((index << 16) | (execute_cout << 8) | 0);
+        else if (current.Result[index].LongAttackEffect)
+            Project(current.Result[index]);
         else
-        {
-            InnerResult(count, host.transform.forward, host.transform.position, current);
-        }
+            InnerResult(index, host.transform.forward, host.transform.position, current);
 
         ++execute_cout;
-        if (current.Result[count].Loop_Count > execute_cout)
-           host.AddedTimerToken(XTimerMgr.singleton.SetTimer(current.Result[count].Cycle, LoopResults, ((count << 16) | execute_cout)), true);
+        if (current.Result[index].Loop_Count > execute_cout)
+            host.AddedTimerToken(XTimerMgr.singleton.SetTimer(current.Result[index].Cycle, LoopResults, ((index << 16) | execute_cout)), true);
     }
 
     private void GroupResults(object param)
     {
-        if (host.state != XSkillHoster.DummyState.Fire) return;
-
         int i = (int)param;
-        int count = i >> 16;
+        int index = i >> 16;
         int group_cout = i & 0x00FF;
         int loop_cout = (i & 0xFF00) >> 8;
 
-        if (!host.CurrentSkillData.Result[count].Group || group_cout >= host.CurrentSkillData.Result[count].Group_Count)
-            return;
+        if (!host.CurrentSkillData.Result[index].Group || group_cout >= host.CurrentSkillData.Result[index].Group_Count) return;
 
         Vector3 face = host.transform.forward;
+        int angle = current.Result[index].Deviation_Angle + current.Result[index].Angle_Step * group_cout;
+        angle = current.Result[index].Clockwise ? angle : -angle;
 
-        int angle = current.Result[count].Deviation_Angle + current.Result[count].Angle_Step * group_cout;
-        angle = current.Result[count].Clockwise ? angle : -angle;
-
-        if (current.Result[count].LongAttackEffect)
-            Project(host.CurrentSkillData.Result[count], angle);
+        if (current.Result[index].LongAttackEffect)
+            Project(host.CurrentSkillData.Result[index], angle);
         else
-            InnerResult(count, XCommon.singleton.HorizontalRotateVetor3(face, angle), host.transform.position, current);
+            InnerResult(index, XCommon.singleton.HorizontalRotateVetor3(face, angle), host.transform.position, current);
 
         group_cout++;
-        if (group_cout < host.CurrentSkillData.Result[count].Group_Count)
+        if (group_cout < host.CurrentSkillData.Result[index].Group_Count)
         {
-            i = (count << 16) | (loop_cout << 8) | group_cout;
-            host.AddedTimerToken(XTimerMgr.singleton.SetTimer(current.Result[count].Time_Step, GroupResults, i), true);
+            i = (index << 16) | (loop_cout << 8) | group_cout;
+            host.AddedTimerToken(XTimerMgr.singleton.SetTimer(current.Result[index].Time_Step, GroupResults, i), true);
         }
     }
 
@@ -138,28 +122,20 @@ public class XSkillResult : XSkill
         {
             pos += XCommon.singleton.VectorToQuaternion(host.transform.forward) * new Vector3(data.Result[triggerTime].Offset_X, 0, data.Result[triggerTime].Offset_Z);
             nResultForward = forward;
-
             XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
-
             foreach (XHitHoster hit in hits)
             {
                 if (IsHurtEntity(hit, triggerTime)) continue;
-
-                Vector3 dir = hit.RadiusCenter - pos; dir.y = 0;
+                Vector3 dir = hit.RadiusCenter - pos;
+                dir.y = 0;
                 float distance = dir.magnitude;
-
                 if (distance > hit.Radius) distance -= hit.Radius;
-
                 if (dir.sqrMagnitude == 0) dir = forward;
                 dir.Normalize();
 
                 if (host.IsInField(data, triggerTime, pos, forward, hit.RadiusCenter, Vector3.Angle(forward, dir), distance))
                 {
-                    Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ?
-                        (hit.RadiusCenter - pos).normalized :
-                        host.GetRotateTo();
-
-                    //_effectual = true;
+                    Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ? (hit.RadiusCenter - pos).normalized : host.GetRotateTo();
                     AddHurtTarget(data, hit, triggerTime);
                     hit.Begin(host, data.Hit[triggerTime], vHitDir, data.Logical.AttackOnHitDown);
                 }
@@ -167,11 +143,9 @@ public class XSkillResult : XSkill
         }
         else
         {
-            Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ?
-                        (hitted.RadiusCenter - pos) :
-                        host.GetRotateTo();
-
-            vHitDir.y = 0; vHitDir.Normalize();
+            Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ? hitted.RadiusCenter - pos : host.GetRotateTo();
+            vHitDir.y = 0;
+            vHitDir.Normalize();
             hitted.Begin(host, data.Hit[triggerTime], vHitDir, data.Logical.AttackOnHitDown);
         }
     }
@@ -182,7 +156,6 @@ public class XSkillResult : XSkill
         if (param.Attack_All)
         {
             XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
-
             for (int i = 0; i < hits.Length; i++)
             {
                 XBulletMgr.singleton.ShootBullet(GenerateBullet(param, hits[i].gameObject, additionalAngle));
@@ -190,7 +163,7 @@ public class XSkillResult : XSkill
         }
         else if (param.Warning)
         {
-            for (int i = 0; i < WarningPosAt[param.Warning_Idx].Count; i++)
+            for (int i = 0; i < host.warningPosAt[param.Warning_Idx].Count; i++)
             {
                 XBulletMgr.singleton.ShootBullet(GenerateBullet(param, null, additionalAngle, i));
             }

@@ -49,7 +49,6 @@ public class TestManager
                     test = new TestCutScene();
                     break;
                 default:
-                    XDebug.Log("test do nothing");
                     test = new Test();
                     break;
             }

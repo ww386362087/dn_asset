@@ -60,7 +60,7 @@ namespace XTable {
 			public string HitFx;
 			public string Death;
 			public string DeathFx;
-			public string HitCurves;
+			public string[] HitCurves;
 			public string DeathCurve;
 			public string A;
 			public string AA;
@@ -159,7 +159,7 @@ namespace XTable {
 			Read<string>(reader, ref row.HitFx, stringParse); columnno = 43;
 			Read<string>(reader, ref row.Death, stringParse); columnno = 44;
 			Read<string>(reader, ref row.DeathFx, stringParse); columnno = 45;
-			Read<string>(reader, ref row.HitCurves, stringParse); columnno = 46;
+			ReadArray<string>(reader, ref row.HitCurves, stringParse); columnno = 46;
 			Read<string>(reader, ref row.DeathCurve, stringParse); columnno = 47;
 			Read<string>(reader, ref row.A, stringParse); columnno = 48;
 			Read<string>(reader, ref row.AA, stringParse); columnno = 49;

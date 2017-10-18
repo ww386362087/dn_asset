@@ -64,6 +64,7 @@ public class XSkillHoster : MonoBehaviour
     private List<uint> _combinedToken = new List<uint>();
     private List<uint> _presentToken = new List<uint>();
     private List<uint> _logicalToken = new List<uint>();
+    public List<Vector3>[] warningPosAt = null;
 
     public XSkillResult skillResult;
     public XSkillMob skillMob;
@@ -129,7 +130,7 @@ public class XSkillHoster : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.4f);
         _state = DummyState.Idle;
         if (oVerrideController == null) BuildOverride();
         _camera = new XSkillCamera(gameObject);

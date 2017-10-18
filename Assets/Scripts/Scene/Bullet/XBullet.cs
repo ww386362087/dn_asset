@@ -209,10 +209,7 @@ internal class XBullet
 
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.TriggerOnce)
         {
-            if (_data.Skill.Result[_data.Sequnce].LongAttackData.IsPingPong)
-                _pingponged = true;
-            else
-                _active = false;
+            _pingponged = _data.Skill.Result[_data.Sequnce].LongAttackData.IsPingPong;
         }
     }
 

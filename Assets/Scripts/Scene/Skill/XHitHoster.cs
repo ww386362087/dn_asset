@@ -2,23 +2,21 @@
 using UnityEngine;
 using XTable;
 
-public class XHitHoster : MonoBehaviour {
+public class XHitHoster : MonoBehaviour
+{
 
     [SerializeField]
     public int PresentID = 0;
-
     private XEntityPresentation.RowData _present_data = null;
     private XHitData _data = null;
     private AnimatorOverrideController _oVerrideController = null;
 
     IEnumerator Start()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.4f);
         _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)PresentID);
-
         if (_oVerrideController == null) BuildOverride();
         AnimationClip clip = XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle, AssetType.Anim);
-        XDebug.Log("clip: " + (clip == null), " idle: " + _present_data.AnimLocation + _present_data.AttackIdle + " hitfly: " + (_present_data.HitFly == null));
         _oVerrideController["Idle"] = clip;
         _oVerrideController["HitLanding"] = _present_data.HitFly != null && _present_data.HitFly.Length == 0 ? null : XResources.Load<AnimationClip>("Animation/" + _present_data.AnimLocation + _present_data.HitFly[1], AssetType.Anim);
 
@@ -41,7 +39,6 @@ public class XHitHoster : MonoBehaviour {
 
     private Vector2 _pos = Vector2.zero;
     private Vector2 _des = Vector2.zero;
-
     private Vector3 _dir = Vector3.zero;
 
     private float _last_offset = 0;
@@ -52,13 +49,11 @@ public class XHitHoster : MonoBehaviour {
     private float _delta_z = 0;
 
     private float _deltaH = 0;
-
     private float _gravity = 0;
     private float _rticalV = 0;
 
     private float _factor = 0;
     private float _elapsed = 0;
-
     private float _time_total = 0;
 
     //private bool _running = false;
@@ -81,9 +76,7 @@ public class XHitHoster : MonoBehaviour {
     private XBeHitPhase _phase = XBeHitPhase.Hit_Present;
 
     private Animator _ator = null;
-
     private XSkillHoster _hoster = null;
-
     private GameObject _hit_fx = null;
     private Transform _binded_bone = null;
 
@@ -94,9 +87,7 @@ public class XHitHoster : MonoBehaviour {
     private float _curve_offset_scale = 1;
     private float _curve_height_time_scale = 1;
     private float _curve_offset_time_scale = 1;
-
-    public Animator XAnimator { get { return _ator; } }
-    public float Height { get { return _dummy_height; } }
+    
     public float Radius { get { return _radius; } }
     public Vector3 RadiusCenter
     {
@@ -108,31 +99,23 @@ public class XHitHoster : MonoBehaviour {
         if (_hoster == null) return;
 
         //trigger and present
-        if (null != _trigger && !_ator.IsInTransition(0))
+        if (!string.IsNullOrEmpty(_trigger) && !_ator.IsInTransition(0))
         {
             if (_trigger == "ToBeHit")
-            {
                 _ator.Play("Present", 0);
-            }
             else
                 _ator.SetTrigger(_trigger);
-
             _trigger = null;
         }
         else
         {
             float last_elapsed = _elapsed;
             _elapsed += Time.deltaTime;
-
             if (_data.State == XBeHitState.Hit_Freezed)
             {
                 float deltaH = -(_deltaH / _present_straight) * Time.deltaTime;
                 transform.Translate(0, deltaH, 0, Space.World);
-
-                if (_elapsed > _time_total)
-                {
-                    Cancel();
-                }
+                if (_elapsed > _time_total) Cancel();
             }
             else
             {
@@ -155,15 +138,12 @@ public class XHitHoster : MonoBehaviour {
                                 _phase = XBeHitPhase.Hit_Hard;
                             }
                         }
-
                         CalcDeltaPos(Time.deltaTime, last_elapsed);
                         float deltaH = -(_deltaH / _present_straight) * Time.deltaTime;
-
                         if (_offset < 0)
                         {
                             float move = Mathf.Sqrt(_delta_x * _delta_x + _delta_z * _delta_z);
                             float dis = (_hoster.gameObject.transform.position - gameObject.transform.position).magnitude;
-
                             if (move > dis - 0.5)
                             {
                                 _delta_x = 0;
@@ -186,16 +166,13 @@ public class XHitHoster : MonoBehaviour {
                             _ator.SetTrigger("ToBeHit_GetUp");
                             _phase = XBeHitPhase.Hit_GetUp;
                         }
-                        else
+                        else if (!_loop_hard)
                         {
-                            if (!_loop_hard) _ator.speed = _hard_straight_time / _hard_straight;
+                            _ator.speed = _hard_straight_time / _hard_straight;
                         }
                         break;
                     case XBeHitPhase.Hit_GetUp:
-                        if (_elapsed > _time_total)
-                        {
-                            Cancel();
-                        }
+                        if (_elapsed > _time_total) Cancel();
                         break;
                 }
             }
@@ -289,7 +266,6 @@ public class XHitHoster : MonoBehaviour {
             _dir = dir;
             _time_total = _present_straight + _landing_time + _hard_straight + _getup_time;
             _bcurve = data.CurveUsing;
-
             _present_animation_factor = _present_anim_time / _present_straight;
 
             //need re-calculate between hurt and broken
@@ -308,7 +284,6 @@ public class XHitHoster : MonoBehaviour {
 
                     _curve_h = raw_h != null ? raw_h : null;
                     _curve_v = raw_v;
-
                     _curve_height_scale = (raw_h == null || raw_h.GetMaxValue() == 0) ? 1 : _height / raw_h.GetMaxValue();
                     _curve_offset_scale = raw_v.GetMaxValue() == 0 ? 1 : _offset / raw_v.GetMaxValue();
                 }
@@ -327,7 +302,6 @@ public class XHitHoster : MonoBehaviour {
     protected void ReadyToGo(XHitData data)
     {
         if (_data.State == XBeHitState.Hit_Freezed) return;
-
         _pos.x = transform.position.x;
         _pos.y = transform.position.z;
         Vector3 destination = transform.position + _dir * _offset;
@@ -338,7 +312,6 @@ public class XHitHoster : MonoBehaviour {
         {
             _curve_height_time_scale = _curve_h == null ? 1 : _present_straight / _curve_h.GetTime(_curve_h.length - 1);
             _curve_offset_time_scale = _present_straight / _curve_v.GetTime(_curve_v.length - 1);
-
             _last_offset = 0;
             _last_height = 0;
         }
@@ -356,48 +329,39 @@ public class XHitHoster : MonoBehaviour {
         switch (data.State)
         {
             case XBeHitState.Hit_Back:
+                if (_change_to_fly)
                 {
-                    if (_change_to_fly)
+                    anims = _present_data.HitFly != null && _present_data.HitFly.Length > 0 ? _present_data.HitFly : _present_data.Hit_f;
+                }
+                else
+                {
+                    switch (data.State_Animation)
                     {
-                        anims = _present_data.HitFly != null && _present_data.HitFly.Length > 0 ? _present_data.HitFly : _present_data.Hit_f;
-                    }
-                    else
-                    {
-                        switch (data.State_Animation)
-                        {
-                            case XBeHitState_Animation.Hit_Back_Front: anims = _present_data.Hit_f; break;
-                            case XBeHitState_Animation.Hit_Back_Left: anims = _present_data.Hit_l; break;
-                            case XBeHitState_Animation.Hit_Back_Right: anims = _present_data.Hit_r; break;
-                        }
+                        case XBeHitState_Animation.Hit_Back_Front: anims = _present_data.Hit_f; break;
+                        case XBeHitState_Animation.Hit_Back_Left: anims = _present_data.Hit_l; break;
+                        case XBeHitState_Animation.Hit_Back_Right: anims = _present_data.Hit_r; break;
                     }
                 }
                 break;
             case XBeHitState.Hit_Roll:
-                {
-                    anims = _change_to_fly ?
-                        _present_data.HitFly != null && _present_data.HitFly.Length > 0 ? _present_data.HitFly : _present_data.Hit_f :
-                        _present_data.HitFly != null && _present_data.HitFly.Length > 0 ? _present_data.Hit_Roll : _present_data.Hit_f;
-                }
+                anims = _change_to_fly ?
+                    _present_data.HitFly != null && _present_data.HitFly.Length > 0 ? _present_data.HitFly : _present_data.Hit_f :
+                    _present_data.HitFly != null && _present_data.HitFly.Length > 0 ? _present_data.Hit_Roll : _present_data.Hit_f;
                 break;
             case XBeHitState.Hit_Fly:
-                {
-                    anims = _present_data.HitFly != null && _present_data.HitFly.Length > 0 ? _present_data.HitFly : _present_data.Hit_f;
-                }
+                anims = _present_data.HitFly != null && _present_data.HitFly.Length > 0 ? _present_data.HitFly : _present_data.Hit_f;
                 break;
             case XBeHitState.Hit_Freezed:
+                if (_data.FreezePresent)
                 {
-                    if (_data.FreezePresent)
-                    {
-                        string freeze = "Animation/" + _present_data.AnimLocation + _present_data.Freeze;
-                        AnimationClip freeze_clip = XResources.Load<AnimationClip>(freeze, AssetType.Anim);
-                        _present_anim_time = freeze_clip.length;
-                        _oVerrideController["Freezed"] = freeze_clip;
-                    }
-                    return;
+                    string freeze = "Animation/" + _present_data.AnimLocation + _present_data.Freeze;
+                    AnimationClip freeze_clip = XResources.Load<AnimationClip>(freeze, AssetType.Anim);
+                    _present_anim_time = freeze_clip.length;
+                    _oVerrideController["Freezed"] = freeze_clip;
                 }
+                return;
         }
-        if (anims == null)
-            return;
+        if (anims == null) return;
         int idx = 0;
 
         string clipname = "Animation/" + _present_data.AnimLocation + anims[idx++];
@@ -467,7 +431,6 @@ public class XHitHoster : MonoBehaviour {
             {
                 system.Stop();
             }
-
             _hit_fx.transform.parent = null;
             GameObject.Destroy(_hit_fx);
         }
@@ -489,9 +452,7 @@ public class XHitHoster : MonoBehaviour {
 
             Vector3 v = _dir * (c_v - _last_offset);
             delta.x = v.x; delta.y = v.z;
-
             h = c_h - _last_height;
-
             _last_height = c_h;
             _last_offset = c_v;
         }
@@ -501,10 +462,8 @@ public class XHitHoster : MonoBehaviour {
             float v2 = _rticalV - _gravity * (_elapsed);
 
             h = (v1 + v2) / 2.0f * deltaTime;
-
             _pos.x = transform.position.x;
             _pos.y = transform.position.z;
-
             delta = (_des - _pos) * Mathf.Min(1.0f, _factor * deltaTime);
         }
 
@@ -512,4 +471,5 @@ public class XHitHoster : MonoBehaviour {
         _delta_y = h;
         _delta_z = delta.y;
     }
+
 }
