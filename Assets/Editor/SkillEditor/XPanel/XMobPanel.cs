@@ -37,7 +37,7 @@ public class XMobPanel : XPanel
 
             if (i < Hoster.SkillData.Mob.Count)
             {
-                float mob_at = (Hoster.SkillData.Mob[i].At / XSkillPanel.frame);
+                float mob_at = (Hoster.SkillData.Mob[i].At / XSkillInspector.frame);
                 EditorGUILayout.BeginHorizontal();
                 mob_at = EditorGUILayout.FloatField("Mob At ", mob_at);
                 GUILayout.Label("(frame)");
@@ -52,7 +52,7 @@ public class XMobPanel : XPanel
                 GUILayout.Label("(0~1)", EditorStyles.miniLabel);
                 EditorGUILayout.EndHorizontal();
 
-                Hoster.SkillData.Mob[i].At = (Hoster.SkillDataExtra.MobEx[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+                Hoster.SkillData.Mob[i].At = (Hoster.SkillDataExtra.MobEx[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
                 Hoster.SkillData.Mob[i].LifewithinSkill = EditorGUILayout.Toggle("Life with in Skill", Hoster.SkillData.Mob[i].LifewithinSkill);
                 EditorGUILayout.Space();
                 Hoster.SkillData.Mob[i].Offset_At_X = EditorGUILayout.FloatField("OffsetX", Hoster.SkillData.Mob[i].Offset_At_X);

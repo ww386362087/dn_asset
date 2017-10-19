@@ -97,7 +97,7 @@ public class XJAPanel : XPanel
             EditorGUILayout.LabelField("", GUILayout.MaxWidth(30));
             EditorGUILayout.EndHorizontal();
 
-            float ja_at = (Hoster.SkillData.Ja[i].At / XSkillPanel.frame);
+            float ja_at = (Hoster.SkillData.Ja[i].At / XSkillInspector.frame);
             EditorGUILayout.BeginHorizontal();
             ja_at = EditorGUILayout.FloatField("Begin At", ja_at);
             GUILayout.Label("(frame)");
@@ -109,9 +109,9 @@ public class XJAPanel : XPanel
             Hoster.ConfigData.Ja[i].JA_Begin_Ratio = EditorGUILayout.Slider("Begin Ratio", Hoster.ConfigData.Ja[i].JA_Begin_Ratio, 0, 1);
             GUILayout.Label("(0~1)", EditorStyles.miniLabel);
             EditorGUILayout.EndHorizontal();
-            Hoster.SkillData.Ja[i].At = (Hoster.ConfigData.Ja[i].JA_Begin_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+            Hoster.SkillData.Ja[i].At = (Hoster.ConfigData.Ja[i].JA_Begin_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
 
-            float ja_end = (Hoster.SkillData.Ja[i].End / XSkillPanel.frame);
+            float ja_end = (Hoster.SkillData.Ja[i].End / XSkillInspector.frame);
             EditorGUILayout.BeginHorizontal();
             ja_end = EditorGUILayout.FloatField("End At", ja_end);
             GUILayout.Label("(frame)");
@@ -124,9 +124,9 @@ public class XJAPanel : XPanel
             Hoster.ConfigData.Ja[i].JA_End_Ratio = EditorGUILayout.Slider("End Ratio", Hoster.ConfigData.Ja[i].JA_End_Ratio, 0, 1);
             GUILayout.Label("(0~1)", EditorStyles.miniLabel);
             EditorGUILayout.EndHorizontal();
-            Hoster.SkillData.Ja[i].End = (Hoster.ConfigData.Ja[i].JA_End_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+            Hoster.SkillData.Ja[i].End = (Hoster.ConfigData.Ja[i].JA_End_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
 
-            float ja_point = (Hoster.SkillData.Ja[i].Point / XSkillPanel.frame);
+            float ja_point = (Hoster.SkillData.Ja[i].Point / XSkillInspector.frame);
             EditorGUILayout.BeginHorizontal();
             ja_point = EditorGUILayout.FloatField("Point At", ja_point);
             GUILayout.Label("(frame)");
@@ -138,7 +138,7 @@ public class XJAPanel : XPanel
             Hoster.ConfigData.Ja[i].JA_Point_Ratio = EditorGUILayout.Slider("Point Ratio", Hoster.ConfigData.Ja[i].JA_Point_Ratio, 0, 1);
             GUILayout.Label("(0~1)", EditorStyles.miniLabel);
             EditorGUILayout.EndHorizontal();
-            Hoster.SkillData.Ja[i].Point = (Hoster.ConfigData.Ja[i].JA_Point_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+            Hoster.SkillData.Ja[i].Point = (Hoster.ConfigData.Ja[i].JA_Point_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
 
             if (i != Hoster.SkillData.Ja.Count - 1)
             {

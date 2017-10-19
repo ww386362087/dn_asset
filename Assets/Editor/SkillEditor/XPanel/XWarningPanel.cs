@@ -39,7 +39,7 @@ public class XWarningPanel : XPanel
         {
             Hoster.SkillData.Warning[i].Index = i;
 
-            float warning_at = (Hoster.SkillData.Warning[i].At / XSkillPanel.frame);
+            float warning_at = (Hoster.SkillData.Warning[i].At / XSkillInspector.frame);
 
             EditorGUILayout.BeginHorizontal();
             warning_at = EditorGUILayout.FloatField("Warning At", warning_at);
@@ -58,7 +58,7 @@ public class XWarningPanel : XPanel
             EditorGUILayout.EndHorizontal();
 
             Hoster.SkillDataExtra.WarningEx[i].Ratio = EditorGUILayout.Slider("Ratio", Hoster.SkillDataExtra.WarningEx[i].Ratio, 0, 1);
-            Hoster.SkillData.Warning[i].At = (Hoster.SkillDataExtra.WarningEx[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+            Hoster.SkillData.Warning[i].At = (Hoster.SkillDataExtra.WarningEx[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
             EditorGUILayout.Space();
 
             Hoster.SkillDataExtra.WarningEx[i].Fx = EditorGUILayout.ObjectField("Fx Object", Hoster.SkillDataExtra.WarningEx[i].Fx, typeof(GameObject), true) as GameObject;

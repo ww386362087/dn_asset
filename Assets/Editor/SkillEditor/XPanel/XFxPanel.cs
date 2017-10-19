@@ -115,7 +115,7 @@ public class XFxPanel : XPanel
                 }
 
                 EditorGUILayout.Space();
-                float fx_at = (Hoster.SkillData.Fx[i].At / XSkillPanel.frame);
+                float fx_at = (Hoster.SkillData.Fx[i].At / XSkillInspector.frame);
                 EditorGUILayout.BeginHorizontal();
                 fx_at = EditorGUILayout.FloatField("Play At", fx_at);
                 GUILayout.Label("(frame)");
@@ -130,11 +130,11 @@ public class XFxPanel : XPanel
                 GUILayout.Label("(0~1)", EditorStyles.miniLabel);
                 EditorGUILayout.EndHorizontal();
 
-                Hoster.SkillData.Fx[i].At = (Hoster.SkillDataExtra.Fx[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+                Hoster.SkillData.Fx[i].At = (Hoster.SkillDataExtra.Fx[i].Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
 
                 ////////////////////////////////
-                if (Hoster.SkillData.Fx[i].End < 0) Hoster.SkillData.Fx[i].End = Hoster.SkillDataExtra.SkillClip_Frame * XSkillPanel.frame;
-                float fx_end_at = (Hoster.SkillData.Fx[i].End / XSkillPanel.frame);
+                if (Hoster.SkillData.Fx[i].End < 0) Hoster.SkillData.Fx[i].End = Hoster.SkillDataExtra.SkillClip_Frame * XSkillInspector.frame;
+                float fx_end_at = (Hoster.SkillData.Fx[i].End / XSkillInspector.frame);
                 EditorGUILayout.BeginHorizontal();
                 fx_end_at = EditorGUILayout.FloatField("End At", fx_end_at);
                 GUILayout.Label("(frame)");
@@ -149,7 +149,7 @@ public class XFxPanel : XPanel
                 GUILayout.Label("(0~1)", EditorStyles.miniLabel);
                 EditorGUILayout.EndHorizontal();
 
-                Hoster.SkillData.Fx[i].End = (Hoster.SkillDataExtra.Fx[i].End_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+                Hoster.SkillData.Fx[i].End = (Hoster.SkillDataExtra.Fx[i].End_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
                 if (Hoster.SkillData.Fx[i].End < Hoster.SkillData.Fx[i].At) Hoster.SkillData.Fx[i].At = Hoster.SkillData.Fx[i].End;
                 EditorGUILayout.Space();
 

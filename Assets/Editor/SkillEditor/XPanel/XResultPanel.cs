@@ -65,7 +65,7 @@ class XResultPanel : XPanel
         for (int i = 0; i < Hoster.SkillData.Result.Count; i++)
         {
             Hoster.SkillData.Result[i].Index = i;
-            float result_at = (Hoster.SkillData.Result[i].At / XSkillPanel.frame);
+            float result_at = (Hoster.SkillData.Result[i].At / XSkillInspector.frame);
 
             EditorGUILayout.BeginHorizontal();
             Hoster.SkillData.Result[i].LongAttackEffect = EditorGUILayout.Toggle("Long Range Attack", Hoster.SkillData.Result[i].LongAttackEffect);
@@ -92,7 +92,7 @@ class XResultPanel : XPanel
             if (Hoster.ConfigData.Result[i].Result_Ratio > 1) Hoster.ConfigData.Result[i].Result_Ratio = 1;
 
             Hoster.ConfigData.Result[i].Result_Ratio = EditorGUILayout.Slider("Ratio", Hoster.ConfigData.Result[i].Result_Ratio, 0, 1);
-            Hoster.SkillData.Result[i].At = (Hoster.ConfigData.Result[i].Result_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+            Hoster.SkillData.Result[i].At = (Hoster.ConfigData.Result[i].Result_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
             if (Hoster.SkillData.Result[i].LongAttackEffect &&
                 (Hoster.SkillData.Result[i].LongAttackData.Type != XResultBulletType.Satellite && Hoster.SkillData.Result[i].LongAttackData.Type != XResultBulletType.Ring))
             {
@@ -110,13 +110,13 @@ class XResultPanel : XPanel
             Hoster.SkillData.Result[i].Loop = EditorGUILayout.Toggle("Loop", Hoster.SkillData.Result[i].Loop);
             if (Hoster.SkillData.Result[i].Loop)
             {
-                float loop = (Hoster.SkillData.Result[i].Cycle / XSkillPanel.frame);
+                float loop = (Hoster.SkillData.Result[i].Cycle / XSkillInspector.frame);
                 EditorGUILayout.BeginHorizontal();
                 loop = EditorGUILayout.FloatField("Repeated Cycle", loop);
                 GUILayout.Label("(frame)");
                 GUILayout.Label("", GUILayout.MaxWidth(30));
                 EditorGUILayout.EndHorizontal();
-                Hoster.SkillData.Result[i].Cycle = loop * XSkillPanel.frame;
+                Hoster.SkillData.Result[i].Cycle = loop * XSkillInspector.frame;
                 int count = EditorGUILayout.IntField("Repeated Count", Hoster.SkillData.Result[i].Loop_Count);
                 if (count < 100 && count >= 0) Hoster.SkillData.Result[i].Loop_Count = count;
             }
@@ -130,13 +130,13 @@ class XResultPanel : XPanel
                 Hoster.SkillData.Result[i].Deviation_Angle = EditorGUILayout.IntField("Deviation Angle", Hoster.SkillData.Result[i].Deviation_Angle);
                 Hoster.SkillData.Result[i].Angle_Step = EditorGUILayout.IntField("Angle Step", Hoster.SkillData.Result[i].Angle_Step);
 
-                float step = (Hoster.SkillData.Result[i].Time_Step / XSkillPanel.frame);
+                float step = (Hoster.SkillData.Result[i].Time_Step / XSkillInspector.frame);
                 EditorGUILayout.BeginHorizontal();
                 step = EditorGUILayout.FloatField("Time Step", step);
                 GUILayout.Label("(frame)");
                 GUILayout.Label("", GUILayout.MaxWidth(30));
                 EditorGUILayout.EndHorizontal();
-                Hoster.SkillData.Result[i].Time_Step = step * XSkillPanel.frame;
+                Hoster.SkillData.Result[i].Time_Step = step * XSkillInspector.frame;
 
                 int count = EditorGUILayout.IntField("Count", Hoster.SkillData.Result[i].Group_Count);
                 if (count < 100 && count >= 0) Hoster.SkillData.Result[i].Group_Count = count;
@@ -335,13 +335,13 @@ class XResultPanel : XPanel
 
                 if (Hoster.SkillData.Result[i].LongAttackData.TriggerAtEnd)
                 {
-                    float cycle = (Hoster.SkillData.Result[i].LongAttackData.TriggerAtEnd_Cycle / XSkillPanel.frame);
+                    float cycle = (Hoster.SkillData.Result[i].LongAttackData.TriggerAtEnd_Cycle / XSkillInspector.frame);
                     EditorGUILayout.BeginHorizontal();
                     cycle = EditorGUILayout.FloatField("Trigger End Cycle", cycle);
                     GUILayout.Label("(frame)");
                     GUILayout.Label("", GUILayout.MaxWidth(30));
                     EditorGUILayout.EndHorizontal();
-                    Hoster.SkillData.Result[i].LongAttackData.TriggerAtEnd_Cycle = cycle * XSkillPanel.frame;
+                    Hoster.SkillData.Result[i].LongAttackData.TriggerAtEnd_Cycle = cycle * XSkillInspector.frame;
                     Hoster.SkillData.Result[i].LongAttackData.TriggerAtEnd_Count = EditorGUILayout.IntField("Trigger End Repeated Count", Hoster.SkillData.Result[i].LongAttackData.TriggerAtEnd_Count);
                 }
 

@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEditor;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
 
 public abstract class XPanel
@@ -48,12 +46,14 @@ public abstract class XPanel
     }
 
     public abstract void Add();
-
-
+    
     protected abstract void OnInnerGUI();
+
     protected virtual void OnInnerUpdate() { }
 
     protected abstract bool FoldOut { get; set; }
+
     protected abstract string PanelName { get; }
+
     protected abstract int Count { get; }
 }

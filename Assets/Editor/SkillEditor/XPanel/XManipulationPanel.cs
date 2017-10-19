@@ -48,7 +48,7 @@ public class XManipulationPanel : XPanel
 
             if (i < Hoster.SkillData.Manipulation.Count)
             {
-                float play_at = (Hoster.SkillData.Manipulation[i].At / XSkillPanel.frame);
+                float play_at = (Hoster.SkillData.Manipulation[i].At / XSkillInspector.frame);
                 EditorGUILayout.BeginHorizontal();
                 play_at = EditorGUILayout.FloatField("Manipulate At ", play_at);
                 GUILayout.Label("(frame)");
@@ -63,10 +63,10 @@ public class XManipulationPanel : XPanel
                 GUILayout.Label("(0~1)", EditorStyles.miniLabel);
                 EditorGUILayout.EndHorizontal();
 
-                Hoster.SkillData.Manipulation[i].At = (Hoster.SkillDataExtra.ManipulationEx[i].At_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+                Hoster.SkillData.Manipulation[i].At = (Hoster.SkillDataExtra.ManipulationEx[i].At_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
 
                 /////////////////////////////////////////////////
-                float end_at = (Hoster.SkillData.Manipulation[i].End / XSkillPanel.frame);
+                float end_at = (Hoster.SkillData.Manipulation[i].End / XSkillInspector.frame);
                 EditorGUILayout.BeginHorizontal();
                 end_at = EditorGUILayout.FloatField("Manipulate End", end_at);
                 GUILayout.Label("(frame)");
@@ -79,7 +79,7 @@ public class XManipulationPanel : XPanel
                 Hoster.SkillDataExtra.ManipulationEx[i].End_Ratio = EditorGUILayout.Slider("Ratio End", Hoster.SkillDataExtra.ManipulationEx[i].End_Ratio, 0, 1);
                 GUILayout.Label("(0~1)", EditorStyles.miniLabel);
                 EditorGUILayout.EndHorizontal();
-                Hoster.SkillData.Manipulation[i].End = (Hoster.SkillDataExtra.ManipulationEx[i].End_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillPanel.frame;
+                Hoster.SkillData.Manipulation[i].End = (Hoster.SkillDataExtra.ManipulationEx[i].End_Ratio * Hoster.SkillDataExtra.SkillClip_Frame) * XSkillInspector.frame;
 
                 ////////////////////////////////////////////////
                 EditorGUILayout.Space();

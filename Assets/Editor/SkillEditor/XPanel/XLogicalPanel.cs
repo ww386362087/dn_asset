@@ -6,17 +6,12 @@ public class XLogicalPanel : XPanel
 {
     GUIStyle _myLabelStyle = null;
 
-    // private List<string> _states = new List<string>();
-
-    //private int _defualt_mask_value;
-    //private int _states_mask_value;
-
     protected override int Count
     {
         get { return -1; }
     }
 
-    public override void Init(){ }
+    public override void Init() { }
 
     protected override void OnInnerGUI()
     {
@@ -101,7 +96,7 @@ public class XLogicalPanel : XPanel
             Hoster.ConfigData.Logical.QTEDataEx.Add(new XQTEDataExtra());
             if (Hoster.SkillData.Logical.QTEData.Count > 4)
             {
-                 XDebug.LogError("Too much QTE(should < 4 Now)");
+                XDebug.LogError("Too much QTE(should < 4 Now)");
             }
         }
         EditorGUILayout.EndHorizontal();
@@ -213,14 +208,14 @@ public class XLogicalPanel : XPanel
 
     private void DataLayout(ref float data, ref float ratio, string name)
     {
-        float result_at = (data / XSkillPanel.frame);
+        float result_at = (data / XSkillInspector.frame);
         EditorGUILayout.BeginHorizontal();
         result_at = EditorGUILayout.FloatField(name, result_at);
         GUILayout.Label("(frame)");
         GUILayout.Label("", GUILayout.MaxWidth(30));
         EditorGUILayout.EndHorizontal();
 
-        ratio = (Hoster.SkillData.Time / XSkillPanel.frame) > 0 ? result_at / (Hoster.SkillData.Time / XSkillPanel.frame) : 0;
+        ratio = (Hoster.SkillData.Time / XSkillInspector.frame) > 0 ? result_at / (Hoster.SkillData.Time / XSkillInspector.frame) : 0;
         if (ratio > 1) ratio = 1;
 
         EditorGUILayout.BeginHorizontal();
@@ -228,7 +223,7 @@ public class XLogicalPanel : XPanel
         GUILayout.Label("(0~1)", EditorStyles.miniLabel);
         EditorGUILayout.EndHorizontal();
 
-        data = (ratio * (Hoster.SkillData.Time / XSkillPanel.frame)) * XSkillPanel.frame;
+        data = (ratio * (Hoster.SkillData.Time / XSkillInspector.frame)) * XSkillInspector.frame;
     }
 
     public override void Add()
@@ -243,7 +238,9 @@ public class XLogicalPanel : XPanel
         Hoster.ConfigData.Logical.QTEDataEx.Add(new XQTEDataExtra());
         if (Hoster.SkillData.Logical.QTEData.Count > 4)
         {
-             XDebug.LogError("Too much QTE(should < 4 Now)");
+            XDebug.LogError("Too much QTE(should < 4 Now)");
         }
     }
+
 }
+

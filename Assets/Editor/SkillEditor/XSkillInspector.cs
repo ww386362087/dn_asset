@@ -6,7 +6,7 @@ using XEditor;
 
 
 [CustomEditor(typeof(XSkillHoster))]
-public class XSkillPanel : Editor
+public class XSkillInspector : Editor
 {
     public static readonly float frame = 1.0f / 30.0f;
     public static string next_file = null;
