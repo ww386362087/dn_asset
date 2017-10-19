@@ -53,10 +53,7 @@ namespace XEditor
                 }
             }
         }
-
-       /// <summary>
-       /// 刷内存数据
-       /// </summary>
+        
         public void HotBuildEx(XSkillHoster hoster, XConfigData conf)
         {
             XSkillDataExtra edata = hoster.SkillDataExtra;
@@ -153,7 +150,6 @@ namespace XEditor
         public void ColdBuild(GameObject prefab, XConfigData conf)
         {
             if (hoster != null) GameObject.DestroyImmediate(hoster);
-
             hoster = UnityEngine.Object.Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
             hoster.transform.localScale = Vector3.one * XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)conf.Player).Scale;
             hoster.AddComponent<XSkillHoster>();

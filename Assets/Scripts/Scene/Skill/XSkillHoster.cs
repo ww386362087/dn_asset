@@ -555,7 +555,6 @@ public class XSkillHoster : MonoBehaviour
     {
         forward = XCommon.singleton.HorizontalRotateVetor3(forward, data.Cast_Scope_Shift);
         Vector3 targetPos = target.transform.position;
-
         if (data.Cast_Range_Rect)
         {
             pos.x += data.Cast_Offset_X;

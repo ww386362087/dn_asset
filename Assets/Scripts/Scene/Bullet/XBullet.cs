@@ -13,10 +13,8 @@ internal class XBullet
 
     private bool _active = true;
     private bool _pingponged = false;
-
     private uint _tail_results_token = 0;
     private int _tail_results = 0;
-
     private float _elapsed = 0;
 
     private GameObject _bullet = null;
@@ -30,7 +28,7 @@ internal class XBullet
     {
         _data = data;
         _elapsed = 0.0f;
-        
+
         _bullet = XResources.Load<GameObject>(data.Prefab, AssetType.Prefab);
         _bullet.transform.position = _data.BulletRay.origin;
         _bullet.transform.rotation = _data.Velocity > 0 ? Quaternion.LookRotation(_data.BulletRay.direction) : Quaternion.LookRotation(_data.Firer.transform.forward);
@@ -43,7 +41,6 @@ internal class XBullet
         {
             return _tail_results >= _data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count;
         }
-
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.IsPingPong && !_pingponged)
         {
             if (_elapsed > _data.Life) _pingponged = true;
@@ -61,11 +58,8 @@ internal class XBullet
     {
         XBulletTarget target;
         if (id != null && _hurt_target.TryGetValue(id, out target))
-        {
             return !target.Hurtable;
-        }
-        else
-            return false;
+        return false;
     }
 
     private void OnTailResult(object o)
@@ -92,7 +86,7 @@ internal class XBullet
             if (_data.Warning) _bullet.transform.position = _data.WarningPos;
             Result(null);
         }
-         if (!present) return;
+        if (!present) return;
         if (!string.IsNullOrEmpty(_data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx))
         {
             GameObject fx = XResources.Load<GameObject>(_data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx, AssetType.Prefab);
@@ -108,7 +102,7 @@ internal class XBullet
 
     private void FakeDestroyBulletObject()
     {
-        if (null != _bullet)
+        if (_bullet != null)
         {
             Vector3 pos = _bullet.transform.position;
             Quaternion quat = _bullet.transform.rotation;
@@ -141,7 +135,7 @@ internal class XBullet
         _bullet = null;
         _data = null;
     }
-    
+
 
     private void OnRefined(object o)
     {
@@ -164,7 +158,6 @@ internal class XBullet
 
         //trigger skill result
         _data.Firer.skillResult.InnerResult(_data.Sequnce, _bullet.transform.forward, _bullet.transform.position, _data.Skill, hit);
-
         if (hit != null)
         {
             XBulletTarget bt;
@@ -173,18 +166,13 @@ internal class XBullet
                 bt = new XBulletTarget();
                 _hurt_target.Add(hit, bt);
             }
-
             XTimerMgr.singleton.RemoveTimer(bt.TimerToken);
-
             bt.Hurtable = false;
             bt.HurtCount++;
             bt.TimerToken = _data.Skill.Result[_data.Sequnce].LongAttackData.Refine_Cycle > 0 ?
-                XTimerMgr.singleton.SetTimer(_data.Skill.Result[_data.Sequnce].LongAttackData.Refine_Cycle, OnRefined, hit) :
-                0;
-
+                XTimerMgr.singleton.SetTimer(_data.Skill.Result[_data.Sequnce].LongAttackData.Refine_Cycle, OnRefined, hit) : 0;
             _hurt_target[hit] = bt;
         }
-
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.TriggerOnce)
         {
             _pingponged = _data.Skill.Result[_data.Sequnce].LongAttackData.IsPingPong;

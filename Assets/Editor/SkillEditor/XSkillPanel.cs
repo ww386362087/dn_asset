@@ -25,8 +25,6 @@ public class XSkillPanel : Editor
 
     private GUIContent _content_add = new GUIContent("+", "Added Skill Timer.");
 
-    private string _status = "nothing more...";
-
     private int _option = 0;
     private List<string> _xOptions = new List<string>();
 
@@ -87,7 +85,7 @@ public class XSkillPanel : Editor
         _hoster.ConfigData.RotateSpeed = EditorGUILayout.FloatField("Rotate Speed", _hoster.ConfigData.RotateSpeed);
 
         EditorGUILayout.Space();
-         _hoster.EditorData.XFrameByFrame = EditorGUILayout.Toggle("Frame By Frame", _hoster.EditorData.XFrameByFrame);
+        _hoster.EditorData.XFrameByFrame = EditorGUILayout.Toggle("Frame By Frame", _hoster.EditorData.XFrameByFrame);
         EditorGUILayout.Space();
 
         /*****Skill Settings*****/
@@ -125,13 +123,11 @@ public class XSkillPanel : Editor
         if (_hoster.SkillData.TypeToken == 0)
         {
             _hoster.SkillData.SkillPosition = (int)EditorGUILayout.Popup("Position", _hoster.SkillData.SkillPosition, XSkillData.JA_Command);
-            if (!_xOptions.Contains("Combos"))
-                _xOptions.Insert(2, "Combos");
+            if (!_xOptions.Contains("Combos")) _xOptions.Insert(2, "Combos");
         }
         else if (_hoster.SkillData.TypeToken != 3)
         {
-            if (_xOptions.Contains("Combos"))
-                _xOptions.Remove("Combos");
+            if (_xOptions.Contains("Combos")) _xOptions.Remove("Combos");
         }
         EditorGUILayout.Space();
 
@@ -157,7 +153,7 @@ public class XSkillPanel : Editor
         }
 
         EditorGUILayout.Space();
-        
+
         EditorGUILayout.BeginHorizontal();
         _hoster.SkillData.CameraTurnBack = EditorGUILayout.FloatField("Camera Tail Speed Ratio", _hoster.SkillData.CameraTurnBack);
         EditorGUILayout.LabelField("(multiplied by)", GUILayout.MaxWidth(90));
@@ -211,7 +207,7 @@ public class XSkillPanel : Editor
             }
         }
         EditorGUILayout.EndHorizontal();
-        
+
         EditorGUILayout.Space();
         if (_hoster.SkillData.TypeToken == 3)
         {
@@ -230,8 +226,6 @@ public class XSkillPanel : Editor
             }
         }
 
-        /*****Operation*****/
-        GUILayout.Label("Operation :", _labelstyle);
         EditorGUILayout.Space();
         EditorGUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
@@ -247,25 +241,12 @@ public class XSkillPanel : Editor
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.Space();
 
-        /*****Status*****/
-        GUILayout.Label("*Status* : " + _status);
-        /*****Ending*****/
-        EditorGUILayout.Space();
-
-        if (GUI.changed)
-        {
-            EditorUtility.SetDirty(target);
-            _status = "not saved.";
-        }
-
         XDataBuilder.singleton.Update(_hoster);
         /*Repaint();*/
 
         if (!string.IsNullOrEmpty(next_file))
         {
-            if (EditorUtility.DisplayDialog("Open new skill",
-                        "Do you want to save current skill?",
-                        "Do", "Do Not"))
+            if (EditorUtility.DisplayDialog("Open new skill", "Do you want to save current skill?", "Do", "Do Not"))
             {
                 SerializeData(GetDataFileWithPath());
             }
@@ -417,10 +398,7 @@ public class XSkillPanel : Editor
                 {
                     if (_hoster.SkillData.Warning == null || data.Warning_Idx >= _hoster.SkillData.Warning.Count)
                     {
-                        EditorUtility.DisplayDialog("Confirm your configuration.",
-                        "Please select right Warning Index!",
-                        "Ok");
-
+                        EditorUtility.DisplayDialog("Confirm your configuration.", "Please select right Warning Index!", "Ok");
                         return;
                     }
                 }
@@ -434,27 +412,19 @@ public class XSkillPanel : Editor
                 int i = 0;
                 for (; i < _hoster.SkillData.Result.Count; i++)
                 {
-                    if (_hoster.SkillData.Result[i].Warning && _hoster.SkillData.Result[i].Warning_Idx == idx)
-                        break;
+                    if (_hoster.SkillData.Result[i].Warning && _hoster.SkillData.Result[i].Warning_Idx == idx) break;
                 }
-
                 if (i == _hoster.SkillData.Result.Count)
                 {
-                    EditorUtility.DisplayDialog("Confirm your configuration.",
-                        "Please MATCH your Results' and Warnings' Index!",
-                        "Ok");
-
+                    EditorUtility.DisplayDialog("Confirm your configuration.", "Please MATCH your Results' and Warnings' Index!", "Ok");
                     return;
                 }
             }
         }
 
-        if (!((_hoster.SkillData.Result == null && _hoster.SkillData.Hit == null) ||
-            _hoster.SkillData.Result.Count == _hoster.SkillData.Hit.Count))
+        if (!((_hoster.SkillData.Result == null && _hoster.SkillData.Hit == null) || _hoster.SkillData.Result.Count == _hoster.SkillData.Hit.Count))
         {
-            EditorUtility.DisplayDialog("Confirm your configuration.",
-                    "Result count is not match with Hit count!",
-                    "Ok");
+            EditorUtility.DisplayDialog("Confirm your configuration.", "Result count is not match with Hit count!", "Ok");
             return;
         }
 
@@ -469,31 +439,23 @@ public class XSkillPanel : Editor
                     (_hoster.SkillData.Hit[idx].FreezeDuration == 0 && _hoster.SkillData.Hit[idx].State == XBeHitState.Hit_Freezed))
                     break;
             }
-
             if (idx < _hoster.SkillData.Hit.Count)
             {
-                EditorUtility.DisplayDialog("Confirm your configuration.",
-                    "your Hit parameters == 0!",
-                    "Ok");
-
+                EditorUtility.DisplayDialog("Confirm your configuration.", "your Hit parameters == 0!", "Ok");
                 return;
             }
         }
 
         StripData(_hoster.SkillData);
-
         XDataIO<XSkillData>.singleton.SerializeData(file, _hoster.SkillData);
         XDataIO<XConfigData>.singleton.SerializeData(XEditorLibrary.GetCfgFromSkp(file), _hoster.ConfigData);
-
         XDataBuilder.Time = File.GetLastWriteTime(file);
-        _status = "already saved.";
     }
 
     private void DeserializeData(string file)
     {
         _hoster.ConfigData = XDataIO<XConfigData>.singleton.DeserializeData(XEditorLibrary.GetCfgFromSkp(file));
         _hoster.SkillData = XDataIO<XSkillData>.singleton.DeserializeData(file);
-
         XDataBuilder.singleton.HotBuild(_hoster, _hoster.ConfigData);
         XDataBuilder.singleton.HotBuildEx(_hoster, _hoster.ConfigData);
     }

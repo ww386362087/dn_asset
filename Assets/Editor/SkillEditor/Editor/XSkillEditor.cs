@@ -70,13 +70,8 @@ internal class XInnerEditor : EditorWindow
 
         EditorGUI.BeginChangeCheck();
         _id = EditorGUILayout.IntField("*Dummy ID", _id);
-        if (EditorGUI.EndChangeCheck())
-        {
-            _prefab = XEditorLibrary.GetDummy((uint)_id);
-        }
-
+        if (EditorGUI.EndChangeCheck()) _prefab = XEditorLibrary.GetDummy((uint)_id);
         EditorGUILayout.ObjectField("*Dummy Prefab:", _prefab, typeof(GameObject), true);
-
         AnimationClip skillClip = null;
         if (!_combined) skillClip = EditorGUILayout.ObjectField("*Skill Animation:", _skillClip, typeof(AnimationClip), true) as AnimationClip;
         _combined = EditorGUILayout.Toggle("Combined Skill", _combined);
@@ -87,11 +82,7 @@ internal class XInnerEditor : EditorWindow
             if (skillClip == null || location.IndexOf(".anim") != -1)
                 _skillClip = skillClip;
             else
-            {
-                EditorUtility.DisplayDialog("Confirm your selection.",
-                        "Please select extracted skill clip!",
-                        "Ok");
-            }
+                EditorUtility.DisplayDialog("Confirm your selection.", "Please select extracted skill clip!", "Ok");
         }
 
         EditorGUILayout.Space();
@@ -115,15 +106,11 @@ internal class XInnerEditor : EditorWindow
             }
             else
             {
-                EditorUtility.DisplayDialog("Confirm your selection.",
-                    "Please select prefab and skill clip!",
-                    "Ok");
+                EditorUtility.DisplayDialog("Confirm your selection.", "Please select prefab and skill clip!", "Ok");
             }
         }
-        else if (GUILayout.Button("Cancel"))
-        {
-            Close();
-        }
+        else if (GUILayout.Button("Cancel")) Close();
+
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space();
@@ -157,7 +144,7 @@ internal class XInnerEditor : EditorWindow
 
     public static void OpenSkill(string file)
     {
-        if (file.Length != 0)
+        if (!string.IsNullOrEmpty(file))
         {
             XDataBuilder.singleton.Load(file);
         }
@@ -169,13 +156,9 @@ internal class XInnerEditor : EditorWindow
         string path = AssetDatabase.GetAssetPath(obj);
         int last = path.LastIndexOf('.');
         string subfix = path.Substring(last, path.Length - last).ToLower();
-
         if (subfix != AssetType.Prefab)
         {
-            EditorUtility.DisplayDialog("Confirm your selection.",
-                "Please select a prefab file for this skill!",
-                "Ok");
-
+            EditorUtility.DisplayDialog("Confirm your selection.", "Please select a prefab file for this skill!", "Ok");
             return false;
         }
         return true;
@@ -183,35 +166,31 @@ internal class XInnerEditor : EditorWindow
 
     private void OnSkillPreGenerationDone()
     {
-        XDataBuilder.singleton.Load(PreStoreData());
+        XDataBuilder.singleton.Load(PreSaveData());
     }
 
-    private string PreStoreData()
+    private string PreSaveData()
     {
         string skp = XEditorLibrary.GetPath("Skill" + "/" + _directory) + _name + ".txt";
         string config = XEditorLibrary.GetEditorBasedPath("Skill" + "/" + _directory) + _name + ".config";
 
         XConfigData conf = new XConfigData();
-
         if (!_combined)
         {
             conf.SkillClip = AssetDatabase.GetAssetPath(_skillClip);
             conf.SkillClipName = _skillClip.name;
         }
-
         conf.Player = _id;
         conf.Directory = _directory;
         conf.SkillName = _name;
 
         XSkillData data = new XSkillData();
         data.Name = _name;
-
         if (!_combined)
         {
             data.ClipName = conf.SkillClip.Remove(conf.SkillClip.LastIndexOf('.'));
             data.ClipName = data.ClipName.Remove(0, 17);
         }
-
         data.TypeToken = _combined ? 3 : 0;
         XDataIO<XSkillData>.singleton.SerializeData(skp, data);
 

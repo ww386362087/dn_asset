@@ -21,7 +21,7 @@ public class XResources
     private static XResController _res;
     private static XABController _ab;
 
-    public static XABController ab { get { return _ab; } }
+    public static XABController ab { get { if (_ab == null) Init(); return _ab; } }
 
     public static void Init()
     {
