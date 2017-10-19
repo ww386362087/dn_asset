@@ -36,7 +36,7 @@ public class XFxPanel : XPanel
 
         for (int i = 0; i < Hoster.SkillData.Fx.Count; i++)
         {
-            Hoster.SkillData.Fx[i].Combined = (Hoster.SkillData.TypeToken == 3);
+            Hoster.SkillData.Fx[i].Combined = (Hoster.SkillData.TypeToken == 2);
 
             Hoster.SkillData.Fx[i].Index = i;
             EditorGUILayout.BeginHorizontal();

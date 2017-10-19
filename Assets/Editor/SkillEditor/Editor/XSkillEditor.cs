@@ -191,7 +191,7 @@ internal class XInnerEditor : EditorWindow
             data.ClipName = conf.SkillClip.Remove(conf.SkillClip.LastIndexOf('.'));
             data.ClipName = data.ClipName.Remove(0, 17);
         }
-        data.TypeToken = _combined ? 3 : 0;
+        data.TypeToken = _combined ? 2 : 0;
         XDataIO<XSkillData>.singleton.SerializeData(skp, data);
 
         using (FileStream writer = new FileStream(config, FileMode.Create))

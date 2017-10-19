@@ -91,7 +91,7 @@ public class XSkillPanel : Editor
         /*****Skill Settings*****/
         GUILayout.Label("Skill Settings :", _labelstyle);
 
-        if (_hoster.SkillData.TypeToken != 3)
+        if (_hoster.SkillData.TypeToken != 2)
         {
             EditorGUI.BeginChangeCheck();
             AnimationClip clip = EditorGUILayout.ObjectField("Clip", _hoster.SkillDataExtra.SkillClip, typeof(AnimationClip), true) as AnimationClip;
@@ -109,7 +109,7 @@ public class XSkillPanel : Editor
         EditorGUILayout.LabelField("Clip Length", (_hoster.SkillDataExtra.SkillClip_Frame * frame).ToString("F3") + "s" + "\t" + _hoster.SkillDataExtra.SkillClip_Frame.ToString("F1") + "(frame)");
         EditorGUILayout.Space();
 
-        if (_hoster.SkillData.TypeToken == 3) _hoster.SkillDataExtra.SkillClip_Frame = 0;
+        if (_hoster.SkillData.TypeToken == 2) _hoster.SkillDataExtra.SkillClip_Frame = 0;
 
         _hoster.SkillData.NeedTarget = EditorGUILayout.Toggle("Need Target", _hoster.SkillData.NeedTarget);
         _hoster.SkillData.OnceOnly = EditorGUILayout.Toggle("Once Only", _hoster.SkillData.OnceOnly);
@@ -119,13 +119,13 @@ public class XSkillPanel : Editor
         _hoster.SkillData.Time = EditorGUILayout.FloatField("Skill Time", _hoster.SkillData.Time);
         _hoster.SkillData.CoolDown = EditorGUILayout.FloatField("Cool Down", _hoster.SkillData.CoolDown);
         _hoster.SkillData.TypeToken = EditorGUILayout.Popup("Skill Type", _hoster.SkillData.TypeToken, XSkillData.Skills);
-        if (_hoster.SkillData.TypeToken != 3 && _hoster.SkillDataExtra.SkillClip == null) return;
+        if (_hoster.SkillData.TypeToken != 2 && _hoster.SkillDataExtra.SkillClip == null) return;
         if (_hoster.SkillData.TypeToken == 0)
         {
             _hoster.SkillData.SkillPosition = (int)EditorGUILayout.Popup("Position", _hoster.SkillData.SkillPosition, XSkillData.JA_Command);
             if (!_xOptions.Contains("Combos")) _xOptions.Insert(2, "Combos");
         }
-        else if (_hoster.SkillData.TypeToken != 3)
+        else if (_hoster.SkillData.TypeToken != 2)
         {
             if (_xOptions.Contains("Combos")) _xOptions.Remove("Combos");
         }
@@ -177,7 +177,7 @@ public class XSkillPanel : Editor
         /*****Timer*****/
         GUILayout.Label("Timer :", _labelstyle);
         EditorGUILayout.BeginHorizontal();
-        if (_hoster.SkillData.TypeToken == 3)
+        if (_hoster.SkillData.TypeToken == 2)
         {
             _option = EditorGUILayout.Popup("Create", _option, new string[] { "Combined", "Fx", "Audio", "Camera Shake" });
         }
@@ -186,7 +186,7 @@ public class XSkillPanel : Editor
 
         if (GUILayout.Button(_content_add, GUILayout.MaxWidth(30)))
         {
-            if (_hoster.SkillData.TypeToken == 3)
+            if (_hoster.SkillData.TypeToken == 2)
             {
                 switch (_option)
                 {
@@ -209,7 +209,7 @@ public class XSkillPanel : Editor
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space();
-        if (_hoster.SkillData.TypeToken == 3)
+        if (_hoster.SkillData.TypeToken == 2)
         {
             _hit.OnGUI();
             EditorGUILayout.Space();
@@ -380,7 +380,7 @@ public class XSkillPanel : Editor
     {
         _hoster.SkillData.Name = _hoster.SkillDataExtra.ScriptFile;
 
-        if (_hoster.SkillData.TypeToken != 3)
+        if (_hoster.SkillData.TypeToken != 2)
         {
             string path = AssetDatabase.GetAssetPath(_hoster.SkillDataExtra.SkillClip).Remove(0, 17);
             _hoster.SkillData.ClipName = path.Remove(path.LastIndexOf('.'));

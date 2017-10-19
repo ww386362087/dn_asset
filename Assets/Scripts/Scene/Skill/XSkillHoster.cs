@@ -373,7 +373,7 @@ public class XSkillHoster : MonoBehaviour
         {
             _action_framecount += Time.deltaTime;
             if (_action_framecount > _current.Time) StopFire();
-            if (_execute || xOuterData.TypeToken == 3)
+            if (_execute || xOuterData.TypeToken == 2)
             {
                 if (nh != 0 || nv != 0)
                 {
@@ -407,7 +407,7 @@ public class XSkillHoster : MonoBehaviour
                 _anim_init = true; // is casting
 
             ator.speed = 1;
-            if (SkillData.TypeToken == 3)
+            if (SkillData.TypeToken == 2)
             {
                 int i = 0;
                 for (; i < XSkillData.Combined_Command.Length; i++)
@@ -448,7 +448,7 @@ public class XSkillHoster : MonoBehaviour
             trigger = xOuterData.SkillPosition > 0 ? XSkillData.JA_Command[xOuterData.SkillPosition] : "ToSkill";
         else if (xOuterData.TypeToken == 1)
             trigger = "ToArtSkill";
-        else if (xOuterData.TypeToken == 3)
+        else if (xOuterData.TypeToken == 2)
             Combined(0);
         else
             trigger = "ToUltraShow";
@@ -590,7 +590,7 @@ public class XSkillHoster : MonoBehaviour
     {
         bool can = false;
         float now = Time.time - fire_time;
-        XLogicalData logic = (SkillData.TypeToken == 3) ? SkillData.Logical : _current.Logical;
+        XLogicalData logic = (SkillData.TypeToken == 2) ? SkillData.Logical : _current.Logical;
         can = true;
         if (now < logic.Not_Move_End && now > logic.Not_Move_At)
         {
@@ -659,7 +659,7 @@ public class XSkillHoster : MonoBehaviour
                 if (ja.Ja != null && ja.Ja.Name.Length > 0) oVerrideController[XSkillData.JaOverrideMap[ja.Ja.SkillPosition]] = Resources.Load(ja.Ja.ClipName) as AnimationClip;
             }
         }
-        else if (SkillData.TypeToken == 3) { }
+        else if (SkillData.TypeToken == 2) { }
         else
         {
             oVerrideController["Art"] = clip;

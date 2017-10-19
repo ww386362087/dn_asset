@@ -166,7 +166,7 @@ namespace XEditor
             component.SkillDataExtra.ScriptPath = path;
             component.SkillDataExtra.ScriptFile = conf.SkillName;
             component.SkillDataExtra.SkillClip = RestoreClip(conf.SkillClip, conf.SkillClipName);
-            if (component.SkillData.TypeToken != 3)
+            if (component.SkillData.TypeToken != 2)
             {
                 if (component.SkillData.Time == 0)
                     component.SkillData.Time = component.SkillDataExtra.SkillClip.length;

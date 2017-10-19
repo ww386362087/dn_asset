@@ -20,7 +20,7 @@ public class XHitPanel : XPanel
 
     protected override string PanelName
     {
-        get { return Hoster.SkillData.TypeToken == 3 ? "Hit Dummy Settings" : "Hit Effect"; }
+        get { return Hoster.SkillData.TypeToken == 2 ? "Hit Dummy Settings" : "Hit Effect"; }
     }
 
     public override void Add()
@@ -73,7 +73,7 @@ public class XHitPanel : XPanel
             _myLabelStyle.padding.left = 19;
         }
 
-        if (Hoster.SkillData.TypeToken == 3)
+        if (Hoster.SkillData.TypeToken == 2)
         {
             DummySettings();
             return;

@@ -15,9 +15,8 @@ public class XSkillData
 {
     public static readonly string[] Skills =
         {
-            "XJAComboSkill",
+            "XJAComboSkill", 
             "XArtsSkill",
-            "XUltraSkill",
             "XCombinedSkill"
         };
 
