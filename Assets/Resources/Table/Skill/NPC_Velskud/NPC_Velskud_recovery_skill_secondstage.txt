@@ -37,6 +37,7 @@
         <Runningtime>0.1</Runningtime>
         <Prefab>Prefabs/Bullets/empty</Prefab>
         <TriggerAtEnd>true</TriggerAtEnd>
+        <End_Fx>Effects/FX_Particle/Roles/Velskud_recovery_skill</End_Fx>
         <EndFx_LifeTime>2</EndFx_LifeTime>
         <Audio_Channel>Skill</Audio_Channel>
         <End_Audio_Channel>Skill</End_Audio_Channel>
@@ -58,6 +59,7 @@
         <Runningtime>0.1</Runningtime>
         <Prefab>Prefabs/Bullets/empty</Prefab>
         <TriggerAtEnd>true</TriggerAtEnd>
+        <End_Fx>Effects/FX_Particle/Roles/Velskud_recovery_skill</End_Fx>
         <EndFx_LifeTime>2</EndFx_LifeTime>
         <Audio_Channel>Skill</Audio_Channel>
         <End_Audio_Channel>Skill</End_Audio_Channel>

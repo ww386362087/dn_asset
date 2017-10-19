@@ -92,10 +92,8 @@ internal class XBullet
             if (_data.Warning) _bullet.transform.position = _data.WarningPos;
             Result(null);
         }
-
-        if (!present) return;
-
-        if (_data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx != null && _data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx.Length > 0)
+         if (!present) return;
+        if (!string.IsNullOrEmpty(_data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx))
         {
             GameObject fx = XResources.Load<GameObject>(_data.Skill.Result[_data.Sequnce].LongAttackData.End_Fx, AssetType.Prefab);
             Vector3 pos = _bullet.transform.position;
