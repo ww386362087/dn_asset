@@ -9,9 +9,9 @@ namespace Level
         public int _id;
         protected XLevelSpawnInfo _spawner;
 
-        public XLevelBaseTask(XLevelSpawnInfo ls)
+        public XLevelBaseTask(XLevelSpawnInfo spawn)
         {
-            _spawner = ls;
+            _spawner = spawn;
         }
 
         public virtual bool Execute(float time)
@@ -23,47 +23,46 @@ namespace Level
 
     internal class XLevelSpawnTask : XLevelBaseTask
     {
-        // level id
-        public uint _EnemyID;        // enemy template id 
+        public uint _EnemyID;
         public int _MonsterRotate;
         public int _MonsterIndex;
         public Vector3 _MonsterPos;
         public LevelSpawnType _SpawnType;
         public bool _IsSummonTask;
 
-        public XLevelSpawnTask(XLevelSpawnInfo ls)
-            : base(ls)
+        public XLevelSpawnTask(XLevelSpawnInfo spawn) : base(spawn)
         {
             _IsSummonTask = false;
         }
 
-        public XEntity CreateClientMonster(uint id, float yRotate, Vector3 pos, int _waveid)
+        public XEntity CreateMonster(uint id, float yRotate, Vector3 pos, int _waveid)
         {
             Quaternion rotation = Quaternion.Euler(0, yRotate, 0);
-
-            XEntity entity = XEntityMgr.singleton.CreateEntity(id, pos, rotation, true);
+            XEntity entity = XEntityMgr.singleton.CreateEntity<XMonster>(id, pos, rotation);
             if (entity != null)
             {
                 entity.Wave = _waveid;
                 entity.CreateTime = Time.realtimeSinceStartup;
-                XAIEventArgs aievent = new XAIEventArgs();
-                aievent.DepracatedPass = true;
-                aievent.EventType = 1;
-                aievent.EventArg = "SpawnMonster";
-                XEventMgr.singleton.FireEvent(aievent, 0.05f);
+                entity.SetRelation(EnitityType.Enemy);
                 return entity;
             }
             return null;
         }
 
 
-        public XEntity CreateServerAttrMonster(object data, float yRotate, Vector3 pos, int _waveid)
+        public XEntity CreateNPC(uint id, float yRotate, Vector3 pos, int _waveid)
         {
-            //to-do CreateServerAttrMonster
-
+            Quaternion rotation = Quaternion.Euler(0, yRotate, 0);
+            XEntity entity = XEntityMgr.singleton.CreateEntity<XNPC>(id, pos, rotation);
+            if (entity != null)
+            {
+                entity.Wave = _waveid;
+                entity.CreateTime = Time.realtimeSinceStartup;
+                entity.SetRelation(EnitityType.Neutral);
+                return entity;
+            }
             return null;
         }
-
 
         public override bool Execute(float time)
         {
@@ -79,19 +78,16 @@ namespace Level
             if (_SpawnType == LevelSpawnType.Spawn_Source_Monster)
             {
                 // 从本地创建
-                enemy = CreateClientMonster(_EnemyID, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
+                enemy = CreateMonster(_EnemyID, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
                 XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(enemy.EntityID);
             }
-            else if (_SpawnType == LevelSpawnType.Spawn_Source_Doodad)
+            else if (_SpawnType == LevelSpawnType.Spawn_Source_Buff)
             {
                 // 单机现在不处理直接掉doodad
             }
-            else
+            else //player or monster
             {
                 // 属性和外形来自服务器
-                //UnitAppearance data = XLevelSpawnMgr.singleton.GetCacheServerMonster((uint)_id);
-                //if (data != null) enemy = CreateServerAttrMonster(data, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
-                //XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(enemy.EntityID);
             }
 
             if (dInfo != null)
@@ -107,11 +103,9 @@ namespace Level
                 }
                 if (enemy != null && enemy.IsBoss)
                 {
-                    //  XTutorialHelper.singleton.HasBoss = true;
                     return false;
                 }
             }
-
             return true;
         }
     }
@@ -120,8 +114,7 @@ namespace Level
     {
         public string _ScriptName;
 
-        public XLevelScriptTask(XLevelSpawnInfo ls)
-            : base(ls)
+        public XLevelScriptTask(XLevelSpawnInfo ls) : base(ls)
         {
         }
 
@@ -130,8 +123,8 @@ namespace Level
             base.Execute(time);
             XLevelScriptMgr.singleton.RunScript(_ScriptName);
             return false;
-
         }
+
     }
 
 }

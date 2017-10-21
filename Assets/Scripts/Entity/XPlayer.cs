@@ -2,11 +2,7 @@
 
 public class XPlayer : XRole
 {
-
-    protected override EnitityType _eEntity_Type
-    {
-        get { return EnitityType.Entity_Player; }
-    }
+    
 
     public static int PlayerLayer = LayerMask.NameToLayer("Player");
 
@@ -18,6 +14,7 @@ public class XPlayer : XRole
     public override void OnInitial()
     {
         base.OnInitial();
+        _eEntity_Type |= EnitityType.Player;
         OnStopJoyStick(null);
     }
 

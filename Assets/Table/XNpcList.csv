@@ -24,8 +24,8 @@ int,string,uint,string,string,int,float[],float[],int,string,string,int,bool,str
 17,夏萝莉,42,TXNPCicon_17,haloli,4,46.07|0.0449|244.4,0|0|0,0,你也是夏萝莉粉丝俱乐部的成员，对吧！,,50,FALSE,Audio/Npc/harori1|Audio/Npc/harori2,,,1
 18,西戴尔,43,TXNPCicon_16,sidel,1,112.76|0|124.14,0|180|0,0,卡拉秋老师，也是位有情有义的人！|要是我也能像你这样，随心所欲的去冒险就好了。|我偶尔也会好奇，外面的世界是什么样的。,,50,TRUE,Audio/Npc/sidel1|Audio/Npc/sidel2,Animation/NPC_sidel/NPC_sidel_talk,,1
 19,精锐士兵克林德,44,TXNPCicon_14,soilder,4,70.29|0.024|252,0|-30|0,0,守卫岗位，准备战斗！,,50,TRUE,,,,1
-20,侦察兵福古斯,45,TXNPCicon_20,fugus,4,60.38|0|243,0|0|0,0,嘘，小声点！,,50,TRUE,,Animation/NPC_fugus/NPC_fugus_talk,,1
-24,莉莉,46,TXNPCicon_21,lily,1,89.6|0|80,0|100|0,0,萝丝姐姐，萝丝姐姐到底去哪了？|说好哦，你一定要帮我找到姐姐。,,50,TRUE,Audio/Npc/3npc_Lily_sp_01_a|Audio/Npc/4npc_Lily_sp_03_b,,,1
+20,侦察兵福古斯,45,TXNPCicon_20,fugus,4,0|0|-2,0|0|0,0,嘘，小声点！,,50,TRUE,,Animation/NPC_fugus/NPC_fugus_talk,,1
+24,莉莉,46,TXNPCicon_21,lily,1,137.3|14.9|79.9,0|100|0,0,萝丝姐姐，萝丝姐姐到底去哪了？|说好哦，你一定要帮我找到姐姐。,,50,TRUE,Audio/Npc/3npc_Lily_sp_01_a|Audio/Npc/4npc_Lily_sp_03_b,,,1
 25,火焰小妖精,211,,goblin-red,,,,,,,,,,,,1
 26,布洛怪,502,,broo,,,,,,,,,,,,1
 27,巨人朱诺克,1506,,troll,,,,,,,,,,,,1

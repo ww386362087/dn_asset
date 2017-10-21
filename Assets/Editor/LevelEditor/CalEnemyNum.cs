@@ -133,7 +133,7 @@ namespace XEditor
                 int count = wave._prefabSlot.Count + wave.RoundCount;
                 int id = map[wave._id];
                 int Percent = wave._preWavePercent;
-                if (wave.EnemyID == enemyid)
+                if (wave.EntityID == enemyid)
                 {
                     add(b, id, count);
                     add(id + n, t, count);
@@ -190,19 +190,19 @@ namespace XEditor
             //int sum = 0, res = 0;
             foreach (LevelWave wave in _wave)
             {
-                if (wave.SpawnType == LevelSpawnType.Spawn_Source_Doodad)
+                if (wave.SpawnType == LevelSpawnType.Spawn_Source_Buff)
                     continue;
 
                 if (wave._id < 1000)
                 {
-                    if (map.ContainsKey(wave.EnemyID) == false)
+                    if (map.ContainsKey(wave.EntityID) == false)
                     {
-                        int tmp = slove(_wave, wave.EnemyID);
-                        map.Add(wave.EnemyID, tmp);
+                        int tmp = slove(_wave, wave.EntityID);
+                        map.Add(wave.EntityID, tmp);
 
                         if (tmp >= 10)
                         {
-                            if (PrintLog)  XDebug.LogError(string.Format("EnemyID {0} will preload {1}!!!", wave.EnemyID, tmp));
+                            if (PrintLog)  XDebug.LogError(string.Format("EnemyID {0} will preload {1}!!!", wave.EntityID, tmp));
                         }
                     }
                 }

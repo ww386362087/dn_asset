@@ -5,136 +5,35 @@ using UnityEngine;
 
 namespace Level
 {
-    internal class XLevelWave
+    public class XLevelWave : BaseWave
     {
-        public int _id;
-
-        public LevelSpawnType _spawnType;
-
-        public float _time;
-
-        public int _loopInterval;
-
-        public uint _EnemyID;
-
-        public int _randomID;
-
-        public int _yRotate;
-
-        public bool _repeat;
-
-        public string _exString;
         public List<int> _preWave = new List<int>();
-        public float _preWavePercent;
-
         public Dictionary<int, Vector3> _monsterPos = new Dictionary<int, Vector3>();
-
         public Dictionary<int, Vector3> _monsterRot = new Dictionary<int, Vector3>();
 
-        public float _roundRidus;
-
-        public int _roundCount;
-
-        public string _levelscript;
-
-        protected void ParseInfo(string data)
+        protected override void ParseInfo(string data)
         {
-            InfoType type = InfoType.TypeNone;
-            if (data.StartsWith("id")) type = InfoType.TypeId;
-            else if (data.StartsWith("bi")) type = InfoType.TypeBaseInfo;
-            else if (data.StartsWith("pw")) type = InfoType.TypePreWave;
-            else if (data.StartsWith("ei")) type = InfoType.TypeEditor;
-            else if (data.StartsWith("mi")) type = InfoType.TypeMonsterInfo;
-            else if (data.StartsWith("si")) type = InfoType.TypeScript;
-            else if (data.StartsWith("es")) type = InfoType.TypeExString;
-            else if (data.StartsWith("st")) type = InfoType.TypeSpawnType;
-
-            string rawData = data.Substring(3);
-
-            switch (type)
+            base.ParseInfo(data);
+            switch (_infotype)
             {
-                case InfoType.TypeId:
-                    _id = int.Parse(rawData);
-                    break;
-
-                case InfoType.TypeSpawnType:
-                    _spawnType = (LevelSpawnType)(int.Parse(rawData));
-                    break;
-                case InfoType.TypeBaseInfo:
-                    string[] strInfos = rawData.Split(',');
-                    _time = float.Parse(strInfos[0]);
-                    _loopInterval = int.Parse(strInfos[1]);
-                    _EnemyID = uint.Parse(strInfos[2]);
-                    _yRotate = int.Parse(strInfos[5]);
-                    if (strInfos.Length > 6)
-                        _roundRidus = float.Parse(strInfos[6]);
-
-                    if (strInfos.Length > 7)
-                        _roundCount = int.Parse(strInfos[7]);
-
-                    if (strInfos.Length > 8)
-                        _randomID = int.Parse(strInfos[8]);
-
-                    if (strInfos.Length > 11)
-                        _repeat = bool.Parse(strInfos[11]);
-                    break;
-                case InfoType.TypeExString:
-                    _exString = rawData;
-
-                    break;
                 case InfoType.TypePreWave:
-                    strInfos = rawData.Split('|');
-
-                    if (strInfos.Length > 0)
+                    if (!string.IsNullOrEmpty(_preWaves))
                     {
-                        string strPreWave = strInfos[0];
-
-                        if (strPreWave.Length > 0)
+                        string[] strPreWaves = _preWaves.Split(',');
+                        for (int i = 0; i < strPreWaves.Length; i++)
                         {
-                            string[] strPreWaves = strPreWave.Split(',');
-
-                            for (int i = 0; i < strPreWaves.Length; i++)
+                            int preWave = 0;
+                            if (int.TryParse(strPreWaves[i], out preWave))
                             {
-                                int preWave = 0;
-
-                                if (int.TryParse(strPreWaves[i], out preWave))
-                                {
-                                    _preWave.Add(preWave);
-                                }
+                                _preWave.Add(preWave);
                             }
                         }
                     }
-
-                    if (strInfos.Length > 1)
-                    {
-                        int percent = int.Parse(strInfos[1]);
-                        _preWavePercent = percent / 100.0f;
-                    }
-                    break;
-                case InfoType.TypeEditor:
                     break;
                 case InfoType.TypeMonsterInfo:
-                    string[] strFloats = rawData.Split(',');
-
-                    int index = int.Parse(strFloats[0]);
-
-                    // generate gameobject in scene
-                    float x = float.Parse(strFloats[1]);
-                    float y = float.Parse(strFloats[2]);
-                    float z = float.Parse(strFloats[3]);
-                    Vector3 pos = new Vector3(x, y, z);
-                    _monsterPos.Add(index, pos);
-                    Vector3 rot = new Vector3(0, 0, 0);
-                    if (strFloats.Length > 4)
-                        rot.y = float.Parse(strFloats[4]);
-                    _monsterRot.Add(index, rot);
-                    break;
-                case InfoType.TypeScript:
-                    strInfos = rawData.Split(',');
-                    if (strInfos.Length > 0)
-                        _levelscript = strInfos[0];
-                    break;
-                default:
+                    _monsterPos.Add(_index, _pos);
+                    Vector3 rot = new Vector3(0, _rotateY, 0);
+                    _monsterRot.Add(_index, rot);
                     break;
             }
         }
@@ -158,8 +57,9 @@ namespace Level
         }
     }
 
-    internal class XLevelDynamicInfo
+    public class XLevelDynamicInfo
     {
+        public int _id;
         public bool _pushIntoTask = false;
         public float _generatetime = 0f;
         public float _prewaveFinishTime = 0f;
@@ -181,7 +81,7 @@ namespace Level
         }
     }
 
-    internal class XLevelSpawnInfo
+    public class XLevelSpawnInfo
     {
         public List<XLevelWave> _waves = new List<XLevelWave>();
 
@@ -196,9 +96,9 @@ namespace Level
         public void Clear()
         {
             _waves.Clear();
-            foreach (KeyValuePair<int, XLevelDynamicInfo> xLevelDynamicInfo in _wavesDynamicInfo)
+            foreach (var info in _wavesDynamicInfo)
             {
-                xLevelDynamicInfo.Value.Reset();
+                info.Value.Reset();
             }
             _wavesDynamicInfo.Clear();
             _preloadInfo.Clear();
@@ -236,15 +136,10 @@ namespace Level
             for (int i = 0; i < _waves.Count; i++)
             {
                 XLevelDynamicInfo dInfo = GetWaveDynamicInfo(_waves[i]._id);
-
-                if (dInfo == null) continue;
-
+                if (dInfo == null || dInfo._pushIntoTask) continue;
                 if (dInfo._TotalCount != 0 && dInfo._generateCount == dInfo._TotalCount) continue;
 
-                if (dInfo._pushIntoTask) continue;
-
                 bool preWaveFinished = true;
-
                 for (int j = 0; j < _waves[i]._preWave.Count; j++)
                 {
                     XLevelDynamicInfo predInfo;
@@ -256,7 +151,6 @@ namespace Level
                             preWaveFinished = false;
                             break;
                         }
-
                         if (predInfo._enemyIds.Count == 0)
                         {
                             preWaveFinished = true;
@@ -290,7 +184,6 @@ namespace Level
                 if (!preWaveFinished) continue;
 
                 bool exStringExists = true;
-
                 if (_waves[i]._exString != null && _waves[i]._exString.Length > 0)
                 {
                     if (!XLevelScriptMgr.singleton.QueryExternalString(_waves[i]._exString, false))
@@ -330,7 +223,6 @@ namespace Level
                     {
                         // normal monsters
                         GenerateNormalTask(_waves[i]);
-
                         // round monsters
                         GenerateRoundTask(_waves[i]);
                     }
@@ -434,21 +326,21 @@ namespace Level
             task._MonsterPos = pos;
             task._SpawnType = LevelSpawnType.Spawn_Source_Monster;
             task._IsSummonTask = true;
-
             _tasks.Enqueue(task);
         }
 
         protected void GenerateNormalTask(XLevelWave wave)
         {
-            XLevelStatistics.singleton.ls._monster_refresh_time.Add((uint)(Time.time - XLevelStatistics.singleton.ls._start_time));
-            foreach (KeyValuePair<int, Vector3> pair in wave._monsterPos)
+            XLevelState ls = XLevelStatistics.singleton.ls;
+            ls._monster_refresh_time.Add((uint)(Time.time - ls._start_time));
+            foreach (var item in wave._monsterPos)
             {
                 XLevelSpawnTask task = new XLevelSpawnTask(this);
                 task._id = wave._id;
-                task._EnemyID = wave._EnemyID;
-                task._MonsterRotate = (int)wave._monsterRot[pair.Key].y;
-                task._MonsterIndex = pair.Key;
-                task._MonsterPos = pair.Value;
+                task._EnemyID = wave._entityid;
+                task._MonsterRotate = (int)wave._monsterRot[item.Key].y;
+                task._MonsterIndex = item.Key;
+                task._MonsterPos = item.Value;
                 task._SpawnType = wave._spawnType;
                 task._IsSummonTask = false;
                 _tasks.Enqueue(task);
@@ -468,7 +360,7 @@ namespace Level
                 {
                     XLevelSpawnTask task = new XLevelSpawnTask(this);
                     task._id = wave._id;
-                    task._EnemyID = wave._EnemyID;
+                    task._EnemyID = wave._entityid;
                     task._MonsterIndex = 0; // no use now
 
                     task._MonsterPos = playerPos +
@@ -494,7 +386,7 @@ namespace Level
         {
             for (int i = 0; i < _waves.Count; i++)
             {
-                if (_waves[i]._EnemyID == monsterID)
+                if (_waves[i]._entityid == monsterID)
                 {
                     foreach (int key in _waves[i]._monsterPos.Keys)
                     {

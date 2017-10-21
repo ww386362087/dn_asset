@@ -1,20 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class XBoss : XEnemy
+public class XBoss : XEntity
 {
-
-    protected override EnitityType _eEntity_Type
-    {
-        get { return EnitityType.Entity_Boss; }
-    }
 
     public override void OnInitial()
     {
         base.OnInitial();
-        _layer = LayerMask.NameToLayer("BigGuy");
+        _layer = LayerMask.NameToLayer("Boss");
+        _eEntity_Type |= EnitityType.Boss;
     }
-
-
+    
 
 }

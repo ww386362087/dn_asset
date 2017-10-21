@@ -3,11 +3,8 @@ using UnityEditor;
 using XTable;
 using Level;
 
-
 namespace XEditor
 {
-
-
     public class WaveWindow
     {
         public Rect _rect;
@@ -17,17 +14,11 @@ namespace XEditor
         public static int height = 120;
         public static int height2 = 45;
 
-
         protected Texture2D _icon = null;
 
-        private static GUIContent
-            RemoveWaveButtonContent = new GUIContent("X", "remove wave");
-
-        private static GUIContent
-            ToggleWaveButtonContent = new GUIContent("V", "toggle visible");
-
-        private static GUIContent
-            SelectEnemyButtonContent = new GUIContent("S", "select enemy");
+        private static GUIContent RemoveWaveButtonContent = new GUIContent("X", "remove wave");
+        private static GUIContent ToggleWaveButtonContent = new GUIContent("V", "toggle visible");
+        private static GUIContent SelectEnemyButtonContent = new GUIContent("S", "select enemy");
 
         public WaveWindow(LevelWave _wv)
         {
@@ -72,7 +63,7 @@ namespace XEditor
                 GUIStyle gs = new GUIStyle();
                 gs.alignment = TextAnchor.LowerRight;
                 gs.normal.textColor = Color.white;
-                XEntityStatistics.RowData enemyData = XTableMgr.GetTable < XEntityStatistics>().GetByID((int)_wave.EnemyID);
+                XEntityStatistics.RowData enemyData = XTableMgr.GetTable < XEntityStatistics>().GetByID((int)_wave.EntityID);
                 if (enemyData != null && _wave.SpawnType == LevelSpawnType.Spawn_Source_Monster)
                 {
                     if (enemyData.Type == 1)
@@ -84,14 +75,14 @@ namespace XEditor
                         gs.normal.textColor = Color.yellow;
                     }
                 }
-                if (_wave._script != null && _wave._script.Length > 0)
+                if (_wave._levelscript != null && _wave._levelscript.Length > 0)
                 {
-                    int fileNamePos = _wave._script.LastIndexOf("/");
-                    GUILayout.Label(_wave._script.Substring(fileNamePos + 1), gs);
+                    int fileNamePos = _wave._levelscript.LastIndexOf("/");
+                    GUILayout.Label(_wave._levelscript.Substring(fileNamePos + 1), gs);
                 }
                 else
                 {
-                    GUILayout.Label(_wave.EnemyID + "x" + (_wave._prefabSlot.Count + _wave.RoundCount), gs);
+                    GUILayout.Label(_wave.EntityID + "x" + (_wave._prefabSlot.Count + _wave.RoundCount), gs);
                 }
                 GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
@@ -135,7 +126,6 @@ namespace XEditor
                 {
                     _wave.VisibleInEditor = !_wave.VisibleInEditor;
                 }
-
                 if (GUILayout.Button(RemoveWaveButtonContent, LevelLayout.miniButtonWidth))
                 {
                     _wave.LevelMgr.RemoveWave(_wave._id);
@@ -149,7 +139,7 @@ namespace XEditor
             else //script
             {
                 GUILayout.BeginHorizontal();
-                _wave._script = EditorGUILayout.TextField(_wave._script, new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
+                _wave._levelscript = EditorGUILayout.TextField(_wave._levelscript, new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
                 if (GUILayout.Button(RemoveWaveButtonContent, LevelLayout.miniButtonWidth))
                 {
                     _wave.LevelMgr.RemoveWave(_wave._id);
@@ -173,15 +163,25 @@ namespace XEditor
                 Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelRandom.png", typeof(Texture)) as Texture;
                 _icon = AssetPreview.GetAssetPreview(icon);
             }
-            else if (_wave.SpawnType == LevelSpawnType.Spawn_Source_Doodad)
+            else if (_wave.SpawnType == LevelSpawnType.Spawn_Source_Buff)
             {
                 Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/buff.png", typeof(Texture)) as Texture;
                 _icon = AssetPreview.GetAssetPreview(icon);
             }
-            else if (_wave.EnemyID > 0)
+            else if (_wave.EntityID > 0)
             {
                 _icon = AssetPreview.GetAssetPreview(_wave._prefab);
             }
+            if (_icon != null) CompressTo64();
+        }
+
+
+        public void CompressTo64()
+        {
+            Color[] pix = _icon.GetPixels(32, 64, 64, 64);
+            _icon = new Texture2D(64, 64);
+            _icon.SetPixels(pix);
+            _icon.Apply();
         }
 
         protected void OpenEnemyListWindow()

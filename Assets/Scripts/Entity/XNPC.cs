@@ -4,11 +4,6 @@ using XTable;
 
 public class XNPC : XEntity
 {
-    protected override EnitityType _eEntity_Type
-    {
-        get { return EnitityType.Entity_Npc; }
-    }
-
     protected XNpcList.RowData row = null;
 
     public static int NpcLayer = LayerMask.NameToLayer("Npc");
@@ -21,14 +16,13 @@ public class XNPC : XEntity
     {
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Npc");
-
+        _eEntity_Type |= EnitityType.Npc;
         _target = XEntityMgr.singleton.Player;
         _head_rotate = EntityTransfer.forward;
         _uGazing = XTableMgr.GetTable<XNpcList>().GetByUID((int)_attr.id).Gazing;
         FindHead();
         XAnimComponent anim = AttachComponent<XAnimComponent>();
         anim.OverrideAnim("NPC_sidel_idle", _present.AnimLocation + _present.Idle);
-
         EnableShadow(true);
     }
 

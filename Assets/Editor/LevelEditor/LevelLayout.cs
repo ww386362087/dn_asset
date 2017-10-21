@@ -11,40 +11,24 @@ namespace XEditor
     {
         public SerializeLevel _levelMgr;
 
-        public static GUILayoutOption miniButtonWidth = GUILayout.Width(20f);
+        private static GUIContent AddWaveButtonContent = new GUIContent("add wave", "add wave");
+        private static GUIContent AddScriptButtonContent = new GUIContent("add script", "add script");
+        private static GUIContent EditLevelScriptButtonContent = new GUIContent("edit script", "edit script");
+        private static GUIContent GenerateWallInfoButtonContent = new GUIContent("save wall info", "save wall info");
+        private static GUIContent LoadWallInfoButtonContent = new GUIContent("load wall info", "load wall info");
+        private static GUIContent SaveWaveButtonContent = new GUIContent("Save", "Save to file");
+        private static GUIContent LoadWaveButtonContent = new GUIContent("Load", "Load from file");
+        private static GUIContent ClearButtonContent = new GUIContent("Clear", "Clear");
 
-        private static GUIContent
-            AddWaveButtonContent = new GUIContent("add wave", "add wave");
-
-        private static GUIContent
-            AddScriptButtonContent = new GUIContent("add script", "add script");
-
-        private static GUIContent
-            EditLevelScriptButtonContent = new GUIContent("edit script", "edit script");
-
-        private static GUIContent
-            GenerateWallInfoButtonContent = new GUIContent("save wall info", "save wall info");
-
-        private static GUIContent
-            LoadWallInfoButtonContent = new GUIContent("load wall info", "load wall info");
-
-        private static GUIContent
-            SaveWaveButtonContent = new GUIContent("Save", "Save to file");
-
-        private static GUIContent
-            LoadWaveButtonContent = new GUIContent("Load", "Load from file");
-
-        private static GUIContent
-            ClearButtonContent = new GUIContent("Clear", "Clear");
-
+        public static int tabLength = 420;
         public static int minViewHeight = 90;
-        public static int maxViewHeight = 700;
+        public static int maxViewHeight = 920;
         public static int minViewWidth = 5;
         public static int maxViewWidth = 1900;
-
         public Vector2 scrollPosition = Vector2.zero;
 
-        public Vector2 detailScrollPosition = Vector2.zero;
+        public static GUILayoutOption miniButtonWidth = GUILayout.Width(20f);
+        public static GUILayoutOption detailLayout = GUILayout.Width(tabLength);
 
         protected Texture2D _grayText = null;
 
@@ -65,32 +49,26 @@ namespace XEditor
             {
                 _levelMgr.AddWave();
             }
-
             if (GUILayout.Button(AddScriptButtonContent, GUILayout.Width(100f)))
             {
                 _levelMgr.AddScript();
             }
-
             if (GUILayout.Button(ClearButtonContent, GUILayout.Width(100f)))
             {
                 _levelMgr.ClearWaves();
             }
-
             if (GUILayout.Button(EditLevelScriptButtonContent, GUILayout.Width(100f)))
             {
                 _levelMgr.OpenLevelScriptFile();
             }
-
             if (GUILayout.Button(GenerateWallInfoButtonContent, GUILayout.Width(150f)))
             {
                 _levelMgr.GenerateWallInfo();
             }
-
             if (GUILayout.Button(LoadWallInfoButtonContent, GUILayout.Width(150f)))
             {
                 _levelMgr.LoadWallInfo();
             }
-
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -109,26 +87,14 @@ namespace XEditor
             GUILayout.EndHorizontal();
 
             GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
-            scrollPosition = GUI.BeginScrollView(new Rect(minViewWidth, minViewHeight, maxViewWidth, maxViewHeight), scrollPosition, new Rect(0, 0, 3000, 3000));
+            GUILayout.BeginHorizontal();
+            DrawTab();
+            scrollPosition = GUI.BeginScrollView(new Rect(tabLength + minViewWidth, minViewHeight, maxViewWidth, maxViewHeight), scrollPosition, new Rect(0, 0, 3000, 3000));
             _levelMgr.Editor.BeginWindows();
-            foreach (LevelWave _wave in _levelMgr._waves)
-                _wave.DrawWaveWindow();
+            foreach (LevelWave _wave in _levelMgr._waves) _wave.DrawWaveWindow();
             _levelMgr.Editor.EndWindows();
-
             GUI.EndScrollView();
-
-            GUILayout.Space(700);
-
-            detailScrollPosition = EditorGUILayout.BeginScrollView(detailScrollPosition, false, false);
-
-            GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
-
-            // detail view
-            DrawDetailView();
-
-            GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
-            DrawPreloadView();
-            EditorGUILayout.EndScrollView();
+            GUILayout.EndHorizontal();
 
             DrawLinks();
         }
@@ -143,40 +109,37 @@ namespace XEditor
         private void DrawPreloadView()
         {
             Dictionary<uint, int> preloadTmp = new Dictionary<uint, int>();
-
             CalEnemyNum cen = new CalEnemyNum();
             CalEnemyNum.PrintLog = false;
             Dictionary<uint, int> dic = cen.CalNum(_levelMgr._waves);
-
-            foreach (KeyValuePair<uint, int> keyValuePair in dic)
+            foreach (var item in dic)
             {
-                int cur = keyValuePair.Value;
+                int cur = item.Value;
                 int last = 0;
-                _levelMgr._lastCachePreloadInfo.TryGetValue(keyValuePair.Key, out last);
+                _levelMgr._lastCachePreloadInfo.TryGetValue(item.Key, out last);
                 if (last != cur)
                 {
-                    _levelMgr._preLoadInfo[keyValuePair.Key] = cur;
+                    _levelMgr._preLoadInfo[item.Key] = cur;
                 }
             }
-
-            foreach (KeyValuePair<uint, int> keyValuePair in _levelMgr._lastCachePreloadInfo)
+            foreach (var item in _levelMgr._lastCachePreloadInfo)
             {
-                int last = keyValuePair.Value;
+                int last = item.Value;
                 int cur = 0;
-                dic.TryGetValue(keyValuePair.Key, out cur);
+                dic.TryGetValue(item.Key, out cur);
                 if (last != cur)
                 {
-                    _levelMgr._preLoadInfo[keyValuePair.Key] = cur;
+                    _levelMgr._preLoadInfo[item.Key] = cur;
                 }
             }
 
             GUIStyle style = new GUIStyle();
             EditorGUILayout.LabelField("Preload Monster : ");
-            foreach (KeyValuePair<uint, int> keyValuePair in _levelMgr._preLoadInfo)
+            foreach (var item in _levelMgr._preLoadInfo)
             {
-                int preload = keyValuePair.Value;
+                int preload = item.Value;
                 int suggest = 0;
-                dic.TryGetValue(keyValuePair.Key, out suggest);
+                dic.TryGetValue(item.Key, out suggest);
 
                 if (preload > suggest || suggest == 0)
                 {
@@ -194,121 +157,94 @@ namespace XEditor
                 GUILayout.BeginHorizontal();
 
                 GUILayout.BeginVertical();
-                EditorGUILayout.LabelField(string.Format("MonsterID: {0}   (推荐数量: {1})", keyValuePair.Key, suggest), style);
+                EditorGUILayout.LabelField(string.Format("MonsterID: {0}   (推荐数量: {1})", item.Key, suggest), style);
                 GUILayout.EndVertical();
 
                 GUILayout.BeginVertical();
-                preloadTmp[keyValuePair.Key] = EditorGUILayout.IntField(preload);
+                preloadTmp[item.Key] = EditorGUILayout.IntField(preload);
                 GUILayout.EndVertical();
 
                 GUILayout.EndHorizontal();
-
                 GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
             }
 
             _levelMgr._preLoadInfo.Clear();
-            foreach (KeyValuePair<uint, int> keyValuePair in preloadTmp)
+            foreach (var item in preloadTmp)
             {
                 int suggest = 0;
-                dic.TryGetValue(keyValuePair.Key, out suggest);
-                if (keyValuePair.Value < 0)
+                dic.TryGetValue(item.Key, out suggest);
+                if (item.Value < 0)
                 {
                     if (suggest != 0)
                     {
-                        _levelMgr._preLoadInfo[keyValuePair.Key] = 0;
+                        _levelMgr._preLoadInfo[item.Key] = 0;
                     }
                     continue;
                 }
-                _levelMgr._preLoadInfo[keyValuePair.Key] = keyValuePair.Value;
+                _levelMgr._preLoadInfo[item.Key] = item.Value;
             }
 
             _levelMgr._lastCachePreloadInfo = dic;
         }
 
-        public void DrawDetailView()
+        public void DrawTab()
         {
+            GUILayout.BeginHorizontal(detailLayout);
+            GUILayout.BeginVertical();
             if (_levelMgr.CurrentEdit > -1)
             {
-                LevelWave wv = _levelMgr.GetWave(_levelMgr.CurrentEdit);
+                GUILayout.Space(10);
+                DrawDetailView();
+            }
+            GUILayout.Space(24);
+            DrawPreloadView();
+            GUILayout.EndHorizontal();
+            GUILayout.EndHorizontal();
+        }
 
-                if (wv != null)
-                {
-                    GUILayout.BeginHorizontal();
+        public void DrawDetailView()
+        {
+            LevelWave wv = _levelMgr.GetWave(_levelMgr.CurrentEdit);
+            if (wv != null)
+            {
+                GUILayout.BeginHorizontal();
+                wv.SpawnType = (LevelSpawnType)EditorGUILayout.EnumPopup("Spawn Type", wv.SpawnType);
+                GUILayout.EndHorizontal();
 
-                    GUILayout.BeginVertical();
-                    if (wv.SpawnType == LevelSpawnType.Spawn_Source_Player)
-                    {
-                        Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelPlayer.png", typeof(Texture)) as Texture;
-                        Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
-                        GUILayout.Box(icon128);
-                    }
-                    else if (wv.SpawnType == LevelSpawnType.Spawn_Source_Random)
-                    {
-                        Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelRandom.png", typeof(Texture)) as Texture;
-                        Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
-                        GUILayout.Box(icon128);
-                    }
-                    else if (wv.SpawnType == LevelSpawnType.Spawn_Source_Doodad)
-                    {
-                        Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/buff.png", typeof(Texture)) as Texture;
-                        Texture2D icon128 = AssetPreview.GetAssetPreview(icon);
-                        GUILayout.Box(icon128);
-                    }
-                    else if (wv._prefab != null)
-                    {
-                        Texture2D icon = AssetPreview.GetAssetPreview(wv._prefab);
-                        if (icon != null) GUILayout.Box(icon);
-                        else GUILayout.Box(_grayText);
-                    }
-                    else
-                    {
-                        GUILayout.Box(_grayText);
-                    }
-                    GUILayout.EndVertical();
+                GUILayout.BeginHorizontal();
+                wv.Time = EditorGUILayout.FloatField("Spawn Time(s):", wv.Time);
+                GUILayout.EndHorizontal();
 
-                    GUILayout.BeginVertical();
+                GUILayout.BeginHorizontal();
+                wv.Random = EditorGUILayout.IntField("Random ID:", wv.Random);
+                GUILayout.EndHorizontal();
 
-                    GUILayout.BeginHorizontal();
-                    wv.SpawnType = (LevelSpawnType)EditorGUILayout.EnumPopup("Spawn Type", wv.SpawnType);
-                    GUILayout.EndHorizontal();
+                GUILayout.Space(20);
 
-                    GUILayout.BeginHorizontal();
-                    wv.Time = EditorGUILayout.FloatField("Spawn Time(second):", wv.Time);
-                    GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                wv._exString = EditorGUILayout.TextField("ExString(,):", wv._exString);
+                GUILayout.EndHorizontal();
 
-                    GUILayout.BeginHorizontal();
-                    wv.Random = EditorGUILayout.IntField("Random ID:", wv.Random);
-                    GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                wv._preWaves = EditorGUILayout.TextField("PreWaves(,):", wv._preWaves);
+                wv._preWavePercent = EditorGUILayout.IntSlider("PreWavePercent(%):", wv._preWavePercent, 0, 100);
+                GUILayout.EndHorizontal();
 
-                    GUILayout.Space(20);
+                GUILayout.BeginHorizontal();
+                wv._doodad_id = EditorGUILayout.TextField("Doodad ID:", wv._doodad_id);
+                wv._doodad_percent = EditorGUILayout.IntSlider("Doodad Percent(%):", wv._doodad_percent, 0, 100);
+                GUILayout.EndHorizontal();
 
-                    GUILayout.BeginHorizontal();
-                    wv._exString = EditorGUILayout.TextField("ExString(,):", wv._exString);
-                    GUILayout.EndHorizontal();
+                GUILayout.Space(20);
 
-                    GUILayout.BeginHorizontal();
-                    wv._preWaves = EditorGUILayout.TextField("PreWaves(,):", wv._preWaves);
-                    wv._preWavePercent = EditorGUILayout.IntSlider("PreWavePercent(%):", wv._preWavePercent, 0, 100);
-                    GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                wv.RoundRidous = EditorGUILayout.FloatField("RoundRidous:", wv.RoundRidous);
+                GUILayout.EndHorizontal();
 
-                    GUILayout.BeginHorizontal();
-                    wv._doodad_id = EditorGUILayout.TextField("Doodad ID:", wv._doodad_id);
-                    wv._doodad_percent = EditorGUILayout.IntSlider("Doodad Percent(%):", wv._doodad_percent, 0, 100);
-                    GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                wv.RoundCount = EditorGUILayout.IntSlider("RoundCount:", wv.RoundCount, 0, 10);
 
-                    GUILayout.Space(20);
-
-                    GUILayout.BeginHorizontal();
-                    wv.RoundRidous = EditorGUILayout.FloatField("RoundRidous:", wv.RoundRidous);
-                    GUILayout.EndHorizontal();
-
-                    GUILayout.BeginHorizontal();
-                    wv.RoundCount = EditorGUILayout.IntSlider("RoundCount:", wv.RoundCount, 0, 10);
-                    GUILayout.EndHorizontal();
-
-                    GUILayout.EndVertical();
-                    GUILayout.EndHorizontal();
-                }
+                GUILayout.EndVertical();
             }
         }
 
@@ -344,11 +280,12 @@ namespace XEditor
         {
             LevelWave parent = _levelMgr.GetWave(parentID);
             LevelWave child = _levelMgr.GetWave(childID);
-
             if (parent != null && child != null)
             {
                 Rect parentRect = parent.LayoutWindow._rect;
                 Rect childRect = child.LayoutWindow._rect;
+                parentRect.x += tabLength;
+                childRect.x += tabLength;
                 curveFromTo(parentRect, childRect, color, color2);
             }
         }
@@ -412,5 +349,4 @@ namespace XEditor
         }
 
     }
-
 }

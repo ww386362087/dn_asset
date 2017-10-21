@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Level;
+using UnityEngine;
 using XTable;
 
 public class XScene : XSingleton<XScene>
@@ -10,6 +11,8 @@ public class XScene : XSingleton<XScene>
     private XCutSceneData _cutscene_data = null;
     private XCutSceneRunner _cutscene_runer = null;
     private Terrain _terrain;
+    private XSceneLoader _loader;
+    private int _syncModeValue = 0;
 
     public SceneType SceneType { get; set; }
 
@@ -20,9 +23,7 @@ public class XScene : XSingleton<XScene>
     /// 1 联机，服务器刷怪和同步
     /// 2 单机，服务器把刷怪数据给客户端，客户端刷怪
     /// </summary>
-    private int SyncModeValue = 0;
-    
-    public bool SyncMode { get { return SyncModeValue == 1; } }
+    public bool SyncMode { get { return _syncModeValue == 1; } }
 
     public SceneList.RowData SceneRow { get { return _scene_row; } }
 
@@ -30,42 +31,42 @@ public class XScene : XSingleton<XScene>
 
     public XCamera GameCamera
     {
-        get
-        {
-            if (_camera == null) _camera = new XCamera();
-            return _camera;
-        }
+        get { if (_camera == null) _camera = new XCamera(); return _camera; }
     }
-
 
     public void Update(float deltaTime)
     {
-        if(_sceneid>0)
+        if (_sceneid > 0)
         {
             if (_camera != null)
                 _camera.Update(deltaTime);
+
+            XLevelSpawnMgr.singleton.Update(deltaTime);
         }
     }
 
     public void LateUpdate()
     {
-        if(_sceneid>0)
+        if (_sceneid > 0)
         {
             if (_camera != null)
                 _camera.LateUpdate();
         }
     }
-    
+
     public void Enter(uint sceneid)
     {
         _sceneid = sceneid;
         OnEnterScene(sceneid);
-        //to-do 
-        CreatePlayer();
-        CreateNPCs();
-        CreateMonsters();
+        DoLoad();
+    }
 
-        OnEnterSceneFinally();
+    private void DoLoad()
+    {
+        XEntityMgr.singleton.CreatePlayer();
+        CreateNPCs();
+        if (_loader == null) _loader = new XSceneLoader();
+        _loader.Load(OnEnterSceneFinally);
     }
 
     private void OnEnterScene(uint sceneid)
@@ -75,6 +76,7 @@ public class XScene : XSingleton<XScene>
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
         GameCamera.Initial(camera);
         Documents.singleton.OnEnterScene();
+        XLevelSpawnMgr.singleton.OnEnterScene(sceneid);
     }
 
     public string GetSceneDynamicPrefix()
@@ -111,12 +113,6 @@ public class XScene : XSingleton<XScene>
         return 0;
     }
 
-    private void CreatePlayer()
-    {
-        XEntityMgr.singleton.CreatePlayer();
-        XPlayer player = XEntityMgr.singleton.Player;
-        player.EnableCC(true);
-    }
 
     public void AttachCutScene(XCutSceneData csd)
     {
@@ -146,16 +142,9 @@ public class XScene : XSingleton<XScene>
         _cutscene_data = null;
     }
 
-    private void CreateMonsters()
-    {
-        //to-do create monster
-    }
-
-
     private void CreateNPCs()
     {
-        var row = XTableMgr.GetTable < XNpcList>().GetByUID(24);
+        var row = XTableMgr.GetTable<XNpcList>().GetByUID(24);
         XEntityMgr.singleton.CreateNPC(row);
     }
-
 }

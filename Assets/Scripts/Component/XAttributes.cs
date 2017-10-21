@@ -5,7 +5,6 @@ public class XAttributes : XComponent
     private uint _id = 0;
     private string _prefab_name = null;
     private string _name = null;
-    private EnitityType _type = EnitityType.Entity_None;
     private Vector3 _appear_pos = Vector3.zero;
     private Quaternion _appear_qua = Quaternion.identity;
     private uint _presentID = 2;
@@ -27,12 +26,7 @@ public class XAttributes : XComponent
         get { return _name; }
         set { _name = value; }
     }
-
-    public EnitityType Type
-    {
-        get { return _type; }
-        set { _type = value; }
-    }
+    
 
     public Vector3 AppearPostion
     {

@@ -130,20 +130,21 @@ namespace XEditor
             Dictionary<uint, int> suggest = cen.CalNum(_waves);
 
             int preLoadCount = 0;
-            foreach (KeyValuePair<uint, int> keyValuePair in _preLoadInfo)
+            foreach (var item in _preLoadInfo)
             {
                 int sugCount = 0;
-                suggest.TryGetValue(keyValuePair.Key, out sugCount);
-                if (keyValuePair.Value > 0 || sugCount > 0) ++preLoadCount;
+                suggest.TryGetValue(item.Key, out sugCount);
+                if (item.Value > 0 || sugCount > 0) ++preLoadCount;
             }
             sw.WriteLine("{0}", preLoadCount);
-            foreach (KeyValuePair<uint, int> keyValuePair in _preLoadInfo)
+
+            foreach (var item in _preLoadInfo)
             {
                 int sugCount = 0;
-                suggest.TryGetValue(keyValuePair.Key, out sugCount);
-                if (keyValuePair.Value > 0 || sugCount > 0)
+                suggest.TryGetValue(item.Key, out sugCount);
+                if (item.Value > 0 || sugCount > 0)
                 {
-                    sw.WriteLine("pi:" + keyValuePair.Key + "," + keyValuePair.Value);
+                    sw.WriteLine("pi:" + item.Key + "," + item.Value);
                 }
             }
             foreach (LevelWave _wave in _waves)
@@ -204,7 +205,7 @@ namespace XEditor
             }
             for (int id = 0; id < totalWave; id++)
             {
-                LevelWave newWave = CreateInstance<LevelWave>();
+                LevelWave newWave = new LevelWave();
                 newWave.LevelMgr = this;
                 newWave.ReadFromFile(sr);
                 _waves.Add(newWave);
@@ -287,7 +288,6 @@ namespace XEditor
         public void GenerateWallInfo()
         {
             if (string.IsNullOrEmpty(current_level)) return;
-
             string fileName = "./" + XEditorLibrary.Lev + current_level + "_sc.txt";
             if (!File.Exists(fileName)) return;
             string content = File.ReadAllText(fileName);
@@ -295,9 +295,7 @@ namespace XEditor
             string[] commands = content.Split(new char[] { '\n' });
             string append = "";
             bool HasPreInfo = false;
-
             List<string> RecordWalls = new List<string>();
-
             for (int i = 0; i < commands.Length; i++)
             {
                 if (commands[i].StartsWith("info"))
@@ -386,7 +384,7 @@ namespace XEditor
 
         public void AddWave()
         {
-            LevelWave newWave = CreateInstance<LevelWave>();
+            LevelWave newWave = new LevelWave();
             int newid = GetEmptySlot(0, 100);
             if (newid >= 0)
             {
@@ -403,7 +401,7 @@ namespace XEditor
 
         public void AddScript()
         {
-            LevelWave newWave = CreateInstance<LevelWave>();
+            LevelWave newWave = new LevelWave();
             int newid = GetEmptySlot(1000, 1100);
 
             if (newid >= 0)

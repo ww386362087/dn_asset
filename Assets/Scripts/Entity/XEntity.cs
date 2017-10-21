@@ -1,32 +1,38 @@
 ﻿using UnityEngine;
 using XTable;
 
+
+/// <summary>
+/// entity 可能是多重身份（既是Ally 又是Role 又是Player）
+/// </summary>
 public enum EnitityType
 {
-    Entity_None = 1 << 0,
-    Entity_Role = 1 << 1,
-    Entity_Player = 1 << 2,
-    Entity_Enemy = 1 << 3,
-    Entity_Opposer = 1 << 4,
-    Entity_Boss = 1 << 5,
-    Entity_Puppet = 1 << 6,
-    Entity_Elite = 1 << 7,
-    Entity_Npc = 1 << 8,
+    //表现
+    Entity = 1 << 0,
+    Role = 1 << 1,
+    Player = 1 << 2,
+    Monster = 1 << 3,
+    Boss = 1 << 4,
+    Npc = 1 << 5,
+
+    //同盟
+    Ship_Start = 1 << 6,
+    Enemy = 1 << 6,
+    Ally = 1 << 7,
+    Neutral = 1 << 8,
 }
 
 
-public abstract class XEntity : XObject
+public class XEntity : XObject
 {
-
-    protected abstract EnitityType _eEntity_Type { get; }
+    protected EnitityType _eEntity_Type = EnitityType.Entity;
     protected XAttributes _attr = null;
     protected XEntityPresentation.RowData _present;
     protected GameObject _object = null;
     protected Transform _transf = null;
     protected int _layer = 0;
-    public float speed = 0.05f;
+    protected float _speed = 0.03f;
     protected SkinnedMeshRenderer _skin = null;
-
     protected Vector3 _forward = Vector3.zero;
     protected bool _force_move = false;
     private Vector3 _pos = Vector3.zero;
@@ -38,37 +44,32 @@ public abstract class XEntity : XObject
 
     public bool IsPlayer
     {
-        get { return (_eEntity_Type & EnitityType.Entity_Player) != 0; }
+        get { return (_eEntity_Type & EnitityType.Player) != 0; }
     }
 
     public bool IsRole
     {
-        get { return (_eEntity_Type & EnitityType.Entity_Role) != 0; }
+        get { return (_eEntity_Type & EnitityType.Role) != 0; }
     }
-
-    public bool IsOpposer
-    {
-        get { return (_eEntity_Type & EnitityType.Entity_Opposer) != 0; }
-    }
-
+    
     public bool IsEnemy
     {
-        get { return (_eEntity_Type & EnitityType.Entity_Enemy) != 0; }
+        get { return (_eEntity_Type & EnitityType.Enemy) != 0; }
     }
 
-    public bool IsPuppet
+    public bool IsAlly
     {
-        get { return (_eEntity_Type & EnitityType.Entity_Puppet) != 0; }
+        get { return (_eEntity_Type & EnitityType.Ally) != 0; }
     }
 
     public bool IsBoss
     {
-        get { return (_eEntity_Type & EnitityType.Entity_Boss) != 0; }
+        get { return (_eEntity_Type & EnitityType.Boss) != 0; }
     }
 
     public bool IsNpc
     {
-        get { return (_eEntity_Type & EnitityType.Entity_Npc) != 0; }
+        get { return (_eEntity_Type & EnitityType.Npc) != 0; }
     }
 
     public float Radius
@@ -152,7 +153,7 @@ public abstract class XEntity : XObject
     public void UnloadEntity()
     {
         _attr = null;
-        GameObject.Destroy(_object);
+        XResources.Destroy(_object);
         _object = null;
         OnUnintial();
         base.Unload();
@@ -169,7 +170,7 @@ public abstract class XEntity : XObject
         if (_force_move && _transf != null)
         {
             _transf.forward = _forward;
-            _pos = Position + _forward.normalized * speed;
+            _pos = Position + _forward.normalized * _speed;
             _pos.y = XScene.singleton.TerrainY(_pos) + 0.02f;
             _transf.position = _pos;
         }
@@ -226,4 +227,9 @@ public abstract class XEntity : XObject
         }
     }
 
+    public void SetRelation(EnitityType type)
+    {
+        _eEntity_Type |= type;
+    }
+    
 }

@@ -51,7 +51,7 @@ namespace Level
             ClearWallInfo();
             Stream s = XResources.ReadText("Table/" + file);
             {
-                StreamReader sr = new StreamReader(s);
+                using (StreamReader sr = new StreamReader(s))
                 {
                     string line;
                     string curFunc = "";
@@ -621,7 +621,7 @@ namespace Level
                     break;
                 case LevelCmd.Level_Cmd_KillAlly:
                     {
-                         XDebug.LogError("找小邹: kill ally");
+                        XDebug.LogError("找小邹: kill ally");
                         // XEntityMgr.singleton.KillAlly(XEntityMgr.singleton.Player);
                         _currentCmd.state = XCmdState.Cmd_Finished;
                     }

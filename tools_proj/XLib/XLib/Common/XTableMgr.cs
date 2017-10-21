@@ -18,7 +18,8 @@ public class XTableMgr
     static bool loadFinish = false;
 
     public static void Initial()
-    { 
+    {
+        if (readers != null) readers.Clear();
         Add<DefaultEquip>();
         Add<EquipSuit>();
         Add<FashionList>();

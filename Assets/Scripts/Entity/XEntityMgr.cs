@@ -7,40 +7,28 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 {
 
     private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
-    public HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
-    
+    private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
+    private Dictionary<EnitityType, List<XEntity>> _map_entities = new Dictionary<EnitityType, List<XEntity>>();
     public XPlayer Player;
 
-    private XEntity CreateEntity(XAttributes attr, bool autoAdd)
-    {
-        XEntity e = null;
-        switch (attr.Type)
-        {
-            case EnitityType.Entity_Boss: e = PrepareEntity<XBoss>(attr, autoAdd); break;
-            case EnitityType.Entity_Role: e = PrepareEntity<XRole>(attr, autoAdd); break;
-            case EnitityType.Entity_Player: e = PrepareEntity<XPlayer>(attr, autoAdd); break;
-            case EnitityType.Entity_Npc: e = PrepareEntity<XNPC>(attr, autoAdd); break;
-            case EnitityType.Entity_Enemy: e = PrepareEntity<XEnemy>(attr, autoAdd); break;
-        }
-        return e;
-    }
 
-
-    private T PrepareEntity<T>(XAttributes attr, bool autoAdd) where T : XEntity
+    private T PrepareEntity<T>(XAttributes attr) where T : XEntity
     {
         T x = Activator.CreateInstance<T>();
-        GameObject o = XResources.Load<GameObject>("Prefabs/" + attr.Prefab, AssetType.Prefab);
-        if (!Application.isMobilePlatform) o.name = attr.Name;
+        GameObject o = XResources.LoadInPool("Prefabs/" + attr.Prefab);
+#if UNITY_EDITOR
+        o.name = attr.Name;
+#endif
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
-        if (!_dic_entities.ContainsKey(attr.id)) _dic_entities.Add(attr.id, x);
-        if (!_hash_entitys.Add(x))  XDebug.Log("has exist entity: " , attr.id);
+        if (!_dic_entities.ContainsKey(attr.id) && IsPlayer(x)) _dic_entities.Add(attr.id, x);
+        if (!_hash_entitys.Add(x) && IsPlayer(Player)) XDebug.Log("has exist entity: ", attr.id);
         return x;
     }
 
 
-    private void UnloadAll()
+    public void UnloadAll()
     {
         var e = _hash_entitys.GetEnumerator();
         while (e.MoveNext())
@@ -49,6 +37,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         }
         _hash_entitys.Clear();
         _dic_entities.Clear();
+        _map_entities.Clear();
     }
 
 
@@ -57,6 +46,13 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         if (_dic_entities.ContainsKey(id))
         {
             _dic_entities[id].UnloadEntity();
+            _dic_entities.Remove(id);
+        }
+        _hash_entitys.RemoveWhere(x => x.EntityID == id);
+        var e = _map_entities.GetEnumerator();
+        while (e.MoveNext())
+        {
+            e.Current.Value.RemoveAll(ent => ent.EntityID == id);
         }
     }
 
@@ -78,7 +74,6 @@ public class XEntityMgr : XSingleton<XEntityMgr>
             e.Current.OnLateUpdate();
         }
     }
-
 
 
     /// <summary>
@@ -107,36 +102,34 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     }
 
 
-    public XEntity CreateEntity(uint id,Vector3 pos,Quaternion rot,bool autoAdd)
+    public XEntity CreateEntity<T>(uint staticid, Vector3 pos, Quaternion rot) where T : XEntity
     {
-        XAttributes attr = InitAttrFromClient((int)id);
+        XAttributes attr = InitAttrFromClient((int)staticid);
         attr.AppearPostion = pos;
         attr.AppearQuaternion = rot;
-        XEntity e = PrepareEntity<XEntity>(attr, autoAdd);
+        XEntity e = PrepareEntity<T>(attr);
+        Add(EnitityType.Entity, e);
         return e;
     }
 
 
-    public XRole CreateRole(XAttributes attr, bool autoAdd)
+    public XRole CreateRole(XAttributes attr)
     {
-        return PrepareEntity<XRole>(attr, autoAdd);
+        return PrepareEntity<XRole>(attr);
     }
-
 
     public XRole CreateTestRole()
     {
         XAttributes attr = InitAttrFromClient(2);
-        attr.Type = EnitityType.Entity_Role;
         attr.AppearPostion = Vector3.zero;
         attr.AppearQuaternion = Quaternion.identity;
-        return CreateRole(attr, false);
+        return CreateRole(attr);
     }
 
     public XPlayer CreatePlayer()
     {
         SceneList.RowData row = XScene.singleton.SceneRow;
         XAttributes attr = InitAttrFromClient(2);
-        attr.Type = EnitityType.Entity_Player;
         string s = row.StartPos;
         string[] ss = s.Split('=');
         float[] fp = new float[3];
@@ -145,24 +138,63 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         float.TryParse(ss[2], out fp[2]);
         attr.AppearPostion = new Vector3(fp[0], fp[1], fp[2]);
         attr.AppearQuaternion = Quaternion.Euler(row.StartRot[0], row.StartRot[1], row.StartRot[2]);
-        return Player = PrepareEntity<XPlayer>(attr, false);
+        return Player = PrepareEntity<XPlayer>(attr);
     }
 
 
     public XNPC CreateNPC(XNpcList.RowData row)
     {
         XAttributes attr = InitAttrByPresent(row.PresentID);
-        attr.Type = EnitityType.Entity_Npc;
-        attr.AppearPostion = Player.Position + new Vector3(0, 0, -2);// new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
+        attr.AppearPostion = new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
         attr.AppearQuaternion = Quaternion.Euler(row.NPCRotation[0], row.NPCRotation[1], row.NPCRotation[2]);
-        return PrepareEntity<XNPC>(attr, false);
+        var e = PrepareEntity<XNPC>(attr);
+        Add(EnitityType.Npc, e);
+        return e;
     }
 
 
-    private XAttributes InitAttrFromClient(int entityID)
+    public List<XEntity> GetAllNPC()
     {
-        var entity = XTableMgr.GetTable<XEntityStatistics>().GetByID(entityID);
-        if (entity == null) throw new Exception("entity is nil with id: " + entityID);
+        return _map_entities[EnitityType.Npc];
+    }
+
+
+    public List<XEntity> GetAllAlly()
+    {
+        return _map_entities[EnitityType.Ally];
+    }
+
+    public List<XEntity> GetAllEnemy()
+    {
+        return _map_entities[EnitityType.Enemy];
+    }
+
+    public void SetRelation(uint entityid, EnitityType type)
+    {
+        if (type < EnitityType.Ship_Start)
+        {
+            XDebug.LogError("Set Relation err");
+            return;
+        }
+        XEntity e = null;
+        if (_dic_entities.TryGetValue(entityid, out e))
+        {
+            e.SetRelation(type);
+            Add(type, e);
+        }
+    }
+
+    private bool IsPlayer(XEntity e)
+    {
+        if (Player != null)
+            return Player.EntityID == e.EntityID;
+        return false;
+    }
+
+    private XAttributes InitAttrFromClient(int staticid)
+    {
+        var entity = XTableMgr.GetTable<XEntityStatistics>().GetByID(staticid);
+        if (entity == null) throw new Exception("entity is nil with id: " + staticid);
         XAttributes attr = new XAttributes();
         var prow = XTableMgr.GetTable<XEntityPresentation>().GetItemID(entity.PresentID);
         if (prow == null) throw new Exception("present is nil with id: " + entity.PresentID);
@@ -183,6 +215,23 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         attr.PresentID = presentID;
         attr.Name = prow.Name;
         return attr;
+    }
+
+    private bool Add(EnitityType type, XEntity e)
+    {
+        if (_map_entities.ContainsKey(type))
+        {
+            List<XEntity> l = _map_entities[type];
+            if (l.Contains(e)) return false;
+            else l.Add(e);
+        }
+        else
+        {
+            List<XEntity> l = new List<XEntity>();
+            l.Add(e);
+            _map_entities.Add(type, l);
+        }
+        return true;
     }
 
 }

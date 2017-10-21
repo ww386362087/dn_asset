@@ -15,6 +15,10 @@ public class XResources
     /// key Clone-Object的InstanceID, value是ABManager或者XResourceMgr的hash值
     /// </summary>
     private static Dictionary<int, uint> _asset_map = new Dictionary<int, uint>();
+    /// <summary>
+    /// 缓冲池（预加载）
+    /// </summary>
+    private static Dictionary<uint, Stack<GameObject>> _cache_pool = new Dictionary<uint, Stack<GameObject>>();
 
     private static MemoryStream _share_stream = new MemoryStream(8192);//512k
 
@@ -43,7 +47,23 @@ public class XResources
     /// </summary>
     public static T Load<T>(string path, AssetType type) where T : Object
     {
-        Object obt; uint hash = 0;
+        uint hash = 0;
+        Object obt = LoadAsset<T>(path, type, out hash);
+        T t = Obj2T<T>(obt);
+        if (t != null)
+        {
+            int instance = t.GetInstanceID();
+            _asset_map[instance] = hash;
+        }
+        return t;
+    }
+
+    /// <summary>
+    /// 拿到的Asset, 方法不对外
+    /// </summary>
+    private static Object LoadAsset<T>(string path, AssetType type,out uint hash) where T: Object
+    {
+        Object obt; 
         if (_ab.Exist(path, type))
         {
             obt = _ab.Load<T>(path, type, out hash);
@@ -52,13 +72,7 @@ public class XResources
         {
             obt = _res.Load<T>(path, type, out hash);
         }
-        T t = Obj2T<T>(obt);
-        if (t != null)
-        {
-            int instance = t.GetInstanceID();
-            _asset_map[instance] = hash;
-        }
-        return t;
+        return obt;
     }
 
     private static T Obj2T<T>(Object o) where T : Object
@@ -103,6 +117,50 @@ public class XResources
         else
         {
             _res.AsynLoad<T>(path, type, cb);
+        }
+    }
+
+
+    public static void CreateInAdvance(string path, int cnt)
+    {
+        uint hash = XCommon.singleton.XHash(path);
+        GameObject go = Load<GameObject>(path, AssetType.Prefab);
+        float far = 1000;
+        go.transform.position = new Vector3(far, 0, far);
+        if (go != null)
+        {
+            if (!_cache_pool.ContainsKey(hash))
+                _cache_pool.Add(hash, new Stack<GameObject>());
+            for (int i = 0; i < cnt; i++)
+            {
+                _cache_pool[hash].Push(go);
+            }
+        }
+    }
+
+    public static GameObject LoadInPool(string path)
+    {
+        uint hash = XCommon.singleton.XHash(path);
+        if(_cache_pool.ContainsKey(hash))
+        {
+            var obj = _cache_pool[hash].Pop();
+            if (_cache_pool[hash].Count <= 0)
+                _cache_pool.Remove(hash);
+            return obj;
+        }
+        return Load<GameObject>(path, AssetType.Prefab);
+    }
+
+    public static void DestroyInPool(string path)
+    {
+        uint hash = XCommon.singleton.XHash(path);
+        if (_cache_pool.ContainsKey(hash))
+        {
+            while (_cache_pool[hash].Count > 0)
+            {
+                Destroy(_cache_pool[hash].Pop());
+            }
+            _cache_pool.Remove(hash);
         }
     }
 
@@ -189,7 +247,7 @@ public class XResources
 
     public static Stream ReadText(string location, bool error = true)
     {
-        TextAsset data = Load<TextAsset>(location, AssetType.Byte);
+        TextAsset data = Load<TextAsset>(location, AssetType.Text);
         if (data == null)
         {
             if (error) XDebug.LogError("Load resource: ", location, " error!");

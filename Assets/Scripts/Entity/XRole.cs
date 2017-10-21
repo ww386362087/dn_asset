@@ -6,19 +6,14 @@ public class XRole : XEntity
 
     protected CharacterController controller;
     protected XNavigationComponent nav;
-
-    protected override EnitityType _eEntity_Type
-    {
-        get { return EnitityType.Entity_Role; }
-    }
-
+    
     public int profession = 1;
     public DefaultEquip.RowData defEquip = null;
 
     public override void OnInitial()
     {
         base.OnInitial();
-
+        _eEntity_Type |= EnitityType.Role;
         _layer = LayerMask.NameToLayer("Role");
         profession = 1;
         defEquip = XTableMgr.GetTable<DefaultEquip>().GetByUID(profession + 1);

@@ -43,10 +43,13 @@ public class TestManager
                     test = new TestFashion();
                     break;
                 case "World":
-                    test = new TestScene();
+                    test = new TestWorld();
                     break;
                 case "CutScene":
                     test = new TestCutScene();
+                    break;
+                case "AI":
+                    test = new TestAI();
                     break;
                 default:
                     test = new Test();

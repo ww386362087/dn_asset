@@ -21,6 +21,8 @@
     
     public static string Fbx = ".fbx";
 
+    public static string Text = ".txt";
+
     private string V;
 
     public AssetType(string aa) { V = aa; }
