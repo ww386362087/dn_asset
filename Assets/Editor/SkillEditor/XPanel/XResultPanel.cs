@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class XVector3
 {
-    private Vector3 _inner_pos;
+    private Vector3 _inner;
 
     public XVector3(float x, float y, float z)
     {
-        _inner_pos = new Vector3(x, y, z);
+        _inner = new Vector3(x, y, z);
     }
-
+    
     public Vector3 FirePos
     {
-        get { return _inner_pos; }
-        set { _inner_pos = value; }
+        get { return _inner; }
+        set { _inner = value; }
     }
 }
 

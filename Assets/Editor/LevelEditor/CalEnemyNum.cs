@@ -106,12 +106,12 @@ namespace XEditor
             n = 0;
             foreach (EditorWave wave in waves)
             {
-                if (wave._id < 1000)
+                if (wave.ID < 1000)
                 {
                     ++n;
-                    if (!map.ContainsKey(wave._id))
+                    if (!map.ContainsKey(wave.ID))
                     {
-                        map.Add(wave._id, ++Sid);
+                        map.Add(wave.ID, ++Sid);
                     }
                 }
             }
@@ -124,9 +124,9 @@ namespace XEditor
             for (int i = 0; i <= NN; ++i) next.Add(-1);
             foreach (EditorWave wave in waves)
             {
-                if (wave._id >= 1000) continue;
+                if (wave.ID >= 1000) continue;
                 int count = wave._prefabSlot.Count + wave.RoundCount;
-                int id = map[wave._id];
+                int id = map[wave.ID];
                 if (wave.EntityID == entityid)
                 {
                     add(b, id, count);
@@ -172,7 +172,7 @@ namespace XEditor
             foreach (EditorWave wave in waves)
             {
                 if (wave.SpawnType == LevelSpawnType.Spawn_Buff) continue;
-                if (wave._id < 1000)
+                if (wave.ID < 1000)
                 {
                     if (map.ContainsKey(wave.EntityID) == false)
                     {

@@ -7,9 +7,9 @@ namespace Level
 {
     public class XLevelWave : BaseWave
     {
-        public List<int> _preWave = new List<int>();
-        public Dictionary<int, Vector3> _monsterPos = new Dictionary<int, Vector3>();
-        public Dictionary<int, Vector3> _monsterRot = new Dictionary<int, Vector3>();
+        public List<int> preWave = new List<int>();
+        public Dictionary<int, Vector3> monsterPos = new Dictionary<int, Vector3>();
+        public Dictionary<int, Vector3> monsterRot = new Dictionary<int, Vector3>();
 
         protected override void ParseInfo(string data)
         {
@@ -25,15 +25,18 @@ namespace Level
                             int preWave = 0;
                             if (int.TryParse(strPreWaves[i], out preWave))
                             {
-                                _preWave.Add(preWave);
+                                this.preWave.Add(preWave);
                             }
                         }
                     }
                     break;
                 case InfoType.TypeMonsterInfo:
-                    _monsterPos.Add(index, pos);
-                    Vector3 rot = new Vector3(0, rotateY, 0);
-                    _monsterRot.Add(index, rot);
+                    if (!isAroundPlayer)
+                    {
+                        monsterPos.Add(index, pos);
+                        Vector3 rot = new Vector3(0, rotateY, 0);
+                        monsterRot.Add(index, rot);
+                    }
                     break;
             }
         }
@@ -61,7 +64,7 @@ namespace Level
         public int id;
         public bool pushIntoTask = false;
         public float generatetime = 0f;
-        public float prewaveFinishTime = 0f;
+        public float startTime = 0f;
         public float exStringFinishTime = 0f;
         public int totalCount = 0;
         public int generateCount = 0;
@@ -73,7 +76,7 @@ namespace Level
             pushIntoTask = false;
             generatetime = 0f;
             generateCount = 0;
-            prewaveFinishTime = 0f;
+            startTime = 0f;
             exStringFinishTime = 0f;
             dieCount = 0;
             entityIds.Clear();
@@ -83,13 +86,9 @@ namespace Level
     public class XLevelSpawnInfo
     {
         public List<XLevelWave> waves = new List<XLevelWave>();
-
         public Dictionary<int, XLevelDynamicInfo> wavesDynamicInfo = new Dictionary<int, XLevelDynamicInfo>();
-
         public Dictionary<int, int> preloadInfo = new Dictionary<int, int>();
-
         private Queue<XLevelBaseTask> _tasks = new Queue<XLevelBaseTask>();
-
         private const int spawn_monster_per_frame = 2;
 
         public void Clear()
@@ -129,15 +128,15 @@ namespace Level
         {
             for (int i = 0; i < waves.Count; i++)
             {
-                XLevelDynamicInfo dInfo = GetWaveDynamicInfo(waves[i]._id);
+                XLevelDynamicInfo dInfo = GetWaveDynamicInfo(waves[i].ID);
                 if (dInfo == null || dInfo.pushIntoTask) continue;
                 if (dInfo.totalCount != 0 && dInfo.generateCount == dInfo.totalCount) continue;
 
                 bool preWaveFinished = true;
-                for (int j = 0; j < waves[i]._preWave.Count; j++)
+                for (int j = 0; j < waves[i].preWave.Count; j++)
                 {
                     XLevelDynamicInfo predInfo;
-                    if (wavesDynamicInfo.TryGetValue(waves[i]._preWave[j], out predInfo))
+                    if (wavesDynamicInfo.TryGetValue(waves[i].preWave[j], out predInfo))
                     {
                         if ((predInfo.generateCount != predInfo.totalCount))
                         { // 还没生成
@@ -156,7 +155,6 @@ namespace Level
                 }
                 if (!preWaveFinished) continue;
 
-
                 bool exStringExists = true;
                 if (!string.IsNullOrEmpty(waves[i].exString))
                 {
@@ -166,7 +164,7 @@ namespace Level
                     }
                 }
                 if (exStringExists && dInfo.exStringFinishTime == 0f) dInfo.exStringFinishTime = time;
-                if (dInfo.prewaveFinishTime == 0f) dInfo.prewaveFinishTime = time;
+                if (dInfo.startTime == 0f) dInfo.startTime = time;
                 bool bCanGenerate = false;
                 if (!string.IsNullOrEmpty(waves[i].exString))
                 {
@@ -177,7 +175,7 @@ namespace Level
                 }
                 else if (waves[i].IsScriptWave() || dInfo.generateCount < dInfo.totalCount)
                 {
-                    if (time - dInfo.prewaveFinishTime >= waves[i].time)
+                    if (time - dInfo.startTime >= waves[i].time)
                     {
                         bCanGenerate = true;
                     }
@@ -191,10 +189,8 @@ namespace Level
                     }
                     else
                     {
-                        // normal monsters
-                        GenerateNormalTask(waves[i]);
-                        // round monsters
-                        GenerateRoundTask(waves[i]);
+                        if (waves[i].isAroundPlayer) GenerateRoundTask(waves[i]);
+                        else GenerateNormalTask(waves[i]);
                     }
                     if (!waves[i].repeat) dInfo.pushIntoTask = true;
                     if (waves[i].repeat && waves[i].exString != null && waves[i].exString.Length > 0)
@@ -211,12 +207,12 @@ namespace Level
         {
             for (int i = 0; i < waves.Count; i++)
             {
-                XLevelDynamicInfo dInfo = GetWaveDynamicInfo(waves[i]._id);
+                XLevelDynamicInfo dInfo = GetWaveDynamicInfo(waves[i].ID);
 
                 if (dInfo == null) continue;
                 if (dInfo.pushIntoTask) continue;
 
-                if (waves[i]._preWave.Count > 0 && waves[i]._preWave[0] == wave && waves[i].IsScriptWave())
+                if (waves[i].preWave.Count > 0 && waves[i].preWave[0] == wave && waves[i].IsScriptWave())
                 {
                     if (XLevelScriptMgr.singleton.IsTalkScript(waves[i].levelscript))
                     {
@@ -265,7 +261,7 @@ namespace Level
         {
             for (int i = 0; i < waves.Count; i++)
             {
-                if (waves[i]._id == waveid)
+                if (waves[i].ID == waveid)
                     return waves[i];
             }
             return null;
@@ -286,12 +282,12 @@ namespace Level
         {
             XLevelState ls = XLevelStatistics.singleton.ls;
             ls._monster_refresh_time.Add((uint)(Time.time - ls._start_time));
-            foreach (var item in wave._monsterPos)
+            foreach (var item in wave.monsterPos)
             {
                 XLevelSpawnTask task = new XLevelSpawnTask(this);
-                task._id = wave._id;
+                task._id = wave.ID;
                 task._EnemyID = wave.entityid;
-                task._MonsterRotate = (int)wave._monsterRot[item.Key].y;
+                task._MonsterRotate = (int)wave.monsterRot[item.Key].y;
                 task._MonsterIndex = item.Key;
                 task._MonsterPos = item.Value;
                 task._SpawnType = wave.spawnType;
@@ -302,18 +298,18 @@ namespace Level
 
         protected void GenerateRoundTask(XLevelWave wave)
         {
-            if (wave.roundRidus > 0 && wave.roundCount > 0)
+            if (wave.RoundRidous > 0 && wave.RoundCount > 0)
             {
                 XLevelStatistics.singleton.ls._monster_refresh_time.Add((uint)(Time.time - XLevelStatistics.singleton.ls._start_time));
-                float angle = 360.0f / wave.roundCount;
+                float angle = 360.0f / wave.RoundCount;
                 Vector3 playerPos = XEntityMgr.singleton.Player.Position;
-                for (int i = 0; i < wave.roundCount; i++)
+                for (int i = 0; i < wave.RoundCount; i++)
                 {
                     XLevelSpawnTask task = new XLevelSpawnTask(this);
-                    task._id = wave._id;
+                    task._id = wave.ID;
                     task._EnemyID = wave.entityid;
                     task._MonsterIndex = 0; // no use now
-                    task._MonsterPos = playerPos + Quaternion.Euler(0, angle * i, 0) * new Vector3(0, 0, 1) * wave.roundRidus;
+                    task._MonsterPos = playerPos + Quaternion.Euler(0, angle * i, 0) * new Vector3(0, 0, 1) * wave.RoundRidous;
                     task._MonsterRotate = (int)angle * i + 180;
                     task._SpawnType = wave.spawnType;
                     task._IsSummonTask = false;
@@ -335,10 +331,10 @@ namespace Level
             {
                 if (waves[i].entityid == monsterID)
                 {
-                    foreach (int key in waves[i]._monsterPos.Keys)
+                    foreach (int key in waves[i].monsterPos.Keys)
                     {
-                        position = waves[i]._monsterPos[key];
-                        face = waves[i]._monsterRot[key].y;
+                        position = waves[i].monsterPos[key];
+                        face = waves[i].monsterRot[key].y;
                         return true;
                     }
                 }

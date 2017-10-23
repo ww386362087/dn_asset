@@ -8,23 +8,25 @@ public class XSceneLoader
     private float _sub_progress = 0;
     
     private System.Action _loaded = null;
+    private IEnumerator ietor;
 
     public void Load(System.Action loadComplete)
     {
         _loaded = loadComplete;
-        GameEnine.entrance.StartCoroutine(InnerLoad());
+        ietor = InnerLoad();
+        GameEnine.entrance.StartCoroutine(ietor);
     }
 
     private IEnumerator InnerLoad()
     {
-        IEnumerator ietr = PreLoadMonster();
-        while (ietr.MoveNext())
+        ietor = PreLoadMonster();
+        while (ietor.MoveNext())
         {
             _progress = 0.05f + _sub_progress * 0.75f;
             yield return null;
         }
-        ietr = PreLoadNPC();
-        while (ietr.MoveNext())
+        ietor = PreLoadNPC();
+        while (ietor.MoveNext())
         {
             _progress = 0.80f + _sub_progress * 0.10f;
             yield return null;

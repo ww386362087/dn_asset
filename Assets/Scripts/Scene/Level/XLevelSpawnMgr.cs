@@ -81,10 +81,10 @@ namespace Level
                     _curSpawner.waves.Add(_wave);
 
                     XLevelDynamicInfo dInfo = new XLevelDynamicInfo();
-                    dInfo.id = _wave._id;
-                    dInfo.totalCount = _wave._monsterPos.Count + _wave.roundCount;
+                    dInfo.id = _wave.ID;
+                    dInfo.totalCount = _wave.monsterPos.Count + _wave.RoundCount;
                     dInfo.Reset();
-                    _curSpawner.wavesDynamicInfo.Add(_wave._id, dInfo);
+                    _curSpawner.wavesDynamicInfo.Add(_wave.ID, dInfo);
                 }
 
                 XResources.ClearStream(s);

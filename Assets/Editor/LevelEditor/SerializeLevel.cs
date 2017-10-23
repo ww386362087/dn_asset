@@ -78,7 +78,7 @@ namespace XEditor
             _layout.OnGUI();
             if (_toBeRemoved != null)
             {
-                if (_toBeRemoved._id == CurrentEdit) CurrentEdit = -1;
+                if (_toBeRemoved.ID == CurrentEdit) CurrentEdit = -1;
                 _waves.Remove(_toBeRemoved);
                 _toBeRemoved = null;
             }
@@ -372,10 +372,10 @@ namespace XEditor
             if (newid >= 0)
             {
                 EditorWave newWave = new EditorWave(newid);
-                newWave._id = newid;
+                newWave.ID = newid;
                 newWave.LevelMgr = this;
                 _waves.Add(newWave);
-                CurrentEdit = newWave._id;
+                CurrentEdit = newWave.ID;
             }
             else
             {
@@ -389,10 +389,10 @@ namespace XEditor
             if (newid >= 0)
             {
                 EditorWave newWave = new EditorWave(newid);
-                newWave._id = newid;
+                newWave.ID = newid;
                 newWave.LevelMgr = this;
                 _waves.Add(newWave);
-                CurrentEdit = newWave._id;
+                CurrentEdit = newWave.ID;
             }
         }
 
@@ -403,7 +403,7 @@ namespace XEditor
                 bool bOccupied = false;
                 foreach (EditorWave _wave in _waves)
                 {
-                    if (_wave._id == i)
+                    if (_wave.ID == i)
                     {
                         bOccupied = true;
                         break;
@@ -418,7 +418,7 @@ namespace XEditor
         {
             foreach (EditorWave _wave in _waves)
             {
-                if (_wave._id == id)
+                if (_wave.ID == id)
                 {
                     _toBeRemoved = _wave;
                 }
@@ -429,7 +429,7 @@ namespace XEditor
         {
             foreach (EditorWave _wave in _waves)
             {
-                if (_wave._id == id)
+                if (_wave.ID == id)
                 {
                     return _wave;
                 }
@@ -445,7 +445,7 @@ namespace XEditor
 
             foreach (EditorWave _wave in _waves)
             {
-                if (_wave._id == wave)
+                if (_wave.ID == wave)
                 {
                     _wave.RemoveMonster(go);
                 }

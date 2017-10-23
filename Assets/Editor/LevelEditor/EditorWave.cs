@@ -12,6 +12,7 @@ namespace XEditor
     {
         public uint _entity_id;
         public GameObject _prefab;
+        public GameObject go;
         public string _buff_id;
         public int _buff_percent;
         public List<int> _prefabSlot;
@@ -103,26 +104,6 @@ namespace XEditor
                 }
             }
         }
-        
-        
-
-        public float RoundRidous
-        {
-            get { return roundRidus; }
-            set { roundRidus = value; }
-        }
-
-        public int RoundCount
-        {
-            get { return roundCount; }
-            set { roundCount = value; }
-        }
-
-        public float Time
-        {
-            get { return time; }
-            set { if (time != value) time = value; }
-        }
 
         public WaveWindow LayoutWindow
         {
@@ -146,7 +127,6 @@ namespace XEditor
             LevelMgr = mgr;
             ReadFromFile(sr);
             InitWindow(_id);
-            
         }
 
         private void InitWindow(int id)
@@ -166,12 +146,11 @@ namespace XEditor
             wave = int.Parse(strWave);
             index = int.Parse(strIndex);
         }
-        
+
         public bool ValidWave()
         {
             if (!string.IsNullOrEmpty(levelscript)) return true;
-            if (_prefab != null && (_prefabSlot.Count > 0 || (roundRidus > 0 && roundCount > 0))) return true;
-            return false;
+            return _prefab != null;
         }
 
         public void WriteToFile(StreamWriter sw)
@@ -183,7 +162,7 @@ namespace XEditor
                 sw.WriteLine("st:{0}", (int)spawnType);
 
                 if (string.IsNullOrEmpty(_buff_id)) _buff_id = "0";
-                sw.WriteLine("bi:{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}", time, loopInterval, _entity_id, _prefabSlot.Count, _bVisibleInEditor, 0, roundRidus, roundCount, randomID, _buff_id, _buff_percent, repeat);
+                sw.WriteLine("bi:{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}", time, loopInterval, _entity_id, _prefabSlot.Count, _bVisibleInEditor, yRotate, roundRidus, roundCount, isAroundPlayer, _buff_id, _buff_percent, repeat);
                 if (levelscript != null && levelscript.Length > 0) sw.WriteLine("si:{0}", levelscript);
 
                 if (preWaves != null && preWaves.Length > 0)
@@ -250,7 +229,8 @@ namespace XEditor
                     _prefabSlot.Add(index);
                     if (_prefab != null)
                     {
-                        GameObject go = GameObject.Instantiate(_prefab);
+                        if (go != null) GameObject.Destroy(go);
+                        go = GameObject.Instantiate(_prefab);
                         go.name = GetMonsterName(_id, index);
                         go.transform.position = pos;
                         go.transform.Rotate(0, rotateY, 0);
@@ -285,12 +265,7 @@ namespace XEditor
 
         public void RemoveSceneViewInstance()
         {
-            foreach (int i in _prefabSlot)
-            {
-                string goName = GetMonsterName(_id, i);
-                GameObject go = GameObject.Find(goName);
-                if (go != null) GameObject.DestroyImmediate(go);
-            }
+            if (go != null) GameObject.DestroyImmediate(go);
         }
 
         public void DrawWaveWindow()

@@ -21,9 +21,11 @@ public class XResources
     private static Dictionary<uint, Stack<GameObject>> _cache_pool = new Dictionary<uint, Stack<GameObject>>();
 
     private static MemoryStream _share_stream = new MemoryStream(8192);//512k
+    private static float far = 1 << 10;
 
     private static XResController _res;
     private static XABController _ab;
+
 
     public static XABController ab { get { if (_ab == null) Init(); return _ab; } }
 
@@ -124,31 +126,43 @@ public class XResources
     public static void CreateInAdvance(string path, int cnt)
     {
         uint hash = XCommon.singleton.XHash(path);
-        GameObject go = Load<GameObject>(path, AssetType.Prefab);
-        float far = 1000;
-        go.transform.position = new Vector3(far, 0, far);
-        if (go != null)
+        if (!_cache_pool.ContainsKey(hash))
+            _cache_pool.Add(hash, new Stack<GameObject>());
+        for (int i = 0; i < cnt; i++)
         {
-            if (!_cache_pool.ContainsKey(hash))
-                _cache_pool.Add(hash, new Stack<GameObject>());
-            for (int i = 0; i < cnt; i++)
-            {
-                _cache_pool[hash].Push(go);
-            }
+            GameObject go = Load<GameObject>(path, AssetType.Prefab);
+            go.transform.position = new Vector3(far, 0, far);
+            if (go != null) _cache_pool[hash].Push(go);
         }
     }
 
     public static GameObject LoadInPool(string path)
     {
         uint hash = XCommon.singleton.XHash(path);
-        if(_cache_pool.ContainsKey(hash))
+        if (_cache_pool.ContainsKey(hash))
         {
             var obj = _cache_pool[hash].Pop();
             if (_cache_pool[hash].Count <= 0)
                 _cache_pool.Remove(hash);
             return obj;
         }
-        return Load<GameObject>(path, AssetType.Prefab);
+        else
+            return Load<GameObject>(path, AssetType.Prefab);
+    }
+
+    public static void RecyleInPool(GameObject go, string path)
+    {
+        uint hash = XCommon.singleton.XHash(path);
+        if (_cache_pool.ContainsKey(hash))
+        {
+            go.transform.position = new Vector3(far, 0, far);
+            _cache_pool[hash].Push(go);
+        }
+        else
+        {
+            _cache_pool.Add(hash, new Stack<GameObject>());
+            _cache_pool[hash].Push(go);
+        }
     }
 
     public static void DestroyInPool(string path)

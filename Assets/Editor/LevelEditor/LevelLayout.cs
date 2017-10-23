@@ -205,38 +205,41 @@ namespace XEditor
             EditorWave wv = levelMgr.GetWave(levelMgr.CurrentEdit);
             if (wv != null)
             {
-                GUILayout.BeginHorizontal();
                 wv.SpawnType = (LevelSpawnType)EditorGUILayout.EnumPopup("Spawn Type", wv.SpawnType);
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
                 wv.Time = EditorGUILayout.FloatField("Spawn Time(s):", wv.Time);
-                GUILayout.EndHorizontal();
 
                 GUILayout.Space(20);
 
-                GUILayout.BeginHorizontal();
                 wv.exString = EditorGUILayout.TextField("ExString(,):", wv.exString);
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
                 wv.preWaves = EditorGUILayout.TextField("PreWaves(,):", wv.preWaves);
-                GUILayout.EndHorizontal();
 
-                GUILayout.BeginHorizontal();
-                wv._buff_id = EditorGUILayout.TextField("Buff ID:", wv._buff_id);
-                wv._buff_percent = EditorGUILayout.IntSlider("Buff Percent(%):", wv._buff_percent, 0, 100);
-                GUILayout.EndHorizontal();
+                if (wv.spawnType == LevelSpawnType.Spawn_Buff)
+                {
+                    GUILayout.BeginHorizontal();
+                    wv._buff_id = EditorGUILayout.TextField("Buff ID:", wv._buff_id);
+                    wv._buff_percent = EditorGUILayout.IntSlider("Buff Percent(%):", wv._buff_percent, 0, 100);
+                    GUILayout.EndHorizontal();
+                }
 
                 GUILayout.Space(20);
-
                 GUILayout.BeginHorizontal();
-                wv.RoundRidous = EditorGUILayout.FloatField("RoundRidous:", wv.RoundRidous);
+                wv.isAroundPlayer = EditorGUILayout.Toggle("Around Player:",wv.isAroundPlayer);
                 GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
-                wv.RoundCount = EditorGUILayout.IntSlider("RoundCount:", wv.RoundCount, 0, 10);
-                GUILayout.EndHorizontal();
+                if (wv.isAroundPlayer)
+                {
+                    wv.RoundRidous = EditorGUILayout.FloatField("RoundRidous:", wv.RoundRidous);
+                    wv.RoundCount = EditorGUILayout.IntSlider("RoundCount:", wv.RoundCount, 0, 10);
+                }
+                else
+                {
+                    if (wv.go != null)
+                    {
+                        Vector3 pos = wv.go.transform.position;
+                        pos = EditorGUILayout.Vector3Field("Pos:", pos);
+                        if (wv.go.transform.position != pos)
+                            wv.go.transform.position = pos;
+                    }
+                }
             }
         }
 
@@ -253,7 +256,7 @@ namespace XEditor
                     {
                         int preWaveId;
                         bool b = int.TryParse(strPreWaves[i], out preWaveId);
-                        if (b) curveFromTo(preWaveId, _wave._id, Color.green, Color.yellow);
+                        if (b) curveFromTo(preWaveId, _wave.ID, Color.green, Color.yellow);
                     }
                 }
                 foreach (EditorWave wv in levelMgr._waves)
@@ -262,7 +265,7 @@ namespace XEditor
                     {
                         string[] strPreWaves = wv.preWaves.Split(',');
                         if (strPreWaves.Contains(levelMgr.CurrentEdit.ToString()))
-                            curveFromTo(levelMgr.CurrentEdit, wv._id, Color.green, Color.yellow);
+                            curveFromTo(levelMgr.CurrentEdit, wv.ID, Color.green, Color.yellow);
                     }
                 }
             }

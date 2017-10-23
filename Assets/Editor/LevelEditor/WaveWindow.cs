@@ -24,8 +24,8 @@ namespace XEditor
 
         public void Draw()
         {
-            string name = title + _wave._id;
-            _rect = GUI.Window(_wave._id, _rect, DoWindow, name);
+            string name = title + _wave.ID;
+            _rect = GUI.Window(_wave.ID, _rect, DoWindow, name);
             _rect.height = height;
             _rect.x = Mathf.Clamp(_rect.x, 0, 3000);
             _rect.y = Mathf.Clamp(_rect.y, 0, 3000);
@@ -57,7 +57,7 @@ namespace XEditor
             _wave.levelscript = EditorGUILayout.TextField(_wave.levelscript, new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
             if (GUILayout.Button(RemoveWaveButtonContent, LevelLayout.miniButtonWidth))
             {
-                _wave.LevelMgr.RemoveWave(_wave._id);
+                _wave.LevelMgr.RemoveWave(_wave.ID);
             }
             _wave.repeat = GUILayout.Toggle(_wave.repeat, "repeat", new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
             GUILayout.EndHorizontal();
@@ -81,7 +81,7 @@ namespace XEditor
         public override void DoWindow(int id)
         {
             base.DoWindow(id);
-
+            if (_wave.go != null) EditorGUIUtility.PingObject(_wave.go);
             if (_icon == null) GenerateIcon();
             GUILayout.BeginHorizontal();
             
@@ -159,7 +159,7 @@ namespace XEditor
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(RemoveWaveButtonContent, LevelLayout.miniButtonWidth))
             {
-                _wave.LevelMgr.RemoveWave(_wave._id);
+                _wave.LevelMgr.RemoveWave(_wave.ID);
                 _wave.RemoveSceneViewInstance();
             }
             GUILayout.EndHorizontal();

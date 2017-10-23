@@ -4,24 +4,48 @@ namespace Level
 {
     public class BaseWave
     {
-        public int _id;
-        public float time;
-        public int loopInterval;
+        protected int _id;
+        protected int index;
+        protected int loopInterval;
+        protected float roundRidus;
+        protected int roundCount;
+        protected int yRotate;
+        protected Vector3 pos;
+        protected float rotateY;
+
         public string preWaves;
-        public int yRotate;
         public bool repeat;
-        public int randomID;
         public uint entityid;
-        public float roundRidus;
+        public float time;
         public string exString;
-        public int roundCount;
         public string levelscript;
-        public int index;
-        public Vector3 pos;
-        public float rotateY;
+        public bool isAroundPlayer;
         public LevelSpawnType spawnType;
         protected InfoType infotype;
 
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
+        public float RoundRidous
+        {
+            get { return roundRidus; }
+            set { roundRidus = value; }
+        }
+
+        public int RoundCount
+        {
+            get { return roundCount; }
+            set { roundCount = value; }
+        }
+
+        public float Time
+        {
+            get { return time; }
+            set { if (time != value) time = value; }
+        }
 
         private InfoType PartType(string data)
         {
@@ -62,7 +86,7 @@ namespace Level
                         roundCount = int.Parse(strInfos[7]);
 
                     if (strInfos.Length > 8)
-                        randomID = int.Parse(strInfos[8]);
+                        isAroundPlayer = bool.Parse(strInfos[8]);
 
                     if (strInfos.Length > 11)
                         repeat = bool.Parse(strInfos[11]);
@@ -82,8 +106,7 @@ namespace Level
                     float y = float.Parse(strFloats[2]);
                     float z = float.Parse(strFloats[3]);
                     pos = new Vector3(x, y, z);
-                    if (strFloats.Length > 4)
-                        rotateY = float.Parse(strFloats[4]);
+                    rotateY = float.Parse(strFloats[4]);
                     break;
                 case InfoType.TypeScript:
                     strInfos = rawData.Split(',');
