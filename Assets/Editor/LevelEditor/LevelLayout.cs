@@ -91,7 +91,7 @@ namespace XEditor
             DrawTab();
             scrollPosition = GUI.BeginScrollView(new Rect(tabLength + minViewWidth, minViewHeight, maxViewWidth, maxViewHeight), scrollPosition, new Rect(0, 0, 3000, 3000));
             _levelMgr.Editor.BeginWindows();
-            foreach (LevelWave _wave in _levelMgr._waves) _wave.DrawWaveWindow();
+            foreach (EditorWave _wave in _levelMgr._waves) _wave.DrawWaveWindow();
             _levelMgr.Editor.EndWindows();
             GUI.EndScrollView();
             GUILayout.EndHorizontal();
@@ -110,7 +110,6 @@ namespace XEditor
         {
             Dictionary<uint, int> preloadTmp = new Dictionary<uint, int>();
             CalEnemyNum cen = new CalEnemyNum();
-            CalEnemyNum.PrintLog = false;
             Dictionary<uint, int> dic = cen.CalNum(_levelMgr._waves);
             foreach (var item in dic)
             {
@@ -140,7 +139,6 @@ namespace XEditor
                 int preload = item.Value;
                 int suggest = 0;
                 dic.TryGetValue(item.Key, out suggest);
-
                 if (preload > suggest || suggest == 0)
                 {
                     style.normal.textColor = Color.red;
@@ -204,7 +202,7 @@ namespace XEditor
 
         public void DrawDetailView()
         {
-            LevelWave wv = _levelMgr.GetWave(_levelMgr.CurrentEdit);
+            EditorWave wv = _levelMgr.GetWave(_levelMgr.CurrentEdit);
             if (wv != null)
             {
                 GUILayout.BeginHorizontal();
@@ -213,10 +211,6 @@ namespace XEditor
 
                 GUILayout.BeginHorizontal();
                 wv.Time = EditorGUILayout.FloatField("Spawn Time(s):", wv.Time);
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
-                wv.Random = EditorGUILayout.IntField("Random ID:", wv.Random);
                 GUILayout.EndHorizontal();
 
                 GUILayout.Space(20);
@@ -231,8 +225,8 @@ namespace XEditor
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                wv._doodad_id = EditorGUILayout.TextField("Doodad ID:", wv._doodad_id);
-                wv._doodad_percent = EditorGUILayout.IntSlider("Doodad Percent(%):", wv._doodad_percent, 0, 100);
+                wv._buff_id = EditorGUILayout.TextField("Buff ID:", wv._buff_id);
+                wv._buff_percent = EditorGUILayout.IntSlider("Buff Percent(%):", wv._buff_percent, 0, 100);
                 GUILayout.EndHorizontal();
 
                 GUILayout.Space(20);
@@ -243,8 +237,7 @@ namespace XEditor
 
                 GUILayout.BeginHorizontal();
                 wv.RoundCount = EditorGUILayout.IntSlider("RoundCount:", wv.RoundCount, 0, 10);
-
-                GUILayout.EndVertical();
+                GUILayout.EndHorizontal();
             }
         }
 
@@ -252,7 +245,7 @@ namespace XEditor
         {
             if (_levelMgr.CurrentEdit > -1)
             {
-                LevelWave _wave = _levelMgr.GetWave(_levelMgr.CurrentEdit);
+                EditorWave _wave = _levelMgr.GetWave(_levelMgr.CurrentEdit);
                 if (_wave == null) return;
                 if (_wave._preWaves != null && _wave._preWaves.Length > 0)
                 {
@@ -264,7 +257,7 @@ namespace XEditor
                         if (b) curveFromTo(preWaveId, _wave._id, Color.green, Color.yellow);
                     }
                 }
-                foreach (LevelWave wv in _levelMgr._waves)
+                foreach (EditorWave wv in _levelMgr._waves)
                 {
                     if (wv._preWaves != null && wv._preWaves.Length > 0)
                     {
@@ -278,8 +271,8 @@ namespace XEditor
 
         protected void curveFromTo(int parentID, int childID, Color color, Color color2)
         {
-            LevelWave parent = _levelMgr.GetWave(parentID);
-            LevelWave child = _levelMgr.GetWave(childID);
+            EditorWave parent = _levelMgr.GetWave(parentID);
+            EditorWave child = _levelMgr.GetWave(childID);
             if (parent != null && child != null)
             {
                 Rect parentRect = parent.LayoutWindow._rect;

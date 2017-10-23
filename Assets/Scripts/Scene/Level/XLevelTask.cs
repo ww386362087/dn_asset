@@ -73,15 +73,14 @@ namespace Level
                 dInfo = _spawner.GetWaveDynamicInfo(_id);
                 if (dInfo == null) return true;
             }
-
             XEntity enemy = null;
-            if (_SpawnType == LevelSpawnType.Spawn_Source_Monster)
+            if (_SpawnType == LevelSpawnType.Spawn_Monster)
             {
                 // 从本地创建
                 enemy = CreateMonster(_EnemyID, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
                 XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(enemy.EntityID);
             }
-            else if (_SpawnType == LevelSpawnType.Spawn_Source_Buff)
+            else if (_SpawnType == LevelSpawnType.Spawn_Buff)
             {
                 // 单机现在不处理直接掉doodad
             }

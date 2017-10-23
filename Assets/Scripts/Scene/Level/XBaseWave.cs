@@ -24,18 +24,24 @@ namespace Level
         public LevelSpawnType _spawnType;
         protected InfoType _infotype;
 
+
+        private InfoType PartType(string data)
+        {
+            InfoType type = InfoType.TypeNone;
+            if (data.StartsWith("id")) type = InfoType.TypeId;
+            else if (data.StartsWith("bi")) type = InfoType.TypeBaseInfo;
+            else if (data.StartsWith("pw")) type = InfoType.TypePreWave;
+            else if (data.StartsWith("ei")) type = InfoType.TypeEditor;
+            else if (data.StartsWith("mi")) type = InfoType.TypeMonsterInfo;
+            else if (data.StartsWith("si")) type = InfoType.TypeScript;
+            else if (data.StartsWith("es")) type = InfoType.TypeExString;
+            else if (data.StartsWith("st")) type = InfoType.TypeSpawnType;
+            return type;
+        }
+
         protected virtual void ParseInfo(string data)
         {
-            _infotype = InfoType.TypeNone;
-            if (data.StartsWith("id")) _infotype = InfoType.TypeId;
-            else if (data.StartsWith("bi")) _infotype = InfoType.TypeBaseInfo;
-            else if (data.StartsWith("pw")) _infotype = InfoType.TypePreWave;
-            else if (data.StartsWith("ei")) _infotype = InfoType.TypeEditor;
-            else if (data.StartsWith("mi")) _infotype = InfoType.TypeMonsterInfo;
-            else if (data.StartsWith("si")) _infotype = InfoType.TypeScript;
-            else if (data.StartsWith("es")) _infotype = InfoType.TypeExString;
-            else if (data.StartsWith("st")) _infotype = InfoType.TypeSpawnType;
-
+            _infotype = PartType(data);
             string rawData = data.Substring(3);
             switch (_infotype)
             {
@@ -46,7 +52,7 @@ namespace Level
                     _spawnType = (LevelSpawnType)(int.Parse(rawData));
                     break;
                 case InfoType.TypeBaseInfo:
-                     string[] strInfos = rawData.Split(',');
+                    string[] strInfos = rawData.Split(',');
                     _time = float.Parse(strInfos[0]);
                     _loopInterval = int.Parse(strInfos[1]);
                     _entityid = uint.Parse(strInfos[2]);
@@ -95,4 +101,5 @@ namespace Level
             }
         }
     }
+
 }

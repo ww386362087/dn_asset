@@ -117,12 +117,7 @@ namespace Level
         {
             //to-do KillSpawn
         }
-
-        public void ShowBubble(int typeid, string text, float exist)
-        {
-            //to-do ShowBubble
-        }
-
+        
         public void Update(float time)
         {
             if (!XScene.singleton.SyncMode)
@@ -237,7 +232,6 @@ namespace Level
                     }
                 }
             }
-
             ProcessTaskQueue(time);
         }
 
@@ -324,7 +318,7 @@ namespace Level
             task._MonsterRotate = rot;
             task._MonsterIndex = 0;
             task._MonsterPos = pos;
-            task._SpawnType = LevelSpawnType.Spawn_Source_Monster;
+            task._SpawnType = LevelSpawnType.Spawn_Monster;
             task._IsSummonTask = true;
             _tasks.Enqueue(task);
         }

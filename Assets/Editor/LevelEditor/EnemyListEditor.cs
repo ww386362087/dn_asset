@@ -81,10 +81,9 @@ namespace XEditor
         {
             LevelEditor _levelInstance = (LevelEditor)GetWindow(typeof(LevelEditor));
             int curWave = _levelInstance.LevelMgr.CurrentEdit;
-            LevelWave wv = _levelInstance.LevelMgr.GetWave(curWave);
+            EditorWave wv = _levelInstance.LevelMgr.GetWave(curWave);
             wv.EntityID = id;
-            EnemyListEditor _window = (EnemyListEditor)GetWindow(typeof(EnemyListEditor));
-            _window.Close();
+            Close();
         }
 
         public void OnSelectDoodad()
@@ -92,21 +91,19 @@ namespace XEditor
             if (_buff == "") return;
             LevelEditor _levelInstance = (LevelEditor)GetWindow(typeof(LevelEditor));
             int curWave = _levelInstance.LevelMgr.CurrentEdit;
-            LevelWave wv = _levelInstance.LevelMgr.GetWave(curWave);
-            wv.SpawnType = LevelSpawnType.Spawn_Source_Buff;
+            EditorWave wv = _levelInstance.LevelMgr.GetWave(curWave);
+            wv.SpawnType = LevelSpawnType.Spawn_Buff;
             wv.EntityID = uint.Parse(_buff);
-            EnemyListEditor _window = (EnemyListEditor)GetWindow(typeof(EnemyListEditor));
-            _window.Close();
+            Close();
         }
         protected void OnSelectScript()
         {
             string path = EditorUtility.OpenFilePanel("Select script", "./Temp", "txt");
             LevelEditor _levelInstance = (LevelEditor)GetWindow(typeof(LevelEditor));
             int curWave = _levelInstance.LevelMgr.CurrentEdit;
-            LevelWave wv = _levelInstance.LevelMgr.GetWave(curWave);
+            EditorWave wv = _levelInstance.LevelMgr.GetWave(curWave);
             wv.LevelScript = ExtractScriptName(path);
-            EnemyListEditor _window = (EnemyListEditor)GetWindow(typeof(EnemyListEditor));
-            _window.Close();
+            Close();
         }
 
         protected void OnSearch() { }

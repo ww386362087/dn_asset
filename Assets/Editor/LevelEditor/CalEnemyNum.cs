@@ -5,13 +5,12 @@ using System.Collections.Generic;
 
 namespace XEditor
 {
-
     public class CalEnemyNum
     {
 
-        public static bool PrintLog = false;
-
+        public static bool print = false;
         private const int inf = 0x3f3f3f3f;
+
         private struct node
         {
             public int to;
@@ -101,19 +100,19 @@ namespace XEditor
             return ret;
         }
 
-        private int slove(List<LevelWave> _wave, uint enemyid)
+        private int Slove(List<EditorWave> waves, uint entityid)
         {
             Dictionary<int, int> map = new Dictionary<int, int>();
             int sum = 0;
             int ans = 0;
             int Sid = 0;
             n = 0;
-            foreach (LevelWave wave in _wave)
+            foreach (EditorWave wave in waves)
             {
                 if (wave._id < 1000)
                 {
                     ++n;
-                    if (map.ContainsKey(wave._id) == false)
+                    if (!map.ContainsKey(wave._id))
                     {
                         map.Add(wave._id, ++Sid);
                     }
@@ -125,15 +124,14 @@ namespace XEditor
             int t = n + n + n + 1;
             NN = n + n + n + 2;
             next.Clear();
-            for (int i = 0; i <= NN; ++i)
-                next.Add(-1);
-            foreach (LevelWave wave in _wave)
+            for (int i = 0; i <= NN; ++i) next.Add(-1);
+            foreach (EditorWave wave in waves)
             {
                 if (wave._id >= 1000) continue;
                 int count = wave._prefabSlot.Count + wave.RoundCount;
                 int id = map[wave._id];
                 int Percent = wave._preWavePercent;
-                if (wave.EntityID == enemyid)
+                if (wave.EntityID == entityid)
                 {
                     add(b, id, count);
                     add(id + n, t, count);
@@ -157,9 +155,8 @@ namespace XEditor
                     int tmp;
                     if (int.TryParse(pre, out tmp))
                     {
-                        if (map.ContainsKey(int.Parse(pre)) == false)
+                        if (!map.ContainsKey(int.Parse(pre)))
                         {
-                            if (PrintLog)  XDebug.LogError(string.Format("Wave {0} is rely on Wave {1}, but Wave {1} is not exist!!!", wave._id, pre));
                             continue;
                         }
                         if (Percent == 0)
@@ -173,43 +170,31 @@ namespace XEditor
                     }
                     else
                     {
-                        if (PrintLog)  XDebug.LogError(string.Format("Wave {0} PreWave String Can't be Parse!!!", wave._id));
+                        if (print)  XDebug.LogError(string.Format("Wave {0} PreWave String Can't be Parse!!!", wave._id));
                     }
                 }
             }
             ans = isap(b, t);
             return sum - ans;
         }
-
-        /************************************************************************/
-        /* Calculate Enemy Num                                                  */
-        /************************************************************************/
-        public Dictionary<uint, int> CalNum(List<LevelWave> _wave)
+        
+        public Dictionary<uint, int> CalNum(List<EditorWave> waves)
         {
             Dictionary<uint, int> map = new Dictionary<uint, int>();
-            //int sum = 0, res = 0;
-            foreach (LevelWave wave in _wave)
+            foreach (EditorWave wave in waves)
             {
-                if (wave.SpawnType == LevelSpawnType.Spawn_Source_Buff)
-                    continue;
-
+                if (wave.SpawnType == LevelSpawnType.Spawn_Buff) continue;
                 if (wave._id < 1000)
                 {
                     if (map.ContainsKey(wave.EntityID) == false)
                     {
-                        int tmp = slove(_wave, wave.EntityID);
+                        int tmp = Slove(waves, wave.EntityID);
                         map.Add(wave.EntityID, tmp);
-
-                        if (tmp >= 10)
-                        {
-                            if (PrintLog)  XDebug.LogError(string.Format("EnemyID {0} will preload {1}!!!", wave.EntityID, tmp));
-                        }
                     }
                 }
             }
             return map;
         }
-
     }
 
 }

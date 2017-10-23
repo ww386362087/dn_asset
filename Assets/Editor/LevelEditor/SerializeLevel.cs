@@ -12,32 +12,27 @@ namespace XEditor
     public class SerializeLevel : ScriptableObject
     {
         [SerializeField]
-        public List<LevelWave> _waves;
-
+        public List<EditorWave> _waves;
         [NonSerialized]
-        private LevelWave _toBeRemoved;
-
-        public Dictionary<uint, int> _preLoadInfo;
-        public Dictionary<uint, int> _lastCachePreloadInfo;
-
+        private EditorWave _toBeRemoved;
         [SerializeField]
         private XEntityStatistics _data_info = null;
-
         [NonSerialized]
         private LevelLayout _layout;
 
+        public Dictionary<uint, int> _preLoadInfo;
+        public Dictionary<uint, int> _lastCachePreloadInfo;
         public static int maxSpawnTime = 180;
 
         private float _markGOHeight;
+        private float _goStep = 0.0001f;
+        public string current_level = "";
+
         public float MarkHeight
         {
             get { return _markGOHeight; }
             set { _markGOHeight = value; }
         }
-
-        private float _goStep = 0.0001f;
-
-        public string current_level = "";
 
         private LevelEditor _editor;
         public LevelEditor Editor
@@ -67,30 +62,23 @@ namespace XEditor
         {
             hideFlags = HideFlags.HideAndDontSave;
             AssetPreview.SetPreviewTextureCacheSize(64);
-            if (_waves == null)
-                _waves = new List<LevelWave>();
-            if (_preLoadInfo == null)
-                _preLoadInfo = new Dictionary<uint, int>();
-            if (_lastCachePreloadInfo == null)
-                _lastCachePreloadInfo = new Dictionary<uint, int>();
+            if (_waves == null) _waves = new List<EditorWave>();
+            if (_preLoadInfo == null) _preLoadInfo = new Dictionary<uint, int>();
+            if (_lastCachePreloadInfo == null) _lastCachePreloadInfo = new Dictionary<uint, int>();
             if (_layout == null) _layout = new LevelLayout(this);
+            if (_data_info == null) _data_info = XTableMgr.GetTable<XEntityStatistics>();
 
             _currentEdit = -1;
             _markGOHeight = 2.0f;
-
-            if (_data_info == null)
-                _data_info = XTableMgr.GetTable<XEntityStatistics>();
         }
+        
 
         public void OnGUI()
         {
             _layout.OnGUI();
             if (_toBeRemoved != null)
             {
-                if (_toBeRemoved._id == CurrentEdit)
-                {
-                    CurrentEdit = -1;
-                }
+                if (_toBeRemoved._id == CurrentEdit) CurrentEdit = -1;
                 _waves.Remove(_toBeRemoved);
                 _toBeRemoved = null;
             }
@@ -126,7 +114,6 @@ namespace XEditor
             sw.WriteLine("{0}", _waves.Count);
 
             CalEnemyNum cen = new CalEnemyNum();
-            CalEnemyNum.PrintLog = true;
             Dictionary<uint, int> suggest = cen.CalNum(_waves);
 
             int preLoadCount = 0;
@@ -147,24 +134,25 @@ namespace XEditor
                     sw.WriteLine("pi:" + item.Key + "," + item.Value);
                 }
             }
-            foreach (LevelWave _wave in _waves)
+            foreach (EditorWave _wave in _waves)
             {
                 _wave.WriteToFile(sw);
             }
             sw.Flush();
             sw.Close();
             AssetDatabase.Refresh();
+            RemoveSceneViewInstance();
         }
 
         public void SavePreprocess()
         {
-            List<LevelWave> _wavesToRemove = new List<LevelWave>();
-            foreach (LevelWave _wave in _waves)
+            List<EditorWave> _wavesToRemove = new List<EditorWave>();
+            foreach (EditorWave _wave in _waves)
             {
                 if (!_wave.ValidWave())
                     _wavesToRemove.Add(_wave);
             }
-            foreach (LevelWave _remove in _wavesToRemove)
+            foreach (EditorWave _remove in _wavesToRemove)
             {
                 _waves.Remove(_remove);
             }
@@ -184,7 +172,6 @@ namespace XEditor
             current_level = path.Substring(v + 6, dot - v - 6);
             LoadFromFile(path);
             CalEnemyNum cen = new CalEnemyNum();
-            CalEnemyNum.PrintLog = false;
             _lastCachePreloadInfo = cen.CalNum(_waves);
         }
 
@@ -205,9 +192,7 @@ namespace XEditor
             }
             for (int id = 0; id < totalWave; id++)
             {
-                LevelWave newWave = new LevelWave();
-                newWave.LevelMgr = this;
-                newWave.ReadFromFile(sr);
+                EditorWave newWave = new EditorWave(this, sr);
                 _waves.Add(newWave);
                 CurrentEdit = -1;
             }
@@ -337,7 +322,6 @@ namespace XEditor
                         RecordWalls.Add(wallName);
                         Vector3 pos = t.position;
                         float r = t.rotation.eulerAngles.y;
-
                         append += ("info:" + wallName);
                         append += " ";
                         append += pos.x;
@@ -376,7 +360,7 @@ namespace XEditor
 
         public void RemoveSceneViewInstance()
         {
-            foreach (LevelWave _wave in _waves)
+            foreach (EditorWave _wave in _waves)
             {
                 _wave.RemoveSceneViewInstance();
             }
@@ -384,10 +368,10 @@ namespace XEditor
 
         public void AddWave()
         {
-            LevelWave newWave = new LevelWave();
             int newid = GetEmptySlot(0, 100);
             if (newid >= 0)
             {
+                EditorWave newWave = new EditorWave(newid);
                 newWave._id = newid;
                 newWave.LevelMgr = this;
                 _waves.Add(newWave);
@@ -401,11 +385,10 @@ namespace XEditor
 
         public void AddScript()
         {
-            LevelWave newWave = new LevelWave();
             int newid = GetEmptySlot(1000, 1100);
-
             if (newid >= 0)
             {
+                EditorWave newWave = new EditorWave(newid);
                 newWave._id = newid;
                 newWave.LevelMgr = this;
                 _waves.Add(newWave);
@@ -418,7 +401,7 @@ namespace XEditor
             for (int i = startIndex; i < endIndex; i++)
             {
                 bool bOccupied = false;
-                foreach (LevelWave _wave in _waves)
+                foreach (EditorWave _wave in _waves)
                 {
                     if (_wave._id == i)
                     {
@@ -426,15 +409,14 @@ namespace XEditor
                         break;
                     }
                 }
-                if (bOccupied == false)
-                    return i;
+                if (!bOccupied) return i;
             }
             return -1;
         }
 
         public void RemoveWave(int id)
         {
-            foreach (LevelWave _wave in _waves)
+            foreach (EditorWave _wave in _waves)
             {
                 if (_wave._id == id)
                 {
@@ -443,9 +425,9 @@ namespace XEditor
             }
         }
 
-        public LevelWave GetWave(int id)
+        public EditorWave GetWave(int id)
         {
-            foreach (LevelWave _wave in _waves)
+            foreach (EditorWave _wave in _waves)
             {
                 if (_wave._id == id)
                 {
@@ -461,7 +443,7 @@ namespace XEditor
             string[] wave_info = go.name.Replace("Wave", "").Replace("monster", "").Split('_');
             int wave = int.Parse(wave_info[0]);
 
-            foreach (LevelWave _wave in _waves)
+            foreach (EditorWave _wave in _waves)
             {
                 if (_wave._id == wave)
                 {

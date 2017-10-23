@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Level
 {
-
     class XLevelScriptMgr : XSingleton<XLevelScriptMgr>
     {
         public uint CommandCount = 0;
@@ -17,11 +16,10 @@ namespace Level
 
         public void RunScript(string funcName)
         {
-            //  XDebug.Log("add script " + funcName);
             if (!_LevelScripts.ContainsKey(funcName)) return;
             if (_CmdQueue != null && _CmdQueue.Count > 0)
             {
-                 XDebug.Log("script function append");
+                XDebug.Log("script function append");
             }
             if (_CmdQueue.Count == 0) _currentCmd = null;
             List<LevelCmdDesc> funcCmds = _LevelScripts[funcName];
@@ -133,28 +131,6 @@ namespace Level
                                 _LevelScripts[curFunc].Add(cmd);
                             }
                         }
-                        else if (line.StartsWith("changebody"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 2)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_ChangeBody;
-                                cmd.Param.Add(str[1]);
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
-                        else if (line.StartsWith("justfx"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 2)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_JustFx;
-                                cmd.Param.Add(str[1]);
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
                         else if (line.StartsWith("playfx"))
                         {
                             string[] str = line.Split(XGlobalConfig.TabSeparator);
@@ -166,38 +142,6 @@ namespace Level
                                 cmd.Param.Add(str[2]);
                                 _LevelScripts[curFunc].Add(cmd);
                             }
-                        }
-                        else if (line.StartsWith("settutorial"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 2)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_Tutorial;
-                                cmd.Param.Add(str[1]);
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
-                        else if (line.StartsWith("notice"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 2)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_Notice;
-                                cmd.Param.Add(str[1]);
-                                if (str.Length >= 3)
-                                {
-                                    cmd.Param.Add(str[2]);
-                                }
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
-                        else if (line.StartsWith("stopnotice"))
-                        {
-                            LevelCmdDesc cmd = new LevelCmdDesc();
-                            cmd.cmd = LevelCmd.Level_Cmd_StopNotice;
-                            _LevelScripts[curFunc].Add(cmd);
                         }
                         else if (line.StartsWith("opendoor"))
                         {
@@ -227,12 +171,6 @@ namespace Level
                         {
                             LevelCmdDesc cmd = new LevelCmdDesc();
                             cmd.cmd = LevelCmd.Level_Cmd_KillAllSpawn;
-                            _LevelScripts[curFunc].Add(cmd);
-                        }
-                        else if (line.StartsWith("killally"))
-                        {
-                            LevelCmdDesc cmd = new LevelCmdDesc();
-                            cmd.cmd = LevelCmd.Level_Cmd_KillAlly;
                             _LevelScripts[curFunc].Add(cmd);
                         }
                         else if (line.StartsWith("killwave"))
@@ -272,12 +210,6 @@ namespace Level
                                 _LevelScripts[curFunc].Add(cmd);
                             }
                         }
-                        else if (line.StartsWith("levelupfx"))
-                        {
-                            LevelCmdDesc cmd = new LevelCmdDesc();
-                            cmd.cmd = LevelCmd.Level_Cmd_LevelupFx;
-                            _LevelScripts[curFunc].Add(cmd);
-                        }
                         else if (line.StartsWith("continue_UI"))
                         {
                             LevelCmdDesc cmd = new LevelCmdDesc();
@@ -296,19 +228,6 @@ namespace Level
                                 _LevelScripts[curFunc].Add(cmd);
                             }
                         }
-                        else if (line.StartsWith("bubble"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 4)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_Bubble;
-                                cmd.Param.Add(str[1]);
-                                cmd.Param.Add(str[2]);
-                                cmd.Param.Add(str[3]);
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
                         else if (line.StartsWith("showdirection"))
                         {
                             string[] str = line.Split(XGlobalConfig.TabSeparator);
@@ -317,58 +236,6 @@ namespace Level
                                 LevelCmdDesc cmd = new LevelCmdDesc();
                                 cmd.cmd = LevelCmd.Level_Cmd_Direction;
                                 cmd.Param.Add(str[1]);
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
-                        else if (line.StartsWith("outline"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 2)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_Outline;
-                                cmd.Param.Add(str[1]);
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
-                        else if (line.StartsWith("clientrecord"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 2)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_Record;
-                                cmd.Param.Add(str[1]);
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
-                        else if (line.StartsWith("callnewbiehelper"))
-                        {
-                            LevelCmdDesc cmd = new LevelCmdDesc();
-                            cmd.cmd = LevelCmd.Level_Cmd_NewbieHelper;
-                            _LevelScripts[curFunc].Add(cmd);
-                        }
-                        else if (line.StartsWith("newbienotice"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 2)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_NewbieNotice;
-                                cmd.Param.Add(str[1]);
-                                _LevelScripts[curFunc].Add(cmd);
-                            }
-                        }
-                        else if (line.StartsWith("summon"))
-                        {
-                            string[] str = line.Split(XGlobalConfig.TabSeparator);
-                            if (str.Length >= 4)
-                            {
-                                LevelCmdDesc cmd = new LevelCmdDesc();
-                                cmd.cmd = LevelCmd.Level_Cmd_Summon;
-                                cmd.Param.Add(str[1]);
-                                cmd.Param.Add(str[2]);
-                                cmd.Param.Add(str[3]);
                                 _LevelScripts[curFunc].Add(cmd);
                             }
                         }
@@ -387,10 +254,6 @@ namespace Level
                                     cmd.Param.Add(str[5]);
                                 _LevelScripts[curFunc].Add(cmd);
                             }
-                            else
-                            {
-                                // XDebug.Log("level script error!" + line);
-                            }
                         }
                         else if (line.StartsWith("aicommand"))
                         {
@@ -405,7 +268,6 @@ namespace Level
                                     cmd.Param.Add(str[3]);
                                 else
                                     cmd.Param.Add("0");
-
                                 _LevelScripts[curFunc].Add(cmd);
                             }
                         }
@@ -423,10 +285,8 @@ namespace Level
 
                             if (str.Length >= 3) xInfo.enable = (str[2] == "on" ? true : false);
                             if (str.Length >= 4) xInfo.width = float.Parse(str[3]);
-                            if (str.Length >= 5)
-                                xInfo.height = float.Parse(str[4]);
-                            else
-                                xInfo.height = float.MaxValue;
+                            if (str.Length >= 5) xInfo.height = float.Parse(str[4]);
+                            else xInfo.height = float.MaxValue;
 
                             if (str.Length >= 6)
                                 xInfo.thickness = float.Parse(str[5]);
@@ -439,11 +299,6 @@ namespace Level
             XResources.ClearStream(s);
         }
 
-        public List<XLevelInfo> GetLevelScriptInfos()
-        {
-            return _LevelInfos;
-        }
-
         public void Update()
         {
             if (_CmdQueue == null || _CmdQueue.Count == 0) return;
@@ -451,11 +306,7 @@ namespace Level
             if (_currentCmd == null || _currentCmd.state == XCmdState.Cmd_Finished)
             {
                 _currentCmd = _CmdQueue.Count > 0 ? _CmdQueue[0] : null;
-                if (_currentCmd == null)
-                {
-                    // XDebug.Log("level script end");
-                }
-                else
+                if (_currentCmd != null)
                 {
                     _CmdQueue.RemoveAt(0);
                     CommandCount++;
@@ -475,11 +326,7 @@ namespace Level
             }
 
             _currentCmd = _CmdQueue.Count > 0 ? _CmdQueue[0] : null;
-            if (_currentCmd == null)
-            {
-                // XDebug.Log("level script end");
-            }
-            else
+            if (_currentCmd != null)
             {
                 _CmdQueue.RemoveAt(0);
                 Execute(_currentCmd);
@@ -539,31 +386,9 @@ namespace Level
 
                     }
                     break;
-                case LevelCmd.Level_Cmd_ChangeBody:
-                    {
-                        //XPlayer p = XEntityMgr.singleton.Player;
-                        //if (p != null) p.OnTransform(uint.Parse(cmd.Param[0]));
-
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_JustFx:
-                    {
-                        //to-do Level_Cmd_JustFx
-
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
                 case LevelCmd.Level_Cmd_PlayFx:
                     {
                         //to-do Level_Cmd_PlayFx
-
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_Tutorial:
-                    {
-                        //to-do Level_Cmd_Tutorial
 
                         _currentCmd.state = XCmdState.Cmd_Finished;
                     }
@@ -573,23 +398,6 @@ namespace Level
                         //to-do Level_Cmd_Continue
 
                         _currentCmd.state = XCmdState.Cmd_Finished;
-
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_Notice:
-                    {
-                        //to-do Level_Cmd_Notice
-
-                        if (_currentCmd != null)
-                            _currentCmd.state = XCmdState.Cmd_Finished;
-
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_StopNotice:
-                    {
-                        //to-do Level_Cmd_StopNotice
-                        if (_currentCmd != null)
-                            _currentCmd.state = XCmdState.Cmd_Finished;
                     }
                     break;
                 case LevelCmd.Level_Cmd_Opendoor:
@@ -606,23 +414,9 @@ namespace Level
                         _currentCmd.state = XCmdState.Cmd_Finished;
                     }
                     break;
-                case LevelCmd.Level_Cmd_Bubble:
-                    {
-                        //to-do Level_Cmd_Bubble
-
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
                 case LevelCmd.Level_Cmd_KillAllSpawn:
                     {
                         //XLevelFinishMgr.singleton.KillAllOpponent();
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_KillAlly:
-                    {
-                        XDebug.LogError("找小邹: kill ally");
-                        // XEntityMgr.singleton.KillAlly(XEntityMgr.singleton.Player);
                         _currentCmd.state = XCmdState.Cmd_Finished;
                     }
                     break;
@@ -636,13 +430,6 @@ namespace Level
                 case LevelCmd.Level_Cmd_Cutscene:
                     {
                         //to-do Level_Cmd_Cutscene
-
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_LevelupFx:
-                    {
-                        //to-do Level_Cmd_LevelupFx
 
                         _currentCmd.state = XCmdState.Cmd_Finished;
                     }
@@ -661,56 +448,13 @@ namespace Level
                         _currentCmd.state = XCmdState.Cmd_Finished;
                     }
                     break;
-                case LevelCmd.Level_Cmd_Outline:
-                    {
-                        //to-do Level_Cmd_Outline
-
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_Record:
-                    {
-                        //to-do Level_Cmd_Record
-
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_NewbieHelper:
-                    {
-                        //to-do Level_Cmd_NewbieHelper
-
-                        if (_currentCmd != null) _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_NewbieNotice:
-                    {
-                        //to-do Level_Cmd_PlayFx
-
-                        if (_currentCmd != null) _currentCmd.state = XCmdState.Cmd_In_Process;
-                    }
-                    break;
                 case LevelCmd.Level_Cmd_NpcPopSpeek:
-                    {
-                        //to-do Level_Cmd_NpcPopSpeek
+                    _currentCmd.state = XCmdState.Cmd_Finished;
 
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
                     break;
                 case LevelCmd.Level_Cmd_SendAICmd:
-                    {
-                        //to-do Level_Cmd_SendAICmd
+                    _currentCmd.state = XCmdState.Cmd_Finished;
 
-                        _currentCmd.state = XCmdState.Cmd_Finished;
-
-                    }
-                    break;
-                case LevelCmd.Level_Cmd_Summon:
-                    {
-                        //to-do Level_Cmd_Summon
-
-                        if (_currentCmd != null)
-                            _currentCmd.state = XCmdState.Cmd_Finished;
-                    }
                     break;
                 default:
                     _currentCmd.state = XCmdState.Cmd_Finished;
@@ -736,15 +480,11 @@ namespace Level
         {
             if (!_LevelScripts.ContainsKey(funcName))
             {
-                 XDebug.LogError("invalid script func");
+                XDebug.LogError("invalid script func");
                 return false;
             }
             LevelCmdDesc top = _LevelScripts[funcName][0];
-            if (top.cmd == LevelCmd.Level_Cmd_TalkL || top.cmd == LevelCmd.Level_Cmd_TalkR)
-            {
-                return true;
-            }
-            return false;
+            return top.cmd == LevelCmd.Level_Cmd_TalkL || top.cmd == LevelCmd.Level_Cmd_TalkR;
         }
 
         public bool QueryExternalString(string str, bool autoRemove)
@@ -764,37 +504,6 @@ namespace Level
             }
             return bFind;
         }
-
-
-        protected void SwitchWallState(string name, bool enabled)
-        {
-            for (int i = 0; i < _LevelInfos.Count; i++)
-            {
-                if (_LevelInfos[i].infoName == name)
-                {
-                    _LevelInfos[i].enable = enabled;
-                }
-            }
-        }
-
-        public void SyncWallState(string name, bool isOn)
-        {
-            SetClientWallState(name, isOn);
-            SwitchWallState(name, isOn);
-        }
-
-        public void SetClientWallState(string name, bool isOn)
-        {
-            GameObject dynamicRoot = GameObject.Find(XScene.singleton.GetSceneDynamicPrefix());
-            if (dynamicRoot == null) return;
-            Transform go = XCommon.singleton.FindChildRecursively(dynamicRoot.transform, name);
-            if (go == null)
-            {
-                 XDebug.LogError("Wall no exists: " , name);
-                return;
-            }
-            go.gameObject.SetActive(isOn);
-        }
-
     }
+
 }
