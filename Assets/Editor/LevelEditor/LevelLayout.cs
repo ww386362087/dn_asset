@@ -9,7 +9,7 @@ namespace XEditor
 
     class LevelLayout
     {
-        public SerializeLevel _levelMgr;
+        public SerializeLevel levelMgr;
 
         private static GUIContent AddWaveButtonContent = new GUIContent("add wave", "add wave");
         private static GUIContent AddScriptButtonContent = new GUIContent("add script", "add script");
@@ -20,12 +20,12 @@ namespace XEditor
         private static GUIContent LoadWaveButtonContent = new GUIContent("Load", "Load from file");
         private static GUIContent ClearButtonContent = new GUIContent("Clear", "Clear");
 
-        public static int tabLength = 420;
-        public static int minViewHeight = 90;
-        public static int maxViewHeight = 920;
-        public static int minViewWidth = 5;
-        public static int maxViewWidth = 1900;
-        public Vector2 scrollPosition = Vector2.zero;
+        private static int tabLength = 420;
+        private static int minViewHeight = 90;
+        private static int maxViewHeight = 920;
+        private static int minViewWidth = 5;
+        private static int maxViewWidth = 1900;
+        private Vector2 scrollPosition = Vector2.zero;
 
         public static GUILayoutOption miniButtonWidth = GUILayout.Width(20f);
         public static GUILayoutOption detailLayout = GUILayout.Width(tabLength);
@@ -34,55 +34,55 @@ namespace XEditor
 
         public LevelLayout(SerializeLevel mgr)
         {
-            _levelMgr = mgr;
+            levelMgr = mgr;
             InitGrayTexture();
         }
 
         public void OnGUI()
         {
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("current level : " + _levelMgr.current_level);
+            EditorGUILayout.LabelField("current level : " + levelMgr.current_level);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(AddWaveButtonContent, GUILayout.Width(100f)))
             {
-                _levelMgr.AddWave();
+                levelMgr.AddWave();
             }
             if (GUILayout.Button(AddScriptButtonContent, GUILayout.Width(100f)))
             {
-                _levelMgr.AddScript();
+                levelMgr.AddScript();
             }
             if (GUILayout.Button(ClearButtonContent, GUILayout.Width(100f)))
             {
-                _levelMgr.ClearWaves();
+                levelMgr.ClearWaves();
             }
             if (GUILayout.Button(EditLevelScriptButtonContent, GUILayout.Width(100f)))
             {
-                _levelMgr.OpenLevelScriptFile();
+                levelMgr.OpenLevelScriptFile();
             }
             if (GUILayout.Button(GenerateWallInfoButtonContent, GUILayout.Width(150f)))
             {
-                _levelMgr.GenerateWallInfo();
+                levelMgr.GenerateWallInfo();
             }
             if (GUILayout.Button(LoadWallInfoButtonContent, GUILayout.Width(150f)))
             {
-                _levelMgr.LoadWallInfo();
+                levelMgr.LoadWallInfo();
             }
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("TotalWave : " + _levelMgr.WaveCount);
+            EditorGUILayout.LabelField("TotalWave : " + levelMgr.WaveCount);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(SaveWaveButtonContent))
             {
-                _levelMgr.SaveToFile();
+                levelMgr.SaveToFile();
             }
             if (GUILayout.Button(LoadWaveButtonContent))
             {
-                _levelMgr.LoadFromFile();
+                levelMgr.LoadFromFile();
             }
             GUILayout.EndHorizontal();
 
@@ -90,9 +90,9 @@ namespace XEditor
             GUILayout.BeginHorizontal();
             DrawTab();
             scrollPosition = GUI.BeginScrollView(new Rect(tabLength + minViewWidth, minViewHeight, maxViewWidth, maxViewHeight), scrollPosition, new Rect(0, 0, 3000, 3000));
-            _levelMgr.Editor.BeginWindows();
-            foreach (EditorWave _wave in _levelMgr._waves) _wave.DrawWaveWindow();
-            _levelMgr.Editor.EndWindows();
+            levelMgr.Editor.BeginWindows();
+            foreach (EditorWave _wave in levelMgr._waves) _wave.DrawWaveWindow();
+            levelMgr.Editor.EndWindows();
             GUI.EndScrollView();
             GUILayout.EndHorizontal();
 
@@ -110,31 +110,31 @@ namespace XEditor
         {
             Dictionary<uint, int> preloadTmp = new Dictionary<uint, int>();
             CalEnemyNum cen = new CalEnemyNum();
-            Dictionary<uint, int> dic = cen.CalNum(_levelMgr._waves);
+            Dictionary<uint, int> dic = cen.CalNum(levelMgr._waves);
             foreach (var item in dic)
             {
                 int cur = item.Value;
                 int last = 0;
-                _levelMgr._lastCachePreloadInfo.TryGetValue(item.Key, out last);
+                levelMgr._lastCachePreloadInfo.TryGetValue(item.Key, out last);
                 if (last != cur)
                 {
-                    _levelMgr._preLoadInfo[item.Key] = cur;
+                    levelMgr._preLoadInfo[item.Key] = cur;
                 }
             }
-            foreach (var item in _levelMgr._lastCachePreloadInfo)
+            foreach (var item in levelMgr._lastCachePreloadInfo)
             {
                 int last = item.Value;
                 int cur = 0;
                 dic.TryGetValue(item.Key, out cur);
                 if (last != cur)
                 {
-                    _levelMgr._preLoadInfo[item.Key] = cur;
+                    levelMgr._preLoadInfo[item.Key] = cur;
                 }
             }
 
             GUIStyle style = new GUIStyle();
             EditorGUILayout.LabelField("Preload Monster : ");
-            foreach (var item in _levelMgr._preLoadInfo)
+            foreach (var item in levelMgr._preLoadInfo)
             {
                 int preload = item.Value;
                 int suggest = 0;
@@ -166,7 +166,7 @@ namespace XEditor
                 GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
             }
 
-            _levelMgr._preLoadInfo.Clear();
+            levelMgr._preLoadInfo.Clear();
             foreach (var item in preloadTmp)
             {
                 int suggest = 0;
@@ -175,21 +175,21 @@ namespace XEditor
                 {
                     if (suggest != 0)
                     {
-                        _levelMgr._preLoadInfo[item.Key] = 0;
+                        levelMgr._preLoadInfo[item.Key] = 0;
                     }
                     continue;
                 }
-                _levelMgr._preLoadInfo[item.Key] = item.Value;
+                levelMgr._preLoadInfo[item.Key] = item.Value;
             }
 
-            _levelMgr._lastCachePreloadInfo = dic;
+            levelMgr._lastCachePreloadInfo = dic;
         }
 
         public void DrawTab()
         {
             GUILayout.BeginHorizontal(detailLayout);
             GUILayout.BeginVertical();
-            if (_levelMgr.CurrentEdit > -1)
+            if (levelMgr.CurrentEdit > -1)
             {
                 GUILayout.Space(10);
                 DrawDetailView();
@@ -202,7 +202,7 @@ namespace XEditor
 
         public void DrawDetailView()
         {
-            EditorWave wv = _levelMgr.GetWave(_levelMgr.CurrentEdit);
+            EditorWave wv = levelMgr.GetWave(levelMgr.CurrentEdit);
             if (wv != null)
             {
                 GUILayout.BeginHorizontal();
@@ -216,12 +216,11 @@ namespace XEditor
                 GUILayout.Space(20);
 
                 GUILayout.BeginHorizontal();
-                wv._exString = EditorGUILayout.TextField("ExString(,):", wv._exString);
+                wv.exString = EditorGUILayout.TextField("ExString(,):", wv.exString);
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                wv._preWaves = EditorGUILayout.TextField("PreWaves(,):", wv._preWaves);
-                wv._preWavePercent = EditorGUILayout.IntSlider("PreWavePercent(%):", wv._preWavePercent, 0, 100);
+                wv.preWaves = EditorGUILayout.TextField("PreWaves(,):", wv.preWaves);
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
@@ -243,13 +242,13 @@ namespace XEditor
 
         public void DrawLinks()
         {
-            if (_levelMgr.CurrentEdit > -1)
+            if (levelMgr.CurrentEdit > -1)
             {
-                EditorWave _wave = _levelMgr.GetWave(_levelMgr.CurrentEdit);
+                EditorWave _wave = levelMgr.GetWave(levelMgr.CurrentEdit);
                 if (_wave == null) return;
-                if (_wave._preWaves != null && _wave._preWaves.Length > 0)
+                if (_wave.preWaves != null && _wave.preWaves.Length > 0)
                 {
-                    string[] strPreWaves = _wave._preWaves.Split(',');
+                    string[] strPreWaves = _wave.preWaves.Split(',');
                     for (int i = 0; i < strPreWaves.Length; i++)
                     {
                         int preWaveId;
@@ -257,13 +256,13 @@ namespace XEditor
                         if (b) curveFromTo(preWaveId, _wave._id, Color.green, Color.yellow);
                     }
                 }
-                foreach (EditorWave wv in _levelMgr._waves)
+                foreach (EditorWave wv in levelMgr._waves)
                 {
-                    if (wv._preWaves != null && wv._preWaves.Length > 0)
+                    if (wv.preWaves != null && wv.preWaves.Length > 0)
                     {
-                        string[] strPreWaves = wv._preWaves.Split(',');
-                        if (strPreWaves.Contains(_levelMgr.CurrentEdit.ToString()))
-                            curveFromTo(_levelMgr.CurrentEdit, wv._id, Color.green, Color.yellow);
+                        string[] strPreWaves = wv.preWaves.Split(',');
+                        if (strPreWaves.Contains(levelMgr.CurrentEdit.ToString()))
+                            curveFromTo(levelMgr.CurrentEdit, wv._id, Color.green, Color.yellow);
                     }
                 }
             }
@@ -271,8 +270,8 @@ namespace XEditor
 
         protected void curveFromTo(int parentID, int childID, Color color, Color color2)
         {
-            EditorWave parent = _levelMgr.GetWave(parentID);
-            EditorWave child = _levelMgr.GetWave(childID);
+            EditorWave parent = levelMgr.GetWave(parentID);
+            EditorWave child = levelMgr.GetWave(childID);
             if (parent != null && child != null)
             {
                 Rect parentRect = parent.LayoutWindow._rect;

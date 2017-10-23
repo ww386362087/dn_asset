@@ -93,12 +93,12 @@ namespace Level
             {
                 if (enemy != null)
                 {
-                    dInfo._generateCount++;
-                    dInfo._enemyIds.Add(enemy.EntityID);
+                    dInfo.generateCount++;
+                    dInfo.entityIds.Add(enemy.EntityID);
                 }
-                if (dInfo._generateCount == dInfo._TotalCount)
+                if (dInfo.generateCount == dInfo.totalCount)
                 {
-                    dInfo._generatetime = time;
+                    dInfo.generatetime = time;
                 }
                 if (enemy != null && enemy.IsBoss)
                 {

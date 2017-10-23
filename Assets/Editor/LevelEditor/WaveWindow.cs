@@ -54,12 +54,12 @@ namespace XEditor
         {
             base.DoWindow(id);
             GUILayout.BeginHorizontal();
-            _wave._levelscript = EditorGUILayout.TextField(_wave._levelscript, new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
+            _wave.levelscript = EditorGUILayout.TextField(_wave.levelscript, new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
             if (GUILayout.Button(RemoveWaveButtonContent, LevelLayout.miniButtonWidth))
             {
                 _wave.LevelMgr.RemoveWave(_wave._id);
             }
-            _wave._repeat = GUILayout.Toggle(_wave._repeat, "repeat", new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
+            _wave.repeat = GUILayout.Toggle(_wave.repeat, "repeat", new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(16) });
             GUILayout.EndHorizontal();
             GUI.DragWindow();
         }
@@ -72,7 +72,6 @@ namespace XEditor
 
         protected Texture2D _icon = null;
 
-        private static GUIContent ToggleWaveButtonContent = new GUIContent("V", "toggle visible");
         private static GUIContent SelectEnemyButtonContent = new GUIContent("S", "select enemy");
 
         public EntityWaveWindow(EditorWave wv) : base(wv)
@@ -111,10 +110,10 @@ namespace XEditor
                     gs.normal.textColor = Color.yellow;
                 }
             }
-            if (_wave._levelscript != null && _wave._levelscript.Length > 0)
+            if (_wave.levelscript != null && _wave.levelscript.Length > 0)
             {
-                int fileNamePos = _wave._levelscript.LastIndexOf("/");
-                GUILayout.Label(_wave._levelscript.Substring(fileNamePos + 1), gs);
+                int fileNamePos = _wave.levelscript.LastIndexOf("/");
+                GUILayout.Label(_wave.levelscript.Substring(fileNamePos + 1), gs);
             }
             else
             {
@@ -131,17 +130,17 @@ namespace XEditor
             GUIStyle gsSpawn = new GUIStyle();
             gsSpawn.alignment = TextAnchor.LowerRight;
 
-            if (_wave._preWaves != null && _wave._preWaves.Length > 0)
+            if (_wave.preWaves != null && _wave.preWaves.Length > 0)
             {
-                strSpawn = "Pre Wave:" + _wave._preWaves;
+                strSpawn = "Pre Wave:" + _wave.preWaves;
                 gsSpawn.normal.textColor = Color.green;
             }
-            if (_wave._exString != null && _wave._exString.Length > 0)
+            if (_wave.exString != null && _wave.exString.Length > 0)
             {
-                strSpawn = "\nES:" + _wave._exString;
+                strSpawn = "\nES:" + _wave.exString;
                 gsSpawn.normal.textColor = Color.green;
             }
-            strSpawn += "\nTime: " + _wave._time;
+            strSpawn += "\nTime: " + _wave.time;
             gsSpawn.normal.textColor = Color.white;
 
             GUILayout.Label(strSpawn, gs, new GUILayoutOption[] { GUILayout.Width(100) });
@@ -158,10 +157,6 @@ namespace XEditor
 
             // operation
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(ToggleWaveButtonContent, LevelLayout.miniButtonWidth))
-            {
-                _wave.VisibleInEditor = !_wave.VisibleInEditor;
-            }
             if (GUILayout.Button(RemoveWaveButtonContent, LevelLayout.miniButtonWidth))
             {
                 _wave.LevelMgr.RemoveWave(_wave._id);

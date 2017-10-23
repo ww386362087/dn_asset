@@ -38,8 +38,8 @@ public class XSceneLoader
         if (spawner != null)
         {
             _sub_progress = 0;
-            float per = 1f / spawner._preloadInfo.Count;
-            foreach (var item in spawner._preloadInfo)
+            float per = 1f / spawner.preloadInfo.Count;
+            foreach (var item in spawner.preloadInfo)
             {
                 var entity = XTableMgr.GetTable<XEntityStatistics>().GetByID(item.Key);
                 if (entity == null) continue;

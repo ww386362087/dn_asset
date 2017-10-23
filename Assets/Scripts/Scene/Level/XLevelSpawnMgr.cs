@@ -3,7 +3,6 @@ using System.IO;
 
 namespace Level
 {
-
     public class XLevelSpawnMgr : XSingleton<XLevelSpawnMgr>
     {
         private XLevelSpawnInfo _curSpawner;
@@ -73,19 +72,19 @@ namespace Level
                     string[] info = line.Split(',');
                     int enemyID = int.Parse(info[0].Substring(3));
                     int count = int.Parse(info[1]);
-                    _curSpawner._preloadInfo.Add(enemyID, count);
+                    _curSpawner.preloadInfo.Add(enemyID, count);
                 }
                 for (int id = 0; id < totalWave; id++)
                 {
                     XLevelWave _wave = new XLevelWave();
                     _wave.ReadFromFile(sr);
-                    _curSpawner._waves.Add(_wave);
+                    _curSpawner.waves.Add(_wave);
 
                     XLevelDynamicInfo dInfo = new XLevelDynamicInfo();
-                    dInfo._id = _wave._id;
-                    dInfo._TotalCount = _wave._monsterPos.Count + _wave._roundCount;
+                    dInfo.id = _wave._id;
+                    dInfo.totalCount = _wave._monsterPos.Count + _wave.roundCount;
                     dInfo.Reset();
-                    _curSpawner._wavesDynamicInfo.Add(_wave._id, dInfo);
+                    _curSpawner.wavesDynamicInfo.Add(_wave._id, dInfo);
                 }
 
                 XResources.ClearStream(s);

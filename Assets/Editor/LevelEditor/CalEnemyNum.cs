@@ -7,8 +7,6 @@ namespace XEditor
 {
     public class CalEnemyNum
     {
-
-        public static bool print = false;
         private const int inf = 0x3f3f3f3f;
 
         private struct node
@@ -96,7 +94,6 @@ namespace XEditor
             {
                 ret += dfs(s, inf);
             }
-
             return ret;
         }
 
@@ -130,7 +127,6 @@ namespace XEditor
                 if (wave._id >= 1000) continue;
                 int count = wave._prefabSlot.Count + wave.RoundCount;
                 int id = map[wave._id];
-                int Percent = wave._preWavePercent;
                 if (wave.EntityID == entityid)
                 {
                     add(b, id, count);
@@ -146,8 +142,8 @@ namespace XEditor
                 add(id + n + n, id, inf);
                 add(id + n + n, t, 0);
 
-                if (wave._preWaves == null) continue;
-                List<string> preWave = new List<string>(wave._preWaves.Split(','));
+                if (wave.preWaves == null) continue;
+                List<string> preWave = new List<string>(wave.preWaves.Split(','));
                 foreach (string pre in preWave)
                 {
                     if (pre.Length == 0) continue;
@@ -159,25 +155,17 @@ namespace XEditor
                         {
                             continue;
                         }
-                        if (Percent == 0)
-                        {
-                            add(id, map[int.Parse(pre)] + n, inf);
-                        }
                         else
                         {
                             add(id, map[int.Parse(pre)] + n + n, inf);
                         }
-                    }
-                    else
-                    {
-                        if (print)  XDebug.LogError(string.Format("Wave {0} PreWave String Can't be Parse!!!", wave._id));
                     }
                 }
             }
             ans = isap(b, t);
             return sum - ans;
         }
-        
+
         public Dictionary<uint, int> CalNum(List<EditorWave> waves)
         {
             Dictionary<uint, int> map = new Dictionary<uint, int>();
