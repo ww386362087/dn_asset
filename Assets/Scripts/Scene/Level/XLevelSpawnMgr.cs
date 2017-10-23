@@ -76,15 +76,15 @@ namespace Level
                 }
                 for (int id = 0; id < totalWave; id++)
                 {
-                    XLevelWave _wave = new XLevelWave();
-                    _wave.ReadFromFile(sr);
-                    _curSpawner.waves.Add(_wave);
+                    XLevelWave wave = new XLevelWave();
+                    wave.ReadFromFile(sr);
+                    _curSpawner.waves.Add(wave);
 
                     XLevelDynamicInfo dInfo = new XLevelDynamicInfo();
-                    dInfo.id = _wave.ID;
-                    dInfo.totalCount = _wave.monsterPos.Count + _wave.RoundCount;
+                    dInfo.id = wave.ID;
+                    dInfo.totalCount = wave.RoundCount;
                     dInfo.Reset();
-                    _curSpawner.wavesDynamicInfo.Add(_wave.ID, dInfo);
+                    _curSpawner.wavesDynamicInfo.Add(wave.ID, dInfo);
                 }
 
                 XResources.ClearStream(s);

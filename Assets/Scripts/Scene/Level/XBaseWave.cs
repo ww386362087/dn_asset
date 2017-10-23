@@ -8,7 +8,7 @@ namespace Level
         protected int index;
         protected int loopInterval;
         protected float roundRidus;
-        protected int roundCount;
+        protected int roundCount = 1;
         protected int yRotate;
         protected Vector3 pos;
         protected float rotateY;

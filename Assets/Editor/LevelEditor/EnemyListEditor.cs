@@ -42,7 +42,7 @@ namespace XEditor
 
             GUILayout.BeginHorizontal();
             _buff = GUILayout.TextField(_buff, GUILayout.Width(120f));
-            if (GUILayout.Button(BuffButtonContent, GUILayout.Width(120f))) OnSelectDoodad();
+            if (GUILayout.Button(BuffButtonContent, GUILayout.Width(120f))) OnSelectBuff();
             GUILayout.EndHorizontal();
             
             GUILayout.Space(20);
@@ -83,10 +83,11 @@ namespace XEditor
             int curWave = _levelInstance.LevelMgr.CurrentEdit;
             EditorWave wv = _levelInstance.LevelMgr.GetWave(curWave);
             wv.EntityID = id;
+            wv.GenerateMonster();
             Close();
         }
 
-        public void OnSelectDoodad()
+        public void OnSelectBuff()
         {
             if (_buff == "") return;
             LevelEditor _levelInstance = (LevelEditor)GetWindow(typeof(LevelEditor));

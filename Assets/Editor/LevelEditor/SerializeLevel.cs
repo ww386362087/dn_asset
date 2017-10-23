@@ -27,13 +27,7 @@ namespace XEditor
         private float _markGOHeight;
         private float _goStep = 0.0001f;
         public string current_level = "";
-
-        public float MarkHeight
-        {
-            get { return _markGOHeight; }
-            set { _markGOHeight = value; }
-        }
-
+        
         private LevelEditor _editor;
         public LevelEditor Editor
         {

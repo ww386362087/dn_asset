@@ -95,7 +95,6 @@ namespace XEditor
             levelMgr.Editor.EndWindows();
             GUI.EndScrollView();
             GUILayout.EndHorizontal();
-
             DrawLinks();
         }
 
@@ -222,24 +221,19 @@ namespace XEditor
                 }
 
                 GUILayout.Space(20);
-                GUILayout.BeginHorizontal();
-                wv.isAroundPlayer = EditorGUILayout.Toggle("Around Player:",wv.isAroundPlayer);
-                GUILayout.EndHorizontal();
-                if (wv.isAroundPlayer)
-                {
-                    wv.RoundRidous = EditorGUILayout.FloatField("RoundRidous:", wv.RoundRidous);
-                    wv.RoundCount = EditorGUILayout.IntSlider("RoundCount:", wv.RoundCount, 0, 10);
-                }
-                else
+                wv.isAroundPlayer = EditorGUILayout.Toggle("Around Player:", wv.isAroundPlayer);
+                if (!wv.isAroundPlayer)
                 {
                     if (wv.go != null)
                     {
                         Vector3 pos = wv.go.transform.position;
-                        pos = EditorGUILayout.Vector3Field("Pos:", pos);
+                        pos = EditorGUILayout.Vector3Field("Center:", pos);
                         if (wv.go.transform.position != pos)
                             wv.go.transform.position = pos;
                     }
                 }
+                wv.RoundRidous = EditorGUILayout.FloatField("RoundRidous:", wv.RoundRidous);
+                wv.RoundCount = EditorGUILayout.IntSlider("RoundCount:", wv.RoundCount, 0, 10);
             }
         }
 

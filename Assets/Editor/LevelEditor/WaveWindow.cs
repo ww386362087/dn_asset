@@ -81,7 +81,8 @@ namespace XEditor
         public override void DoWindow(int id)
         {
             base.DoWindow(id);
-            if (_wave.go != null) EditorGUIUtility.PingObject(_wave.go);
+            if (_wave.go != null)
+                EditorGUIUtility.PingObject(_wave.go);
             if (_icon == null) GenerateIcon();
             GUILayout.BeginHorizontal();
             

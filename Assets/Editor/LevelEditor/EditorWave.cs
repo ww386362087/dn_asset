@@ -7,8 +7,8 @@ using XTable;
 
 namespace XEditor
 {
-   
-    public class EditorWave :BaseWave
+
+    public class EditorWave : BaseWave
     {
         public uint _entity_id;
         public GameObject _prefab;
@@ -110,9 +110,9 @@ namespace XEditor
             get { return _window; }
         }
 
-        public static string GetMonsterName(int wave, int index)
+        public static string GetMonsterName(int wave)
         {
-            return "Wave" + wave + "_monster" + index;
+            return "Wave" + wave;
         }
 
         public EditorWave(int id)
@@ -150,7 +150,7 @@ namespace XEditor
         public bool ValidWave()
         {
             if (!string.IsNullOrEmpty(levelscript)) return true;
-            return _prefab != null;
+            return _prefab != null && roundCount > 0;
         }
 
         public void WriteToFile(StreamWriter sw)
@@ -185,15 +185,20 @@ namespace XEditor
                 }
                 if (exString != null && exString.Length > 0) sw.WriteLine("es:{0}", exString);
                 sw.WriteLine("ei:{0},{1}", _window._rect.x, _window._rect.y);
-                foreach (int index in _prefabSlot)
+
+                if (go == null)
                 {
-                    string goName = GetMonsterName(_id, index);
-                    GameObject go = GameObject.Find(goName);
-                    if (go != null)
-                    {
-                        Transform t = go.transform;
-                        sw.WriteLine("mi:{0},{1},{2},{3},{4}", index, t.position.x, t.position.y, t.position.z, t.localRotation.eulerAngles.y);
-                    }
+                    string goName = GetMonsterName(_id);
+                    go = GameObject.Find(goName);
+                }
+                if (go != null)
+                {
+                    Transform t = go.transform;
+                    sw.WriteLine("mi:{0},{1},{2},{3},{4}", index, t.position.x, t.position.y, t.position.z, t.localRotation.eulerAngles.y);
+                }
+                else
+                {
+                    sw.WriteLine("mi:{0},{1},{2},{3},{4}", index, 0, 0, 0, 0);
                 }
                 sw.WriteLine("ew");
             }
@@ -229,9 +234,9 @@ namespace XEditor
                     _prefabSlot.Add(index);
                     if (_prefab != null)
                     {
-                        if (go != null) GameObject.Destroy(go);
+                        if (go != null) GameObject.DestroyImmediate(go);
                         go = GameObject.Instantiate(_prefab);
-                        go.name = GetMonsterName(_id, index);
+                        go.name = GetMonsterName(_id);
                         go.transform.position = pos;
                         go.transform.Rotate(0, rotateY, 0);
 
@@ -273,20 +278,6 @@ namespace XEditor
             _window.Draw();
         }
 
-        public void SetInstanceFace()
-        {
-            foreach (int i in _prefabSlot)
-            {
-                string name = GetMonsterName(_id, i);
-                GameObject go = GameObject.Find(name);
-                if (go != null)
-                {
-                    go.transform.rotation = Quaternion.Euler(0, yRotate, 0);
-                }
-            }
-        }
-        
-
         public void RemoveMonster(GameObject go)
         {
             int wave = 0;
@@ -297,6 +288,15 @@ namespace XEditor
                 GameObject.DestroyImmediate(go);
                 _prefabSlot.Remove(index);
             }
+        }
+
+        public void GenerateMonster()
+        {
+            if (go != null) GameObject.DestroyImmediate(go);
+            go = GameObject.Instantiate(_prefab);
+            go.name = GetMonsterName(_id);
+            go.transform.position = pos;
+            go.transform.Rotate(0, rotateY, 0);
         }
 
     }

@@ -8,8 +8,8 @@ namespace Level
     public class XLevelWave : BaseWave
     {
         public List<int> preWave = new List<int>();
-        public Dictionary<int, Vector3> monsterPos = new Dictionary<int, Vector3>();
-        public Dictionary<int, Vector3> monsterRot = new Dictionary<int, Vector3>();
+        public Vector3 Pos { get { return pos; } }
+        public Vector3 Rot { get { return new Vector3(0, rotateY, 0); } }
 
         protected override void ParseInfo(string data)
         {
@@ -28,14 +28,6 @@ namespace Level
                                 this.preWave.Add(preWave);
                             }
                         }
-                    }
-                    break;
-                case InfoType.TypeMonsterInfo:
-                    if (!isAroundPlayer)
-                    {
-                        monsterPos.Add(index, pos);
-                        Vector3 rot = new Vector3(0, rotateY, 0);
-                        monsterRot.Add(index, rot);
                     }
                     break;
             }
@@ -189,8 +181,7 @@ namespace Level
                     }
                     else
                     {
-                        if (waves[i].isAroundPlayer) GenerateRoundTask(waves[i]);
-                        else GenerateNormalTask(waves[i]);
+                         GenerateEntityTask(waves[i]);
                     }
                     if (!waves[i].repeat) dInfo.pushIntoTask = true;
                     if (waves[i].repeat && waves[i].exString != null && waves[i].exString.Length > 0)
@@ -276,40 +267,22 @@ namespace Level
                 ret.entityIds.Remove(entity.EntityID);
             }
         }
-        
 
-        protected void GenerateNormalTask(XLevelWave wave)
-        {
-            XLevelState ls = XLevelStatistics.singleton.ls;
-            ls._monster_refresh_time.Add((uint)(Time.time - ls._start_time));
-            foreach (var item in wave.monsterPos)
-            {
-                XLevelSpawnTask task = new XLevelSpawnTask(this);
-                task._id = wave.ID;
-                task._EnemyID = wave.entityid;
-                task._MonsterRotate = (int)wave.monsterRot[item.Key].y;
-                task._MonsterIndex = item.Key;
-                task._MonsterPos = item.Value;
-                task._SpawnType = wave.spawnType;
-                task._IsSummonTask = false;
-                _tasks.Enqueue(task);
-            }
-        }
 
-        protected void GenerateRoundTask(XLevelWave wave)
+        protected void GenerateEntityTask(XLevelWave wave)
         {
-            if (wave.RoundRidous > 0 && wave.RoundCount > 0)
+            if (wave.RoundCount > 0)
             {
                 XLevelStatistics.singleton.ls._monster_refresh_time.Add((uint)(Time.time - XLevelStatistics.singleton.ls._start_time));
                 float angle = 360.0f / wave.RoundCount;
-                Vector3 playerPos = XEntityMgr.singleton.Player.Position;
+                Vector3 pos = wave.isAroundPlayer ? XEntityMgr.singleton.Player.Position : wave.Pos;
                 for (int i = 0; i < wave.RoundCount; i++)
                 {
                     XLevelSpawnTask task = new XLevelSpawnTask(this);
                     task._id = wave.ID;
                     task._EnemyID = wave.entityid;
                     task._MonsterIndex = 0; // no use now
-                    task._MonsterPos = playerPos + Quaternion.Euler(0, angle * i, 0) * new Vector3(0, 0, 1) * wave.RoundRidous;
+                    task._MonsterPos = pos + Quaternion.Euler(0, angle * i, 0) * new Vector3(0, 0, 1) * wave.RoundRidous;
                     task._MonsterRotate = (int)angle * i + 180;
                     task._SpawnType = wave.spawnType;
                     task._IsSummonTask = false;
@@ -324,23 +297,7 @@ namespace Level
             task._ScriptName = wave.levelscript;
             _tasks.Enqueue(task);
         }
-
-        public bool QueryMonsterStaticInfo(uint monsterID, ref Vector3 position, ref float face)
-        {
-            for (int i = 0; i < waves.Count; i++)
-            {
-                if (waves[i].entityid == monsterID)
-                {
-                    foreach (int key in waves[i].monsterPos.Keys)
-                    {
-                        position = waves[i].monsterPos[key];
-                        face = waves[i].monsterRot[key].y;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+        
     }
 
 }
