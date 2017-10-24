@@ -7,15 +7,15 @@ namespace Level
         protected int _id;
         protected int index;
         protected int loopInterval;
-        protected float roundRidus;
-        protected int roundCount = 1;
+        protected float radius;
+        protected int count = 1;
         protected int yRotate;
         protected Vector3 pos;
         protected float rotateY;
 
         public string preWaves;
         public bool repeat;
-        public uint entityid;
+        public int uid;
         public float time;
         public string exString;
         public string levelscript;
@@ -29,16 +29,16 @@ namespace Level
             set { _id = value; }
         }
 
-        public float RoundRidous
+        public float Radius
         {
-            get { return roundRidus; }
-            set { roundRidus = value; }
+            get { return radius; }
+            set { radius = value; }
         }
 
-        public int RoundCount
+        public int Count
         {
-            get { return roundCount; }
-            set { roundCount = value; }
+            get { return count; }
+            set { count = value; }
         }
 
         public float Time
@@ -51,13 +51,13 @@ namespace Level
         {
             InfoType type = InfoType.TypeNone;
             if (data.StartsWith("id")) type = InfoType.TypeId;
-            else if (data.StartsWith("bi")) type = InfoType.TypeBaseInfo;
-            else if (data.StartsWith("pw")) type = InfoType.TypePreWave;
-            else if (data.StartsWith("ei")) type = InfoType.TypeEditor;
-            else if (data.StartsWith("mi")) type = InfoType.TypeMonsterInfo;
-            else if (data.StartsWith("si")) type = InfoType.TypeScript;
-            else if (data.StartsWith("es")) type = InfoType.TypeExString;
-            else if (data.StartsWith("st")) type = InfoType.TypeSpawnType;
+            else if (data.StartsWith("bi")) type = InfoType.BaseInfo;
+            else if (data.StartsWith("pw")) type = InfoType.PreWave;
+            else if (data.StartsWith("ei")) type = InfoType.EditorInfo;
+            else if (data.StartsWith("ti")) type = InfoType.TransformInfo;
+            else if (data.StartsWith("si")) type = InfoType.Script;
+            else if (data.StartsWith("es")) type = InfoType.ExString;
+            else if (data.StartsWith("st")) type = InfoType.SpawnType;
             return type;
         }
 
@@ -70,20 +70,20 @@ namespace Level
                 case InfoType.TypeId:
                     _id = int.Parse(rawData);
                     break;
-                case InfoType.TypeSpawnType:
+                case InfoType.SpawnType:
                     spawnType = (LevelSpawnType)(int.Parse(rawData));
                     break;
-                case InfoType.TypeBaseInfo:
+                case InfoType.BaseInfo:
                     string[] strInfos = rawData.Split(',');
                     time = float.Parse(strInfos[0]);
                     loopInterval = int.Parse(strInfos[1]);
-                    entityid = uint.Parse(strInfos[2]);
+                    uid = int.Parse(strInfos[2]);
                     yRotate = int.Parse(strInfos[5]);
                     if (strInfos.Length > 6)
-                        roundRidus = float.Parse(strInfos[6]);
+                        radius = float.Parse(strInfos[6]);
 
                     if (strInfos.Length > 7)
-                        roundCount = int.Parse(strInfos[7]);
+                        count = int.Parse(strInfos[7]);
 
                     if (strInfos.Length > 8)
                         isAroundPlayer = bool.Parse(strInfos[8]);
@@ -91,15 +91,15 @@ namespace Level
                     if (strInfos.Length > 11)
                         repeat = bool.Parse(strInfos[11]);
                     break;
-                case InfoType.TypeExString:
+                case InfoType.ExString:
                     exString = rawData;
                     break;
-                case InfoType.TypePreWave:
+                case InfoType.PreWave:
                     preWaves = rawData;
                     break;
-                case InfoType.TypeEditor:
+                case InfoType.EditorInfo:
                     break;
-                case InfoType.TypeMonsterInfo:
+                case InfoType.TransformInfo:
                     string[] strFloats = rawData.Split(',');
                     index = int.Parse(strFloats[0]);
                     float x = float.Parse(strFloats[1]);
@@ -108,7 +108,7 @@ namespace Level
                     pos = new Vector3(x, y, z);
                     rotateY = float.Parse(strFloats[4]);
                     break;
-                case InfoType.TypeScript:
+                case InfoType.Script:
                     strInfos = rawData.Split(',');
                     if (strInfos.Length > 0)
                         levelscript = strInfos[0];

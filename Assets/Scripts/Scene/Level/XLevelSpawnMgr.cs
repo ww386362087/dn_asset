@@ -82,7 +82,7 @@ namespace Level
 
                     XLevelDynamicInfo dInfo = new XLevelDynamicInfo();
                     dInfo.id = wave.ID;
-                    dInfo.totalCount = wave.RoundCount;
+                    dInfo.totalCount = wave.Count;
                     dInfo.Reset();
                     _curSpawner.wavesDynamicInfo.Add(wave.ID, dInfo);
                 }

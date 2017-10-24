@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using XTable;
 
 namespace Level
 {
@@ -23,16 +23,15 @@ namespace Level
 
     internal class XLevelSpawnTask : XLevelBaseTask
     {
-        public uint _EnemyID;
-        public int _MonsterRotate;
-        public int _MonsterIndex;
-        public Vector3 _MonsterPos;
-        public LevelSpawnType _SpawnType;
-        public bool _IsSummonTask;
+        public uint UID;
+        public int rot;
+        public Vector3 pos;
+        public LevelSpawnType spawnType;
+        public bool isSummonTask;
 
         public XLevelSpawnTask(XLevelSpawnInfo spawn) : base(spawn)
         {
-            _IsSummonTask = false;
+            isSummonTask = false;
         }
 
         public XEntity CreateMonster(uint id, float yRotate, Vector3 pos, int _waveid)
@@ -53,7 +52,8 @@ namespace Level
         public XEntity CreateNPC(uint id, float yRotate, Vector3 pos, int _waveid)
         {
             Quaternion rotation = Quaternion.Euler(0, yRotate, 0);
-            XEntity entity = XEntityMgr.singleton.CreateEntity<XNPC>(id, pos, rotation);
+            XNpcList.RowData row = XTableMgr.GetTable<XNpcList>().GetByUID((int)id);
+            XEntity entity = XEntityMgr.singleton.CreateNPC(row, pos, rotation);
             if (entity != null)
             {
                 entity.Wave = _waveid;
@@ -68,21 +68,25 @@ namespace Level
         {
             base.Execute(time);
             XLevelDynamicInfo dInfo = null;
-            if (!_IsSummonTask)
+            if (!isSummonTask)
             {
                 dInfo = _spawner.GetWaveDynamicInfo(_id);
                 if (dInfo == null) return true;
             }
-            XEntity enemy = null;
-            if (_SpawnType == LevelSpawnType.Spawn_Monster)
+            XEntity entity = null;
+            if (spawnType == LevelSpawnType.Spawn_Monster)
             {
                 // 从本地创建
-                enemy = CreateMonster(_EnemyID, _MonsterRotate, _MonsterPos + new Vector3(0, 0.02f, 0), _id);
-                XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(enemy.EntityID);
+                entity = CreateMonster(UID, rot, pos + new Vector3(0, 0.02f, 0), _id);
+                XLevelStatistics.singleton.ls.AddLevelSpawnEntityCount(entity.EntityID);
             }
-            else if (_SpawnType == LevelSpawnType.Spawn_Buff)
+            else if (spawnType == LevelSpawnType.Spawn_Buff)
             {
                 // 单机现在不处理直接掉doodad
+            }
+            else if(spawnType == LevelSpawnType.Spawn_NPC)
+            {
+                entity = CreateNPC(UID, rot, pos + new Vector3(0, 0.02f, 0), _id);
             }
             else //player or monster
             {
@@ -91,16 +95,16 @@ namespace Level
 
             if (dInfo != null)
             {
-                if (enemy != null)
+                if (entity != null)
                 {
                     dInfo.generateCount++;
-                    dInfo.entityIds.Add(enemy.EntityID);
+                    dInfo.entityIds.Add(entity.EntityID);
                 }
                 if (dInfo.generateCount == dInfo.totalCount)
                 {
                     dInfo.generatetime = time;
                 }
-                if (enemy != null && enemy.IsBoss)
+                if (entity != null && entity.IsBoss)
                 {
                     return false;
                 }

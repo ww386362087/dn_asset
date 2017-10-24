@@ -67,12 +67,10 @@ namespace XEditor
 
     public class EntityWaveWindow : WaveWindow
     {
-        protected override int height { get { return 120; } }
+        protected override int height { get { return 110; } }
         protected override string title { get { return "wave"; } }
 
         protected Texture2D _icon = null;
-
-        private static GUIContent SelectEnemyButtonContent = new GUIContent("S", "select enemy");
 
         public EntityWaveWindow(EditorWave wv) : base(wv)
         {
@@ -81,8 +79,7 @@ namespace XEditor
         public override void DoWindow(int id)
         {
             base.DoWindow(id);
-            if (_wave.go != null)
-                EditorGUIUtility.PingObject(_wave.go);
+            if (_wave.go != null) EditorGUIUtility.PingObject(_wave.go);
             if (_icon == null) GenerateIcon();
             GUILayout.BeginHorizontal();
             
@@ -90,16 +87,10 @@ namespace XEditor
             GUILayout.Box(_icon);
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(SelectEnemyButtonContent, LevelLayout.miniButtonWidth))
-            {
-                _wave.LevelMgr.CurrentEdit = id;
-                OpenEnemyListWindow();
-            }
-
             GUIStyle gs = new GUIStyle();
             gs.alignment = TextAnchor.LowerRight;
             gs.normal.textColor = Color.white;
-            XEntityStatistics.RowData enemyData = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)_wave.EntityID);
+            XEntityStatistics.RowData enemyData = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)_wave.UID);
             if (enemyData != null && _wave.SpawnType == LevelSpawnType.Spawn_Monster)
             {
                 if (enemyData.Type == 1)
@@ -118,7 +109,7 @@ namespace XEditor
             }
             else
             {
-                GUILayout.Label(_wave.EntityID + "x" + (_wave._prefabSlot.Count + _wave.RoundCount), gs);
+                GUILayout.Label(_wave.UID + "x" + _wave.Count, gs);
             }
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
@@ -179,17 +170,12 @@ namespace XEditor
                 Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelPlayer.png", typeof(Texture)) as Texture;
                 _icon = AssetPreview.GetAssetPreview(icon);
             }
-            else if (_wave.SpawnType == LevelSpawnType.Spawn_NPC)
-            {
-                Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/LevelRandom.png", typeof(Texture)) as Texture;
-                _icon = AssetPreview.GetAssetPreview(icon);
-            }
             else if (_wave.SpawnType == LevelSpawnType.Spawn_Buff)
             {
                 Texture icon = AssetDatabase.LoadAssetAtPath("Assets/Editor/LevelEditor/res/buff.png", typeof(Texture)) as Texture;
                 _icon = AssetPreview.GetAssetPreview(icon);
             }
-            else if (_wave.EntityID > 0)
+            else if (_wave.UID > 0)
             {
                 _icon = AssetPreview.GetAssetPreview(_wave._prefab);
             }
@@ -204,12 +190,7 @@ namespace XEditor
             _icon.SetPixels(pix);
             _icon.Apply();
         }
-
-        protected void OpenEnemyListWindow()
-        {
-            EnemyListEditor _window = (EnemyListEditor)EditorWindow.GetWindow(typeof(EnemyListEditor));
-            _window.Show();
-        }
+        
     }
 
 

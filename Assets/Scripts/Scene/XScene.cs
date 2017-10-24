@@ -64,7 +64,6 @@ public class XScene : XSingleton<XScene>
     private void DoLoad()
     {
         XEntityMgr.singleton.CreatePlayer();
-        CreateNPCs();
         if (_loader == null) _loader = new XSceneLoader();
         _loader.Load(OnEnterSceneFinally);
     }
@@ -141,10 +140,5 @@ public class XScene : XSingleton<XScene>
         }
         _cutscene_data = null;
     }
-
-    private void CreateNPCs()
-    {
-        var row = XTableMgr.GetTable<XNpcList>().GetByUID(24);
-        XEntityMgr.singleton.CreateNPC(row);
-    }
+    
 }

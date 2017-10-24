@@ -144,9 +144,16 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 
     public XNPC CreateNPC(XNpcList.RowData row)
     {
+        var pos = new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
+        var rot = Quaternion.Euler(row.NPCRotation[0], row.NPCRotation[1], row.NPCRotation[2]);
+        return CreateNPC(row, pos, rot);
+    }
+
+    public XNPC CreateNPC(XNpcList.RowData row,Vector3 pos, Quaternion rot)
+    {
         XAttributes attr = InitAttrByPresent(row.PresentID);
-        attr.AppearPostion = new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
-        attr.AppearQuaternion = Quaternion.Euler(row.NPCRotation[0], row.NPCRotation[1], row.NPCRotation[2]);
+        attr.AppearPostion = pos;
+        attr.AppearQuaternion = rot;
         var e = PrepareEntity<XNPC>(attr);
         Add(EnitityType.Npc, e);
         return e;

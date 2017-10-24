@@ -10,7 +10,7 @@ namespace XEditor
 
     public class EditorWave : BaseWave
     {
-        public uint _entity_id;
+        public int _uni_id;
         public GameObject _prefab;
         public GameObject go;
         public string _buff_id;
@@ -18,6 +18,7 @@ namespace XEditor
         public List<int> _prefabSlot;
         public bool _bVisibleInEditor = true;
         public float rectX = 0, rectY = 90;
+        public string name;
         SerializeLevel _levelMgr;
         [NonSerialized]
         private WaveWindow _window;
@@ -37,53 +38,47 @@ namespace XEditor
                 if (spawnType == LevelSpawnType.Spawn_Role)
                 {
                     _prefab = Resources.Load("Prefabs/NPC_pope") as GameObject;
-                    _entity_id = 0;
-                    if (_window != null) _window.GenerateIcon();
-                }
-                if (spawnType == LevelSpawnType.Spawn_NPC)
-                {
-                    _prefab = Resources.Load("Prefabs/NPC_Velskud_Wing") as GameObject;
-                    _entity_id = 0;
+                    _uni_id = 0;
                     if (_window != null) _window.GenerateIcon();
                 }
             }
         }
 
-        public bool HasBuff
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_buff_id)) return false;
-                int doodad = 0;
-                if (int.TryParse(_buff_id, out doodad))
-                {
-                    if (doodad == 0) return false;
-                }
-                return true;
-            }
-        }
+        public bool HasBuff = false;
 
-        public uint EntityID
+        public int UID
         {
-            get { return _entity_id; }
+            get { return _uni_id; }
             set
             {
-                if (_entity_id != value)
+                if (_uni_id != value)
                 {
                     if (value > 0)
                     {
-                        _entity_id = value;
+                        _uni_id = value;
                         levelscript = null;
                         if (SpawnType == LevelSpawnType.Spawn_Monster)
                         {
-                            XEntityStatistics.RowData row = LevelMgr.EnemyList.GetByID((int)_entity_id);
+                            XEntityStatistics.RowData row = LevelMgr.EntityList.GetByID((int)_uni_id);
                             if (row == null) return;
+                            name = row.Name;
                             _prefab = Resources.Load("Prefabs/" + XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)row.PresentID).Prefab) as GameObject;
+                            GenerateInstance();
                             if (_window != null) _window.GenerateIcon();
                         }
-                        if (SpawnType == LevelSpawnType.Spawn_Buff)
+                        else if (SpawnType == LevelSpawnType.Spawn_Buff)
                         {
                             _prefab = Resources.Load("Effects/FX_Particle/Roles/Lzg_Ty/Ty_buff_jx_m") as GameObject;
+                            if (_window != null) _window.GenerateIcon();
+                            name = "buff";
+                        }
+                        else if(SpawnType == LevelSpawnType.Spawn_NPC)
+                        {
+                            XNpcList.RowData row = XTableMgr.GetTable<XNpcList>().GetByUID((int)_uni_id);
+                            if (row == null) return;
+                            name = row.NPCName;
+                            _prefab = Resources.Load("Prefabs/" + XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)row.PresentID).Prefab) as GameObject;
+                            GenerateInstance();
                             if (_window != null) _window.GenerateIcon();
                         }
                     }
@@ -99,7 +94,7 @@ namespace XEditor
                 if (levelscript != value)
                 {
                     levelscript = value;
-                    _entity_id = 0;
+                    _uni_id = 0;
                     if (_window != null) _window.GenerateIcon();
                 }
             }
@@ -150,7 +145,7 @@ namespace XEditor
         public bool ValidWave()
         {
             if (!string.IsNullOrEmpty(levelscript)) return true;
-            return _prefab != null && roundCount > 0;
+            return _prefab != null && count > 0;
         }
 
         public void WriteToFile(StreamWriter sw)
@@ -162,7 +157,7 @@ namespace XEditor
                 sw.WriteLine("st:{0}", (int)spawnType);
 
                 if (string.IsNullOrEmpty(_buff_id)) _buff_id = "0";
-                sw.WriteLine("bi:{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}", time, loopInterval, _entity_id, _prefabSlot.Count, _bVisibleInEditor, yRotate, roundRidus, roundCount, isAroundPlayer, _buff_id, _buff_percent, repeat);
+                sw.WriteLine("bi:{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}", time, loopInterval, _uni_id, _prefabSlot.Count, _bVisibleInEditor, yRotate, radius, count, isAroundPlayer, _buff_id, _buff_percent, repeat);
                 if (levelscript != null && levelscript.Length > 0) sw.WriteLine("si:{0}", levelscript);
 
                 if (preWaves != null && preWaves.Length > 0)
@@ -194,11 +189,11 @@ namespace XEditor
                 if (go != null)
                 {
                     Transform t = go.transform;
-                    sw.WriteLine("mi:{0},{1},{2},{3},{4}", index, t.position.x, t.position.y, t.position.z, t.localRotation.eulerAngles.y);
+                    sw.WriteLine("ti:{0},{1},{2},{3},{4}", index, t.position.x, t.position.y, t.position.z, t.localRotation.eulerAngles.y);
                 }
                 else
                 {
-                    sw.WriteLine("mi:{0},{1},{2},{3},{4}", index, 0, 0, 0, 0);
+                    sw.WriteLine("ti:{0},{1},{2},{3},{4}", index, 0, 0, 0, 0);
                 }
                 sw.WriteLine("ew");
             }
@@ -210,17 +205,17 @@ namespace XEditor
             string rawData = data.Substring(3);
             switch (infotype)
             {
-                case InfoType.TypeSpawnType:
+                case InfoType.SpawnType:
                     SpawnType = spawnType;
                     break;
-                case InfoType.TypeBaseInfo:
-                    EntityID = entityid;
+                case InfoType.BaseInfo:
+                    UID = uid;
                     break;
-                case InfoType.TypeExString:
+                case InfoType.ExString:
                     string[] strInfos = rawData.Split('|');
                     if (strInfos.Length > 0) exString = strInfos[0];
                     break;
-                case InfoType.TypeEditor:
+                case InfoType.EditorInfo:
                     if (rawData.Length > 0)
                     {
                         string[] strEditorCoords = rawData.Split(',');
@@ -228,22 +223,22 @@ namespace XEditor
                         rectY = int.Parse(strEditorCoords[1]);
                     }
                     break;
-                case InfoType.TypeMonsterInfo:
+                case InfoType.TransformInfo:
                     string[] strFloats = rawData.Split(',');
                     int index = int.Parse(strFloats[0]);
                     _prefabSlot.Add(index);
                     if (_prefab != null)
                     {
-                        if (go != null) GameObject.DestroyImmediate(go);
-                        go = GameObject.Instantiate(_prefab);
+                        if (go == null)
+                            go = GameObject.Instantiate(_prefab);
                         go.name = GetMonsterName(_id);
                         go.transform.position = pos;
                         go.transform.Rotate(0, rotateY, 0);
 
-                        XEntityStatistics.RowData sData = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)_entity_id);
+                        XEntityStatistics.RowData sData = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)_uni_id);
                         if (sData == null)
                         {
-                            XDebug.Log("enemy id not exist:", _entity_id);
+                            XDebug.Log("enemy id not exist:", _uni_id);
                             break;
                         }
                         if (sData.PresentID > 0)
@@ -290,8 +285,9 @@ namespace XEditor
             }
         }
 
-        public void GenerateMonster()
+        public void GenerateInstance()
         {
+            if (_prefab == null) return;
             if (go != null) GameObject.DestroyImmediate(go);
             go = GameObject.Instantiate(_prefab);
             go.name = GetMonsterName(_id);

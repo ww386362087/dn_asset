@@ -19,9 +19,7 @@ namespace XEditor
         private XEntityStatistics _data_info = null;
         [NonSerialized]
         private LevelLayout _layout;
-
-        public Dictionary<uint, int> _preLoadInfo;
-        public Dictionary<uint, int> _lastCachePreloadInfo;
+        
         public static int maxSpawnTime = 180;
 
         private float _markGOHeight;
@@ -40,11 +38,11 @@ namespace XEditor
             get { return _waves.Count; }
         }
 
-        public XEntityStatistics EnemyList
+        public XEntityStatistics EntityList
         {
             get { return _data_info; }
         }
-
+        
         int _currentEdit = -1;
         public int CurrentEdit
         {
@@ -57,11 +55,8 @@ namespace XEditor
             hideFlags = HideFlags.HideAndDontSave;
             AssetPreview.SetPreviewTextureCacheSize(64);
             if (_waves == null) _waves = new List<EditorWave>();
-            if (_preLoadInfo == null) _preLoadInfo = new Dictionary<uint, int>();
-            if (_lastCachePreloadInfo == null) _lastCachePreloadInfo = new Dictionary<uint, int>();
             if (_layout == null) _layout = new LevelLayout(this);
             if (_data_info == null) _data_info = XTableMgr.GetTable<XEntityStatistics>();
-
             _currentEdit = -1;
             _markGOHeight = 2.0f;
         }
@@ -107,23 +102,14 @@ namespace XEditor
             StreamWriter sw = File.CreateText(path);
             sw.WriteLine("{0}", _waves.Count);
 
-            CalEnemyNum cen = new CalEnemyNum();
-            Dictionary<uint, int> suggest = cen.CalNum(_waves);
+            LevelEntityStatistics.CulWaves(_waves);
 
-            int preLoadCount = 0;
-            foreach (var item in _preLoadInfo)
-            {
-                int sugCount = 0;
-                suggest.TryGetValue(item.Key, out sugCount);
-                if (item.Value > 0 || sugCount > 0) ++preLoadCount;
-            }
+            int preLoadCount = LevelEntityStatistics.suggest.Count;
             sw.WriteLine("{0}", preLoadCount);
 
-            foreach (var item in _preLoadInfo)
+            foreach (var item in LevelEntityStatistics.suggest)
             {
-                int sugCount = 0;
-                suggest.TryGetValue(item.Key, out sugCount);
-                if (item.Value > 0 || sugCount > 0)
+                if (item.Value > 0)
                 {
                     sw.WriteLine("pi:" + item.Key + "," + item.Value);
                 }
@@ -135,7 +121,6 @@ namespace XEditor
             sw.Flush();
             sw.Close();
             AssetDatabase.Refresh();
-            RemoveSceneViewInstance();
         }
 
         public void SavePreprocess()
@@ -158,15 +143,12 @@ namespace XEditor
             string path = EditorUtility.OpenFilePanel("Select a file to load", XEditorLibrary.Lev, "txt");
             RemoveSceneViewInstance();
             _waves.Clear();
-            _preLoadInfo.Clear();
-            _lastCachePreloadInfo.Clear();
             _currentEdit = -1;
             int v = path.LastIndexOf("Level/");
             int dot = path.LastIndexOf(".");
             current_level = path.Substring(v + 6, dot - v - 6);
             LoadFromFile(path);
-            CalEnemyNum cen = new CalEnemyNum();
-            _lastCachePreloadInfo = cen.CalNum(_waves);
+            LevelEntityStatistics.CulWaves(_waves);
         }
 
         public void LoadFromFile(string path)
@@ -180,9 +162,6 @@ namespace XEditor
             for (int i = 0; i < PreloadWave; i++)
             {
                 line = sr.ReadLine();
-                line = line.Replace("pi:", "");
-                string[] preloadInfo = line.Split(',');
-                _preLoadInfo.Add(uint.Parse(preloadInfo[0]), int.Parse(preloadInfo[1]));
             }
             for (int id = 0; id < totalWave; id++)
             {
@@ -197,10 +176,7 @@ namespace XEditor
         public void ClearWaves()
         {
             RemoveSceneViewInstance();
-
             _waves.Clear();
-            _preLoadInfo.Clear();
-            _lastCachePreloadInfo.Clear();
             _editor.Repaint();
         }
 

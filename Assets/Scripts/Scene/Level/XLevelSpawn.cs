@@ -16,7 +16,7 @@ namespace Level
             base.ParseInfo(data);
             switch (infotype)
             {
-                case InfoType.TypePreWave:
+                case InfoType.PreWave:
                     if (!string.IsNullOrEmpty(preWaves))
                     {
                         string[] strPreWaves = preWaves.Split(',');
@@ -271,21 +271,20 @@ namespace Level
 
         protected void GenerateEntityTask(XLevelWave wave)
         {
-            if (wave.RoundCount > 0)
+            if (wave.Count > 0)
             {
                 XLevelStatistics.singleton.ls._monster_refresh_time.Add((uint)(Time.time - XLevelStatistics.singleton.ls._start_time));
-                float angle = 360.0f / wave.RoundCount;
+                float angle = 360.0f / wave.Count;
                 Vector3 pos = wave.isAroundPlayer ? XEntityMgr.singleton.Player.Position : wave.Pos;
-                for (int i = 0; i < wave.RoundCount; i++)
+                for (int i = 0; i < wave.Count; i++)
                 {
                     XLevelSpawnTask task = new XLevelSpawnTask(this);
                     task._id = wave.ID;
-                    task._EnemyID = wave.entityid;
-                    task._MonsterIndex = 0; // no use now
-                    task._MonsterPos = pos + Quaternion.Euler(0, angle * i, 0) * new Vector3(0, 0, 1) * wave.RoundRidous;
-                    task._MonsterRotate = (int)angle * i + 180;
-                    task._SpawnType = wave.spawnType;
-                    task._IsSummonTask = false;
+                    task.UID = (uint)wave.uid;
+                    task.pos = pos + Quaternion.Euler(0, angle * i, 0) * new Vector3(0, 0, 1) * wave.Radius;
+                    task.rot = (int)angle * i + 180;
+                    task.spawnType = wave.spawnType;
+                    task.isSummonTask = false;
                     _tasks.Enqueue(task);
                 }
             }

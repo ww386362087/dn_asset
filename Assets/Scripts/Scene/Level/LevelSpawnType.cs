@@ -5,16 +5,15 @@ namespace Level
     {
         TypeNone,
         TypeId,
-        TypeBaseInfo,
-        TypePreWave,
-        TypeEditor,
-        TypeMonsterInfo,
-        TypeScript,
-        TypeExString,
-        TypeSpawnType,
+        BaseInfo,
+        PreWave,
+        EditorInfo,
+        TransformInfo,
+        Script,
+        ExString,
+        SpawnType,
     }
-
-
+    
 
     public enum LevelSpawnType
     {
@@ -23,6 +22,5 @@ namespace Level
         Spawn_NPC,
         Spawn_Buff,
     }
-
 
 }

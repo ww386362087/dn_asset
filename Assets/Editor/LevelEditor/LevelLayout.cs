@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
 using Level;
 
 namespace XEditor
@@ -29,6 +28,8 @@ namespace XEditor
 
         public static GUILayoutOption miniButtonWidth = GUILayout.Width(20f);
         public static GUILayoutOption detailLayout = GUILayout.Width(tabLength);
+
+        public static string[] titles = { "entityid", "roleid", "npcid", "buffid" };
 
         protected Texture2D _grayText = null;
 
@@ -107,81 +108,25 @@ namespace XEditor
 
         private void DrawPreloadView()
         {
-            Dictionary<uint, int> preloadTmp = new Dictionary<uint, int>();
-            CalEnemyNum cen = new CalEnemyNum();
-            Dictionary<uint, int> dic = cen.CalNum(levelMgr._waves);
-            foreach (var item in dic)
-            {
-                int cur = item.Value;
-                int last = 0;
-                levelMgr._lastCachePreloadInfo.TryGetValue(item.Key, out last);
-                if (last != cur)
-                {
-                    levelMgr._preLoadInfo[item.Key] = cur;
-                }
-            }
-            foreach (var item in levelMgr._lastCachePreloadInfo)
-            {
-                int last = item.Value;
-                int cur = 0;
-                dic.TryGetValue(item.Key, out cur);
-                if (last != cur)
-                {
-                    levelMgr._preLoadInfo[item.Key] = cur;
-                }
-            }
-
+            LevelEntityStatistics.CulWaves(levelMgr._waves);
             GUIStyle style = new GUIStyle();
-            EditorGUILayout.LabelField("Preload Monster : ");
-            foreach (var item in levelMgr._preLoadInfo)
+            EditorGUILayout.LabelField("Preload  : ");
+            foreach (var item in LevelEntityStatistics.suggest)
             {
-                int preload = item.Value;
-                int suggest = 0;
-                dic.TryGetValue(item.Key, out suggest);
-                if (preload > suggest || suggest == 0)
+                int suggest = item.Value;
+                int max = 10;
+                if (suggest > max || suggest == 0)
                 {
                     style.normal.textColor = Color.red;
-                }
-                else if (preload < suggest)
-                {
-                    style.normal.textColor = Color.green;
                 }
                 else
                 {
                     style.normal.textColor = Color.white;
                 }
-
-                GUILayout.BeginHorizontal();
-
-                GUILayout.BeginVertical();
-                EditorGUILayout.LabelField(string.Format("MonsterID: {0}   (推荐数量: {1})", item.Key, suggest), style);
-                GUILayout.EndVertical();
-
-                GUILayout.BeginVertical();
-                preloadTmp[item.Key] = EditorGUILayout.IntField(preload);
-                GUILayout.EndVertical();
-
-                GUILayout.EndHorizontal();
+                int all = LevelEntityStatistics.statistics[item.Key];
+                EditorGUILayout.LabelField(string.Format("MonsterID: {0}   (预加载数量: {1})   统计数量:{2}", item.Key, suggest, all), style);
                 GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
             }
-
-            levelMgr._preLoadInfo.Clear();
-            foreach (var item in preloadTmp)
-            {
-                int suggest = 0;
-                dic.TryGetValue(item.Key, out suggest);
-                if (item.Value < 0)
-                {
-                    if (suggest != 0)
-                    {
-                        levelMgr._preLoadInfo[item.Key] = 0;
-                    }
-                    continue;
-                }
-                levelMgr._preLoadInfo[item.Key] = item.Value;
-            }
-
-            levelMgr._lastCachePreloadInfo = dic;
         }
 
         public void DrawTab()
@@ -205,14 +150,18 @@ namespace XEditor
             if (wv != null)
             {
                 wv.SpawnType = (LevelSpawnType)EditorGUILayout.EnumPopup("Spawn Type", wv.SpawnType);
+                GUILayout.BeginHorizontal();
+                wv.UID = EditorGUILayout.IntField(titles[(int)wv.spawnType], wv.UID);
+                if (!string.IsNullOrEmpty(wv.name)) EditorGUILayout.LabelField(wv.name);
+                GUILayout.EndHorizontal();
                 wv.Time = EditorGUILayout.FloatField("Spawn Time(s):", wv.Time);
-
                 GUILayout.Space(20);
 
                 wv.exString = EditorGUILayout.TextField("ExString(,):", wv.exString);
                 wv.preWaves = EditorGUILayout.TextField("PreWaves(,):", wv.preWaves);
 
-                if (wv.spawnType == LevelSpawnType.Spawn_Buff)
+                wv.HasBuff = EditorGUILayout.Toggle("Add Buff:", wv.HasBuff);
+                if (wv.HasBuff)
                 {
                     GUILayout.BeginHorizontal();
                     wv._buff_id = EditorGUILayout.TextField("Buff ID:", wv._buff_id);
@@ -232,8 +181,8 @@ namespace XEditor
                             wv.go.transform.position = pos;
                     }
                 }
-                wv.RoundRidous = EditorGUILayout.FloatField("RoundRidous:", wv.RoundRidous);
-                wv.RoundCount = EditorGUILayout.IntSlider("RoundCount:", wv.RoundCount, 0, 10);
+                wv.Radius = EditorGUILayout.FloatField("Radius:", wv.Radius);
+                wv.Count = EditorGUILayout.IntSlider("Count:", wv.Count, 0, 10);
             }
         }
 
