@@ -22,7 +22,7 @@ namespace Level
         public bool isAroundPlayer;
         public LevelSpawnType spawnType;
         protected InfoType infotype;
-
+        
         public int ID
         {
             get { return _id; }

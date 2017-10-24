@@ -19,13 +19,13 @@ namespace XEditor
         private XEntityStatistics _data_info = null;
         [NonSerialized]
         private LevelLayout _layout;
-        
+
         public static int maxSpawnTime = 180;
 
         private float _markGOHeight;
         private float _goStep = 0.0001f;
         public string current_level = "";
-        
+
         private LevelEditor _editor;
         public LevelEditor Editor
         {
@@ -42,7 +42,7 @@ namespace XEditor
         {
             get { return _data_info; }
         }
-        
+
         int _currentEdit = -1;
         public int CurrentEdit
         {
@@ -60,7 +60,7 @@ namespace XEditor
             _currentEdit = -1;
             _markGOHeight = 2.0f;
         }
-        
+
 
         public void OnGUI()
         {
@@ -68,6 +68,7 @@ namespace XEditor
             if (_toBeRemoved != null)
             {
                 if (_toBeRemoved.ID == CurrentEdit) CurrentEdit = -1;
+                _toBeRemoved.Remove();
                 _waves.Remove(_toBeRemoved);
                 _toBeRemoved = null;
             }
@@ -125,13 +126,13 @@ namespace XEditor
 
         public void SavePreprocess()
         {
-            List<EditorWave> _wavesToRemove = new List<EditorWave>();
+            List<EditorWave> wavesToRemove = new List<EditorWave>();
             foreach (EditorWave _wave in _waves)
             {
                 if (!_wave.ValidWave())
-                    _wavesToRemove.Add(_wave);
+                    wavesToRemove.Add(_wave);
             }
-            foreach (EditorWave _remove in _wavesToRemove)
+            foreach (EditorWave _remove in wavesToRemove)
             {
                 _waves.Remove(_remove);
             }
@@ -406,22 +407,19 @@ namespace XEditor
             }
             return null;
         }
-
-
+        
         public void RemoveMonster(GameObject go)
         {
-            string[] wave_info = go.name.Replace("Wave", "").Replace("monster", "").Split('_');
-            int wave = int.Parse(wave_info[0]);
-
+            string wave_info = go.name.Replace("Wave", string.Empty);
+            int wave = int.Parse(wave_info);
             foreach (EditorWave _wave in _waves)
             {
                 if (_wave.ID == wave)
                 {
-                    _wave.RemoveMonster(go);
+                    _wave.Remove();
                 }
             }
         }
     }
-
 
 }

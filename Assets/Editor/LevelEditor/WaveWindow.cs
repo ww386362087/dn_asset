@@ -90,14 +90,14 @@ namespace XEditor
             GUIStyle gs = new GUIStyle();
             gs.alignment = TextAnchor.LowerRight;
             gs.normal.textColor = Color.white;
-            XEntityStatistics.RowData enemyData = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)_wave.UID);
-            if (enemyData != null && _wave.SpawnType == LevelSpawnType.Spawn_Monster)
+            XEntityStatistics.RowData eData = XTableMgr.GetTable<XEntityStatistics>().GetByID((int)_wave.UID);
+            if (eData != null && _wave.SpawnType == LevelSpawnType.Spawn_Monster)
             {
-                if (enemyData.Type == 1)
+                if (eData.Type == 1)
                 {
                     gs.normal.textColor = Color.red;
                 }
-                else if (enemyData.Type == 6)
+                else if (eData.Type == 6)
                 {
                     gs.normal.textColor = Color.yellow;
                 }

@@ -10,6 +10,7 @@ namespace XEditor
         /// 根据wave 最大的
         /// </summary>
         public static Dictionary<int, int> suggest = new Dictionary<int, int>();
+
         /// <summary>
         /// 统计
         /// </summary>

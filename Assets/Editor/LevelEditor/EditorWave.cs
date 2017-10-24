@@ -133,15 +133,6 @@ namespace XEditor
             }
         }
 
-        public static void ExtractInfoFromName(string name, out int wave, out int index)
-        {
-            int i = name.IndexOf("_monster");
-            string strWave = name.Substring(4, i - 4);
-            string strIndex = name.Substring(i + 8);
-            wave = int.Parse(strWave);
-            index = int.Parse(strIndex);
-        }
-
         public bool ValidWave()
         {
             if (!string.IsNullOrEmpty(levelscript)) return true;
@@ -273,16 +264,10 @@ namespace XEditor
             _window.Draw();
         }
 
-        public void RemoveMonster(GameObject go)
+        public void Remove()
         {
-            int wave = 0;
-            int index = 0;
-            ExtractInfoFromName(go.name, out wave, out index);
-            if (wave == _id)
-            {
-                GameObject.DestroyImmediate(go);
-                _prefabSlot.Remove(index);
-            }
+            GameObject.DestroyImmediate(go);
+            _prefabSlot.Remove(index);
         }
 
         public void GenerateInstance()
