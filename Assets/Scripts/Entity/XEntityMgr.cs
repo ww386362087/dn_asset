@@ -5,20 +5,16 @@ using XTable;
 
 public class XEntityMgr : XSingleton<XEntityMgr>
 {
-
     private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
     private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
     private Dictionary<EnitityType, List<XEntity>> _map_entities = new Dictionary<EnitityType, List<XEntity>>();
     public XPlayer Player;
-
-
+    
     private T PrepareEntity<T>(XAttributes attr) where T : XEntity
     {
         T x = Activator.CreateInstance<T>();
         GameObject o = XResources.LoadInPool("Prefabs/" + attr.Prefab);
-#if UNITY_EDITOR
-        o.name = attr.Name;
-#endif
+        o.name = attr.id.ToString();
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
@@ -140,8 +136,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         attr.AppearQuaternion = Quaternion.Euler(row.StartRot[0], row.StartRot[1], row.StartRot[2]);
         return Player = PrepareEntity<XPlayer>(attr);
     }
-
-
+    
     public XNPC CreateNPC(XNpcList.RowData row)
     {
         var pos = new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
@@ -158,14 +153,12 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         Add(EnitityType.Npc, e);
         return e;
     }
-
-
+    
     public List<XEntity> GetAllNPC()
     {
         return _map_entities[EnitityType.Npc];
     }
-
-
+    
     public List<XEntity> GetAllAlly()
     {
         return _map_entities[EnitityType.Ally];

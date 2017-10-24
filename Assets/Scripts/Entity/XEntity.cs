@@ -97,6 +97,11 @@ public class XEntity : XObject
         get { return _attr; }
     }
 
+    public float Speed
+    {
+        get { return _speed; }
+    }
+
     public int DefaultLayer
     {
         get { return _layer; }
@@ -127,6 +132,10 @@ public class XEntity : XObject
         get { return _present; }
     }
 
+    public bool IsDead
+    {
+        get { return _attr == null ? true : _attr.IsDead; }
+    }
 
     public SkinnedMeshRenderer skin
     {
@@ -203,6 +212,17 @@ public class XEntity : XObject
         return false;
     }
 
+    public static bool Valide(Transform transf)
+    {
+        uint id = uint.Parse(transf.name);
+        XEntity e = XEntityMgr.singleton.GetEntity(id);
+        return Valide(e);
+    }
+
+    public static bool Valide(XEntity e)
+    {
+        return e != null && !e.IsDead && !e.Deprecated && e.Attributes != null;
+    }
 
     public void MoveForward(Vector3 forward)
     {

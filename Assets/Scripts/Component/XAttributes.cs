@@ -8,6 +8,7 @@ public class XAttributes : XComponent
     private Vector3 _appear_pos = Vector3.zero;
     private Quaternion _appear_qua = Quaternion.identity;
     private uint _presentID = 2;
+    private bool _is_dead = false;
 
     public uint id
     {
@@ -48,6 +49,11 @@ public class XAttributes : XComponent
         set { _presentID = value; }
     }
 
+    public bool IsDead
+    {
+        get { return _is_dead; }
+        set { _is_dead = value; }
+    }
 
     public double GetAttr(XAttributeDefine def)
     {

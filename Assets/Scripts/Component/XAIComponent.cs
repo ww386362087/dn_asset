@@ -1,27 +1,204 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using AI;
+using UnityEngine;
 
 public class XAIComponent : XComponent
 {
+    private bool _is_inited = false;
+    private IXBehaviorTree _tree;
+    private float _ai_tick = 1.0f;  //AI心跳间隔 
+    private float _tick_factor = 1f;
+    private bool _enable_runtime = true;
+    private float _tick = 0;
+    private float _timer = 0;
+    private XEntity _host;
+
+    //行为树内部筛选变量
+    private List<XEntity> _targets = null;
+
+    // 行为树相关的变量
+    private XEntity _target = null;
+    private Transform _navtarget = null;
+    private bool _is_oppo_casting_skill = false;
+    private bool _is_hurt_oppo = false;
+    private float _target_distance = 0.0f;
+    private float _master_distance = 9999.0f;
+    private bool _is_fixed_in_cd = false;
+    private float _normal_attack_prob = 0.5f;
+    private float _enter_fight_range = 10.0f;
+    private float _fight_together_dis = 10.0f;
+    private bool _is_wander = false;
+    private float _max_hp = 1000.0f;
+    private float _current_hp = 0.0f;
+    private float _max_super_armor = 100.0f;
+    private float _current_super_armor = 50.0f;
+    private int _type = 1;
+    private float _target_rotation = 0.0f;
+    private float _attack_range = 1.0f;
+    private float _min_keep_range = 1.0f;
+    private bool _is_casting_skill = false;
     private bool _is_fighting = false;
-    private XRole _opponent = null;
-   // private float _ai_tick = 1.0f;  //AI心跳间隔 
+    private bool _is_qte_state = false;
 
-    public bool IsFighting { get { return _is_fighting; } set { _is_fighting = value; } }
 
-    public XRole Opponent { get { return _opponent; } set { _opponent = value; } }
-   
+    private List<XEntity> targets
+    {
+        get
+        {
+            if (_targets == null)
+            {
+                _targets =new List<XEntity>();
+            }
+            return _targets;
+        }
+    }
 
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
+        _host = _obj as XEntity;
+        _tree = _host.EntityObject.GetComponent<XBehaviorTree>();
     }
-    
+
     public override void OnUninit()
     {
         base.OnUninit();
     }
 
+    public override void OnUpdate(float delta)
+    {
+        base.OnUpdate(delta);
+        if (_tick > 0 && _tree != null)
+        {
+            _timer += delta;
+            if (_timer >= _tick)
+            {
+                OnTickAI();
+                _timer = 0;
+            }
+        }
+    }
 
-    
-    
+    public void SetTarget(XEntity entity)
+    {
+        if (entity == null)
+            _target = null;
+        else
+        {
+            _target = entity;
+            if (XEntity.Valide(_target))
+            {
+                _target_distance = (_host.Position - _target.Position).magnitude;
+                _tree.SetVariable("target_distance", _target_distance);
+                _tree.SetVariable("target", _target.EntityObject);
+            }
+        }
+    }
+
+
+    public void SetBehaviorTree(string tree)
+    {
+        if (!string.IsNullOrEmpty(tree))
+            _is_inited = true;
+
+        if (_enable_runtime)
+        {
+            _tree = new AIRunTimeBehaviorTree();
+            (_tree as AIRunTimeBehaviorTree).Host = _host;
+        }
+        else
+        {
+            _tree = _host.EntityObject.GetComponent<XBehaviorTree>();
+        }
+
+        if (_tree != null)
+        {
+            _tree.SetBehaviorTree(tree);
+            _tree.EnableBehaviorTree(true);
+            _tree.SetManual(true);
+            _tick = _ai_tick * _tick_factor;
+        }
+        else
+        {
+            XDebug.LogError("Add behavior error: ", tree);
+        }
+    }
+
+
+    protected void OnTickAI()
+    {
+        if (_is_inited && _tree != null && XEntity.Valide(_host))
+        {
+            UpdateVariable();
+            SetTreeVariable(_tree);
+            _tree.TickBehaviorTree();
+        }
+    }
+
+    private void UpdateVariable()
+    {
+        if (_host.Attributes != null)
+        {
+            _max_hp = (float)_host.Attributes.GetAttr(XAttributeDefine.XAttr_MaxHP_Total);
+            _current_hp = (float)_host.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentHP_Total);
+            _max_super_armor = (float)_host.Attributes.GetAttr(XAttributeDefine.XAttr_MaxSuperArmor_Total);
+            _current_super_armor = (float)_host.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentSuperArmor_Total);
+        }
+        if (XEntity.Valide(XEntityMgr.singleton.Player))
+        {
+            _master_distance = (_host.Position - XEntityMgr.singleton.Player.Position).magnitude;
+        }
+        if (_target != null && XEntity.Valide(_target))
+        {
+            _target_distance = (_host.Position - _target.Position).magnitude;
+            _target_distance -= _target.Radius;
+            if (_target_distance < 0) _target_distance = 0;
+            Vector3 oDirect1 = _host.Position - _target.Position;
+            _target_rotation = Mathf.Abs(XCommon.singleton.AngleWithSign(oDirect1, _target.Forward));
+        }
+        else
+        {
+            _target_distance = 9999999;
+            _target_rotation = 0;
+            targets.Clear();
+            List<XEntity> enemy = XEntityMgr.singleton.GetAllEnemy();
+            for (int i = 0; i < enemy.Count; i++)
+            {
+                if (XEntity.Valide(enemy[i]))
+                    targets.Add(enemy[i]);
+            }
+        }
+    }
+
+    private void SetTreeVariable(IXBehaviorTree tree)
+    {
+        tree.SetVariable(AITreeArg.TARGET, _target == null ? null : _target.EntityObject);
+        tree.SetVariable(AITreeArg.MASTER, XEntityMgr.singleton.Player == null ? null : XEntityMgr.singleton.Player.EntityObject);
+        tree.SetVariable(AITreeArg.NavTarget, _navtarget);
+        tree.SetVariable(AITreeArg.IsOppoCastingSkill, _is_oppo_casting_skill);
+        tree.SetVariable(AITreeArg.IsHurtOppo, _is_hurt_oppo);
+        tree.SetVariable(AITreeArg.TargetDistance, _target_distance);
+        tree.SetVariable(AITreeArg.MasterDistance, _master_distance);
+        tree.SetVariable(AITreeArg.IsFixedInCD, _is_fixed_in_cd);
+        tree.SetVariable(AITreeArg.NormalAttackProb, _normal_attack_prob);
+        tree.SetVariable(AITreeArg.EnterFightRange, _enter_fight_range);
+        tree.SetVariable(AITreeArg.FightTogetherDis, _fight_together_dis);
+        tree.SetVariable(AITreeArg.IsWander, _is_wander);
+        tree.SetVariable(AITreeArg.MaxHP, _max_hp);
+        tree.SetVariable(AITreeArg.CurrHP, _current_hp);
+        tree.SetVariable(AITreeArg.MaxSupperArmor, _max_super_armor);
+        tree.SetVariable(AITreeArg.CurrSuperArmor, _current_super_armor);
+        tree.SetVariable(AITreeArg.TYPE, _type);
+        tree.SetVariable(AITreeArg.TargetRot, _target_rotation);
+        tree.SetVariable(AITreeArg.AttackRange, _attack_range);
+        tree.SetVariable(AITreeArg.MinKeepRange, _min_keep_range);
+        tree.SetVariable(AITreeArg.IsCastingSkill, _is_casting_skill);
+        tree.SetVariable(AITreeArg.IsFighting, _is_fighting);
+        tree.SetVariable(AITreeArg.IsQteState, _is_qte_state);
+        tree.SetVariable(AITreeArg.MoveDir, Vector3.zero);
+        tree.SetVariable(AITreeArg.MoveDest, Vector3.zero);
+        tree.SetVariable(AITreeArg.MoveSpeed, _host.Speed);
+        tree.SetVariable(AITreeArg.BornPos, _host.Position);
+    }
+
 }
