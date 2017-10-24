@@ -1,4 +1,4 @@
-﻿internal enum XStateDefine
+﻿public enum XStateDefine
 {
     XState_Idle = 0,
     XState_Move,

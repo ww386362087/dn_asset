@@ -8,7 +8,7 @@ public class XMonster : XEntity
     {
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Enemy");
-        _eEntity_Type |= EnitityType.Monster;
+        _eEntity_Type |= EntityType.Monster;
         XAnimComponent anim = AttachComponent<XAnimComponent>();
         anim.OverrideAnim("Idle", _present.AnimLocation + _present.AttackIdle);
 

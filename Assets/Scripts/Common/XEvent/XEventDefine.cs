@@ -10,6 +10,8 @@ public enum XEventDefine
     XEvent_Camera_Action,
     XEvent_Attach_Host,
     XEvent_Detach_Host,
+    XEvent_AIStartSkill,
+    XEvent_AIEndSkill,
     XEvent_Num
 }
 
@@ -66,9 +68,9 @@ public class XCameraActionEvent : XEventArgs
 
     public override void Recycle()
     {
-        base.Recycle();
         To_Rot_X = 0;
         To_Rot_Y = 0;
+        base.Recycle();
     }
 }
 
@@ -86,10 +88,10 @@ public class XAIEventArgs : XEventArgs
 
     public override void Recycle()
     {
-        base.Recycle();
         DepracatedPass = false;
         EventType = 1;
         EventArg = string.Empty;
+        base.Recycle();
     }
 }
 
@@ -115,4 +117,42 @@ public class XDetachEventArgs:XEventArgs
     public override void Recycle()
     {
     }
+}
+
+
+public class XAIStartSkillEventArgs : XEventArgs
+{
+    public uint SkillId = 0;
+    public bool IsCaster = false;
+
+    public XAIStartSkillEventArgs()
+    {
+        _eDefine = XEventDefine.XEvent_AIStartSkill;
+    }
+
+    public override void Recycle()
+    {
+        SkillId = 0;
+        IsCaster = false;
+        base.Recycle();
+    }
+}
+
+internal class XAIEndSkillEventArgs : XEventArgs
+{
+    public uint SkillId = 0;
+    public bool IsCaster = false;
+
+    public XAIEndSkillEventArgs()
+    {
+        _eDefine = XEventDefine.XEvent_AIEndSkill;
+    }
+
+    public override void Recycle()
+    {
+        SkillId = 0;
+        IsCaster = false;
+        base.Recycle();
+    }
+   
 }

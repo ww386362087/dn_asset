@@ -7,7 +7,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 {
     private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
     private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
-    private Dictionary<EnitityType, List<XEntity>> _map_entities = new Dictionary<EnitityType, List<XEntity>>();
+    private Dictionary<EntityType, List<XEntity>> _map_entities = new Dictionary<EntityType, List<XEntity>>();
     public XPlayer Player;
     
     private T PrepareEntity<T>(XAttributes attr) where T : XEntity
@@ -104,28 +104,23 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         attr.AppearPostion = pos;
         attr.AppearQuaternion = rot;
         XEntity e = PrepareEntity<T>(attr);
-        Add(EnitityType.Entity, e);
+        Add(EntityType.Entity, e);
         return e;
     }
-
-
-    public XRole CreateRole(XAttributes attr)
-    {
-        return PrepareEntity<XRole>(attr);
-    }
-
+    
     public XRole CreateTestRole()
     {
         XAttributes attr = InitAttrFromClient(2);
         attr.AppearPostion = Vector3.zero;
         attr.AppearQuaternion = Quaternion.identity;
-        return CreateRole(attr);
+        return PrepareEntity<XRole>(attr);
     }
 
     public XPlayer CreatePlayer()
     {
         SceneList.RowData row = XScene.singleton.SceneRow;
-        XAttributes attr = InitAttrFromClient(2);
+        int statisticid = 2;
+        XAttributes attr = InitAttrFromClient(statisticid);
         string s = row.StartPos;
         string[] ss = s.Split('=');
         float[] fp = new float[3];
@@ -150,28 +145,28 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         attr.AppearPostion = pos;
         attr.AppearQuaternion = rot;
         var e = PrepareEntity<XNPC>(attr);
-        Add(EnitityType.Npc, e);
+        Add(EntityType.Npc, e);
         return e;
     }
     
     public List<XEntity> GetAllNPC()
     {
-        return _map_entities[EnitityType.Npc];
+        return _map_entities[EntityType.Npc];
     }
     
     public List<XEntity> GetAllAlly()
     {
-        return _map_entities[EnitityType.Ally];
+        return _map_entities[EntityType.Ally];
     }
 
     public List<XEntity> GetAllEnemy()
     {
-        return _map_entities[EnitityType.Enemy];
+        return _map_entities[EntityType.Enemy];
     }
 
-    public void SetRelation(uint entityid, EnitityType type)
+    public void SetRelation(uint entityid, EntityType type)
     {
-        if (type < EnitityType.Ship_Start)
+        if (type < EntityType.Ship_Start)
         {
             XDebug.LogError("Set Relation err");
             return;
@@ -191,10 +186,10 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         return false;
     }
 
-    private XAttributes InitAttrFromClient(int staticid)
+    private XAttributes InitAttrFromClient(int statisticid)
     {
-        var entity = XTableMgr.GetTable<XEntityStatistics>().GetByID(staticid);
-        if (entity == null) throw new Exception("entity is nil with id: " + staticid);
+        var entity = XTableMgr.GetTable<XEntityStatistics>().GetByID(statisticid);
+        if (entity == null) throw new Exception("entity is nil with id: " + statisticid);
         XAttributes attr = new XAttributes();
         var prow = XTableMgr.GetTable<XEntityPresentation>().GetItemID(entity.PresentID);
         if (prow == null) throw new Exception("present is nil with id: " + entity.PresentID);
@@ -202,6 +197,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         attr.id = (uint)XCommon.singleton.New_id;
         attr.PresentID = entity.PresentID;
         attr.Name = prow.Name;
+        attr.InitAttribute(entity);
         return attr;
     }
 
@@ -217,7 +213,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         return attr;
     }
 
-    private bool Add(EnitityType type, XEntity e)
+    private bool Add(EntityType type, XEntity e)
     {
         if (_map_entities.ContainsKey(type))
         {
@@ -233,5 +229,5 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         }
         return true;
     }
-
+    
 }

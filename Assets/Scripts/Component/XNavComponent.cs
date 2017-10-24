@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class XNavigationComponent : XComponent
+public class XNavComponent : XComponent
 {
     private NavMeshAgent _nav = null;
     private NavMeshPath _path = new NavMeshPath();

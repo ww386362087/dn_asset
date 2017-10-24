@@ -7,7 +7,7 @@ public class XBoss : XEntity
     {
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Boss");
-        _eEntity_Type |= EnitityType.Boss;
+        _eEntity_Type |= EntityType.Boss;
     }
     
 

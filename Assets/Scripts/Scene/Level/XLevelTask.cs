@@ -42,7 +42,7 @@ namespace Level
             {
                 entity.Wave = _waveid;
                 entity.CreateTime = Time.realtimeSinceStartup;
-                entity.SetRelation(EnitityType.Enemy);
+                entity.SetRelation(EntityType.Enemy);
                 return entity;
             }
             return null;
@@ -58,7 +58,7 @@ namespace Level
             {
                 entity.Wave = _waveid;
                 entity.CreateTime = Time.realtimeSinceStartup;
-                entity.SetRelation(EnitityType.Neutral);
+                entity.SetRelation(EntityType.Neutral);
                 return entity;
             }
             return null;

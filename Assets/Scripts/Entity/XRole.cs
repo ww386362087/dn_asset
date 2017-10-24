@@ -5,7 +5,7 @@ public class XRole : XEntity
 {
 
     protected CharacterController controller;
-    protected XNavigationComponent nav;
+    protected XNavComponent nav;
     
     public int profession = 1;
     public DefaultEquip.RowData defEquip = null;
@@ -13,7 +13,7 @@ public class XRole : XEntity
     public override void OnInitial()
     {
         base.OnInitial();
-        _eEntity_Type |= EnitityType.Role;
+        _eEntity_Type |= EntityType.Role;
         _layer = LayerMask.NameToLayer("Role");
         profession = 1;
         defEquip = XTableMgr.GetTable<DefaultEquip>().GetByUID(profession + 1);
@@ -23,7 +23,7 @@ public class XRole : XEntity
         AttachComponent<XAIComponent>();
         AttachComponent<XAnimComponent>();
         AttachComponent<XEquipComponent>();
-        AttachComponent<XNavigationComponent>();
+        AttachComponent<XNavComponent>();
     }
 
 
@@ -31,7 +31,7 @@ public class XRole : XEntity
     {
         if (nav == null)
         {
-            nav = GetComponent<XNavigationComponent>();
+            nav = GetComponent<XNavComponent>();
             nav.ActiveNav();
         }
         nav.Navigate(pos);
@@ -41,7 +41,7 @@ public class XRole : XEntity
     {
         if (nav == null)
         {
-            nav = GetComponent<XNavigationComponent>();
+            nav = GetComponent<XNavComponent>();
         }
         nav.DebugDrawPath();
     }

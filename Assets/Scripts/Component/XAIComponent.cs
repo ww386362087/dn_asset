@@ -9,16 +9,13 @@ public class XAIComponent : XComponent
     private float _ai_tick = 1.0f;  //AI心跳间隔 
     private float _tick_factor = 1f;
     private bool _enable_runtime = true;
+    private uint _cast_skillid = 0;
     private float _tick = 0;
     private float _timer = 0;
     private XEntity _host;
-
-    //行为树内部筛选变量
-    private List<XEntity> _targets = null;
-
+    
     // 行为树相关的变量
     private XEntity _target = null;
-    private Transform _navtarget = null;
     private bool _is_oppo_casting_skill = false;
     private bool _is_hurt_oppo = false;
     private float _target_distance = 0.0f;
@@ -27,42 +24,41 @@ public class XAIComponent : XComponent
     private float _normal_attack_prob = 0.5f;
     private float _enter_fight_range = 10.0f;
     private float _fight_together_dis = 10.0f;
-    private bool _is_wander = false;
     private float _max_hp = 1000.0f;
     private float _current_hp = 0.0f;
     private float _max_super_armor = 100.0f;
     private float _current_super_armor = 50.0f;
-    private int _type = 1;
     private float _target_rotation = 0.0f;
     private float _attack_range = 1.0f;
     private float _min_keep_range = 1.0f;
     private bool _is_casting_skill = false;
     private bool _is_fighting = false;
     private bool _is_qte_state = false;
-
-
-    private List<XEntity> targets
-    {
-        get
-        {
-            if (_targets == null)
-            {
-                _targets =new List<XEntity>();
-            }
-            return _targets;
-        }
-    }
+    
+    public bool IsCastingSkill { get { return _is_casting_skill; } }
+    public bool IsOppoCastingSkill { get { return _is_oppo_casting_skill; } }
+    public bool IsFixedInCd { get { return _is_fixed_in_cd; } }
+    public bool IsHurtOppo { get { return _is_hurt_oppo; } set { _is_hurt_oppo = value; } }
+    
 
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
         _host = _obj as XEntity;
-        _tree = _host.EntityObject.GetComponent<XBehaviorTree>();
+        InitVariables();
+        InitTree();
     }
 
     public override void OnUninit()
     {
         base.OnUninit();
+    }
+
+    protected override void EventSubscribe()
+    {
+        base.EventSubscribe();
+        RegisterEvent(XEventDefine.XEvent_AIStartSkill, OnStartSkill);
+        RegisterEvent(XEventDefine.XEvent_AIEndSkill, OnEndSkill);
     }
 
     public override void OnUpdate(float delta)
@@ -96,11 +92,8 @@ public class XAIComponent : XComponent
     }
 
 
-    public void SetBehaviorTree(string tree)
+    public void InitTree()
     {
-        if (!string.IsNullOrEmpty(tree))
-            _is_inited = true;
-
         if (_enable_runtime)
         {
             _tree = new AIRunTimeBehaviorTree();
@@ -110,6 +103,22 @@ public class XAIComponent : XComponent
         {
             _tree = _host.EntityObject.GetComponent<XBehaviorTree>();
         }
+        string tree = string.Empty;
+        if (_host.IsPlayer)
+        {
+            tree = "PlayerAutoFight";
+        }
+        else
+        {
+            tree = _host.Attributes.AiBehavior;
+        }
+        SetBehaviorTree(tree);
+    }
+
+    public void SetBehaviorTree(string tree)
+    {
+        if (!string.IsNullOrEmpty(tree))
+            _is_inited = true;
 
         if (_tree != null)
         {
@@ -124,6 +133,16 @@ public class XAIComponent : XComponent
         }
     }
 
+
+    private void InitVariables()
+    {
+        XAttributes attr = _host.Attributes;
+        _normal_attack_prob = attr.NormalAttackProb;
+        _enter_fight_range = attr.EnterFightRange;
+        _tick = attr.AIActionGap;
+        _is_fixed_in_cd = attr.IsFixedInCD;
+        _fight_together_dis = attr.FightTogetherDis;
+    }
 
     protected void OnTickAI()
     {
@@ -158,15 +177,8 @@ public class XAIComponent : XComponent
         }
         else
         {
-            _target_distance = 9999999;
+            _target_distance = float.MaxValue;
             _target_rotation = 0;
-            targets.Clear();
-            List<XEntity> enemy = XEntityMgr.singleton.GetAllEnemy();
-            for (int i = 0; i < enemy.Count; i++)
-            {
-                if (XEntity.Valide(enemy[i]))
-                    targets.Add(enemy[i]);
-            }
         }
     }
 
@@ -174,7 +186,6 @@ public class XAIComponent : XComponent
     {
         tree.SetVariable(AITreeArg.TARGET, _target == null ? null : _target.EntityObject);
         tree.SetVariable(AITreeArg.MASTER, XEntityMgr.singleton.Player == null ? null : XEntityMgr.singleton.Player.EntityObject);
-        tree.SetVariable(AITreeArg.NavTarget, _navtarget);
         tree.SetVariable(AITreeArg.IsOppoCastingSkill, _is_oppo_casting_skill);
         tree.SetVariable(AITreeArg.IsHurtOppo, _is_hurt_oppo);
         tree.SetVariable(AITreeArg.TargetDistance, _target_distance);
@@ -183,12 +194,11 @@ public class XAIComponent : XComponent
         tree.SetVariable(AITreeArg.NormalAttackProb, _normal_attack_prob);
         tree.SetVariable(AITreeArg.EnterFightRange, _enter_fight_range);
         tree.SetVariable(AITreeArg.FightTogetherDis, _fight_together_dis);
-        tree.SetVariable(AITreeArg.IsWander, _is_wander);
         tree.SetVariable(AITreeArg.MaxHP, _max_hp);
         tree.SetVariable(AITreeArg.CurrHP, _current_hp);
         tree.SetVariable(AITreeArg.MaxSupperArmor, _max_super_armor);
         tree.SetVariable(AITreeArg.CurrSuperArmor, _current_super_armor);
-        tree.SetVariable(AITreeArg.TYPE, _type);
+        tree.SetVariable(AITreeArg.EntityType, _host.Type);
         tree.SetVariable(AITreeArg.TargetRot, _target_rotation);
         tree.SetVariable(AITreeArg.AttackRange, _attack_range);
         tree.SetVariable(AITreeArg.MinKeepRange, _min_keep_range);
@@ -199,6 +209,83 @@ public class XAIComponent : XComponent
         tree.SetVariable(AITreeArg.MoveDest, Vector3.zero);
         tree.SetVariable(AITreeArg.MoveSpeed, _host.Speed);
         tree.SetVariable(AITreeArg.BornPos, _host.Position);
+    }
+
+
+    private void OnStartSkill(XEventArgs e)
+    {
+        XAIStartSkillEventArgs skillarg = e as XAIStartSkillEventArgs;
+        if (skillarg.IsCaster)//自己放技能
+        {
+            _is_hurt_oppo = false;
+            _is_casting_skill = true;
+            _cast_skillid = skillarg.SkillId;
+            if (_tree != null) _tree.SetVariable(AITreeArg.SkillID, (int)_cast_skillid);
+        }
+        else  // 别人放技能
+        {
+            //XDebug.Log("Other cast skill");
+            _is_oppo_casting_skill = true;
+        }
+    }
+
+    private void OnEndSkill(XEventArgs e)
+    {
+        XAIEndSkillEventArgs skillarg = e as XAIEndSkillEventArgs;
+        if (skillarg.IsCaster)
+        {
+            _is_casting_skill = false;
+            _cast_skillid = 0;
+            _is_hurt_oppo = false;
+        }
+        else  // 别人放技能
+        {
+            //XDebug.Log("Other cast skill");
+            _is_oppo_casting_skill = false;
+        }
+    }
+
+    public bool FindTargetByDistance(float dist, float angle)
+    { 
+        List<XEntity> list = XEntityMgr.singleton.GetAllEnemy();
+        if (list == null) return false;
+        list.Sort(SortEntity);
+        for (int i = 0; i < list.Count; i++)
+        {
+            XEntity enemy = list[i];
+            if (XEntity.Valide(enemy))
+            {
+                Vector3 oTargetPos = enemy.Position;
+                Vector3 oSrcPos = _host.Position;
+                float distance = (oTargetPos - oSrcPos).magnitude;
+                if (distance < dist)
+                {
+                    Vector3 dir = enemy.Position - _host.Position;
+                    float targetangle = Vector3.Angle(dir, _host.Forward);
+                    if (targetangle < angle)
+                    {
+                        _target = enemy;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public bool DoSelectNearest()
+    {
+        SetTarget(_target);
+        return true;
+    }
+
+    public int SortEntity(XEntity a, XEntity b)
+    {
+        if (a == null || b == null)
+            return 0;
+        if (a.Attributes == null || b.Attributes == null)
+            return 0;
+        return b.Attributes.AiHit.CompareTo(a.Attributes.AiHit);
     }
 
 }

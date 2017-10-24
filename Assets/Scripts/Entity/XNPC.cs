@@ -16,7 +16,7 @@ public class XNPC : XEntity
     {
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Npc");
-        _eEntity_Type |= EnitityType.Npc;
+        _eEntity_Type |= EntityType.Npc;
         _target = XEntityMgr.singleton.Player;
         _head_rotate = EntityTransfer.forward;
         _uGazing = XTableMgr.GetTable<XNpcList>().GetByUID((int)_attr.id).Gazing;

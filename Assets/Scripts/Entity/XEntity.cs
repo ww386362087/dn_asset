@@ -5,7 +5,7 @@ using XTable;
 /// <summary>
 /// entity 可能是多重身份（既是Ally 又是Role 又是Player）
 /// </summary>
-public enum EnitityType
+public enum EntityType
 {
     //表现
     Entity = 1 << 0,
@@ -25,7 +25,7 @@ public enum EnitityType
 
 public class XEntity : XObject
 {
-    protected EnitityType _eEntity_Type = EnitityType.Entity;
+    protected EntityType _eEntity_Type = EntityType.Entity;
     protected XAttributes _attr = null;
     protected XEntityPresentation.RowData _present;
     protected GameObject _object = null;
@@ -36,6 +36,7 @@ public class XEntity : XObject
     protected Vector3 _forward = Vector3.zero;
     protected bool _force_move = false;
     private Vector3 _pos = Vector3.zero;
+    protected XStateDefine _state = XStateDefine.XState_Idle;
 
     public uint EntityID
     {
@@ -44,33 +45,34 @@ public class XEntity : XObject
 
     public bool IsPlayer
     {
-        get { return (_eEntity_Type & EnitityType.Player) != 0; }
+        get { return (_eEntity_Type & EntityType.Player) != 0; }
     }
 
     public bool IsRole
     {
-        get { return (_eEntity_Type & EnitityType.Role) != 0; }
+        get { return (_eEntity_Type & EntityType.Role) != 0; }
     }
     
     public bool IsEnemy
     {
-        get { return (_eEntity_Type & EnitityType.Enemy) != 0; }
+        get { return (_eEntity_Type & EntityType.Enemy) != 0; }
     }
 
     public bool IsAlly
     {
-        get { return (_eEntity_Type & EnitityType.Ally) != 0; }
+        get { return (_eEntity_Type & EntityType.Ally) != 0; }
     }
 
     public bool IsBoss
     {
-        get { return (_eEntity_Type & EnitityType.Boss) != 0; }
+        get { return (_eEntity_Type & EntityType.Boss) != 0; }
     }
 
     public bool IsNpc
     {
-        get { return (_eEntity_Type & EnitityType.Npc) != 0; }
+        get { return (_eEntity_Type & EntityType.Npc) != 0; }
     }
+    public XStateDefine CurState { get { return _state; } }
 
     public float Radius
     {
@@ -80,6 +82,11 @@ public class XEntity : XObject
     public float Height
     {
         get { return _present != null ? _present.BoundHeight : 0f; }
+    }
+
+    public EntityType Type
+    {
+        get { return _eEntity_Type; }
     }
 
     public GameObject EntityObject
@@ -232,6 +239,7 @@ public class XEntity : XObject
         if (anim != null)
         {
             anim.SetTrigger(AnimTriger.ToMove);
+            _state = XStateDefine.XState_Move;
         }
     }
 
@@ -244,10 +252,16 @@ public class XEntity : XObject
         {
             anim.SetTrigger(AnimTriger.ToMove, false);
             anim.SetTrigger(AnimTriger.ToStand);
+            _state = XStateDefine.XState_Idle;
         }
     }
 
-    public void SetRelation(EnitityType type)
+    public void OnDied()
+    {
+        _state = XStateDefine.XState_Death;
+    }
+
+    public void SetRelation(EntityType type)
     {
         _eEntity_Type |= type;
     }

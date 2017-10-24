@@ -61,4 +61,78 @@ namespace AI
         }
     }
 
+
+    public class ValueDistance : Conditional
+    {
+        public SharedTransform mAIArgTarget;
+        public SharedFloat mAIArgMaxDistance;
+
+        public override TaskStatus OnUpdate()
+        {
+            if (mAIArgTarget.Value == null)
+                return TaskStatus.Failure;
+
+            if ((transform.position - mAIArgTarget.Value.position).magnitude <= mAIArgMaxDistance.Value)
+                return TaskStatus.Success;
+            else
+                return TaskStatus.Failure;
+        }
+    }
+
+
+    public class IsOppoCastingSkill : Conditional
+    {
+        public override TaskStatus OnUpdate()
+        {
+            uint id = uint.Parse(transform.name);
+            XEntity entity = XEntityMgr.singleton.GetEntity(id);
+            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (entity.GetComponent<XAIComponent>().IsOppoCastingSkill)
+                return TaskStatus.Success;
+            else
+                return TaskStatus.Failure;
+        }
+    }
+
+    public class IsHurtOppo : Conditional
+    {
+        public override TaskStatus OnUpdate()
+        {
+            uint id = uint.Parse(transform.name);
+            XEntity entity = XEntityMgr.singleton.GetEntity(id);
+            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (entity.GetComponent<XAIComponent>().IsHurtOppo)
+                return TaskStatus.Success;
+            else
+                return TaskStatus.Failure;
+        }
+    }
+
+    public class IsFixedInCd : Conditional
+    {
+        public override TaskStatus OnUpdate()
+        {
+            uint id = uint.Parse(transform.name);
+            XEntity entity = XEntityMgr.singleton.GetEntity(id);
+            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (entity.GetComponent<XAIComponent>().IsFixedInCd)
+                return TaskStatus.Success;
+            else
+                return TaskStatus.Failure;
+        }
+    }
+}
+
+public class IsCastingSkill : Conditional
+{
+    public override TaskStatus OnUpdate()
+    {
+        uint id = uint.Parse(transform.name);
+        XEntity entity = XEntityMgr.singleton.GetEntity(id);
+        if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+        if (entity.GetComponent<XAIComponent>().IsCastingSkill)
+            return TaskStatus.Success;
+        else
+            return TaskStatus.Failure;
+    }
 }

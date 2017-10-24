@@ -27,8 +27,6 @@ namespace AI
 
         public static string FightTogetherDis = "fight_together_dis";
 
-        public static string IsWander = "is_wander";
-
         public static string MaxHP = "max_hp";
 
         public static string CurrHP = "current_hp";
@@ -37,7 +35,7 @@ namespace AI
 
         public static string CurrSuperArmor = "current_super_armor";
 
-        public static string TYPE = "type";
+        public static string EntityType = "entity_type";
 
         public static string TargetRot = "target_rotation";
 
@@ -58,6 +56,8 @@ namespace AI
         public static string MoveSpeed = "movespeed";
 
         public static string BornPos = "bornpos";
+
+        public static string SkillID = "skillid";
 
         private string V;
 

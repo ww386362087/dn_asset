@@ -14,7 +14,7 @@ public class XPlayer : XRole
     public override void OnInitial()
     {
         base.OnInitial();
-        _eEntity_Type |= EnitityType.Player;
+        _eEntity_Type |= EntityType.Player;
         OnStopJoyStick(null);
     }
 
