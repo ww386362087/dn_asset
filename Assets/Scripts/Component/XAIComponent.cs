@@ -8,7 +8,7 @@ public class XAIComponent : XComponent
     private IXBehaviorTree _tree;
     private float _ai_tick = 1.0f;  //AI心跳间隔 
     private float _tick_factor = 1f;
-    private bool _enable_runtime = true;
+    private bool _enable_runtime = false;
     private uint _cast_skillid = 0;
     private float _tick = 0;
     private float _timer = 0;
@@ -39,7 +39,7 @@ public class XAIComponent : XComponent
     public bool IsOppoCastingSkill { get { return _is_oppo_casting_skill; } }
     public bool IsFixedInCd { get { return _is_fixed_in_cd; } }
     public bool IsHurtOppo { get { return _is_hurt_oppo; } set { _is_hurt_oppo = value; } }
-    
+    public float EnterFightRange { get { return _enter_fight_range; } }
 
     public override void OnInitial(XObject _obj)
     {
@@ -75,13 +75,13 @@ public class XAIComponent : XComponent
         }
     }
 
-    public void SetTarget(XEntity entity)
+    public void SetTarget(XEntity target)
     {
-        if (entity == null)
+        if (target == null)
             _target = null;
         else
         {
-            _target = entity;
+            _target = target;
             if (XEntity.Valide(_target))
             {
                 _target_distance = (_host.Position - _target.Position).magnitude;

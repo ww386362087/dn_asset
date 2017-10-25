@@ -1,6 +1,8 @@
 ﻿using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using AI;
+using UnityEngine;
+
 
 public class FindTargetByDistance : Action
 {
@@ -24,5 +26,25 @@ public class DoSelectNearest : Action
             return TaskStatus.Success;
         else
             return TaskStatus.Failure;
+    }
+}
+
+
+public class SelectMoveTargetById : Action
+{
+    public SharedTransform mAIArgMoveTarget;
+    public int mAIArgObjectId;
+
+    public override TaskStatus OnUpdate()
+    {
+        Transform moveTarget = XAIGeneralMgr.singleton.SelectMoveTargetById(transform, mAIArgObjectId);
+
+        if (moveTarget == null)
+            return TaskStatus.Failure;
+        else
+        {
+            mAIArgMoveTarget.Value = moveTarget;
+            return TaskStatus.Success;
+        }
     }
 }

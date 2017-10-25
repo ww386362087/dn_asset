@@ -7,9 +7,10 @@ public class XAttributes : XComponent
     private string _prefab_name = null;
     private string _name = null;
     private Vector3 _appear_pos = Vector3.zero;
-    private Quaternion _appear_qua = Quaternion.identity;
+    private Quaternion _appear_rot = Quaternion.identity;
     private uint _presentID = 2;
     private bool _is_dead = false;
+    private uint _type_id;
 
     public uint id
     {
@@ -39,8 +40,8 @@ public class XAttributes : XComponent
 
     public Quaternion AppearQuaternion
     {
-        get { return _appear_qua; }
-        set { _appear_qua = value; }
+        get { return _appear_rot; }
+        set { _appear_rot = value; }
     }
 
 
@@ -50,20 +51,25 @@ public class XAttributes : XComponent
         set { _presentID = value; }
     }
 
+    public virtual uint TypeID
+    {
+        get { return _type_id; }
+        set { _type_id = value; }
+    }
+
     public bool IsDead
     {
         get { return _is_dead; }
         set { _is_dead = value; }
     }
+
+    public int FightGroup { get; set; }
     public bool Blocked { get; set; }
-    public bool IsWander { get; set; }
     public bool IsFixedInCD { get; set; }
     public bool Outline { get; set; }
-    public int UseMyMesh { get; set; }
     public int SummonGroup { get; set; }
     public bool EndShow { get; set; }
     public bool GeneralCutScene { get; set; }
-    public bool SameBillBoardByMaster { get; set; }
     public float NormalAttackProb { get; set; }
     public float EnterFightRange { get; set; }
     public float FloatingMax { get; set; }
@@ -73,6 +79,7 @@ public class XAttributes : XComponent
     public string AiBehavior { get; set; }
     public float FightTogetherDis { get; set; }
     public int AiHit { get; set; }
+
     public double GetAttr(XAttributeDefine def)
     {
         return 0;
@@ -81,6 +88,7 @@ public class XAttributes : XComponent
     // 从本地读出来的配置数据初始化
     public void InitAttribute(XEntityStatistics.RowData data)
     {
+        FightGroup = data.Fightgroup;
         NormalAttackProb = data.AttackProb;
         EnterFightRange = data.Sight;
         Blocked = data.Block;
@@ -95,6 +103,7 @@ public class XAttributes : XComponent
         FightTogetherDis = data.FightTogetherDis;
         AiBehavior = data.AiBehavior;
         AiHit = data.aihit;
+        TypeID = (uint)data.UID;
     }
 
 }

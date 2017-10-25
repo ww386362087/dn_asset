@@ -5,11 +5,12 @@ using XTable;
 
 public class XEntityMgr : XSingleton<XEntityMgr>
 {
+    private List<XEntity> _empty = new List<XEntity>();
     private Dictionary<uint, XEntity> _dic_entities = new Dictionary<uint, XEntity>();
     private HashSet<XEntity> _hash_entitys = new HashSet<XEntity>();
     private Dictionary<EntityType, List<XEntity>> _map_entities = new Dictionary<EntityType, List<XEntity>>();
     public XPlayer Player;
-    
+
     private T PrepareEntity<T>(XAttributes attr) where T : XEntity
     {
         T x = Activator.CreateInstance<T>();
@@ -20,6 +21,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         x.Initilize(o, attr);
         if (!_dic_entities.ContainsKey(attr.id) && IsPlayer(x)) _dic_entities.Add(attr.id, x);
         if (!_hash_entitys.Add(x) && IsPlayer(Player)) XDebug.Log("has exist entity: ", attr.id);
+        SetRelation(attr.id, attr.FightGroup);
         return x;
     }
 
@@ -107,7 +109,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         Add(EntityType.Entity, e);
         return e;
     }
-    
+
     public XRole CreateTestRole()
     {
         XAttributes attr = InitAttrFromClient(2);
@@ -131,7 +133,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         attr.AppearQuaternion = Quaternion.Euler(row.StartRot[0], row.StartRot[1], row.StartRot[2]);
         return Player = PrepareEntity<XPlayer>(attr);
     }
-    
+
     public XNPC CreateNPC(XNpcList.RowData row)
     {
         var pos = new Vector3(row.NPCPosition[0], row.NPCPosition[1], row.NPCPosition[2]);
@@ -139,7 +141,7 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         return CreateNPC(row, pos, rot);
     }
 
-    public XNPC CreateNPC(XNpcList.RowData row,Vector3 pos, Quaternion rot)
+    public XNPC CreateNPC(XNpcList.RowData row, Vector3 pos, Quaternion rot)
     {
         XAttributes attr = InitAttrByPresent(row.PresentID);
         attr.AppearPostion = pos;
@@ -148,15 +150,23 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         Add(EntityType.Npc, e);
         return e;
     }
-    
+
     public List<XEntity> GetAllNPC()
     {
         return _map_entities[EntityType.Npc];
     }
-    
+
     public List<XEntity> GetAllAlly()
     {
         return _map_entities[EntityType.Ally];
+    }
+
+    public List<XEntity> GetAllAlly(XEntity e)
+    {
+        EntityType type = (EntityType)e.Attributes.FightGroup;
+        if (type == EntityType.Ally) return _map_entities[EntityType.Ally];
+        else if (type == EntityType.Enemy) return _map_entities[EntityType.Enemy];
+        return _empty;
     }
 
     public List<XEntity> GetAllEnemy()
@@ -164,13 +174,23 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         return _map_entities[EntityType.Enemy];
     }
 
-    public void SetRelation(uint entityid, EntityType type)
+    public List<XEntity> GetAllEnemy(XEntity e)
     {
-        if (type < EntityType.Ship_Start)
+        EntityType type = (EntityType)e.Attributes.FightGroup;
+        if (type == EntityType.Ally) return _map_entities[EntityType.Enemy];
+        else if (type == EntityType.Enemy) return _map_entities[EntityType.Ally];
+        return _empty;
+    }
+
+    public void SetRelation(uint entityid, int group)
+    {
+        int max = EntityType.Ship_End - EntityType.Ship_Start;
+        if (group < 0 || group > max)
         {
-            XDebug.LogError("Set Relation err");
+            XDebug.LogError("Set Relation err ", entityid);
             return;
         }
+        EntityType type = group + EntityType.Ship_Start;
         XEntity e = null;
         if (_dic_entities.TryGetValue(entityid, out e))
         {
@@ -188,16 +208,16 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 
     private XAttributes InitAttrFromClient(int statisticid)
     {
-        var entity = XTableMgr.GetTable<XEntityStatistics>().GetByID(statisticid);
-        if (entity == null) throw new Exception("entity is nil with id: " + statisticid);
+        var srow = XTableMgr.GetTable<XEntityStatistics>().GetByID(statisticid);
+        if (srow == null) throw new Exception("entity is nil with id: " + statisticid);
         XAttributes attr = new XAttributes();
-        var prow = XTableMgr.GetTable<XEntityPresentation>().GetItemID(entity.PresentID);
-        if (prow == null) throw new Exception("present is nil with id: " + entity.PresentID);
+        var prow = XTableMgr.GetTable<XEntityPresentation>().GetItemID(srow.PresentID);
+        if (prow == null) throw new Exception("present is nil with id: " + srow.PresentID);
         attr.Prefab = prow.Prefab;
         attr.id = (uint)XCommon.singleton.New_id;
-        attr.PresentID = entity.PresentID;
+        attr.PresentID = srow.PresentID;
         attr.Name = prow.Name;
-        attr.InitAttribute(entity);
+        attr.InitAttribute(srow);
         return attr;
     }
 
@@ -229,5 +249,5 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         }
         return true;
     }
-    
+
 }
