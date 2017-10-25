@@ -19,7 +19,7 @@ public class NavToTarget : Action
                     return TaskStatus.Failure;
                 else
                 {
-                    if (XAIGeneralMgr.singleton.ActionNav(transform, mAIArgNavPos.Value))
+                    if (XAIUtil.ActionNav(transform, mAIArgNavPos.Value))
                         return TaskStatus.Success;
                     else
                         return TaskStatus.Failure;
@@ -28,7 +28,7 @@ public class NavToTarget : Action
             }
             else
             {
-                if (XAIGeneralMgr.singleton.NavToTarget(transform, mAIArgNavTarget.Value.gameObject))
+                if (XAIUtil.NavToTarget(transform, mAIArgNavTarget.Value.gameObject))
                     return TaskStatus.Success;
                 else
                     return TaskStatus.Failure;
@@ -36,7 +36,7 @@ public class NavToTarget : Action
         }
         else
         {
-            if (XAIGeneralMgr.singleton.NavToTarget(transform, mAIArgTarget.Value.gameObject))
+            if (XAIUtil.NavToTarget(transform, mAIArgTarget.Value.gameObject))
                 return TaskStatus.Success;
             else
                 return TaskStatus.Failure;
@@ -49,7 +49,7 @@ public class RotateToTarget : Action
 {
     public override TaskStatus OnUpdate()
     {
-        if (XAIGeneralMgr.singleton.RotateToTarget(transform))
+        if (XAIUtil.RotateToTarget(transform))
             return TaskStatus.Success;
         else
             return TaskStatus.Failure;
@@ -61,7 +61,7 @@ public class DetectEnimyInSight : Action
 {
     public override TaskStatus OnUpdate()
     {
-        if (XAIGeneralMgr.singleton.DetectEnemyInSight(transform))
+        if (XAIUtil.DetectEnemyInSight(transform))
             return TaskStatus.Success;
         else
             return TaskStatus.Failure;

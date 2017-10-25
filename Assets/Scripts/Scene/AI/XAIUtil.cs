@@ -3,24 +3,34 @@ using System.Collections.Generic;
 
 namespace AI
 {
-    public class XAIGeneralMgr : XSingleton<XAIGeneralMgr>
+    public class XAIUtil 
     {
 
-        public bool FindTargetByDistance(GameObject go, float distance, float angle)
+        public static bool FindTargetByDistance(GameObject go, float distance, float angle)
         {
             XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(go.transform.name));
             return entity.GetComponent<XAIComponent>().FindTargetByDistance(distance, angle);
         }
 
-
-        public bool DoSelectNearest(GameObject go)
+        public static bool DoSelectNearest(Transform tran)
         {
-            XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(go.transform.name));
+            XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(tran.name));
             return entity.GetComponent<XAIComponent>().DoSelectNearest();
         }
 
+        public static bool DoSelectFarthest(Transform tran)
+        {
+            XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(tran.name));
+            return entity.GetComponent<XAIComponent>().DoSelectFarthest();
+        }
 
-        public Transform SelectMoveTargetById(Transform transf, int objectid)
+        public static bool DoSelectRandomTarget(Transform tran)
+        {
+            XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(tran.name));
+            return entity.GetComponent<XAIComponent>().DoSelectRandom();
+        }
+
+        public static Transform SelectMoveTargetById(Transform transf, int objectid)
         {
             XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(transf.name));
             List<XEntity> ens = XEntityMgr.singleton.GetAllEnemy(entity);
@@ -35,12 +45,12 @@ namespace AI
         }
 
         //only editor use
-        public bool ActionNav(Transform tr, Vector3 dest)
+        public static bool ActionNav(Transform tr, Vector3 dest)
         {
             return ActionNav(uint.Parse(tr.name), dest);
         }
 
-        public bool ActionNav(uint id, Vector3 dest)
+        public static bool ActionNav(uint id, Vector3 dest)
         {
             XEntity entity = XEntityMgr.singleton.GetEntity(id);
             XNavComponent nav = entity.GetComponent<XNavComponent>();
@@ -48,12 +58,12 @@ namespace AI
             return false;
         }
 
-        public bool NavToTarget(Transform tr, GameObject target)
+        public static bool NavToTarget(Transform tr, GameObject target)
         {
             return NavToTarget(uint.Parse(tr.name), target);
         }
 
-        public bool NavToTarget(uint id, GameObject target)
+        public static bool NavToTarget(uint id, GameObject target)
         {
             XEntity entity = XEntityMgr.singleton.GetEntity(id);
             if (entity == null) return false;
@@ -70,14 +80,14 @@ namespace AI
         }
 
 
-        public bool RotateToTarget(Transform go)
+        public static bool RotateToTarget(Transform go)
         {
             XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(go.name));
             XDebug.Log(entity.Attributes.Name);
             return true;
         }
 
-        public bool DetectEnemyInSight(Transform transf)
+        public static bool DetectEnemyInSight(Transform transf)
         {
             XEntity e = XEntityMgr.singleton.GetEntity(uint.Parse(transf.name));
             List<XEntity> opponent = XEntityMgr.singleton.GetAllEnemy(e);

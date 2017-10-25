@@ -41,6 +41,8 @@ public class XAIComponent : XComponent
     public bool IsHurtOppo { get { return _is_hurt_oppo; } set { _is_hurt_oppo = value; } }
     public float EnterFightRange { get { return _enter_fight_range; } }
 
+    private List<XEntity> targets = new List<XEntity>();
+
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
@@ -243,36 +245,73 @@ public class XAIComponent : XComponent
     }
 
     public bool FindTargetByDistance(float dist, float angle)
-    { 
+    {
         List<XEntity> list = XEntityMgr.singleton.GetAllEnemy();
         if (list == null) return false;
+        targets.Clear();
         list.Sort(SortEntity);
         for (int i = 0; i < list.Count; i++)
         {
             XEntity enemy = list[i];
             if (XEntity.Valide(enemy))
             {
-                Vector3 oTargetPos = enemy.Position;
-                Vector3 oSrcPos = _host.Position;
-                float distance = (oTargetPos - oSrcPos).magnitude;
+                float distance = (enemy.Position - _host.Position).magnitude;
                 if (distance < dist)
                 {
                     Vector3 dir = enemy.Position - _host.Position;
                     float targetangle = Vector3.Angle(dir, _host.Forward);
                     if (targetangle < angle)
                     {
-                        _target = enemy;
-                        return true;
+                        targets.Add(enemy);
                     }
                 }
             }
         }
-        return false;
+        return targets.Count > 0;
     }
-    
+
     public bool DoSelectNearest()
     {
-        SetTarget(_target);
+        XEntity t = null;
+        float near = int.MaxValue;
+        for (int i = 0; i < targets.Count; i++)
+        {
+            float dis = (_host.Position - targets[i].Position).magnitude;
+            if (dis < near)
+            {
+                t = targets[i];
+                near = dis;
+            }
+        }
+        SetTarget(t);
+        return true;
+    }
+
+
+    public bool DoSelectFarthest()
+    {
+        XEntity t = null;
+        float far = 0;
+        for (int i = 0; i < targets.Count; i++)
+        {
+            float dis = (_host.Position - targets[i].Position).magnitude;
+            if (dis > far)
+            {
+                t = targets[i];
+                far = dis;
+            }
+        }
+        SetTarget(t);
+        return true;
+    }
+
+    public bool DoSelectRandom()
+    {
+        if(targets.Count>0)
+        {
+            int rand = Random.Range(0, targets.Count);
+            SetTarget(targets[rand]);
+        }
         return true;
     }
 
