@@ -19,8 +19,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
-        if (!_dic_entities.ContainsKey(attr.id) && IsPlayer(x)) _dic_entities.Add(attr.id, x);
-        if (!_hash_entitys.Add(x) && IsPlayer(Player)) XDebug.Log("has exist entity: ", attr.id);
+        if (!_dic_entities.ContainsKey(attr.id) && !IsPlayer(x)) _dic_entities.Add(attr.id, x);
+        if (!_hash_entitys.Add(x) && !IsPlayer(Player)) XDebug.Log("has exist entity: ", attr.id);
         SetRelation(attr.id, attr.FightGroup);
         return x;
     }

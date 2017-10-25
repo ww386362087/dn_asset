@@ -1,5 +1,6 @@
 ﻿using BehaviorDesigner.Runtime.Tasks;
 
+[TaskCategory("Game")]
 public class StatusIdle : Conditional
 {
     public override TaskStatus OnUpdate()
@@ -15,6 +16,7 @@ public class StatusIdle : Conditional
     }
 }
 
+[TaskCategory("Game")]
 public class StatusMove : Conditional
 {
     public override TaskStatus OnUpdate()
@@ -29,7 +31,7 @@ public class StatusMove : Conditional
     }
 }
 
-
+[TaskCategory("Game")]
 public class StatusBehit : Conditional
 {
     public override TaskStatus OnUpdate()
@@ -44,7 +46,7 @@ public class StatusBehit : Conditional
     }
 }
 
-
+[TaskCategory("Game")]
 public class StatusDeath : Conditional
 {
     public override TaskStatus OnUpdate()
@@ -59,6 +61,7 @@ public class StatusDeath : Conditional
     }
 }
 
+[TaskCategory("Game")]
 public class StatusFreeze : Conditional
 {
     public override TaskStatus OnUpdate()
@@ -73,7 +76,7 @@ public class StatusFreeze : Conditional
     }
 }
 
-
+[TaskCategory("Game")]
 public class StatusSkill : Conditional
 {
     public override TaskStatus OnUpdate()

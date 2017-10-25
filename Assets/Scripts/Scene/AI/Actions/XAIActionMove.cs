@@ -3,6 +3,8 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
+[TaskCategory("Game")]
+[TaskDescription("寻路去锁定目标")]
 public class NavToTarget : Action
 {
     public SharedTransform mAIArgTarget;
@@ -24,7 +26,6 @@ public class NavToTarget : Action
                     else
                         return TaskStatus.Failure;
                 }
-
             }
             else
             {
@@ -44,7 +45,7 @@ public class NavToTarget : Action
     }
 }
 
-
+[TaskCategory("Game")]
 public class RotateToTarget : Action
 {
     public override TaskStatus OnUpdate()
@@ -56,7 +57,7 @@ public class RotateToTarget : Action
     }
 }
 
-
+[TaskCategory("Game")]
 public class DetectEnimyInSight : Action
 {
     public override TaskStatus OnUpdate()

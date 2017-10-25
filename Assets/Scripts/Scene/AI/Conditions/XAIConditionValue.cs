@@ -3,6 +3,7 @@ using BehaviorDesigner.Runtime.Tasks;
 
 namespace AI
 {
+    [TaskCategory("Game")]
     public class ValueHP : Conditional
     {
         public int mAIArgMaxHP;
@@ -21,7 +22,7 @@ namespace AI
         }
     }
 
-
+    [TaskCategory("Game")]
     public class ValueMP : Conditional
     {
         public int mAIArgMaxMP;
@@ -40,6 +41,7 @@ namespace AI
         }
     }
 
+    [TaskCategory("Game")]
     public class ValueTarget : Conditional
     {
         public SharedTransform mAIArgTarget;
@@ -61,7 +63,7 @@ namespace AI
         }
     }
 
-
+    [TaskCategory("Game")]
     public class ValueDistance : Conditional
     {
         public SharedTransform mAIArgTarget;
@@ -79,7 +81,7 @@ namespace AI
         }
     }
 
-
+    [TaskCategory("Game")]
     public class IsOppoCastingSkill : Conditional
     {
         public override TaskStatus OnUpdate()
@@ -94,6 +96,7 @@ namespace AI
         }
     }
 
+    [TaskCategory("Game")]
     public class IsHurtOppo : Conditional
     {
         public override TaskStatus OnUpdate()
@@ -108,6 +111,7 @@ namespace AI
         }
     }
 
+    [TaskCategory("Game")]
     public class IsFixedInCd : Conditional
     {
         public override TaskStatus OnUpdate()
@@ -123,6 +127,7 @@ namespace AI
     }
 }
 
+[TaskCategory("Game")]
 public class IsCastingSkill : Conditional
 {
     public override TaskStatus OnUpdate()

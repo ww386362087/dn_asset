@@ -3,7 +3,8 @@ using BehaviorDesigner.Runtime.Tasks;
 using AI;
 using UnityEngine;
 
-
+[TaskCategory("Game")]
+[TaskDescription("选择目标")]
 public class FindTargetByDistance : Action
 {
     public SharedFloat mAIArgDistance;
@@ -18,6 +19,8 @@ public class FindTargetByDistance : Action
     }
 }
 
+[TaskCategory("Game")]
+[TaskDescription("锁定最近的目标")]
 public class DoSelectNearest : Action
 {
     public override TaskStatus OnUpdate()
@@ -29,6 +32,8 @@ public class DoSelectNearest : Action
     }
 }
 
+[TaskCategory("Game")]
+[TaskDescription("锁定最远的目标")]
 public class DoSelectFarthest : Action
 {
     public override TaskStatus OnUpdate()
@@ -40,6 +45,8 @@ public class DoSelectFarthest : Action
     }
 }
 
+[TaskCategory("Game")]
+[TaskDescription("随机锁定目标")]
 public class DoSelectRandomTarget : Action
 {
     public override TaskStatus OnUpdate()
@@ -51,6 +58,8 @@ public class DoSelectRandomTarget : Action
     }
 }
 
+[TaskCategory("Game")]
+[TaskDescription("给树里参数计算距离")]
 public class CalDistance : Action
 {
     public SharedTransform mAIArgObject;
@@ -72,7 +81,8 @@ public class CalDistance : Action
     }
 }
 
-
+[TaskCategory("Game")]
+[TaskDescription("根据statistic id锁定目标")]
 public class SelectMoveTargetById : Action
 {
     public SharedTransform mAIArgMoveTarget;

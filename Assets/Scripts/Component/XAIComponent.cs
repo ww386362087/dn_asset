@@ -43,6 +43,11 @@ public class XAIComponent : XComponent
 
     private List<XEntity> targets = new List<XEntity>();
 
+    protected override UpdateState state
+    {
+        get { return UpdateState.FRAME; }
+    }
+
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
