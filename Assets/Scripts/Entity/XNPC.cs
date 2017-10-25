@@ -14,9 +14,9 @@ public class XNPC : XEntity
 
     public override void OnInitial()
     {
+        _eEntity_Type |= EntityType.Npc;
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Npc");
-        _eEntity_Type |= EntityType.Npc;
         _target = XEntityMgr.singleton.Player;
         _head_rotate = EntityTransfer.forward;
         _uGazing = XTableMgr.GetTable<XNpcList>().GetByUID((int)_attr.id).Gazing;

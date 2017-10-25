@@ -125,7 +125,6 @@ namespace Level
             XLevelScriptMgr.singleton.RunScript(_ScriptName);
             return false;
         }
-
     }
 
 }

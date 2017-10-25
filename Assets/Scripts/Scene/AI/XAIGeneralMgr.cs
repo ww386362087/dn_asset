@@ -35,9 +35,9 @@ namespace AI
         }
 
         //only editor use
-        public bool ActionNav(GameObject go, Vector3 dest)
+        public bool ActionNav(Transform tr, Vector3 dest)
         {
-            return ActionNav(uint.Parse(go.transform.name), dest);
+            return ActionNav(uint.Parse(tr.name), dest);
         }
 
         public bool ActionNav(uint id, Vector3 dest)
@@ -48,9 +48,9 @@ namespace AI
             return false;
         }
 
-        public bool NavToTarget(GameObject go, GameObject target)
+        public bool NavToTarget(Transform tr, GameObject target)
         {
-            return NavToTarget(uint.Parse(go.transform.name), target);
+            return NavToTarget(uint.Parse(tr.name), target);
         }
 
         public bool NavToTarget(uint id, GameObject target)

@@ -19,7 +19,7 @@ public class NavToTarget : Action
                     return TaskStatus.Failure;
                 else
                 {
-                    if (XAIGeneralMgr.singleton.ActionNav(transform.gameObject, mAIArgNavPos.Value))
+                    if (XAIGeneralMgr.singleton.ActionNav(transform, mAIArgNavPos.Value))
                         return TaskStatus.Success;
                     else
                         return TaskStatus.Failure;
@@ -28,7 +28,7 @@ public class NavToTarget : Action
             }
             else
             {
-                if (XAIGeneralMgr.singleton.NavToTarget(transform.gameObject, mAIArgNavTarget.Value.gameObject))
+                if (XAIGeneralMgr.singleton.NavToTarget(transform, mAIArgNavTarget.Value.gameObject))
                     return TaskStatus.Success;
                 else
                     return TaskStatus.Failure;
@@ -36,7 +36,7 @@ public class NavToTarget : Action
         }
         else
         {
-            if (XAIGeneralMgr.singleton.NavToTarget(transform.gameObject, mAIArgTarget.Value.gameObject))
+            if (XAIGeneralMgr.singleton.NavToTarget(transform, mAIArgTarget.Value.gameObject))
                 return TaskStatus.Success;
             else
                 return TaskStatus.Failure;

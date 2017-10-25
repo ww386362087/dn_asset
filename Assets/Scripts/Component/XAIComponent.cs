@@ -90,8 +90,7 @@ public class XAIComponent : XComponent
             }
         }
     }
-
-
+    
     public void InitTree()
     {
         if (_enable_runtime)
@@ -106,11 +105,11 @@ public class XAIComponent : XComponent
         string tree = string.Empty;
         if (_host.IsPlayer)
         {
-            tree = "PlayerAutoFight";
+            tree = "ai_log";// "PlayerAutoFight";
         }
         else
         {
-            tree = "ai_log";// _host.Attributes.AiBehavior;
+            tree =  _host.Attributes.AiBehavior;
         }
         SetBehaviorTree(tree);
     }

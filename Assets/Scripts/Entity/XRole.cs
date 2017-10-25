@@ -12,8 +12,8 @@ public class XRole : XEntity
 
     public override void OnInitial()
     {
-        base.OnInitial();
         _eEntity_Type |= EntityType.Role;
+        base.OnInitial();
         _layer = LayerMask.NameToLayer("Role");
         profession = 1;
         defEquip = XTableMgr.GetTable<DefaultEquip>().GetByUID(profession + 1);
