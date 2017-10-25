@@ -101,7 +101,7 @@ public class XAIComponent : XComponent
         }
         else
         {
-            _tree = _host.EntityObject.GetComponent<XBehaviorTree>();
+            _tree = _host.EntityObject.AddComponent<XBehaviorTree>();
         }
         string tree = string.Empty;
         if (_host.IsPlayer)
@@ -110,16 +110,14 @@ public class XAIComponent : XComponent
         }
         else
         {
-            tree = _host.Attributes.AiBehavior;
+            tree = "ai_log";// _host.Attributes.AiBehavior;
         }
         SetBehaviorTree(tree);
     }
 
     public void SetBehaviorTree(string tree)
     {
-        if (!string.IsNullOrEmpty(tree))
-            _is_inited = true;
-
+        if (!string.IsNullOrEmpty(tree)) _is_inited = true;
         if (_tree != null)
         {
             _tree.SetBehaviorTree(tree);
@@ -129,7 +127,7 @@ public class XAIComponent : XComponent
         }
         else
         {
-            XDebug.LogError("Add behavior error: ", tree);
+            XDebug.LogError("Add behavior error: ", tree, _host.Attributes.Name);
         }
     }
 

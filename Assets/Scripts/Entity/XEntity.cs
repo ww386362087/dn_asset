@@ -56,7 +56,7 @@ public class XEntity : XObject
     {
         get { return (_eEntity_Type & EntityType.Role) != 0; }
     }
-    
+
     public bool IsEnemy
     {
         get { return (_eEntity_Type & EntityType.Enemy) != 0; }
@@ -111,11 +111,6 @@ public class XEntity : XObject
     public float Speed
     {
         get { return _speed; }
-    }
-
-    public int DefaultLayer
-    {
-        get { return _layer; }
     }
 
     public virtual bool HasAI
@@ -269,5 +264,5 @@ public class XEntity : XObject
     {
         _eEntity_Type |= type;
     }
-    
+
 }
