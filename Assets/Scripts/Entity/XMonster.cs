@@ -15,6 +15,9 @@ public class XMonster : XEntity
         string[] hits = _present.HitFly;
         string hit = hits == null || hits.Length == 0 ? null : hits[1];
         anim.OverrideAnim("HitLanding", _present.AnimLocation + hit);
+
+        AttachComponent<XAIComponent>();
+        AttachComponent<XNavComponent>();
     }
 
 
