@@ -2,7 +2,7 @@
 
 namespace AI
 {
-    public class AIRunTimeBehaviorTree : IXBehaviorTree
+    public class AIRunTimeTree : IXBehaviorTree
     {
         XEntity _host = null;
 

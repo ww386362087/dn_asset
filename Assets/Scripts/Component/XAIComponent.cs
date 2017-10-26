@@ -104,7 +104,7 @@ public class XAIComponent : XComponent
     {
         if (_enable_runtime)
         {
-            _tree = new AIRunTimeBehaviorTree();
+            _tree = new AIRunTimeTree();
         }
         else
         {
