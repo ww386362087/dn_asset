@@ -13,7 +13,6 @@ public class XPlayer : XRole
     {
         _eEntity_Type |= EntityType.Player;
         base.OnInitial();
-        OnStopJoyStick(null);
     }
 
     protected override void EventSubscribe()

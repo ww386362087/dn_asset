@@ -110,8 +110,6 @@ public class XAIComponent : XComponent
         {
             _tree = new XBehaviorTree();
         }
-        _tree.Initial(_entity);
-
         string tree = string.Empty;
         if (_entity.IsPlayer)
         {
@@ -127,9 +125,9 @@ public class XAIComponent : XComponent
     public void SetBehaviorTree(string tree)
     {
         if (!string.IsNullOrEmpty(tree))
-            _is_inited = true;
-        if (_tree != null)
         {
+            _is_inited = true;
+            _tree.Initial(_entity);
             _tree.SetBehaviorTree(tree);
             _tree.EnableBehaviorTree(true);
             _tree.SetManual(true);
@@ -137,7 +135,7 @@ public class XAIComponent : XComponent
         }
         else
         {
-            XDebug.LogError("ai error: ", tree, _entity.Attributes.Name);
+            XDebug.LogWarning("ai error: ", tree, _entity.Attributes.Name);
         }
     }
 
