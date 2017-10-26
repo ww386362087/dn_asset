@@ -4,6 +4,8 @@
 public class XMonster : XEntity
 {
 
+    private XAnimComponent anim;
+
     public override void OnInitial()
     {
         _eEntity_Type |= EntityType.Monster;
@@ -20,13 +22,27 @@ public class XMonster : XEntity
 
     private void InitAnim()
     {
-        XAnimComponent anim = AttachComponent<XAnimComponent>();
-        anim.OverrideAnim("Idle", _present.AnimLocation + _present.AttackIdle);
+        anim = AttachComponent<XAnimComponent>();
+        OverrideAnim("Idle", _present.AnimLocation + _present.AttackIdle);
+        OverrideAnim("Death", present.AnimLocation + present.Death);
+        OverrideAnim("Run", present.AnimLocation + present.Run);
+        OverrideAnim("RunLeft", present.AnimLocation + present.RunLeft);
+        OverrideAnim("RunRight", present.AnimLocation + present.RunRight);
+        OverrideAnim("Freezed", present.AnimLocation + present.Freeze);
+
+
         string[] hits = _present.HitFly;
         string hit = hits == null || hits.Length == 0 ? null : hits[1];
-        anim.OverrideAnim("HitLanding", _present.AnimLocation + hit);
+        OverrideAnim("HitLanding", _present.AnimLocation + hit);
     }
 
+
+
+    private void OverrideAnim(string key, string clippath)
+    {
+        if (anim != null)
+            anim.OverrideAnim(key, clippath);
+    }
 
 }
 

@@ -87,8 +87,7 @@ public class XAnimComponent : XComponent
             RealPlay();
         }
     }
-
-
+    
     public void SetTrigger(string name,bool val)
     {
         if(m_Animator!=null)

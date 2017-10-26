@@ -48,13 +48,7 @@ namespace AI
         public static string IsFighting = "is_fighting";
 
         public static string IsQteState = "is_qte_state";
-
-        public static string MoveDir = "movedir";
-
-        public static string MoveDest = "movedest";
-
-        public static string MoveSpeed = "movespeed";
-
+        
         public static string BornPos = "bornpos";
 
         public static string SkillID = "skillid";

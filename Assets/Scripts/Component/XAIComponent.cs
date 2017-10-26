@@ -213,9 +213,6 @@ public class XAIComponent : XComponent
         tree.SetVariable(AITreeArg.IsCastingSkill, _is_casting_skill);
         tree.SetVariable(AITreeArg.IsFighting, _is_fighting);
         tree.SetVariable(AITreeArg.IsQteState, _is_qte_state);
-        tree.SetVariable(AITreeArg.MoveDir, Vector3.zero);
-        tree.SetVariable(AITreeArg.MoveDest, Vector3.zero);
-        tree.SetVariable(AITreeArg.MoveSpeed, _entity.Speed);
         tree.SetVariable(AITreeArg.BornPos, _entity.Position);
     }
 

@@ -64,9 +64,10 @@ namespace AI
     }
 
     [TaskCategory("Game")]
+    [TaskDescription("距离目标小于固定值")]
     public class ValueDistance : Conditional
     {
-        public SharedTransform mAIArgTarget;
+        public SharedGameObject mAIArgTarget;
         public SharedFloat mAIArgMaxDistance;
 
         public override TaskStatus OnUpdate()
@@ -74,7 +75,8 @@ namespace AI
             if (mAIArgTarget.Value == null)
                 return TaskStatus.Failure;
 
-            if ((transform.position - mAIArgTarget.Value.position).magnitude <= mAIArgMaxDistance.Value)
+            float dis = (transform.position - mAIArgTarget.Value.transform.position).magnitude;
+            if (dis <= mAIArgMaxDistance.Value)
                 return TaskStatus.Success;
             else
                 return TaskStatus.Failure;

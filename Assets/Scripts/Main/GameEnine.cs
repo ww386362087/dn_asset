@@ -10,7 +10,7 @@ public sealed class GameEnine : XObject
     public static void Init(MonoBehaviour en)
     {
         _entrance = en;
-
+        Application.targetFrameRate = 60;
         XTimerMgr.singleton.Init();
         XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();
@@ -46,7 +46,7 @@ public sealed class GameEnine : XObject
     public static void OnUnintial()
     {
     }
-    
+
     public static void OnApplicationQuit()
     {
         XDebug.Log("game quit!");

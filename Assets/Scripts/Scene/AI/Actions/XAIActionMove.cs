@@ -46,6 +46,18 @@ public class NavToTarget : Action
 }
 
 [TaskCategory("Game")]
+[TaskDescription("停止寻路")]
+public class StopNavMove : Action
+{
+    public override TaskStatus OnUpdate()
+    {
+        if (XAIUtil.StopNavMove(transform))
+            return TaskStatus.Success;
+        return TaskStatus.Failure;
+    }
+}
+
+[TaskCategory("Game")]
 [TaskDescription("方向对准目标")]
 public class RotateToTarget : Action
 {

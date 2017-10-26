@@ -57,6 +57,7 @@ namespace AI
             if (nav != null)
             {
                 nav.Navigate(dest);
+                entity.MoveForward(dest - entity.Position);
                 return true;
             }
             return false;
@@ -77,10 +78,22 @@ namespace AI
                 if (nav != null)
                 {
                     nav.Navigate(target.transform.position);
+                    entity.MoveForward(target.transform.position-entity.Position);
                     return true;
                 }
             }
             return false;
+        }
+
+        public static bool StopNavMove(Transform tr)
+        {
+            uint id = uint.Parse(tr.name);
+            XEntity entity = XEntityMgr.singleton.GetEntity(id);
+            if (entity == null) return false;
+            XNavComponent nav = entity.GetComponent<XNavComponent>();
+            if (nav == null) return false;
+            nav.NavEnd();
+            return true;
         }
         
         public static bool RotateToTarget(Transform src, GameObject target)
