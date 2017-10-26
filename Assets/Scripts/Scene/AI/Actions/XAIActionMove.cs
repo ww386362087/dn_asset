@@ -46,11 +46,14 @@ public class NavToTarget : Action
 }
 
 [TaskCategory("Game")]
+[TaskDescription("方向对准目标")]
 public class RotateToTarget : Action
 {
+    public SharedGameObject mAIArgTarget;
+
     public override TaskStatus OnUpdate()
     {
-        if (XAIUtil.RotateToTarget(transform))
+        if (XAIUtil.RotateToTarget(transform,mAIArgTarget.Value))
             return TaskStatus.Success;
         else
             return TaskStatus.Failure;

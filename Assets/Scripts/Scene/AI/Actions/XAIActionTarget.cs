@@ -65,8 +65,7 @@ public class CalDistance : Action
     public SharedTransform mAIArgObject;
     public SharedFloat mAIArgDistance;
     public SharedVector3 mAIArgDestPoint;
-
-
+    
     public override TaskStatus OnUpdate()
     {
         if (mAIArgObject.Value != null)

@@ -2,8 +2,6 @@
 
 public class XPlayer : XRole
 {
-    
-
     public static int PlayerLayer = LayerMask.NameToLayer("Player");
 
     public Vector3 lastpos = Vector3.zero;

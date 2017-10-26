@@ -82,13 +82,16 @@ namespace AI
             }
             return false;
         }
-
-
-        public static bool RotateToTarget(Transform go)
+        
+        public static bool RotateToTarget(Transform src, GameObject target)
         {
-            XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(go.name));
-            XDebug.Log(entity.Attributes.Name);
-            return true;
+            if (src != null && target != null)
+            {
+                Vector3 dir = target.transform.position - src.position;
+                src.forward = dir;
+                return true;
+            }
+            return false;
         }
 
         public static bool DetectEnemyInSight(Transform transf)

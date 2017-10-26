@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using XTable;
 
-
 /// <summary>
-/// entity 可能是多重身份（既是Ally 又是Role 又是Player）
+/// entity 可能是多重身份（如既是Ally 又是Role 又是Player）
 /// </summary>
 public enum EntityType
 {
