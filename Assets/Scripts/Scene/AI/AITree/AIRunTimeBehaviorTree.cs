@@ -6,8 +6,13 @@ namespace AI
     {
         XEntity _host = null;
 
-        public XEntity Host { get { return _host; } set { _host = value; } }
+        private XEntity Host { get { return _host; } set { _host = value; } }
         
+        public void Initial(XEntity e)
+        {
+            Host = e;
+        }
+
         public void EnableBehaviorTree(bool enable)
         {
             throw new NotImplementedException();

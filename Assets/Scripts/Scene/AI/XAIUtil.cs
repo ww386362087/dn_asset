@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace AI
 {
-    public class XAIUtil 
+    public class XAIUtil
     {
 
-        public static bool FindTargetByDistance(GameObject go, float distance, float angle)
+        public static bool FindTargetByDistance(Transform trans, float distance, float angle)
         {
-            XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(go.transform.name));
+            XEntity entity = XEntityMgr.singleton.GetEntity(uint.Parse(trans.name));
             return entity.GetComponent<XAIComponent>().FindTargetByDistance(distance, angle);
         }
 
@@ -54,7 +54,11 @@ namespace AI
         {
             XEntity entity = XEntityMgr.singleton.GetEntity(id);
             XNavComponent nav = entity.GetComponent<XNavComponent>();
-            if (nav != null) { nav.Navigate(dest); return true; }
+            if (nav != null)
+            {
+                nav.Navigate(dest);
+                return true;
+            }
             return false;
         }
 
@@ -106,7 +110,6 @@ namespace AI
             }
             return false;
         }
-
 
     }
 }

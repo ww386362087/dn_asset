@@ -3,6 +3,8 @@ namespace AI
 {
     public interface IXBehaviorTree
     {
+        void Initial(XEntity e);
+
         void SetVariable(string name, object value);
 
         void EnableBehaviorTree(bool enable);

@@ -23,26 +23,17 @@ public class XRole : XEntity
         AttachComponent<XAIComponent>();
         AttachComponent<XAnimComponent>();
         AttachComponent<XEquipComponent>();
-        AttachComponent<XNavComponent>();
+        nav = AttachComponent<XNavComponent>();
     }
 
 
     public void Navigate(Vector3 pos)
     {
-        if (nav == null)
-        {
-            nav = GetComponent<XNavComponent>();
-            nav.ActiveNav();
-        }
         nav.Navigate(pos);
     }
 
     public void DrawNavPath()
     {
-        if (nav == null)
-        {
-            nav = GetComponent<XNavComponent>();
-        }
         nav.DebugDrawPath();
     }
 

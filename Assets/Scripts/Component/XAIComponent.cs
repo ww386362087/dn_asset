@@ -12,8 +12,8 @@ public class XAIComponent : XComponent
     private uint _cast_skillid = 0;
     private float _tick = 0;
     private float _timer = 0;
-    private XEntity _host;
-    
+    private XEntity _entity;
+
     // 行为树相关的变量
     private XEntity _target = null;
     private bool _is_oppo_casting_skill = false;
@@ -34,7 +34,7 @@ public class XAIComponent : XComponent
     private bool _is_casting_skill = false;
     private bool _is_fighting = false;
     private bool _is_qte_state = false;
-    
+
     public bool IsCastingSkill { get { return _is_casting_skill; } }
     public bool IsOppoCastingSkill { get { return _is_oppo_casting_skill; } }
     public bool IsFixedInCd { get { return _is_fixed_in_cd; } }
@@ -51,7 +51,7 @@ public class XAIComponent : XComponent
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
-        _host = _obj as XEntity;
+        _entity = _obj as XEntity;
         InitVariables();
         InitTree();
     }
@@ -85,45 +85,49 @@ public class XAIComponent : XComponent
     public void SetTarget(XEntity target)
     {
         if (target == null)
+        {
             _target = null;
+        }
         else
         {
             _target = target;
             if (XEntity.Valide(_target))
             {
-                _target_distance = (_host.Position - _target.Position).magnitude;
-                _tree.SetVariable("target_distance", _target_distance);
-                _tree.SetVariable("target", _target.EntityObject);
+                _target_distance = (_entity.Position - _target.Position).magnitude;
+                _tree.SetVariable(AITreeArg.TargetDistance, _target_distance);
+                _tree.SetVariable(AITreeArg.TARGET, _target.EntityObject);
             }
         }
     }
-    
+
     public void InitTree()
     {
         if (_enable_runtime)
         {
             _tree = new AIRunTimeBehaviorTree();
-            (_tree as AIRunTimeBehaviorTree).Host = _host;
         }
         else
         {
-            _tree = _host.EntityObject.AddComponent<XBehaviorTree>();
+            _tree = new XBehaviorTree();
         }
+        _tree.Initial(_entity);
+
         string tree = string.Empty;
-        if (_host.IsPlayer)
+        if (_entity.IsPlayer)
         {
-            tree = "ai_log";// "PlayerAutoFight";
+            tree = "PlayerAutoFight";
         }
         else
         {
-            tree =  _host.Attributes.AiBehavior;
+            tree = _entity.Attributes.AiBehavior;
         }
         SetBehaviorTree(tree);
     }
 
     public void SetBehaviorTree(string tree)
     {
-        if (!string.IsNullOrEmpty(tree)) _is_inited = true;
+        if (!string.IsNullOrEmpty(tree))
+            _is_inited = true;
         if (_tree != null)
         {
             _tree.SetBehaviorTree(tree);
@@ -133,14 +137,14 @@ public class XAIComponent : XComponent
         }
         else
         {
-            XDebug.LogError("Add behavior error: ", tree, _host.Attributes.Name);
+            XDebug.LogError("ai error: ", tree, _entity.Attributes.Name);
         }
     }
 
 
     private void InitVariables()
     {
-        XAttributes attr = _host.Attributes;
+        XAttributes attr = _entity.Attributes;
         _normal_attack_prob = attr.NormalAttackProb;
         _enter_fight_range = attr.EnterFightRange;
         _tick = attr.AIActionGap;
@@ -150,7 +154,7 @@ public class XAIComponent : XComponent
 
     protected void OnTickAI()
     {
-        if (_is_inited && _tree != null && XEntity.Valide(_host))
+        if (_is_inited && _tree != null && XEntity.Valide(_entity))
         {
             UpdateVariable();
             SetTreeVariable(_tree);
@@ -160,23 +164,23 @@ public class XAIComponent : XComponent
 
     private void UpdateVariable()
     {
-        if (_host.Attributes != null)
+        if (_entity.Attributes != null)
         {
-            _max_hp = (float)_host.Attributes.GetAttr(XAttributeDefine.XAttr_MaxHP_Total);
-            _current_hp = (float)_host.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentHP_Total);
-            _max_super_armor = (float)_host.Attributes.GetAttr(XAttributeDefine.XAttr_MaxSuperArmor_Total);
-            _current_super_armor = (float)_host.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentSuperArmor_Total);
+            _max_hp = (float)_entity.Attributes.GetAttr(XAttributeDefine.XAttr_MaxHP_Total);
+            _current_hp = (float)_entity.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentHP_Total);
+            _max_super_armor = (float)_entity.Attributes.GetAttr(XAttributeDefine.XAttr_MaxSuperArmor_Total);
+            _current_super_armor = (float)_entity.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentSuperArmor_Total);
         }
         if (XEntity.Valide(XEntityMgr.singleton.Player))
         {
-            _master_distance = (_host.Position - XEntityMgr.singleton.Player.Position).magnitude;
+            _master_distance = (_entity.Position - XEntityMgr.singleton.Player.Position).magnitude;
         }
         if (_target != null && XEntity.Valide(_target))
         {
-            _target_distance = (_host.Position - _target.Position).magnitude;
+            _target_distance = (_entity.Position - _target.Position).magnitude;
             _target_distance -= _target.Radius;
             if (_target_distance < 0) _target_distance = 0;
-            Vector3 oDirect1 = _host.Position - _target.Position;
+            Vector3 oDirect1 = _entity.Position - _target.Position;
             _target_rotation = Mathf.Abs(XCommon.singleton.AngleWithSign(oDirect1, _target.Forward));
         }
         else
@@ -202,7 +206,7 @@ public class XAIComponent : XComponent
         tree.SetVariable(AITreeArg.CurrHP, _current_hp);
         tree.SetVariable(AITreeArg.MaxSupperArmor, _max_super_armor);
         tree.SetVariable(AITreeArg.CurrSuperArmor, _current_super_armor);
-        tree.SetVariable(AITreeArg.EntityType, _host.Type);
+        tree.SetVariable(AITreeArg.EntityType, (int)_entity.Type);
         tree.SetVariable(AITreeArg.TargetRot, _target_rotation);
         tree.SetVariable(AITreeArg.AttackRange, _attack_range);
         tree.SetVariable(AITreeArg.MinKeepRange, _min_keep_range);
@@ -211,8 +215,8 @@ public class XAIComponent : XComponent
         tree.SetVariable(AITreeArg.IsQteState, _is_qte_state);
         tree.SetVariable(AITreeArg.MoveDir, Vector3.zero);
         tree.SetVariable(AITreeArg.MoveDest, Vector3.zero);
-        tree.SetVariable(AITreeArg.MoveSpeed, _host.Speed);
-        tree.SetVariable(AITreeArg.BornPos, _host.Position);
+        tree.SetVariable(AITreeArg.MoveSpeed, _entity.Speed);
+        tree.SetVariable(AITreeArg.BornPos, _entity.Position);
     }
 
 
@@ -228,7 +232,6 @@ public class XAIComponent : XComponent
         }
         else  // 别人放技能
         {
-            //XDebug.Log("Other cast skill");
             _is_oppo_casting_skill = true;
         }
     }
@@ -244,14 +247,13 @@ public class XAIComponent : XComponent
         }
         else  // 别人放技能
         {
-            //XDebug.Log("Other cast skill");
             _is_oppo_casting_skill = false;
         }
     }
 
     public bool FindTargetByDistance(float dist, float angle)
     {
-        List<XEntity> list = XEntityMgr.singleton.GetAllEnemy();
+        List<XEntity> list = XEntityMgr.singleton.GetAllEnemy(_entity);
         if (list == null) return false;
         targets.Clear();
         list.Sort(SortEntity);
@@ -260,11 +262,11 @@ public class XAIComponent : XComponent
             XEntity enemy = list[i];
             if (XEntity.Valide(enemy))
             {
-                float distance = (enemy.Position - _host.Position).magnitude;
+                float distance = (enemy.Position - _entity.Position).magnitude;
                 if (distance < dist)
                 {
-                    Vector3 dir = enemy.Position - _host.Position;
-                    float targetangle = Vector3.Angle(dir, _host.Forward);
+                    Vector3 dir = enemy.Position - _entity.Position;
+                    float targetangle = Vector3.Angle(dir, _entity.Forward);
                     if (targetangle < angle)
                     {
                         targets.Add(enemy);
@@ -277,45 +279,44 @@ public class XAIComponent : XComponent
 
     public bool DoSelectNearest()
     {
-        XEntity t = null;
         float near = int.MaxValue;
         for (int i = 0; i < targets.Count; i++)
         {
-            float dis = (_host.Position - targets[i].Position).magnitude;
+            float dis = (_entity.Position - targets[i].Position).magnitude;
             if (dis < near)
             {
-                t = targets[i];
+                _target = targets[i];
                 near = dis;
             }
         }
-        SetTarget(t);
+        SetTarget(_target);
         return true;
     }
 
 
     public bool DoSelectFarthest()
     {
-        XEntity t = null;
         float far = 0;
         for (int i = 0; i < targets.Count; i++)
         {
-            float dis = (_host.Position - targets[i].Position).magnitude;
+            float dis = (_entity.Position - targets[i].Position).magnitude;
             if (dis > far)
             {
-                t = targets[i];
+                _target = targets[i];
                 far = dis;
             }
         }
-        SetTarget(t);
+        SetTarget(_target);
         return true;
     }
 
     public bool DoSelectRandom()
     {
-        if(targets.Count>0)
+        if (targets.Count > 0)
         {
             int rand = Random.Range(0, targets.Count);
-            SetTarget(targets[rand]);
+            _target = targets[rand];
+            SetTarget(_target);
         }
         return true;
     }

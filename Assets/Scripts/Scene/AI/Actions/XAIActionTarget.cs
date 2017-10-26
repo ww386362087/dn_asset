@@ -12,7 +12,7 @@ public class FindTargetByDistance : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (XAIUtil.FindTargetByDistance(transform.gameObject, mAIArgDistance.Value, mAIArgAngle))
+        if (XAIUtil.FindTargetByDistance(transform, mAIArgDistance.Value, mAIArgAngle))
             return TaskStatus.Success;
         else
             return TaskStatus.Failure;

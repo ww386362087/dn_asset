@@ -6,9 +6,9 @@ public class XMonster : XEntity
 
     public override void OnInitial()
     {
+        _eEntity_Type |= EntityType.Monster;
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Enemy");
-        _eEntity_Type |= EntityType.Monster;
         XAnimComponent anim = AttachComponent<XAnimComponent>();
         anim.OverrideAnim("Idle", _present.AnimLocation + _present.AttackIdle);
 

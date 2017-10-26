@@ -7,8 +7,8 @@ using UnityEngine;
 [TaskDescription("寻路去锁定目标")]
 public class NavToTarget : Action
 {
-    public SharedTransform mAIArgTarget;
-    public SharedTransform mAIArgNavTarget;
+    public SharedGameObject mAIArgTarget;
+    public SharedGameObject mAIArgNavTarget;
     public SharedVector3 mAIArgNavPos;
 
     public override TaskStatus OnUpdate()
@@ -29,7 +29,7 @@ public class NavToTarget : Action
             }
             else
             {
-                if (XAIUtil.NavToTarget(transform, mAIArgNavTarget.Value.gameObject))
+                if (XAIUtil.NavToTarget(transform, mAIArgNavTarget.Value))
                     return TaskStatus.Success;
                 else
                     return TaskStatus.Failure;
@@ -37,7 +37,7 @@ public class NavToTarget : Action
         }
         else
         {
-            if (XAIUtil.NavToTarget(transform, mAIArgTarget.Value.gameObject))
+            if (XAIUtil.NavToTarget(transform, mAIArgTarget.Value))
                 return TaskStatus.Success;
             else
                 return TaskStatus.Failure;

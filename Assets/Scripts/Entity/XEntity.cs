@@ -16,14 +16,14 @@ public enum EntityType
     Npc = 1 << 5,
 
     //同盟
-    Ship_Start = 1 << 6,
+    Ship_Start = 6,
     Enemy = 1 << 6, //敌对 
     Ally = 1 << 7,  //友好
-    ENeutral = 1 << 8, //双方友好 如礼物
-    ANeutral = 1 << 9, //双方敌对 如风火轮
+    AllyAll = 1 << 8, //双方友好 如礼物
+    EnemyAll = 1 << 9, //双方敌对 如风火轮
     EProtected = 1 << 10,//敌对但不可受击 如隐形怪
     AProtected = 1 << 11,//友军不可受击 如安全区域
-    Ship_End = 1 << 11
+    Ship_End = 11
 }
 
 

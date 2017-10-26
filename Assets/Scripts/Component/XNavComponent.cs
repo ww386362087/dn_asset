@@ -62,7 +62,6 @@ public class XNavComponent : XComponent
         {
             _destination = _nodes.Current;
             _bFoundNext = _nodes.MoveNext();
-
             if (!_bFoundNext)
             {
                 Vector3 vec = _entity.Position - _destination;
@@ -116,7 +115,7 @@ public class XNavComponent : XComponent
 
     public void Navigate(Vector3 targetPos)
     {
-        if (_nav == null) return;
+        if (_nav == null) ActiveNav();
         _path.ClearCorners();
         _nav.enabled = true;
         _nav.CalculatePath(targetPos, _path);

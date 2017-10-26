@@ -19,9 +19,9 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         o.transform.position = attr.AppearPostion;
         o.transform.rotation = attr.AppearQuaternion;
         x.Initilize(o, attr);
-        if (!_dic_entities.ContainsKey(attr.id) && !IsPlayer(x)) _dic_entities.Add(attr.id, x);
-        if (!_hash_entitys.Add(x) && !IsPlayer(Player)) XDebug.Log("has exist entity: ", attr.id);
-        SetRelation(attr.id, attr.FightGroup);
+        if (!_dic_entities.ContainsKey(attr.id) && !x.IsPlayer) _dic_entities.Add(attr.id, x);
+        if (!_hash_entitys.Add(x) && !x.IsPlayer) XDebug.Log("has exist entity: ", attr.id);
+        SetRelation<T>(x);
         return x;
     }
 
@@ -156,54 +156,37 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         return _map_entities[EntityType.Npc];
     }
 
-    public List<XEntity> GetAllAlly()
-    {
-        return _map_entities[EntityType.Ally];
-    }
-
     public List<XEntity> GetAllAlly(XEntity e)
     {
-        EntityType type = (EntityType)e.Attributes.FightGroup;
+        EntityType type = (EntityType)(1 << (e.Attributes.FightGroup + (int)EntityType.Ship_Start));
         if (type == EntityType.Ally) return _map_entities[EntityType.Ally];
         else if (type == EntityType.Enemy) return _map_entities[EntityType.Enemy];
         return _empty;
     }
 
-    public List<XEntity> GetAllEnemy()
-    {
-        return _map_entities[EntityType.Enemy];
-    }
-
     public List<XEntity> GetAllEnemy(XEntity e)
     {
-        EntityType type = (EntityType)e.Attributes.FightGroup;
+        EntityType type = (EntityType)(1 << (e.Attributes.FightGroup + (int)EntityType.Ship_Start));
         if (type == EntityType.Ally) return _map_entities[EntityType.Enemy];
         else if (type == EntityType.Enemy) return _map_entities[EntityType.Ally];
         return _empty;
     }
 
-    public void SetRelation(uint entityid, int group)
+    public void SetRelation<T>(XEntity ent) where T : XEntity
     {
+        int group = ent.Attributes.FightGroup;
+        uint entityid = ent.Attributes.ID;
         int max = EntityType.Ship_End - EntityType.Ship_Start;
         if (group < 0 || group > max)
         {
             XDebug.LogError("Set Relation err ", entityid);
             return;
         }
-        EntityType type = group + EntityType.Ship_Start;
-        XEntity e = null;
-        if (_dic_entities.TryGetValue(entityid, out e))
-        {
-            e.SetRelation(type);
-            Add(type, e);
-        }
-    }
-
-    private bool IsPlayer(XEntity e)
-    {
-        if (Player != null)
-            return Player.EntityID == e.EntityID;
-        return false;
+        EntityType type = (EntityType)(1 << (group + (int)EntityType.Ship_Start));
+        if (type == EntityType.EnemyAll) type = EntityType.Enemy;
+        if (type == EntityType.AllyAll) type = EntityType.Ally;
+        ent.SetRelation(type);
+        Add(type, ent);
     }
 
     private XAttributes InitAttrFromClient(int statisticid)

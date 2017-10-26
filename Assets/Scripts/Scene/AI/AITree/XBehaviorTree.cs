@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace AI
 {
-    public class XBehaviorTree : MonoBehaviour, IXBehaviorTree
+    public class XBehaviorTree :  IXBehaviorTree
     {
         private BehaviorTree _behavior_tree = null;
 
-        void Awake()
+        public void Initial(XEntity e)
         {
-            _behavior_tree = gameObject.AddComponent<BehaviorTree>();
+            _behavior_tree = e.EntityObject.AddComponent<BehaviorTree>();
         }
 
         public void SetVariable(string name, object value)
         {
             if (_behavior_tree == null) return;
             SharedVariable sharedvar = _behavior_tree.GetVariable(name);
-            if (sharedvar != null) sharedvar.SetValue(value);
+            if (sharedvar != null && value != null) sharedvar.SetValue(value);
         }
 
         public void SetNavPoint(Transform navpoint)
