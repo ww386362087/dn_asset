@@ -1,4 +1,5 @@
-﻿using BehaviorDesigner.Runtime.Tasks;
+﻿using AI;
+using BehaviorDesigner.Runtime.Tasks;
 
 [TaskCategory("Game")]
 [TaskDescription("当前状态是否为Idle")]
@@ -6,14 +7,8 @@ public class StatusIdle : Conditional
 {
     public override TaskStatus OnUpdate()
     {
-        uint id = uint.Parse(transform.name);
-        XEntity entity = XEntityMgr.singleton.GetEntity(id);
-        if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-
-        if (entity.CurState == XStateDefine.XState_Idle)
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.StatusIdleUpdate(e);
     }
 }
 
@@ -23,13 +18,8 @@ public class StatusMove : Conditional
 {
     public override TaskStatus OnUpdate()
     {
-        uint id = uint.Parse(transform.name);
-        XEntity entity = XEntityMgr.singleton.GetEntity(id);
-        if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-        if (entity.CurState == XStateDefine.XState_Move)
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.StatusMoveUpdate(e);
     }
 }
 
@@ -39,13 +29,8 @@ public class StatusBehit : Conditional
 {
     public override TaskStatus OnUpdate()
     {
-        uint id = uint.Parse(transform.name);
-        XEntity entity = XEntityMgr.singleton.GetEntity(id);
-        if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-        if (entity.CurState == XStateDefine.XState_BeHit)
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.StatusBehitUpdate(e);
     }
 }
 
@@ -55,13 +40,8 @@ public class StatusDeath : Conditional
 {
     public override TaskStatus OnUpdate()
     {
-        uint id = uint.Parse(transform.name);
-        XEntity entity = XEntityMgr.singleton.GetEntity(id);
-        if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-        if (entity.CurState == XStateDefine.XState_Death)
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.StatusDeathUpdate(e);
     }
 }
 
@@ -71,13 +51,8 @@ public class StatusFreeze : Conditional
 {
     public override TaskStatus OnUpdate()
     {
-        uint id = uint.Parse(transform.name);
-        XEntity entity = XEntityMgr.singleton.GetEntity(id);
-        if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-        if (entity.CurState == XStateDefine.XState_Freeze)
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.StatusFreezeUpdate(e);
     }
 }
 
@@ -87,13 +62,8 @@ public class StatusSkill : Conditional
 {
     public override TaskStatus OnUpdate()
     {
-        uint id = uint.Parse(transform.name);
-        XEntity entity = XEntityMgr.singleton.GetEntity(id);
-        if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-        if (entity.CurState == XStateDefine.XState_Skill)
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.StatusSkillUpdate(e);
     }
 }
 

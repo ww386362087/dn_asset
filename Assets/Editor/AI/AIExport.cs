@@ -8,6 +8,7 @@ public class AIExport
 {
     private const string Children = "Children";
     private const string RootTask = "RootTask";
+    private const string Variables = "Variables";
     private static string[] nodes = {
         "NodeData",
         "ID",
@@ -66,8 +67,13 @@ public class AIExport
         //Debug.Log(json);
         var obj = MiniJSON.Deserialize(json) as Dictionary<string, object>;
         var root = obj[RootTask] as Dictionary<string, object>;
-        object ob = SimplyTask(root);
-        json = MiniJSON.Serialize(ob);
+        Dictionary<string, object> ict = new Dictionary<string, object>();
+        if (obj.ContainsKey(Variables))
+        {
+            ict.Add(Variables, obj[Variables]);
+        }
+        ict.Add(RootTask, SimplyTask(root));
+        json = MiniJSON.Serialize(ict);
         Build(json, name);
     }
 
@@ -75,10 +81,13 @@ public class AIExport
     private static void Build(string json, string name)
     {
         string path = XEditorLibrary.Ai + name + ".txt";
+        json = json.Replace("BehaviorDesigner.Runtime.Tasks.", string.Empty);
+        json = json.Replace("BehaviorDesigner.Runtime.", string.Empty);
+        json = json.Replace("BehaviorDesigner.Runtime.Tasks.", string.Empty);
         File.WriteAllText(path, json);
     }
 
-    private static object SimplyTask(Dictionary<string, object> dic)
+    private static Dictionary<string,object> SimplyTask(Dictionary<string, object> dic)
     {
         for (int i = 0, max = nodes.Length; i < max; i++)
         {

@@ -1,10 +1,12 @@
 ﻿using System;
 
-namespace AI
+namespace AI.Runtime
 {
     public class AIRunTimeTree : IXBehaviorTree
     {
         XEntity _host = null;
+        bool _enbale = false;
+        AIRuntimeTreeData _tree_data;
 
         private XEntity Host { get { return _host; } set { _host = value; } }
         
@@ -15,22 +17,26 @@ namespace AI
 
         public void EnableBehaviorTree(bool enable)
         {
-            throw new NotImplementedException();
+            _enbale = enable;
         }
 
         public bool SetBehaviorTree(string name)
         {
-            throw new NotImplementedException();
+            _tree_data = AIRuntimeUtil.Load(name);
+            return true;
         }
 
         public void SetVariable(string name, object value)
         {
-            throw new NotImplementedException();
+            if (_enbale && _tree_data != null)
+            {
+                _tree_data.SetVariable(name, value);
+            }
         }
 
         public void SetManual(bool enable)
         {
-
+            //do nothing here 
         }
 
         public void TickBehaviorTree()

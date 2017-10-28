@@ -1,7 +1,6 @@
 ﻿using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using AI;
-using UnityEngine;
 
 [TaskCategory("Game")]
 [TaskDescription("选择目标")]
@@ -12,10 +11,8 @@ public class FindTargetByDistance : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (XAIUtil.FindTargetByDistance(transform, mAIArgDistance.Value, mAIArgAngle))
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.FindTargetByDistanceUpdate(e, mAIArgDistance.Value, mAIArgAngle);
     }
 }
 
@@ -25,10 +22,8 @@ public class DoSelectNearest : Action
 {
     public override TaskStatus OnUpdate()
     {
-        if (XAIUtil.DoSelectNearest(transform))
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.DoSelectNearestUpdate(e);
     }
 }
 
@@ -38,10 +33,8 @@ public class DoSelectFarthest : Action
 {
     public override TaskStatus OnUpdate()
     {
-        if (XAIUtil.DoSelectFarthest(transform))
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.DoSelectFarthestUpdate(e);
     }
 }
 
@@ -51,10 +44,8 @@ public class DoSelectRandomTarget : Action
 {
     public override TaskStatus OnUpdate()
     {
-        if (XAIUtil.DoSelectRandomTarget(transform))
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.DoSelectRandomTargetUpdate(e);
     }
 }
 
@@ -68,15 +59,8 @@ public class CalDistance : Action
     
     public override TaskStatus OnUpdate()
     {
-        if (mAIArgObject.Value != null)
-        {
-            mAIArgDistance.Value = (transform.position - mAIArgObject.Value.position).magnitude;
-        }
-        else
-        {
-            mAIArgDistance.Value = (transform.position - mAIArgDestPoint.Value).magnitude;
-        }
-        return TaskStatus.Success;
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.CalDistanceUpdate(e,mAIArgObject.Value,mAIArgDistance.Value,mAIArgDestPoint.Value);
     }
 }
 
@@ -89,14 +73,7 @@ public class SelectMoveTargetById : Action
 
     public override TaskStatus OnUpdate()
     {
-        Transform moveTarget = XAIUtil.SelectMoveTargetById(transform, mAIArgObjectId);
-
-        if (moveTarget == null)
-            return TaskStatus.Failure;
-        else
-        {
-            mAIArgMoveTarget.Value = moveTarget;
-            return TaskStatus.Success;
-        }
+        XEntity e = AITreeImpleted.Transform2Entity(transform);
+        return AITreeImpleted.SelectMoveTargetByIdUpdate(e, mAIArgMoveTarget.Value, mAIArgObjectId);
     }
 }

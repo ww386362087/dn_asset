@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using BehaviorDesigner.Runtime.Tasks;
 
-public class XAIActionSkill : MonoBehaviour 
+public class XAIActionSkill : Action
 {
 
-	// Use this for initialization
-	void Start () 
-	{
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	}
+    public override TaskStatus OnUpdate()
+    {
+        return TaskStatus.Success;
+    }
 }

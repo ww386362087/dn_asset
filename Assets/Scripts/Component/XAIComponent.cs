@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using AI;
 using UnityEngine;
+using AI.Runtime;
 
 public class XAIComponent : XComponent
 {

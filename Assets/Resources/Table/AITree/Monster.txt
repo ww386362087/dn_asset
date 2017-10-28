@@ -1,50 +1,57 @@
 {
-	"Type":"BehaviorDesigner.Runtime.Tasks.Selector",
-	"Children":[{
-		"Type":"BehaviorDesigner.Runtime.Tasks.Sequence",
+	"Variables":[{
+		"Type":"SharedGameObject",
+		"Name":"target",
+		"IsShared":true
+	}],
+	"RootTask":{
+		"Type":"Selector",
 		"Children":[{
-			"Type":"FindTargetByDistance",
-			"SharedFloatmAIArgDistance":{
-				"Type":"BehaviorDesigner.Runtime.SharedFloat",
-				"SinglemValue":20
-			},
-			"SinglemAIArgAngle":360
-		},{
-			"Type":"DoSelectNearest"
-		},{
-			"Type":"RotateToTarget",
-			"SharedGameObjectmAIArgTarget":{
-				"Type":"BehaviorDesigner.Runtime.SharedGameObject",
-				"IsShared":true
-			}
-		},{
-			"Type":"BehaviorDesigner.Runtime.Tasks.Inverter",
+			"Type":"Sequence",
 			"Children":[{
-				"Type":"AI.ValueDistance",
+				"Type":"FindTargetByDistance",
+				"SharedFloatmAIArgDistance":{
+					"Type":"SharedFloat",
+					"SinglemValue":20
+				},
+				"SinglemAIArgAngle":360
+			},{
+				"Type":"DoSelectNearest"
+			},{
+				"Type":"RotateToTarget",
 				"SharedGameObjectmAIArgTarget":{
-					"Type":"BehaviorDesigner.Runtime.SharedGameObject",
+					"Type":"SharedGameObject",
+					"IsShared":true
+				}
+			},{
+				"Type":"Inverter",
+				"Children":[{
+					"Type":"AI.ValueDistance",
+					"SharedGameObjectmAIArgTarget":{
+						"Type":"SharedGameObject",
+						"IsShared":true
+					},
+					"SharedFloatmAIArgMaxDistance":{
+						"Type":"SharedFloat",
+						"SinglemValue":1
+					}
+				}]
+			},{
+				"Type":"NavToTarget",
+				"SharedGameObjectmAIArgTarget":{
+					"Type":"SharedGameObject",
 					"IsShared":true
 				},
-				"SharedFloatmAIArgMaxDistance":{
-					"Type":"BehaviorDesigner.Runtime.SharedFloat",
-					"SinglemValue":1
+				"SharedGameObjectmAIArgNavTarget":{
+					"Type":"SharedGameObject"
+				},
+				"SharedVector3mAIArgNavPos":{
+					"Type":"SharedVector3",
+					"Vector3mValue":"(0,0,0)"
 				}
 			}]
 		},{
-			"Type":"NavToTarget",
-			"SharedGameObjectmAIArgTarget":{
-				"Type":"BehaviorDesigner.Runtime.SharedGameObject",
-				"IsShared":true
-			},
-			"SharedGameObjectmAIArgNavTarget":{
-				"Type":"BehaviorDesigner.Runtime.SharedGameObject"
-			},
-			"SharedVector3mAIArgNavPos":{
-				"Type":"BehaviorDesigner.Runtime.SharedVector3",
-				"Vector3mValue":"(0,0,0)"
-			}
+			"Type":"StopNavMove"
 		}]
-	},{
-		"Type":"StopNavMove"
-	}]
+	}
 }

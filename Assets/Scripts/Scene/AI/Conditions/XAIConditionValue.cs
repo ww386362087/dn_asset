@@ -11,14 +11,8 @@ namespace AI
 
         public override TaskStatus OnUpdate()
         {
-            uint id = uint.Parse(transform.name);
-            XEntity entity = XEntityMgr.singleton.GetEntity(id);
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-            double hp = entity.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentHP_Basic);
-            if (hp >= mAIArgMinHP && hp <= mAIArgMaxHP)
-                return TaskStatus.Success;
-            else
-                return TaskStatus.Failure;
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return AITreeImpleted.ValueHPUpdate(e, mAIArgMaxHP, mAIArgMinHP);
         }
     }
 
@@ -30,14 +24,8 @@ namespace AI
 
         public override TaskStatus OnUpdate()
         {
-            uint id = uint.Parse(transform.name);
-            XEntity entity = XEntityMgr.singleton.GetEntity(id);
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-            double hp = entity.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentMP_Basic);
-            if (hp >= mAIArgMinMP && hp <= mAIArgMaxMP)
-                return TaskStatus.Success;
-            else
-                return TaskStatus.Failure;
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return AITreeImpleted.ValueMPUpdate(e, mAIArgMaxMP, mAIArgMinMP);
         }
     }
 
@@ -48,18 +36,8 @@ namespace AI
 
         public override TaskStatus OnUpdate()
         {
-            if (XEntity.Valide(mAIArgTarget.Value))
-                return TaskStatus.Success;
-            else
-            {
-                uint id = uint.Parse(transform.name);
-                XEntity entity = XEntityMgr.singleton.GetEntity(id);
-                if (XEntity.Valide(entity))
-                {
-                    entity.GetComponent<XAIComponent>().SetTarget(null);
-                }
-                return TaskStatus.Failure;
-            }
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return AITreeImpleted.ValueTargetUpdate(e, mAIArgTarget.Value);
         }
     }
 
@@ -72,14 +50,8 @@ namespace AI
 
         public override TaskStatus OnUpdate()
         {
-            if (mAIArgTarget.Value == null)
-                return TaskStatus.Failure;
-
-            float dis = (transform.position - mAIArgTarget.Value.transform.position).magnitude;
-            if (dis <= mAIArgMaxDistance.Value)
-                return TaskStatus.Success;
-            else
-                return TaskStatus.Failure;
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return AITreeImpleted.ValueDistanceUpdate(e, mAIArgTarget.Value, mAIArgMaxDistance.Value);
         }
     }
 
@@ -88,13 +60,8 @@ namespace AI
     {
         public override TaskStatus OnUpdate()
         {
-            uint id = uint.Parse(transform.name);
-            XEntity entity = XEntityMgr.singleton.GetEntity(id);
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-            if (entity.GetComponent<XAIComponent>().IsOppoCastingSkill)
-                return TaskStatus.Success;
-            else
-                return TaskStatus.Failure;
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return AITreeImpleted.IsOppoCastingSkillUpdate(e);
         }
     }
 
@@ -103,13 +70,8 @@ namespace AI
     {
         public override TaskStatus OnUpdate()
         {
-            uint id = uint.Parse(transform.name);
-            XEntity entity = XEntityMgr.singleton.GetEntity(id);
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-            if (entity.GetComponent<XAIComponent>().IsHurtOppo)
-                return TaskStatus.Success;
-            else
-                return TaskStatus.Failure;
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return AITreeImpleted.IsHurtOppoUpdate(e);
         }
     }
 
@@ -118,28 +80,20 @@ namespace AI
     {
         public override TaskStatus OnUpdate()
         {
-            uint id = uint.Parse(transform.name);
-            XEntity entity = XEntityMgr.singleton.GetEntity(id);
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-            if (entity.GetComponent<XAIComponent>().IsFixedInCd)
-                return TaskStatus.Success;
-            else
-                return TaskStatus.Failure;
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return AITreeImpleted.IsFixedInCdUpdate(e);
         }
     }
-}
 
-[TaskCategory("Game")]
-public class IsCastingSkill : Conditional
-{
-    public override TaskStatus OnUpdate()
+
+    [TaskCategory("Game")]
+    public class IsCastingSkill : Conditional
     {
-        uint id = uint.Parse(transform.name);
-        XEntity entity = XEntityMgr.singleton.GetEntity(id);
-        if (!XEntity.Valide(entity)) return TaskStatus.Failure;
-        if (entity.GetComponent<XAIComponent>().IsCastingSkill)
-            return TaskStatus.Success;
-        else
-            return TaskStatus.Failure;
+        public override TaskStatus OnUpdate()
+        {
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return AITreeImpleted.IsCastingSkillUpdate(e);
+        }
     }
+
 }
