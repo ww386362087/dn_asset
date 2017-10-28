@@ -88,6 +88,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
     /// </summary>
     public void DetachFromHost()
     {
+        UnloadAll();
+
         XDetachEventArgs e = new XDetachEventArgs();
         XEventMgr.singleton.FireEvent(e);
     }

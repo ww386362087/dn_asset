@@ -18,6 +18,7 @@ internal class XEditorLibrary
     public static readonly string Cfg = "Assets/Editor/EditorResources/Skill/";
     public static readonly string Sc = "Assets/Resources/Table/Map/";
     public static readonly string Lev = "Assets/Resources/Table/Level/";
+    public static readonly string Ai = "Assets/Resources/Table/AITree/";
     public static readonly string Comb = "Assets/Editor/EditorResources/ImporterData/CombineConfig.prefab";
 
     private static readonly string _root = "Assets/Resources";

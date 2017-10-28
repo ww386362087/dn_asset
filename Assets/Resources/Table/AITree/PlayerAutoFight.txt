@@ -1,0 +1,32 @@
+{
+	"Type":"BehaviorDesigner.Runtime.Tasks.Sequence",
+	"Children":[{
+		"Type":"BehaviorDesigner.Runtime.Tasks.Wait",
+		"SharedFloatwaitTime":{
+			"Type":"BehaviorDesigner.Runtime.SharedFloat",
+			"SinglemValue":34
+		},
+		"SharedBoolrandomWait":{
+			"Type":"BehaviorDesigner.Runtime.SharedBool",
+			"BooleanmValue":false
+		},
+		"SharedFloatrandomWaitMin":{
+			"Type":"BehaviorDesigner.Runtime.SharedFloat",
+			"SinglemValue":1
+		},
+		"SharedFloatrandomWaitMax":{
+			"Type":"BehaviorDesigner.Runtime.SharedFloat",
+			"SinglemValue":1
+		}
+	},{
+		"Type":"BehaviorDesigner.Runtime.Tasks.Log",
+		"SharedStringtext":{
+			"Type":"BehaviorDesigner.Runtime.SharedString",
+			"StringmValue":"ai\n        tick"
+		},
+		"SharedBoollogError":{
+			"Type":"BehaviorDesigner.Runtime.SharedBool",
+			"BooleanmValue":false
+		}
+	}]
+}
