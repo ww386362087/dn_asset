@@ -12,7 +12,7 @@ namespace AI.Runtime
 
     public abstract class AIRunTimeBase
     {
-        public abstract void Init(AIRuntimeTaskData data);
+        public virtual void Init(AIRuntimeTaskData data) { }
 
         public abstract AIRuntimeStatus OnTick(XEntity entity);
     }

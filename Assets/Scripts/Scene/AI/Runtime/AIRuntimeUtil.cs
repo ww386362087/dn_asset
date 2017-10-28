@@ -15,7 +15,7 @@ namespace AI.Runtime
             return Parse(ta.text, name);
         }
 
-        private static AIRuntimeTreeData Parse(string json, string name)
+        public static AIRuntimeTreeData Parse(string json, string name)
         {
             XDebug.Log(json);
             var obj = MiniJSON.Deserialize(json) as Dictionary<string, object>;
@@ -29,6 +29,7 @@ namespace AI.Runtime
                 var list = root["Variables"] as List<object>;
                 for (int i = 0, max = list.Count; i < max; i++)
                 {
+                    if (tree.vars == null) tree.vars = new List<AITreeVar>();
                     AITreeVar v = ParseTreeVar(list[i] as Dictionary<string, object>);
                     tree.vars.Add(v);
                 }
@@ -47,12 +48,20 @@ namespace AI.Runtime
             };
         }
 
+        private static Mode Type2Mode(string type)
+        {
+            if (type == "Sequence") return Mode.Sequence;
+            if (type == "Selector") return Mode.Selector;
+            if (type == "Inverter") return Mode.Inverter;
+            return Mode.Custom;
+        }
+
         private static AIRuntimeTaskData ParseTask(Dictionary<string, object> arg)
         {
             AIRuntimeTaskData t = new AIRuntimeTaskData();
-            t.name = arg["Name"].ToString();
             var type = arg["Type"].ToString();
             t.type = ParseType(type);
+            t.mode = Type2Mode(t.type);
             foreach (var item in arg)
             {
                 if (item.Key.StartsWith("Shared"))
@@ -81,7 +90,13 @@ namespace AI.Runtime
         {
             AIShareVar v = new AIShareVar();
             v.name = key;
-            v.type = ParseType(dic["Type"].ToString());
+            v.type = ParseType(dic["Type"].ToString()).Replace("Shared", string.Empty);
+            string[] arr = { "Float", "Int", "Bool", "String" };
+            for (int i = 0, max = arr.Length; i < max; i++)
+            {
+                if (v.type == arr[i])
+                    v.type = v.type.ToLower();
+            }
             foreach (var item in dic)
             {
                 if (item.Key.Contains("Value"))
@@ -92,7 +107,6 @@ namespace AI.Runtime
             }
             return v;
         }
-
 
         private static string ParseType(string str)
         {

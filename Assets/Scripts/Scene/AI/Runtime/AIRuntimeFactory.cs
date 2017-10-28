@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AI.Runtime
 {
     public class AIRuntimeFactory:XSingleton<AIRuntimeFactory>
     {
-
         public AIRunTimeBase MakeRuntime(AIRuntimeTaskData data)
         {
             AIRunTimeBase rst = null;
@@ -30,7 +28,6 @@ namespace AI.Runtime
             }
             return rst;
         }
-
     }
 
 

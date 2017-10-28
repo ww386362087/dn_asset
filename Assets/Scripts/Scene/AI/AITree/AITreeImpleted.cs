@@ -275,11 +275,15 @@ namespace AI
                 return AIRuntimeStatus.Failure;
         }
 
+        public static AIRuntimeStatus LogUpdate(XEntity entity,string str,bool b)
+        {
+            return AIRuntimeStatus.Success;
+        }
 
-
-
-
-
+        public static AIRuntimeStatus WaitUpdate(XEntity entity, float f1, bool b, float f2, float f3)
+        {
+            return AIRuntimeStatus.Success;
+        }
 
 
 

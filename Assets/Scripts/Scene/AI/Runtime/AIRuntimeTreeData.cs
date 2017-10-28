@@ -2,6 +2,14 @@
 
 namespace AI.Runtime
 {
+
+    public enum Mode
+    {
+        Selector,
+        Sequence,
+        Inverter,
+        Custom, //自定义的Action | Conditional
+    }
     
     public class AITreeVar
     {
@@ -20,7 +28,7 @@ namespace AI.Runtime
 
     public class AIRuntimeTaskData
     {
-        public string name;
+        public Mode mode;
         public string type;
         public List<AIShareVar> vars;
         public List<AIRuntimeTaskData> children;
