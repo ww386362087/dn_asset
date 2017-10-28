@@ -1,4 +1,7 @@
-﻿namespace AI.Runtime
+﻿using System;
+using UnityEngine;
+
+namespace AI.Runtime
 {
     public class AIRuntimeFactory:XSingleton<AIRuntimeFactory>
     {
@@ -28,5 +31,22 @@
             return rst;
         }
 
+    }
+
+
+    public class MoveToTarget : AIRunTimeBase
+    {
+        public GameObject mAIArgTarget;
+        public GameObject mAIArgNavTarget;
+        public Vector3 mAIArgNavPos;
+
+        public override void Init(AIRuntimeTaskData data)
+        {
+        }
+
+        public override AIRuntimeStatus OnTick(XEntity entity)
+        {
+            return AITreeImpleted.NavToTargetUpdate(entity, mAIArgTarget, mAIArgNavTarget, mAIArgNavPos);
+        }
     }
 }

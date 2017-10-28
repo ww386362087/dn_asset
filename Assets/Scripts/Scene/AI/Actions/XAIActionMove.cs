@@ -13,7 +13,7 @@ public class NavToTarget : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.NavToTargetUpdate(e, mAIArgTarget.Value, mAIArgNavTarget.Value, mAIArgNavPos.Value);
+        return (TaskStatus)AITreeImpleted.NavToTargetUpdate(e, mAIArgTarget.Value, mAIArgNavTarget.Value, mAIArgNavPos.Value);
     }
 }
 
@@ -24,7 +24,7 @@ public class StopNavMove : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.StopNavMoveUpdate(e);
+        return (TaskStatus)AITreeImpleted.StopNavMoveUpdate(e);
     }
 }
 
@@ -37,7 +37,7 @@ public class RotateToTarget : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.RotateToTargetUpdate(e, mAIArgTarget.Value);
+        return (TaskStatus)AITreeImpleted.RotateToTargetUpdate(e, mAIArgTarget.Value);
     }
 }
 
@@ -47,6 +47,6 @@ public class DetectEnemyInSight : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.DetectEnemyInSightUpdate(e);
+        return (TaskStatus)AITreeImpleted.DetectEnemyInSightUpdate(e);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using BehaviorDesigner.Runtime.Tasks;
 using System.Collections.Generic;
+using AI.Runtime;
 
 namespace AI
 {
@@ -12,101 +12,101 @@ namespace AI
             return XEntityMgr.singleton.GetEntity(id);
         }
 
-        public static TaskStatus NavToTargetUpdate(XEntity entity,GameObject mAIArgTarget,GameObject mAIArgNavTarget,Vector3 mAIArgNavPos)
+        public static AIRuntimeStatus NavToTargetUpdate(XEntity entity,GameObject mAIArgTarget,GameObject mAIArgNavTarget,Vector3 mAIArgNavPos)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             if (mAIArgTarget == null)
             {
                 if (mAIArgNavTarget == null)
                 {
                     if (mAIArgNavPos == Vector3.zero)
-                        return TaskStatus.Failure;
+                        return AIRuntimeStatus.Failure;
                     else
                     {
                         if (ActionNav(entity, mAIArgNavPos))
-                            return TaskStatus.Success;
+                            return AIRuntimeStatus.Success;
                         else
-                            return TaskStatus.Failure;
+                            return AIRuntimeStatus.Failure;
                     }
                 }
                 else
                 {
                     if (NavToTarget(entity, mAIArgNavTarget))
-                        return TaskStatus.Success;
+                        return AIRuntimeStatus.Success;
                     else
-                        return TaskStatus.Failure;
+                        return AIRuntimeStatus.Failure;
                 }
             }
             else
             {
                 if (NavToTarget(entity, mAIArgTarget))
-                    return TaskStatus.Success;
+                    return AIRuntimeStatus.Success;
                 else
-                    return TaskStatus.Failure;
+                    return AIRuntimeStatus.Failure;
             }
         }
 
-        public static TaskStatus StopNavMoveUpdate(XEntity entity)
+        public static AIRuntimeStatus StopNavMoveUpdate(XEntity entity)
         {
             if (XEntity.Valide(entity) && StopNavMove(entity))
-                return TaskStatus.Success;
-            return TaskStatus.Failure;
+                return AIRuntimeStatus.Success;
+            return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus RotateToTargetUpdate(XEntity entity, GameObject mAIArgTarget)
+        public static AIRuntimeStatus RotateToTargetUpdate(XEntity entity, GameObject mAIArgTarget)
         {
             if (XEntity.Valide(entity) && RotateToTarget(entity.EntityTransfer, mAIArgTarget))
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus DetectEnemyInSightUpdate(XEntity entity)
+        public static AIRuntimeStatus DetectEnemyInSightUpdate(XEntity entity)
         {
             if (XEntity.Valide(entity) && DetectEnemyInSight(entity))
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
 
-        public static TaskStatus FindTargetByDistanceUpdate(XEntity entity,float mAIArgDistance,float mAIArgAngle)
+        public static AIRuntimeStatus FindTargetByDistanceUpdate(XEntity entity,float mAIArgDistance,float mAIArgAngle)
         {
             if (XEntity.Valide(entity) && entity.GetComponent<XAIComponent>().FindTargetByDistance(mAIArgDistance, mAIArgAngle))
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus DoSelectNearestUpdate(XEntity entity)
+        public static AIRuntimeStatus DoSelectNearestUpdate(XEntity entity)
         {
             if (XEntity.Valide(entity) && entity.GetComponent<XAIComponent>().DoSelectNearest())
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
 
-        public static TaskStatus DoSelectFarthestUpdate(XEntity entity)
+        public static AIRuntimeStatus DoSelectFarthestUpdate(XEntity entity)
         {
             if (XEntity.Valide(entity) && entity.GetComponent<XAIComponent>().DoSelectFarthest())
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus DoSelectRandomTargetUpdate(XEntity entity)
+        public static AIRuntimeStatus DoSelectRandomTargetUpdate(XEntity entity)
         {
             if (entity != null && entity.GetComponent<XAIComponent>().DoSelectRandom())
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
 
-        public static TaskStatus CalDistanceUpdate(XEntity entity, Transform mAIArgObject, float mAIArgDistance, Vector3 mAIArgDestPoint)
+        public static AIRuntimeStatus CalDistanceUpdate(XEntity entity, Transform mAIArgObject, float mAIArgDistance, Vector3 mAIArgDestPoint)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             if (mAIArgObject != null)
             {
                 mAIArgDistance = (entity.Position - mAIArgObject.position).magnitude;
@@ -115,164 +115,164 @@ namespace AI
             {
                 mAIArgDistance = (entity.Position - mAIArgDestPoint).magnitude;
             }
-            return TaskStatus.Success;
+            return AIRuntimeStatus.Success;
         }
 
-        public static TaskStatus SelectMoveTargetByIdUpdate(XEntity entity, Transform mAIArgMoveTarget, int mAIArgObjectId)
+        public static AIRuntimeStatus SelectMoveTargetByIdUpdate(XEntity entity, Transform mAIArgMoveTarget, int mAIArgObjectId)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             Transform moveTarget = SelectMoveTargetById(entity, mAIArgObjectId);
             if (moveTarget == null)
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
             else
             {
                 mAIArgMoveTarget = moveTarget;
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             }
         }
 
-        public static TaskStatus ValueHPUpdate(XEntity entity, int mAIArgMaxHP,int mAIArgMinHP)
+        public static AIRuntimeStatus ValueHPUpdate(XEntity entity, int mAIArgMaxHP,int mAIArgMinHP)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             double hp = entity.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentHP_Basic);
             if (hp >= mAIArgMinHP && hp <= mAIArgMaxHP)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus ValueMPUpdate(XEntity entity, int mAIArgMaxMP, int mAIArgMinMP)
+        public static AIRuntimeStatus ValueMPUpdate(XEntity entity, int mAIArgMaxMP, int mAIArgMinMP)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             double hp = entity.Attributes.GetAttr(XAttributeDefine.XAttr_CurrentMP_Basic);
             if (hp >= mAIArgMinMP && hp <= mAIArgMaxMP)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus ValueTargetUpdate(XEntity entity, Transform mAIArgTarget)
+        public static AIRuntimeStatus ValueTargetUpdate(XEntity entity, Transform mAIArgTarget)
         {
             if (XEntity.Valide(mAIArgTarget))
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
             {
                 if (XEntity.Valide(entity))
                 {
                     entity.GetComponent<XAIComponent>().SetTarget(null);
                 }
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
             }
         }
 
-        public static TaskStatus ValueDistanceUpdate(XEntity entity, GameObject mAIArgTarget,float mAIArgMaxDistance)
+        public static AIRuntimeStatus ValueDistanceUpdate(XEntity entity, GameObject mAIArgTarget,float mAIArgMaxDistance)
         {
             if (mAIArgTarget == null)
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
 
             float dis = (entity.Position - mAIArgTarget.transform.position).magnitude;
             if (dis <= mAIArgMaxDistance)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus IsOppoCastingSkillUpdate(XEntity entity)
+        public static AIRuntimeStatus IsOppoCastingSkillUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             if (entity.GetComponent<XAIComponent>().IsOppoCastingSkill)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
 
-        public static TaskStatus IsHurtOppoUpdate(XEntity entity)
+        public static AIRuntimeStatus IsHurtOppoUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             if (entity.GetComponent<XAIComponent>().IsHurtOppo)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus IsFixedInCdUpdate(XEntity entity)
+        public static AIRuntimeStatus IsFixedInCdUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             if (entity.GetComponent<XAIComponent>().IsFixedInCd)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus IsCastingSkillUpdate(XEntity entity)
+        public static AIRuntimeStatus IsCastingSkillUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
             if (entity.GetComponent<XAIComponent>().IsCastingSkill)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus StatusIdleUpdate(XEntity entity)
+        public static AIRuntimeStatus StatusIdleUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
 
             if (entity.CurState == XStateDefine.XState_Idle)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus StatusMoveUpdate(XEntity entity)
+        public static AIRuntimeStatus StatusMoveUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
 
             if (entity.CurState == XStateDefine.XState_Move)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus StatusBehitUpdate(XEntity entity)
+        public static AIRuntimeStatus StatusBehitUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
 
             if (entity.CurState == XStateDefine.XState_BeHit)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
 
-        public static TaskStatus StatusDeathUpdate(XEntity entity)
+        public static AIRuntimeStatus StatusDeathUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
 
             if (entity.CurState == XStateDefine.XState_Death)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus StatusFreezeUpdate(XEntity entity)
+        public static AIRuntimeStatus StatusFreezeUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
 
             if (entity.CurState == XStateDefine.XState_Freeze)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
-        public static TaskStatus StatusSkillUpdate(XEntity entity)
+        public static AIRuntimeStatus StatusSkillUpdate(XEntity entity)
         {
-            if (!XEntity.Valide(entity)) return TaskStatus.Failure;
+            if (!XEntity.Valide(entity)) return AIRuntimeStatus.Failure;
 
             if (entity.CurState == XStateDefine.XState_Skill)
-                return TaskStatus.Success;
+                return AIRuntimeStatus.Success;
             else
-                return TaskStatus.Failure;
+                return AIRuntimeStatus.Failure;
         }
 
 

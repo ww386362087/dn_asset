@@ -12,7 +12,7 @@ namespace AI
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return AITreeImpleted.ValueHPUpdate(e, mAIArgMaxHP, mAIArgMinHP);
+            return (TaskStatus)AITreeImpleted.ValueHPUpdate(e, mAIArgMaxHP, mAIArgMinHP);
         }
     }
 
@@ -25,7 +25,7 @@ namespace AI
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return AITreeImpleted.ValueMPUpdate(e, mAIArgMaxMP, mAIArgMinMP);
+            return (TaskStatus)AITreeImpleted.ValueMPUpdate(e, mAIArgMaxMP, mAIArgMinMP);
         }
     }
 
@@ -37,7 +37,7 @@ namespace AI
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return AITreeImpleted.ValueTargetUpdate(e, mAIArgTarget.Value);
+            return (TaskStatus)AITreeImpleted.ValueTargetUpdate(e, mAIArgTarget.Value);
         }
     }
 
@@ -51,7 +51,7 @@ namespace AI
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return AITreeImpleted.ValueDistanceUpdate(e, mAIArgTarget.Value, mAIArgMaxDistance.Value);
+            return (TaskStatus)AITreeImpleted.ValueDistanceUpdate(e, mAIArgTarget.Value, mAIArgMaxDistance.Value);
         }
     }
 
@@ -61,7 +61,7 @@ namespace AI
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return AITreeImpleted.IsOppoCastingSkillUpdate(e);
+            return (TaskStatus)AITreeImpleted.IsOppoCastingSkillUpdate(e);
         }
     }
 
@@ -71,7 +71,7 @@ namespace AI
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return AITreeImpleted.IsHurtOppoUpdate(e);
+            return (TaskStatus)AITreeImpleted.IsHurtOppoUpdate(e);
         }
     }
 
@@ -81,7 +81,7 @@ namespace AI
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return AITreeImpleted.IsFixedInCdUpdate(e);
+            return (TaskStatus)AITreeImpleted.IsFixedInCdUpdate(e);
         }
     }
 
@@ -92,7 +92,7 @@ namespace AI
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return AITreeImpleted.IsCastingSkillUpdate(e);
+            return (TaskStatus)AITreeImpleted.IsCastingSkillUpdate(e);
         }
     }
 

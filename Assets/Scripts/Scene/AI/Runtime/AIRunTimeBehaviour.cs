@@ -4,9 +4,10 @@ namespace AI.Runtime
 {
     public enum AIRuntimeStatus
     {
-        Running,
-        Success,
-        Failed
+        Inactive = 0,
+        Failure = 1,
+        Success = 2,
+        Running = 3
     }
 
     public abstract class AIRunTimeBase
@@ -39,9 +40,9 @@ namespace AI.Runtime
             {
                 for (int i = 0, max = list.Count; i < max; i++)
                 {
-                    if (list[i].OnTick(entity) == AIRuntimeStatus.Failed)
+                    if (list[i].OnTick(entity) == AIRuntimeStatus.Failure)
                     {
-                        return AIRuntimeStatus.Failed;
+                        return AIRuntimeStatus.Failure;
                     }
                 }
             }
@@ -78,7 +79,7 @@ namespace AI.Runtime
                     }
                 }
             }
-            return AIRuntimeStatus.Failed;
+            return AIRuntimeStatus.Failure;
         }
     }
 
@@ -99,13 +100,13 @@ namespace AI.Runtime
             if(node!=null)
             {
                 var rst = node.OnTick(entity);
-                if(rst== AIRuntimeStatus.Failed)
+                if(rst== AIRuntimeStatus.Failure)
                 {
                     return AIRuntimeStatus.Success;
                 }
                 else if(rst == AIRuntimeStatus.Success)
                 {
-                    return AIRuntimeStatus.Failed;
+                    return AIRuntimeStatus.Failure;
                 }
                 return rst;
             }

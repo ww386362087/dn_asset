@@ -8,7 +8,7 @@ public class StatusIdle : Conditional
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.StatusIdleUpdate(e);
+        return (TaskStatus)AITreeImpleted.StatusIdleUpdate(e);
     }
 }
 
@@ -19,7 +19,7 @@ public class StatusMove : Conditional
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.StatusMoveUpdate(e);
+        return (TaskStatus)AITreeImpleted.StatusMoveUpdate(e);
     }
 }
 
@@ -30,7 +30,7 @@ public class StatusBehit : Conditional
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.StatusBehitUpdate(e);
+        return (TaskStatus)AITreeImpleted.StatusBehitUpdate(e);
     }
 }
 
@@ -41,7 +41,7 @@ public class StatusDeath : Conditional
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.StatusDeathUpdate(e);
+        return (TaskStatus)AITreeImpleted.StatusDeathUpdate(e);
     }
 }
 
@@ -52,7 +52,7 @@ public class StatusFreeze : Conditional
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.StatusFreezeUpdate(e);
+        return (TaskStatus)AITreeImpleted.StatusFreezeUpdate(e);
     }
 }
 
@@ -63,7 +63,7 @@ public class StatusSkill : Conditional
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.StatusSkillUpdate(e);
+        return (TaskStatus)AITreeImpleted.StatusSkillUpdate(e);
     }
 }
 

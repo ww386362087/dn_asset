@@ -12,7 +12,7 @@ public class FindTargetByDistance : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.FindTargetByDistanceUpdate(e, mAIArgDistance.Value, mAIArgAngle);
+        return (TaskStatus)AITreeImpleted.FindTargetByDistanceUpdate(e, mAIArgDistance.Value, mAIArgAngle);
     }
 }
 
@@ -23,7 +23,7 @@ public class DoSelectNearest : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.DoSelectNearestUpdate(e);
+        return (TaskStatus)AITreeImpleted.DoSelectNearestUpdate(e);
     }
 }
 
@@ -34,7 +34,7 @@ public class DoSelectFarthest : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.DoSelectFarthestUpdate(e);
+        return (TaskStatus)AITreeImpleted.DoSelectFarthestUpdate(e);
     }
 }
 
@@ -45,7 +45,7 @@ public class DoSelectRandomTarget : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.DoSelectRandomTargetUpdate(e);
+        return (TaskStatus)AITreeImpleted.DoSelectRandomTargetUpdate(e);
     }
 }
 
@@ -60,7 +60,7 @@ public class CalDistance : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.CalDistanceUpdate(e,mAIArgObject.Value,mAIArgDistance.Value,mAIArgDestPoint.Value);
+        return (TaskStatus)AITreeImpleted.CalDistanceUpdate(e,mAIArgObject.Value,mAIArgDistance.Value,mAIArgDestPoint.Value);
     }
 }
 
@@ -74,6 +74,6 @@ public class SelectMoveTargetById : Action
     public override TaskStatus OnUpdate()
     {
         XEntity e = AITreeImpleted.Transform2Entity(transform);
-        return AITreeImpleted.SelectMoveTargetByIdUpdate(e, mAIArgMoveTarget.Value, mAIArgObjectId);
+        return (TaskStatus)AITreeImpleted.SelectMoveTargetByIdUpdate(e, mAIArgMoveTarget.Value, mAIArgObjectId);
     }
 }
