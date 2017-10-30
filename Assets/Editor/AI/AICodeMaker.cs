@@ -9,22 +9,39 @@ using System.CodeDom.Compiler;
 public class AICodeMaker
 {
 
+    public static string unity_AI_path
+    {
+        get { return Application.dataPath + @"\Resources\Table\AITree\"; }
+    }
+
+    public static string unity_AI_code
+    {
+        get { return Application.dataPath + @"\Scripts\Scene\AI\Code\"; }
+    }
+
     [MenuItem("Tools/MakeRuntimeCode")]
     private static void MakeRuntimeCode()
     {
-        string path = Application.dataPath + @"\Behavior Designer\AIData\";
-        DirectoryInfo dir = new DirectoryInfo(path);
-        FileInfo[] files = dir.GetFiles("*.asset");
+        DirectoryInfo dir = new DirectoryInfo(unity_AI_path);
+        FileInfo[] files = dir.GetFiles("*.txt");
         for (int i = 0, max = files.Length; i < max; i++)
         {
-            Make(files[i].Name.Split('.')[0]);
+            string name = files[i].Name.Split('.')[0];
+            string content = File.ReadAllText(files[i].FullName);
+            Parse(content, name);
         }
     }
 
-    private static void Make(string name)
+    [MenuItem("Tools/CleanRuntimeCode")]
+    private static void CleanRuntimeCode()
     {
-        TextAsset ta = Resources.Load<TextAsset>("Table/AITree/" + name);
-        Parse(ta.text, name);
+        DirectoryInfo dir = new DirectoryInfo(unity_AI_code);
+        FileInfo[] files = dir.GetFiles();
+        for(int i=0,max=files.Length;i<max;i++)
+        {
+            File.Delete(files[i].FullName);
+        }
+        AssetDatabase.Refresh();
     }
 
 
@@ -70,7 +87,8 @@ public class AICodeMaker
         {
             for (int i = 0, max = task.vars.Count; i < max; i++)
             {
-                CodeMemberField field = new CodeMemberField(task.vars[i].type, task.vars[i].name);
+                CodeTypeReference type = new CodeTypeReference(task.vars[i].type);
+                CodeMemberField field = new CodeMemberField(type, task.vars[i].name);
                 field.Attributes = MemberAttributes.Public;
                 wrapClass.Members.Add(field);
             }
@@ -101,7 +119,7 @@ public class AICodeMaker
         {
             CodeDomProvider.CreateProvider("CSharp").GenerateCodeFromCompileUnit(compunit, sw, new CodeGeneratorOptions());
         }
-        string filePath = Application.dataPath + @"/Scripts/Scene/AI/Code/AIRuntime" + task.type + ".cs";
+        string filePath = unity_AI_code + "AIRuntime" + task.type + ".cs";
         if (File.Exists(filePath)) File.Delete(filePath);
         File.WriteAllText(filePath, fileContent.ToString());
         AssetDatabase.Refresh();
