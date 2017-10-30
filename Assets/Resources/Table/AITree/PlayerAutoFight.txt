@@ -20,6 +20,10 @@
 				"SinglemValue":1
 			}
 		},{
+			"Type":"AI.ValueHP",
+			"Int32mAIArgMaxHP":0,
+			"Int32mAIArgMinHP":20
+		},{
 			"Type":"Log",
 			"SharedStringtext":{
 				"Type":"SharedString",

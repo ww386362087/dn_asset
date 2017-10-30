@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI.Runtime
 {
-    
+
     public class AIRuntimeUtil
     {
         static string Children = "Children";
@@ -66,9 +66,18 @@ namespace AI.Runtime
             {
                 if (item.Key.StartsWith("Shared"))
                 {
-                    AIShareVar v = ParseVar(item.Key, item.Value as Dictionary<string, object>);
-                    if (t.vars == null) t.vars = new List<AIShareVar>();
+                    AIVar v = ParseSharedVar(item.Key, item.Value as Dictionary<string, object>);
+                    if (t.vars == null) t.vars = new List<AIVar>();
                     t.vars.Add(v);
+                }
+                else
+                {
+                    AIVar v = ParseCustomVar(item.Key, item.Value);
+                    if (v != null)
+                    {
+                        if (t.vars == null) t.vars = new List<AIVar>();
+                        t.vars.Add(v);
+                    }
                 }
             }
             if (arg.ContainsKey(Children))
@@ -85,10 +94,9 @@ namespace AI.Runtime
             return t;
         }
 
-
-        private static AIShareVar ParseVar(string key, Dictionary<string, object> dic)
+        private static AIVar ParseSharedVar(string key, Dictionary<string, object> dic)
         {
-            AIShareVar v = new AIShareVar();
+            AIVar v = new AIVar();
             v.name = key.Replace("Shared", string.Empty);
             v.type = ParseType(dic["Type"].ToString()).Replace("Shared", string.Empty);
             string[] arr = { "Float", "Int", "Bool", "String" };
@@ -109,6 +117,25 @@ namespace AI.Runtime
                 }
             }
             return v;
+        }
+
+
+        private static AIVar ParseCustomVar(string key,object val)
+        {
+            string[] arr = { "Single", "Int32", "Boolean", "String" };
+          
+            for(int i=0,max= arr.Length;i<max;i++)
+            {
+                if(key.StartsWith(arr[i]))
+                {
+                    AIVar v = new AIVar();
+                    v.type = "System." + arr[i];
+                    v.name = key.Replace(arr[i], string.Empty);
+                    v.val = val;
+                    return v;
+                }
+            }
+            return null;
         }
 
         private static string ParseType(string str)

@@ -29,7 +29,9 @@ public class AICodeMaker
             string name = files[i].Name.Split('.')[0];
             string content = File.ReadAllText(files[i].FullName);
             Parse(content, name);
+            Debug.Log(files[i].FullName);
         }
+        EditorUtility.DisplayDialog("AI", "AI Code Make Finish!", "OK");
     }
 
     [MenuItem("Tools/CleanRuntimeCode")]
@@ -42,6 +44,7 @@ public class AICodeMaker
             File.Delete(files[i].FullName);
         }
         AssetDatabase.Refresh();
+        EditorUtility.DisplayDialog("AI", "AI Code Clean Finish!", "OK");
     }
 
 
@@ -82,7 +85,7 @@ public class AICodeMaker
         CodeTypeDeclaration wrapClass = new CodeTypeDeclaration("AIRuntime" + task.type + " : AIRunTimeBase");
         sample.Types.Add(wrapClass);
 
-        //添加属性
+        //添加成员
         if (task.vars != null)
         {
             for (int i = 0, max = task.vars.Count; i < max; i++)

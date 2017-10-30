@@ -19,7 +19,7 @@ namespace AI.Runtime
         public object val;
     }
 
-    public struct AIShareVar
+    public class AIVar
     {
         public string type;
         public string name;
@@ -30,7 +30,7 @@ namespace AI.Runtime
     {
         public Mode mode;
         public string type;
-        public List<AIShareVar> vars;
+        public List<AIVar> vars;
         public List<AIRuntimeTaskData> children;
     }
     
