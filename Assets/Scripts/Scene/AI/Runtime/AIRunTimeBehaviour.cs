@@ -28,7 +28,7 @@ namespace AI.Runtime
                 for (int i = 0, max = data.children.Count; i < max; i++)
                 {
                     if (list == null) list = new List<AIRunTimeBase>();
-                    AIRunTimeBase run = AIRuntimeFactory.singleton.MakeRuntime(data.children[i]);
+                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i]);
                     list.Add(run);
                 }
             }
@@ -61,7 +61,7 @@ namespace AI.Runtime
                 for (int i = 0, max = data.children.Count; i < max; i++)
                 {
                     if (list == null) list = new List<AIRunTimeBase>();
-                    AIRunTimeBase run = AIRuntimeFactory.singleton.MakeRuntime(data.children[i]);
+                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i]);
                     list.Add(run);
                 }
             }
@@ -91,7 +91,7 @@ namespace AI.Runtime
         {
             if (data.children != null && data.children.Count > 0)
             {
-                node = AIRuntimeFactory.singleton.MakeRuntime(data.children[0]);
+                node = AIRuntimeFactory.MakeRuntime(data.children[0]);
             }
         }
 

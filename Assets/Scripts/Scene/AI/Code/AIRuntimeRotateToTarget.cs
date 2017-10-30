@@ -14,10 +14,10 @@ namespace AI.Runtime {
     
     public class AIRuntimeRotateToTarget : AIRunTimeBase {
         
-        public GameObject GameObjectmAIArgTarget;
+        public GameObject mAIArgTarget;
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.RotateToTargetUpdate(entity, GameObjectmAIArgTarget);
+			return AITreeImpleted.RotateToTargetUpdate(entity, mAIArgTarget);
         }
     }
 }

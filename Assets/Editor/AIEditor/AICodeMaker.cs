@@ -5,6 +5,7 @@ using System.CodeDom;
 using System.IO;
 using System.Text;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
 
 public class AICodeMaker
 {
@@ -19,32 +20,39 @@ public class AICodeMaker
         get { return Application.dataPath + @"\Scripts\Scene\AI\Code\"; }
     }
 
+    static List<string> maker_list = new List<string>();
+
     [MenuItem("Tools/MakeRuntimeCode")]
     private static void MakeRuntimeCode()
     {
         DirectoryInfo dir = new DirectoryInfo(unity_AI_path);
         FileInfo[] files = dir.GetFiles("*.txt");
+        maker_list.Clear();
         for (int i = 0, max = files.Length; i < max; i++)
         {
+            EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", "ai auto code", (i + 1), max), files[i].FullName, (float)(i + 1) / max);
             string name = files[i].Name.Split('.')[0];
             string content = File.ReadAllText(files[i].FullName);
             Parse(content, name);
-            Debug.Log(files[i].FullName);
         }
-        EditorUtility.DisplayDialog("AI", "AI Code Make Finish!", "OK");
+        GenerateFactoryCode();
+        EditorUtility.ClearProgressBar();
+        AssetDatabase.Refresh();
+        EditorUtility.DisplayDialog("AI Auto Code", "AI Code Make Finish!", "OK");
     }
 
     [MenuItem("Tools/CleanRuntimeCode")]
     private static void CleanRuntimeCode()
     {
+        maker_list.Clear();
         DirectoryInfo dir = new DirectoryInfo(unity_AI_code);
         FileInfo[] files = dir.GetFiles();
-        for(int i=0,max=files.Length;i<max;i++)
+        for (int i = 0, max = files.Length; i < max; i++)
         {
             File.Delete(files[i].FullName);
         }
         AssetDatabase.Refresh();
-        EditorUtility.DisplayDialog("AI", "AI Code Clean Finish!", "OK");
+        EditorUtility.DisplayDialog("AI Auto Code", "AI Code Clean Finish!", "OK");
     }
 
 
@@ -59,8 +67,11 @@ public class AICodeMaker
     private static void ParseTask(AIRuntimeTaskData task)
     {
         if (task.mode == Mode.Custom)
-        {
-            GenerateCode(task);
+        { //避免不同task 生成同一份代码 加速生成
+            if (!maker_list.Contains(task.type))
+            {
+                GenerateCode(task);
+            }
         }
         if (task.children != null)
         {
@@ -125,7 +136,61 @@ public class AICodeMaker
         string filePath = unity_AI_code + "AIRuntime" + task.type + ".cs";
         if (File.Exists(filePath)) File.Delete(filePath);
         File.WriteAllText(filePath, fileContent.ToString());
-        AssetDatabase.Refresh();
+        maker_list.Add(task.type);
+    }
+
+    private static void GenerateFactoryCode()
+    {
+        string[] sys = { "Sequence", "Selector", "Inverter" };
+
+        CodeCompileUnit compunit = new CodeCompileUnit();
+        CodeNamespace sample = new CodeNamespace("AI.Runtime");
+        compunit.Namespaces.Add(sample);
+
+        CodeTypeDeclaration wrapClass = new CodeTypeDeclaration("AIRuntimeFactory");
+        sample.Types.Add(wrapClass);
+
+        CodeMemberMethod method = new CodeMemberMethod();
+        method.Name = "MakeRuntime";
+        method.Attributes = MemberAttributes.Public | MemberAttributes.Static;
+        method.Parameters.Add(new CodeParameterDeclarationExpression("AIRuntimeTaskData", "data"));
+        method.ReturnType = new CodeTypeReference("AIRunTimeBase");//返回值
+        AddState(method, "AIRunTimeBase rst = null;");
+        AddState(method, "switch (data.type)");
+        AddState(method, "{");
+        for (int i = 0, max = sys.Length; i < max; i++)
+        {
+            AddState(method, "\tcase \"" + sys[i] + "\":");
+            AddState(method, "\t\trst = new AIRuntime" + sys[i] + "();");
+            AddState(method, "\t\tbreak;");
+        }
+        for (int i = 0, max = maker_list.Count; i < max; i++)
+        {
+            AddState(method, "\tcase \"" + maker_list[i] + "\":");
+            AddState(method, "\t\trst = new AIRuntime" + maker_list[i] + "();");
+            AddState(method, "\t\tbreak;");
+        }
+        AddState(method, "}");
+        AddState(method, "if (rst != null) rst.Init(data);");
+        AddState(method, "return rst;");
+
+        wrapClass.Members.Add(method);
+
+        //output
+        StringBuilder fileContent = new StringBuilder();
+        using (StringWriter sw = new StringWriter(fileContent))
+        {
+            CodeDomProvider.CreateProvider("CSharp").GenerateCodeFromCompileUnit(compunit, sw, new CodeGeneratorOptions());
+        }
+        string filePath = unity_AI_code + "AIRuntimeFactory.cs";
+        if (File.Exists(filePath)) File.Delete(filePath);
+        File.WriteAllText(filePath, fileContent.ToString());
+        maker_list.Clear();
+    }
+
+    private static void AddState(CodeMemberMethod method, string state)
+    {
+        method.Statements.Add(new CodeSnippetStatement("\t\t\t" + state));
     }
 
 }

@@ -14,12 +14,12 @@ namespace AI.Runtime {
     
     public class AIRuntimeLog : AIRunTimeBase {
         
-        public  System.String Stringtext;
+        public  System.String text;
         
-        public bool BoollogError;
+        public bool logError;
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.LogUpdate(entity, Stringtext, BoollogError);
+			return AITreeImpleted.LogUpdate(entity, text, logError);
         }
     }
 }

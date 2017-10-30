@@ -97,16 +97,16 @@ namespace AI.Runtime
         private static AIVar ParseSharedVar(string key, Dictionary<string, object> dic)
         {
             AIVar v = new AIVar();
-            v.name = key.Replace("Shared", string.Empty);
-            v.type = ParseType(dic["Type"].ToString()).Replace("Shared", string.Empty);
+            v.name = key;
+            v.type = ParseType(dic["Type"].ToString());
+            if (key.StartsWith(v.type)) v.name = key.Replace(v.type, string.Empty);
+            v.type = v.type.Replace("Shared", string.Empty);
             string[] arr = { "Float", "Int", "Bool", "String" };
             string[] arr2 = { "System.Single", "System.Int32", "System.Boolean", " System.String" };
             for (int i = 0, max = arr.Length; i < max; i++)
             {
                 if (v.type == arr[i])
                     v.type = arr2[i];
-                if (v.name.StartsWith(arr[i]))
-                    v.name.Replace(arr[i], string.Empty);
             }
             foreach (var item in dic)
             {
@@ -123,7 +123,6 @@ namespace AI.Runtime
         private static AIVar ParseCustomVar(string key,object val)
         {
             string[] arr = { "Single", "Int32", "Boolean", "String" };
-          
             for(int i=0,max= arr.Length;i<max;i++)
             {
                 if(key.StartsWith(arr[i]))

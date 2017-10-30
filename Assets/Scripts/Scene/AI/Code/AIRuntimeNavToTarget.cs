@@ -14,14 +14,14 @@ namespace AI.Runtime {
     
     public class AIRuntimeNavToTarget : AIRunTimeBase {
         
-        public GameObject GameObjectmAIArgTarget;
+        public GameObject mAIArgTarget;
         
-        public GameObject GameObjectmAIArgNavTarget;
+        public GameObject mAIArgNavTarget;
         
-        public Vector3 Vector3mAIArgNavPos;
+        public Vector3 mAIArgNavPos;
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.NavToTargetUpdate(entity, GameObjectmAIArgTarget, GameObjectmAIArgNavTarget, Vector3mAIArgNavPos);
+			return AITreeImpleted.NavToTargetUpdate(entity, mAIArgTarget, mAIArgNavTarget, mAIArgNavPos);
         }
     }
 }

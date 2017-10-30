@@ -14,12 +14,12 @@ namespace AI.Runtime {
     
     public class AIRuntimeValueDistance : AIRunTimeBase {
         
-        public GameObject GameObjectmAIArgTarget;
+        public GameObject mAIArgTarget;
         
-        public float FloatmAIArgMaxDistance;
+        public float mAIArgMaxDistance;
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.ValueDistanceUpdate(entity, GameObjectmAIArgTarget, FloatmAIArgMaxDistance);
+			return AITreeImpleted.ValueDistanceUpdate(entity, mAIArgTarget, mAIArgMaxDistance);
         }
     }
 }
