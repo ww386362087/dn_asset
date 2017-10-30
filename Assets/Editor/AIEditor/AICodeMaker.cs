@@ -17,7 +17,7 @@ public class AICodeMaker
 
     public static string unity_AI_code
     {
-        get { return Application.dataPath + @"\Scripts\Scene\AI\AutoRuntime\"; }
+        get { return Application.dataPath + @"\Scripts\Scene\AI\Runtime\"; }
     }
 
     static List<string> maker_list = new List<string>();
