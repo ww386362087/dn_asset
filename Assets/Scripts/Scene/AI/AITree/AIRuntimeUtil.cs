@@ -20,10 +20,9 @@ namespace AI.Runtime
             XDebug.Log(json);
             var obj = MiniJSON.Deserialize(json) as Dictionary<string, object>;
             var root = obj as Dictionary<string, object>;
-            var dic_task = root["RootTask"] as Dictionary<string, object>;
-            AIRuntimeTaskData task = ParseTask(dic_task);
             AIRuntimeTreeData tree = new AIRuntimeTreeData();
-            tree.task = task;
+
+            //Variables
             if (root.ContainsKey("Variables"))
             {
                 var list = root["Variables"] as List<object>;
@@ -34,6 +33,12 @@ namespace AI.Runtime
                     tree.vars.Add(v);
                 }
             }
+            
+            //task
+            var dic_task = root["RootTask"] as Dictionary<string, object>;
+            AIRuntimeTaskData task = ParseTask(dic_task);
+            tree.task = task;
+          
             return tree;
         }
 
@@ -66,9 +71,16 @@ namespace AI.Runtime
             {
                 if (item.Key.StartsWith("Shared"))
                 {
-                    AIVar v = ParseSharedVar(item.Key, item.Value as Dictionary<string, object>);
-                    if (t.vars == null) t.vars = new List<AIVar>();
-                    t.vars.Add(v);
+                    try
+                    {
+                        AIVar v = ParseSharedVar(item.Key, item.Value as Dictionary<string, object>);
+                        if (t.vars == null) t.vars = new List<AIVar>();
+                        t.vars.Add(v);
+                    }
+                    catch (System.Exception e)
+                    {
+                        Debug.LogError(item.Key + " ************ " + e.StackTrace);
+                    }
                 }
                 else
                 {
@@ -94,10 +106,12 @@ namespace AI.Runtime
             return t;
         }
 
-        private static AIVar ParseSharedVar(string key, Dictionary<string, object> dic)
+        private static AITreeSharedVar ParseSharedVar(string key, Dictionary<string, object> dic)
         {
-            AIVar v = new AIVar();
+            AITreeSharedVar v = new AITreeSharedVar();
             v.name = key;
+            dic.TryGetValue("Name",out v.bindName);
+            dic.TryGetValue("IsShared",out v.isShared);
             v.type = ParseType(dic["Type"].ToString());
             if (key.StartsWith(v.type)) v.name = key.Replace(v.type, string.Empty);
             v.type = v.type.Replace("Shared", string.Empty);

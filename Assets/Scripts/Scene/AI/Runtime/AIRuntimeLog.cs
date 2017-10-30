@@ -18,6 +18,9 @@ namespace AI.Runtime {
         
         public bool logError;
         
+        public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+        }
+        
         public override AIRuntimeStatus OnTick(XEntity entity) {
 			return AITreeImpleted.LogUpdate(entity, text, logError);
         }

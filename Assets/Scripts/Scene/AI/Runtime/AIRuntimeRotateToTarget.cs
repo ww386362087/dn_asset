@@ -16,6 +16,10 @@ namespace AI.Runtime {
         
         public GameObject mAIArgTarget;
         
+        public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+			mAIArgTarget = (GameObject)tree.GetVariable("target"); 
+        }
+        
         public override AIRuntimeStatus OnTick(XEntity entity) {
 			return AITreeImpleted.RotateToTargetUpdate(entity, mAIArgTarget);
         }

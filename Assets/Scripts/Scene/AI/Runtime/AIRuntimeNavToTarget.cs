@@ -20,6 +20,10 @@ namespace AI.Runtime {
         
         public Vector3 mAIArgNavPos;
         
+        public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+			mAIArgTarget = (GameObject)tree.GetVariable("target"); 
+        }
+        
         public override AIRuntimeStatus OnTick(XEntity entity) {
 			return AITreeImpleted.NavToTargetUpdate(entity, mAIArgTarget, mAIArgNavTarget, mAIArgNavPos);
         }

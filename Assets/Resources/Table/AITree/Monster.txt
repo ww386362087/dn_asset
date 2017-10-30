@@ -12,6 +12,7 @@
 				"Type":"FindTargetByDistance",
 				"SharedFloatmAIArgDistance":{
 					"Type":"SharedFloat",
+					"Name":null,
 					"SinglemValue":20
 				},
 				"SinglemAIArgAngle":360
@@ -21,6 +22,7 @@
 				"Type":"RotateToTarget",
 				"SharedGameObjectmAIArgTarget":{
 					"Type":"SharedGameObject",
+					"Name":"target",
 					"IsShared":true
 				}
 			},{
@@ -29,10 +31,12 @@
 					"Type":"AI.ValueDistance",
 					"SharedGameObjectmAIArgTarget":{
 						"Type":"SharedGameObject",
+						"Name":"target",
 						"IsShared":true
 					},
 					"SharedFloatmAIArgMaxDistance":{
 						"Type":"SharedFloat",
+						"Name":null,
 						"SinglemValue":1
 					}
 				}]
@@ -40,13 +44,16 @@
 				"Type":"NavToTarget",
 				"SharedGameObjectmAIArgTarget":{
 					"Type":"SharedGameObject",
+					"Name":"target",
 					"IsShared":true
 				},
 				"SharedGameObjectmAIArgNavTarget":{
-					"Type":"SharedGameObject"
+					"Type":"SharedGameObject",
+					"Name":null
 				},
 				"SharedVector3mAIArgNavPos":{
 					"Type":"SharedVector3",
+					"Name":null,
 					"Vector3mValue":"(0,0,0)"
 				}
 			}]

@@ -18,6 +18,9 @@ namespace AI.Runtime {
         
         public int mAIArgMinHP;
         
+        public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+        }
+        
         public override AIRuntimeStatus OnTick(XEntity entity) {
 			return AITreeImpleted.ValueHPUpdate(entity, mAIArgMaxHP, mAIArgMinHP);
         }

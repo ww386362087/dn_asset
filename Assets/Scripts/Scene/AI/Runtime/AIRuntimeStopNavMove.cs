@@ -14,6 +14,9 @@ namespace AI.Runtime {
     
     public class AIRuntimeStopNavMove : AIRunTimeBase {
         
+        public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+        }
+        
         public override AIRuntimeStatus OnTick(XEntity entity) {
 			return AITreeImpleted.StopNavMoveUpdate(entity);
         }

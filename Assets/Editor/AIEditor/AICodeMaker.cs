@@ -30,7 +30,7 @@ public class AICodeMaker
         maker_list.Clear();
         for (int i = 0, max = files.Length; i < max; i++)
         {
-            EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", "ai auto code", (i + 1), max), files[i].FullName, (float)(i + 1) / max);
+           // EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", "ai auto code", (i + 1), max), files[i].FullName, (float)(i + 1) / max);
             string name = files[i].Name.Split('.')[0];
             string content = File.ReadAllText(files[i].FullName);
             Parse(content, name);
@@ -70,7 +70,7 @@ public class AICodeMaker
         { //避免不同task 生成同一份代码 加速生成
             if (!maker_list.Contains(task.type))
             {
-                GenerateCode(task);
+                GenerateTaskCode(task);
             }
         }
         if (task.children != null)
@@ -83,7 +83,7 @@ public class AICodeMaker
     }
 
 
-    private static void GenerateCode(AIRuntimeTaskData task)
+    private static void GenerateTaskCode(AIRuntimeTaskData task)
     {
         //声明代码的部分
         CodeCompileUnit compunit = new CodeCompileUnit();
@@ -108,12 +108,34 @@ public class AICodeMaker
             }
         }
 
-        //为这个类添加一个方法   public override Init 方法名(string str);
+        //为这个类添加一个方法   Init()
         CodeMemberMethod method = new CodeMemberMethod();
-        method.Name = "OnTick";
+        method.Name = "Init";
         method.Attributes = MemberAttributes.Override | MemberAttributes.Public;
-        method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(XEntity), "entity"));
-        method.ReturnType = new CodeTypeReference("AIRuntimeStatus");//返回值
+        method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(AIRuntimeTaskData), "data"));
+        method.ReturnType = new CodeTypeReference(typeof(void));//返回值
+        if (task.vars != null)
+        {
+            for (int i = 0, max = task.vars.Count; i < max; i++)
+            {
+                if (task.vars[i] is AITreeSharedVar)
+                {
+                    AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
+                    if (var.IsShared)
+                    {
+                        string st = var.name + " = (" + var.type + ")tree.GetVariable(\"" + var.BindName + "\"); ";
+                        AddState(method, st);
+                    }
+                }
+            }
+        }
+
+        //OnTick()
+        CodeMemberMethod method2 = new CodeMemberMethod();
+        method2.Name = "OnTick";
+        method2.Attributes = MemberAttributes.Override | MemberAttributes.Public;
+        method2.Parameters.Add(new CodeParameterDeclarationExpression(typeof(XEntity), "entity"));
+        method2.ReturnType = new CodeTypeReference("AIRuntimeStatus");//返回值
         string state = "return AITreeImpleted." + task.type + "Update(entity";
         if (task.vars != null)
         {
@@ -123,9 +145,9 @@ public class AICodeMaker
             }
         }
         state += ");";
-        method.Statements.Add(new CodeSnippetStatement("\t\t\t" + state));
-
+        method2.Statements.Add(new CodeSnippetStatement("\t\t\t" + state));
         wrapClass.Members.Add(method);
+        wrapClass.Members.Add(method2);
 
         //output
         StringBuilder fileContent = new StringBuilder();
@@ -141,7 +163,7 @@ public class AICodeMaker
 
     private static void GenerateFactoryCode()
     {
-        string[] sys = { "Sequence", "Selector", "Inverter" };
+        string[] sys = AIRunTimeTree.composites;
 
         CodeCompileUnit compunit = new CodeCompileUnit();
         CodeNamespace sample = new CodeNamespace("AI.Runtime");

@@ -22,6 +22,9 @@ namespace AI.Runtime {
         
         public float randomWaitMax;
         
+        public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+        }
+        
         public override AIRuntimeStatus OnTick(XEntity entity) {
 			return AITreeImpleted.WaitUpdate(entity, waitTime, randomWait, randomWaitMin, randomWaitMax);
         }

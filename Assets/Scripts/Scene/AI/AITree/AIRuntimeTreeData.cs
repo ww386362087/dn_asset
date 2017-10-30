@@ -19,11 +19,35 @@ namespace AI.Runtime
         public object val;
     }
 
+   
     public class AIVar
     {
         public string type;
         public string name;
         public object val;
+       
+    }
+
+
+    public class AITreeSharedVar : AIVar
+    {
+        //这个只有sharedvar才会有 根据这个值找树维护的变量
+        public object bindName;
+
+        public object isShared;
+
+        public string BindName { get { return bindName.ToString(); } }
+
+        public bool IsShared
+        {
+            get
+            {
+                if (isShared != null)
+                    return bool.Parse(isShared.ToString());
+                else
+                    return false;
+            }
+        }
     }
 
     public class AIRuntimeTaskData

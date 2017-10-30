@@ -14,6 +14,9 @@ namespace AI.Runtime {
     
     public class AIRuntimeDoSelectNearest : AIRunTimeBase {
         
+        public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+        }
+        
         public override AIRuntimeStatus OnTick(XEntity entity) {
 			return AITreeImpleted.DoSelectNearestUpdate(entity);
         }

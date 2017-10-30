@@ -28,7 +28,7 @@ public class AIExport
             Export(file);
         }
         AssetDatabase.Refresh();
-        Debug.Log("Export Finish!");
+        EditorUtility.DisplayDialog("AI Auto ", "AI Export Finish!", "OK");
     }
 
     [MenuItem("Tools/ExportAll")]
@@ -87,7 +87,7 @@ public class AIExport
         File.WriteAllText(path, json);
     }
 
-    private static Dictionary<string,object> SimplyTask(Dictionary<string, object> dic)
+    private static Dictionary<string, object> SimplyTask(Dictionary<string, object> dic)
     {
         for (int i = 0, max = nodes.Length; i < max; i++)
         {
@@ -102,17 +102,7 @@ public class AIExport
                 SimplyTask(d);
             }
         }
-        foreach (var item in dic)
-        {
-            if (item.Key.StartsWith("Shared"))
-                SimplyVar(item.Value as Dictionary<string, object>);
-        }
         return dic;
     }
 
-    private static void SimplyVar(Dictionary<string, object> dic)
-    {
-        string key = "Name";
-        if (dic.ContainsKey(key)) dic.Remove(key);
-    }
 }
