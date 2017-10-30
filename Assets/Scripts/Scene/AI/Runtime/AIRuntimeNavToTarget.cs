@@ -21,6 +21,7 @@ namespace AI.Runtime {
         public Vector3 mAIArgNavPos;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+			base.Init(data);
 			mAIArgTarget = (GameObject)tree.GetVariable("target"); 
         }
         

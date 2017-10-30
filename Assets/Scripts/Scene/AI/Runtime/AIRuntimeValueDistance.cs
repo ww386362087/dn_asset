@@ -19,6 +19,7 @@ namespace AI.Runtime {
         public float mAIArgMaxDistance;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+			base.Init(data);
 			mAIArgTarget = (GameObject)tree.GetVariable("target"); 
         }
         

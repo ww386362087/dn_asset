@@ -28,7 +28,7 @@
         public bool SetBehaviorTree(string name)
         {
             _tree_data = AIRuntimeUtil.Load(name);
-            _tree_behaviour = AIRuntimeFactory.MakeRuntime(_tree_data.task);
+            _tree_behaviour = AIRuntimeFactory.MakeRuntime(_tree_data.task, this);
             return true;
         }
 

@@ -13,7 +13,7 @@ namespace AI.Runtime {
     
     public class AIRuntimeFactory {
         
-        public static AIRunTimeBase MakeRuntime(AIRuntimeTaskData data) {
+        public static AIRunTimeBase MakeRuntime(AIRuntimeTaskData data, AI.Runtime.AIRunTimeTree tree) {
 			AIRunTimeBase rst = null;
 			switch (data.type)
 			{

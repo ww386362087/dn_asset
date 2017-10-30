@@ -17,6 +17,7 @@ namespace AI.Runtime {
         public GameObject mAIArgTarget;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+			base.Init(data);
 			mAIArgTarget = (GameObject)tree.GetVariable("target"); 
         }
         

@@ -23,6 +23,7 @@ namespace AI.Runtime {
         public float randomWaitMax;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+			base.Init(data);
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {

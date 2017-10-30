@@ -30,7 +30,7 @@ namespace AI.Runtime
                 for (int i = 0, max = data.children.Count; i < max; i++)
                 {
                     if (list == null) list = new List<AIRunTimeBase>();
-                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i]);
+                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i],tree);
                     list.Add(run);
                 }
             }
@@ -63,7 +63,7 @@ namespace AI.Runtime
                 for (int i = 0, max = data.children.Count; i < max; i++)
                 {
                     if (list == null) list = new List<AIRunTimeBase>();
-                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i]);
+                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i],tree);
                     list.Add(run);
                 }
             }
@@ -93,7 +93,7 @@ namespace AI.Runtime
         {
             if (data.children != null && data.children.Count > 0)
             {
-                node = AIRuntimeFactory.MakeRuntime(data.children[0]);
+                node = AIRuntimeFactory.MakeRuntime(data.children[0], tree);
             }
         }
 

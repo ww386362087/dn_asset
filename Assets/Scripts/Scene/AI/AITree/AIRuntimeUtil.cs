@@ -17,7 +17,7 @@ namespace AI.Runtime
 
         public static AIRuntimeTreeData Parse(string json, string name)
         {
-            XDebug.Log(json);
+          //  XDebug.Log(json);
             var obj = MiniJSON.Deserialize(json) as Dictionary<string, object>;
             var root = obj as Dictionary<string, object>;
             AIRuntimeTreeData tree = new AIRuntimeTreeData();

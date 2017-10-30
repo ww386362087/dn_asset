@@ -15,6 +15,7 @@ namespace AI.Runtime {
     public class AIRuntimeDoSelectNearest : AIRunTimeBase {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
+			base.Init(data);
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {

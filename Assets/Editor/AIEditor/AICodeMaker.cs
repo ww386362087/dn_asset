@@ -30,7 +30,7 @@ public class AICodeMaker
         maker_list.Clear();
         for (int i = 0, max = files.Length; i < max; i++)
         {
-           // EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", "ai auto code", (i + 1), max), files[i].FullName, (float)(i + 1) / max);
+            EditorUtility.DisplayProgressBar(string.Format("{0}-{1}/{2}", "ai auto code", (i + 1), max), files[i].FullName, (float)(i + 1) / max);
             string name = files[i].Name.Split('.')[0];
             string content = File.ReadAllText(files[i].FullName);
             Parse(content, name);
@@ -114,6 +114,7 @@ public class AICodeMaker
         method.Attributes = MemberAttributes.Override | MemberAttributes.Public;
         method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(AIRuntimeTaskData), "data"));
         method.ReturnType = new CodeTypeReference(typeof(void));//返回值
+        AddState(method, "base.Init(data);");
         if (task.vars != null)
         {
             for (int i = 0, max = task.vars.Count; i < max; i++)
@@ -176,6 +177,7 @@ public class AICodeMaker
         method.Name = "MakeRuntime";
         method.Attributes = MemberAttributes.Public | MemberAttributes.Static;
         method.Parameters.Add(new CodeParameterDeclarationExpression("AIRuntimeTaskData", "data"));
+        method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(AIRunTimeTree), "tree"));
         method.ReturnType = new CodeTypeReference("AIRunTimeBase");//返回值
         AddState(method, "AIRunTimeBase rst = null;");
         AddState(method, "switch (data.type)");
