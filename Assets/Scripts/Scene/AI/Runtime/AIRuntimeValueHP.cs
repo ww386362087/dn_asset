@@ -16,16 +16,17 @@ namespace AI.Runtime {
         
         public int mAIArgMaxHP;
         
-        public int mAIArgMinHP;
+        public int intmAIArgMinHP;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			mAIArgMaxHP = 0;
-			mAIArgMinHP = 20;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.ValueHPUpdate(entity, mAIArgMaxHP, mAIArgMinHP);
+			var inintmAIArgMinHP = _tree.GetVariable("minHP"); 
+			if (inintmAIArgMinHP != null) intmAIArgMinHP = (System.Int32)inintmAIArgMinHP;
+			return AITreeImpleted.ValueHPUpdate(entity, mAIArgMaxHP, intmAIArgMinHP);
         }
     }
 }

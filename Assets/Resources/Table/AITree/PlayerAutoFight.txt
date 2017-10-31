@@ -1,4 +1,10 @@
 {
+	"Variables":[{
+		"Type":"int",
+		"Name":"minHP",
+		"IsShared":true,
+		"Int32mValue":0
+	}],
 	"RootTask":{
 		"Type":"Sequence",
 		"Children":[{
@@ -26,7 +32,12 @@
 		},{
 			"Type":"ValueHP",
 			"Int32mAIArgMaxHP":0,
-			"Int32mAIArgMinHP":20
+			"intmAIArgMinHP":{
+				"Type":"int",
+				"Name":"minHP",
+				"IsShared":true,
+				"Int32mValue":0
+			}
 		},{
 			"Type":"Log",
 			"stringtext":{

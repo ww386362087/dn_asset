@@ -7,12 +7,12 @@ namespace AI
     public class ValueHP : Conditional
     {
         public int mAIArgMaxHP;
-        public int mAIArgMinHP;
+        public SharedInt mAIArgMinHP;
 
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return (TaskStatus)AITreeImpleted.ValueHPUpdate(e, mAIArgMaxHP, mAIArgMinHP);
+            return (TaskStatus)AITreeImpleted.ValueHPUpdate(e, mAIArgMaxHP, mAIArgMinHP.Value);
         }
     }
 

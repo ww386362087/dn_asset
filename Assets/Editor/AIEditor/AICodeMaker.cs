@@ -162,7 +162,9 @@ public class AICodeMaker
                     AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
                     if (var.IsShared)
                     {
-                        string st = var.name + " = (" + var.type + ")_tree.GetVariable(\"" + var.BindName + "\"); ";
+                        string st = "var in" + var.name + " = _tree.GetVariable(\"" + var.BindName + "\"); ";
+                        AddState(method2, st);
+                        st = "if (in" + var.name + " != null) " + var.name + " = (" + var.type + ")in" + var.name + ";";
                         AddState(method2, st);
                     }
                 }
