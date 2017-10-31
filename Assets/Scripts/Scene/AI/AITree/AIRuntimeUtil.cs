@@ -8,6 +8,7 @@ namespace AI.Runtime
     public class AIRuntimeUtil
     {
         static string Children = "Children";
+        static string Type = "Type";
 
         public static AIRuntimeTreeData Load(string name)
         {
@@ -17,7 +18,7 @@ namespace AI.Runtime
 
         public static AIRuntimeTreeData Parse(string json, string name)
         {
-          //  XDebug.Log(json);
+            //  XDebug.Log(json);
             var obj = MiniJSON.Deserialize(json) as Dictionary<string, object>;
             var root = obj as Dictionary<string, object>;
             AIRuntimeTreeData tree = new AIRuntimeTreeData();
@@ -33,12 +34,11 @@ namespace AI.Runtime
                     tree.vars.Add(v);
                 }
             }
-            
+
             //task
             var dic_task = root["RootTask"] as Dictionary<string, object>;
             AIRuntimeTaskData task = ParseTask(dic_task);
             tree.task = task;
-          
             return tree;
         }
 
@@ -61,26 +61,32 @@ namespace AI.Runtime
             return Mode.Custom;
         }
 
-        private static AIRuntimeTaskData ParseTask(Dictionary<string, object> arg)
+        private static AIRuntimeTaskData ParseTask(Dictionary<string, object> task)
         {
             AIRuntimeTaskData t = new AIRuntimeTaskData();
-            var type = arg["Type"].ToString();
-            t.type = ParseType(type);
-            t.mode = Type2Mode(t.type);
-            foreach (var item in arg)
+            foreach (var item in task)
             {
-                if (item.Key.StartsWith("Shared"))
+                if (item.Key == Type)
                 {
-                    try
+                    t.type = task[Type].ToString();
+                    t.mode = Type2Mode(t.type);
+                }
+                else if (item.Key == Children)
+                {
+                    List<object> list = task[Children] as List<object>;
+                    for (int i = 0, max = list.Count; i < max; i++)
                     {
-                        AIVar v = ParseSharedVar(item.Key, item.Value as Dictionary<string, object>);
-                        if (t.vars == null) t.vars = new List<AIVar>();
-                        t.vars.Add(v);
+                        Dictionary<string, object> child = list[i] as Dictionary<string, object>;
+                        if (t.children == null) t.children = new List<AIRuntimeTaskData>();
+                        AIRuntimeTaskData tt = ParseTask(child);
+                        t.children.Add(tt);
                     }
-                    catch (System.Exception e)
-                    {
-                        Debug.LogError(item.Key + " ************ " + e.StackTrace);
-                    }
+                }
+                else if (item.Value is Dictionary<string, object>)
+                {
+                    AIVar v = ParseSharedVar(item.Key, item.Value as Dictionary<string, object>);
+                    if (t.vars == null) t.vars = new List<AIVar>();
+                    t.vars.Add(v);
                 }
                 else
                 {
@@ -92,17 +98,6 @@ namespace AI.Runtime
                     }
                 }
             }
-            if (arg.ContainsKey(Children))
-            {
-                List<object> list = arg[Children] as List<object>;
-                for (int i = 0, max = list.Count; i < max; i++)
-                {
-                    Dictionary<string, object> child = list[i] as Dictionary<string, object>;
-                    if (t.children == null) t.children = new List<AIRuntimeTaskData>();
-                    AIRuntimeTaskData tt = ParseTask(child);
-                    t.children.Add(tt);
-                }
-            }
             return t;
         }
 
@@ -110,23 +105,14 @@ namespace AI.Runtime
         {
             AITreeSharedVar v = new AITreeSharedVar();
             v.name = key;
-            dic.TryGetValue("Name",out v.bindName);
-            dic.TryGetValue("IsShared",out v.isShared);
-            v.type = ParseType(dic["Type"].ToString());
+            dic.TryGetValue("Name", out v.bindName);
+            dic.TryGetValue("IsShared", out v.isShared);
+            v.type = TransfType(dic["Type"]);
             if (key.StartsWith(v.type)) v.name = key.Replace(v.type, string.Empty);
-            v.type = v.type.Replace("Shared", string.Empty);
-            string[] arr = { "Float", "Int", "Bool", "String" };
-            string[] arr2 = { "System.Single", "System.Int32", "System.Boolean", " System.String" };
-            for (int i = 0, max = arr.Length; i < max; i++)
-            {
-                if (v.type == arr[i])
-                    v.type = arr2[i];
-            }
             foreach (var item in dic)
             {
                 if (item.Key.Contains("Value"))
                 {
-                    //v.val = item.Value;
                     ParseVarValue(v, item.Value);
                     break;
                 }
@@ -135,15 +121,15 @@ namespace AI.Runtime
         }
 
 
-        private static AIVar ParseCustomVar(string key,object val)
+        private static AIVar ParseCustomVar(string key, object val)
         {
-            string[] arr = { "Single", "Int32", "Boolean", "String" };
-            for(int i=0,max= arr.Length;i<max;i++)
+            string[] arr = { "Single", "Int32", "Boolean", "String", "Vector3", "Vector2", "Vector4", "GameObject", "Transform" };
+            for (int i = 0, max = arr.Length; i < max; i++)
             {
-                if(key.StartsWith(arr[i]))
+                if (key.StartsWith(arr[i]))
                 {
                     AIVar v = new AIVar();
-                    v.type = "System." + arr[i];
+                    v.type = i <= 4 ? "System." + arr[i] : arr[i];
                     v.name = key.Replace(arr[i], string.Empty);
                     ParseVarValue(v, val);
                     return v;
@@ -154,17 +140,41 @@ namespace AI.Runtime
 
         private static void ParseVarValue(AIVar var, object val)
         {
-            if (var.type == "System.Boolean") var.val= bool.Parse(val.ToString());
-            else if (var.type == "System.String") var.val = val.ToString().Replace("\n", string.Empty);
-            else if (var.type == "System.Single") var.val = float.Parse(val.ToString());
-            var.val = val;
+            switch (var.type)
+            {
+                case "System.Boolean":
+                    var.val = val.ToString().ToLower();
+                    break;
+                case "System.String":
+                    string s = val.ToString().Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                    var.val = "\"" + s + "\"";
+                    break;
+                case "System.Single":
+                    var.val = float.Parse(val.ToString());
+                    break;
+                case "Vector3":
+                case "Vector2":
+                case "Vector4":
+                    var.val = "new " + var.type + val;
+                    break;
+                default:
+                    var.val = val;
+                    break;
+            }
         }
 
-        private static string ParseType(string str)
+        private static string TransfType(object type)
         {
-            int index = str.LastIndexOf(".");
-            return index == -1 ? str : str.Substring(index + 1);
+            string[] arr = { "float", "int", "bool", "string" };
+            string[] arr2 = { "System.Single", "System.Int32", "System.Boolean", "System.String" };
+            for (int i = 0, max = arr.Length; i < max; i++)
+            {
+                if (type.Equals(arr[i]))
+                    return arr2[i];
+            }
+            return type.ToString();
         }
+
     }
 
 }

@@ -14,20 +14,24 @@ namespace AI.Runtime {
     
     public class AIRuntimeWait : AIRunTimeBase {
         
-        public float waitTime;
+        public float floatwaitTime;
         
-        public bool randomWait;
+        public bool boolrandomWait;
         
-        public float randomWaitMin;
+        public float floatrandomWaitMin;
         
-        public float randomWaitMax;
+        public float floatrandomWaitMax;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
+			floatwaitTime = 34;
+			boolrandomWait = false;
+			floatrandomWaitMin = 1;
+			floatrandomWaitMax = 1;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.WaitUpdate(entity, waitTime, randomWait, randomWaitMin, randomWaitMax);
+			return AITreeImpleted.WaitUpdate(entity, floatwaitTime, boolrandomWait, floatrandomWaitMin, floatrandomWaitMax);
         }
     }
 }

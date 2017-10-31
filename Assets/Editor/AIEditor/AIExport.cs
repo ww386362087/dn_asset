@@ -28,7 +28,7 @@ public class AIExport
             Export(file);
         }
         AssetDatabase.Refresh();
-        EditorUtility.DisplayDialog("AI Auto ", "AI Export Finish!", "OK");
+       
     }
 
     [MenuItem("Tools/ExportAll")]
@@ -42,7 +42,7 @@ public class AIExport
             Export(files[i]);
         }
         AssetDatabase.Refresh();
-        Debug.Log("Export Finish!");
+        EditorUtility.DisplayDialog("AI Auto ", "AI Export Finish!", "OK");
     }
 
     private static void Export(FileInfo file)
@@ -84,6 +84,15 @@ public class AIExport
         json = json.Replace("BehaviorDesigner.Runtime.Tasks.", string.Empty);
         json = json.Replace("BehaviorDesigner.Runtime.", string.Empty);
         json = json.Replace("BehaviorDesigner.Runtime.Tasks.", string.Empty);
+        json = json.Replace("AI.", string.Empty);
+        json = json.Replace("SharedFloat", "float");
+        json = json.Replace("SharedBool", "bool");
+        json = json.Replace("SharedInt", "int");
+        json = json.Replace("SharedString", "string");
+        json = json.Replace("SharedVector2", "Vector2");
+        json = json.Replace("SharedVector3", "Vector3");
+        json = json.Replace("SharedVector4", "Vector4");
+        json = json.Replace("SharedGameObject", "GameObject");
         File.WriteAllText(path, json);
     }
 

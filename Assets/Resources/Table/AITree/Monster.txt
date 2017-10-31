@@ -1,6 +1,6 @@
 {
 	"Variables":[{
-		"Type":"SharedGameObject",
+		"Type":"GameObject",
 		"Name":"target",
 		"IsShared":true
 	}],
@@ -10,8 +10,8 @@
 			"Type":"Sequence",
 			"Children":[{
 				"Type":"FindTargetByDistance",
-				"SharedFloatmAIArgDistance":{
-					"Type":"SharedFloat",
+				"floatmAIArgDistance":{
+					"Type":"float",
 					"Name":null,
 					"SinglemValue":20
 				},
@@ -20,39 +20,39 @@
 				"Type":"DoSelectNearest"
 			},{
 				"Type":"RotateToTarget",
-				"SharedGameObjectmAIArgTarget":{
-					"Type":"SharedGameObject",
+				"GameObjectmAIArgTarget":{
+					"Type":"GameObject",
 					"Name":"target",
 					"IsShared":true
 				}
 			},{
 				"Type":"Inverter",
 				"Children":[{
-					"Type":"AI.ValueDistance",
-					"SharedGameObjectmAIArgTarget":{
-						"Type":"SharedGameObject",
+					"Type":"ValueDistance",
+					"GameObjectmAIArgTarget":{
+						"Type":"GameObject",
 						"Name":"target",
 						"IsShared":true
 					},
-					"SharedFloatmAIArgMaxDistance":{
-						"Type":"SharedFloat",
+					"floatmAIArgMaxDistance":{
+						"Type":"float",
 						"Name":null,
 						"SinglemValue":1
 					}
 				}]
 			},{
 				"Type":"NavToTarget",
-				"SharedGameObjectmAIArgTarget":{
-					"Type":"SharedGameObject",
+				"GameObjectmAIArgTarget":{
+					"Type":"GameObject",
 					"Name":"target",
 					"IsShared":true
 				},
-				"SharedGameObjectmAIArgNavTarget":{
-					"Type":"SharedGameObject",
+				"GameObjectmAIArgNavTarget":{
+					"Type":"GameObject",
 					"Name":null
 				},
-				"SharedVector3mAIArgNavPos":{
-					"Type":"SharedVector3",
+				"Vector3mAIArgNavPos":{
+					"Type":"Vector3",
 					"Name":null,
 					"Vector3mValue":"(0,0,0)"
 				}

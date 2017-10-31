@@ -54,7 +54,7 @@ namespace AI.Runtime {
 					rst = new AIRuntimeLog();
 					break;
 			}
-			if (rst != null) rst.Init(data);
+			if (rst != null) { rst.SetTree(tree); rst.Init(data); }
 			return rst;
         }
     }

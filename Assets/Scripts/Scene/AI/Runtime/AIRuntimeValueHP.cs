@@ -20,6 +20,8 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
+			mAIArgMaxHP = 0;
+			mAIArgMinHP = 20;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {

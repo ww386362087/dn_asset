@@ -1,10 +1,12 @@
 ﻿using BehaviorDesigner.Runtime.Tasks;
-
-public class XAIActionSkill : Action
+namespace AI
 {
-
-    public override TaskStatus OnUpdate()
+    public class XAIActionSkill : Action
     {
-        return TaskStatus.Success;
+
+        public override TaskStatus OnUpdate()
+        {
+            return TaskStatus.Success;
+        }
     }
 }

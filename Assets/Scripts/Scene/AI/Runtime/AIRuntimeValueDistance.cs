@@ -16,15 +16,16 @@ namespace AI.Runtime {
         
         public GameObject mAIArgTarget;
         
-        public float mAIArgMaxDistance;
+        public float floatmAIArgMaxDistance;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			mAIArgTarget = (GameObject)_tree.GetVariable("target"); 
+			floatmAIArgMaxDistance = 1;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.ValueDistanceUpdate(entity, mAIArgTarget, mAIArgMaxDistance);
+			return AITreeImpleted.ValueDistanceUpdate(entity, mAIArgTarget, floatmAIArgMaxDistance);
         }
     }
 }

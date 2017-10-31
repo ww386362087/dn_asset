@@ -3,39 +3,39 @@
 		"Type":"Sequence",
 		"Children":[{
 			"Type":"Wait",
-			"SharedFloatwaitTime":{
-				"Type":"SharedFloat",
+			"floatwaitTime":{
+				"Type":"float",
 				"Name":"",
 				"SinglemValue":34
 			},
-			"SharedBoolrandomWait":{
-				"Type":"SharedBool",
+			"boolrandomWait":{
+				"Type":"bool",
 				"Name":"",
 				"BooleanmValue":false
 			},
-			"SharedFloatrandomWaitMin":{
-				"Type":"SharedFloat",
+			"floatrandomWaitMin":{
+				"Type":"float",
 				"Name":"",
 				"SinglemValue":1
 			},
-			"SharedFloatrandomWaitMax":{
-				"Type":"SharedFloat",
+			"floatrandomWaitMax":{
+				"Type":"float",
 				"Name":"",
 				"SinglemValue":1
 			}
 		},{
-			"Type":"AI.ValueHP",
+			"Type":"ValueHP",
 			"Int32mAIArgMaxHP":0,
 			"Int32mAIArgMinHP":20
 		},{
 			"Type":"Log",
-			"SharedStringtext":{
-				"Type":"SharedString",
+			"stringtext":{
+				"Type":"string",
 				"Name":"",
 				"StringmValue":"ai\n        tick"
 			},
-			"SharedBoollogError":{
-				"Type":"SharedBool",
+			"boollogError":{
+				"Type":"bool",
 				"Name":"",
 				"BooleanmValue":false
 			}
