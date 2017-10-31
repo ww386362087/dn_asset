@@ -22,7 +22,7 @@ public class XNPC : XEntity
         _uGazing = XTableMgr.GetTable<XNpcList>().GetByUID((int)_attr.id).Gazing;
         FindHead();
         XAnimComponent anim = AttachComponent<XAnimComponent>();
-        anim.OverrideAnim("NPC_sidel_idle", _present.AnimLocation + _present.Idle);
+        anim.OverrideAnim("Idle", _present.AnimLocation + _present.Idle);
         EnableShadow(true);
     }
 
