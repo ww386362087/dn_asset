@@ -124,7 +124,24 @@ public class AICodeMaker
                     AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
                     if (var.IsShared)
                     {
-                        string st = var.name + " = (" + var.type + ")tree.GetVariable(\"" + var.BindName + "\"); ";
+                        string st = var.name + " = (" + var.type + ")_tree.GetVariable(\"" + var.BindName + "\"); ";
+                        AddState(method, st);
+                    }
+                    else
+                    {
+                        if (var.val != null)
+                        {
+                            string st = var.name + " = " + var.val + ";";
+                            AddState(method, st);
+                        }
+                    }
+                }
+                else
+                {
+                    AIVar var = task.vars[i];
+                    if (var.val != null)
+                    {
+                        string st = var.name + " = " + var.val + ";";
                         AddState(method, st);
                     }
                 }
@@ -195,7 +212,7 @@ public class AICodeMaker
             AddState(method, "\t\tbreak;");
         }
         AddState(method, "}");
-        AddState(method, "if (rst != null) rst.Init(data);");
+        AddState(method, "if (rst != null) { rst.SetTree(tree); rst.Init(data); }");
         AddState(method, "return rst;");
 
         wrapClass.Members.Add(method);

@@ -11,7 +11,7 @@ namespace AI.Runtime
 
         public static AIRuntimeTreeData Load(string name)
         {
-            TextAsset ta = XResources.Load<TextAsset>("AITree/" + name, AssetType.Text);
+            TextAsset ta = XResources.Load<TextAsset>("Table/AITree/" + name, AssetType.Text);
             return Parse(ta.text, name);
         }
 
@@ -126,7 +126,8 @@ namespace AI.Runtime
             {
                 if (item.Key.Contains("Value"))
                 {
-                    v.val = item.Value;
+                    //v.val = item.Value;
+                    ParseVarValue(v, item.Value);
                     break;
                 }
             }
@@ -144,11 +145,19 @@ namespace AI.Runtime
                     AIVar v = new AIVar();
                     v.type = "System." + arr[i];
                     v.name = key.Replace(arr[i], string.Empty);
-                    v.val = val;
+                    ParseVarValue(v, val);
                     return v;
                 }
             }
             return null;
+        }
+
+        private static void ParseVarValue(AIVar var, object val)
+        {
+            if (var.type == "System.Boolean") var.val= bool.Parse(val.ToString());
+            else if (var.type == "System.String") var.val = val.ToString().Replace("\n", string.Empty);
+            else if (var.type == "System.Single") var.val = float.Parse(val.ToString());
+            var.val = val;
         }
 
         private static string ParseType(string str)

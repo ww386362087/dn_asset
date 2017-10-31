@@ -22,7 +22,7 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
-			mAIArgTarget = (GameObject)tree.GetVariable("target"); 
+			mAIArgTarget = (GameObject)_tree.GetVariable("target"); 
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {

@@ -12,9 +12,14 @@ namespace AI.Runtime
 
     public abstract class AIRunTimeBase
     {
-        protected AIRunTimeTree tree;
+        protected AIRunTimeTree _tree;
 
         public virtual void Init(AIRuntimeTaskData data) { }
+
+        public void SetTree(AIRunTimeTree tree)
+        {
+            _tree = tree;
+        }
 
         public abstract AIRuntimeStatus OnTick(XEntity entity);
     }
@@ -30,7 +35,7 @@ namespace AI.Runtime
                 for (int i = 0, max = data.children.Count; i < max; i++)
                 {
                     if (list == null) list = new List<AIRunTimeBase>();
-                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i],tree);
+                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i],_tree);
                     list.Add(run);
                 }
             }
@@ -63,7 +68,7 @@ namespace AI.Runtime
                 for (int i = 0, max = data.children.Count; i < max; i++)
                 {
                     if (list == null) list = new List<AIRunTimeBase>();
-                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i],tree);
+                    AIRunTimeBase run = AIRuntimeFactory.MakeRuntime(data.children[i],_tree);
                     list.Add(run);
                 }
             }
@@ -93,7 +98,7 @@ namespace AI.Runtime
         {
             if (data.children != null && data.children.Count > 0)
             {
-                node = AIRuntimeFactory.MakeRuntime(data.children[0], tree);
+                node = AIRuntimeFactory.MakeRuntime(data.children[0], _tree);
             }
         }
 
