@@ -22,7 +22,8 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
-			mAIArgNavPos = new Vector3(0,0,0);
+			if(data.vars[2].val != null)
+				mAIArgNavPos = (Vector3)data.vars[2].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {

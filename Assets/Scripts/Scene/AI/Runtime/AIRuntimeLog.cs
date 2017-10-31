@@ -20,8 +20,10 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
-			stringtext = "ai        tick";
-			boollogError = false;
+			if(data.vars[0].val != null)
+				stringtext = (System.String)data.vars[0].val;
+			if(data.vars[1].val != null)
+				boollogError = (System.Boolean)data.vars[1].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {

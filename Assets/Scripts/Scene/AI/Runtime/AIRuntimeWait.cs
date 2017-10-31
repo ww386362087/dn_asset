@@ -24,10 +24,14 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
-			floatwaitTime = 34;
-			boolrandomWait = false;
-			floatrandomWaitMin = 1;
-			floatrandomWaitMax = 1;
+			if(data.vars[0].val != null)
+				floatwaitTime = (System.Single)data.vars[0].val;
+			if(data.vars[1].val != null)
+				boolrandomWait = (System.Boolean)data.vars[1].val;
+			if(data.vars[2].val != null)
+				floatrandomWaitMin = (System.Single)data.vars[2].val;
+			if(data.vars[3].val != null)
+				floatrandomWaitMax = (System.Single)data.vars[3].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {

@@ -143,7 +143,7 @@ namespace AI.Runtime
             switch (var.type)
             {
                 case "System.Boolean":
-                    var.val = val.ToString().ToLower();
+                    var.val = val;
                     break;
                 case "System.String":
                     string s = val.ToString().Replace("\n", "").Replace("\t", "").Replace("\r", "");
@@ -152,10 +152,13 @@ namespace AI.Runtime
                 case "System.Single":
                     var.val = float.Parse(val.ToString());
                     break;
+                case "System.Int32":
+                    var.val = int.Parse(val.ToString());
+                    break;
                 case "Vector3":
                 case "Vector2":
                 case "Vector4":
-                    var.val = "new " + var.type + val;
+                    var.val = ParseVector(val.ToString());
                     break;
                 default:
                     var.val = val;
@@ -173,6 +176,22 @@ namespace AI.Runtime
                     return arr2[i];
             }
             return type.ToString();
+        }
+
+        private static object ParseVector(string str)
+        {
+            str = str.Trim().Replace("(", string.Empty).Replace(")", string.Empty);
+            string[] ss = str.Split(',');
+            int cnt = ss.Length;
+            float[] arr = new float[cnt];
+            for (int i = 0; i < cnt; i++)
+            {
+                arr[i] = float.Parse(ss[i]);
+            }
+            if (cnt == 2) return new Vector2(arr[0], arr[1]);
+            if (cnt == 3) return new Vector3(arr[0], arr[1], arr[2]);
+            if (cnt == 4) return new Vector4(arr[0], arr[1], arr[2], arr[3]);
+            throw new System.Exception("Error vector format");
         }
 
     }

@@ -20,8 +20,10 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
-			floatmAIArgDistance = 20;
-			mAIArgAngle = 360;
+			if(data.vars[0].val != null)
+				floatmAIArgDistance = (System.Single)data.vars[0].val;
+			if(data.vars[1].val != null)
+				mAIArgAngle = (System.Single)data.vars[1].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
