@@ -275,18 +275,18 @@ namespace AI
                 return AIRuntimeStatus.Failure;
         }
 
-        public static AIRuntimeStatus LogUpdate(XEntity entity,string str,bool b)
+        public static AIRuntimeStatus LogUpdate(XEntity entity, string str, bool b)
         {
+            if (b) XDebug.LogError(str);
+            else XDebug.Log(str);
             return AIRuntimeStatus.Success;
         }
 
-        public static AIRuntimeStatus WaitUpdate(XEntity entity, float f1, bool b, float f2, float f3)
+        public static AIRuntimeStatus WaitUpdate(XEntity entity, float wait, bool rand, float min, float max)
         {
             return AIRuntimeStatus.Success;
         }
-
-
-
+        
         public static Transform SelectMoveTargetById(XEntity entity, int objectid)
         {
             List<XEntity> ens = XEntityMgr.singleton.GetAllEnemy(entity);

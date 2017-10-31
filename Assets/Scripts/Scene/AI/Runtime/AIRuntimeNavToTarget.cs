@@ -22,11 +22,11 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
-			mAIArgTarget = (GameObject)_tree.GetVariable("target"); 
 			mAIArgNavPos = new Vector3(0,0,0);
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
+			mAIArgTarget = (GameObject)_tree.GetVariable("target"); 
 			return AITreeImpleted.NavToTargetUpdate(entity, mAIArgTarget, mAIArgNavTarget, mAIArgNavPos);
         }
     }

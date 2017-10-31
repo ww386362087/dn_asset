@@ -20,11 +20,11 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
-			mAIArgTarget = (GameObject)_tree.GetVariable("target"); 
 			floatmAIArgMaxDistance = 1;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
+			mAIArgTarget = (GameObject)_tree.GetVariable("target"); 
 			return AITreeImpleted.ValueDistanceUpdate(entity, mAIArgTarget, floatmAIArgMaxDistance);
         }
     }

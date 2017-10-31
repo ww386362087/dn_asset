@@ -42,13 +42,10 @@
 
         public object GetVariable(string name)
         {
-            if (_enbale && _tree_data != null && _tree_data.vars != null)
+            if (_enbale && _tree_data != null )
             {
-                for (int i = 0, max = _tree_data.vars.Count; i < max; i++)
-                {
-                    if (_tree_data.vars[i].name == name)
-                        return _tree_data.vars[i].val;
-                }
+                uint hash = XCommon.singleton.XHash(name);
+                return _tree_data.cache[hash];
             }
             return null;
         }

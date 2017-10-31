@@ -122,12 +122,8 @@ public class AICodeMaker
                 if (task.vars[i] is AITreeSharedVar)
                 {
                     AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
-                    if (var.IsShared)
-                    {
-                        string st = var.name + " = (" + var.type + ")_tree.GetVariable(\"" + var.BindName + "\"); ";
-                        AddState(method, st);
-                    }
-                    else
+                 
+                    if(!var.IsShared)
                     {
                         if (var.val != null)
                         {
@@ -160,6 +156,16 @@ public class AICodeMaker
             for (int i = 0, max = task.vars.Count; i < max; i++)
             {
                 state += ", " + task.vars[i].name;
+
+                if (task.vars[i] is AITreeSharedVar)
+                {
+                    AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
+                    if (var.IsShared)
+                    {
+                        string st = var.name + " = (" + var.type + ")_tree.GetVariable(\"" + var.BindName + "\"); ";
+                        AddState(method2, st);
+                    }
+                }
             }
         }
         state += ");";

@@ -1,10 +1,14 @@
 ﻿#if TEST
+using System.Collections.Generic;
+using UnityEngine;
 
 public class TestAI : ITest
 {
     const int sceneid = 401;
+    
+    
     public void Start()
-    {
+    { 
         XScene.singleton.Enter(sceneid);
     }
 

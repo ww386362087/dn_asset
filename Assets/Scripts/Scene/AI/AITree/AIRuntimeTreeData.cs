@@ -16,7 +16,6 @@ namespace AI.Runtime
         public bool isShared;
         public string type;
         public string name;
-        public object val;
     }
 
    
@@ -25,7 +24,6 @@ namespace AI.Runtime
         public string type;
         public string name;
         public object val;
-       
     }
 
 
@@ -61,9 +59,12 @@ namespace AI.Runtime
     public class AIRuntimeTreeData
     {
         /// <summary>
-        /// Variables
+        /// Variables 从配置文件读取
         /// </summary>
         public List<AITreeVar> vars { get; set; }
+
+
+        public Dictionary<uint, object> cache = new Dictionary<uint, object>();
 
         /// <summary>
         /// RootTask
@@ -73,16 +74,8 @@ namespace AI.Runtime
 
         public void SetVariable(string name, object value)
         {
-            if (vars != null)
-            {
-                for (int i = 0, max = vars.Count; i < max; i++)
-                {
-                    if ( vars[i].name == name)
-                    {
-                        vars[i].val = value;
-                    }
-                }
-            }
+            uint hash = XCommon.singleton.XHash(name);
+            cache[hash] = value;
         }
 
     }
