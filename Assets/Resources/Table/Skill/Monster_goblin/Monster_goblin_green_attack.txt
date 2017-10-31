@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XSkillData>
+  <Name>Monster_goblin_green_attack</Name>
+  <ClipName>Animation/Monster_goblin/Monster_goblin_attack</ClipName>
+  <Result>
+    <XResultData>
+      <At>0.466666639</At>
+      <Range>2</Range>
+      <Scope>120</Scope>
+      <Affect_Direction>AttackDir</Affect_Direction>
+    </XResultData>
+  </Result>
+  <Charge>
+    <XChargeData>
+      <Using_Curve>true</Using_Curve>
+      <Curve_Forward>Curve/Monster_goblin/Monster_goblin_attack_forward</Curve_Forward>
+      <Curve_Side>Curve/Monster_goblin/Monster_goblin_attack_side</Curve_Side>
+    </XChargeData>
+  </Charge>
+  <Hit>
+    <XHitData>
+      <Time_Present_Straight>0.13332</Time_Present_Straight>
+      <Time_Hard_Straight>0.03</Time_Hard_Straight>
+      <Offset>0.4</Offset>
+      <State>Hit_Back</State>
+      <State_Animation>Hit_Back_Front</State_Animation>
+      <Fx>Effects/FX_Particle/NPC/Lzg_Gw/Jz_play_red_U</Fx>
+      <CurveUsing>true</CurveUsing>
+    </XHitData>
+  </Hit>
+  <Audio>
+    <XAudioData>
+      <Clip>Audio/Monster_goblin/Monster_goblin_green_attack</Clip>
+      <Channel>Skill</Channel>
+    </XAudioData>
+  </Audio>
+  <Logical>
+    <StrickenMask>Cease</StrickenMask>
+    <Not_Move_End>1.33333337</Not_Move_End>
+    <CanCancelAt>1.33333337</CanCancelAt>
+  </Logical>
+  <CoolDown>3</CoolDown>
+  <Time>1.33333337</Time>
+  <Cast_Range_Upper>2</Cast_Range_Upper>
+  <Cast_Scope>180</Cast_Scope>
+</XSkillData>
