@@ -284,7 +284,8 @@ namespace AI
 
         public static AIRuntimeStatus WaitUpdate(XEntity entity, float wait, bool rand, float min, float max)
         {
-            return AIRuntimeStatus.Success;
+            if (entity.SetTimer(wait)) return AIRuntimeStatus.Success;
+            return AIRuntimeStatus.Failure;
         }
         
         public static Transform SelectMoveTargetById(XEntity entity, int objectid)

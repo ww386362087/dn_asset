@@ -264,4 +264,21 @@ public class XEntity : XObject
         _eEntity_Type |= type;
     }
 
+    private float _timer = 0f;
+    public bool SetTimer(float delay)
+    {
+        if (_timer > 0.01f)
+        {
+            if (Time.time - _timer > delay)
+            {
+                _timer = 0f;
+                return true;
+            }
+        }
+        else
+        {
+            _timer = Time.time;
+        }
+        return false;
+    }
 }
