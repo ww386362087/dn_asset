@@ -24,11 +24,9 @@ public class XSkillJA : XSkill
 
     public override void OnTrigger(object param)
     {
-        if (!host.EditorData.XAutoJA) return;
-
         int i = (int)param;
         float swype = XGesture.singleton.LastSwypeAt;
-        float trigger_at = swype - host.fire_time - Time.deltaTime;
+        float trigger_at = swype - host.FireTime - Time.deltaTime;
 
         XJAData jd = current.Ja[_jaCount];
         if (trigger_at < jd.End && trigger_at > jd.At)
@@ -36,24 +34,21 @@ public class XSkillJA : XSkill
             if (host.xOuterData.Ja[i].Name != null && host.xOuterData.Ja[i].Name.Length > 0)
             {
                 host.StopFire();
-                host.trigger = XSkillData.JA_Command[host.xDataExtra.JaEx[i].Ja.SkillPosition];
-
-                host.SetCurrData(host.xDataExtra.JaEx[i].Ja);
-
-                host.state = XSkillHoster.DummyState.Fire;
-                host.fire_time = Time.time;
-                if (host.ator != null) host.ator.speed = 0;
+                host.Triger = XSkillData.JA_Command[host.SkillDataExtra.JaEx[i].Ja.SkillPosition];
+                host.SetCurrData(host.SkillDataExtra.JaEx[i].Ja);
+                host.state = DummyState.Fire;
+                host.FireTime = Time.time;
+                if (host.Actor != null) host.Actor.speed = 0;
             }
         }
         else if (host.xOuterData.Ja[i].Next_Name != null && host.xOuterData.Ja[i].Next_Name.Length > 0)
         {
             host.StopFire();
-            host.trigger = XSkillData.JA_Command[host.xDataExtra.JaEx[i].Next.SkillPosition];
-
-            host.SetCurrData(host.xDataExtra.JaEx[i].Next);
-            host.state = XSkillHoster.DummyState.Fire;
-            host.fire_time = Time.time;
-            if (host.ator != null) host.ator.speed = 0;
+            host.Triger = XSkillData.JA_Command[host.SkillDataExtra.JaEx[i].Next.SkillPosition];
+            host.SetCurrData(host.SkillDataExtra.JaEx[i].Next);
+            host.state = DummyState.Fire;
+            host.FireTime = Time.time;
+            if (host.Actor != null) host.Actor.speed = 0;
         }
         _jaCount++;
     }

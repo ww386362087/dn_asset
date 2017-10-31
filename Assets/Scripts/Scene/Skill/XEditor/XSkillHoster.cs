@@ -3,7 +3,7 @@ using UnityEngine;
 using XTable;
 using System.Collections;
 
-public class XSkillHoster : MonoBehaviour
+public class XSkillHoster : MonoBehaviour, ISkillHoster
 {
     [SerializeField]
     private XSkillData _xData = null;
@@ -33,25 +33,25 @@ public class XSkillHoster : MonoBehaviour
     [HideInInspector]
     public Vector3 nResultForward = Vector3.zero;
     [HideInInspector]
-    public Transform ShownTransform = null;
+    public Transform ShownTransform { get; set; }
     [HideInInspector]
     public AnimatorOverrideController oVerrideController = null;
     [HideInInspector]
-    public float ir = 0;
+    public float ir { get; set; }
     [HideInInspector]
-    public float or = 0;
+    public float or { get; set; }
 
     public float defaultFov = 45;
 
     private XEntityPresentation.RowData _present_data = null;
-    public XSkillData xOuterData = null;
+    public XSkillData xOuterData { get; set; }
     private float _to = 0;
     private float _from = 0;
     private float _time_offset = 0;
-    public float fire_time = 0;
-    public string trigger = null;
+    private float fire_time = 0;
+    private string trigger = null;
     public Animator ator = null;
-    public enum DummyState { Idle, Move, Fire };
+    
 
     private DummyState _state = DummyState.Idle;
     private XSkillCamera _camera = null;
@@ -64,14 +64,15 @@ public class XSkillHoster : MonoBehaviour
     private List<uint> _combinedToken = new List<uint>();
     private List<uint> _presentToken = new List<uint>();
     private List<uint> _logicalToken = new List<uint>();
-    public List<Vector3>[] warningPosAt = null;
 
-    public XSkillResult skillResult;
-    public XSkillMob skillMob;
-    public XSkillFx skillFx;
-    public XSkillManipulate skillManip;
-    public XSkillJA skillJa;
-    public XSkillWarning skillWarning;
+    public List<Vector3>[] warningPosAt { get; set; }
+
+    public XSkillResult skillResult { get; set; }
+    public XSkillMob skillMob { get; set; }
+    public XSkillFx skillFx { get; set; }
+    public XSkillManipulate skillManip { get; set; }
+    public XSkillJA skillJa { get; set; }
+    public XSkillWarning skillWarning { get; set; }
     public List<XSkill> skills = new List<XSkill>();
 
     public XConfigData ConfigData
@@ -86,6 +87,14 @@ public class XSkillHoster : MonoBehaviour
             _xConfigData = value;
         }
     }
+
+    public Transform Transform { get { return transform; } }
+
+    public float FireTime { get { return fire_time; } set { fire_time = value; } }
+
+    public string Triger { get { return trigger; } set { Triger = value; } }
+
+    public Animator Actor { get { return ator; } }
 
     public XEditorData EditorData
     {
@@ -354,6 +363,8 @@ public class XSkillHoster : MonoBehaviour
         }
     }
 
+
+
     void Update()
     {
         int nh = 0; int nv = 0;
@@ -479,6 +490,11 @@ public class XSkillHoster : MonoBehaviour
 
     private void Combined(object param)
     {
+    }
+
+    public void AddSkill(XSkill skill)
+    {
+        skills.Add(skill);
     }
 
     private void FocusTarget()

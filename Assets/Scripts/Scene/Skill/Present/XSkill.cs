@@ -1,17 +1,17 @@
 ﻿public class XSkill
 {
 
-    protected XSkillHoster host;
+    protected ISkillHoster host;
 
     protected XSkillData current
     {
         get { return host.CurrentSkillData; }
     }
 
-    public XSkill(XSkillHoster _host)
+    public XSkill(ISkillHoster _host)
     {
         host = _host;
-        host.skills.Add(this);
+        host.AddSkill(this);
     }
 
 

@@ -34,10 +34,10 @@ public class XSkillMob : XSkill
 
         GameObject mob_unit = GameObject.Instantiate(Resources.Load("Prefabs/" + data.Prefab)) as GameObject;
 
-        Vector3 offset = host.transform.rotation * new Vector3(mob.Offset_At_X, mob.Offset_At_Y, mob.Offset_At_Z);
-        Vector3 pos = host.transform.position + offset;
+        Vector3 offset = host.Transform.rotation * new Vector3(mob.Offset_At_X, mob.Offset_At_Y, mob.Offset_At_Z);
+        Vector3 pos = host.Transform.position + offset;
         mob_unit.transform.position = pos;
-        mob_unit.transform.forward = host.transform.forward;
+        mob_unit.transform.forward = host.Transform.forward;
         if (mob.LifewithinSkill) mob_unit.tag = "Finish";
         _mob_unit.Add(mob_unit);
     }

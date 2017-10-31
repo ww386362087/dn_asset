@@ -112,16 +112,16 @@ public class XSkillWarning : XSkill
             {
                 case XWarningType.Warning_None:
                     {
-                        Vector3 offset = host.transform.rotation * new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
+                        Vector3 offset = host.Transform.rotation * new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
                         var fx = XFxMgr.singleton.CreateAndPlay(
                                 data.Fx,
-                                host.gameObject,
+                                host.Transform.gameObject,
                                 offset,
                                 data.Scale * Vector3.one,
                                 1,
                                 data.FxDuration);
                         list.Add(fx);
-                        host.warningPosAt[data.Index].Add(host.transform.position + offset);
+                        host.warningPosAt[data.Index].Add(host.Transform.position + offset);
                     }
                     break;
                 case XWarningType.Warning_Target:
@@ -142,16 +142,16 @@ public class XSkillWarning : XSkill
                     }
                     else
                     {
-                        Vector3 offset = host.transform.rotation * new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
+                        Vector3 offset = host.Transform.rotation * new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
                         var fx = XFxMgr.singleton.CreateAndPlay(
                                 data.Fx,
-                                host.gameObject,
+                                host.Transform.gameObject,
                                 offset,
                                 data.Scale * Vector3.one,
                                 1,
                                 data.FxDuration);
                         list.Add(fx);
-                        host.warningPosAt[data.Index].Add(host.transform.position + offset);
+                        host.warningPosAt[data.Index].Add(host.Transform.position + offset);
                     }
                     break;
                 case XWarningType.Warning_All:

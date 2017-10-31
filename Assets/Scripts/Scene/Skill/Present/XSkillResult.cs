@@ -45,7 +45,7 @@ public class XSkillResult : XSkill
         }
         else
         {
-            InnerResult(data.Index, host.transform.forward, host.transform.position, current);
+            InnerResult(data.Index, host.Transform.forward, host.Transform.position, current);
         }
     }
 
@@ -81,7 +81,7 @@ public class XSkillResult : XSkill
         else if (current.Result[index].LongAttackEffect)
             Project(current.Result[index]);
         else
-            InnerResult(index, host.transform.forward, host.transform.position, current);
+            InnerResult(index, host.Transform.forward, host.Transform.position, current);
 
         ++execute_cout;
         if (current.Result[index].Loop_Count > execute_cout)
@@ -97,14 +97,14 @@ public class XSkillResult : XSkill
 
         if (!host.CurrentSkillData.Result[index].Group || group_cout >= host.CurrentSkillData.Result[index].Group_Count) return;
 
-        Vector3 face = host.transform.forward;
+        Vector3 face = host.Transform.forward;
         int angle = current.Result[index].Deviation_Angle + current.Result[index].Angle_Step * group_cout;
         angle = current.Result[index].Clockwise ? angle : -angle;
 
         if (current.Result[index].LongAttackEffect)
             Project(host.CurrentSkillData.Result[index], angle);
         else
-            InnerResult(index, XCommon.singleton.HorizontalRotateVetor3(face, angle), host.transform.position, current);
+            InnerResult(index, XCommon.singleton.HorizontalRotateVetor3(face, angle), host.Transform.position, current);
 
         group_cout++;
         if (group_cout < host.CurrentSkillData.Result[index].Group_Count)
@@ -120,7 +120,7 @@ public class XSkillResult : XSkill
 
         if (hitted == null)
         {
-            pos += XCommon.singleton.VectorToQuaternion(host.transform.forward) * new Vector3(data.Result[triggerTime].Offset_X, 0, data.Result[triggerTime].Offset_Z);
+            pos += XCommon.singleton.VectorToQuaternion(host.Transform.forward) * new Vector3(data.Result[triggerTime].Offset_X, 0, data.Result[triggerTime].Offset_Z);
             nResultForward = forward;
             XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
             foreach (XHitHoster hit in hits)

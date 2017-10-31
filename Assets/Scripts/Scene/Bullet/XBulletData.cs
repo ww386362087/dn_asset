@@ -4,7 +4,7 @@ using XTable;
 internal class XBulletData
 {
     private XSkillData _data = null;
-    private XSkillHoster _hoster = null;
+    private ISkillHoster _hoster = null;
     private Vector3 _warning_pos = Vector3.zero;
     private int _sequnce = 0;
     private float _velocity = 0;
@@ -16,7 +16,7 @@ internal class XBulletData
     public Vector3 WarningPos { get { return _warning_pos; } }
     public bool Warning { get { return _warning; } }
     public XSkillData Skill { get { return _data; } }
-    public XSkillHoster Firer { get { return _hoster; } }
+    public ISkillHoster Firer { get { return _hoster; } }
     public string Prefab { get { return _data.Result[_sequnce].LongAttackData.Prefab; } }
     public int Sequnce { get { return _sequnce; } }
     public float Velocity { get { return _velocity; } }
@@ -24,7 +24,7 @@ internal class XBulletData
     public float Runningtime { get { return _data.Result[_sequnce].LongAttackData.Runningtime; } }
     public float Radius { get { return _data.Result[_sequnce].LongAttackData.Radius; } }
 
-    public XBulletData(XSkillHoster firer, XSkillData data, GameObject target, int idx, float diviation, int wid)
+    public XBulletData(ISkillHoster firer, XSkillData data, GameObject target, int idx, float diviation, int wid)
     {
         _sequnce = idx;
         _data = data;
@@ -42,9 +42,9 @@ internal class XBulletData
 
         _warning = _warning_pos.sqrMagnitude > 0;
         float height = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_hoster.ConfigData.Player).BoundHeight;
-        Vector3 begin = _hoster.gameObject.transform.position; begin.y += height * 0.5f;
-        Vector3 dir = _warning ? (_warning_pos - _hoster.gameObject.transform.position) : firer.transform.forward;
-        begin += firer.transform.rotation * new Vector3(
+        Vector3 begin = _hoster.Transform.position; begin.y += height * 0.5f;
+        Vector3 dir = _warning ? (_warning_pos - _hoster.Transform.position) : firer.Transform.forward;
+        begin += firer.Transform.rotation * new Vector3(
             data.Result[idx].LongAttackData.At_X,
             data.Result[idx].LongAttackData.At_Y,
             data.Result[idx].LongAttackData.At_Z);

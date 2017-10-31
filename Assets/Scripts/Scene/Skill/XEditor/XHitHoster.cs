@@ -70,7 +70,7 @@ public class XHitHoster : MonoBehaviour
     private XBeHitPhase _phase = XBeHitPhase.Hit_Present;
 
     private Animator _ator = null;
-    private XSkillHoster _hoster = null;
+    private ISkillHoster _hoster = null;
     private GameObject _hit_fx = null;
     private Transform _binded_bone = null;
 
@@ -136,7 +136,7 @@ public class XHitHoster : MonoBehaviour
                         if (_offset < 0)
                         {
                             float move = Mathf.Sqrt(_delta_x * _delta_x + _delta_z * _delta_z);
-                            float dis = (_hoster.gameObject.transform.position - gameObject.transform.position).magnitude;
+                            float dis = (_hoster.Transform.position - gameObject.transform.position).magnitude;
                             if (move > dis - 0.5)
                             {
                                 _delta_x = 0;
@@ -185,7 +185,7 @@ public class XHitHoster : MonoBehaviour
         _ator.SetTrigger("ToStand");
     }
 
-    public void Begin(XSkillHoster hoster, XHitData data, Vector3 dir, bool bAttackOnHitDown)
+    public void Begin(ISkillHoster hoster, XHitData data, Vector3 dir, bool bAttackOnHitDown)
     {
         if (data.State == XBeHitState.Hit_Free) return;
 

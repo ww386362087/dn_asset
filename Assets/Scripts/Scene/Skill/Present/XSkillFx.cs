@@ -28,7 +28,7 @@ public class XSkillFx : XSkill
         XFxData data = param as XFxData;
         if (data.Shield || data.Fx == null) return;
 
-        Transform trans = host.transform;
+        Transform trans = host.Transform;
         Vector3 offset = new Vector3(data.OffsetX, data.OffsetY, data.OffsetZ);
         XFx fx = XFxMgr.singleton.CreateFx(data.Fx);
         fx.DelayDestroy = data.Destroy_Delay;

@@ -7,7 +7,7 @@ public class XSkillManipulate : XSkill
 
     private Dictionary<long, XManipulationData> _item = new Dictionary<long, XManipulationData>();
 
-    public XSkillManipulate(XSkillHoster _host) : base(_host)
+    public XSkillManipulate(ISkillHoster _host) : base(_host)
     {
     }
 
@@ -64,13 +64,13 @@ public class XSkillManipulate : XSkill
         XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
         foreach (XManipulationData data in _item.Values)
         {
-            Vector3 center = host.transform.position + host.transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
+            Vector3 center = host.Transform.position + host.Transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
             foreach (XHitHoster hit in hits)
             {
                 Vector3 gap = center - hit.transform.position; gap.y = 0;
                 float dis = gap.magnitude;
 
-                if (dis < data.Radius && (dis == 0 || Vector3.Angle(-gap, host.transform.forward) <= data.Degree * 0.5f))
+                if (dis < data.Radius && (dis == 0 || Vector3.Angle(-gap, host.Transform.forward) <= data.Degree * 0.5f))
                 {
                     float len = data.Force * deltaTime;
                     Vector3 dir = gap.normalized;
