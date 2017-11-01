@@ -48,11 +48,11 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     private float fire_time = 0;
     private string trigger = null;
     public Animator ator = null;
-    
+
     private DummyState _state = DummyState.Idle;
     private XSkillCamera _camera = null;
     private XSkillData _current = null;
-    
+
     private bool _execute = false;
     private bool _anim_init = false;
     private bool _skill_when_move = false;
@@ -77,7 +77,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             if (_xConfigData == null) _xConfigData = new XConfigData();
             return _xConfigData;
         }
-        set {  _xConfigData = value; }
+        set { _xConfigData = value; }
     }
 
     public Transform Transform { get { return transform; } }
@@ -316,8 +316,8 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
 
     private float _action_framecount = 0;
     private Rect _rect = new Rect(10, 10, 150, 20);
-    void OnGUI() {  GUI.Label(_rect, "Action Frame: " + _action_framecount);  }
-    
+    void OnGUI() { GUI.Label(_rect, "Action Frame: " + _action_framecount); }
+
     private void InitHost()
     {
         skills.Clear();
@@ -343,7 +343,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         }
     }
 
-    
+
     void Update()
     {
         int nh = 0; int nv = 0;
@@ -372,7 +372,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
                 }
                 else if (_skill_when_move)
                 {
-                    trigger = "ToStand";
+                    trigger = AnimTriger.ToStand;
                     _skill_when_move = false;
                 }
             }
@@ -383,14 +383,12 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
 
     void LateUpdate()
     {
-        //face to
         UpdateRotation();
         if (!string.IsNullOrEmpty(trigger) && ator != null && !ator.IsInTransition(0))
         {
-            if (trigger != "ToStand" &&
-                trigger != "ToMove" &&
-                trigger != "EndSkill" &&
-                trigger != "ToUltraShow")
+            if (trigger != AnimTriger.ToStand &&
+                trigger != AnimTriger.ToMove &&
+                trigger != AnimTriger.EndSkill)
                 _anim_init = true; // is casting
 
             ator.speed = 1;
@@ -419,8 +417,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         if (xOuterData.TypeToken == 0)
             trigger = XSkillData.JA_Command[xOuterData.SkillPosition];
         else if (xOuterData.TypeToken == 1)
-            trigger = "ToArtSkill";
-       
+            trigger = AnimTriger.ToArtSkill;
 
         FocusTarget();
         _anim_init = false;
@@ -430,7 +427,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     {
         if (_state != DummyState.Fire) return;
         _state = DummyState.Idle;
-        trigger = "EndSkill";
+        trigger = AnimTriger.EndSkill;
         _execute = false;
 
         for (int i = 0, max = skills.Count; i < max; i++)
@@ -451,93 +448,12 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     {
         XHitHoster hit = GameObject.FindObjectOfType<XHitHoster>();
         _target = (xOuterData.NeedTarget && hit != null) ? hit.gameObject : null;
-        if (_target != null && IsInAttckField(xOuterData, transform.position, transform.forward, _target))
+        if (_target != null && xOuterData.IsInAttckField(transform.position, transform.forward, _target))
         {
             PrepareRotation(XCommon.singleton.Horizontal(_target.transform.position - transform.position), _xConfigData.RotateSpeed);
         }
     }
-
-    public bool IsPickedInRange(int n, int d)
-    {
-        if (n >= d) return true;
-        int i = Random.Range(0, d);
-        return i < n;
-    }
-
-    public bool IsInField(XSkillData data, int triggerTime, Vector3 pos, Vector3 forward, Vector3 target, float angle, float distance)
-    {
-        bool log = true;
-        if (data.Warning != null && data.Warning.Count > 0)
-        {
-            for (int i = 0; i < data.Warning.Count; i++)
-            {
-                if (data.Warning[i].RandomWarningPos || data.Warning[i].Type == XWarningType.Warning_Multiple)
-                {
-                    log = false; break;
-                }
-            }
-        }
-        if (data.Result[triggerTime].Sector_Type)
-        {
-            if (!(distance >= data.Result[triggerTime].Low_Range &&
-                   distance < data.Result[triggerTime].Range &&
-                    angle <= data.Result[triggerTime].Scope * 0.5f))
-            {
-                return false;
-            }
-        }
-        else
-        {
-            if (!IsInAttackRect(target, pos, forward, data.Result[triggerTime].Range, data.Result[triggerTime].Scope, data.Result[triggerTime].Rect_HalfEffect, data.Result[triggerTime].None_Sector_Angle_Shift))
-            {
-                float d = data.Result[triggerTime].Range;
-                float w = data.Result[triggerTime].Scope;
-                Vector3[] vecs = new Vector3[4];
-                vecs[0] = new Vector3(-w / 2.0f, 0, data.Result[triggerTime].Rect_HalfEffect ? 0 : (-d / 2.0f));
-                vecs[1] = new Vector3(-w / 2.0f, 0, d / 2.0f);
-                vecs[2] = new Vector3(w / 2.0f, 0, d / 2.0f);
-                vecs[3] = new Vector3(w / 2.0f, 0, data.Result[triggerTime].Rect_HalfEffect ? 0 : (-d / 2.0f));
-
-                if (log)  XDebug.Log("Not in rect " + vecs[0], " " + vecs[1], " " + vecs[2], " " + vecs[3]);
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private bool IsInAttckField(XSkillData data, Vector3 pos, Vector3 forward, GameObject target)
-    {
-        forward = XCommon.singleton.HorizontalRotateVetor3(forward, data.Cast_Scope_Shift);
-        Vector3 targetPos = target.transform.position;
-        if (data.Cast_Range_Rect)
-        {
-            pos.x += data.Cast_Offset_X;
-            pos.z += data.Cast_Offset_Z;
-            return IsInAttackRect(targetPos, pos, forward, data.Cast_Range_Upper, data.Cast_Scope, false, 0);
-        }
-        else
-        {
-            Vector3 dir = targetPos - pos;
-            dir.y = 0;
-            float distance = dir.magnitude;
-            dir.Normalize();
-            float angle = (distance == 0) ? 0 : Vector3.Angle(forward, dir);
-            return distance <= data.Cast_Range_Upper &&
-                distance >= data.Cast_Range_Lower &&
-                angle <= data.Cast_Scope * 0.5f;
-        }
-    }
-
-    private bool IsInAttackRect(Vector3 target, Vector3 anchor, Vector3 forward, float d, float w, bool half, float shift)
-    {
-        Quaternion rotation = XCommon.singleton.VectorToQuaternion(XCommon.singleton.HorizontalRotateVetor3(forward, shift));
-        Rect rect = new Rect();
-        rect.xMin = -w / 2.0f;
-        rect.xMax = w / 2.0f;
-        rect.yMin = half ? 0 : (-d / 2.0f);
-        rect.yMax = d / 2.0f;
-        return XCommon.singleton.IsInRect(target - anchor, rect, Vector3.zero, rotation);
-    }
+    
 
     private bool CanAct(Vector3 dir)
     {
@@ -647,7 +563,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         }
         _logicalToken.Clear();
     }
-    
+
 
     /// <summary>
     /// 绘制攻击范围

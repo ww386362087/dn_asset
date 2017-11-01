@@ -44,7 +44,7 @@ public class XSkillWarning : XSkill
                         int n = (data.Type == XWarningType.Warning_All) ? hits.Length : data.MaxRandomTarget;
                         for (int i = 0; i < hits.Length; i++)
                         {
-                            bool counted = (data.Type == XWarningType.Warning_All) ? true : host.IsPickedInRange(n, hits.Length - i);
+                            bool counted = (data.Type == XWarningType.Warning_All) ? true : IsPickedInRange(n, hits.Length - i);
                             if (counted)
                             {
                                 n--;
@@ -85,7 +85,7 @@ public class XSkillWarning : XSkill
                 int n = data.MaxRandomTarget;
                 for (int i = 0; i < hits.Length; i++)
                 {
-                    if (host.IsPickedInRange(n, hits.Length - i))
+                    if (IsPickedInRange(n, hits.Length - i))
                     {
                         n--;
                         if (!string.IsNullOrEmpty(data.Fx))
@@ -185,6 +185,13 @@ public class XSkillWarning : XSkill
             list.Clear();
             host.warningPosAt = null;
         }
+    }
+
+    private bool IsPickedInRange(int n, int d)
+    {
+        if (n >= d) return true;
+        int i = Random.Range(0, d);
+        return i < n;
     }
 
 }

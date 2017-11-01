@@ -133,7 +133,7 @@ public class XSkillResult : XSkill
                 if (dir.sqrMagnitude == 0) dir = forward;
                 dir.Normalize();
 
-                if (host.IsInField(data, triggerTime, pos, forward, hit.RadiusCenter, Vector3.Angle(forward, dir), distance))
+                if(data.IsInField(triggerTime, pos, forward, hit.RadiusCenter, Vector3.Angle(forward, dir), distance))
                 {
                     Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ? (hit.RadiusCenter - pos).normalized : host.GetRotateTo();
                     AddHurtTarget(data, hit, triggerTime);

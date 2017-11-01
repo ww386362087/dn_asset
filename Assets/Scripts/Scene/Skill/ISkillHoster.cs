@@ -28,11 +28,7 @@ public interface ISkillHoster
     Transform ShownTransform { get; set; }
     
     void AddedTimerToken(uint token, bool logical);
-
-    bool IsPickedInRange(int n, int d);
-
-    bool IsInField(XSkillData data, int triggerTime, Vector3 pos, Vector3 forward, Vector3 target, float angle, float distance);
-
+    
     void StopFire();
 
     void AddedCombinedToken(uint token);

@@ -4,6 +4,7 @@
     public static string ToStand = "ToStand";
     public static string ToFall = "ToFall";
     public static string ToSkill = "ToSkill";
+    public static string EndSkill = "EndSkill";
     public static string ToCharge = "ToCharge";
     public static string ToFreeze = "ToFreeze";
     public static string ToBeHit = "ToBeHit";
@@ -11,19 +12,10 @@
     public static string ToMove = "ToMove";
     public static string ToArtSkill = "ToArtSkill";
     public static string ToJA_0_1 = "ToJA_0_1";
-    public static string ToJA_0_2 = "ToJA_0_2";
     public static string ToJA_1_0 = "ToJA_1_0";
     public static string ToJA_2_0 = "ToJA_2_0";
     public static string ToJA_3_0 = "ToJA_3_0";
     public static string ToJA_4_0 = "ToJA_4_0";
-    public static string ToJA_1_1 = "ToJA_1_1";
-    public static string ToJA_1_2 = "ToJA_1_2";
-    public static string ToJA_2_1 = "ToJA_2_1";
-    public static string ToJA_2_2 = "ToJA_2_2";
-    public static string ToJA_3_1 = "ToJA_3_1";
-    public static string ToJA_3_2 = "ToJA_3_2";
-    public static string ToJA_4_1 = "ToJA_4_1";
-    public static string ToJA_4_2 = "ToJA_4_2";
     public static string ToBeHit_Landing = "ToBeHit_Landing";
     public static string ToBeHit_Hard = "ToBeHit_Hard";
     public static string ToBeHit_GetUp = "ToBeHit_GetUp";
