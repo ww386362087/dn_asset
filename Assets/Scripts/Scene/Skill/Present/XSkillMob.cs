@@ -8,9 +8,7 @@ public class XSkillMob : XSkill
 
     List<GameObject> _mob_unit = new List<GameObject>();
 
-    public XSkillMob(XSkillHoster _host) : base(_host)
-    {
-    }
+    public XSkillMob(ISkillHoster _host) : base(_host) { }
 
     public override void Execute()
     {
@@ -31,9 +29,7 @@ public class XSkillMob : XSkill
 
         uint id = XTableMgr.GetTable<XEntityStatistics>().GetByID(mob.TemplateID).PresentID;
         XEntityPresentation.RowData data = XTableMgr.GetTable<XEntityPresentation>().GetItemID(id);
-
         GameObject mob_unit = GameObject.Instantiate(Resources.Load("Prefabs/" + data.Prefab)) as GameObject;
-
         Vector3 offset = host.Transform.rotation * new Vector3(mob.Offset_At_X, mob.Offset_At_Y, mob.Offset_At_Z);
         Vector3 pos = host.Transform.position + offset;
         mob_unit.transform.position = pos;

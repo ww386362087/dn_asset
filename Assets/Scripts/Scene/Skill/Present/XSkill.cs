@@ -11,7 +11,6 @@
     public XSkill(ISkillHoster _host)
     {
         host = _host;
-        host.AddSkill(this);
     }
 
 
@@ -20,20 +19,11 @@
         host.AddedTimerToken(token, logical);
     }
 
-    public virtual void Execute()
-    {
+    public virtual void Execute() { }
 
-    }
-
-    public virtual void OnTrigger(object param)
-    {
-
-    }
+    public virtual void OnTrigger(object param) { }
 
 
-    public virtual void Clear()
-    {
-
-    }
+    public virtual void Clear() { }
 
 }

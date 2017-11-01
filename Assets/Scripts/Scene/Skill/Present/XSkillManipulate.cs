@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-
+/// <summary>
+/// 受此技能打击范围内所有对手被动位移
+/// </summary>
 public class XSkillManipulate : XSkill
 {
 
     private Dictionary<long, XManipulationData> _item = new Dictionary<long, XManipulationData>();
 
-    public XSkillManipulate(ISkillHoster _host) : base(_host)
-    {
-    }
+    public XSkillManipulate(ISkillHoster _host) : base(_host) { }
 
     public Dictionary<long, XManipulationData> Set { get { return _item; } }
 
-    
     public override void Execute()
     {
         base.Execute();

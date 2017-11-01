@@ -16,7 +16,6 @@ public class XSkillInspector : Editor
     private List<XPanel> _panels = new List<XPanel>();
 
     private XResultPanel _result = new XResultPanel();
-    private XJAPanel _ja = new XJAPanel();
     private XHitPanel _hit = new XHitPanel();
     private XManipulationPanel _manip = new XManipulationPanel();
     private XFxPanel _fx = new XFxPanel();
@@ -35,12 +34,6 @@ public class XSkillInspector : Editor
     {
         hideFlags = HideFlags.HideAndDontSave;
         if (_hoster == null) _hoster = target as XSkillHoster;
-
-        if (XSkillHoster.Quit)
-        {
-            _hoster.FetchDataBack();
-            XSkillHoster.Quit = false;
-        }
 
         AddPanels();
         _xOptions.Clear();
@@ -77,20 +70,16 @@ public class XSkillInspector : Editor
 
         /*****Base Settings*****/
         GUILayout.Label("Basic Settings :", _labelstyle);
-
         EditorGUILayout.LabelField("Data File", _hoster.SkillDataExtra.ScriptFile);
         EditorGUILayout.LabelField("Data Path", _hoster.SkillDataExtra.ScriptPath);
-
         _hoster.ConfigData.Speed = EditorGUILayout.FloatField("Speed", _hoster.ConfigData.Speed);
         _hoster.ConfigData.RotateSpeed = EditorGUILayout.FloatField("Rotate Speed", _hoster.ConfigData.RotateSpeed);
-
         EditorGUILayout.Space();
         _hoster.EditorData.XFrameByFrame = EditorGUILayout.Toggle("Frame By Frame", _hoster.EditorData.XFrameByFrame);
         EditorGUILayout.Space();
 
         /*****Skill Settings*****/
         GUILayout.Label("Skill Settings :", _labelstyle);
-
         if (_hoster.SkillData.TypeToken != 2)
         {
             EditorGUI.BeginChangeCheck();
@@ -102,15 +91,12 @@ public class XSkillInspector : Editor
                 _hoster.ConfigData.SkillClipName = clip.name;
             }
             EditorGUILayout.LabelField("Clip Name", _hoster.ConfigData.SkillClip);
-
             if (_hoster.SkillDataExtra.SkillClip != null) _hoster.SkillDataExtra.SkillClip_Frame = (_hoster.SkillDataExtra.SkillClip.length / frame);
         }
 
         EditorGUILayout.LabelField("Clip Length", (_hoster.SkillDataExtra.SkillClip_Frame * frame).ToString("F3") + "s" + "\t" + _hoster.SkillDataExtra.SkillClip_Frame.ToString("F1") + "(frame)");
         EditorGUILayout.Space();
-
         if (_hoster.SkillData.TypeToken == 2) _hoster.SkillDataExtra.SkillClip_Frame = 0;
-
         _hoster.SkillData.NeedTarget = EditorGUILayout.Toggle("Need Target", _hoster.SkillData.NeedTarget);
         _hoster.SkillData.OnceOnly = EditorGUILayout.Toggle("Once Only", _hoster.SkillData.OnceOnly);
         _hoster.SkillData.IgnoreCollision = EditorGUILayout.Toggle("Disable Collision", _hoster.SkillData.IgnoreCollision);
@@ -220,7 +206,6 @@ public class XSkillInspector : Editor
         {
             foreach (XPanel panel in _panels)
             {
-                if (_hoster.SkillData.TypeToken != 0 && panel is XJAPanel) continue;
                 panel.OnGUI();
                 EditorGUILayout.Space();
             }
@@ -456,7 +441,6 @@ public class XSkillInspector : Editor
     {
         _hoster.ConfigData = XDataIO<XConfigData>.singleton.DeserializeData(XEditorLibrary.GetCfgFromSkp(file));
         _hoster.SkillData = XDataIO<XSkillData>.singleton.DeserializeData(file);
-        XDataBuilder.singleton.HotBuild(_hoster, _hoster.ConfigData);
         XDataBuilder.singleton.HotBuildEx(_hoster, _hoster.ConfigData);
     }
 
@@ -465,7 +449,6 @@ public class XSkillInspector : Editor
         _panels.Clear();
         _panels.Add(_result);
         _panels.Add(_hit);
-        _panels.Add(_ja);
         _panels.Add(_fx);
         _panels.Add(_warning);
         _panels.Add(_mob);
@@ -636,5 +619,4 @@ public class XSkillInspector : Editor
         else
             data.Mob = null;
     }
-
 }

@@ -6,19 +6,9 @@ using UnityEngine;
 
 public class XCommon : XSingleton<XCommon>
 {
-    public XCommon()
-    {
-        _idx = 5;
-    }
+    public XCommon() { _idx = 5; }
 
     public const float FrameStep = (1 / 30.0f);
-    private static readonly float _eps = 0.0001f;
-
-    public static float XEps
-    {
-        get { return _eps; }
-    }
-
 
     private int _idx = 0;
 
@@ -70,16 +60,6 @@ public class XCommon : XSingleton<XCommon>
         return hash;
     }
 
-    public bool IsEqual(float a, float b)
-    {
-#if (PRECISION_USED)
-            //return Mathf.Approximately(Mathf.Abs(a - b), _eps);
-            return Mathf.Abs(a - b) < _eps;
-#else
-        return a == b;
-#endif
-    }
-
 
     /// <summary>
     /// 叉积
@@ -88,7 +68,6 @@ public class XCommon : XSingleton<XCommon>
     {
         return x1 * z2 - x2 * z1;
     }
-
 
     /// <summary>
     /// 线段是否相交 叉积运算
@@ -139,7 +118,7 @@ public class XCommon : XSingleton<XCommon>
         return HorizontalRotateVetor2(v, degree, true);
     }
 
-    public Vector2 HorizontalRotateVetor2(Vector2 v, float degree, bool normalized )
+    public Vector2 HorizontalRotateVetor2(Vector2 v, float degree, bool normalized)
     {
         degree = -degree;
 
@@ -158,10 +137,10 @@ public class XCommon : XSingleton<XCommon>
 
     public Vector3 HorizontalRotateVetor3(Vector3 v, float degree)
     {
-        return HorizontalRotateVetor3( v, degree,true);
+        return HorizontalRotateVetor3(v, degree, true);
     }
 
-    public Vector3 HorizontalRotateVetor3(Vector3 v, float degree, bool normalized )
+    public Vector3 HorizontalRotateVetor3(Vector3 v, float degree, bool normalized)
     {
         degree = -degree;
 
@@ -186,7 +165,6 @@ public class XCommon : XSingleton<XCommon>
         float r = fiduciary.z * relativity.x - fiduciary.x * relativity.z;
         return r > 0;
     }
-
 
     /// <summary>
     /// 顺时针旋转 
@@ -214,11 +192,11 @@ public class XCommon : XSingleton<XCommon>
     }
 
     /*
-        * rect point sequence:
-        * left-bottom-->left-top-->right-top-->right-bottom
-        * 
-        * the center of rect is the (0, 0) for axis
-        */
+    * rect point sequence:
+    * left-bottom-->left-top-->right-top-->right-bottom
+    * 
+    * the center of rect is the (0, 0) for axis
+    */
     public bool IsInRect(Vector3 point, Rect rect, Vector3 center, Quaternion rotation)
     {
         float y = -(rotation.eulerAngles.y % 360) / 180.0f * Mathf.PI;
@@ -280,7 +258,7 @@ public class XCommon : XSingleton<XCommon>
     {
         float _hitFactor = 0;
         distance = Mathf.Abs(distance);
-        if (distance > XEps)
+        if (distance > Mathf.Epsilon)
         {
             float deltaT = Time.smoothDeltaTime;
             float div = nearenough / distance;
@@ -296,7 +274,36 @@ public class XCommon : XSingleton<XCommon>
                 _hitFactor = Mathf.Infinity;
             }
         }
-
         return _hitFactor;
     }
+
+    public bool IsEqual(float a, float b)
+    {
+        return Mathf.Abs(a - b) < Mathf.Epsilon;
+    }
+
+
+    public bool IsLess(float a, float b)
+    {
+        float v = a - b;
+        return !IsEqual(v, 0) && (v < 0);
+    }
+
+
+    public bool IsGreater(float a, float b)
+    {
+        float v = a - b;
+        return !IsEqual(v, 0) && (v > 0);
+    }
+
+    public bool IsEqualLess(float a, float b)
+    {
+        return IsEqual(a, b) || IsLess(a, b);
+    }
+
+    public bool IsEqualGreater(float a, float b)
+    {
+        return IsEqual(a, b) || IsGreater(a, b);
+    }
+
 }

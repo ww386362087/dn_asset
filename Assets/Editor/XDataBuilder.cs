@@ -16,7 +16,6 @@ namespace XEditor
         {
             try
             {
-                XSkillHoster.Quit = false;
                 string path = XEditorLibrary.GetCfgFromSkp(pathwithname);
                 XConfigData conf = XDataIO<XConfigData>.singleton.DeserializeData(path);
                 GameObject prefab = XEditorLibrary.GetDummy((uint)conf.Player);
@@ -31,28 +30,7 @@ namespace XEditor
             }
         }
 
-        public void HotBuild(XSkillHoster hoster, XConfigData conf)
-        {
-            hoster.SkillDataExtra.JaEx.Clear();
-            if (conf.Ja != null)
-            {
-                foreach (XJADataExtra ja in conf.Ja)
-                {
-                    XJADataExtraEx jaex = new XJADataExtraEx();
-                    if (ja.Next_Skill_PathWithName != null && ja.Next_Skill_PathWithName.Length > 0)
-                    {
-                        XSkillData skill = XDataIO<XSkillData>.singleton.DeserializeData("Assets/Resources/" + ja.Next_Skill_PathWithName);
-                        jaex.Next = skill;
-                    }
-                    if (ja.JA_Skill_PathWithName != null && ja.JA_Skill_PathWithName.Length > 0)
-                    {
-                        XSkillData skill = XDataIO<XSkillData>.singleton.DeserializeData("Assets/Resources/" + ja.JA_Skill_PathWithName);
-                        jaex.Ja = skill;
-                    }
-                    hoster.SkillDataExtra.JaEx.Add(jaex);
-                }
-            }
-        }
+    
         
         public void HotBuildEx(XSkillHoster hoster, XConfigData conf)
         {
@@ -117,7 +95,6 @@ namespace XEditor
                     edata.Fx.Add(fxe);
                 }
             }
-
             if (data.Manipulation != null)
             {
                 foreach (XManipulationData manipulation in data.Manipulation)
@@ -171,7 +148,6 @@ namespace XEditor
                 if (component.SkillData.Time == 0)
                     component.SkillData.Time = component.SkillDataExtra.SkillClip.length;
             }
-            HotBuild(component, conf);
             HotBuildEx(component, conf);
 
             EditorGUIUtility.PingObject(hoster);
@@ -193,8 +169,6 @@ namespace XEditor
                 {
                     hoster.ConfigData = XDataIO<XConfigData>.singleton.DeserializeData(XEditorLibrary.GetCfgFromSkp(pathwithname));
                     hoster.SkillData = XDataIO<XSkillData>.singleton.DeserializeData(pathwithname);
-
-                    HotBuild(hoster, hoster.ConfigData);
                     HotBuildEx(hoster, hoster.ConfigData);
                 }
             }

@@ -10,38 +10,38 @@ public class XBaseData
     public int Index = 0;
 }
 
+
 [Serializable]
 public class XSkillData
 {
     public static readonly string[] Skills =
         {
-            "XJAComboSkill", 
+            "XJAComboSkill",
             "XArtsSkill",
             "XCombinedSkill"
         };
 
+
     public static readonly string[] JaOverrideMap =
       {
             "A",
-            "AA", "AAA", "AAAA", "AAAAA",
-            "AB", "ABB",
-            "AAB", "AABB",
-            "AAAB", "AAABB",
-            "AAAAB", "AAAABB",
-            "AAAAAB", "AAAAABB",
+            "AA",
+            "AAA",
+            "AAAA",
+            "AAAAA",
+            "AB",
             "QTE"
-        };
+       };
 
     public static readonly string[] JA_Command = new string[]
        {
-            "ToSkill",
-            "ToJA_1_0", "ToJA_2_0", "ToJA_3_0", "ToJA_4_0",
-            "ToJA_0_1", "ToJA_0_2",
-            "ToJA_1_1", "ToJA_1_2",
-            "ToJA_2_1", "ToJA_2_2",
-            "ToJA_3_1", "ToJA_3_2",
-            "ToJA_4_1", "ToJA_4_2",
-            "ToJA_QTE"
+           "ToSkill",  //A
+           "ToJA_1_0", //AA
+           "ToJA_2_0", //AAA
+           "ToJA_3_0", //AAAA
+           "ToJA_4_0", //AAAAA
+           "ToJA_0_1", //AB
+           "ToJA_QTE"  //QTE
        };
 
     public static readonly string[] Combined_Command = new string[]

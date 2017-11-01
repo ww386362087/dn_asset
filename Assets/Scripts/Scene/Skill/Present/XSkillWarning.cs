@@ -6,9 +6,7 @@ public class XSkillWarning : XSkill
 
     private List<XFx> list;
 
-    public XSkillWarning(XSkillHoster _host) : base(_host)
-    {
-    }
+    public XSkillWarning(ISkillHoster _host) : base(_host) { }
 
     public override void Execute()
     {
@@ -27,7 +25,7 @@ public class XSkillWarning : XSkill
             }
         }
     }
-    
+
     public override void OnTrigger(object param)
     {
         XWarningData data = param as XWarningData;
@@ -68,13 +66,13 @@ public class XSkillWarning : XSkill
                         Vector3 v = r * XCommon.singleton.HorizontalRotateVetor3(Vector3.forward, d);
                         if (!string.IsNullOrEmpty(data.Fx))
                         {
-                           var fx= XFxMgr.singleton.CreateAndPlay(
-                                    data.Fx,
-                                    item[i].gameObject,
-                                    new Vector3(v.x, 0.05f - item[i].transform.position.y, v.z),
-                                    data.Scale * Vector3.one,
-                                    1,
-                                    data.FxDuration);
+                            var fx = XFxMgr.singleton.CreateAndPlay(
+                                     data.Fx,
+                                     item[i].gameObject,
+                                     new Vector3(v.x, 0.05f - item[i].transform.position.y, v.z),
+                                     data.Scale * Vector3.one,
+                                     1,
+                                     data.FxDuration);
                             list.Add(fx);
                         }
                         host.warningPosAt[data.Index].Add(item[i].transform.position + v);
@@ -92,13 +90,13 @@ public class XSkillWarning : XSkill
                         n--;
                         if (!string.IsNullOrEmpty(data.Fx))
                         {
-                          var fx=  XFxMgr.singleton.CreateAndPlay(
-                                    data.Fx,
-                                    hits[i].gameObject,
-                                    new Vector3(0, 0.05f - hits[i].transform.position.y, 0),
-                                    data.Scale * Vector3.one,
-                                    1,
-                                    data.FxDuration);
+                            var fx = XFxMgr.singleton.CreateAndPlay(
+                                      data.Fx,
+                                      hits[i].gameObject,
+                                      new Vector3(0, 0.05f - hits[i].transform.position.y, 0),
+                                      data.Scale * Vector3.one,
+                                      1,
+                                      data.FxDuration);
                             list.Add(fx);
                         }
                         host.warningPosAt[data.Index].Add(hits[i].transform.position);
@@ -129,13 +127,13 @@ public class XSkillWarning : XSkill
                     {
                         if (!string.IsNullOrEmpty(data.Fx))
                         {
-                           var fx= XFxMgr.singleton.CreateAndPlay(
-                                    data.Fx,
-                                    host.Target.gameObject,
-                                    new Vector3(0, 0.05f - host.Target.transform.position.y, 0),
-                                    data.Scale * Vector3.one,
-                                    1,
-                                    data.FxDuration);
+                            var fx = XFxMgr.singleton.CreateAndPlay(
+                                     data.Fx,
+                                     host.Target.gameObject,
+                                     new Vector3(0, 0.05f - host.Target.transform.position.y, 0),
+                                     data.Scale * Vector3.one,
+                                     1,
+                                     data.FxDuration);
                             list.Add(fx);
                         }
                         host.warningPosAt[data.Index].Add(host.Target.transform.position);
@@ -188,5 +186,6 @@ public class XSkillWarning : XSkill
             host.warningPosAt = null;
         }
     }
+
 }
 

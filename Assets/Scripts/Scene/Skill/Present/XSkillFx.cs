@@ -6,7 +6,7 @@ public class XSkillFx : XSkill
     protected List<XFx> _fx = new List<XFx>();
     protected List<XFx> _outer_fx = new List<XFx>();
 
-    public XSkillFx(XSkillHoster _host) : base(_host)
+    public XSkillFx(ISkillHoster _host) : base(_host)
     {
     }
 

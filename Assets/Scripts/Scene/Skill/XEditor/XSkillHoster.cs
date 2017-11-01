@@ -19,8 +19,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     [HideInInspector]
     public GameObject Target { get { return _target; } }
     [HideInInspector]
-    public static bool Quit { get; set; }
-    [HideInInspector]
     public static XSerialized<XSkillData> sData = new XSerialized<XSkillData>();
     [HideInInspector]
     public static XSerialized<XEditorData> sEditorData = new XSerialized<XEditorData>();
@@ -40,19 +38,17 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     public float ir { get; set; }
     [HideInInspector]
     public float or { get; set; }
-
+    [HideInInspector]
     public float defaultFov = 45;
 
     private XEntityPresentation.RowData _present_data = null;
     public XSkillData xOuterData { get; set; }
     private float _to = 0;
     private float _from = 0;
-    private float _time_offset = 0;
     private float fire_time = 0;
     private string trigger = null;
     public Animator ator = null;
     
-
     private DummyState _state = DummyState.Idle;
     private XSkillCamera _camera = null;
     private XSkillData _current = null;
@@ -66,13 +62,12 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     private List<uint> _logicalToken = new List<uint>();
 
     public List<Vector3>[] warningPosAt { get; set; }
-
     public XSkillResult skillResult { get; set; }
     public XSkillMob skillMob { get; set; }
     public XSkillFx skillFx { get; set; }
     public XSkillManipulate skillManip { get; set; }
-    public XSkillJA skillJa { get; set; }
     public XSkillWarning skillWarning { get; set; }
+
     public List<XSkill> skills = new List<XSkill>();
 
     public XConfigData ConfigData
@@ -82,19 +77,10 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             if (_xConfigData == null) _xConfigData = new XConfigData();
             return _xConfigData;
         }
-        set
-        {
-            _xConfigData = value;
-        }
+        set {  _xConfigData = value; }
     }
 
     public Transform Transform { get { return transform; } }
-
-    public float FireTime { get { return fire_time; } set { fire_time = value; } }
-
-    public string Triger { get { return trigger; } set { Triger = value; } }
-
-    public Animator Actor { get { return ator; } }
 
     public XEditorData EditorData
     {
@@ -129,8 +115,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         get { return _state == DummyState.Fire ? _current : SkillData; }
     }
 
-    public DummyState state { get { return _state; } set { _state = value; } }
-    
     void Awake()
     {
         ShownTransform = transform;
@@ -227,7 +211,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
                     }
 
                     Gizmos.DrawLine(firstPoint, beginPoint);
-
                     Vector3 beginPoint2 = Vector3.zero;
                     Vector3 firstPoint2 = Vector3.zero;
                     for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
@@ -332,25 +315,22 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     }
 
     private float _action_framecount = 0;
-    private Rect _rect;
-
-    void OnGUI()
-    {
-#if UNITY_EDITOR
-        GUI.Label(_rect, "Action Frame: " + _action_framecount);
-#endif
-    }
+    private Rect _rect = new Rect(10, 10, 150, 20);
+    void OnGUI() {  GUI.Label(_rect, "Action Frame: " + _action_framecount);  }
     
     private void InitHost()
     {
-        _rect = new Rect(10, 10, 150, 20);
         skills.Clear();
         skillResult = new XSkillResult(this);
         skillMob = new XSkillMob(this);
         skillFx = new XSkillFx(this);
         skillManip = new XSkillManipulate(this);
-        skillJa = new XSkillJA(this);
         skillWarning = new XSkillWarning(this);
+        skills.Add(skillResult);
+        skills.Add(skillMob);
+        skills.Add(skillFx);
+        skills.Add(skillManip);
+        skills.Add(skillWarning);
     }
 
     private void Execute()
@@ -363,8 +343,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         }
     }
 
-
-
+    
     void Update()
     {
         int nh = 0; int nv = 0;
@@ -389,10 +368,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
                 if (nh != 0 || nv != 0)
                 {
                     Vector3 MoveDir = h * nh;
-                    if (CanAct(MoveDir))
-                    {
-                        Move(MoveDir);
-                    }
+                    if (CanAct(MoveDir)) Move(MoveDir);
                 }
                 else if (_skill_when_move)
                 {
@@ -418,22 +394,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
                 _anim_init = true; // is casting
 
             ator.speed = 1;
-            if (SkillData.TypeToken == 2)
-            {
-                int i = 0;
-                for (; i < XSkillData.Combined_Command.Length; i++)
-                {
-                    if (trigger == XSkillData.Combined_Command[i]) break;
-                }
-                if (i < XSkillData.Combined_Command.Length)
-                    ator.Play(XSkillData.CombinedOverrideMap[i], 1, _time_offset);
-                else
-                    ator.SetTrigger(trigger);
-            }
-            else
-            {
-                ator.SetTrigger(trigger);
-            }
+            ator.SetTrigger(trigger);
             trigger = null;
         }
     }
@@ -456,13 +417,10 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         fire_time = Time.time;
 
         if (xOuterData.TypeToken == 0)
-            trigger = xOuterData.SkillPosition > 0 ? XSkillData.JA_Command[xOuterData.SkillPosition] : "ToSkill";
+            trigger = XSkillData.JA_Command[xOuterData.SkillPosition];
         else if (xOuterData.TypeToken == 1)
             trigger = "ToArtSkill";
-        else if (xOuterData.TypeToken == 2)
-            Combined(0);
-        else
-            trigger = "ToUltraShow";
+       
 
         FocusTarget();
         _anim_init = false;
@@ -488,14 +446,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         _current = null;
     }
 
-    private void Combined(object param)
-    {
-    }
-
-    public void AddSkill(XSkill skill)
-    {
-        skills.Add(skill);
-    }
 
     private void FocusTarget()
     {
@@ -533,13 +483,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
                    distance < data.Result[triggerTime].Range &&
                     angle <= data.Result[triggerTime].Scope * 0.5f))
             {
-                if (log)
-                {
-                    XDebug.Log("-----------------------------------");
-                    XDebug.Log("At " + triggerTime, " Hit missing: distance is " + distance.ToString("F3"), " ( >= " + data.Result[triggerTime].Low_Range.ToString("F3") + ")");
-                    XDebug.Log("At " + triggerTime, " Hit missing: distance is " + distance.ToString("F3"), " ( < " + data.Result[triggerTime].Range.ToString("F3") + ")");
-                    XDebug.Log("At " + triggerTime, " Hit missing: dir is " + angle.ToString("F3"), " ( < " + (data.Result[triggerTime].Scope * 0.5f).ToString("F3") + ")");
-                }
                 return false;
             }
         }
@@ -549,18 +492,13 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             {
                 float d = data.Result[triggerTime].Range;
                 float w = data.Result[triggerTime].Scope;
-
                 Vector3[] vecs = new Vector3[4];
                 vecs[0] = new Vector3(-w / 2.0f, 0, data.Result[triggerTime].Rect_HalfEffect ? 0 : (-d / 2.0f));
                 vecs[1] = new Vector3(-w / 2.0f, 0, d / 2.0f);
                 vecs[2] = new Vector3(w / 2.0f, 0, d / 2.0f);
                 vecs[3] = new Vector3(w / 2.0f, 0, data.Result[triggerTime].Rect_HalfEffect ? 0 : (-d / 2.0f));
 
-                if (log)
-                {
-                    XDebug.Log("-----------------------------------");
-                    XDebug.Log("Not in rect " + vecs[0], " " + vecs[1], " " + vecs[2], " " + vecs[3]);
-                }
+                if (log)  XDebug.Log("Not in rect " + vecs[0], " " + vecs[1], " " + vecs[2], " " + vecs[3]);
                 return false;
             }
         }
@@ -582,7 +520,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             Vector3 dir = targetPos - pos;
             dir.y = 0;
             float distance = dir.magnitude;
-            //normalize
             dir.Normalize();
             float angle = (distance == 0) ? 0 : Vector3.Angle(forward, dir);
             return distance <= data.Cast_Range_Upper &&
@@ -659,42 +596,19 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
 
     public void RebuildSkillAniamtion()
     {
-        AnimationClip clip = Resources.Load(SkillData.ClipName) as AnimationClip;
+        AnimationClip clip = XResources.Load<AnimationClip>(SkillData.ClipName, AssetType.Anim);
         if (oVerrideController == null) BuildOverride();
         if (SkillData.TypeToken == 0)
         {
             string motion = XSkillData.JaOverrideMap[SkillData.SkillPosition];
             oVerrideController[motion] = clip;
-
-            foreach (XJADataExtraEx ja in SkillDataExtra.JaEx)
-            {
-                if (SkillData.SkillPosition == 15)  //ToJA_QTE
-                    continue;
-
-                if (ja.Next != null && ja.Next.Name.Length > 0) oVerrideController[XSkillData.JaOverrideMap[ja.Next.SkillPosition]] = Resources.Load(ja.Next.ClipName) as AnimationClip;
-                if (ja.Ja != null && ja.Ja.Name.Length > 0) oVerrideController[XSkillData.JaOverrideMap[ja.Ja.SkillPosition]] = Resources.Load(ja.Ja.ClipName) as AnimationClip;
-            }
         }
-        else if (SkillData.TypeToken == 2) { }
-        else
-        {
-            oVerrideController["Art"] = clip;
-        }
+        else if (SkillData.TypeToken == 1) { oVerrideController["Art"] = clip; }
 
         _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_xConfigData.Player);
         oVerrideController["Idle"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle) as AnimationClip;
         oVerrideController["Run"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackRun) as AnimationClip;
         oVerrideController["Walk"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackWalk) as AnimationClip;
-    }
-
-    public void FetchDataBack()
-    {
-        _xData = sData.Get();
-        _xEditorData = sEditorData.Get();
-        _xConfigData = sConfigData.Get();
-
-        //XDataBuilder.singleton.HotBuild(this, _xConfigData);
-        //XDataBuilder.singleton.HotBuildEx(this, _xConfigData);
     }
 
     public Vector3 GetRotateTo()
@@ -733,11 +647,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         }
         _logicalToken.Clear();
     }
-
-    public void SetCurrData(XSkillData data)
-    {
-        _current = data;
-    }
+    
 
     /// <summary>
     /// 绘制攻击范围

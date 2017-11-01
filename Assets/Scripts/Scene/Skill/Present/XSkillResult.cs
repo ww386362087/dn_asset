@@ -7,7 +7,7 @@ public class XSkillResult : XSkill
     public Vector3 nResultForward = Vector3.zero;
     private List<HashSet<XHitHoster>> _hurt_target = new List<HashSet<XHitHoster>>();
 
-    public XSkillResult(XSkillHoster _host) : base(_host)
+    public XSkillResult(ISkillHoster _host) : base(_host)
     {
     }
 

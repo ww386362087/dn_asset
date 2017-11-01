@@ -27,8 +27,6 @@ public class XSkillDataExtra
     [SerializeField]
     public List<XMobUnitDataExtra> MobEx = new List<XMobUnitDataExtra>();
     [SerializeField]
-    public List<XJADataExtraEx> JaEx = new List<XJADataExtraEx>();
-    [SerializeField]
     public List<XHitDataExtraEx> HitEx = new List<XHitDataExtraEx>();
 
     public void Add<T>() where T : XBaseDataExtra, new()
@@ -38,7 +36,6 @@ public class XSkillDataExtra
         if (data is XFxDataExtra) Fx.Add(data as XFxDataExtra);
         else if (data is XWarningDataExtra) WarningEx.Add(data as XWarningDataExtra);
         else if (data is XMobUnitDataExtra) MobEx.Add(data as XMobUnitDataExtra);
-        else if (data is XJADataExtraEx) JaEx.Add(data as XJADataExtraEx);
         else if (data is XHitDataExtraEx) HitEx.Add(data as XHitDataExtraEx);
         else if (data is XResultDataExtraEx) ResultEx.Add(data as XResultDataExtraEx);
     }
@@ -64,15 +61,6 @@ public class XResultDataExtraEx : XBaseDataExtra
     public GameObject BulletEndFx = null;
     [SerializeField]
     public GameObject BulletHitGroundFx = null;
-}
-
-[Serializable]
-public class XJADataExtraEx : XBaseDataExtra
-{
-    [SerializeField]
-    public XSkillData Next = null;
-    [SerializeField]
-    public XSkillData Ja = null;
 }
 
 [Serializable]
