@@ -21,7 +21,7 @@ public class XSkillResult : XSkill
             {
                 var data = current.Result[i];
                 data.Token = index++;
-                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), true);
+                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data));
             }
         }
     }
@@ -51,6 +51,7 @@ public class XSkillResult : XSkill
 
     public override void Clear()
     {
+        base.Clear();
     }
 
     private void AddHurtTarget(XSkillData data, XHitHoster id, int triggerTime)
@@ -85,7 +86,9 @@ public class XSkillResult : XSkill
 
         ++execute_cout;
         if (current.Result[index].Loop_Count > execute_cout)
-            host.AddedTimerToken(XTimerMgr.singleton.SetTimer(current.Result[index].Cycle, LoopResults, ((index << 16) | execute_cout)), true);
+        {
+            AddedTimerToken(XTimerMgr.singleton.SetTimer(current.Result[index].Cycle, LoopResults, ((index << 16) | execute_cout)));
+        }
     }
 
     private void GroupResults(object param)
@@ -110,7 +113,8 @@ public class XSkillResult : XSkill
         if (group_cout < host.CurrentSkillData.Result[index].Group_Count)
         {
             i = (index << 16) | (loop_cout << 8) | group_cout;
-            host.AddedTimerToken(XTimerMgr.singleton.SetTimer(current.Result[index].Time_Step, GroupResults, i), true);
+            uint timer = XTimerMgr.singleton.SetTimer(current.Result[index].Time_Step, GroupResults, i);
+            AddedTimerToken(timer);
         }
     }
 

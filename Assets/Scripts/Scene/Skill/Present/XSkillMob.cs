@@ -18,7 +18,7 @@ public class XSkillMob : XSkill
             for (int i = 0, max = current.Mob.Count; i < max; i++)
             {
                 var data = current.Mob[i];
-                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), true);
+                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data));
             }
         }
     }
@@ -49,6 +49,7 @@ public class XSkillMob : XSkill
             }
         }
         _mob_unit.Clear();
+        base.Clear();
     }
 
 }

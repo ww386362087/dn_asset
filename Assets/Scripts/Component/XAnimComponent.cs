@@ -15,6 +15,8 @@ public class XAnimComponent : XComponent
     private bool m_enable = true;
     
 
+    public Animator Ator { get { return m_Animator; } }
+
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
@@ -143,7 +145,13 @@ public class XAnimComponent : XComponent
     {
         if (string.IsNullOrEmpty(clippath) || m_Animator == null || m_overrideController == null)
             return;
-        m_overrideController[key] = XResources.Load<AnimationClip>("Animation/" + clippath, AssetType.Anim);
+        AnimationClip clip = XResources.Load<AnimationClip>("Animation/" + clippath, AssetType.Anim);
+        OverrideAnim(key, clip);
+    }
+
+    public void OverrideAnim(string key,AnimationClip clip)
+    {
+        m_overrideController[key] = clip;
     }
 
     public void Reset()

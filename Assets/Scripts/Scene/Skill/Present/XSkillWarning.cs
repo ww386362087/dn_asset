@@ -21,7 +21,7 @@ public class XSkillWarning : XSkill
             {
                 host.warningPosAt[i] = new List<Vector3>();
                 var data = current.Warning[i];
-                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), false);
+                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data));
             }
         }
     }
@@ -185,6 +185,7 @@ public class XSkillWarning : XSkill
             list.Clear();
             host.warningPosAt = null;
         }
+        base.Clear();
     }
 
     private bool IsPickedInRange(int n, int d)

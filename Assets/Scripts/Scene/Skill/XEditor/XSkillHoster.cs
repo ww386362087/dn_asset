@@ -13,7 +13,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     private XEditorData _xEditorData = null;
     [SerializeField]
     private XConfigData _xConfigData = null;
-
+    
     GameObject _target = null;
 
     [HideInInspector]
@@ -35,14 +35,10 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     [HideInInspector]
     public AnimatorOverrideController oVerrideController = null;
     [HideInInspector]
-    public float ir { get; set; }
-    [HideInInspector]
-    public float or { get; set; }
-    [HideInInspector]
     public float defaultFov = 45;
 
     private XEntityPresentation.RowData _present_data = null;
-    public XSkillData xOuterData { get; set; }
+    
     private float _to = 0;
     private float _from = 0;
     private float fire_time = 0;
@@ -54,12 +50,9 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     private XSkillData _current = null;
 
     private bool _execute = false;
-    private bool _anim_init = false;
     private bool _skill_when_move = false;
 
     private List<uint> _combinedToken = new List<uint>();
-    private List<uint> _presentToken = new List<uint>();
-    private List<uint> _logicalToken = new List<uint>();
 
     public List<Vector3>[] warningPosAt { get; set; }
     public XSkillResult skillResult { get; set; }
@@ -141,6 +134,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
 
     void OnDrawGizmos()
     {
+        DrawManipulationFileds();
         if (nHotID < 0 || CurrentSkillData.Result == null || nHotID >= CurrentSkillData.Result.Count) return;
         if (ShownTransform == null) ShownTransform = transform;
         float offset_x = CurrentSkillData.Result[nHotID].LongAttackEffect ? CurrentSkillData.Result[nHotID].LongAttackData.At_X : CurrentSkillData.Result[nHotID].Offset_X;
@@ -195,57 +189,25 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             }
             else
             {
-                if (CurrentSkillData.Result[nHotID].LongAttackData.Type == XResultBulletType.Ring)
+                float m_Theta = 0.01f;
+                Vector3 beginPoint = Vector3.zero;
+                Vector3 firstPoint = Vector3.zero;
+                for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
                 {
-                    float m_Theta = 0.01f;
-                    Vector3 beginPoint = Vector3.zero;
-                    Vector3 firstPoint = Vector3.zero;
-                    for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
+                    float x = CurrentSkillData.Result[nHotID].LongAttackData.Radius / ShownTransform.localScale.y * Mathf.Cos(theta);
+                    float z = CurrentSkillData.Result[nHotID].LongAttackData.Radius / ShownTransform.localScale.y * Mathf.Sin(theta);
+                    Vector3 endPoint = new Vector3(x, 0, z);
+                    if (theta == 0)
                     {
-                        float x = ir / ShownTransform.localScale.y * Mathf.Cos(theta);
-                        float z = ir / ShownTransform.localScale.y * Mathf.Sin(theta);
-                        Vector3 endPoint = new Vector3(x, 0, z);
-                        if (theta == 0) firstPoint = endPoint;
-                        else Gizmos.DrawLine(beginPoint, endPoint);
-                        beginPoint = endPoint;
+                        firstPoint = endPoint;
                     }
-
-                    Gizmos.DrawLine(firstPoint, beginPoint);
-                    Vector3 beginPoint2 = Vector3.zero;
-                    Vector3 firstPoint2 = Vector3.zero;
-                    for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
+                    else
                     {
-                        float x = or / ShownTransform.localScale.y * Mathf.Cos(theta);
-                        float z = or / ShownTransform.localScale.y * Mathf.Sin(theta);
-                        Vector3 endPoint = new Vector3(x, 0, z);
-                        if (theta == 0) firstPoint2 = endPoint;
-                        else Gizmos.DrawLine(beginPoint2, endPoint);
-                        beginPoint2 = endPoint;
+                        Gizmos.DrawLine(beginPoint, endPoint);
                     }
-                    Gizmos.DrawLine(firstPoint2, beginPoint2);
+                    beginPoint = endPoint;
                 }
-                else
-                {
-                    float m_Theta = 0.01f;
-                    Vector3 beginPoint = Vector3.zero;
-                    Vector3 firstPoint = Vector3.zero;
-                    for (float theta = 0; theta < 2 * Mathf.PI; theta += m_Theta)
-                    {
-                        float x = CurrentSkillData.Result[nHotID].LongAttackData.Radius / ShownTransform.localScale.y * Mathf.Cos(theta);
-                        float z = CurrentSkillData.Result[nHotID].LongAttackData.Radius / ShownTransform.localScale.y * Mathf.Sin(theta);
-                        Vector3 endPoint = new Vector3(x, 0, z);
-                        if (theta == 0)
-                        {
-                            firstPoint = endPoint;
-                        }
-                        else
-                        {
-                            Gizmos.DrawLine(beginPoint, endPoint);
-                        }
-                        beginPoint = endPoint;
-                    }
-                    Gizmos.DrawLine(firstPoint, beginPoint);
-                }
+                Gizmos.DrawLine(firstPoint, beginPoint);
             }
         }
         else
@@ -354,7 +316,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (_xData.TypeToken == 1 && ComboSkills.Count > 0) oVerrideController["Art"] = Resources.Load(_xData.ClipName) as AnimationClip;
-                xOuterData = _xData;
+                _current = _xData;
                 Fire();
             }
             _action_framecount = 0;
@@ -363,7 +325,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         {
             _action_framecount += Time.deltaTime;
             if (_action_framecount > _current.Time) StopFire();
-            if (_execute || xOuterData.TypeToken == 2)
+            if (_execute || _current.TypeToken == 2)
             {
                 if (nh != 0 || nv != 0)
                 {
@@ -376,8 +338,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
                     _skill_when_move = false;
                 }
             }
-            if (_anim_init) Execute();
-            _anim_init = false;
         }
     }
 
@@ -389,7 +349,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             if (trigger != AnimTriger.ToStand &&
                 trigger != AnimTriger.ToMove &&
                 trigger != AnimTriger.EndSkill)
-                _anim_init = true; // is casting
+                Execute(); // is casting
 
             ator.speed = 1;
             ator.SetTrigger(trigger);
@@ -409,18 +369,16 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
 
     private void Fire()
     {
-        _current = xOuterData;
         _skill_when_move = _state == DummyState.Move;
         _state = DummyState.Fire;
         fire_time = Time.time;
 
-        if (xOuterData.TypeToken == 0)
-            trigger = XSkillData.JA_Command[xOuterData.SkillPosition];
-        else if (xOuterData.TypeToken == 1)
+        if (_current.TypeToken == 0)
+            trigger = XSkillData.JA_Command[_current.SkillPosition];
+        else if (_current.TypeToken == 1)
             trigger = AnimTriger.ToArtSkill;
 
         FocusTarget();
-        _anim_init = false;
     }
 
     public void StopFire()
@@ -440,21 +398,19 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         nResultForward = Vector3.zero;
         Time.timeScale = 1;
         if (ator != null) ator.speed = 1;
-        _current = null;
     }
 
 
     private void FocusTarget()
     {
         XHitHoster hit = GameObject.FindObjectOfType<XHitHoster>();
-        _target = (xOuterData.NeedTarget && hit != null) ? hit.gameObject : null;
-        if (_target != null && xOuterData.IsInAttckField(transform.position, transform.forward, _target))
+        _target = (_current.NeedTarget && hit != null) ? hit.gameObject : null;
+        if (_target != null && _current.IsInAttckField(transform.position, transform.forward, _target))
         {
             PrepareRotation(XCommon.singleton.Horizontal(_target.transform.position - transform.position), _xConfigData.RotateSpeed);
         }
     }
     
-
     private bool CanAct(Vector3 dir)
     {
         bool can = false;
@@ -532,19 +488,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         return XCommon.singleton.FloatToAngle(_to);
     }
 
-    public void AddedTimerToken(uint token, bool logical)
-    {
-        if (logical)
-            _logicalToken.Add(token);
-        else
-            _presentToken.Add(token);
-    }
-
-    public void AddedCombinedToken(uint token)
-    {
-        _combinedToken.Add(token);
-    }
-
     private void CleanTokens()
     {
         foreach (uint token in _combinedToken)
@@ -552,22 +495,8 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             XTimerMgr.singleton.RemoveTimer(token);
         }
         _combinedToken.Clear();
-        foreach (uint token in _presentToken)
-        {
-            XTimerMgr.singleton.RemoveTimer(token);
-        }
-        _presentToken.Clear();
-        foreach (uint token in _logicalToken)
-        {
-            XTimerMgr.singleton.RemoveTimer(token);
-        }
-        _logicalToken.Clear();
     }
-
-
-    /// <summary>
-    /// 绘制攻击范围
-    /// </summary>
+    
     private void DrawManipulationFileds()
     {
         if (_xData.Manipulation != null)

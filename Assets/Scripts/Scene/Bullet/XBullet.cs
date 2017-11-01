@@ -21,6 +21,7 @@ internal class XBullet
     private XBulletData _data = null;
     private RaycastHit _hitInfo;
     private Vector3 _origin = Vector3.zero;
+    
 
     private Dictionary<XHitHoster, XBulletTarget> _hurt_target = new Dictionary<XHitHoster, XBulletTarget>();
 
@@ -117,11 +118,6 @@ internal class XBullet
     public void Destroy()
     {
         XTimerMgr.singleton.RemoveTimer(_tail_results_token);
-        if (_data.Skill.Result[_data.Sequnce].LongAttackData.Type == XResultBulletType.Ring)
-        {
-            _data.Firer.ir = 0;
-            _data.Firer.or = 0;
-        }
         if (_data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count == 0) TailResult(true);
 
         if (_bullet != null)
@@ -266,8 +262,6 @@ internal class XBullet
                     float t = _elapsed > _data.Life ? 0 : (_data.Skill.Result[_data.Sequnce].LongAttackData.RingFull ? (_elapsed > _data.Life * 0.5f ? (_data.Life - _elapsed) : _elapsed) : _elapsed);
                     float ir = t * _data.Skill.Result[_data.Sequnce].LongAttackData.RingVelocity;
                     float or = ir + _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
-                    _data.Firer.ir = ir;
-                    _data.Firer.or = or;
                     RingCollideUnit(ir, or, _data.Firer.Transform.position, this);
                     break;
                 case XResultBulletType.Sphere:

@@ -5,6 +5,7 @@ public class XSkillFx : XSkill
 {
     protected List<XFx> _fx = new List<XFx>();
     protected List<XFx> _outer_fx = new List<XFx>();
+    private List<uint> _timers = new List<uint>();
 
     public XSkillFx(ISkillHoster _host) : base(_host)
     {
@@ -18,7 +19,7 @@ public class XSkillFx : XSkill
             for (int i = 0, max = current.Fx.Count; i < max; i++)
             {
                 var data = current.Fx[i];
-                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), false);
+                _timers.Add(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data));
             }
         }
     }
@@ -87,13 +88,15 @@ public class XSkillFx : XSkill
         if (data.Combined)
         {
             if (data.End > 0)
-                host.AddedCombinedToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillFx, fx));
+                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillFx, fx));
             _outer_fx.Add(fx);
         }
         else
         {
             if (data.End > 0)
-                host.AddedTimerToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillFx, fx), false);
+            {
+                _timers.Add( XTimerMgr.singleton.SetTimer(data.End - data.At, KillFx, fx));
+            }
             _fx.Add(fx);
         }
     }
@@ -108,6 +111,12 @@ public class XSkillFx : XSkill
         for (int i = 0; i < _fx.Count; i++)
             XFxMgr.singleton.DestroyFx(_fx[i], false);
         _fx.Clear();
+
+        for(int i=0,max= _timers.Count;i<max;i++)
+        {
+            XTimerMgr.singleton.RemoveTimer(_timers[i]);
+        }
+        _timers.Clear();
     }
 
 

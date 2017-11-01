@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 public class XSkillManipulate : XSkill
 {
-
+   
     private Dictionary<long, XManipulationData> _item = new Dictionary<long, XManipulationData>();
 
     public XSkillManipulate(ISkillHoster _host) : base(_host) { }
@@ -21,7 +21,7 @@ public class XSkillManipulate : XSkill
             for (int i = 0, max = current.Manipulation.Count; i < max; i++)
             {
                 var data = current.Manipulation[i];
-                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data), true);
+                AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data));
             }
         }
     }
@@ -31,11 +31,12 @@ public class XSkillManipulate : XSkill
         XManipulationData data = param as XManipulationData;
         long token = XCommon.singleton.UniqueToken;
         Add(token, data);
-        host.AddedTimerToken(XTimerMgr.singleton.SetTimer(data.End - data.At, KillManipulate, token), true);
+        AddedTimerToken( XTimerMgr.singleton.SetTimer(data.End - data.At, KillManipulate, token));
     }
 
     public override void Clear()
     {
+        base.Clear();
         Remove(0);
     }
 
