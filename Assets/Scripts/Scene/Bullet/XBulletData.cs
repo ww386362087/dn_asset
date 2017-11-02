@@ -37,11 +37,11 @@ internal class XBulletData
         }
         else if (data.Result[idx].Warning)
         {
-            _warning_pos = firer.warningPosAt[data.Result[idx].Warning_Idx][wid];
+            _warning_pos = firer.Attribute.skillWarning.warningPosAt[data.Result[idx].Warning_Idx][wid];
         }
 
         _warning = _warning_pos.sqrMagnitude > 0;
-        float height = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_hoster.ConfigData.Player).BoundHeight;
+        float height = _hoster.Present_data.BoundHeight;
         Vector3 begin = _hoster.Transform.position; begin.y += height * 0.5f;
         Vector3 dir = _warning ? (_warning_pos - _hoster.Transform.position) : firer.Transform.forward;
         begin += firer.Transform.rotation * new Vector3(

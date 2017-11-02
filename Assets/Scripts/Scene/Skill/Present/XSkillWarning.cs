@@ -8,6 +8,8 @@ public class XSkillWarning : XSkill
 
     public XSkillWarning(ISkillHoster _host) : base(_host) { }
 
+    public List<Vector3>[] warningPosAt { get; set; }
+
     public override void Execute()
     {
         base.Execute();
@@ -16,10 +18,10 @@ public class XSkillWarning : XSkill
         {
             if (list == null) list = new List<XFx>();
             if (current.Warning.Count > 0)
-                host.warningPosAt = new List<Vector3>[current.Warning.Count];
+                warningPosAt = new List<Vector3>[current.Warning.Count];
             for (int i = 0, max = current.Warning.Count; i < max; i++)
             {
-                host.warningPosAt[i] = new List<Vector3>();
+                warningPosAt[i] = new List<Vector3>();
                 var data = current.Warning[i];
                 AddedTimerToken(XTimerMgr.singleton.SetTimer(data.At, OnTrigger, data));
             }
@@ -29,7 +31,7 @@ public class XSkillWarning : XSkill
     public override void OnTrigger(object param)
     {
         XWarningData data = param as XWarningData;
-        host.warningPosAt[data.Index].Clear();
+        warningPosAt[data.Index].Clear();
 
         if (data.RandomWarningPos || data.Type == XWarningType.Warning_Multiple)
         {
@@ -75,7 +77,7 @@ public class XSkillWarning : XSkill
                                      data.FxDuration);
                             list.Add(fx);
                         }
-                        host.warningPosAt[data.Index].Add(item[i].transform.position + v);
+                        warningPosAt[data.Index].Add(item[i].transform.position + v);
                     }
                 }
             }
@@ -99,7 +101,7 @@ public class XSkillWarning : XSkill
                                       data.FxDuration);
                             list.Add(fx);
                         }
-                        host.warningPosAt[data.Index].Add(hits[i].transform.position);
+                        warningPosAt[data.Index].Add(hits[i].transform.position);
                     }
                 }
             }
@@ -119,7 +121,7 @@ public class XSkillWarning : XSkill
                                 1,
                                 data.FxDuration);
                         list.Add(fx);
-                        host.warningPosAt[data.Index].Add(host.Transform.position + offset);
+                        warningPosAt[data.Index].Add(host.Transform.position + offset);
                     }
                     break;
                 case XWarningType.Warning_Target:
@@ -136,7 +138,7 @@ public class XSkillWarning : XSkill
                                      data.FxDuration);
                             list.Add(fx);
                         }
-                        host.warningPosAt[data.Index].Add(host.Target.transform.position);
+                        warningPosAt[data.Index].Add(host.Target.transform.position);
                     }
                     else
                     {
@@ -149,7 +151,7 @@ public class XSkillWarning : XSkill
                                 1,
                                 data.FxDuration);
                         list.Add(fx);
-                        host.warningPosAt[data.Index].Add(host.Transform.position + offset);
+                        warningPosAt[data.Index].Add(host.Transform.position + offset);
                     }
                     break;
                 case XWarningType.Warning_All:
@@ -167,7 +169,7 @@ public class XSkillWarning : XSkill
                                     1,
                                     data.FxDuration);
                         }
-                        host.warningPosAt[data.Index].Add(hits[i].transform.position);
+                        warningPosAt[data.Index].Add(hits[i].transform.position);
                     }
                     break;
             }
@@ -183,7 +185,7 @@ public class XSkillWarning : XSkill
                 list[i].DestroyXFx();
             }
             list.Clear();
-            host.warningPosAt = null;
+            warningPosAt = null;
         }
         base.Clear();
     }

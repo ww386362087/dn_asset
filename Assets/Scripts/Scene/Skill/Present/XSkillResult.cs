@@ -137,9 +137,9 @@ public class XSkillResult : XSkill
                 if (dir.sqrMagnitude == 0) dir = forward;
                 dir.Normalize();
 
-                if(data.IsInField(triggerTime, pos, forward, hit.RadiusCenter, Vector3.Angle(forward, dir), distance))
+                if (data.IsInField(triggerTime, pos, forward, hit.RadiusCenter, Vector3.Angle(forward, dir), distance))
                 {
-                    Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ? (hit.RadiusCenter - pos).normalized : host.GetRotateTo();
+                    Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ? (hit.RadiusCenter - pos).normalized : host.Attribute.GetRotateTo();
                     AddHurtTarget(data, hit, triggerTime);
                     hit.Begin(host, data.Hit[triggerTime], vHitDir, data.Logical.AttackOnHitDown);
                 }
@@ -147,7 +147,7 @@ public class XSkillResult : XSkill
         }
         else
         {
-            Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ? hitted.RadiusCenter - pos : host.GetRotateTo();
+            Vector3 vHitDir = data.Result[triggerTime].Affect_Direction == XResultAffectDirection.AttackDir ? hitted.RadiusCenter - pos : host.Attribute.GetRotateTo();
             vHitDir.y = 0;
             vHitDir.Normalize();
             hitted.Begin(host, data.Hit[triggerTime], vHitDir, data.Logical.AttackOnHitDown);
@@ -167,7 +167,7 @@ public class XSkillResult : XSkill
         }
         else if (param.Warning)
         {
-            for (int i = 0; i < host.warningPosAt[param.Warning_Idx].Count; i++)
+            for (int i = 0; i < host.Attribute.skillWarning.warningPosAt[param.Warning_Idx].Count; i++)
             {
                 XBulletMgr.singleton.ShootBullet(GenerateBullet(param, null, additionalAngle, i));
             }

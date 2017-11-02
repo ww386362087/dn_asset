@@ -13,7 +13,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     private XEditorData _xEditorData = null;
     [SerializeField]
     private XConfigData _xConfigData = null;
-    
+
     GameObject _target = null;
 
     [HideInInspector]
@@ -39,29 +39,13 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
 
     private XEntityPresentation.RowData _present_data = null;
     
-    private float _to = 0;
-    private float _from = 0;
-    private float fire_time = 0;
     private string trigger = null;
     public Animator ator = null;
-
     private DummyState _state = DummyState.Idle;
     private XSkillCamera _camera = null;
     private XSkillData _current = null;
-
-    private bool _execute = false;
-    private bool _skill_when_move = false;
-
-    private List<uint> _combinedToken = new List<uint>();
-
-    public List<Vector3>[] warningPosAt { get; set; }
-    public XSkillResult skillResult { get; set; }
-    public XSkillMob skillMob { get; set; }
-    public XSkillFx skillFx { get; set; }
-    public XSkillManipulate skillManip { get; set; }
-    public XSkillWarning skillWarning { get; set; }
-
-    public List<XSkill> skills = new List<XSkill>();
+    private XSkillAttributes _attribute;
+    
 
     public XConfigData ConfigData
     {
@@ -72,8 +56,12 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         }
         set { _xConfigData = value; }
     }
-
+    
     public Transform Transform { get { return transform; } }
+
+    public XSkillAttributes Attribute { get { return _attribute; } }
+
+    public XEntityPresentation.RowData Present_data { get { return _present_data; } }
 
     public XEditorData EditorData
     {
@@ -129,7 +117,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
 
         RebuildSkillAniamtion();
         Application.targetFrameRate = 30;
-        InitHost();
+        _attribute = new XSkillAttributes(this, transform);
     }
 
     void OnDrawGizmos()
@@ -280,37 +268,16 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     private Rect _rect = new Rect(10, 10, 150, 20);
     void OnGUI() { GUI.Label(_rect, "Action Frame: " + _action_framecount); }
 
-    private void InitHost()
-    {
-        skills.Clear();
-        skillResult = new XSkillResult(this);
-        skillMob = new XSkillMob(this);
-        skillFx = new XSkillFx(this);
-        skillManip = new XSkillManipulate(this);
-        skillWarning = new XSkillWarning(this);
-        skills.Add(skillResult);
-        skills.Add(skillMob);
-        skills.Add(skillFx);
-        skills.Add(skillManip);
-        skills.Add(skillWarning);
-    }
 
     private void Execute()
     {
-        _execute = true;
         if (_current == null) return;
-        for (int i = 0, max = skills.Count; i < max; i++)
-        {
-            skills[i].Execute();
-        }
+        if (_attribute != null) _attribute.Execute();
     }
 
 
     void Update()
     {
-        int nh = 0; int nv = 0;
-        Vector3 h = Vector3.right;
-        Vector3 up = Vector3.up;
         if (_state != DummyState.Fire)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -325,25 +292,12 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         {
             _action_framecount += Time.deltaTime;
             if (_action_framecount > _current.Time) StopFire();
-            if (_execute || _current.TypeToken == 2)
-            {
-                if (nh != 0 || nv != 0)
-                {
-                    Vector3 MoveDir = h * nh;
-                    if (CanAct(MoveDir)) Move(MoveDir);
-                }
-                else if (_skill_when_move)
-                {
-                    trigger = AnimTriger.ToStand;
-                    _skill_when_move = false;
-                }
-            }
         }
     }
 
     void LateUpdate()
     {
-        UpdateRotation();
+        if (_attribute != null) _attribute.UpdateRotation();
         if (!string.IsNullOrEmpty(trigger) && ator != null && !ator.IsInTransition(0))
         {
             if (trigger != AnimTriger.ToStand &&
@@ -357,22 +311,11 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         }
     }
 
-    private float rotate_speed = 0;
-    private void UpdateRotation()
-    {
-        if (_from != _to)
-        {
-            _from += (_to - _from) * Mathf.Min(1.0f, Time.deltaTime * rotate_speed);
-            transform.rotation = Quaternion.Euler(0, _from, 0);
-        }
-    }
 
     private void Fire()
     {
-        _skill_when_move = _state == DummyState.Move;
         _state = DummyState.Fire;
-        fire_time = Time.time;
-
+      
         if (_current.TypeToken == 0)
             trigger = XSkillData.JA_Command[_current.SkillPosition];
         else if (_current.TypeToken == 1)
@@ -386,15 +329,10 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         if (_state != DummyState.Fire) return;
         _state = DummyState.Idle;
         trigger = AnimTriger.EndSkill;
-        _execute = false;
 
-        for (int i = 0, max = skills.Count; i < max; i++)
-        {
-            skills[i].Clear();
-        }
+        if (_attribute != null) _attribute.Clear();
         _action_framecount = 0;
         _camera.EndEffect(null);
-        CleanTokens();
         nResultForward = Vector3.zero;
         Time.timeScale = 1;
         if (ator != null) ator.speed = 1;
@@ -407,54 +345,15 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         _target = (_current.NeedTarget && hit != null) ? hit.gameObject : null;
         if (_target != null && _current.IsInAttckField(transform.position, transform.forward, _target))
         {
-            PrepareRotation(XCommon.singleton.Horizontal(_target.transform.position - transform.position), _xConfigData.RotateSpeed);
+            if (_attribute != null)
+            {
+                _attribute.PrepareRotation(XCommon.singleton.Horizontal(_target.transform.position - transform.position));
+                _attribute.rotate_speed = _xConfigData.RotateSpeed;
+            }
         }
     }
     
-    private bool CanAct(Vector3 dir)
-    {
-        bool can = false;
-        float now = Time.time - fire_time;
-        XLogicalData logic = (SkillData.TypeToken == 2) ? SkillData.Logical : _current.Logical;
-        can = true;
-        if (now < logic.Not_Move_End && now > logic.Not_Move_At)
-        {
-            can = false;
-        }
-        if (can) StopFire();
-        else
-        {
-            if (now < logic.Rotate_End && now > logic.Rotate_At)
-            {
-                PrepareRotation(XCommon.singleton.Horizontal(dir), logic.Rotate_Speed > 0 ? logic.Rotate_Speed : _xConfigData.RotateSpeed);
-            }
-        }
-        return can;
-    }
-
-    private void Move(Vector3 dir)
-    {
-        PrepareRotation(dir, _xConfigData.RotateSpeed);
-        transform.Translate(dir * Time.deltaTime * ConfigData.Speed, Space.World);
-    }
-
-    public void PrepareRotation(Vector3 targetDir, float speed)
-    {
-        Vector3 from = transform.forward;
-        _from = YRotation(from);
-        float angle = Vector3.Angle(from, targetDir);
-        bool clockwise = XCommon.singleton.Clockwise(from, targetDir);
-        _to = clockwise ? _from + angle : _from - angle;
-        rotate_speed = speed;
-    }
-
-    private float YRotation(Vector3 dir)
-    {
-        float r = Vector3.Angle(Vector3.forward, dir);
-        bool clockwise = XCommon.singleton.Clockwise(Vector3.forward, dir);
-        return clockwise ? r : 360.0f - r;
-    }
-
+    
     private void BuildOverride()
     {
         oVerrideController = new AnimatorOverrideController();
@@ -483,20 +382,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         oVerrideController["Walk"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackWalk) as AnimationClip;
     }
 
-    public Vector3 GetRotateTo()
-    {
-        return XCommon.singleton.FloatToAngle(_to);
-    }
-
-    private void CleanTokens()
-    {
-        foreach (uint token in _combinedToken)
-        {
-            XTimerMgr.singleton.RemoveTimer(token);
-        }
-        _combinedToken.Clear();
-    }
-    
     private void DrawManipulationFileds()
     {
         if (_xData.Manipulation != null)

@@ -151,9 +151,8 @@ internal class XBullet
     public void Result(XHitHoster hit)
     {
         if (IsHurtEntity(hit)) return;
-
-        //trigger skill result
-        _data.Firer.skillResult.InnerResult(_data.Sequnce, _bullet.transform.forward, _bullet.transform.position, _data.Skill, hit);
+        
+        _data.Firer.Attribute.skillResult.InnerResult(_data.Sequnce, _bullet.transform.forward, _bullet.transform.position, _data.Skill, hit);
         if (hit != null)
         {
             XBulletTarget bt;
