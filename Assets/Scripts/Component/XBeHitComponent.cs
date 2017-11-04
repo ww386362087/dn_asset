@@ -22,6 +22,7 @@ public class XBeHitComponent : XComponent, IHitHoster
         base.OnInitial(_obj);
         _entity = _obj as XEntity;
         InitHitAnim();
+        InitAttr();
     }
 
     private void InitHitAnim()
@@ -38,17 +39,32 @@ public class XBeHitComponent : XComponent, IHitHoster
     }
 
 
+    private void InitAttr()
+    {
+        _attr = new XHitAttribute(_entity.EntityTransfer,
+            _anim.OverideControllder,
+            _anim.Ator,
+            _entity.present);
+    }
+
+
     public override void OnUpdate(float delta)
     {
         base.OnUpdate(delta);
-        if (_attr == null || _attr.hoster == null) return;
-
+        if (_attr == null)
+        {
+            _attr.Update();
+        }
     }
 
 
 
     public void Begin(ISkillHoster hoster, XHitData data, Vector3 dir, bool bAttackOnHitDown)
     {
-
+        if (_attr == null)
+        {
+            _attr.Begin(hoster, data, dir, bAttackOnHitDown);
+        }
     }
+
 }

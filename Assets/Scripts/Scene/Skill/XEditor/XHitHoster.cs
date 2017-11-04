@@ -39,14 +39,6 @@ public class XHitHoster : MonoBehaviour, IHitHoster
         _attr = new XHitAttribute(transform, contr, ator, present);
     }
 
-    private void BuildOverride()
-    {
-        var controllder = new AnimatorOverrideController();
-        var ator = GetComponent<Animator>();
-        controllder.runtimeAnimatorController = _attr.ator.runtimeAnimatorController;
-        _attr.ator.runtimeAnimatorController = _attr.controllder;
-    }
-
 
     void Update()
     {
@@ -64,5 +56,5 @@ public class XHitHoster : MonoBehaviour, IHitHoster
             _attr.Begin(hoster, data, dir, bAttackOnHitDown);
         }
     }
-
+    
 }

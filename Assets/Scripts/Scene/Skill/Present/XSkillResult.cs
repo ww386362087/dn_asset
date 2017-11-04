@@ -118,7 +118,7 @@ public class XSkillResult : XSkill
         }
     }
 
-    public void InnerResult(int triggerTime, Vector3 forward, Vector3 pos, XSkillData data, XHitHoster hitted = null)
+    public void InnerResult(int triggerTime, Vector3 forward, Vector3 pos, XSkillData data, IHitHoster hitted = null)
     {
         nHotID = triggerTime;
 
@@ -158,10 +158,10 @@ public class XSkillResult : XSkill
     {
         if (param.Attack_All)
         {
-            XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
+            IHitHoster[] hits = host.Hits;
             for (int i = 0; i < hits.Length; i++)
             {
-                XBulletMgr.singleton.ShootBullet(GenerateBullet(param, hits[i].gameObject, additionalAngle));
+                XBulletMgr.singleton.ShootBullet(GenerateBullet(param, hits[i].HitObject, additionalAngle));
             }
         }
         else if (param.Warning)

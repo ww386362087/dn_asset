@@ -14,6 +14,7 @@ public class XAnimComponent : XComponent
     private float m_value = 0;
     private bool m_enable = true;
     
+    public AnimatorOverrideController OverideControllder { get { return m_overrideController; } }
 
     public Animator Ator { get { return m_Animator; } }
 
