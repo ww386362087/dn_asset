@@ -38,7 +38,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     public float defaultFov = 45;
 
     private XEntityPresentation.RowData _present_data = null;
-    
     private string trigger = null;
     public Animator ator = null;
     private DummyState _state = DummyState.Idle;
@@ -46,6 +45,11 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     private XSkillData _current = null;
     private XSkillAttributes _attribute;
     
+    public Transform Transform { get { return transform; } }
+
+    public XSkillAttributes Attribute { get { return _attribute; } }
+
+    public XEntityPresentation.RowData Present_data { get { return _present_data; } }
 
     public XConfigData ConfigData
     {
@@ -56,12 +60,6 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         }
         set { _xConfigData = value; }
     }
-    
-    public Transform Transform { get { return transform; } }
-
-    public XSkillAttributes Attribute { get { return _attribute; } }
-
-    public XEntityPresentation.RowData Present_data { get { return _present_data; } }
 
     public XEditorData EditorData
     {
@@ -94,6 +92,15 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     public XSkillData CurrentSkillData
     {
         get { return _state == DummyState.Fire ? _current : SkillData; }
+    }
+
+    public IHitHoster[] Hits
+    {
+        get
+        {
+            XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
+            return hits as IHitHoster[];
+        }
     }
 
     void Awake()
@@ -282,7 +289,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (_xData.TypeToken == 1 && ComboSkills.Count > 0) oVerrideController["Art"] = Resources.Load(_xData.ClipName) as AnimationClip;
+                if (_xData.TypeToken == 1 && ComboSkills.Count > 0) oVerrideController[Clip.Art] = Resources.Load(_xData.ClipName) as AnimationClip;
                 _current = _xData;
                 Fire();
             }
@@ -312,7 +319,7 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
     }
 
 
-    private void Fire()
+    public void Fire()
     {
         _state = DummyState.Fire;
       
@@ -374,12 +381,12 @@ public class XSkillHoster : MonoBehaviour, ISkillHoster
             string motion = XSkillData.JaOverrideMap[SkillData.SkillPosition];
             oVerrideController[motion] = clip;
         }
-        else if (SkillData.TypeToken == 1) { oVerrideController["Art"] = clip; }
+        else if (SkillData.TypeToken == 1) { oVerrideController[Clip.Art] = clip; }
 
         _present_data = XTableMgr.GetTable<XEntityPresentation>().GetItemID((uint)_xConfigData.Player);
-        oVerrideController["Idle"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle) as AnimationClip;
-        oVerrideController["Run"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackRun) as AnimationClip;
-        oVerrideController["Walk"] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackWalk) as AnimationClip;
+        oVerrideController[Clip.Idle] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackIdle) as AnimationClip;
+        oVerrideController[Clip.Run] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackRun) as AnimationClip;
+        oVerrideController[Clip.Walk] = Resources.Load("Animation/" + _present_data.AnimLocation + _present_data.AttackWalk) as AnimationClip;
     }
 
     private void DrawManipulationFileds()

@@ -6,7 +6,7 @@
     public static string ToSkill = "ToSkill";
     public static string EndSkill = "EndSkill";
     public static string ToCharge = "ToCharge";
-    public static string ToFreeze = "ToFreeze";
+    public static string ToFreezed = "ToFreezed";
     public static string ToBeHit = "ToBeHit";
     public static string ToDeath = "ToDeath";
     public static string ToMove = "ToMove";

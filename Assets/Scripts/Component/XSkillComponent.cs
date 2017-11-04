@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using XTable;
+using System.IO;
+using System.Xml.Serialization;
 
 public class XSkillComponent : XComponent, ISkillHoster
 {
@@ -10,34 +12,41 @@ public class XSkillComponent : XComponent, ISkillHoster
     private XAnimComponent _anim;
     private string trigger = null;
     private XSkillAttributes _attribute;
-   
+
     protected override UpdateState state { get { return UpdateState.FRAME; } }
-    
+
     public Transform Transform { get { return _entity.EntityTransfer; } }
 
     public GameObject Target { get { return _target.EntityObject; } }
 
     public XSkillAttributes Attribute { get { return _attribute; } }
-    
+
     public XSkillData CurrentSkillData { get { return _current; } }
 
     public Transform ShownTransform { get; set; }
 
     public XEntityPresentation.RowData Present_data { get { return _entity.present; } }
 
+    public IHitHoster[] Hits
+    {
+        get
+        {
+            List<XEntity> ens = XEntityMgr.singleton.GetAllEnemy(_entity);
+            List<IHitHoster> list = new List<IHitHoster>();
+            for (int i = 0, max = ens.Count; i < max; i++)
+            {
+                XBeHitComponent hit = ens[i].GetComponent<XBeHitComponent>();
+                if (hit != null) list.Add(hit);
+            }
+            return list.ToArray();
+        }
+    }
+
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
         _entity = _obj as XEntity;
-
-        _anim = _entity.GetComponent<XAnimComponent>();
-        if (_anim == null)
-        {
-            _anim = _entity.AttachComponent<XAnimComponent>();
-        }
-        RebuildSkillAniamtion();
-
-        _attribute = new XSkillAttributes(this,_entity.EntityTransfer);
+        _attribute = new XSkillAttributes(this, _entity.EntityTransfer);
     }
 
 
@@ -57,6 +66,24 @@ public class XSkillComponent : XComponent, ISkillHoster
         }
     }
 
+    public void LoadSkill(string file)
+    {
+        Stream stream = XResources.ReadText("Table/Skill" + file);
+        XmlSerializer formatter = new XmlSerializer(typeof(XSkillData));
+        _current = (XSkillData)formatter.Deserialize(stream);
+
+        InitSkillAnim();
+    }
+
+    private void InitSkillAnim()
+    {
+        _anim = _entity.GetComponent<XAnimComponent>();
+        if (_anim == null)
+        {
+            _anim = _entity.AttachComponent<XAnimComponent>();
+        }
+        RebuildSkillAniamtion();
+    }
 
     public void Fire()
     {
@@ -81,12 +108,12 @@ public class XSkillComponent : XComponent, ISkillHoster
 
     private void FocusTarget()
     {
-        if (FindTarget() && _current.IsInAttckField(_entity.Position, _entity.Forward, _entity.EntityObject) && _attribute != null)
+        if (FindTarget() && _current.IsInAttckField(_entity.Position, _entity.Forward, _target.EntityObject) && _attribute != null)
         {
             _attribute.PrepareRotation(XCommon.singleton.Horizontal(_target.Position - _entity.Position));
         }
     }
-    
+
     private void RebuildSkillAniamtion()
     {
         AnimationClip clip = XResources.Load<AnimationClip>(_current.ClipName, AssetType.Anim);
@@ -97,10 +124,10 @@ public class XSkillComponent : XComponent, ISkillHoster
         }
         else if (_current.TypeToken == 1)
         {
-            _anim.OverrideAnim("Art", clip);
+            _anim.OverrideAnim(Clip.Art, clip);
         }
     }
-    
+
     private bool FindTarget()
     {
         List<XEntity> enemys = XEntityMgr.singleton.GetAllEnemy(_entity);
@@ -111,6 +138,6 @@ public class XSkillComponent : XComponent, ISkillHoster
         }
         return false;
     }
-    
+
 }
 

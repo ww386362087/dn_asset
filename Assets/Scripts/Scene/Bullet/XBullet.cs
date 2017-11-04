@@ -22,7 +22,6 @@ internal class XBullet
     private RaycastHit _hitInfo;
     private Vector3 _origin = Vector3.zero;
     
-
     private Dictionary<XHitHoster, XBulletTarget> _hurt_target = new Dictionary<XHitHoster, XBulletTarget>();
 
     public XBullet(XBulletData data)
@@ -70,7 +69,6 @@ internal class XBullet
             _tail_results = 0;
             FakeDestroyBulletObject();
         }
-
         if (_tail_results < _data.Skill.Result[_data.Sequnce].LongAttackData.TriggerAtEnd_Count)
         {
             _tail_results++;
@@ -308,7 +306,7 @@ internal class XBullet
             cycle -= rectcenter;
             cycle.y = 0;
             cycle = XCommon.singleton.HorizontalRotateVetor3(cycle, rotation, false);
-            collided = XCommon.singleton.IsRectCycleCross(hlen, r, cycle, ents[i].Radius) || Vector3.SqrMagnitude(cycle) < r * r;
+            collided = XCommon.singleton.IsRectCycleCross(hlen, r, cycle, ents[i].Attr.radius) || Vector3.SqrMagnitude(cycle) < r * r;
             if (collided) bullet.Result(ents[i]);
             if (bullet.IsExpired()) break;
         }

@@ -17,6 +17,10 @@ public interface ISkillHoster
     
     Transform ShownTransform { get; set; }
 
+    IHitHoster[] Hits { get; }
+
+    void Fire();
+
     void StopFire();
 
 }

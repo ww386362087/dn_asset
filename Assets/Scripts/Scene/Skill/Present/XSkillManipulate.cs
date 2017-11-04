@@ -61,13 +61,13 @@ public class XSkillManipulate : XSkill
 
     public void Update(float deltaTime)
     {
-        XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
+        IHitHoster[] hits = host.Hits;
         foreach (XManipulationData data in _item.Values)
         {
             Vector3 center = host.Transform.position + host.Transform.rotation * new Vector3(data.OffsetX, 0, data.OffsetZ);
-            foreach (XHitHoster hit in hits)
+            foreach (IHitHoster hit in hits)
             {
-                Vector3 gap = center - hit.transform.position; gap.y = 0;
+                Vector3 gap = center - hit.Pos; gap.y = 0;
                 float dis = gap.magnitude;
 
                 if (dis < data.Radius && (dis == 0 || Vector3.Angle(-gap, host.Transform.forward) <= data.Degree * 0.5f))
@@ -75,7 +75,7 @@ public class XSkillManipulate : XSkill
                     float len = data.Force * deltaTime;
                     Vector3 dir = gap.normalized;
                     Vector3 move = dir * Mathf.Min(dis, len);
-                    hit.transform.Translate(move, Space.World);
+                    hit.HitObject.transform.Translate(move, Space.World);
                 }
             }
         }

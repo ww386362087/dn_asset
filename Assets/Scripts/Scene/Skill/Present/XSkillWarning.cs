@@ -42,7 +42,7 @@ public class XSkillWarning : XSkill
                 {
                     case XWarningType.Warning_All:
                     case XWarningType.Warning_Multiple:
-                        XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
+                        IHitHoster[] hits = host.Hits;
                         int n = (data.Type == XWarningType.Warning_All) ? hits.Length : data.MaxRandomTarget;
                         for (int i = 0; i < hits.Length; i++)
                         {
@@ -50,7 +50,7 @@ public class XSkillWarning : XSkill
                             if (counted)
                             {
                                 n--;
-                                item.Add(hits[i].gameObject);
+                                item.Add(hits[i].HitObject);
                             }
                         }
                         break;
@@ -83,7 +83,7 @@ public class XSkillWarning : XSkill
             }
             else if (data.Type == XWarningType.Warning_Multiple)
             {
-                XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
+                IHitHoster[] hits = host.Hits;
                 int n = data.MaxRandomTarget;
                 for (int i = 0; i < hits.Length; i++)
                 {
@@ -94,14 +94,14 @@ public class XSkillWarning : XSkill
                         {
                             var fx = XFxMgr.singleton.CreateAndPlay(
                                       data.Fx,
-                                      hits[i].gameObject,
-                                      new Vector3(0, 0.05f - hits[i].transform.position.y, 0),
+                                      hits[i].HitObject,
+                                      new Vector3(0, 0.05f - hits[i].Pos.y, 0),
                                       data.Scale * Vector3.one,
                                       1,
                                       data.FxDuration);
                             list.Add(fx);
                         }
-                        warningPosAt[data.Index].Add(hits[i].transform.position);
+                        warningPosAt[data.Index].Add(hits[i].Pos);
                     }
                 }
             }
@@ -155,7 +155,7 @@ public class XSkillWarning : XSkill
                     }
                     break;
                 case XWarningType.Warning_All:
-                    XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
+                    IHitHoster[] hits = host.Hits;
 
                     for (int i = 0; i < hits.Length; i++)
                     {
@@ -163,13 +163,13 @@ public class XSkillWarning : XSkill
                         {
                             XFxMgr.singleton.CreateAndPlay(
                                     data.Fx,
-                                    hits[i].gameObject,
-                                     new Vector3(0, 0.05f - hits[i].transform.position.y, 0),
+                                    hits[i].HitObject,
+                                     new Vector3(0, 0.05f - hits[i].Pos.y, 0),
                                     data.Scale * Vector3.one,
                                     1,
                                     data.FxDuration);
                         }
-                        warningPosAt[data.Index].Add(hits[i].transform.position);
+                        warningPosAt[data.Index].Add(hits[i].Pos);
                     }
                     break;
             }

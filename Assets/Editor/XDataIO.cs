@@ -46,11 +46,10 @@ namespace XEditor
 
         public T DeserializeData(string pathwithname)
         {
-            try 
+            try
             {
                 using (FileStream reader = new FileStream(pathwithname, FileMode.Open))
                 {
-                    //IFormatter formatter = new BinaryFormatter();
                     XmlSerializer formatter = new XmlSerializer(typeof(T));
                     return (T)formatter.Deserialize(reader);
                 }

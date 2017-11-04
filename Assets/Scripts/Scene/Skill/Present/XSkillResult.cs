@@ -5,7 +5,7 @@ public class XSkillResult : XSkill
 {
     public int nHotID = 0;
     public Vector3 nResultForward = Vector3.zero;
-    private List<HashSet<XHitHoster>> _hurt_target = new List<HashSet<XHitHoster>>();
+    private List<HashSet<IHitHoster>> _hurt_target = new List<HashSet<IHitHoster>>();
 
     public XSkillResult(ISkillHoster _host) : base(_host)
     {
@@ -54,13 +54,13 @@ public class XSkillResult : XSkill
         base.Clear();
     }
 
-    private void AddHurtTarget(XSkillData data, XHitHoster id, int triggerTime)
+    private void AddHurtTarget(XSkillData data, IHitHoster id, int triggerTime)
     {
         if (!data.Result[triggerTime].Loop && /*for multiple trigger end*/!data.Result[triggerTime].LongAttackEffect)
             _hurt_target[triggerTime].Add(id);
     }
 
-    private bool IsHurtEntity(XHitHoster id, int triggerTime)
+    private bool IsHurtEntity(IHitHoster id, int triggerTime)
     {
         /*
          * this section not as same as client shows
@@ -126,14 +126,13 @@ public class XSkillResult : XSkill
         {
             pos += XCommon.singleton.VectorToQuaternion(host.Transform.forward) * new Vector3(data.Result[triggerTime].Offset_X, 0, data.Result[triggerTime].Offset_Z);
             nResultForward = forward;
-            XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
-            foreach (XHitHoster hit in hits)
+            foreach (IHitHoster hit in host.Hits)
             {
                 if (IsHurtEntity(hit, triggerTime)) continue;
                 Vector3 dir = hit.RadiusCenter - pos;
                 dir.y = 0;
                 float distance = dir.magnitude;
-                if (distance > hit.Radius) distance -= hit.Radius;
+                if (distance > hit.Attr.radius) distance -= hit.Attr.radius;
                 if (dir.sqrMagnitude == 0) dir = forward;
                 dir.Normalize();
 

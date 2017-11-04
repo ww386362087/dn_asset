@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
+
 [Serializable]
 public class XBaseData
 {
@@ -22,39 +23,39 @@ public class XSkillData
 
 
     public static readonly string[] JaOverrideMap = {
-            "A",
-            "AA",
-            "AAA",
-            "AAAA",
-            "AAAAA",
-            "AB",
-            "QTE"
-       };
+            Clip.A,
+            Clip.AA,
+            Clip.AAA,
+            Clip.AAAA,
+            Clip.AAAAA,
+            Clip.AB,
+            Clip.QTE
+    };
 
     public static readonly string[] JA_Command = {
-           "ToSkill",  //A
-           "ToJA_1_0", //AA
-           "ToJA_2_0", //AAA
-           "ToJA_3_0", //AAAA
-           "ToJA_4_0", //AAAAA
-           "ToJA_0_1", //AB
-           "ToJA_QTE"  //QTE
+           AnimTriger.ToSkill,  //A
+           AnimTriger.ToJA_1_0, //AA
+           AnimTriger.ToJA_2_0, //AAA
+           AnimTriger.ToJA_3_0, //AAAA
+           AnimTriger.ToJA_4_0, //AAAAA
+           AnimTriger.ToJA_0_1, //AB
+           AnimTriger.ToJA_QTE  //QTE
        };
 
     public static readonly string[] Combined_Command = {
-            "ToPhase",
-            "ToPhase1", "ToPhase2", "ToPhase3", "ToPhase4",
-            "ToPhase5", "ToPhase6",
-            "ToPhase7", "ToPhase8",
-            "ToPhase9"
+            AnimTriger.ToPhase,
+            AnimTriger.ToPhase1, AnimTriger.ToPhase2, AnimTriger.ToPhase3, AnimTriger.ToPhase4,
+            AnimTriger.ToPhase5, AnimTriger.ToPhase6,
+            AnimTriger.ToPhase7, AnimTriger.ToPhase8,
+            AnimTriger.ToPhase9
       };
 
     public static readonly string[] CombinedOverrideMap = {
-            "Phase0",
-            "Phase1", "Phase2", "Phase3", "Phase4",
-            "Phase5", "Phase6",
-            "Phase7", "Phase8",
-            "Phase9"
+            Clip.Phase0,
+            Clip.Phase1, Clip.Phase2, Clip.Phase3, Clip.Phase4,
+            Clip.Phase5, Clip.Phase6,
+            Clip.Phase7, Clip.Phase8,
+            Clip.Phase9
         };
 
     public XSkillData()
