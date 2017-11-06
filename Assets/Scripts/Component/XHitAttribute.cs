@@ -70,9 +70,9 @@ public class XHitAttribute
     }
 
 
-    public void Update()
+    public bool Update()
     {
-        if ( hoster == null) return;
+        if ( hoster == null) return true;
 
         if (!string.IsNullOrEmpty(trigger) && !ator.IsInTransition(0))
         {
@@ -90,7 +90,11 @@ public class XHitAttribute
             {
                 float dh = -(deltaH / present_straight) * Time.deltaTime;
                 transform.Translate(0, dh, 0, Space.World);
-                if (elapsed > time_total) Cancel();
+                if (elapsed > time_total)
+                {
+                    Cancel();
+                    return false;
+                }
             }
             else
             {
@@ -146,11 +150,16 @@ public class XHitAttribute
                         }
                         break;
                     case XBeHitPhase.Hit_GetUp:
-                        if (elapsed > time_total) Cancel();
+                        if (elapsed > time_total)
+                        {
+                            Cancel();
+                            return false;
+                        }
                         break;
                 }
             }
         }
+        return true;
     }
 
     

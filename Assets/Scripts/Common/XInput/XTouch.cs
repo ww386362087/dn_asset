@@ -34,8 +34,7 @@ internal class XTouch : XSingleton<XTouch>
     {
         UpdateTouch();
     }
-
-
+    
 
     private void UpdateTouch()
     {

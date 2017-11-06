@@ -107,6 +107,7 @@ public class XSkillComponent : XComponent, ISkillHoster
         _action_framecount = 0;
         _state = DummyState.Fire;
         _entity.OnSkill(true);
+
         if (_current.TypeToken == 0)
             trigger = XSkillData.JA_Command[_current.SkillPosition];
         else if (_current.TypeToken == 1)
@@ -149,6 +150,7 @@ public class XSkillComponent : XComponent, ISkillHoster
         {
             _anim.OverrideAnim(Clip.Art, clip);
         }
+        _anim.Rebind();
     }
 
     private bool FindTarget()

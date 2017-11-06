@@ -62,8 +62,11 @@
 			"Children":[{
 				"Type":"StopNavMove"
 			},{
+				"Type":"RandomCompare",
+				"Int32mAIArgProb":30
+			},{
 				"Type":"XAIActionSkill",
-				"StringmAIArgSkillScript":"Monster_goblin_green_attack"
+				"StringmAIArgSkillScript":"Monster_goblin/Monster_goblin_green_attack"
 			}]
 		}]
 	}

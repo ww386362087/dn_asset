@@ -257,6 +257,7 @@ public class XEntity : XObject
     public void OnDied()
     {
         _state = XStateDefine.XState_Death;
+
     }
 
     public void OnSkill(bool cast)
@@ -264,6 +265,7 @@ public class XEntity : XObject
         if (_state != XStateDefine.XState_Death)
         {
             _state = cast ? XStateDefine.XState_Skill : XStateDefine.XState_Idle;
+           if(IsPlayer) XVirtualTab.singleton.Freezed = cast;
         }
     }
 
@@ -272,6 +274,7 @@ public class XEntity : XObject
         if (_state != XStateDefine.XState_Death)
         {
             _state = hit ? XStateDefine.XState_BeHit : XStateDefine.XState_Idle;
+            if (IsPlayer) XVirtualTab.singleton.Freezed = hit;
         }
     }
 

@@ -32,11 +32,17 @@ public class XPlayer : XRole
         }
     }
 
+    //state在behit、skill、death等状态不能move
+    private bool CheckState()
+    {
+        return _state == XStateDefine.XState_Idle 
+            || _state == XStateDefine.XState_Move;
+    }
 
     private void ApplyJoyStickMove()
     {
         XCamera camera = XScene.singleton.GameCamera;
-        if (camera != null && XVirtualTab.singleton.Direction != Vector3.zero)
+        if (camera != null && XVirtualTab.singleton.Direction != Vector3.zero && CheckState())
         {
             MoveForward(XVirtualTab.singleton.Direction);
         }

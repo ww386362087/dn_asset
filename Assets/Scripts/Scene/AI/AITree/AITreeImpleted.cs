@@ -303,6 +303,19 @@ namespace AI
         }
 
 
+        public static AIRuntimeStatus RandomCompareUpdate(XEntity entity, int prob)
+        {
+            int rand = Random.Range(0, 100);
+            if (prob > rand)
+            {
+                return AIRuntimeStatus.Success;
+            }
+            else
+            {
+                return AIRuntimeStatus.Failure;
+            }
+        }
+
 
         public static Transform SelectMoveTargetById(XEntity entity, int objectid)
         {

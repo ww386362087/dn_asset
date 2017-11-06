@@ -68,4 +68,17 @@ namespace AI
         }
     }
 
+    [TaskCategory("Game")]
+    [TaskDescription("随机值 触发概率")]
+    public class RandomCompare : Conditional
+    {
+        public int mAIArgProb;
+
+        public override TaskStatus OnUpdate()
+        {
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return (TaskStatus)AITreeImpleted.RandomCompareUpdate(e, mAIArgProb);
+        }
+    }
+
 }

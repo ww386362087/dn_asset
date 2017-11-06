@@ -155,6 +155,14 @@ public class XAnimComponent : XComponent
         m_overrideController[key] = clip;
     }
 
+    public void Rebind()
+    {
+        if(m_Animator!=null)
+        {
+            m_Animator.Rebind();
+        }
+    }
+
     public void Reset()
     {
         if (m_Animator != null)

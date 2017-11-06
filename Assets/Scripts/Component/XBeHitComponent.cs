@@ -53,9 +53,12 @@ public class XBeHitComponent : XComponent, IHitHoster
     public override void OnUpdate(float delta)
     {
         base.OnUpdate(delta);
-        if (_attr != null )
+        if (_attr != null)
         {
-            _attr.Update();
+            if (!_attr.Update())
+            {
+                _entity.OnHit(false);
+            }
         }
     }
 
@@ -65,8 +68,8 @@ public class XBeHitComponent : XComponent, IHitHoster
     {
         if (_attr != null && _entity.CurState != XStateDefine.XState_Death)
         {
-            _attr.Begin(hoster, data, dir, bAttackOnHitDown);
             _entity.OnHit(true);
+            _attr.Begin(hoster, data, dir, bAttackOnHitDown);
         }
     }
 

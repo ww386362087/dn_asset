@@ -31,7 +31,7 @@ public class AIExport
        
     }
 
-    [MenuItem("Tools/ExportAll")]
+    [MenuItem("Tools/ExportConfig")]
     public static void ExportAll()
     {
         string path = Application.dataPath + @"\Behavior Designer\AIData\";
