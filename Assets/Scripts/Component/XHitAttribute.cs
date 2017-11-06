@@ -162,7 +162,7 @@ public class XHitAttribute
         return true;
     }
 
-    
+
     public void Begin(ISkillHoster host, XHitData da, Vector3 d, bool bAttackOnHitDown)
     {
         if (da.State == XBeHitState.Hit_Free) return;
@@ -226,10 +226,10 @@ public class XHitAttribute
                     break;
             }
 
-            present_straight = (change_to_fly ? (data.Additional_Using_Default ? XHitConfLibrary.Hit_PresentStraight : data.Additional_Hit_Time_Present_Straight) : data.Time_Present_Straight) * OffsetTimeScale_Present;
-            hard_straight = (change_to_fly ? (data.Additional_Using_Default ? XHitConfLibrary.Hit_HardStraight : data.Additional_Hit_Time_Hard_Straight) : data.Time_Hard_Straight) * OffsetTimeScale_Hard;
-            height = (change_to_fly ? (data.Additional_Using_Default ? XHitConfLibrary.Hit_Height : data.Additional_Hit_Height) : data.Height) * OffsetTimeScale_Height;
-            offset = (change_to_fly ? (data.Additional_Using_Default ? XHitConfLibrary.Hit_Offset : data.Additional_Hit_Offset) : data.Offset) * OffsetTimeScale_Offset;
+            present_straight = (change_to_fly ? data.Additional_Hit_Time_Present_Straight : data.Time_Present_Straight) * OffsetTimeScale_Present;
+            hard_straight = (change_to_fly ? data.Additional_Hit_Time_Hard_Straight : data.Time_Hard_Straight) * OffsetTimeScale_Hard;
+            height = (change_to_fly ? data.Additional_Hit_Height : data.Height) * OffsetTimeScale_Height;
+            offset = (change_to_fly ? data.Additional_Hit_Offset : data.Offset) * OffsetTimeScale_Offset;
 
             dir = d;
             time_total = present_straight + landing_time + hard_straight + getup_time;

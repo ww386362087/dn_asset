@@ -30,32 +30,3 @@ public class XEditorData
     public bool XAutoJA = false;
 }
 
-public class XHitConfLibrary
-{
-   
-    public static float Hit_PresentStraight;
-    public static float Hit_HardStraight;
-    public static float Hit_Offset;
-    public static float Hit_Height;
-
-    static string GetValue(string key)
-    {
-        string ret = "";
-        //uint k = XCommon.singleton.XHash(key);
-        //if (_table.Table.TryGetValue(k, out ret))
-        //{
-        //    return ret;
-        //}
-
-        return ret;
-    }
-    static XHitConfLibrary()
-    {
-        //XTableReader.ReadFile(@"Table/GlobalConfig", _table);
-
-        //Hit_PresentStraight = XParse.Parse(GetValue("PresentStraight"));
-        //Hit_HardStraight = XParse.Parse(GetValue("HardStraight"));
-        //Hit_Offset = XParse.Parse(GetValue("Offset"));
-        //Hit_Height = XParse.Parse(GetValue("Height"));
-    }
-}
