@@ -5,7 +5,8 @@ public class XSkillResult : XSkill
 {
     public int nHotID = 0;
     public Vector3 nResultForward = Vector3.zero;
-    private List<HashSet<IHitHoster>> _hurt_target = new List<HashSet<IHitHoster>>();
+    private Dictionary<int, HashSet<IHitHoster>> _hurt_target = new Dictionary<int, HashSet<IHitHoster>>();
+
 
     public XSkillResult(ISkillHoster _host) : base(_host)
     {
@@ -52,21 +53,22 @@ public class XSkillResult : XSkill
     public override void Clear()
     {
         base.Clear();
+        _hurt_target.Clear();
     }
 
-    private void AddHurtTarget(XSkillData data, IHitHoster id, int triggerTime)
+    private void AddHurtTarget(XSkillData data, IHitHoster hit, int triggerTime)
     {
-        if (!data.Result[triggerTime].Loop && /*for multiple trigger end*/!data.Result[triggerTime].LongAttackEffect)
-            _hurt_target[triggerTime].Add(id);
+        if (!data.Result[triggerTime].Loop && !data.Result[triggerTime].LongAttackEffect)
+        {
+            if (!_hurt_target.ContainsKey(triggerTime))
+                _hurt_target[triggerTime] = new HashSet<IHitHoster>();
+            _hurt_target[triggerTime].Add(hit);
+        }
     }
 
     private bool IsHurtEntity(IHitHoster id, int triggerTime)
     {
-        /*
-         * this section not as same as client shows
-         * but in editor mode just using it for simple.
-         */
-        return triggerTime < _hurt_target.Count ? _hurt_target[triggerTime].Contains(id) : false;
+        return _hurt_target.ContainsKey(triggerTime) ? _hurt_target[triggerTime].Contains(id) : false;
     }
 
     public void LoopResults(object param)
@@ -126,8 +128,9 @@ public class XSkillResult : XSkill
         {
             pos += XCommon.singleton.VectorToQuaternion(host.Transform.forward) * new Vector3(data.Result[triggerTime].Offset_X, 0, data.Result[triggerTime].Offset_Z);
             nResultForward = forward;
-            foreach (IHitHoster hit in host.Hits)
+            for (int i = 0, max = host.Hits.Length; i < max; i++)
             {
+                var hit = host.Hits[i];
                 if (IsHurtEntity(hit, triggerTime)) continue;
                 Vector3 dir = hit.RadiusCenter - pos;
                 dir.y = 0;

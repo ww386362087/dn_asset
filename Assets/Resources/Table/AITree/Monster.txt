@@ -58,7 +58,13 @@
 				}
 			}]
 		},{
-			"Type":"StopNavMove"
+			"Type":"Sequence",
+			"Children":[{
+				"Type":"StopNavMove"
+			},{
+				"Type":"XAIActionSkill",
+				"StringmAIArgSkillScript":"Monster_goblin_green_attack"
+			}]
 		}]
 	}
 }

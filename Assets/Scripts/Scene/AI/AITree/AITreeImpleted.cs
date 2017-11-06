@@ -287,7 +287,23 @@ namespace AI
             if (entity.SetTimer(wait)) return AIRuntimeStatus.Success;
             return AIRuntimeStatus.Failure;
         }
-        
+
+
+        public static AIRuntimeStatus XAIActionSkillUpdate(XEntity entity, string scr)
+        {
+            var skill = entity.GetComponent<XSkillComponent>();
+            if (skill != null)
+            {
+                if (!skill.IsCasting)
+                    skill.CastSkill(scr);
+                else
+                    return AIRuntimeStatus.Running;
+            }
+            return AIRuntimeStatus.Failure;
+        }
+
+
+
         public static Transform SelectMoveTargetById(XEntity entity, int objectid)
         {
             List<XEntity> ens = XEntityMgr.singleton.GetAllEnemy(entity);

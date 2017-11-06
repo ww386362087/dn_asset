@@ -12,7 +12,7 @@
 			"floatwaitTime":{
 				"Type":"float",
 				"Name":"",
-				"SinglemValue":34
+				"SinglemValue":30
 			},
 			"boolrandomWait":{
 				"Type":"bool",
@@ -31,13 +31,8 @@
 			}
 		},{
 			"Type":"ValueHP",
-			"Int32mAIArgMaxHP":0,
-			"intmAIArgMinHP":{
-				"Type":"int",
-				"Name":"minHP",
-				"IsShared":true,
-				"Int32mValue":0
-			}
+			"Int32mAIArgMaxHP":2,
+			"Int32mAIArgMinHP":0
 		},{
 			"Type":"Log",
 			"stringtext":{

@@ -155,8 +155,7 @@ public class XHitAttribute
         }
     }
 
-
-
+    
     public void Begin(ISkillHoster host, XHitData da, Vector3 d, bool bAttackOnHitDown)
     {
         if (da.State == XBeHitState.Hit_Free) return;
@@ -247,7 +246,7 @@ public class XHitAttribute
                     curve_h = raw_h != null ? raw_h : null;
                     curve_v = raw_v;
                     curve_height_scale = (raw_h == null || raw_h.GetMaxValue() == 0) ? 1 : height / raw_h.GetMaxValue();
-                    curve_offset_scale = raw_v.GetMaxValue() == 0 ? 1 : offset / raw_v.GetMaxValue();
+                    curve_offset_scale = (raw_v == null || raw_v.GetMaxValue() == 0) ? 1 : offset / raw_v.GetMaxValue();
                 }
             }
         }
@@ -353,7 +352,7 @@ public class XHitAttribute
         if (bcurve)
         {
             curve_height_time_scale = curve_h == null ? 1 : present_straight / curve_h.GetTime(curve_h.length - 1);
-            curve_offset_time_scale = present_straight / curve_v.GetTime(curve_v.length - 1);
+            curve_offset_time_scale = curve_v == null ? 1 : present_straight / curve_v.GetTime(curve_v.length - 1);
             last_offset = 0;
             last_height = 0;
         }
@@ -375,7 +374,7 @@ public class XHitAttribute
             float ev = (elapsed) / curve_offset_time_scale;
             float eh = (elapsed) / curve_height_time_scale;
 
-            float c_v = curve_v.Evaluate(ev) * curve_offset_scale;
+            float c_v = curve_v == null ? 0 : curve_v.Evaluate(ev) * curve_offset_scale;
             float c_h = curve_h == null ? 0 : curve_h.Evaluate(eh) * curve_height_scale;
 
             Vector3 v = dir * (c_v - last_offset);

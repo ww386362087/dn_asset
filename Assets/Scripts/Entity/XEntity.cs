@@ -259,6 +259,22 @@ public class XEntity : XObject
         _state = XStateDefine.XState_Death;
     }
 
+    public void OnSkill(bool cast)
+    {
+        if (_state != XStateDefine.XState_Death)
+        {
+            _state = cast ? XStateDefine.XState_Skill : XStateDefine.XState_Idle;
+        }
+    }
+
+    public void OnHit(bool hit)
+    {
+        if (_state != XStateDefine.XState_Death)
+        {
+            _state = hit ? XStateDefine.XState_BeHit : XStateDefine.XState_Idle;
+        }
+    }
+
     public void SetRelation(EntityType type)
     {
         _eEntity_Type |= type;
@@ -281,4 +297,5 @@ public class XEntity : XObject
         }
         return false;
     }
+
 }

@@ -63,10 +63,10 @@ public class XAnimComponent : XComponent
             RealPlay();
         }
     }
-    
-    public void SetTrigger(string name,bool val)
+
+    public void SetTrigger(string name, bool val)
     {
-        if(m_Animator!=null)
+        if (m_Animator != null && m_Animator.isInitialized)
         {
             m_Animator.SetBool(name, val);
         }
@@ -77,7 +77,7 @@ public class XAnimComponent : XComponent
         if (!m_triggerName.Equals(name))
         {
             m_triggerName = name;
-            if (m_Animator != null )
+            if (m_Animator != null && m_Animator.isInitialized)
             {
                 m_Animator.SetTrigger(m_triggerName);
             }

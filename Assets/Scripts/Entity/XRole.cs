@@ -3,7 +3,6 @@ using XTable;
 
 public class XRole : XEntity
 {
-
     protected CharacterController controller;
     protected XNavComponent nav;
     protected XAnimComponent ani;
@@ -25,7 +24,8 @@ public class XRole : XEntity
         AttachComponent<XEquipComponent>();
         ani = AttachComponent<XAnimComponent>();
         nav = AttachComponent<XNavComponent>();
-
+        AttachComponent<XSkillComponent>();
+        AttachComponent<XBeHitComponent>();
         InitAnim();
     }
 

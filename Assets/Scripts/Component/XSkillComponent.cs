@@ -12,6 +12,9 @@ public class XSkillComponent : XComponent, ISkillHoster
     private XAnimComponent _anim;
     private string trigger = null;
     private XSkillAttributes _attribute;
+    private float _action_framecount = 0;
+    private DummyState _state = DummyState.Idle;
+    private string _src_skill = string.Empty;
 
     protected override UpdateState state { get { return UpdateState.FRAME; } }
 
@@ -26,6 +29,8 @@ public class XSkillComponent : XComponent, ISkillHoster
     public Transform ShownTransform { get; set; }
 
     public XEntityPresentation.RowData Present_data { get { return _entity.present; } }
+
+    public bool IsCasting { get { return _state == DummyState.Fire; } }
 
     public IHitHoster[] Hits
     {
@@ -47,12 +52,29 @@ public class XSkillComponent : XComponent, ISkillHoster
         base.OnInitial(_obj);
         _entity = _obj as XEntity;
         _attribute = new XSkillAttributes(this, _entity.EntityTransfer);
+        _anim = _entity.GetComponent<XAnimComponent>();
     }
 
 
     public override void OnUpdate(float delta)
     {
         base.OnUpdate(delta);
+        UpdateDummyState(delta);
+        LateUpdate();
+    }
+
+
+    private void UpdateDummyState(float delta)
+    {
+        if (_state == DummyState.Fire)
+        {
+            _action_framecount += delta;
+            if (_action_framecount > _current.Time) StopFire();
+        }
+    }
+
+    private void LateUpdate()
+    {
         if (_attribute != null) _attribute.UpdateRotation();
         if (!string.IsNullOrEmpty(trigger) && _anim != null && !_anim.Ator.IsInTransition(0))
         {
@@ -66,27 +88,25 @@ public class XSkillComponent : XComponent, ISkillHoster
         }
     }
 
-    public void LoadSkill(string file)
+    public void CastSkill(string file)
     {
-        Stream stream = XResources.ReadText("Table/Skill" + file);
-        XmlSerializer formatter = new XmlSerializer(typeof(XSkillData));
-        _current = (XSkillData)formatter.Deserialize(stream);
-
-        InitSkillAnim();
-    }
-
-    private void InitSkillAnim()
-    {
-        _anim = _entity.GetComponent<XAnimComponent>();
-        if (_anim == null)
+        if (_src_skill != file)
         {
-            _anim = _entity.AttachComponent<XAnimComponent>();
+            _src_skill = file;
+            Stream stream = XResources.ReadText("Table/Skill/" + file);
+            XmlSerializer formatter = new XmlSerializer(typeof(XSkillData));
+            _current = (XSkillData)formatter.Deserialize(stream);
+            RebuildSkillAniamtion();
         }
-        RebuildSkillAniamtion();
+        Fire();
     }
+    
 
     public void Fire()
     {
+        _action_framecount = 0;
+        _state = DummyState.Fire;
+        _entity.OnSkill(true);
         if (_current.TypeToken == 0)
             trigger = XSkillData.JA_Command[_current.SkillPosition];
         else if (_current.TypeToken == 1)
@@ -96,6 +116,9 @@ public class XSkillComponent : XComponent, ISkillHoster
 
     public void StopFire()
     {
+        _action_framecount = 0;
+        _state = DummyState.Idle;
+        _entity.OnSkill(false);
         trigger = AnimTriger.EndSkill;
         if (_attribute != null) _attribute.Clear();
     }

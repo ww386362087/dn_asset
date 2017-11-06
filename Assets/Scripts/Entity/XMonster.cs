@@ -3,7 +3,6 @@
 
 public class XMonster : XEntity
 {
-
     private XAnimComponent anim;
 
     public override void OnInitial()
@@ -12,17 +11,20 @@ public class XMonster : XEntity
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Enemy");
         _speed = 0.01f;
-
-        InitAnim();
+        
+        anim = AttachComponent<XAnimComponent>();
         AttachComponent<XAIComponent>();
         AttachComponent<XNavComponent>();
+        AttachComponent<XSkillComponent>();
+        AttachComponent<XBeHitComponent>();
+
+        InitAnim();
     }
 
 
 
     private void InitAnim()
     {
-        anim = AttachComponent<XAnimComponent>();
         OverrideAnim("Idle", _present.AttackIdle);
         OverrideAnim("Death", present.Death);
         OverrideAnim("Run", present.Run);

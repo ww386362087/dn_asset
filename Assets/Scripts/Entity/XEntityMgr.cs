@@ -96,7 +96,9 @@ public class XEntityMgr : XSingleton<XEntityMgr>
 
     public XEntity GetEntity(uint id)
     {
-        if (_dic_entities.ContainsKey(id))
+        if (Player != null && id == Player.EntityID)
+            return Player;
+        else if (_dic_entities.ContainsKey(id))
             return _dic_entities[id];
         return null;
     }
