@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-
 internal class XBullet
 {
     private struct XBulletTarget
@@ -21,14 +20,15 @@ internal class XBullet
     private XBulletData _data = null;
     private RaycastHit _hitInfo;
     private Vector3 _origin = Vector3.zero;
-    
-    private Dictionary<XHitHoster, XBulletTarget> _hurt_target = new Dictionary<XHitHoster, XBulletTarget>();
+    private IHitHoster[] _hits;
 
+    private Dictionary<IHitHoster, XBulletTarget> _hurt_target = new Dictionary<IHitHoster, XBulletTarget>();
+    
     public XBullet(XBulletData data)
     {
         _data = data;
         _elapsed = 0.0f;
-
+        _hits = data.Hits;
         _bullet = XResources.Load<GameObject>(data.Prefab, AssetType.Prefab);
         _bullet.transform.position = _data.BulletRay.origin;
         _bullet.transform.rotation = _data.Velocity > 0 ? Quaternion.LookRotation(_data.BulletRay.direction) : Quaternion.LookRotation(_data.Firer.Transform.forward);
@@ -54,7 +54,7 @@ internal class XBullet
         return expired;
     }
 
-    public bool IsHurtEntity(XHitHoster id)
+    public bool IsHurtEntity(IHitHoster id)
     {
         XBulletTarget target;
         if (id != null && _hurt_target.TryGetValue(id, out target))
@@ -134,7 +134,7 @@ internal class XBullet
     private void OnRefined(object o)
     {
         XBulletTarget bt;
-        XHitHoster id = (XHitHoster)o;
+        IHitHoster id = (IHitHoster)o;
 
         if (_hurt_target.TryGetValue(id, out bt))
         {
@@ -146,10 +146,10 @@ internal class XBullet
         }
     }
 
-    public void Result(XHitHoster hit)
+    public void Result(IHitHoster hit)
     {
         if (IsHurtEntity(hit)) return;
-        
+
         _data.Firer.Attribute.skillResult.InnerResult(_data.Sequnce, _bullet.transform.forward, _bullet.transform.position, _data.Skill, hit);
         if (hit != null)
         {
@@ -236,16 +236,15 @@ internal class XBullet
             _bullet.transform.position += move;
             if (_data.Skill.Result[_data.Sequnce].LongAttackData.Manipulation)
             {
-                XHitHoster[] hits = GameObject.FindObjectsOfType<XHitHoster>();
                 Vector3 center = _bullet.transform.position;
-                foreach (XHitHoster hit in hits)
+                foreach (IHitHoster hit in _hits)
                 {
-                    Vector3 gap = center - hit.transform.position;
+                    Vector3 gap = center - hit.Pos;
                     gap.y = 0;
                     if (gap.magnitude < _data.Skill.Result[_data.Sequnce].LongAttackData.ManipulationRadius)
                     {
                         float len = _data.Skill.Result[_data.Sequnce].LongAttackData.ManipulationForce * fDeltaT;
-                        hit.transform.Translate(gap.normalized * Mathf.Min(dis, len), Space.World);
+                        hit.HitObject.transform.Translate(gap.normalized * Mathf.Min(dis, len), Space.World);
                     }
                 }
             }
@@ -259,7 +258,7 @@ internal class XBullet
                     float t = _elapsed > _data.Life ? 0 : (_data.Skill.Result[_data.Sequnce].LongAttackData.RingFull ? (_elapsed > _data.Life * 0.5f ? (_data.Life - _elapsed) : _elapsed) : _elapsed);
                     float ir = t * _data.Skill.Result[_data.Sequnce].LongAttackData.RingVelocity;
                     float or = ir + _data.Skill.Result[_data.Sequnce].LongAttackData.RingRadius;
-                    RingCollideUnit(ir, or, _data.Firer.Transform.position, this);
+                    RingCollideUnit(ir, or, _data.Firer.Transform.position);
                     break;
                 case XResultBulletType.Sphere:
                 case XResultBulletType.Satellite:
@@ -272,61 +271,55 @@ internal class XBullet
                         new Vector3(_origin.x + dir.x * hlen, 0, _origin.z + dir.z * hlen),
                         hlen,
                         rotation,
-                        _data.Radius,
-                        this);
+                        _data.Radius);
                     break;
                 case XResultBulletType.Plane:
-                    PlaneBulletCollideUnit(_origin, move, _data.Radius, this);
+                    PlaneBulletCollideUnit(_origin, move, _data.Radius);
                     break;
             }
         }
     }
 
-    private static void RingCollideUnit(float ir, float or, Vector3 center, XBullet bullet)
+    private void RingCollideUnit(float ir, float or, Vector3 center)
     {
-        XHitHoster[] ents = GameObject.FindObjectsOfType<XHitHoster>();
-        for (int i = 0; i < ents.Length; i++)
+        for (int i = 0; i < _hits.Length; i++)
         {
             bool collided = false;
-            Vector3 v = ents[i].transform.position - center; v.y = 0;
+            Vector3 v = _hits[i].Pos - center; v.y = 0;
             float dis = v.sqrMagnitude;
             collided = dis > (ir * ir) && dis < (or * or);
-            if (collided) bullet.Result(ents[i]);
-            if (bullet.IsExpired()) break;
+            if (collided) Result(_hits[i]);
+            if (IsExpired()) break;
         }
     }
 
-    private static void BulletCollideUnit(Vector3 rectcenter, float hlen, float rotation, float r, XBullet bullet)
+    private void BulletCollideUnit(Vector3 rectcenter, float hlen, float rotation, float r)
     {
-        XHitHoster[] ents = GameObject.FindObjectsOfType<XHitHoster>();
-        for (int i = 0; i < ents.Length; i++)
+        for (int i = 0; i < _hits.Length; i++)
         {
             bool collided = false;
-            Vector3 cycle = ents[i].RadiusCenter;
+            Vector3 cycle = _hits[i].RadiusCenter;
             cycle -= rectcenter;
             cycle.y = 0;
             cycle = XCommon.singleton.HorizontalRotateVetor3(cycle, rotation, false);
-            collided = XCommon.singleton.IsRectCycleCross(hlen, r, cycle, ents[i].Attr.radius) || Vector3.SqrMagnitude(cycle) < r * r;
-            if (collided) bullet.Result(ents[i]);
-            if (bullet.IsExpired()) break;
+            collided = XCommon.singleton.IsRectCycleCross(hlen, r, cycle, _hits[i].Attr.radius) || Vector3.SqrMagnitude(cycle) < r * r;
+            if (collided) Result(_hits[i]);
+            if (IsExpired()) break;
         }
     }
 
-    private static void PlaneBulletCollideUnit(Vector3 origin, Vector3 move, float r, XBullet bullet)
+    private void PlaneBulletCollideUnit(Vector3 origin, Vector3 move, float r)
     {
         Vector3 side = XCommon.singleton.HorizontalRotateVetor3(move, 90);
         Vector3 left = origin + side * r;
         Vector3 right = origin - side * r;
-
-        XHitHoster[] ents = GameObject.FindObjectsOfType<XHitHoster>();
-
-        for (int i = 0; i < ents.Length; i++)
+        for (int i = 0; i < _hits.Length; i++)
         {
             bool collided = false;
-            Vector3 pos = ents[i].RadiusCenter;
+            Vector3 pos = _hits[i].RadiusCenter;
             collided = XCommon.singleton.IsLineSegmentCross(pos, pos - move, left, right);
-            if (collided) bullet.Result(ents[i]);
-            if (bullet.IsExpired()) break;
+            if (collided) Result(_hits[i]);
+            if (IsExpired()) break;
         }
     }
 

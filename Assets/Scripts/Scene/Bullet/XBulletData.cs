@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using XTable;
 
 internal class XBulletData
 {
@@ -10,6 +9,7 @@ internal class XBulletData
     private float _velocity = 0;
     private bool _warning = false;
     private GameObject _target = null;
+    private IHitHoster[] _hits = null;
 
     public Ray BulletRay;
     public GameObject Target { get { return _target; } }
@@ -23,12 +23,14 @@ internal class XBulletData
     public float Life { get { return _data.Result[_sequnce].LongAttackData.Runningtime + _data.Result[_sequnce].LongAttackData.Stickytime; } }
     public float Runningtime { get { return _data.Result[_sequnce].LongAttackData.Runningtime; } }
     public float Radius { get { return _data.Result[_sequnce].LongAttackData.Radius; } }
+    public IHitHoster[] Hits { get { return _hits; } }
 
-    public XBulletData(ISkillHoster firer, XSkillData data, GameObject target, int idx, float diviation, int wid)
+    public XBulletData(ISkillHoster firer, XSkillData data, GameObject target, int idx, float diviation, int wid,IHitHoster[] hits)
     {
         _sequnce = idx;
         _data = data;
         _hoster = firer;
+        _hits = hits;
         _warning_pos = Vector3.zero;
 
         if (data.Result[idx].Attack_All)

@@ -185,7 +185,8 @@ public class XSkillResult : XSkill
             target,
             data.Index,
             data.LongAttackData.FireAngle + additionalAngle,
-            wid));
+            wid,
+            host.Hits));
     }
 
 }
