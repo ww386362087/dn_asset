@@ -21,7 +21,6 @@ public class XHitAttribute
     public float last_height = 0;
 
     public float delta_x = 0;
-    public float delta_y = 0;
     public float delta_z = 0;
 
     public float factor = 0;
@@ -115,7 +114,6 @@ public class XHitAttribute
                             }
                         }
                         CalcDeltaPos(transform.position, Time.deltaTime, last_elapsed);
-                        float dh = -(deltaH / present_straight) * Time.deltaTime;
                         if (offset < 0)
                         {
                             float move = Mathf.Sqrt(delta_x * delta_x + delta_z * delta_z);
@@ -126,7 +124,7 @@ public class XHitAttribute
                                 delta_z = 0;
                             }
                         }
-                        transform.Translate(delta_x, delta_y + dh, delta_z, Space.World);
+                        transform.Translate(delta_x, 0, delta_z, Space.World);
                         break;
                     case XBeHitPhase.Hit_Landing:
                         if (elapsed > present_straight + landing_time)
@@ -367,8 +365,7 @@ public class XHitAttribute
     public void CalcDeltaPos(Vector3 position, float deltaTime, float last_elapsed)
     {
         Vector2 delta = Vector2.zero;
-        float h = 0;
-
+        
         if (bcurve)
         {
             float ev = (elapsed) / curve_offset_time_scale;
@@ -379,29 +376,23 @@ public class XHitAttribute
 
             Vector3 v = dir * (c_v - last_offset);
             delta.x = v.x; delta.y = v.z;
-            h = c_h - last_height;
             last_height = c_h;
             last_offset = c_v;
         }
         else
         {
-            float v1 = rticalV - gravity * (last_elapsed);
-            float v2 = rticalV - gravity * (elapsed);
-
-            h = (v1 + v2) / 2.0f * deltaTime;
             pos = position;
             delta = (des - pos) * Mathf.Min(1.0f, factor * deltaTime);
         }
 
         delta_x = delta.x;
-        delta_y = h;
         delta_z = delta.y;
     }
 
 
     public void PlayHitFx(Transform trans, string fx, bool follow)
     {
-        if (fx.Length == 0) return;
+        if (string.IsNullOrEmpty(fx)) return;
 
         hit_fx = XResources.Load<GameObject>(fx, AssetType.Prefab);
         binded_bone = trans.Find("Bip001/Bip001 Pelvis/Bip001 Spine");

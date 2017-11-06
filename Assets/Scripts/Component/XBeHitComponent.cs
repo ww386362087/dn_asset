@@ -17,6 +17,8 @@ public class XBeHitComponent : XComponent, IHitHoster
 
     public XHitAttribute Attr { get { return _attr; } }
 
+    protected override UpdateState state { get { return UpdateState.FRAME; } }
+
     public override void OnInitial(XObject _obj)
     {
         base.OnInitial(_obj);
@@ -51,7 +53,7 @@ public class XBeHitComponent : XComponent, IHitHoster
     public override void OnUpdate(float delta)
     {
         base.OnUpdate(delta);
-        if (_attr == null )
+        if (_attr != null )
         {
             _attr.Update();
         }
@@ -61,7 +63,7 @@ public class XBeHitComponent : XComponent, IHitHoster
 
     public void Begin(ISkillHoster hoster, XHitData data, Vector3 dir, bool bAttackOnHitDown)
     {
-        if (_attr == null && _entity.CurState != XStateDefine.XState_Death)
+        if (_attr != null && _entity.CurState != XStateDefine.XState_Death)
         {
             _attr.Begin(hoster, data, dir, bAttackOnHitDown);
             _entity.OnHit(true);

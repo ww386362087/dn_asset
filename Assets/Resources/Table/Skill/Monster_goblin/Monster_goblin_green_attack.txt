@@ -24,7 +24,7 @@
       <Offset>0.4</Offset>
       <State>Hit_Back</State>
       <State_Animation>Hit_Back_Front</State_Animation>
-      <Fx>Effects/FX_Particle/NPC/Lzg_Gw/Jz_play_red_U</Fx>
+      <Fx>Effects/FX_Particle/Roles/Jz_play_red_U</Fx>
       <CurveUsing>true</CurveUsing>
     </XHitData>
   </Hit>

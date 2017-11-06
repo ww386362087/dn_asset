@@ -53,6 +53,7 @@ public class XHitPanel : XPanel
             {
                 GameObject hitter = UnityEngine.Object.Instantiate(Hoster.SkillDataExtra.Dummy, Hoster.transform.position, Quaternion.identity) as GameObject;
                 hitter.AddComponent<XHitHoster>().PresentID = (int)Hoster.ConfigData.Dummy;
+                Selection.activeGameObject = hitter;
             }
         }
         EditorGUILayout.EndHorizontal();
