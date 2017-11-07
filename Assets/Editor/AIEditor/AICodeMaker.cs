@@ -22,8 +22,8 @@ public class AICodeMaker
 
     static List<string> maker_list = new List<string>();
 
-    [MenuItem("Tools/MakeRuntimeCode")]
-    private static void MakeRuntimeCode()
+    [MenuItem("Tools/MakeAIRuntimeCode")]
+    public static void MakeRuntimeCode()
     {
         DirectoryInfo dir = new DirectoryInfo(unity_AI_path);
         FileInfo[] files = dir.GetFiles("*.txt");
@@ -41,7 +41,7 @@ public class AICodeMaker
         EditorUtility.DisplayDialog("AI Auto Code", "AI Code Make Finish!", "OK");
     }
 
-    [MenuItem("Tools/CleanRuntimeCode")]
+    [MenuItem("Tools/CleanAIRuntimeCode")]
     private static void CleanRuntimeCode()
     {
         maker_list.Clear();

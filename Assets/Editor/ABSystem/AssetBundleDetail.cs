@@ -5,7 +5,7 @@ using UnityEngine;
 public class AssetBundleDetail : EditorWindow
 {
 
-    [MenuItem("ABSystem/AssetBundle Detail")]
+    [MenuItem("XBuild/ABSystem/AssetBundle Detail")]
     static void Open()
     {
         GetWindow<AssetBundleDetail>("AssetBundle Detail", true);

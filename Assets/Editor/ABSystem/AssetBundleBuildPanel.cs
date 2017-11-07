@@ -8,7 +8,7 @@ namespace ABSystem
 {
     class AssetBundleBuildPanel : EditorWindow
     {
-        [MenuItem("ABSystem/Builder Panel")]
+        [MenuItem("XBuild/ABSystem/Builder Panel")]
         static void Open()
         {
             GetWindow<AssetBundleBuildPanel>("ABSystem", true);

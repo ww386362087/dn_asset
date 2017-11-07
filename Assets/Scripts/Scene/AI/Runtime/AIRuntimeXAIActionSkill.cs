@@ -19,7 +19,7 @@ namespace AI.Runtime {
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[0].val != null)
-				mAIArgSkillScript = data.vars[0].val.ToString();
+				mAIArgSkillScript = (System.String)data.vars[0].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {

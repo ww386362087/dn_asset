@@ -31,7 +31,14 @@ public class AIExport
        
     }
 
-    [MenuItem("Tools/ExportConfig")]
+    [MenuItem("Tools/AI-DoOnce")]
+    private static void DoOnce()
+    {
+        ExportAll();
+        AICodeMaker.MakeRuntimeCode();
+    }
+
+    [MenuItem("Tools/ExportAIConfig")]
     public static void ExportAll()
     {
         string path = Application.dataPath + @"\Behavior Designer\AIData\";

@@ -10,7 +10,7 @@ namespace ABSystem
     {
         AssetBundleDataWriter dataWriter = new AssetBundleDataBinaryWriter();
 
-        [MenuItem(@"ABSystem/BuildABImmediate")]
+        [MenuItem(@"XBuild/ABSystem/BuildABImmediate")]
         public static void BuildBundle()
         {
             AssetBundleBuildPanel.Save();
