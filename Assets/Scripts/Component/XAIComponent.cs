@@ -9,7 +9,7 @@ public class XAIComponent : XComponent
     private IXBehaviorTree _tree;
     private float _ai_tick = 1.0f;  //AI心跳间隔 
     private float _tick_factor = 1f;
-    private bool _enable_runtime = false;
+    private bool _enable_runtime = true;
     private uint _cast_skillid = 0;
     private float _tick = 0;
     private float _timer = 0;

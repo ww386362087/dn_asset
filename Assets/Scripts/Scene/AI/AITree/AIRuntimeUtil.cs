@@ -146,8 +146,7 @@ namespace AI.Runtime
                     var.val = val;
                     break;
                 case "System.String":
-                    string s = val.ToString().Replace("\n", "").Replace("\t", "").Replace("\r", "");
-                    var.val = "\"" + s + "\"";
+                    var.val = val.ToString().Replace("\n", "").Replace("\t", "").Replace("\r", "");
                     break;
                 case "System.Single":
                     var.val = float.Parse(val.ToString());

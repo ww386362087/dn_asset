@@ -71,8 +71,7 @@ namespace AI
         {
             return V;
         }
-
-
+        
         public override bool Equals(object obj)
         {
             return V.Equals(obj.ToString());
