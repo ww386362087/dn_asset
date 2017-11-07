@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1160779693940540}
+  m_RootGameObject: {fileID: 1986188319695800}
   m_IsPrefabParent: 1
---- !u!1 &1160779693940540
+--- !u!1 &1986188319695800
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4740124350960800}
-  - component: {fileID: 33388519444774338}
-  - component: {fileID: 23700270867487518}
+  - component: {fileID: 4454046410468808}
+  - component: {fileID: 33376289251439000}
+  - component: {fileID: 23286526274790106}
   m_Layer: 11
   m_Name: ar_apocalypse_bigbow_weapon
   m_TagString: Untagged
@@ -28,12 +28,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4740124350960800
+--- !u!4 &4454046410468808
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160779693940540}
+  m_GameObject: {fileID: 1986188319695800}
   m_LocalRotation: {x: -0.7071068, y: 0.00000006181724, z: 2.7021175e-15, w: 0.70710677}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,12 +41,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23700270867487518
+--- !u!23 &23286526274790106
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160779693940540}
+  m_GameObject: {fileID: 1986188319695800}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,10 +72,10 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33388519444774338
+--- !u!33 &33376289251439000
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160779693940540}
+  m_GameObject: {fileID: 1986188319695800}
   m_Mesh: {fileID: 4300000, guid: 3802f047ab4a74848a47fbf8d65a0754, type: 2}

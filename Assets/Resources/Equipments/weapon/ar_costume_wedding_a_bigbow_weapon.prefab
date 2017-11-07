@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1494998046115762}
+  m_RootGameObject: {fileID: 1113189464312736}
   m_IsPrefabParent: 1
---- !u!1 &1494998046115762
+--- !u!1 &1113189464312736
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4348521272619972}
-  - component: {fileID: 33571496812515532}
-  - component: {fileID: 23379203131498900}
+  - component: {fileID: 4609793055077374}
+  - component: {fileID: 33752090988637784}
+  - component: {fileID: 23327926825156772}
   m_Layer: 11
   m_Name: ar_costume_wedding_a_bigbow_weapon
   m_TagString: Untagged
@@ -28,12 +28,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4348521272619972
+--- !u!4 &4609793055077374
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494998046115762}
+  m_GameObject: {fileID: 1113189464312736}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 8.3378976e-10, y: 8.3378976e-10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,12 +41,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23379203131498900
+--- !u!23 &23327926825156772
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494998046115762}
+  m_GameObject: {fileID: 1113189464312736}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,10 +72,10 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33571496812515532
+--- !u!33 &33752090988637784
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494998046115762}
+  m_GameObject: {fileID: 1113189464312736}
   m_Mesh: {fileID: 4300000, guid: 3fe66ffc69a8008439300cdd32739b7c, type: 2}
