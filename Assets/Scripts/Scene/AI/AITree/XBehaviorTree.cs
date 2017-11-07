@@ -16,7 +16,7 @@ namespace AI
         {
             if (_behavior_tree == null) return;
             SharedVariable sharedvar = _behavior_tree.GetVariable(name);
-            if (sharedvar != null && value != null) sharedvar.SetValue(value);
+            if (sharedvar != null) sharedvar.SetValue(value);
         }
 
         public void SetNavPoint(Transform navpoint)
