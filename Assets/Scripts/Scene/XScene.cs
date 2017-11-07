@@ -91,6 +91,7 @@ public class XScene : XSingleton<XScene>
     {
         GameCamera.OnEnterSceneFinally();
         Documents.singleton.OnEnterSceneFinally();
+        SkillframeDlg.singleton.SetVisible(true);
         _terrain = Terrain.activeTerrain;
     }
 

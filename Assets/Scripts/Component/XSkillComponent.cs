@@ -20,7 +20,7 @@ public class XSkillComponent : XComponent, ISkillHoster
 
     public Transform Transform { get { return _entity.EntityTransfer; } }
 
-    public GameObject Target { get { return _target.EntityObject; } }
+    public GameObject Target { get { return _target != null ? _target.EntityObject : null; } }
 
     public XSkillAttributes Attribute { get { return _attribute; } }
 
