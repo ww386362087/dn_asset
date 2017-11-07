@@ -18,6 +18,17 @@ namespace AI
     }
 
     [TaskCategory("Game")]
+    [TaskDescription("重置目标")]
+    public class ResetTarget : Action
+    {
+        public override TaskStatus OnUpdate()
+        {
+            XEntity e = AITreeImpleted.Transform2Entity(transform);
+            return (TaskStatus)AITreeImpleted.ResetTargetUpdate(e);
+        }
+    }
+
+    [TaskCategory("Game")]
     [TaskDescription("锁定最近的目标")]
     public class DoSelectNearest : Action
     {

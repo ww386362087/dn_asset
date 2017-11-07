@@ -12,22 +12,14 @@ namespace AI.Runtime {
     using UnityEngine;
     
     
-    public class AIRuntimeRotateToTarget : AIRunTimeBase {
-        
-        public GameObject mAIArgTarget;
-        
-        public float floatmAIArgAngle;
+    public class AIRuntimeMoveForward : AIRunTimeBase {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
-			if(data.vars[1].val != null)
-				floatmAIArgAngle = (System.Single)data.vars[1].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			var inmAIArgTarget = _tree.GetVariable("target"); 
-			if (inmAIArgTarget != null) mAIArgTarget = (GameObject)inmAIArgTarget;
-			return AITreeImpleted.RotateToTargetUpdate(entity, mAIArgTarget, floatmAIArgAngle);
+			return AITreeImpleted.MoveForwardUpdate(entity);
         }
     }
 }

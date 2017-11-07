@@ -69,8 +69,8 @@ namespace AI
     }
 
     [TaskCategory("Game")]
-    [TaskDescription("随机值 触发概率")]
-    public class RandomCompare : Conditional
+    [TaskDescription("随机值(0-100) 概率触发")]
+    public class StatusRandom : Conditional
     {
         public int mAIArgProb;
 

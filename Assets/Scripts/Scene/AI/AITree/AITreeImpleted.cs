@@ -45,7 +45,7 @@ namespace AI
                     return AIRuntimeStatus.Failure;
             }
         }
-
+        
         public static AIRuntimeStatus StopNavMoveUpdate(XEntity entity)
         {
             if (XEntity.Valide(entity) && StopNavMove(entity))
@@ -53,10 +53,33 @@ namespace AI
             return AIRuntimeStatus.Failure;
         }
 
-        public static AIRuntimeStatus RotateToTargetUpdate(XEntity entity, GameObject mAIArgTarget)
+        public static AIRuntimeStatus RotateToTargetUpdate(XEntity entity, GameObject mAIArgTarget, float ang)
         {
-            if (XEntity.Valide(entity) && RotateToTarget(entity.EntityTransfer, mAIArgTarget))
+            if (XEntity.Valide(entity) && RotateToTarget(entity.EntityTransfer, mAIArgTarget, ang))
                 return AIRuntimeStatus.Success;
+            else
+                return AIRuntimeStatus.Failure;
+        }
+
+        public static AIRuntimeStatus RotateSelfUpdate(XEntity entity, float max,float min)
+        {
+            if (XEntity.Valide(entity))
+            {
+                float ang = Random.Range(min, max);
+                Vector3 dir = XCommon.singleton.HorizontalRotateVetor3(entity.Forward, ang);
+                entity.EntityTransfer.forward = dir;
+                return AIRuntimeStatus.Success;
+            }
+            return AIRuntimeStatus.Failure;
+        }
+
+        public static AIRuntimeStatus MoveForwardUpdate(XEntity entity)
+        {
+            if (XEntity.Valide(entity))
+            {
+                entity.MoveForward(entity.EntityTransfer.forward);
+                return AIRuntimeStatus.Success;
+            }
             else
                 return AIRuntimeStatus.Failure;
         }
@@ -76,6 +99,14 @@ namespace AI
                 return AIRuntimeStatus.Success;
             else
                 return AIRuntimeStatus.Failure;
+        }
+
+
+        public static AIRuntimeStatus ResetTargetUpdate(XEntity entity)
+        {
+            if (XEntity.Valide(entity) && entity.GetComponent<XAIComponent>().ResetTarget())
+                return AIRuntimeStatus.Success;
+            return AIRuntimeStatus.Failure;
         }
 
         public static AIRuntimeStatus DoSelectNearestUpdate(XEntity entity)
@@ -165,16 +196,32 @@ namespace AI
             }
         }
 
-        public static AIRuntimeStatus ValueDistanceUpdate(XEntity entity, GameObject mAIArgTarget,float mAIArgMaxDistance)
+        public static AIRuntimeStatus ValueDistanceUpdate(XEntity entity, GameObject mAIArgTarget, float mAIArgMaxDistance)
         {
             if (mAIArgTarget == null)
                 return AIRuntimeStatus.Failure;
 
-            float dis = (entity.Position - mAIArgTarget.transform.position).magnitude;
-            if (dis <= mAIArgMaxDistance)
+            float dis = (entity.Position - mAIArgTarget.transform.position).sqrMagnitude;
+            if (dis <= mAIArgMaxDistance * mAIArgMaxDistance)
                 return AIRuntimeStatus.Success;
             else
                 return AIRuntimeStatus.Failure;
+        }
+
+
+        public static AIRuntimeStatus StatusRandomUpdate(XEntity e, int prob)
+        {
+            if (prob < 0 || prob > 100)
+            {
+                return AIRuntimeStatus.Failure;
+            }
+            else
+            {
+                int rand = Random.Range(0, 100);
+                if (rand >= prob)
+                    return AIRuntimeStatus.Success;
+                else return AIRuntimeStatus.Failure;
+            }
         }
 
         public static AIRuntimeStatus IsOppoCastingSkillUpdate(XEntity entity)
@@ -289,10 +336,10 @@ namespace AI
         }
 
 
-        public static AIRuntimeStatus XAIActionSkillUpdate(XEntity entity, string scr)
+        public static AIRuntimeStatus XAIActionSkillUpdate(XEntity entity, string scr, GameObject target)
         {
             var skill = entity.GetComponent<XSkillComponent>();
-            if (skill != null)
+            if (skill != null && target != null)
             {
                 if (!skill.IsCasting)
                     skill.CastSkill(scr);
@@ -368,11 +415,12 @@ namespace AI
             return true;
         }
 
-        public static bool RotateToTarget(Transform src, GameObject target)
+        public static bool RotateToTarget(Transform src, GameObject target,float ang)
         {
             if (src != null && target != null)
             {
                 Vector3 dir = target.transform.position - src.position;
+                dir = XCommon.singleton.HorizontalRotateVetor3(dir, ang);
                 src.forward = dir;
                 return true;
             }

@@ -1,4 +1,7 @@
-﻿using BehaviorDesigner.Runtime.Tasks;
+﻿using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tasks;
+
+
 namespace AI
 {
     [TaskCategory("Game")]
@@ -6,11 +9,14 @@ namespace AI
     public class XAIActionSkill : Action
     {
         public string mAIArgSkillScript;
+        public SharedGameObject mAIArgTarget;
+
 
         public override TaskStatus OnUpdate()
         {
             XEntity e = AITreeImpleted.Transform2Entity(transform);
-            return (TaskStatus)AITreeImpleted.XAIActionSkillUpdate(e, mAIArgSkillScript);
+            return (TaskStatus)AITreeImpleted.XAIActionSkillUpdate(e, mAIArgSkillScript, mAIArgTarget.Value);
         }
     }
+
 }

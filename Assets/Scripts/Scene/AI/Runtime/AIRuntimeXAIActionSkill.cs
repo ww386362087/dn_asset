@@ -16,6 +16,8 @@ namespace AI.Runtime {
         
         public string mAIArgSkillScript;
         
+        public GameObject mAIArgTarget;
+        
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[0].val != null)
@@ -23,7 +25,9 @@ namespace AI.Runtime {
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.XAIActionSkillUpdate(entity, mAIArgSkillScript);
+			var inmAIArgTarget = _tree.GetVariable("target"); 
+			if (inmAIArgTarget != null) mAIArgTarget = (GameObject)inmAIArgTarget;
+			return AITreeImpleted.XAIActionSkillUpdate(entity, mAIArgSkillScript, mAIArgTarget);
         }
     }
 }

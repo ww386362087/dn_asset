@@ -26,6 +26,18 @@ namespace AI.Runtime {
 				case "Inverter":
 					rst = new AIRuntimeInverter();
 					break;
+				case "RotateSelf":
+					rst = new AIRuntimeRotateSelf();
+					break;
+				case "MoveForward":
+					rst = new AIRuntimeMoveForward();
+					break;
+				case "ResetTarget":
+					rst = new AIRuntimeResetTarget();
+					break;
+				case "StatusRandom":
+					rst = new AIRuntimeStatusRandom();
+					break;
 				case "FindTargetByDistance":
 					rst = new AIRuntimeFindTargetByDistance();
 					break;
@@ -43,9 +55,6 @@ namespace AI.Runtime {
 					break;
 				case "StopNavMove":
 					rst = new AIRuntimeStopNavMove();
-					break;
-				case "RandomCompare":
-					rst = new AIRuntimeRandomCompare();
 					break;
 				case "XAIActionSkill":
 					rst = new AIRuntimeXAIActionSkill();

@@ -262,8 +262,8 @@ public class XAIComponent : XComponent
             XEntity enemy = list[i];
             if (XEntity.Valide(enemy))
             {
-                float distance = (enemy.Position - _entity.Position).magnitude;
-                if (distance < dist)
+                float distance = (enemy.Position - _entity.Position).sqrMagnitude;
+                if (distance < dist * dist)
                 {
                     Vector3 dir = enemy.Position - _entity.Position;
                     float targetangle = Vector3.Angle(dir, _entity.Forward);
@@ -275,6 +275,14 @@ public class XAIComponent : XComponent
             }
         }
         return targets.Count > 0;
+    }
+
+    public bool ResetTarget()
+    {
+        targets.Clear();
+        _target = null;
+        _tree.SetVariable(AITreeArg.TARGET, null);
+        return true;
     }
 
     public bool DoSelectNearest()
