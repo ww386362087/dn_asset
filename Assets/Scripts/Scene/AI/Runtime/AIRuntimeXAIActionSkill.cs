@@ -12,22 +12,18 @@ namespace AI.Runtime {
     using UnityEngine;
     
     
-    public class AIRuntimeValueHP : AIRunTimeBase {
+    public class AIRuntimeXAIActionSkill : AIRunTimeBase {
         
-        public int mAIArgMaxHP;
-        
-        public int mAIArgMinHP;
+        public string mAIArgSkillScript;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[0].val != null)
-				mAIArgMaxHP = (System.Int32)data.vars[0].val;
-			if(data.vars[1].val != null)
-				mAIArgMinHP = (System.Int32)data.vars[1].val;
+				mAIArgSkillScript = data.vars[0].val.ToString();
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.ValueHPUpdate(entity, mAIArgMaxHP, mAIArgMinHP);
+			return AITreeImpleted.XAIActionSkillUpdate(entity, mAIArgSkillScript);
         }
     }
 }

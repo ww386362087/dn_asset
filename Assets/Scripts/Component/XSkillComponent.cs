@@ -69,7 +69,7 @@ public class XSkillComponent : XComponent, ISkillHoster
         if (_state == DummyState.Fire)
         {
             _action_framecount += delta;
-            if (_action_framecount > _current.Time) StopFire();
+            if (_current != null && _action_framecount > _current.Time) StopFire();
         }
     }
 

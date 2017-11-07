@@ -53,6 +53,10 @@ public class XAIComponent : XComponent
     {
         base.OnInitial(_obj);
         _entity = _obj as XEntity;
+        if (!Application.isEditor)
+        {
+            _enable_runtime = true;
+        }
         InitVariables();
         InitTree();
     }

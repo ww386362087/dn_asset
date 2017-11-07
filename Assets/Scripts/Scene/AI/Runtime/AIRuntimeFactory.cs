@@ -44,6 +44,12 @@ namespace AI.Runtime {
 				case "StopNavMove":
 					rst = new AIRuntimeStopNavMove();
 					break;
+				case "RandomCompare":
+					rst = new AIRuntimeRandomCompare();
+					break;
+				case "XAIActionSkill":
+					rst = new AIRuntimeXAIActionSkill();
+					break;
 				case "Wait":
 					rst = new AIRuntimeWait();
 					break;

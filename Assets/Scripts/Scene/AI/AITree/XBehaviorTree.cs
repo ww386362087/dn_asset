@@ -45,10 +45,12 @@ namespace AI
         public bool SetBehaviorTree(string name)
         {
             if (string.IsNullOrEmpty(name)) return false;
+#if UNITY_EDITOR
             string location = "Assets/Behavior Designer/AIData/" + name + ".asset";
             ExternalBehaviorTree ebt = UnityEditor.AssetDatabase.LoadAssetAtPath(location, typeof(ExternalBehaviorTree)) as ExternalBehaviorTree;
             _behavior_tree.ExternalBehavior = ebt;
             _behavior_tree.RestartWhenComplete = true;
+#endif
             return true;
         }
 

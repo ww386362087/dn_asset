@@ -11,7 +11,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: yunstudio
-  productName: DnAsset
+  productName: "\u8C37\u57FA"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
@@ -61,7 +61,7 @@ PlayerSettings:
   allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 1
   allowedAutorotateToLandscapeLeft: 1
-  useOSAutorotation: 0
+  useOSAutorotation: 1
   use32BitDisplayBuffer: 1
   disableDepthAndStencilBuffers: 0
   defaultIsFullScreen: 1
@@ -120,23 +120,23 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: com.yunstudio.dnasset
-  bundleVersion: 1.0
+  bundleVersion: 0.0.0
   preloadedAssets: []
   metroInputSource: 0
   m_HolographicPauseOnTrackingLoss: 1
   xboxOneDisableKinectGpuReservation: 0
   protectGraphicsMemory: 0
-  AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 9
-  AndroidPreferredInstallLocation: 1
+  AndroidBundleVersionCode: 171107
+  AndroidMinSdkVersion: 14
+  AndroidPreferredInstallLocation: 0
   aotOptions: 
   apiCompatibilityLevel: 2
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
   iPhoneBuildNumber: 0
-  ForceInternetPermission: 0
-  ForceSDCardPermission: 0
+  ForceInternetPermission: 1
+  ForceSDCardPermission: 1
   CreateWallpaper: 0
   APKExpansionFiles: 0
   preloadShaders: 0
@@ -196,10 +196,10 @@ PlayerSettings:
   tvOSManualSigningProvisioningProfileID: 
   appleEnableAutomaticSigning: 0
   AndroidTargetDevice: 0
-  AndroidSplashScreenScale: 0
+  AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: D:/projects/dn_asset/Assets/Editor/Build/yunstudio.keystore
+  AndroidKeyaliasName: yunstudio
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
@@ -393,12 +393,13 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: TEST
-    4: TEST
-    7: TEST
+    1: 
+    4: 
+    7: 
   platformArchitecture:
     iOS: 0
   scriptingBackend:
+    Android: 0
     iOS: 1
   incrementalIl2cppBuild:
     iOS: 1
