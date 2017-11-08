@@ -16,7 +16,7 @@ public class AIExport
         "Instant",
         "Name"
     };
-
+    
     [MenuItem("Assets/AI/Export")]
     public static void ExportSelect()
     {

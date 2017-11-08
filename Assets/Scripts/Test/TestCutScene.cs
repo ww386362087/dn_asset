@@ -34,7 +34,7 @@ public class TestCutScene : ITest
     
     void Load()
     {
-        string path = "Assets/Resources/Table/CutScene/4_4_start.txt";
+        string path = @"Assets/Resources/Table/CutScene/4_4_start.txt";
        _run_data = DeserializeData<XCutSceneData>(path);
     }
 

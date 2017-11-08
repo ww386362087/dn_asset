@@ -45,6 +45,8 @@ public sealed class GameEnine : XObject
 
     public static void OnUnintial()
     {
+        UIManager.singleton.UnInitial();
+        Documents.singleton.Unintial();
     }
 
     public static void OnApplicationQuit()

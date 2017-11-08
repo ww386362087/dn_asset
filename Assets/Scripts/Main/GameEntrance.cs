@@ -77,7 +77,7 @@ public class GameEntrance : MonoBehaviour
 
     void OnApplicationQuit()
     {
-
+        GameEnine.OnApplicationQuit();
     }
 
 
