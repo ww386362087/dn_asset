@@ -118,10 +118,12 @@ public class XScene : XSingleton<XScene>
     {
         if (!IsPlayCutScene)
         {
+            XAutoFade.FadeOut2In(1f, 0.2f);
             _cutscene_data = csd;
             GameCamera.Target = null;
             _cutscene_runer = GameCamera.CameraObject.AddComponent<XCutSceneRunner>();
             _cutscene_runer.cut_scene_data = _cutscene_data;
+            UIManager.singleton.OnCutScene(true);
         }
         else
         {
@@ -138,6 +140,7 @@ public class XScene : XSingleton<XScene>
         {
             _cutscene_runer.UnLoad();
             GameObject.Destroy(_cutscene_runer);
+            UIManager.singleton.OnCutScene(false);
         }
         _cutscene_data = null;
     }

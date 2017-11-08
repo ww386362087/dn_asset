@@ -13,6 +13,11 @@ public class XCutSceneUI : UIDlg<XCutSceneUI, XCutSceneBehaviour>
         get { return DlgType.Top; }
     }
 
+    public override bool isCutscene
+    {
+        get { return true; }
+    }
+
     protected override void Regist()
     {
         base.Regist();

@@ -9,6 +9,8 @@ public interface IUIDlg
 
     string fileName { get; }
 
+    bool isCutscene { get; }
+
     bool shareCanvas { get; }
 
     DlgBehaviourBase innerBehaviour { get; }

@@ -25,9 +25,8 @@ public class UIManager : XSingleton<UIManager>
     private const int _gap = 10;
     private const int _top = 800000;
 
-
-    public static int _far_far_away = 1000;
-    public static Vector3 Far_Far_Away = new Vector3(10000, 10000, 0);
+    public static int _far_far_away = 10000;
+    public static Vector3 Far_Far_Away = new Vector3(_far_far_away, _far_far_away, 0);
 
     public Camera UiCamera { get { return _uiCamera; } }
 
@@ -64,7 +63,7 @@ public class UIManager : XSingleton<UIManager>
 
         GameObject go = XResources.Load<GameObject>(rootpath, AssetType.Prefab);
         GameObject.DontDestroyOnLoad(go);
-        
+
         _uiCamera = go.GetComponent<Camera>();
         _canvas = go.transform.GetChild(0).GetComponent<Canvas>();
         _fade = _canvas.transform.GetChild(0).GetComponent<Image>();
@@ -198,14 +197,14 @@ public class UIManager : XSingleton<UIManager>
                 }
                 else
                 {
-                     XDebug.LogError("dlg is not in stack " , dlg.fileName);
+                    XDebug.LogError("dlg is not in stack ", dlg.fileName);
                 }
             }
             else
             {
-                for(int i=0,max=m_list.Count;i<max;i++)
+                for (int i = 0, max = m_list.Count; i < max; i++)
                 {
-                    if(m_list[i].id==dlg.id)
+                    if (m_list[i].id == dlg.id)
                     {
                         DestroyDlg(dlg);
                         m_list.RemoveAt(i);
@@ -248,4 +247,24 @@ public class UIManager : XSingleton<UIManager>
             m_stack.Clear();
         }
     }
+
+
+    public void OnCutScene(bool open)
+    {
+        var e = m_stack.GetEnumerator();
+        while (e.MoveNext())
+        {
+            if (e.Current.IsVisible() && !e.Current.isCutscene)
+            {
+                e.Current.innerBehaviour.gameObject.SetActive(!open);
+            }
+        }
+        e.Dispose();
+        for (int i = 0, max = m_list.Count; i < max; i++)
+        {
+            if (m_list[i].IsVisible() && !m_list[i].isCutscene)
+                m_list[i].innerBehaviour.gameObject.SetActive(!open);
+        }
+    }
+
 }

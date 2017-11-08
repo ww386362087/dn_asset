@@ -84,6 +84,8 @@ public abstract class UIDlg<TDlg, TBehaviour> : UIEventPacher, IUIDlg
     {
         get { return DlgType.Stack; }
     }
+    
+    public virtual bool isCutscene { get { return false; } }
 
     public virtual bool shareCanvas
     { get { return false; } }
@@ -126,6 +128,7 @@ public abstract class UIDlg<TDlg, TBehaviour> : UIEventPacher, IUIDlg
             UIManager.singleton.Hide(this as IUIDlg);
         }
     }
+    
     
     public void SetBehaviour(GameObject _go)
     {
