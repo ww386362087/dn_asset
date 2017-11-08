@@ -1,0 +1,13 @@
+﻿欢迎来到新的团队，开启你的开心之旅。
+新手入门 - UI管理(必须)
+Prefab保存在Resources/UI文件下 脚本放在Scripts/UI文件下
+新手入门 - 关卡编辑器
+编辑你的关卡 XEditor->LevelEditor
+新手入门 - 技能编辑器
+编辑技能XEditor->OpenSkill 创建新技能XEditor->CreateSkill
+新手入门 - AI 管理
+编辑器中使用行为树(Behavior Designer),运行时在Runtime实现
+新手入门 - Cutscene 管理
+编辑你的关卡动画 XEditor->Cut Scene
+开始时候显示对话框
+老司机们，来不及解释了，赶紧上车

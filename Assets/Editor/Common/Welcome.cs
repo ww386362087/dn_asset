@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using XEditor;
@@ -32,7 +33,7 @@ public class Welcome
 public class WelcomeScreen : EditorWindow
 {
     private bool flag = true;
-    private string version = "老司机们，来不及解释了，赶紧上车";
+    private string version = "";
     private Rect mCutsceneDescriptionRect = new Rect(70f, 344f, 250f, 30f);
     private Rect mCutsceneHeaderRect = new Rect(70f, 324f, 250f, 20f);
     private Texture mCutSceneImage;
@@ -57,6 +58,19 @@ public class WelcomeScreen : EditorWindow
     private Rect mSkillImageRect = new Rect(15f, 190f, 50f, 50f);
     private Rect mWelcomeIntroRect = new Rect(15f, 12f, 400f, 40f);
     private Texture mWelcomeScreenImage;
+    private string mWelComeText;
+    private string mUITitle;
+    private string mUIContent;
+    private string mLevelTitle;
+    private string mLevelContent;
+    private string mSkillTitle;
+    private string mSkillContent;
+    private string mAITitle;
+    private string mAIContent;
+    private string mCutsceTitle;
+    private string mCutsceContent;
+    private string mStartText;
+    private string mDriverText;
 
     public void OnEnable()
     {
@@ -66,6 +80,7 @@ public class WelcomeScreen : EditorWindow
         mSkillImage = LoadTexture("WelcomeSkillIcon.png");
         mAIImage = LoadTexture("Behavior Designer Scene Icon.png");
         mCutSceneImage = LoadTexture("WelcomeScreenContactIcon.png");
+        LoadConfig();
     }
 
     Texture LoadTexture(string name)
@@ -74,28 +89,55 @@ public class WelcomeScreen : EditorWindow
         return (Texture)AssetDatabase.LoadAssetAtPath(path + name, typeof(Texture));
     }
 
-
+    void LoadConfig()
+    {
+        Queue<string> conf = new Queue<string>();
+        string path = "Assets/Editor/EditorResources/Welcome/welcome.txt";
+        StreamReader stream  = File.OpenText(path);
+        while (true)
+        {
+            string str = stream.ReadLine();
+            if (string.IsNullOrEmpty(str)) break;
+            conf.Enqueue(str);
+        }
+        stream.Close();
+        
+        mWelComeText = conf.Dequeue();
+        mUITitle = conf.Dequeue();
+        mUIContent = conf.Dequeue();
+        mLevelTitle = conf.Dequeue();
+        mLevelContent = conf.Dequeue();
+        mSkillTitle = conf.Dequeue();
+        mSkillContent = conf.Dequeue();
+        mAITitle = conf.Dequeue();
+        mAIContent = conf.Dequeue();
+        mCutsceTitle = conf.Dequeue();
+        mCutsceContent = conf.Dequeue();
+        mStartText = conf.Dequeue();
+        mDriverText = conf.Dequeue();
+    }
+    
     public void OnGUI()
     {
-        GUI.Label(mWelcomeIntroRect, "欢迎来到新的团队，开启你的开心之旅。");
+        GUI.Label(mWelcomeIntroRect,mWelComeText);
         GUI.DrawTexture(mUIImageRect, mUIImage);
-        GUI.Label(mUIHeaderRect, "新手入门 - UI管理(必须)");
-        GUI.Label(mUIDescriptionRect, "UI Prefab保存在Resources/UI文件下 \nUI 脚本放在Scripts/UI文件下");
+        GUI.Label(mUIHeaderRect, mUITitle);
+        GUI.Label(mUIDescriptionRect, mUIContent);
         GUI.DrawTexture(mLevelImageRect, mLevelImage);
-        GUI.Label(mLevelHeaderRect, "新手入门 - 关卡编辑器");
-        GUI.Label(mLevelDescriptionRect, "编辑你的关卡 XEditor->LevelEditor");
+        GUI.Label(mLevelHeaderRect, mLevelTitle);
+        GUI.Label(mLevelDescriptionRect, mLevelContent);
         GUI.DrawTexture(mSkillImageRect, mSkillImage);
-        GUI.Label(mSkillHeaderRect, "新手入门 - 技能编辑器");
-        GUI.Label(mSkillDescriptionRect, "编辑技能XEditor->OpenSkill\n创建新技能XEditor->CreateSkill");
+        GUI.Label(mSkillHeaderRect, mSkillTitle);
+        GUI.Label(mSkillDescriptionRect, mSkillContent);
         GUI.DrawTexture(mAIImageRect, mAIImage);
-        GUI.Label(mAIHeaderRect, "新手入门 - AI 管理");
-        GUI.Label(mAIDescriptionRect, "在编辑器中AI使用行为树(Behavior Designer)实现\n运行时AI在Runtime里实现");
+        GUI.Label(mAIHeaderRect, mAITitle);
+        GUI.Label(mAIDescriptionRect, mAIContent);
         GUI.DrawTexture(mCutsceneImageRect, mCutSceneImage);
-        GUI.Label(mCutsceneHeaderRect, "新手入门 - Cutscene 管理");
-        GUI.Label(mCutsceneDescriptionRect, "编辑你的关卡动画 XEditor->Cut Scene");
-        GUI.Label(mVersionRect, version);
+        GUI.Label(mCutsceneHeaderRect, mCutsceTitle);
+        GUI.Label(mCutsceneDescriptionRect, mCutsceContent);
+        GUI.Label(mVersionRect, mDriverText);
 
-        flag = GUI.Toggle(mToggleButtonRect, flag, "开始时候显示对话框");
+        flag = GUI.Toggle(mToggleButtonRect, flag, mStartText);
         PlayerPrefs.SetInt("ShowWelcomeScreen", flag ? 1 : 0);
 
         EditorGUIUtility.AddCursorRect(mUIImageRect, MouseCursor.Link);
