@@ -22,7 +22,7 @@ public class AICodeMaker
 
     static List<string> maker_list = new List<string>();
 
-    [MenuItem("Tools/MakeAIRuntimeCode")]
+    [MenuItem("Tools/AI-MakeRuntimeCode")]
     public static void MakeRuntimeCode()
     {
         DirectoryInfo dir = new DirectoryInfo(unity_AI_path);
@@ -41,7 +41,7 @@ public class AICodeMaker
         EditorUtility.DisplayDialog("AI Auto Code", "AI Code Make Finish!", "OK");
     }
 
-    [MenuItem("Tools/CleanAIRuntimeCode")]
+    [MenuItem("Tools/AI-CleanRuntimeCode")]
     private static void CleanRuntimeCode()
     {
         maker_list.Clear();

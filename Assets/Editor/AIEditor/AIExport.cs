@@ -38,7 +38,7 @@ public class AIExport
         AICodeMaker.MakeRuntimeCode();
     }
 
-    [MenuItem("Tools/ExportAIConfig")]
+    [MenuItem("Tools/AI-ExportConfig")]
     public static void ExportAll()
     {
         string path = Application.dataPath + @"\Behavior Designer\AIData\";
