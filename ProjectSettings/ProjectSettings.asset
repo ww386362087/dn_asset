@@ -393,9 +393,9 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: TEST
-    4: TEST
-    7: TEST
+    1: Test
+    4: Test
+    7: Test
   platformArchitecture:
     iOS: 0
   scriptingBackend:

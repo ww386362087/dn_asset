@@ -8,7 +8,7 @@ public class XBuild : EditorWindow
 {
     static bool _init = true;
     static string _targetDir = "";
-    static string _macrow = "Release";
+    static string _macro = "TEST;";
     static BuildTarget _target;
     static BuildOptions _build = BuildOptions.None;
     static string _identifier = "com.yunstudio.dnasset";
@@ -19,6 +19,18 @@ public class XBuild : EditorWindow
     static string[] _scenes = null;
 
     static bool isRelease = true;
+
+    public static string Macro
+    {
+        get
+        {
+            string str = "TEST";
+            string path = typeof(AssetDatabase).Module.FullyQualifiedName;
+            string backup = path.Replace("UnityEditor.dll", "UnityEditor-backup.dll");
+            if (File.Exists(backup)) str += ";Inject";
+            return str;
+        }
+    }
 
     enum TPlatform
     {
@@ -124,6 +136,7 @@ public class XBuild : EditorWindow
                     Build();
                 }
             }
+            EditorGUILayout.Space();
             EditorGUILayout.EndHorizontal();
         }
     }
@@ -152,7 +165,7 @@ public class XBuild : EditorWindow
         PlayerSettings.defaultScreenWidth = 1136;
         PlayerSettings.defaultScreenHeight = 640;
         _targetDir = Path.Combine(Application.dataPath.Replace("/Assets", ""), "Win32");
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, _macrow);
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, _macro);
         PlayerSettings.apiCompatibilityLevel = ApiCompatibilityLevel.NET_2_0;
         PlayerSettings.strippingLevel = StrippingLevel.StripByteCode;
     }
@@ -168,7 +181,7 @@ public class XBuild : EditorWindow
         PlayerSettings.SetScriptingBackend(BuildTargetGroup.iOS, ScriptingImplementation.IL2CPP);
         PlayerSettings.accelerometerFrequency = 0;
         PlayerSettings.iOS.locationUsageDescription = "";
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, _macrow);
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, _macro);
         PlayerSettings.apiCompatibilityLevel = ApiCompatibilityLevel.NET_2_0_Subset;
         PlayerSettings.aotOptions = "nrgctx-trampolines=4096,nimt-trampolines=4096,ntrampolines=4096";
         PlayerSettings.iOS.sdkVersion = iOSSdkVersion.DeviceSDK;
@@ -190,7 +203,7 @@ public class XBuild : EditorWindow
         PlayerSettings.Android.preferredInstallLocation = AndroidPreferredInstallLocation.Auto;
         PlayerSettings.Android.forceSDCardPermission = true;
         PlayerSettings.Android.forceInternetPermission = true;
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, _macrow);
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, _macro);
         PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android, ScriptingImplementation.Mono2x);
         PlayerSettings.apiCompatibilityLevel = ApiCompatibilityLevel.NET_2_0_Subset;
         PlayerSettings.strippingLevel = StrippingLevel.Disabled;
@@ -205,9 +218,7 @@ public class XBuild : EditorWindow
     private static void Build()
     {
         _scenes = FindEnabledEditorScenes();
-        SetScriptDefine();
         EditorUserBuildSettings.SwitchActiveBuildTarget(_target);
-
         if (Directory.Exists(_targetDir))
         {
             Directory.Delete(_targetDir, true);
@@ -225,9 +236,10 @@ public class XBuild : EditorWindow
         string res = BuildPipeline.BuildPlayer(_scenes, dest, _target, _build);
 
         AfterBuild(EditorUserBuildSettings.activeBuildTarget);
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, "TEST");
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "TEST");
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, "TEST");
+        string macro = Macro;
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, macro);
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, macro);
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, macro);
 
         EditorUtility.DisplayDialog("Package Build Finish", "Package Build Finish!(" + res + ")", "OK");
         if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.iOS)
@@ -251,6 +263,7 @@ public class XBuild : EditorWindow
 
     private static void SwitchPlatForm(TPlatform platformType)
     {
+        SetScriptDefine();
         switch (platformType)
         {
             case TPlatform.Win32:
@@ -287,11 +300,10 @@ public class XBuild : EditorWindow
         _init = false;
     }
 
-    private static  void SetScriptDefine()
+    private static void SetScriptDefine()
     {
         string res = isRelease ? "Release" : "Debug";
-        _macrow = res;
-        _macrow += ";TEST";
+        _macro += res;
     }
 
     static private bool BeforeBuild(BuildTarget target)

@@ -29,11 +29,9 @@ public class Welcome
 }
 
 
-
 public class WelcomeScreen : EditorWindow
 {
     private bool flag = true;
-    private string version = "";
     private Rect mCutsceneDescriptionRect = new Rect(70f, 344f, 250f, 30f);
     private Rect mCutsceneHeaderRect = new Rect(70f, 324f, 250f, 20f);
     private Texture mCutSceneImage;

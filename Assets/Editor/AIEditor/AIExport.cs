@@ -27,9 +27,9 @@ public class AIExport
             FileInfo file = new FileInfo(path);
             Export(file);
         }
-        AssetDatabase.Refresh();
-       
+        AssetDatabase.Refresh();  
     }
+    
 
     [MenuItem("Tools/AI-DoOnce")]
     private static void DoOnce()

@@ -39,10 +39,18 @@ public class HelperEditor : MonoBehaviour
 		Open(basepath+"/Shell");
 	}
 
+    [MenuItem("Help/IO/OpenUnityInstallDirectory")]
+    public static void OpenUnityDir()
+    {
+        Open(EditorApplication.applicationContentsPath);
+    }
+
     [MenuItem("Help/IO/CleanCache")]
 	public static void CleanCache()
 	{
 		Caching.CleanCache();
+        int isShow = PlayerPrefs.GetInt("ShowWelcomeScreen", 1);
+        XDebug.Log("Do Cache "+isShow);
 	}
 
     [MenuItem("Help/IO/PlayerPrefsDeleteAll")]
@@ -54,6 +62,10 @@ public class HelperEditor : MonoBehaviour
 	public static void Open(string path)
 	{
         XDebug.Log("Open:", path);
+        if(File.Exists(path))
+        {
+            path = Path.GetDirectoryName(path);
+        }
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
