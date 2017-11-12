@@ -135,7 +135,7 @@ public class LogRedirect
     
     private static bool MakeInjectTag()
     {
-        string path = EditorApplication.applicationContentsPath + "/Managed/editor_inject.txt";
+        string path = EditorApplication.applicationContentsPath + "/Managed/Tag.txt";
         if (!File.Exists(path))
         {
             File.WriteAllText(path, "UnityEditor.dll is overite by others!");

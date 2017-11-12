@@ -16,7 +16,6 @@ public class GameEntrance : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("game start");
         GameEnine.Init(this);  
     }
 
