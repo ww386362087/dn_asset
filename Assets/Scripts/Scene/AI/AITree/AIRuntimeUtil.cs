@@ -1,5 +1,4 @@
-﻿using BehaviorDesigner.Runtime;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI.Runtime
@@ -19,7 +18,7 @@ namespace AI.Runtime
         public static AIRuntimeTreeData Parse(string json, string name)
         {
             //  XDebug.Log(json);
-            var obj = MiniJSON.Deserialize(json) as Dictionary<string, object>;
+            var obj = MiniJSON.Json.Deserialize(json) as Dictionary<string, object>;
             var root = obj as Dictionary<string, object>;
             AIRuntimeTreeData tree = new AIRuntimeTreeData();
 

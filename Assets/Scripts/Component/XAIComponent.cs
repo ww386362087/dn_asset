@@ -113,7 +113,9 @@ public class XAIComponent : XComponent
         }
         else
         {
+#if UNITY_EDITOR
             _tree = new XBehaviorTree();
+#endif
         }
         string tree = string.Empty;
         if (_entity.IsPlayer)

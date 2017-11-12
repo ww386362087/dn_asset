@@ -2,7 +2,6 @@
 using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
-using BehaviorDesigner.Runtime;
 
 public class AIExport
 {
@@ -72,7 +71,7 @@ public class AIExport
         json = json.Replace("\\n", "");
         json = json.Replace("\\", "");
         //Debug.Log(json);
-        var obj = MiniJSON.Deserialize(json) as Dictionary<string, object>;
+        var obj = BehaviorDesigner.Runtime.MiniJSON.Deserialize(json) as Dictionary<string, object>;
         var root = obj[RootTask] as Dictionary<string, object>;
         Dictionary<string, object> ict = new Dictionary<string, object>();
         if (obj.ContainsKey(Variables))
@@ -80,7 +79,7 @@ public class AIExport
             ict.Add(Variables, obj[Variables]);
         }
         ict.Add(RootTask, SimplyTask(root));
-        json = MiniJSON.Serialize(ict);
+        json = BehaviorDesigner.Runtime.MiniJSON.Serialize(ict);
         Build(json, name);
     }
 

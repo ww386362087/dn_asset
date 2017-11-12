@@ -27,7 +27,7 @@ public class XBuild : EditorWindow
             string str = "TEST";
             string path = typeof(AssetDatabase).Module.FullyQualifiedName;
             string backup = path.Replace("UnityEditor.dll", "UnityEditor-backup.dll");
-            if (File.Exists(backup)) str += ";Inject";
+            if (File.Exists(backup)) str += ";Inject;";
             return str;
         }
     }
