@@ -113,7 +113,7 @@ public class XAIComponent : XComponent
         }
         else
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR_AI
             _tree = new XBehaviorTree();
 #endif
         }

@@ -11,6 +11,7 @@ public class LogRedirect
 {
     static LogRedirect()
     {
+        SetSccriptDefine();
 #if Inject
         AssetDatabase.onDoubleClick -= OnConsoleDoubleClick;
         AssetDatabase.onDoubleClick += OnConsoleDoubleClick;
@@ -192,7 +193,7 @@ public class LogRedirect
 #endif
     }
 
-    private static void SetSccriptDefine()
+    public static void SetSccriptDefine()
     {
         string macro = XBuild.Macro;
         PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, macro);

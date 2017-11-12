@@ -14,6 +14,7 @@ public class Welcome
         XResources.Init();
 
         int isShow = PlayerPrefs.GetInt("ShowWelcomeScreen", 1);
+        
         if (isShow == 1)
         {
             EditorApplication.update += Update;

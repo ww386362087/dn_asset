@@ -25,7 +25,14 @@ public class XPostBuild : XBuildArg
     {
         string src = Path.Combine(temp_dir, folder);
         string dest = Path.Combine(data_dir, folder);
-        if (Directory.Exists(src)) Directory.Move(src, dest);
+        if (Directory.Exists(src))
+        {
+            Directory.Move(src, dest);
+        }
+        else
+        {
+            XDebug.Log("not exist dir ", src);
+        }
     }
 
 }

@@ -32,7 +32,14 @@ public class XPriorBuild : XBuildArg
     {
         string src = Path.Combine(data_dir, folder);
         string dest = Path.Combine(temp_dir, folder);
-        if (Directory.Exists(src)) Directory.Move(src, dest);
+        if (Directory.Exists(src))
+        {
+            Directory.Move(src, dest);
+        }
+        else
+        {
+            XDebug.LogError("not exit dir ", src);
+        }
     }
 
 }
