@@ -225,27 +225,21 @@ public class XBuild : EditorWindow
         }
         Directory.CreateDirectory(_targetDir);
 
-        BeforeBuild(EditorUserBuildSettings.activeBuildTarget);
+        XPriorBuild.OnPriorBuild(EditorUserBuildSettings.activeBuildTarget);
 
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
         string lastName = "";
         if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android) lastName = ".apk";
         else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.StandaloneWindows) lastName = ".exe";
         string dest = Path.Combine(_targetDir, "dnasset" + lastName);
         string res = BuildPipeline.BuildPlayer(_scenes, dest, _target, _build);
 
-        AfterBuild(EditorUserBuildSettings.activeBuildTarget);
         string macro = Macro;
         PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, macro);
         PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, macro);
         PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, macro);
-
+        XPostBuild.OnPostBuild(EditorUserBuildSettings.activeBuildTarget);
         EditorUtility.DisplayDialog("Package Build Finish", "Package Build Finish!(" + res + ")", "OK");
-        if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.iOS)
-        {
-            System.Diagnostics.Process.Start(_targetDir);
-        }
+        HelperEditor.Open(_targetDir);
     }
 
 
@@ -304,21 +298,6 @@ public class XBuild : EditorWindow
     {
         string res = isRelease ? "Release" : "Debug";
         _macro += res;
-    }
-
-    static private bool BeforeBuild(BuildTarget target)
-    {
-        //TO-DO Before Build
-
-        return true;
-    }
-
-
-    static private bool AfterBuild(BuildTarget target)
-    {
-        //TO-DO After Build
-
-        return true;
     }
 
 }
