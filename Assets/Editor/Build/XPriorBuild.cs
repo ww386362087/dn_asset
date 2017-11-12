@@ -18,7 +18,7 @@ public class XPriorBuild : XBuildArg
     public static void OnPriorBuild(BuildTarget target)
     {
         if (Directory.Exists(temp_dir))
-            Directory.Delete(temp_dir, false);
+            Directory.Delete(temp_dir, true);
         Directory.CreateDirectory(temp_dir);
         
         MoveFolder(ai_editor);

@@ -11,7 +11,6 @@ public class LogRedirect
 {
     static LogRedirect()
     {
-        SetSccriptDefine();
 #if Inject
         AssetDatabase.onDoubleClick -= OnConsoleDoubleClick;
         AssetDatabase.onDoubleClick += OnConsoleDoubleClick;

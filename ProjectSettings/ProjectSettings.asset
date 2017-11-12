@@ -126,7 +126,7 @@ PlayerSettings:
   m_HolographicPauseOnTrackingLoss: 1
   xboxOneDisableKinectGpuReservation: 0
   protectGraphicsMemory: 0
-  AndroidBundleVersionCode: 171107
+  AndroidBundleVersionCode: 171112
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 0
   aotOptions: 
@@ -393,9 +393,9 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: TEST
-    4: TEST
-    7: TEST
+    1: TEST;UNITY_EDITOR_AI
+    4: TEST;UNITY_EDITOR_AI
+    7: TEST;UNITY_EDITOR_AI
   platformArchitecture:
     iOS: 0
   scriptingBackend:
