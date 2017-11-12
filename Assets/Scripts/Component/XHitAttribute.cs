@@ -122,13 +122,11 @@ public class XHitAttribute
                         {
                             float move = Mathf.Sqrt(delta_x * delta_x + delta_z * delta_z);
                             float dis = (hoster.Transform.position - transform.position).magnitude;
-                            if (move > dis - 0.5)
+                            if (move < dis - 0.5)
                             {
-                                delta_x = 0;
-                                delta_z = 0;
+                                transform.Translate(delta_x, 0, delta_z, Space.World);
                             }
                         }
-                        transform.Translate(delta_x, 0, delta_z, Space.World);
                         break;
                     case XBeHitPhase.Hit_Landing:
                         if (elapsed > present_straight + landing_time)
@@ -374,11 +372,11 @@ public class XHitAttribute
     public void CalcDeltaPos(Vector3 position, float deltaTime, float last_elapsed)
     {
         Vector2 delta = Vector2.zero;
-        
+
         if (bcurve)
         {
-            float ev = (elapsed) / curve_offset_time_scale;
-            float eh = (elapsed) / curve_height_time_scale;
+            float ev = elapsed / curve_offset_time_scale;
+            float eh = elapsed / curve_height_time_scale;
 
             float c_v = curve_v == null ? 0 : curve_v.Evaluate(ev) * curve_offset_scale;
             float c_h = curve_h == null ? 0 : curve_h.Evaluate(eh) * curve_height_scale;

@@ -10,8 +10,9 @@ public class XCurve : MonoBehaviour , IXCurve
 
 	public float Evaluate(float time)
 	{
-		return Curve.Evaluate (time);
+        return time < Land_Value ? Curve.Evaluate(time) : 0;
 	}
+
 	public float GetValue(int index)
 	{
 		return Curve [index].value;
