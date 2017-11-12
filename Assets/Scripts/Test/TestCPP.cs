@@ -21,7 +21,7 @@ public class TestCPP : ITest
         var t1 = XTableMgr.GetTable<XEntityPresentation>();
         var t2 = XTableMgr.GetTable<FashionSuit>();
         var t3 = XTableMgr.GetTable<DefaultEquip>();
-        XDebug.Log("length: " + t1.Table.Length, " " + t2.Table.Length, " ", t3.Table.Length);
+        XDebug.Log("length: " + t1.length, " " + t2.length, " ", t3.length);
         Profiler.EndSample();
     }
 
@@ -39,7 +39,7 @@ public class TestCPP : ITest
             XDebug.Log(list[i]);
         }
         DefaultEquip t = XTableMgr.GetTable<DefaultEquip>();
-        XDebug.LogGreen("len: " + t.Table.Length);
+        XDebug.LogGreen("len: " + t.length);
     }
 
 

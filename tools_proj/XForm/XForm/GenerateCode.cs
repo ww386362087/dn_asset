@@ -191,7 +191,9 @@ namespace XForm
             }
             content2.Append("\r\n\t\t}\r\n");
 
-            content2.Append("\r\n\r\n\t\tpublic RowData[] Table;");
+            content2.Append("\r\n\r\n\t\tprivate RowData[] Table;");
+            content2.Append("\r\n\r\n\t\tpublic override int length { get { return Table.Length; } }");
+            content2.Append("\r\n\r\n\t\tpublic RowData this[int index] { get { return Table[index]; } }");
             content2.Append("\r\n\r\n\t\tpublic override string bytePath { get { return \"Table/" + name + "\"; } }");
 
             fileContent.Replace("public int replace;", content2.ToString());

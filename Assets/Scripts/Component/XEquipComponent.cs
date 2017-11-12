@@ -35,9 +35,10 @@ public class XEquipComponent : XComponent
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
         m_FashionList = new List<EquipPart>();
-        for (int i = 0, max = XTableMgr.GetTable<FashionSuit>().Table.Length; i < max; ++i)
+        var fashionsuit = XTableMgr.GetTable<FashionSuit>();
+        for (int i = 0, max = fashionsuit.length; i < max; ++i)
         {
-            FashionSuit.RowData row = XTableMgr.GetTable<FashionSuit>().Table[i];
+            FashionSuit.RowData row = fashionsuit[i];
             if (row.FashionID != null)
             {
                 XEquipUtil.MakeEquip(row.SuitName, row.FashionID, m_FashionList, fashions, (int)row.SuitID);
@@ -46,9 +47,10 @@ public class XEquipComponent : XComponent
 
         //装备
         m_EquipList = new List<EquipPart>();
-        for (int i = 0, max = XTableMgr.GetTable<EquipSuit>().Table.Length; i < max; ++i)
+        var equipsuit = XTableMgr.GetTable<EquipSuit>();
+        for (int i = 0, max = equipsuit.length; i < max; ++i)
         {
-            EquipSuit.RowData row = XTableMgr.GetTable<EquipSuit>().Table[i];
+            EquipSuit.RowData row = equipsuit[i];
             if (row.EquipID != null)
                 XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
         }
@@ -58,7 +60,7 @@ public class XEquipComponent : XComponent
         if (skin == null) skin = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         skin.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         e.skin = skin;
-        
+
         for (EPartType part = EPartType.ECombinePartStart; part < EPartType.ECombinePartEnd; ++part)
         {
             parts[(int)part] = new PartLoadTask(part, this, m_PartLoaded);
@@ -68,7 +70,7 @@ public class XEquipComponent : XComponent
             parts[(int)part] = new MountLoadTask(part, this);
         }
         RegisterEvent(XEventDefine.XEvent_Detach_Host, OnDetachHost);
-        
+
         EquipPart(m_FashionList[0]);
     }
 

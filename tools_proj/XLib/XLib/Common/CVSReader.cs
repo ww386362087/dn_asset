@@ -11,6 +11,8 @@ public abstract class CVSReader
         public abstract void SkipBuffer(BinaryReader stream, int count);
     }
 
+    public abstract int length { get; }
+
     public virtual string bytePath { get { return string.Empty; } }
 
     public bool isDone = false;

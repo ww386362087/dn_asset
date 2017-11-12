@@ -13,9 +13,9 @@ public class XQTEStatusLibrary
         NameList = new List<string>();
         //KeyList = new List<string>();
 
-        for (int i = 0; i < _table.Table.Length; ++i)
+        for (int i = 0; i < _table.length; ++i)
         {
-            QteStatusList.RowData row = _table.Table[i];
+            QteStatusList.RowData row = _table[i];
             NameList.Add(row.Value + " " + row.Name);
         }
 
@@ -29,9 +29,9 @@ public class XQTEStatusLibrary
 
         string[] strs = NameList.ToArray();
 
-        for (int i = 0; i < _table.Table.Length; ++i)
+        for (int i = 0; i < _table.length; ++i)
         {
-            QteStatusList.RowData row = _table.Table[i];
+            QteStatusList.RowData row = _table[i];
             if ((row.Value + " " + row.Name) == strs[idx])
                 return (int)row.Value;
         }
@@ -44,9 +44,9 @@ public class XQTEStatusLibrary
         string[] strs = NameList.ToArray();
 
         string str = null;
-        for (int i = 0; i < _table.Table.Length; ++i)
+        for (int i = 0; i < _table.length; ++i)
         {
-            QteStatusList.RowData row = _table.Table[i];
+            QteStatusList.RowData row = _table[i];
             if (row.Value == qte)
             {
                 str = (row.Value + " " + row.Name);

@@ -134,7 +134,11 @@ namespace XTable {
 		}
 
 
-		public RowData[] Table;
+		private RowData[] Table;
+
+		public override int length { get { return Table.Length; } }
+
+		public RowData this[int index] { get { return Table[index]; } }
 
 		public override string bytePath { get { return "Table/SceneList"; } }
         
