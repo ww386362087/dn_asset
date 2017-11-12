@@ -17,12 +17,12 @@ public class XPriorBuild : XBuildArg
 
     public static void OnPriorBuild(BuildTarget target)
     {
-        if (Directory.Exists(temp_dir)) Directory.Delete(temp_dir, true);
+        if (Directory.Exists(temp_dir))
+            Directory.Delete(temp_dir, false);
         Directory.CreateDirectory(temp_dir);
         
         MoveFolder(ai_editor);
         MoveFolder(ai_xeditor);
-
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
@@ -34,6 +34,10 @@ public class XPriorBuild : XBuildArg
         string dest = Path.Combine(temp_dir, folder);
         if (Directory.Exists(src))
         {
+            // 创建一个深的空父目录
+            if (!Directory.Exists(dest)) Directory.CreateDirectory(dest);
+            Directory.Delete(dest);
+            
             Directory.Move(src, dest);
         }
         else
