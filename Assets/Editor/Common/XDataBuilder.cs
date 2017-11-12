@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using XTable;
 
+
 namespace XEditor
 {
     public class XDataBuilder : XSingleton<XDataBuilder>
@@ -198,5 +199,4 @@ namespace XEditor
             return null;
         }
     }
-
 }

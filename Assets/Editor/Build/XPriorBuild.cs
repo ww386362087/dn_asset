@@ -7,13 +7,15 @@ using System.IO;
 /// </summary>
 public class XPriorBuild : XBuildArg
 {
-
+    /*
     [MenuItem("XBuild/OnBuild/OnPriorBuild")]
     private static void TestPrior()
     {
         OnPriorBuild(EditorUserBuildSettings.activeBuildTarget);
         XDebug.Log("PriorBuild Finish");
     }
+    */
+
 
     public static void OnPriorBuild(BuildTarget target)
     {
@@ -23,6 +25,7 @@ public class XPriorBuild : XBuildArg
         
         MoveFolder(ai_editor);
         MoveFolder(ai_xeditor);
+        MoveFolder(skill_xeditor);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }

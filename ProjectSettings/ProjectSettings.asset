@@ -393,9 +393,9 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: TEST;UNITY_EDITOR_AI
-    4: TEST;UNITY_EDITOR_AI
-    7: TEST;UNITY_EDITOR_AI
+    1: TEST;Inject
+    4: TEST;Inject
+    7: TEST;Inject
   platformArchitecture:
     iOS: 0
   scriptingBackend:

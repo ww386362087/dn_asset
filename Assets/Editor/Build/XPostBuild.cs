@@ -6,18 +6,21 @@ using UnityEditor;
 /// </summary>
 public class XPostBuild : XBuildArg
 {
+
+    /*
     [MenuItem("XBuild/OnBuild/OnPostBuild")]
     private static void TestPost()
     {
         OnPostBuild(EditorUserBuildSettings.activeBuildTarget);
         XDebug.Log("PostBuild Finish");
     }
-
+    */
 
     public static void OnPostBuild(BuildTarget target)
     {
         MoveFolder(ai_editor);
         MoveFolder(ai_xeditor);
+        MoveFolder(skill_xeditor);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
