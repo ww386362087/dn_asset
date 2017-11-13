@@ -1,0 +1,4 @@
+2017-11-13 22:19:15	function (main)	line 9	hello world
+2017-11-13 22:19:15	function (BinaryOpt::setPath)	line 90	set patha.txt
+2017-11-13 22:19:17	function (BinaryOpt::Open)	line 26	Opening file: a.txt
+2017-11-13 22:19:21	function (main)	line 35	Quit, Jump Break

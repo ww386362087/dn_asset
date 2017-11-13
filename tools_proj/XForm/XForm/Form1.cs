@@ -104,6 +104,8 @@ namespace XForm
             ClearContent();
             AppendContent("开始编译表格代码.");
             BuildCode.Build(this);
+
+
         }
         
         private void AppendContent(string str)
@@ -120,6 +122,39 @@ namespace XForm
             contentLbl.Text = "";
         }
 
-       
+
+        private string path = @"D:\projects\dn_asset\tools_proj\XCPP\XCPP\a.txt";
+        private void write_Click(object sender, EventArgs e)
+        {
+            ClearContent();
+            AppendContent("Start write cpp file");
+            FileStream stream = new FileStream(path, FileMode.Create);
+            BinaryWriter writer = new BinaryWriter(stream);
+            writer.Write(10);
+            writer.Write(false);
+            string s = "";
+            for (int i = 0; i < 31; i++)
+            {
+                s += "abc";
+            }
+            writer.Write(s);
+            writer.Write(true);
+            AppendContent("write succ");
+            stream.Close();
+        }
+
+        private void read_Click(object sender, EventArgs e)
+        {
+            ClearContent();
+            AppendContent("Start read cpp file");
+            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            BinaryReader reader = new BinaryReader(stream);
+            int num = reader.ReadInt32();
+            bool b = reader.ReadBoolean();
+            string str = reader.ReadString();
+            bool b2 = reader.ReadBoolean();
+            AppendContent("read num:" + num + " str: " + str+" b1: "+b+" b2: "+b2);
+            stream.Close();
+        }
     }
 }

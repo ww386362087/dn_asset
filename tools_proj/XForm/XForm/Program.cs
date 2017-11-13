@@ -17,24 +17,12 @@ namespace XForm
         static void Main(String[] args)
         {
             XDebug.Begin();
-            //try
-            //{
-                if (ProcessArgs(args))
-                {
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new XCForm());
-                }
-            //}
-            //catch(Exception e)
-            //{
-            //    XDebug.LogError("Exception: "+e.Message);
-            //    XDebug.LogError("Stack:" + e.StackTrace);
-            //}
-            //finally
-            //{
-            //    XDebug.Save();
-            //}
+            if (ProcessArgs(args))
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new XCForm());
+            }
         }
 
 
