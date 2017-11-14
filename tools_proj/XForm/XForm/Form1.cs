@@ -129,14 +129,15 @@ namespace XForm
             ClearContent();
             AppendContent("Start write cpp file");
             FileStream stream = new FileStream(path, FileMode.Create);
-            BinaryWriter writer = new BinaryWriter(stream);
+            BinaryWriter writer = new BinaryWriter(stream,Encoding.Default);
             writer.Write(10);
             writer.Write(false);
             string s = "";
             for (int i = 0; i < 31; i++)
             {
-                s += "abc";
+                s += "你我";
             }
+            s += "a";
             writer.Write(s);
             writer.Write(true);
             AppendContent("write succ");
@@ -148,7 +149,7 @@ namespace XForm
             ClearContent();
             AppendContent("Start read cpp file");
             FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            BinaryReader reader = new BinaryReader(stream);
+            BinaryReader reader = new BinaryReader(stream, Encoding.Default);
             int num = reader.ReadInt32();
             bool b = reader.ReadBoolean();
             string str = reader.ReadString();

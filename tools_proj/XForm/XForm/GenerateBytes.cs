@@ -50,7 +50,7 @@ namespace XForm
             {
                 using (FileStream fs = new FileStream(dest, FileMode.Create))
                 {
-                    BinaryWriter write = new BinaryWriter(fs);
+                    BinaryWriter write = new BinaryWriter(fs, System.Text.Encoding.Default);
                     //先预留一个long记录文件大小
                     write.Seek(8, SeekOrigin.Begin);
                     write.Write(table.rowCnt);

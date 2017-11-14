@@ -214,7 +214,7 @@ public abstract class CVSReader
     {
         lineno = 0;
         columnno = -1;
-        BinaryReader reader = new BinaryReader(stream);
+        BinaryReader reader = new BinaryReader(stream, System.Text.Encoding.Default);
         {
             long fileSize = reader.ReadInt64();
             int lineCount = reader.ReadInt32();

@@ -33,8 +33,11 @@ public:
 	bool ReadBoolean();
 	char ReadChar();
 	int ReadInt();
+	long long ReadInt64();
 	float ReadFloat();
 	string ReadString();
+
+
 private:
     ofstream writer;
     ifstream reader;

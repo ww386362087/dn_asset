@@ -14,8 +14,8 @@ void main()
 	{
 		char input;
 		
-		cout<<"r 读取文件"<<endl;
-		cout<<"w 写入文件"<<endl;
+		cout<<"r 读取string"<<endl;
+		cout<<"w 读取table"<<endl;
 		cout<<"b 跳出循环"<<endl;
 		cout<<"请输入字符:";
 		cin>>input;
@@ -26,9 +26,9 @@ void main()
 		{
 			file->ReadBinary();
 		}
-		else if (input == 'w')
+		else if(input == 'w')
 		{
-			file->WriteBinary();
+			file->ReadTable();
 		}
 		else if (input == 'b' || input == 'q')
 		{
@@ -40,6 +40,5 @@ void main()
 			ERROR("invalid input char: reinput again!");
 		}
 	}
-	system("pause");
 }
 

@@ -39,7 +39,7 @@ bool BinaryOpt::Open(string fileFullPath, IOMode mode)
     {
         currentMode = mode;
         if(reader.is_open())reader.close();
-		//reader.imbue(locale("chs"));
+		reader.imbue(locale("chs"));
         reader.open(filePath, ios::binary|ios::in);
         if(!reader.is_open())
         {
@@ -147,6 +147,17 @@ int BinaryOpt::ReadInt()
 	return 0;
 }
 
+long long BinaryOpt::ReadInt64()
+{
+	if(CheckReadabilityStatus())
+	{
+        long long value = 0;
+        BINARY_READ(reader, value);
+        return value;
+     }
+	return 0;
+}
+
 float BinaryOpt::ReadFloat()
 {
 	if(CheckReadabilityStatus())
@@ -158,6 +169,7 @@ float BinaryOpt::ReadFloat()
 	return 0;
 }
 
+
 string BinaryOpt::ReadString()
 {
 	if(CheckReadabilityStatus())
@@ -165,15 +177,14 @@ string BinaryOpt::ReadString()
        char c;
        string result = "";
 	   int len = ReadChar();
-	   cout<<"string len:"<<len<<endl;
-
+	   //cout<<"string len:"<<len<<endl;
+	   string tmp="";
        while(len > 0)
 	   {
-		   //LOG("->"+c);
 		   result += ReadChar();
 		   len--;
 	   }
 	   return result;
-     }
+    }
 	return "";
 }

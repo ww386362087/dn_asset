@@ -3,15 +3,25 @@
 #include <fstream>
 #include<iostream>
 #include"BinaryOpt.h"
+#include <vector>
+
+
 using namespace std;
 
-class FileOpt:public BinaryOpt
+struct FileRaw
+{
+	 string comment;
+	 string name;
+	 int val;
+};
+
+class FileOpt : public BinaryOpt
 {
 public:
 	void ReadBinary();
-	void WriteBinary();
+	void ReadTable();
 
-private:
-	 static const int len = 256;
+protected:
+	vector<FileRaw> m_data;
 };
 
