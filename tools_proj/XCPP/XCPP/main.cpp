@@ -1,44 +1,45 @@
-#include <process.h>
-#include "FileOpt.h"
 #include <iostream>
-#include "Logger.h"
+#include<Windows.h>
+#include<time.h>
+#include<string>
+
+using namespace std;
+
+typedef bool(*DllInitial)();
+typedef int(*DllAdd)(int*,int*);
+typedef int(*DllSub)(int*,int*);
+typedef void(*DllTable)();
 
 void main()
 {
-	InitLogger("Log\\info_log.txt","Log\\warn_log.txt","Log\\error_log.txt");
-	LOG("hello world");
+	DllInitial init;
+	DllAdd add;
+	DllSub sub;
+	DllTable tab;
 
-	FileOpt* file = new FileOpt();
-	file->setPath("a.txt");
-	while(true)
+	HINSTANCE hInst = LoadLibrary("XTable.dll");
+	if(hInst==NULL)
 	{
-		char input;
-		
-		cout<<"r 读取string"<<endl;
-		cout<<"w 读取table"<<endl;
-		cout<<"b 跳出循环"<<endl;
-		cout<<"请输入字符:";
-		cin>>input;
-		if(input>= 'A' && input <='Z')
-			input += 32; //转成小写
-
-		if(input == 'r')
-		{
-			file->ReadBinary();
-		}
-		else if(input == 'w')
-		{
-			file->ReadTable();
-		}
-		else if (input == 'b' || input == 'q')
-		{
-			LOG("Quit, Jump Break");
-			break;
-		}
-		else
-		{
-			ERROR("invalid input char: reinput again!");
-		}
+		cout<<"hInst is null"<<endl;
+		return;
 	}
-}
+	cout<<"load library succ"<<endl;
+	init = (DllInitial)GetProcAddress(hInst,"iInitial");
+	add = (DllAdd)GetProcAddress(hInst,"iAdd");
+	sub = (DllAdd)GetProcAddress(hInst,"iSub");
+	tab = (DllTable)GetProcAddress(hInst,"iReadTable");
 
+	bool rest=init();
+	int a = 4;
+	int b = 2;
+	int add_rst=add(&a,&b);
+	int sub_rst=sub(&a,&b);
+	cout<<"ex rst is:"<<rest<<endl;
+	cout<<"cul add: "<<add_rst<<" sub_rst:"<<sub_rst<<endl;
+	
+	std::cout<<"start read table.."<<std::endl;
+	tab();
+
+	FreeLibrary(hInst);
+	system("pause");
+}

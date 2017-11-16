@@ -127,7 +127,9 @@ namespace XForm
         private void write_Click(object sender, EventArgs e)
         {
             ClearContent();
-            AppendContent("Start write cpp file");
+            string s1 = "你";
+            string s2 = "a";
+            AppendContent("Start write cpp file  "+s1.Length+" "+s2.Length);
             FileStream stream = new FileStream(path, FileMode.Create);
             BinaryWriter writer = new BinaryWriter(stream,Encoding.Default);
             writer.Write(10);
