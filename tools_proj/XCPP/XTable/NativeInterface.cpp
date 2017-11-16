@@ -14,9 +14,9 @@ NativeInterface::~NativeInterface(void)
 extern "C"
 {
 
-	int iAdd(int *a, int* b)
+	int iAdd(int a, int b)
 	{
-		return *a+*b;
+		return a+b;
 	}
 
 	int iSub(int* a, int* b)
@@ -24,11 +24,11 @@ extern "C"
 		return *a - *b;
 	}
 
-	bool iInitial()
+	int iInitial()
 	{
 		std::cout<<"****** hello-world ******"<<std::endl;
 		InitLogger("Log/info.txt","Log/warn.txt","Log/error.txt");
-		return true;
+		return 1;
 	}
 
 }

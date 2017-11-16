@@ -13,7 +13,7 @@ public:
 extern "C"
 {
 	ENGINE_INTERFACE_EXPORT std::string  iDesc();
-	ENGINE_INTERFACE_EXPORT int iAdd(int *a, int* b);
+	ENGINE_INTERFACE_EXPORT int iAdd(int a, int b);
 	ENGINE_INTERFACE_EXPORT int iSub(int* a, int* b);
-	ENGINE_INTERFACE_EXPORT bool iInitial();
+	ENGINE_INTERFACE_EXPORT int iInitial();
 };

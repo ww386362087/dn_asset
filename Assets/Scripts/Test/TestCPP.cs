@@ -1,64 +1,49 @@
 ﻿#if TEST
 
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.Profiling;
-using XTable;
 
 
 public class TestCPP : ITest
 {
-    [DllImport("DnTable")]
-    private static extern int add(int x, int y);
+    [DllImport("XTable")]
+    private static extern int iAdd(int x, int y);
 
-    int i = add(5, 7);
+    [DllImport("XTable")]
+    private static extern int iInitial();
 
-
-    void TStart()
-    {
-        Profiler.BeginSample("ForList");
-        var t1 = XTableMgr.GetTable<XEntityPresentation>();
-        var t2 = XTableMgr.GetTable<FashionSuit>();
-        var t3 = XTableMgr.GetTable<DefaultEquip>();
-        XDebug.Log("length: " + t1.length, " " + t2.length, " ", t3.length);
-        Profiler.EndSample();
-    }
+    [DllImport("XTable")]
+    private static extern void iReadTable();
 
 
     public void Start()
     {
-        //   XDebug.Log("bb"+Vector3.Cross(Vector3.up, Vector3.forward));
-        List<int> list = new List<int>();
-        list.Add(3);
-        list.Add(5);
-        list.Add(4);
-        list.Sort((x, y) => x - y);
-        for(int i=0;i<3;i++)
-        {
-            XDebug.Log(list[i]);
-        }
-        DefaultEquip t = XTableMgr.GetTable<DefaultEquip>();
-        XDebug.LogGreen("len: " + t.length);
     }
 
 
     public void OnGUI()
     {
-        if (GUI.Button(new Rect(1, 1, 200, 100), "this dll i = 5+7, i is" + i))
+        if(GUI.Button(new Rect(20,10,200,100),"init"))
         {
-            TStart();
+           int rst = iInitial();
+            XDebug.Log("to initial finish "+rst);
+        }
+        if (GUI.Button(new Rect(20, 120, 200, 100), "test"))
+        {
+            int i = iAdd(8, 7);
+            XDebug.Log("add rest: " + i);
+        }
+        if (GUI.Button(new Rect(20, 230, 200, 100), "read"))
+        {
+            iReadTable();
+            XDebug.Log("read table finish");
         }
     }
 
-    public void Update()
-    {
+    public void Update() { }
 
-    }
+    public void LateUpdate() { }
 
-    public void LateUpdate()
-    {
-    }
 }
 
 
