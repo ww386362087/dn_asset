@@ -395,7 +395,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: TEST;Inject
     4: TEST;Inject
-    7: TEST
+    7: TEST;Inject
   platformArchitecture:
     iOS: 0
   scriptingBackend:

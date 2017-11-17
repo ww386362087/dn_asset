@@ -2,17 +2,20 @@
 #include <cstdlib>  
 #include <ctime>  
 #include <sstream>
+#include "NativeInterface.h"
 
 std::ofstream Log::m_error_log_file;  
 std::ofstream Log::m_info_log_file;  
 std::ofstream Log::m_warn_log_file;
+
+CALLBACK callback;
+std::string UNITY_STREAMING_PATH;
 
 void InitLogger(const std::string& info_log_filename,const std::string& warn_log_filename,const std::string& error_log_filename){  
 	Log::m_info_log_file.open(info_log_filename.c_str());  
 	Log::m_warn_log_file.open(warn_log_filename.c_str());  
 	Log::m_error_log_file.open(error_log_filename.c_str());  
 }
-
 
 
 Log::~Log(void)
@@ -45,6 +48,6 @@ std::ostream& Log::Start(LogLevel level,std::string text,const int line,const st
    strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S",localtime(&tm) );
    std::ostringstream ostr;
    ostr<<tmp<<"\t"<<"function ("<<func<< ")"<< "\tline "<<line<<"\t";
-   std::cout<<text<<std::endl;
+   callback(text.c_str());
    return GetStream(level)<<ostr.str()<<text;  
 }

@@ -1,13 +1,11 @@
+#pragma once
 #include "FileOpt.h"
-#include "NativeInterface.h"
+
 
 void FileOpt::ReadTable()
 {
 	if(m_data.empty())
 	{
-		LOG("start read QteStatusList");
-		string s="start read QteStatusList";
-		XCommand(s.c_str());
 		ReadTable("QteStatusList.bytes");
 	}
 	else
@@ -18,6 +16,7 @@ void FileOpt::ReadTable()
 
 void FileOpt::ReadTable(string name)
 {
+	LOG("read:"+name);
 	this->Open(name);
 	long long filesize= this->ReadInt64();
 	int lineCnt=this->ReadInt();
@@ -38,10 +37,10 @@ void FileOpt::ReadTable(string name)
 extern "C"
 {
 
-	void  iReadTable()
+	void  iReadTable(const char* name)
 	{
-		FileOpt *f=new FileOpt();
-			f->ReadTable();
+		FileOpt *f = new FileOpt();
+		f->ReadTable(name);
 	}
 
 }

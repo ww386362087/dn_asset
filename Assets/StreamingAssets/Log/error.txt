@@ -1,1 +1,0 @@
-2017-11-17 15:48:44	function (NativeReader::Open)	line 24	Could not open file for read: QteStatusList.bytes

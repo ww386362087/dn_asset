@@ -1,2 +1,32 @@
-2017-11-17 15:48:44	function (FileOpt::ReadTable)	line 8	start read QteStatusList
-2017-11-17 15:48:44	function (NativeReader::Open)	line 18	Opening file: QteStatusList.bytes
+2017-11-17 19:51:16	function (iInitial)	line 35	init finish
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 19	read:D:/projects/dn_asset/Assets/StreamingAssets/Table/QteStatusList.bytes
+2017-11-17 19:51:18	function (NativeReader::Open)	line 18	Opening file: D:/projects/dn_asset/Assets/StreamingAssets/Table/QteStatusList.bytes
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: None Ä¬ÈÏ×´Ì¬
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitBackPresent »÷ÍËÎ»ÒÆ
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitBackStraight »÷ÍËÓ²Ö±
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitBackGetup »÷ÍË»Ö¸´
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitFlyPresent »÷·É¸¡¿Õ
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitFlyLand »÷·ÉË¤µØ
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitFlyBounce »÷·Éµ¯µØ
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitFlyStraight »÷·ÉÌÉµØ
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitFlyGetup »÷·ÉÆğÉí
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitRollPresent ·­¹öÎ»ÒÆ
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitRollStraight ·­¹öÓ²Ö±
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitRollGetup ·­¹ö»Ö¸´
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: HitFreeze ÊÜ»÷Ó²Ö±
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: Attack_A1 ÆÕ¹¥1
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: Attack_A2 ÆÕ¹¥2
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: Attack_A3 ÆÕ¹¥3
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: Attack_A4 ÆÕ¹¥4
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: huoqiu »ğÇòÌáÇ°
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: junengjiguang ¾ÛÄÜ¼¤¹âÌáÇ°
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: huoqiuEX »ğÇòEXÌáÇ°
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: CanDash ¿ÉÉÁ±Ü
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: DashState ÉÁ±Ü×´Ì¬
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: ChargeState ³å·æ×´Ì¬
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: DashAttackState ÉÁ±Ü¹¥»÷×´Ì¬
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: StayInAir ÖÍ¿Õ×´Ì¬
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: firedash 1_1BOSSfiredashÁ¬·Å
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: onelight 1_5BOSSonelightÁ¬·Å
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: kunbangsheji ¹­¼ıÊÖÀ¦°óÉä»÷
+2017-11-17 19:51:18	function (FileOpt::ReadTable)	line 30	read line: yingjichangkong Ó¥»÷³¤¿Õ

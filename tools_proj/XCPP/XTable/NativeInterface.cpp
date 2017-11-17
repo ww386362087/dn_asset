@@ -26,8 +26,7 @@ extern "C"
 
 	int iInitial(char* path)
 	{
-		LOG("****** hello-world ******");
-		XCommand("****** hello-world ******");
+		LOG("hello-world");
 		UNITY_STREAMING_PATH = path;
 		LOG(path);
 		InitLogger(UNITY_STREAMING_PATH+"Log/info.txt",

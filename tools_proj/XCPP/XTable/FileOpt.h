@@ -6,6 +6,7 @@
 #include <vector>
 #include"Log.h"
 #include"Common.h"
+
 using namespace std;
 
 struct FileRaw
@@ -25,8 +26,7 @@ protected:
 	vector<FileRaw> m_data;
 };
 
-
 extern "C"
 {
-	ENGINE_INTERFACE_EXPORT void iReadTable();
+	ENGINE_INTERFACE_EXPORT void iReadTable(const char* name);
 };

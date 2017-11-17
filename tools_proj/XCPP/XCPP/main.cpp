@@ -10,7 +10,7 @@ typedef void(*DllCommand)(CB);
 typedef int(*DllInitial)(char*);
 typedef int(*DllAdd)(int,int);
 typedef int(*DllSub)(int*,int*);
-typedef void(*DllTable)();
+typedef void(*DllTable)(const char*);
 DllCommand cb;
 DllInitial init;
 DllAdd add;
@@ -67,14 +67,17 @@ void ExSub()
 
 void ExRead()
 {
-	cout<<"start read table.."<<endl;
-	tab();
+	cout<<"input table name:";
+	string name;
+	cin>>name;
+	string ss = name+".bytes";
+	tab(ss.c_str());
 	cout<<endl<<endl;
 }
 
 void OnCallback(const char* command)
 {
-	cout<<"callback:"<<command<<endl;
+	cout<<"> "<<command<<endl;
 }
 
 void main()
