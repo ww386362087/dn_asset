@@ -197,9 +197,9 @@ public class TestFashion : ITest
 
     public void Update() { }
 
-    public void LateUpdate()
-    {
-    }
+    public void LateUpdate() { }
+
+    public void OnQuit() { }
 
 }
 

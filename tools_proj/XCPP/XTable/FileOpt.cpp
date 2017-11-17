@@ -1,9 +1,19 @@
 #include "FileOpt.h"
-
+#include "NativeInterface.h"
 
 void FileOpt::ReadTable()
 {
-	ReadTable("QteStatusList.bytes");
+	if(m_data.empty())
+	{
+		LOG("start read QteStatusList");
+		string s="start read QteStatusList";
+		XCommand(s.c_str());
+		ReadTable("QteStatusList.bytes");
+	}
+	else
+	{
+		WARN("TABLE HAS READ, DON'T READ AGAIN");
+	}
 }
 
 void FileOpt::ReadTable(string name)
@@ -31,7 +41,7 @@ extern "C"
 	void  iReadTable()
 	{
 		FileOpt *f=new FileOpt();
-		f->ReadTable();
+			f->ReadTable();
 	}
 
 }

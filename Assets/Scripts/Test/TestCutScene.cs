@@ -27,10 +27,12 @@ public class TestCutScene : ITest
             XScene.singleton.DetachCutScene();
         }
     }
-    
-    public void Update() {}
 
-    public void LateUpdate(){}
+    public void Update() { }
+
+    public void LateUpdate() { }
+
+    public void OnQuit() { }
     
     void Load()
     {

@@ -19,6 +19,11 @@ public class Test : ITest
     public void Update()
     {
     }
+
+    public void OnQuit()
+    {
+
+    }
     
 }
 

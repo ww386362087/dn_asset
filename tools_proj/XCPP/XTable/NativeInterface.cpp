@@ -24,11 +24,22 @@ extern "C"
 		return *a - *b;
 	}
 
-	int iInitial()
+	int iInitial(char* path)
 	{
-		std::cout<<"****** hello-world ******"<<std::endl;
-		InitLogger("Log/info.txt","Log/warn.txt","Log/error.txt");
+		LOG("****** hello-world ******");
+		XCommand("****** hello-world ******");
+		UNITY_STREAMING_PATH = path;
+		LOG(path);
+		InitLogger(UNITY_STREAMING_PATH+"Log/info.txt",
+			UNITY_STREAMING_PATH+"Log/warn.txt",
+			UNITY_STREAMING_PATH+"Log/error.txt");
+		LOG("init finish");
 		return 1;
+	}
+
+	void iInitCallbackCommand(CALLBACK cb)
+	{
+		callback = cb;   
 	}
 
 }

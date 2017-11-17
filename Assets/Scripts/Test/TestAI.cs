@@ -24,5 +24,10 @@ public class TestAI : ITest
     {
     }
 
+    public void OnQuit()
+    {
+
+    }
+
 }
 #endif

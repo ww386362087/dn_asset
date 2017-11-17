@@ -2,7 +2,7 @@
 
 using System.Runtime.InteropServices;
 using UnityEngine;
-
+using System.IO;
 
 public class TestCPP : ITest
 {
@@ -10,23 +10,33 @@ public class TestCPP : ITest
     private static extern int iAdd(int x, int y);
 
     [DllImport("XTable")]
-    private static extern int iInitial();
+    private static extern int iInitial(string path);
 
     [DllImport("XTable")]
     private static extern void iReadTable();
 
+    [DllImport("XTable")]
+    public static extern void iInitCallbackCommand(callbackDelegate cb);
+
+    public delegate void callbackDelegate(string str);
 
     public void Start()
     {
+        iInitCallbackCommand(new callbackDelegate(OnCallback));
+    }
+
+    void OnCallback(string commad)
+    {
+        XDebug.Log(commad);
     }
 
 
     public void OnGUI()
     {
-        if(GUI.Button(new Rect(20,10,200,100),"init"))
+        if (GUI.Button(new Rect(20, 10, 200, 100), "init"))
         {
-           int rst = iInitial();
-            XDebug.Log("to initial finish "+rst);
+            int rst = iInitial(Application.streamingAssetsPath);
+            XDebug.Log("to initial finish " + rst);
         }
         if (GUI.Button(new Rect(20, 120, 200, 100), "test"))
         {
@@ -43,6 +53,11 @@ public class TestCPP : ITest
     public void Update() { }
 
     public void LateUpdate() { }
+
+    public void OnQuit()
+    {
+        
+    }
 
 }
 

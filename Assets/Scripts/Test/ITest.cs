@@ -16,6 +16,9 @@ public interface ITest
 
     void LateUpdate();
 
+
+    void OnQuit();
+
 }
 
 

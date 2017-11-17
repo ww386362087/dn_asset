@@ -1,0 +1,2 @@
+2017-11-17 15:48:44	function (FileOpt::ReadTable)	line 8	start read QteStatusList
+2017-11-17 15:48:44	function (NativeReader::Open)	line 18	Opening file: QteStatusList.bytes

@@ -71,6 +71,9 @@ public class GameEntrance : MonoBehaviour
     void OnDestroy()
     {
         GameEnine.OnUnintial();
+#if TEST
+        TestManager.Get().OnQuit();
+#endif
     }
 
 

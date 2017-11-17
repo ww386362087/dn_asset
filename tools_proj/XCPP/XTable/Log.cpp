@@ -8,9 +8,9 @@ std::ofstream Log::m_info_log_file;
 std::ofstream Log::m_warn_log_file;
 
 void InitLogger(const std::string& info_log_filename,const std::string& warn_log_filename,const std::string& error_log_filename){  
-   Log::m_info_log_file.open(info_log_filename.c_str());  
-   Log::m_warn_log_file.open(warn_log_filename.c_str());  
-   Log::m_error_log_file.open(error_log_filename.c_str());  
+	Log::m_info_log_file.open(info_log_filename.c_str());  
+	Log::m_warn_log_file.open(warn_log_filename.c_str());  
+	Log::m_error_log_file.open(error_log_filename.c_str());  
 }
 
 
@@ -41,7 +41,7 @@ std::ostream& Log::Start(LogLevel level,std::string text,const int line,const st
 {  
    time_t tm;  
    time(&tm);  
-   char tmp[64];
+   char tmp[64]; 
    strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S",localtime(&tm) );
    std::ostringstream ostr;
    ostr<<tmp<<"\t"<<"function ("<<func<< ")"<< "\tline "<<line<<"\t";
