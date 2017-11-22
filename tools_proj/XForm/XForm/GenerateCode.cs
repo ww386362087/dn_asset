@@ -113,7 +113,7 @@ namespace XForm
 
             compunit.Namespaces.Add(sample);
             //在命名空间下添加一个类
-            CodeTypeDeclaration wrapClass = new CodeTypeDeclaration(name + " : CVSReader");
+            CodeTypeDeclaration wrapClass = new CodeTypeDeclaration(name + " : CSVReader");
             sample.Types.Add(wrapClass);
 
             //加一个标记 用来替换

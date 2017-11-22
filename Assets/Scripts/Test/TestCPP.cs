@@ -41,27 +41,27 @@ public class TestCPP : ITest
 
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(40) };
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
+    GUIStyle ui_sty = new GUIStyle();
+    GUIStyle ui_st2 = new GUIStyle();
     string ui_in = "23";
     string ui_rst = string.Empty;
     QteStatusListMarshalRowData m_cacheMarshalData = new QteStatusListMarshalRowData();
 
     public void Start()
     {
+        ui_sty.fontSize = 21;
+        ui_sty.fontStyle = FontStyle.Bold;
+        ui_sty.alignment = TextAnchor.MiddleCenter;
+        ui_st2.normal.textColor = Color.red;
+        ui_st2.fontSize = 18;
         iInitCallbackCommand(new CppDelegate(OnCallback));
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
     
-
     void OnCallback(IntPtr ptr)
     {
         string command = Marshal.PtrToStringAnsi(ptr);
-        XDebug.Log(command);
-    }
-
-    void OnCallback(string command)
-    {
-        if (string.IsNullOrEmpty(command)) XDebug.Log("rst is null ");
-        else XDebug.Log(command);
+        XDebug.Log("[cpp]:"+command);
     }
     
     public void OnGUI()
@@ -69,14 +69,13 @@ public class TestCPP : ITest
         GUILayout.BeginHorizontal();
         GUILayout.Space(10);
         GUILayout.BeginVertical();
-        GUILayout.Space(10);
-        if (GUILayout.Button("Add", ui_opt))
+        if (GUILayout.Button("Cal-Add", ui_opt))
         {
             int i = iAdd(8, 7);
-            ui_rst = "add rest: " + i;
+            ui_rst = "add rst: " + i;
             XDebug.LogGreen(ui_rst);
         }
-        if (GUILayout.Button("Sub", ui_opt))
+        if (GUILayout.Button("Cal-Sub", ui_opt))
         {
             int a = 5, b = 6;
             IntPtr p1 = Marshal.AllocCoTaskMem(Marshal.SizeOf(a));
@@ -87,25 +86,25 @@ public class TestCPP : ITest
             ui_rst = "sub rst: " + rst;
             XDebug.Log(ui_rst);
         }
-        if (GUILayout.Button("Table-QTE", ui_opt))
+        if (GUILayout.Button("Read-QTE", ui_opt))
         {
             iReadQteStatusList();
             ui_rst = "read table finish";
             XDebug.LogGreen(ui_rst);
         }
-        ui_in = GUILayout.TextField(ui_in,ui_opt);
+        ui_in = GUILayout.TextField(ui_in, ui_sty, ui_opt);
 
-        if (GUILayout.Button("Row-CPP", ui_opt))
+        if (GUILayout.Button("Get-Row", ui_opt))
         {
             int val = 23;
             int.TryParse(ui_in, out val);
             iGetQteStatusListRow(val, ref m_cacheMarshalData);
-            ui_rst = m_cacheMarshalData.Value + " name: " + m_cacheMarshalData.Name + " comment: " + m_cacheMarshalData.Comment;
+            ui_rst = "value:\t"+m_cacheMarshalData.Value + "\nname:\t" + m_cacheMarshalData.Name + "\ncomment:\t" + m_cacheMarshalData.Comment;
             XDebug.Log(ui_rst);
         }
         GUILayout.EndVertical();
         GUILayout.Space(20);
-        GUILayout.TextArea(ui_rst, ui_op2);
+        GUILayout.TextArea(ui_rst,ui_st2, ui_op2);
         GUILayout.EndHorizontal();
     }
 

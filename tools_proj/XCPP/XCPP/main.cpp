@@ -10,8 +10,8 @@ typedef void(*DllCommand)(CB);
 typedef void(*DllInitial)(char*,char*);
 typedef int(*DllAdd)(int,int);
 typedef int(*DllSub)(int*,int*);
-typedef void(*DllReadQteTable)();
-typedef void(*DllReadSuitTable)();
+typedef int(*DllReadQteTable)();
+typedef int(*DllReadSuitTable)();
 DllCommand cb;
 DllInitial init;
 DllAdd add;
@@ -95,8 +95,8 @@ void main()
 	init = (DllInitial)GetProcAddress(hInst,"iInitial");
 	add = (DllAdd)GetProcAddress(hInst,"iAdd");
 	sub = (DllSub)GetProcAddress(hInst,"iSub");
-	qte = (DllReadQteTable)GetProcAddress(hInst,"iReadQteStatusList");
-	suit = (DllReadSuitTable)GetProcAddress(hInst,"iReadEquipSuitList");
+	qte = (DllReadQteTable)GetProcAddress(hInst,"iGetQteStatueListLength");
+	suit = (DllReadSuitTable)GetProcAddress(hInst,"iGetEquipSuitLength");
 	cb(OnCallback);
 	init("","");
 

@@ -17,6 +17,7 @@ public:
 	QteStatusList(void);
 	void ReadTable();
 	void GetRow(int val,QteStatusListRow* row);
+	int GetLength();
 
 protected:
 	std::string name;
@@ -28,6 +29,6 @@ extern std::string UNITY_STREAM_PATH;
 
 extern "C"
 {
-	ENGINE_INTERFACE_EXPORT void iReadQteStatusList();
+	ENGINE_INTERFACE_EXPORT int iGetQteStatueListLength();
 	ENGINE_INTERFACE_EXPORT void iGetQteStatusListRow(int val,QteStatusListRow* row);
 };

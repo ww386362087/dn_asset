@@ -31,6 +31,7 @@ public:
 	EquipSuit(void);
 	void ReadTable();
 	void GetRow(int val,EquipSuitRow* row);
+	int GetLength();
 
 protected:
 	std::string name;
@@ -40,6 +41,6 @@ protected:
 
 extern "C"
 {
-	ENGINE_INTERFACE_EXPORT void iReadEquipSuitList();
+	ENGINE_INTERFACE_EXPORT int iGetEquipSuitLength();
 	ENGINE_INTERFACE_EXPORT void iGetEquipSuitRow(int suitid,EquipSuitRow* row);
 };

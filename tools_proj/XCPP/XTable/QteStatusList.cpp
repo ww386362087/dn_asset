@@ -1,15 +1,14 @@
 #include "QteStatusList.h"
 
-
 QteStatusList::QteStatusList(void)
 {
 	name = UNITY_STREAM_PATH + "Table/QteStatusList.bytes";
+	ReadTable();
 }
 
 void QteStatusList::ReadTable()
 {
 	LOG(this->name);
-	LOG("Read");
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -42,22 +41,31 @@ void QteStatusList::GetRow(int val,QteStatusListRow* row)
 	}
 }
 
+int QteStatusList::GetLength()
+{
+	return m_data.size();
+}
+
 
 extern "C"
 {
 	QteStatusList *qtestatuslist;
 
-	void  iReadQteStatusList()
+	int iGetQteStatueListLength()
 	{
-		if(qtestatuslist==NULL)
+		if(qtestatuslist == NULL)
 		{
 			qtestatuslist = new QteStatusList();
 		}
-		qtestatuslist->ReadTable();
+		return qtestatuslist->GetLength();
 	}
 
 	void iGetQteStatusListRow(int val,QteStatusListRow* row)
 	{
-		if(qtestatuslist) qtestatuslist->GetRow(val,row);
+		if(qtestatuslist == NULL)
+		{
+			qtestatuslist = new QteStatusList();
+		}
+		qtestatuslist->GetRow(val,row);
 	}
 }
