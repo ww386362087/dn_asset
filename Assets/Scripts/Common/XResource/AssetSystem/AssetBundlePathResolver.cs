@@ -34,25 +34,17 @@ public class AssetBundlePathResolver
         if (last == -1) return abName;
         return string.Format("{0}.{1}", abName.Substring(0, last), abName.Substring(last + 1));
     }
+    
+    public static string DependFileName { get { return "Table/dep"; } }
 
+    static string cacheDir;
 
-    /// <summary>
-    /// AB 依赖信息文件名
-    /// </summary>
-    public static string DependFileName { get { return "dep.all"; } }
-
-    static DirectoryInfo cacheDir;
-
-    /// <summary>
-    /// 用于缓存AB的目录，要求可写
-    /// </summary>
     public static string BundleCacheDir
     {
         get
         {
             if (cacheDir == null)
             {
-                string dir;
                 bool is_test = false;
 #if TEST
                 is_test = true;
@@ -60,19 +52,17 @@ public class AssetBundlePathResolver
                 switch (Application.platform)
                 {
                     case RuntimePlatform.Android:
-                        dir = string.Format("{0}/update/Android/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
+                        cacheDir = string.Format("{0}/update/Android/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
                         break;
                     case RuntimePlatform.IPhonePlayer:
-                        dir = string.Format("{0}/update/iOS/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
+                        cacheDir = string.Format("{0}/update/iOS/AssetBundles", is_test ? Application.streamingAssetsPath : Application.persistentDataPath);
                         break;
                     default:
-                        dir = string.Format("{0}/update/AssetBundles", Application.streamingAssetsPath);
+                        cacheDir = string.Format("{0}/update/AssetBundles", Application.streamingAssetsPath);
                         break;
                 }
-                cacheDir = new DirectoryInfo(dir);
-                if (!cacheDir.Exists) cacheDir.Create();
             }
-            return cacheDir.FullName;
+            return cacheDir;
         }
     }
 

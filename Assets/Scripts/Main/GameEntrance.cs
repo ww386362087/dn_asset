@@ -10,22 +10,44 @@ public class GameEntrance : MonoBehaviour
 
     void Awake()
     {
-        XTableMgr.tableLoaded += ToStartTest;
+        try
+        {
+            XTableMgr.tableLoaded += ToStartTest;
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogError("ERROR AWAKE:" + e.Message + "\n" + e.StackTrace);
+        }
     }
 
 
     void Start()
     {
-        GameEnine.Init(this);  
+        try
+        {
+            Debug.Log("GameEntrance Start");
+            GameEnine.Init(this);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("EROR START:" + e.Message + "\n" + e.StackTrace);
+        }
     }
 
 
     void ToStartTest(bool st)
     {
+        try
+        {
 #if TEST
-        start = true;
-        TestManager.Get().Start();
+            start = true;
+            TestManager.Get().Start();
 #endif
+        }
+        catch(System.Exception e)
+        {
+            Debug.Log("TEST:" + e.StackTrace);
+        }
     }
 
 
@@ -34,7 +56,7 @@ public class GameEntrance : MonoBehaviour
 
         XTableMgr.Update();
 
-         if (start)
+        if (start)
         {
             GameEnine.Update(Time.deltaTime);
 

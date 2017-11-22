@@ -17,7 +17,7 @@ namespace XEditor
         private Type tableType = null;
         private Type tableRowType = null;
         private FieldInfo[] tableRowTypeField = null;
-        private CVSReader reader = null;
+        private CSVReader reader = null;
         private FieldInfo tableListInfo = null;
         private System.Collections.IList tableList = null;
         private List<string> tableData = new List<string>();
@@ -53,14 +53,14 @@ namespace XEditor
                     {
                         tableRowTypeField = tableRowType.GetFields();
                         tableListInfo = tableType.GetField("Table");
-                        reader = Activator.CreateInstance(tableType) as CVSReader;
+                        reader = Activator.CreateInstance(tableType) as CSVReader;
                         if (reader != null)
                         {
-                            CVSReader.Init();
+                            CSVReader.Init();
                             Stream stream = new MemoryStream(table.bytes);
                             reader.ReadFile(stream);
                             tableList = tableListInfo.GetValue(reader) as IList;
-                            CVSReader.Uninit();
+                            CSVReader.Uninit();
                             tableData.Clear();
                             if (tableList != null && tableRowTypeField != null)
                             {

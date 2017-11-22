@@ -33,7 +33,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -154,13 +154,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
-    <ClInclude Include="FileOpt.h" />
+    <ClInclude Include="QteStatusList.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="NativeInterface.h" />
     <ClInclude Include="NativeReader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileOpt.cpp" />
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="QteStatusList.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="NativeInterface.cpp" />
     <ClCompile Include="NativeReader.cpp" />

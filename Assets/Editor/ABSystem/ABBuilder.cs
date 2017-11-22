@@ -152,7 +152,7 @@ namespace ABSystem
 
         protected void SaveDepAll(List<AssetTarget> all)
         {
-            string path = Path.Combine(AssetBundleUtil.GetBundleDir(), AssetBundlePathResolver.DependFileName);
+            string path = Path.Combine(Application.dataPath+ "/Resources/", AssetBundlePathResolver.DependFileName+".txt");
             if (File.Exists(path)) File.Delete(path);
             List<AssetTarget> exportList = new List<AssetTarget>();
             for (int i = 0; i < all.Count; i++)

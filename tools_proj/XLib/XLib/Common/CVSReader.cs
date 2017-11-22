@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
-using UnityEngine;
+﻿using System.IO;
 
-public abstract class CVSReader
+public abstract class CSVReader
 {
     public abstract class ValueParse<T>
     {

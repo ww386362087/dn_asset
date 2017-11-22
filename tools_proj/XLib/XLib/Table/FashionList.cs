@@ -11,7 +11,7 @@
 namespace XTable {
     
     
-    public class FashionList : CVSReader {
+    public class FashionList : CSVReader {
         
         public class RowData :BaseRow {
 			public uint ItemID;

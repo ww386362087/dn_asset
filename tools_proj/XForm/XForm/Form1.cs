@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -15,6 +16,7 @@ namespace XForm
         public delegate void ProgressCallback(string str);
 
         public ProgressCallback PCB;
+
 
         public static string unity_proj_path
         {
@@ -121,43 +123,6 @@ namespace XForm
             _content.Length = 0;
             contentLbl.Text = "";
         }
-
-
-        private string path = @"D:\projects\dn_asset\tools_proj\XCPP\XCPP\a.txt";
-        private void write_Click(object sender, EventArgs e)
-        {
-            ClearContent();
-            string s1 = "你";
-            string s2 = "a";
-            AppendContent("Start write cpp file  "+s1.Length+" "+s2.Length);
-            FileStream stream = new FileStream(path, FileMode.Create);
-            BinaryWriter writer = new BinaryWriter(stream,Encoding.Default);
-            writer.Write(10);
-            writer.Write(false);
-            string s = "";
-            for (int i = 0; i < 31; i++)
-            {
-                s += "你我";
-            }
-            s += "a";
-            writer.Write(s);
-            writer.Write(true);
-            AppendContent("write succ");
-            stream.Close();
-        }
-
-        private void read_Click(object sender, EventArgs e)
-        {
-            ClearContent();
-            AppendContent("Start read cpp file");
-            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            BinaryReader reader = new BinaryReader(stream, Encoding.Default);
-            int num = reader.ReadInt32();
-            bool b = reader.ReadBoolean();
-            string str = reader.ReadString();
-            bool b2 = reader.ReadBoolean();
-            AppendContent("read num:" + num + " str: " + str+" b1: "+b+" b2: "+b2);
-            stream.Close();
-        }
+        
     }
 }

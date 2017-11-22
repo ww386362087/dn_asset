@@ -11,7 +11,7 @@
 namespace XTable {
     
     
-    public class DefaultEquip : CVSReader {
+    public class DefaultEquip : CSVReader {
         
         public class RowData :BaseRow {
 			public uint ProfID;

@@ -1,6 +1,7 @@
 #pragma once
 #include<string>
 #include<fstream>
+#include"Common.h"
 
 using namespace std;
 
@@ -16,16 +17,17 @@ public:
 	string getPath();
 	void Open(string fileFullPath);
 
-	bool ReadBoolean();
-	char ReadChar();
-	int ReadInt();
-	long long ReadInt64();
-	float ReadFloat();
-	string ReadString();
-	virtual void ReadTable() = 0;
+	template<typename T> void Read(T* v);
+	void ReadString(char buff[]);
 
 private:
     ifstream reader;
 	string filePath;
 };
 
+
+template<typename T>
+void NativeReader::Read(T* v)
+{
+	BINARY_READ(reader, *v);
+}

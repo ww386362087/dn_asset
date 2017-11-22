@@ -15,10 +15,10 @@ extern "C"
 {
 	typedef void(*CALLBACK)(const char*);
 	extern CALLBACK callback;
-	extern std::string UNITY_STREAMING_PATH;
 
 	ENGINE_INTERFACE_EXPORT void iInitCallbackCommand(CALLBACK cb);
 	ENGINE_INTERFACE_EXPORT int iAdd(int, int);
 	ENGINE_INTERFACE_EXPORT int iSub(int*, int*);
-	ENGINE_INTERFACE_EXPORT int iInitial(char*);
+	ENGINE_INTERFACE_EXPORT char* GetStr();
+	ENGINE_INTERFACE_EXPORT void iInitial(const char*);
 };

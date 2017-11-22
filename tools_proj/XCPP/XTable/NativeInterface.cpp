@@ -1,5 +1,5 @@
 #include "NativeInterface.h"
-#include "FileOpt.h"
+#include "QteStatusList.h"
 
 NativeInterface::NativeInterface(void)
 {
@@ -24,16 +24,16 @@ extern "C"
 		return *a - *b;
 	}
 
-	int iInitial(char* path)
+	char* GetStr()
 	{
-		LOG("hello-world");
-		UNITY_STREAMING_PATH = path;
-		LOG(path);
-		InitLogger(UNITY_STREAMING_PATH+"Log/info.txt",
-			UNITY_STREAMING_PATH+"Log/warn.txt",
-			UNITY_STREAMING_PATH+"Log/error.txt");
-		LOG("init finish");
-		return 1;
+		return "ÖÐÎÄ";
+	}
+
+	void iInitial(const char* path)
+	{
+		string s = path;
+		InitLogger(s+"Log/info.txt",s+"Log/warn.txt",s+"Log/error.txt");
+		LOG("c++ initial success with path: "+ s);
 	}
 
 	void iInitCallbackCommand(CALLBACK cb)

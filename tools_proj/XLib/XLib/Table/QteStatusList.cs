@@ -11,7 +11,7 @@
 namespace XTable {
     
     
-    public class QteStatusList : CVSReader {
+    public class QteStatusList : CSVReader {
         
         public class RowData {
 			public string Comment;

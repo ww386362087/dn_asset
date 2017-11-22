@@ -44,50 +44,16 @@ string NativeReader::getPath()
 }
 
 
-bool NativeReader::ReadBoolean()
+void NativeReader::ReadString(char buff[])
 {
-    bool value = false;
-    BINARY_READ(reader, value);
-    return value;
-}
-
-char NativeReader::ReadChar()
-{
-    char value = 0;
-    BINARY_READ(reader, value);
-    return value;
-}
-
-int NativeReader::ReadInt()
-{
-    int value = 0;
-    BINARY_READ(reader, value);
-    return value;
-}
-
-long long NativeReader::ReadInt64()
-{
-    long long value = 0;
-    BINARY_READ(reader, value);
-    return value;
-}
-
-float NativeReader::ReadFloat()
-{
-    float value = 0;
-    BINARY_READ(reader, value);
-    return value;
-}
-
-string NativeReader::ReadString()
-{
-    string result = "";
-	int len = ReadChar();
-	string tmp="";
+	char len =0;
+	Read(&len);
+	memset(buff, 0, MaxStringSize * sizeof(char));
+	int ptr=0;
     while(len > 0)
 	{
-		result += ReadChar();
+		WChar c;
+		Read(&buff[ptr++]);
 		len--;
 	}
-	return result;
 }

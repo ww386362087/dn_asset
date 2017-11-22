@@ -12,7 +12,7 @@ public class XTableMgr
 {
     const int ThreadCnt = 2;
 
-    static Dictionary<uint, CVSReader> readers;
+    static Dictionary<uint, CSVReader> readers;
 
     public static System.Action<bool> tableLoaded;
     static bool loadFinish = false;
@@ -28,7 +28,7 @@ public class XTableMgr
         Add<SceneList>();
         Add<XEntityPresentation>();
 		Add<XEntityStatistics>();
-		Add<XNpcList>();
+        Add<XNpcList>();
 		loadFinish = false;
         ThreadLoad();
     }
@@ -43,7 +43,7 @@ public class XTableMgr
         if (readers != null)
         {
             bool finish = true;
-            Dictionary<uint, CVSReader>.Enumerator e = readers.GetEnumerator();
+            Dictionary<uint, CSVReader>.Enumerator e = readers.GetEnumerator();
             while (e.MoveNext())
             {
                 if (!e.Current.Value.isDone)
@@ -64,11 +64,11 @@ public class XTableMgr
         }
     }
 
-    private static void Add<T>() where T : CVSReader, new()
+    private static void Add<T>() where T : CSVReader, new()
     {
-        if (readers == null) readers = new Dictionary<uint, CVSReader>();
+        if (readers == null) readers = new Dictionary<uint, CSVReader>();
         uint uid = XCommon.singleton.XHash(typeof(T).Name);
-        CVSReader reader = new T();
+        CSVReader reader = new T();
         readers.Add(uid, reader);
     }
 
@@ -79,10 +79,11 @@ public class XTableMgr
     public static void ThreadLoad()
     {
         ThreadPool.SetMaxThreads(ThreadCnt, ThreadCnt);
-        Dictionary<uint, CVSReader>.Enumerator e= readers.GetEnumerator();
+        Dictionary<uint, CSVReader>.Enumerator e= readers.GetEnumerator();
         while (e.MoveNext())
         {
-            ThreadPool.QueueUserWorkItem(LoadTable, e.Current.Value);
+            //ThreadPool.QueueUserWorkItem(LoadTable, e.Current.Value);
+            LoadTable(e.Current.Value);
         }
         e.Dispose();
         Thread.Sleep(1);
@@ -91,10 +92,10 @@ public class XTableMgr
 
     public static void LoadTable(object reader)
     {
-        (reader as CVSReader).Create();
+        (reader as CSVReader).Create();
     }
 
-    public static T GetTable<T>() where T : CVSReader, new()
+    public static T GetTable<T>() where T : CSVReader, new()
     {
         
         uint uid = XCommon.singleton.XHash(typeof(T).Name);

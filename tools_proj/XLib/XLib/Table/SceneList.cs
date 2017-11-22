@@ -11,7 +11,7 @@
 namespace XTable {
     
     
-    public class SceneList : CVSReader {
+    public class SceneList : CSVReader {
         
         public class RowData :BaseRow {
 			public int SceneID;

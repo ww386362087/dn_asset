@@ -71,29 +71,13 @@ public sealed class XABController
 
     void LoadDepInfo()
     {
-        string depFile = string.Format("{0}/{1}", AssetBundlePathResolver.BundleCacheDir, AssetBundlePathResolver.DependFileName);
-        if (File.Exists(depFile))
-        {
-            FileStream fs = new FileStream(depFile, FileMode.Open, FileAccess.Read);
-            Init(fs);
-            fs.Close();
-        }
-        else
-        {
-            TextAsset o = Resources.Load<TextAsset>("dep");
-            if (o != null)
-            {
-                Init(new MemoryStream(o.bytes));
-            }
-            else
-            {
-                XDebug.LogError("depFile not exist! ", depFile);
-            }
-        }
+        TextAsset o = Resources.Load<TextAsset>(AssetBundlePathResolver.DependFileName);
+        if (o != null) Init(o.bytes);
     }
 
-    public void Init(Stream depStream)
+    public void Init(byte[] bytes)
     {
+        MemoryStream depStream =new MemoryStream(bytes);
         if (depStream.Length > 4)
         {
             BinaryReader br = new BinaryReader(depStream);

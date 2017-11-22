@@ -11,7 +11,7 @@
 namespace XTable {
     
     
-    public class XNpcList : CVSReader {
+    public class XNpcList : CSVReader {
         
         public class RowData :BaseRow {
 			public int NPCID;

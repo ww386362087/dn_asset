@@ -35,8 +35,6 @@
             this.makeCodeBtn = new System.Windows.Forms.Button();
             this.clearBtn = new System.Windows.Forms.Button();
             this.buildBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -105,33 +103,11 @@
             this.buildBtn.UseVisualStyleBackColor = true;
             this.buildBtn.Click += new System.EventHandler(this.build_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(331, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Write";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.write_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(412, 21);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Read";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.read_Click);
-            // 
             // XCForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 417);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.buildBtn);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.makeCodeBtn);
@@ -155,8 +131,6 @@
         private System.Windows.Forms.Button makeCodeBtn;
         private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.Button buildBtn;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
     }
 }
 

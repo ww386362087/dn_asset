@@ -7,14 +7,16 @@ using namespace std;
 
 typedef void(*CB)(const char*);
 typedef void(*DllCommand)(CB);
-typedef int(*DllInitial)(char*);
+typedef void(*DllInitial)(char*);
 typedef int(*DllAdd)(int,int);
 typedef int(*DllSub)(int*,int*);
+typedef char*(*DllStr)();
 typedef void(*DllTable)(const char*);
 DllCommand cb;
 DllInitial init;
 DllAdd add;
 DllSub sub;
+DllStr str;
 DllTable tab;
 
 void DebugInfo()
@@ -65,13 +67,12 @@ void ExSub()
 	cout<<"add result:"<<c<<endl<<endl;
 }
 
+
 void ExRead()
 {
 	cout<<"input table name:";
-	string name;
-	cin>>name;
-	string ss = name+".bytes";
-	tab(ss.c_str());
+	string name="QteStatusList.bytes";
+	tab(name.c_str());
 	cout<<endl<<endl;
 }
 
@@ -82,6 +83,8 @@ void OnCallback(const char* command)
 
 void main()
 {
+	cout<<"**********  main **********"<<endl;
+
 	HINSTANCE hInst = LoadLibrary("XTable.dll");
 	if(hInst==NULL)
 	{
@@ -93,9 +96,10 @@ void main()
 	init = (DllInitial)GetProcAddress(hInst,"iInitial");
 	add = (DllAdd)GetProcAddress(hInst,"iAdd");
 	sub = (DllSub)GetProcAddress(hInst,"iSub");
+	str = (DllStr)GetProcAddress(hInst,"GetStr");
 	tab = (DllTable)GetProcAddress(hInst,"iReadTable");
 	cb(OnCallback);
-	init("D:\\");
+	init("");
 
 	while(true)
 	{
@@ -116,6 +120,9 @@ void main()
 				break;
 			case 'q':
 				jump = true;
+				break;
+			case 'r':
+				cout<< str()<<endl;
 				break;
 			default:
 				cout<<"invalid command"<<endl<<endl;

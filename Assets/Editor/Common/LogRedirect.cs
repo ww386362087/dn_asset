@@ -40,6 +40,7 @@ public class LogRedirect
     private static void OnHandleCondition(string condition)
     {
         string[] lines = condition.Split('\n');
+        if (lines.Length <= 2) return;
         //第一行是打印的内容 第二行是UnityEngine.Debug:Log 
         bool isXDebug = lines[2].Trim().StartsWith("XDebug");
         if (isXDebug)
@@ -173,6 +174,7 @@ public class LogRedirect
         }
     }
 
+    [MenuItem("Tools/Restart-Unity", false, 1)]
     public static void RestartUnity()
     {
 #if UNITY_EDITOR_WIN

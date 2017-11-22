@@ -24,10 +24,10 @@
     <ClInclude Include="Log.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="FileOpt.h">
+    <ClInclude Include="NativeInterface.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="NativeInterface.h">
+    <ClInclude Include="QteStatusList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,10 +38,13 @@
     <ClCompile Include="Log.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="FileOpt.cpp">
+    <ClCompile Include="NativeInterface.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="NativeInterface.cpp">
+    <ClCompile Include="Common.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="QteStatusList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

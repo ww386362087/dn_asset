@@ -11,7 +11,7 @@
 namespace XTable {
     
     
-    public class XEntityPresentation : CVSReader {
+    public class XEntityPresentation : CSVReader {
         
         public class RowData :BaseRow {
 			public uint UID;
