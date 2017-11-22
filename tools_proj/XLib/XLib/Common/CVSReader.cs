@@ -212,7 +212,7 @@ public abstract class CSVReader
     {
         lineno = 0;
         columnno = -1;
-        BinaryReader reader = new BinaryReader(stream, System.Text.Encoding.Default);
+        BinaryReader reader = new BinaryReader(stream, System.Text.Encoding.UTF8);
         {
             long fileSize = reader.ReadInt64();
             int lineCount = reader.ReadInt32();

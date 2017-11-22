@@ -24,11 +24,6 @@ extern "C"
 		return *a - *b;
 	}
 
-	char* GetStr()
-	{
-		return "жпнд";
-	}
-
 	void iInitial(const char* path)
 	{
 		string s = path;

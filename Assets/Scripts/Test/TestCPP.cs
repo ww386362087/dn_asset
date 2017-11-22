@@ -8,6 +8,19 @@ using XTable;
 
 public class TestCPP : ITest
 {
+    
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    public struct QteStatusListMarshalRowData
+    {
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+        public string Comment;
+
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+        public string Name;
+        
+        public int Value;
+    }
+
     [DllImport("XTable")]
     public static extern int iAdd(int x, int y);
 
@@ -15,14 +28,11 @@ public class TestCPP : ITest
     public static extern void iInitial(string path);
 
     [DllImport("XTable")]
-    public static extern void iReadTable(string path);
+    public static extern void iReadQteStatusList(string path);
 
     [DllImport("XTable")]
-    public static extern void iGetComment(string ptr, int val);
-
-    [DllImport("XTable")]
-    public static extern IntPtr GetStr();
-
+    public static extern void iGetQteStatusListRow(int val,ref QteStatusListMarshalRowData row);
+    
     [DllImport("XTable")]
     public static extern void iInitCallbackCommand(CppDelegate cb);
 
@@ -31,13 +41,12 @@ public class TestCPP : ITest
     QteStatusList m_table;
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(40) };
 
+    QteStatusListMarshalRowData m_cacheMarshalData = new QteStatusListMarshalRowData();
+
     public void Start()
     {
         iInitCallbackCommand(new CppDelegate(OnCallback));
         iInitial(Application.streamingAssetsPath + "/");
-        IntPtr str = GetStr();
-        string str1 = Marshal.PtrToStringAnsi(str);
-        XDebug.Log(str1);
     }
 
 
@@ -77,11 +86,7 @@ public class TestCPP : ITest
         if (string.IsNullOrEmpty(command)) XDebug.Log("rst is null ");
         else XDebug.Log(command);
     }
-
-
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-    string str_comment;
-
+    
     public void OnGUI()
     {
         GUILayout.BeginHorizontal();
@@ -94,7 +99,7 @@ public class TestCPP : ITest
         if (GUILayout.Button("Table-CPP", ui_opt))
         {
             string path = Application.streamingAssetsPath + "/Table/QteStatusList.bytes";
-            iReadTable(path);
+            iReadQteStatusList(path);
             XDebug.Log("read table finish");
         }
         if (GUILayout.Button("Table-C#", ui_opt))
@@ -104,8 +109,8 @@ public class TestCPP : ITest
         }
         if (GUILayout.Button("Row-CPP", ui_opt))
         {
-            iGetComment(str_comment, 24);
-            XDebug.Log(str_comment);
+            iGetQteStatusListRow(24, ref m_cacheMarshalData);
+            XDebug.Log(m_cacheMarshalData.Value+" name: "+m_cacheMarshalData.Name+" comment: "+m_cacheMarshalData.Comment);
         }
         GUILayout.EndVertical();
         GUILayout.Space(20);

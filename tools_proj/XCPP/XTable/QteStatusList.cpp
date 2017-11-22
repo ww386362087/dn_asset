@@ -55,13 +55,18 @@ extern "C"
 {
 	QteStatusList *f;
 
-	void  iReadTable(const char* name)
+	void  iReadQteStatusList(const char* name)
 	{
 		f = new QteStatusList();
 		f->ReadTable(name);
+
+		QteStatusListRow* row=new QteStatusListRow();
+		iGetQteStatusListRow(24,row);
+		LOG("********************************");
+		LOG("val:"+tostring(row->val)+" comment: "+tostring(row->comment)+" name: "+tostring(row->name));
 	}
 
-	void iGetRow(int val,QteStatusListRow* row)
+	void iGetQteStatusListRow(int val,QteStatusListRow* row)
 	{
 		if(f) f->GetRow(val,row);
 	}

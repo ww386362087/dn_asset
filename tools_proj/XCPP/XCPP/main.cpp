@@ -10,14 +10,12 @@ typedef void(*DllCommand)(CB);
 typedef void(*DllInitial)(char*);
 typedef int(*DllAdd)(int,int);
 typedef int(*DllSub)(int*,int*);
-typedef char*(*DllStr)();
-typedef void(*DllTable)(const char*);
+typedef void(*DllReadTable)(const char*);
 DllCommand cb;
 DllInitial init;
 DllAdd add;
 DllSub sub;
-DllStr str;
-DllTable tab;
+DllReadTable tab;
 
 void DebugInfo()
 {
@@ -67,7 +65,6 @@ void ExSub()
 	cout<<"add result:"<<c<<endl<<endl;
 }
 
-
 void ExRead()
 {
 	cout<<"input table name:";
@@ -96,8 +93,7 @@ void main()
 	init = (DllInitial)GetProcAddress(hInst,"iInitial");
 	add = (DllAdd)GetProcAddress(hInst,"iAdd");
 	sub = (DllSub)GetProcAddress(hInst,"iSub");
-	str = (DllStr)GetProcAddress(hInst,"GetStr");
-	tab = (DllTable)GetProcAddress(hInst,"iReadTable");
+	tab = (DllReadTable)GetProcAddress(hInst,"iReadQteStatusList");
 	cb(OnCallback);
 	init("");
 
@@ -120,9 +116,6 @@ void main()
 				break;
 			case 'q':
 				jump = true;
-				break;
-			case 'r':
-				cout<< str()<<endl;
 				break;
 			default:
 				cout<<"invalid command"<<endl<<endl;

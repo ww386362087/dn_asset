@@ -12,8 +12,6 @@ struct QteStatusListRow
 {
 	 char comment[MaxStringSize];
 	 char name[MaxStringSize];
-	 //string comment;
-	 //string name;
 	 int val;
 };
 
@@ -30,6 +28,6 @@ protected:
 
 extern "C"
 {
-	ENGINE_INTERFACE_EXPORT void iReadTable(const char* name);
-	ENGINE_INTERFACE_EXPORT void iGetRow(int val,QteStatusListRow* row);
+	ENGINE_INTERFACE_EXPORT void iReadQteStatusList(const char* name);
+	ENGINE_INTERFACE_EXPORT void iGetQteStatusListRow(int val,QteStatusListRow* row);
 };
