@@ -25,7 +25,7 @@ void NativeReader::Open(const char* path)
 
 void NativeReader::Close()
 {
-	if(reader.is_open())   reader.close();
+	if(reader.is_open()) reader.close();
 }
 
 

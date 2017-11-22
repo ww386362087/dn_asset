@@ -11,17 +11,17 @@ struct EquipSuitRow
 	int profid;
 	int suitquality;
 	bool iscreate;
-	std::vector<int> euipid;
+	int euipid[MaxArraySize];
 	char effect1[MaxStringSize];
-	char effect2[MaxStringSize];
-	char effect3[MaxStringSize];
-	char effect4[MaxStringSize];
-	char effect5[MaxStringSize];
-	char effect6[MaxStringSize];
-	char effect7[MaxStringSize];
-	char effect8[MaxStringSize];
-	char effect9[MaxStringSize];
-	char effect10[MaxStringSize];
+	Seq<int> effect2;
+	Seq<int> effect3;
+	Seq<int> effect4;
+	Seq<int> effect5;
+	Seq<int> effect6;
+	Seq<int> effect7;
+	Seq<int> effect8;
+	Seq<int> effect9;
+	Seq<int> effect10;
 	int sortid;
 };
 

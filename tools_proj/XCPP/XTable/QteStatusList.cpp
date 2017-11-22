@@ -43,7 +43,7 @@ void QteStatusList::GetRow(int val,QteStatusListRow* row)
 
 int QteStatusList::GetLength()
 {
-	return m_data.size();
+	return (int)m_data.size();
 }
 
 

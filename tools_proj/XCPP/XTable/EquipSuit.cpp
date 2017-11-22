@@ -24,24 +24,22 @@ void EquipSuit::ReadTable()
 		Read(&(row->profid));
 		Read(&(row->suitquality));
 		Read(&(row->iscreate));
-		ReadArray(row->euipid);
+		ReadArray<int>(row->euipid);
 		ReadString(row->effect1);
-		ReadString(row->effect2);
-		ReadString(row->effect3);
-		ReadString(row->effect4);
-		ReadString(row->effect5);
-		ReadString(row->effect6);
-		ReadString(row->effect7);
-		ReadString(row->effect8);
-		ReadString(row->effect9);
-		ReadString(row->effect10);
+		ReadSeq(row->effect2);
+		ReadSeq(row->effect3);
+		ReadSeq(row->effect4);
+		ReadSeq(row->effect5);
+		ReadSeq(row->effect6);
+		ReadSeq(row->effect7);
+		ReadSeq(row->effect8);
+		ReadSeq(row->effect9);
+		ReadSeq(row->effect10);
+
 		LOG("read id:"+tostring(row->suitid)
-			+"\t\tlevel: "+tostring(row->level)
-			+"\t\tequip: "+tostring(row->euipid.size())
-			+"\t\teffect1:"+tostring(row->effect1)
-			+"\t\teffect2:"+tostring(row->effect2)
-			+"\t\teffect3:"+tostring(row->effect3)
-			+"\t\teffect8:"+tostring(row->effect8));
+			+"\tlevel: "+tostring(row->level)
+			+"\tequip: "+tostring(row->euipid)
+			+"\tlevel:"+tostring(row->level));
 		m_data.push_back(*row);
 	}
 	this->Close();
@@ -61,7 +59,7 @@ void EquipSuit::GetRow(int id,EquipSuitRow* row)
 
 int EquipSuit::GetLength()
 {
-	return m_data.size();
+	return (int)m_data.size();
 }
 
 

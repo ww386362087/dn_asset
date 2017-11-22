@@ -1,10 +1,18 @@
 #pragma once
 #include<string>
 #include<fstream>
+#include<iostream>
 #include<vector>
 #include"Common.h"
 
 #define BINARY_READ(reader,value) reader.read((char *)&value, sizeof(value))
+
+template<class T> struct Seq
+{
+	T value0;
+	T value1;
+};
+
 
 class NativeReader
 {
@@ -14,13 +22,13 @@ public:
 	void Open(const char* path);
 
 	template<typename T> void Read(T* v);
-	template<typename T> void ReadArray(std::vector<T>& v);
+	template<typename T> void ReadArray(T buff[]);
+	template<typename T> void ReadSeq(Seq<T>& v);
 	void ReadString(char buff[]);
 
 private:
     std::ifstream reader;
 };
-
 
 template<typename T>
 void NativeReader::Read(T* v)
@@ -28,19 +36,24 @@ void NativeReader::Read(T* v)
 	BINARY_READ(reader, *v);
 }
 
-template <typename  T>
-void NativeReader::ReadArray(std::vector<T>& v)
+template <typename T>
+void NativeReader::ReadArray(T buff[])
 {
 	char length = 0;
 	Read(&length);
-	if(length > 0)
+	memset(buff,-1,MaxArraySize*sizeof(T));
+	T val;
+	for(int i = 0; i < length; i++)
 	{
-		v.clear();
-		T val;
-		for(int i = 0; i < length; i++)
-		{
-			Read(&val);
-			v.push_back(val);
-		}
+		Read(&val);
+		buff[i]=val;
 	}
 }
+
+template<typename T>
+void NativeReader::ReadSeq(Seq<T>& v)
+{
+	Read(&v.value0);
+	Read(&v.value1);
+}
+

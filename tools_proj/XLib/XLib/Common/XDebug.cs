@@ -6,6 +6,7 @@ public enum LogLevel
 {
     Log,
     Green,
+    Cpp,
     Warn,
     Error,
     None, // 不输出log
@@ -96,7 +97,22 @@ public class XDebug
             Write(shareSB);
         }
     }
-    
+
+    /// <summary>
+    /// 专门给C/C++调用的Log
+    /// </summary>
+    public static void LogC(string param)
+    {
+        if (loglevel <= LogLevel.Cpp)
+        {
+            shareSB.Length = 0;
+            shareSB.Append("++> ");
+            shareSB.Append(param);
+            Debug.Log(shareSB);
+            Write(shareSB);
+        }
+    }
+
     public static void LogWarning(object param)
     {
         LogWarning(param, null);

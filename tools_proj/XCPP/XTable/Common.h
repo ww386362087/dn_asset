@@ -16,9 +16,10 @@
 #include <sstream> 
 #include<string>
 
-
+typedef unsigned int  uint;
 #define MaxStringSize 64
- 
+#define MaxArraySize 16
+
 extern std::string UNITY_STREAM_PATH;
 extern std::string UNITY_CACHE_PATH;
 
@@ -39,4 +40,3 @@ T Add(T a,T b)
 }
 
 void tobytes(std::string str);
-

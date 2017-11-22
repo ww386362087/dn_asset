@@ -19,7 +19,6 @@ DllSub sub;
 DllReadQteTable qte;
 DllReadSuitTable suit;
 
-
 void DebugInfo()
 {
 	cout<<"********* op *********"<<endl;
@@ -105,6 +104,8 @@ void main()
 		DebugInfo();
 		char input;
 		cin>>input;
+		if(input>='A'&&input<='Z')
+			input+=32;
 		bool jump =false;
 		switch(input)
 		{
