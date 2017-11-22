@@ -30,6 +30,9 @@
     <ClInclude Include="QteStatusList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="EquipSuit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NativeReader.cpp">
@@ -45,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="QteStatusList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipSuit.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

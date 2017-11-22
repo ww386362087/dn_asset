@@ -15,13 +15,12 @@
 
 #include <sstream> 
 #include<string>
-#include <assert.h>
-#include<wchar.h>
 
-typedef unsigned short WChar;
+
 #define MaxStringSize 64
-#define MaxCharsSize 128
-
+ 
+extern std::string UNITY_STREAM_PATH;
+extern std::string UNITY_CACHE_PATH;
 
 template<typename T>
 std::string tostring(T val)
@@ -41,6 +40,3 @@ T Add(T a,T b)
 
 void tobytes(std::string str);
 
-std::wstring str2wstr(std::string str);
-
-wchar_t* MBCS2Unicode(wchar_t* buff, const char* str);

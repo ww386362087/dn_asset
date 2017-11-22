@@ -2,9 +2,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Text;
 using UnityEngine;
-using XTable;
 
 public class TestCPP : ITest
 {
@@ -25,10 +23,13 @@ public class TestCPP : ITest
     public static extern int iAdd(int x, int y);
 
     [DllImport("XTable")]
-    public static extern void iInitial(string path);
+    public static extern int iSub(IntPtr x, IntPtr y);
 
     [DllImport("XTable")]
-    public static extern void iReadQteStatusList(string path);
+    public static extern void iInitial(string stream,string persist);
+
+    [DllImport("XTable")]
+    public static extern void iReadQteStatusList();
 
     [DllImport("XTable")]
     public static extern void iGetQteStatusListRow(int val,ref QteStatusListMarshalRowData row);
@@ -38,42 +39,18 @@ public class TestCPP : ITest
 
     public delegate void CppDelegate(IntPtr str);
 
-    QteStatusList m_table;
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(100), GUILayout.Height(40) };
-
+    GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
+    string ui_in = "23";
+    string ui_rst = string.Empty;
     QteStatusListMarshalRowData m_cacheMarshalData = new QteStatusListMarshalRowData();
 
     public void Start()
     {
         iInitCallbackCommand(new CppDelegate(OnCallback));
-        iInitial(Application.streamingAssetsPath + "/");
+        iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
-
-
-    private void TestBytes()
-    {
-        if (m_table != null)
-        {
-            for (int i = 0, max = m_table.length; i < max; i++)
-            {
-                var bytes = Encoding.Default.GetBytes(m_table[i].Comment);
-                XDebug.LogGreen(m_table[i].Comment);
-                PrintBytes(bytes);
-            }
-        }
-    }
-
-    public void PrintBytes(byte[] bytes)
-    {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < bytes.Length; i++)
-        {
-            sb.Append("0x");
-            sb.AppendFormat("{0:x2}", bytes[i]); //十六进制
-            sb.Append(",");
-        }
-        XDebug.Log(sb.ToString());
-    }
+    
 
     void OnCallback(IntPtr ptr)
     {
@@ -90,39 +67,45 @@ public class TestCPP : ITest
     public void OnGUI()
     {
         GUILayout.BeginHorizontal();
+        GUILayout.Space(10);
         GUILayout.BeginVertical();
+        GUILayout.Space(10);
         if (GUILayout.Button("Add", ui_opt))
         {
             int i = iAdd(8, 7);
-            XDebug.Log("add rest: " + i);
+            ui_rst = "add rest: " + i;
+            XDebug.LogGreen(ui_rst);
         }
-        if (GUILayout.Button("Table-CPP", ui_opt))
+        if (GUILayout.Button("Sub", ui_opt))
         {
-            string path = Application.streamingAssetsPath + "/Table/QteStatusList.bytes";
-            iReadQteStatusList(path);
-            XDebug.Log("read table finish");
+            int a = 5, b = 6;
+            IntPtr p1 = Marshal.AllocCoTaskMem(Marshal.SizeOf(a));
+            Marshal.StructureToPtr(a, p1, false);
+            IntPtr p2 = Marshal.AllocCoTaskMem(Marshal.SizeOf(b));
+            Marshal.StructureToPtr(b, p2, false);
+            int rst = iSub(p1,p2);
+            ui_rst = "sub rst: " + rst;
+            XDebug.Log(ui_rst);
         }
-        if (GUILayout.Button("Table-C#", ui_opt))
+        if (GUILayout.Button("Table-QTE", ui_opt))
         {
-            m_table = XTableMgr.GetTable<QteStatusList>();
-            TestBytes();
+            iReadQteStatusList();
+            ui_rst = "read table finish";
+            XDebug.LogGreen(ui_rst);
         }
+        ui_in = GUILayout.TextField(ui_in,ui_opt);
+
         if (GUILayout.Button("Row-CPP", ui_opt))
         {
-            iGetQteStatusListRow(24, ref m_cacheMarshalData);
-            XDebug.Log(m_cacheMarshalData.Value+" name: "+m_cacheMarshalData.Name+" comment: "+m_cacheMarshalData.Comment);
+            int val = 23;
+            int.TryParse(ui_in, out val);
+            iGetQteStatusListRow(val, ref m_cacheMarshalData);
+            ui_rst = m_cacheMarshalData.Value + " name: " + m_cacheMarshalData.Name + " comment: " + m_cacheMarshalData.Comment;
+            XDebug.Log(ui_rst);
         }
         GUILayout.EndVertical();
         GUILayout.Space(20);
-        if (m_table != null)
-        {
-            GUILayout.BeginVertical();
-            for (int i = 0, max = m_table.length; i < max; i++)
-            {
-                GUILayout.Label(m_table[i].Value + "\t" + m_table[i].Name + "\t\t" + m_table[i].Comment);
-            }
-            GUILayout.EndVertical();
-        }
+        GUILayout.TextArea(ui_rst, ui_op2);
         GUILayout.EndHorizontal();
     }
 

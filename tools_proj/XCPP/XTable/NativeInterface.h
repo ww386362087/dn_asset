@@ -19,5 +19,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT void iInitCallbackCommand(CALLBACK cb);
 	ENGINE_INTERFACE_EXPORT int iAdd(int, int);
 	ENGINE_INTERFACE_EXPORT int iSub(int*, int*);
-	ENGINE_INTERFACE_EXPORT void iInitial(const char*);
+	ENGINE_INTERFACE_EXPORT void iInitial(const char*,const char*);
 };

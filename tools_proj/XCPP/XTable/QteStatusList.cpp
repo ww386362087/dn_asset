@@ -1,24 +1,16 @@
-#pragma once
-
-#include "Common.h"
 #include "QteStatusList.h"
+
+
+QteStatusList::QteStatusList(void)
+{
+	name = UNITY_STREAM_PATH + "Table/QteStatusList.bytes";
+}
 
 void QteStatusList::ReadTable()
 {
-	if(m_data.empty())
-	{
-		ReadTable("QteStatusList.bytes");
-	}
-	else
-	{
-		WARN("TABLE HAS READ, DON'T READ AGAIN");
-	}
-}
-
-void QteStatusList::ReadTable(string name)
-{
-	LOG("read:"+name);
-	this->Open(name);
+	LOG(this->name);
+	LOG("Read");
+	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
 	Read(&filesize);
@@ -27,15 +19,15 @@ void QteStatusList::ReadTable(string name)
 	for(int i=0;i<lineCnt;i++)
 	{
 		QteStatusListRow *row = new QteStatusListRow();
-		this->ReadString(row->comment);
-		this->ReadString(row->name);
-		this->Read(&(row->val));
+		ReadString(row->comment);
+		ReadString(row->name);
+		Read(&(row->val));
 		LOG("read vlue:"+tostring(row->val));
 		LOG("read comt:"+tostring(row->comment));
 		LOG("read nam:"+tostring(row->name));
 		m_data.push_back(*row);
 	}
-	this->Close();
+	Close();
 }
 
 void QteStatusList::GetRow(int val,QteStatusListRow* row)
@@ -53,21 +45,19 @@ void QteStatusList::GetRow(int val,QteStatusListRow* row)
 
 extern "C"
 {
-	QteStatusList *f;
+	QteStatusList *qtestatuslist;
 
-	void  iReadQteStatusList(const char* name)
+	void  iReadQteStatusList()
 	{
-		f = new QteStatusList();
-		f->ReadTable(name);
-
-		QteStatusListRow* row=new QteStatusListRow();
-		iGetQteStatusListRow(24,row);
-		LOG("********************************");
-		LOG("val:"+tostring(row->val)+" comment: "+tostring(row->comment)+" name: "+tostring(row->name));
+		if(qtestatuslist==NULL)
+		{
+			qtestatuslist = new QteStatusList();
+		}
+		qtestatuslist->ReadTable();
 	}
 
 	void iGetQteStatusListRow(int val,QteStatusListRow* row)
 	{
-		if(f) f->GetRow(val,row);
+		if(qtestatuslist) qtestatuslist->GetRow(val,row);
 	}
 }

@@ -1,7 +1,6 @@
 #include "NativeReader.h"
 #include "Log.h"
 
-NativeReader::NativeReader(void) { }
 
 NativeReader::~NativeReader(void)
 {
@@ -12,35 +11,21 @@ NativeReader::~NativeReader(void)
 	}
 }
 
-void NativeReader::Open(string fileFullPath)
+void NativeReader::Open(const char* path)
 {
-	filePath = fileFullPath; 
-	LOG("Opening file: " + filePath);
+	LOG("Opening file: " + tostring(path));
     if(reader.is_open())reader.close();
-	reader.imbue(locale("chs"));
-    reader.open(filePath, ios::binary|ios::in);
+	reader.imbue(std::locale("chs"));
+    reader.open(path, std::ios::binary|std::ios::in);
     if(!reader.is_open())
     {
-        ERROR("Could not open file for read: " + filePath);
+        ERROR("Could not open file for read: " + tostring(path));
     }
 }
 
 void NativeReader::Close()
 {
 	if(reader.is_open())   reader.close();
-}
-
-
-void NativeReader::setPath(string str)
-{
-	this->filePath=str;
-	LOG("set path" + str);
-}
-
-string NativeReader::getPath()
-{
-	if(this->filePath.empty()) ERROR("FILEPATH is null");
-	return this->filePath;
 }
 
 
@@ -52,7 +37,6 @@ void NativeReader::ReadString(char buff[])
 	int ptr=0;
     while(len > 0)
 	{
-		WChar c;
 		Read(&buff[ptr++]);
 		len--;
 	}

@@ -1,12 +1,8 @@
 #pragma once
-#include<string>
-#include <fstream>
-#include<iostream>
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
-
-using namespace std;
+#include"Common.h"
 
 struct QteStatusListRow
 {
@@ -18,16 +14,20 @@ struct QteStatusListRow
 class QteStatusList:public NativeReader
 {
 public:
+	QteStatusList(void);
 	void ReadTable();
-	void ReadTable(string name);
 	void GetRow(int val,QteStatusListRow* row);
 
 protected:
-	vector<QteStatusListRow> m_data;
+	std::string name;
+	std::vector<QteStatusListRow> m_data;
 };
+
+
+extern std::string UNITY_STREAM_PATH;
 
 extern "C"
 {
-	ENGINE_INTERFACE_EXPORT void iReadQteStatusList(const char* name);
+	ENGINE_INTERFACE_EXPORT void iReadQteStatusList();
 	ENGINE_INTERFACE_EXPORT void iGetQteStatusListRow(int val,QteStatusListRow* row);
 };

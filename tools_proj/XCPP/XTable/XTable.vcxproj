@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
+    <ClInclude Include="EquipSuit.h" />
     <ClInclude Include="QteStatusList.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="NativeInterface.h" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common.cpp" />
+    <ClCompile Include="EquipSuit.cpp" />
     <ClCompile Include="QteStatusList.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="NativeInterface.cpp" />

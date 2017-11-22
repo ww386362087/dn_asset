@@ -7,15 +7,18 @@ using namespace std;
 
 typedef void(*CB)(const char*);
 typedef void(*DllCommand)(CB);
-typedef void(*DllInitial)(char*);
+typedef void(*DllInitial)(char*,char*);
 typedef int(*DllAdd)(int,int);
 typedef int(*DllSub)(int*,int*);
-typedef void(*DllReadTable)(const char*);
+typedef void(*DllReadQteTable)();
+typedef void(*DllReadSuitTable)();
 DllCommand cb;
 DllInitial init;
 DllAdd add;
 DllSub sub;
-DllReadTable tab;
+DllReadQteTable qte;
+DllReadSuitTable suit;
+
 
 void DebugInfo()
 {
@@ -39,7 +42,7 @@ bool CheckIn()
 	return true;
 }
 
-void ExAdd()
+void EAdd()
 {
 	int a,b,c;
 	cout<<"input a:";
@@ -52,7 +55,7 @@ void ExAdd()
 	cout<<"add result:"<<c<<endl<<endl;
 }
 
-void ExSub()
+void ESub()
 {
 	int a,b,c;
 	cout<<"input a:";
@@ -65,11 +68,11 @@ void ExSub()
 	cout<<"add result:"<<c<<endl<<endl;
 }
 
-void ExRead()
+void ERead()
 {
-	cout<<"input table name:";
-	string name="QteStatusList.bytes";
-	tab(name.c_str());
+	qte();
+	cout<<endl;
+	suit();
 	cout<<endl<<endl;
 }
 
@@ -81,7 +84,6 @@ void OnCallback(const char* command)
 void main()
 {
 	cout<<"**********  main **********"<<endl;
-
 	HINSTANCE hInst = LoadLibrary("XTable.dll");
 	if(hInst==NULL)
 	{
@@ -93,9 +95,10 @@ void main()
 	init = (DllInitial)GetProcAddress(hInst,"iInitial");
 	add = (DllAdd)GetProcAddress(hInst,"iAdd");
 	sub = (DllSub)GetProcAddress(hInst,"iSub");
-	tab = (DllReadTable)GetProcAddress(hInst,"iReadQteStatusList");
+	qte = (DllReadQteTable)GetProcAddress(hInst,"iReadQteStatusList");
+	suit = (DllReadSuitTable)GetProcAddress(hInst,"iReadEquipSuitList");
 	cb(OnCallback);
-	init("");
+	init("","");
 
 	while(true)
 	{
@@ -106,13 +109,13 @@ void main()
 		switch(input)
 		{
 			case 'a':
-				ExAdd();
+				EAdd();
 				break;
 			case 's':
-				ExSub();
+				ESub();
 				break;
 			case 't':
-				ExRead();
+				ERead();
 				break;
 			case 'q':
 				jump = true;
