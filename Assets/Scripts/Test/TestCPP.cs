@@ -3,6 +3,7 @@
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using XTable;
 
 public class TestCPP : ITest
 {

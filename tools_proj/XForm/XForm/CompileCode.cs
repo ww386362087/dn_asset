@@ -5,7 +5,7 @@ using System.IO;
 
 namespace XForm
 {
-    public class BuildCode
+    public class CompileCode
     {
 
         private static string _output = string.Empty;

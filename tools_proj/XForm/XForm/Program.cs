@@ -44,7 +44,7 @@ namespace XForm
                         CheckException(args[i]);
                         XDebug.Log("gennerate code: " + args[i]);
                         GenerateCode.sington.GenerateTCode(args[i]);
-                        BuildCode.Build();
+                        CompileCode.Build();
                     }
                     else
                     {

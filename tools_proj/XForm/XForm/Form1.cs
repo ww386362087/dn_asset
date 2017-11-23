@@ -39,6 +39,11 @@ namespace XForm
             get { return unity_proj_path + @"Assets\Table\"; }
         }
 
+        public static string unity_marshal_path
+        {
+            get { return unity_proj_path + @"Assets\Scripts\Marshal\"; }
+        }
+
         public static string unity_bytes_path
         {
             get { return unity_proj_path + @"Assets\StreamingAssets\Table\"; }
@@ -105,7 +110,7 @@ namespace XForm
         {
             ClearContent();
             AppendContent("开始编译表格代码.");
-            BuildCode.Build(this);
+            CompileCode.Build(this);
 
 
         }
