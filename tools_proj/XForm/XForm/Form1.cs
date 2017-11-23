@@ -133,5 +133,10 @@ namespace XForm
         {
             GenerateMarshalCode.sington.GenerateAll(this);
         }
+
+        private void cpp_Click(object sender, EventArgs e)
+        {
+            GenerateCppCode.sington.GenerateAll(this);
+        }
     }
 }

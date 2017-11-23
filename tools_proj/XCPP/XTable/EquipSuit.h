@@ -22,7 +22,6 @@ struct EquipSuitRow
 	Seq<int> effect8;
 	Seq<int> effect9;
 	Seq<int> effect10;
-	int sortid;
 };
 
 class EquipSuit:public NativeReader

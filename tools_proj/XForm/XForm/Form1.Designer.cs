@@ -36,6 +36,7 @@
             this.clearBtn = new System.Windows.Forms.Button();
             this.buildBtn = new System.Windows.Forms.Button();
             this.marshal = new System.Windows.Forms.Button();
+            this.cpp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -76,7 +77,7 @@
             // 
             // makeCodeBtn
             // 
-            this.makeCodeBtn.Location = new System.Drawing.Point(128, 73);
+            this.makeCodeBtn.Location = new System.Drawing.Point(118, 73);
             this.makeCodeBtn.Name = "makeCodeBtn";
             this.makeCodeBtn.Size = new System.Drawing.Size(75, 23);
             this.makeCodeBtn.TabIndex = 4;
@@ -86,7 +87,7 @@
             // 
             // clearBtn
             // 
-            this.clearBtn.Location = new System.Drawing.Point(426, 73);
+            this.clearBtn.Location = new System.Drawing.Point(442, 73);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(75, 23);
             this.clearBtn.TabIndex = 5;
@@ -96,7 +97,7 @@
             // 
             // buildBtn
             // 
-            this.buildBtn.Location = new System.Drawing.Point(331, 73);
+            this.buildBtn.Location = new System.Drawing.Point(361, 73);
             this.buildBtn.Name = "buildBtn";
             this.buildBtn.Size = new System.Drawing.Size(75, 23);
             this.buildBtn.TabIndex = 6;
@@ -107,7 +108,7 @@
             // marshal
             // 
             this.marshal.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.marshal.Location = new System.Drawing.Point(235, 73);
+            this.marshal.Location = new System.Drawing.Point(199, 73);
             this.marshal.Name = "marshal";
             this.marshal.Size = new System.Drawing.Size(75, 23);
             this.marshal.TabIndex = 7;
@@ -115,11 +116,23 @@
             this.marshal.UseVisualStyleBackColor = true;
             this.marshal.Click += new System.EventHandler(this.marshal_Click);
             // 
+            // cpp
+            // 
+            this.cpp.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cpp.Location = new System.Drawing.Point(280, 73);
+            this.cpp.Name = "cpp";
+            this.cpp.Size = new System.Drawing.Size(75, 23);
+            this.cpp.TabIndex = 8;
+            this.cpp.Text = "生成C++";
+            this.cpp.UseVisualStyleBackColor = true;
+            this.cpp.Click += new System.EventHandler(this.cpp_Click);
+            // 
             // XCForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 417);
+            this.Controls.Add(this.cpp);
             this.Controls.Add(this.marshal);
             this.Controls.Add(this.buildBtn);
             this.Controls.Add(this.clearBtn);
@@ -145,6 +158,7 @@
         private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.Button buildBtn;
         private System.Windows.Forms.Button marshal;
+        private System.Windows.Forms.Button cpp;
     }
 }
 

@@ -55,18 +55,18 @@ public class TestCPP : ITest
         if (GUILayout.Button("Cal-Add", ui_opt))
         {
             int i = iAdd(8, 7);
-            ui_rst = "add rst: " + i;
+            ui_rst = "8+7=" + i;
             XDebug.LogGreen(ui_rst);
         }
         if (GUILayout.Button("Cal-Sub", ui_opt))
         {
-            int a = 5, b = 6;
+            int a = 8, b = 2;
             IntPtr p1 = Marshal.AllocCoTaskMem(Marshal.SizeOf(a));
             Marshal.StructureToPtr(a, p1, false);
             IntPtr p2 = Marshal.AllocCoTaskMem(Marshal.SizeOf(b));
             Marshal.StructureToPtr(b, p2, false);
-            int rst = iSub(p1,p2);
-            ui_rst = "sub rst: " + rst;
+            int rst = iSub(p1, p2);
+            ui_rst = a + "-" + b + "=" + rst;
             XDebug.Log(ui_rst);
         }
         ui_qte = GUILayout.TextField(ui_qte, ui_sty, ui_opt);
