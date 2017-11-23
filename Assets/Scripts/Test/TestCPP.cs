@@ -7,17 +7,32 @@ using XTable;
 
 public class TestCPP : ITest
 {
-    
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
     [DllImport("XTable")]
+#endif
     public static extern void iInitCallbackCommand(CppDelegate cb);
 
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
     [DllImport("XTable")]
+#endif
     public static extern void iInitial(string stream,string persist);
 
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
     [DllImport("XTable")]
+#endif
     public static extern int iAdd(int x, int y);
 
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
     [DllImport("XTable")]
+#endif
     public static extern int iSub(IntPtr x, IntPtr y);
     
     public delegate void CppDelegate(IntPtr str);
