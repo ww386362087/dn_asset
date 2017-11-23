@@ -37,21 +37,21 @@ public class TestManager
         {
             string name = SceneManager.GetActiveScene().name;
            //  XDebug.Log("scene name: "+name);
-            switch (name)
+            switch (name.ToLower())
             {
-                case "Cpp":
+                case "cpp":
                     test = new TestCPP();
                     break;
-                case "Fashion":
+                case "fashion":
                     test = new TestFashion();
                     break;
-                case "World":
+                case "world":
                     test = new TestWorld();
                     break;
-                case "CutScene":
+                case "cutScene":
                     test = new TestCutScene();
                     break;
-                case "AI":
+                case "ai":
                     test = new TestAI();
                     break;
                 default:
