@@ -1,5 +1,8 @@
 #include "Common.h"
 
+std::string UNITY_STREAM_PATH;
+std::string UNITY_CACHE_PATH;
+
 void tobytes(std::string str)
 {
 	size_t len = str.length();
@@ -9,4 +12,9 @@ void tobytes(std::string str)
 	}
 	printf("\n");
 }
- 
+
+void InitPath(std::string stream,std::string cache)
+{
+	UNITY_STREAM_PATH = stream;
+	UNITY_CACHE_PATH = cache;
+}

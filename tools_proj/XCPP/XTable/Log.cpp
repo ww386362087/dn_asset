@@ -46,7 +46,7 @@ std::ostream& Log::Start(LogLevel level,std::string text,const int line,const st
    char tmp[64]; 
    strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S",localtime(&tm));
    char buff[255];   
-   strcpy_s(buff,text.c_str());
+   strcpy(buff,text.c_str());
    callback(buff);
    std::ostringstream ostr;
    ostr<<tmp<<"\t"<<"function ("<<func<< ")"<< "\tline "<<line<<"\t";

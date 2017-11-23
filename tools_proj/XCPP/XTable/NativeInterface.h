@@ -2,6 +2,7 @@
 #include "Common.h"
 #include <string>
 #include <iostream>
+#include "Log.h"
 
 class NativeInterface
 {

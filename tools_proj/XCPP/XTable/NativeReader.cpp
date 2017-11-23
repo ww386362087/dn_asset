@@ -6,7 +6,7 @@ NativeReader::~NativeReader(void)
 {
 	if(reader.is_open())
 	{
-		ERROR("你忘了在完成后调用close with the file！Closing it ...");
+		ERROR("warn: not close stream. Closing it ...");
 		reader.close();
 	}
 }

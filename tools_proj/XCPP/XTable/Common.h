@@ -40,3 +40,5 @@ T Add(T a,T b)
 }
 
 void tobytes(std::string str);
+
+void InitPath(std::string stream,std::string cache);
