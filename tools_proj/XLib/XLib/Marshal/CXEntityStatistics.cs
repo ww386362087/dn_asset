@@ -242,7 +242,7 @@ namespace XTable {
 
 
 		[DllImport("XTable")]
-		static extern void iGetXEntityStatisticsRow(int val, ref RowData row);
+		static extern void iGetXEntityStatisticsRow(int idx, ref RowData row);
 
 		[DllImport("XTable")]
 		static extern int iGetXEntityStatisticsLength();
@@ -255,8 +255,8 @@ namespace XTable {
             }
         }
         
-        public static RowData GetRow(int val) {
-			iGetXEntityStatisticsRow(val, ref m_data);
+        public static RowData GetRow(int idx) {
+			iGetXEntityStatisticsRow(idx, ref m_data);
 			return m_data;
         }
     }

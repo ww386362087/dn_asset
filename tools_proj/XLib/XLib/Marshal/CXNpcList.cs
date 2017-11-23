@@ -105,7 +105,7 @@ namespace XTable {
 
 
 		[DllImport("XTable")]
-		static extern void iGetXNpcListRow(int val, ref RowData row);
+		static extern void iGetXNpcListRow(int idx, ref RowData row);
 
 		[DllImport("XTable")]
 		static extern int iGetXNpcListLength();
@@ -118,8 +118,8 @@ namespace XTable {
             }
         }
         
-        public static RowData GetRow(int val) {
-			iGetXNpcListRow(val, ref m_data);
+        public static RowData GetRow(int idx) {
+			iGetXNpcListRow(idx, ref m_data);
 			return m_data;
         }
     }

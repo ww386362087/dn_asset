@@ -32,11 +32,11 @@ namespace XTable {
 
 
 		[DllImport("XTable")]
-		static extern void iGetQteStatusListRow(int val, ref RowData row);
+		static extern void iGetQteStatusListRow(int idx, ref RowData row);
 
 		[DllImport("XTable")]
 		static extern int iGetQteStatusListLength();
-    
+        
         private static RowData m_data;
         
         public static int length {
@@ -45,8 +45,8 @@ namespace XTable {
             }
         }
         
-        public static RowData GetRow(int val) {
-			iGetQteStatusListRow(val, ref m_data);
+        public static RowData GetRow(int idx) {
+			iGetQteStatusListRow(idx, ref m_data);
 			return m_data;
         }
     }

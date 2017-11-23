@@ -60,7 +60,7 @@ namespace XForm
                 CSVTable tb = CSVUtil.sington.UtilCsv(files[i]);
                 string name = tb.name.Replace(".csv", "");
                 GenerateHead(tb,name);
-                GenerateCpp(tb);
+                GenerateCpp(tb,name);
                 f.PCB(files[i].FullName);
             }
             f.PCB("generate cpp finish");
@@ -74,19 +74,19 @@ namespace XForm
             {
                 if (tb.types[i].Contains("<>")) //Seq
                 {
-                    sb.Append("\n\n\t\t\tSeq<" + tb.types[i].Replace("<>", "") + "> " + tb.titles[i].ToLower() + ";");
+                    sb.Append("\n\tSeq<" + tb.types[i].Replace("<>", "") + "> " + tb.titles[i].ToLower() + ";");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {
-                    sb.Append("\n\n\t\t\t" + tb.types[i].Replace("[]", " ") + tb.titles[i].ToLower() + "[MaxArraySize];");
+                    sb.Append("\n\t" + tb.types[i].Replace("[]", " ") + tb.titles[i].ToLower() + "[MaxArraySize];");
                 }
                 else if (tb.types[i].ToLower().Equals("string"))
                 {
-                    sb.Append("\n\t\t\tchar " + tb.titles[i].ToLower() + "[MaxStringSize];");
+                    sb.Append("\n\tchar " + tb.titles[i].ToLower() + "[MaxStringSize];");
                 }
                 else
                 {
-                    sb.Append("\n\t\t\t" + tb.types[i] + " " + tb.titles[i].ToLower() + ";");
+                    sb.Append("\n\t" + tb.types[i] + " " + tb.titles[i].ToLower() + ";");
                 }
             }
             new_h = new_h.Replace("[**var**]", sb.ToString());
@@ -104,19 +104,19 @@ namespace XForm
             {
                 if (tb.types[i].Contains("<>")) //Seq
                 {
-                    sb.Append("\n\n\t\t\tReadSeq(row->" + tb.titles[i].ToLower() + ");");
+                    sb.Append("\n\t\tReadSeq(row->" + tb.titles[i].ToLower() + ");");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {
-                    sb.Append("\n\n\t\t\tReadArray<" + tb.types[i].Replace("[]", ">row->") + tb.titles[i].ToLower() + ");");
+                    sb.Append("\n\t\tReadArray<" + tb.types[i].Replace("[]", ">(row->") + tb.titles[i].ToLower() + ");");
                 }
                 else if (tb.types[i].ToLower().Equals("string"))
                 {
-                    sb.Append("\n\t\t\tReadString(row->" + tb.titles[i].ToLower() + ");");
+                    sb.Append("\n\t\tReadString(row->" + tb.titles[i].ToLower() + ");");
                 }
                 else
                 {
-                    sb.Append("\n\t\t\tRead(&(row->" + tb.titles[i].ToLower() + "));");
+                    sb.Append("\n\t\tRead(&(row->" + tb.titles[i].ToLower() + "));");
                 }
             }
             new_c = new_c.Replace("[**read**]", sb.ToString());

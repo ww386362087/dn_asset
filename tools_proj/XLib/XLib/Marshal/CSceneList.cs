@@ -629,7 +629,7 @@ namespace XTable {
 
 
 		[DllImport("XTable")]
-		static extern void iGetSceneListRow(int val, ref RowData row);
+		static extern void iGetSceneListRow(int idx, ref RowData row);
 
 		[DllImport("XTable")]
 		static extern int iGetSceneListLength();
@@ -642,8 +642,8 @@ namespace XTable {
             }
         }
         
-        public static RowData GetRow(int val) {
-			iGetSceneListRow(val, ref m_data);
+        public static RowData GetRow(int idx) {
+			iGetSceneListRow(idx, ref m_data);
 			return m_data;
         }
     }

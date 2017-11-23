@@ -113,9 +113,9 @@ namespace XForm
             CodeMemberMethod method = new CodeMemberMethod();
             method.Name = "GetRow";
             method.Attributes = MemberAttributes.Static | MemberAttributes.Public;
-            method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "val"));
+            method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "idx"));
             method.ReturnType = new CodeTypeReference("RowData");//返回值
-            method.Statements.Add(new CodeSnippetStatement("\t\t\tiGet" + name + "Row(val, ref m_data);"));
+            method.Statements.Add(new CodeSnippetStatement("\t\t\tiGet" + name + "Row(idx, ref m_data);"));
             method.Statements.Add(new CodeSnippetStatement("\t\t\treturn m_data;"));
             wrapClass.Members.Add(method);
 
@@ -185,7 +185,7 @@ namespace XForm
             content2.Append("\r\n\t\t}\r\n");
 
             content2.Append("\n\n\t\t[DllImport(\"XTable\")]");
-            content2.Append("\r\n\t\tstatic extern void iGet" + name + "Row(int val, ref RowData row);");
+            content2.Append("\r\n\t\tstatic extern void iGet" + name + "Row(int idx, ref RowData row);");
 
             content2.Append("\n\n\t\t[DllImport(\"XTable\")]");
             content2.Append("\r\n\t\tstatic extern int iGet" + name + "Length();");

@@ -115,7 +115,7 @@ namespace XTable {
 
 
 		[DllImport("XTable")]
-		static extern void iGetFashionSuitRow(int val, ref RowData row);
+		static extern void iGetFashionSuitRow(int idx, ref RowData row);
 
 		[DllImport("XTable")]
 		static extern int iGetFashionSuitLength();
@@ -128,8 +128,8 @@ namespace XTable {
             }
         }
         
-        public static RowData GetRow(int val) {
-			iGetFashionSuitRow(val, ref m_data);
+        public static RowData GetRow(int idx) {
+			iGetFashionSuitRow(idx, ref m_data);
 			return m_data;
         }
     }
