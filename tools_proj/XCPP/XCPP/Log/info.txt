@@ -1,5 +1,1 @@
-2017-11-23 16:53:32	function (iInitial)	line 37	c++ initial success with path: 
-2017-11-23 16:53:34	function (QteStatusList::ReadTable)	line 18	read:Table/QteStatusList.bytes
-2017-11-23 16:53:34	function (NativeReader::Open)	line 16	Opening file: Table/QteStatusList.bytes
-2017-11-23 16:53:34	function (EquipSuit::ReadTable)	line 18	read:Table/EquipSuit.bytes
-2017-11-23 16:53:34	function (NativeReader::Open)	line 16	Opening file: Table/EquipSuit.bytes
+2017-11-23 17:39:20	function (iInitial)	line 37	c++ initial success with path: 
