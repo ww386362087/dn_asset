@@ -15,7 +15,6 @@ void NativeReader::Open(const char* path)
 {
 	LOG("Opening file: " + tostring(path));
     if(reader.is_open())reader.close();
-	reader.imbue(std::locale("chs"));
     reader.open(path, std::ios::binary|std::ios::in);
     if(!reader.is_open())
     {
