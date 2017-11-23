@@ -38,7 +38,6 @@ void EquipSuit::ReadTable()
 
 		LOG("read id:"+tostring(row->suitid)
 			+"\tlevel: "+tostring(row->level)
-			+"\tequip: "+tostring(row->euipid)
 			+"\tlevel:"+tostring(row->level));
 		m_data.push_back(*row);
 	}

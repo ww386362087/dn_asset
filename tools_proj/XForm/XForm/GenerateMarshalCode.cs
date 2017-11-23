@@ -31,6 +31,32 @@ namespace XForm
             }
         }
 
+        private string _csproj = string.Empty;
+        private string csproj
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_csproj))
+                {
+                    _csproj = XCForm.unity_proj_path + @"tools_proj\XLib\XLib\XLib.csproj";
+                }
+                return _csproj;
+            }
+        }
+
+        public void CleanAll(XCForm f)
+        {
+            form = f;
+            DirectoryInfo dir = new DirectoryInfo(destdir);
+            FileInfo[] files = dir.GetFiles();
+            for (int i = 0, max = files.Length; i < max; i++)
+            {
+                if (files[i].Name != "CCommon")
+                {
+                    File.Delete(files[i].FullName);
+                }
+            }
+        }
 
         public void GenerateAll(XCForm f)
         {
@@ -69,7 +95,7 @@ namespace XForm
             wrapClass.Members.Add(field);
 
             CodeMemberField field2 = new CodeMemberField("RowData", "m_data");
-            field2.Attributes = MemberAttributes.Static|MemberAttributes.Private;
+            field2.Attributes = MemberAttributes.Static | MemberAttributes.Private;
             wrapClass.Members.Add(field2);
 
 
@@ -80,8 +106,7 @@ namespace XForm
             prop.HasSet = false;
             prop.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             prop.Type = new CodeTypeReference(typeof(int));
-            var exp = new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "iGet" + name + "Length()");
-            prop.GetStatements.Add(new CodeMethodReturnStatement(exp));
+            prop.GetStatements.Add(new CodeSnippetStatement("\t\t\t\treturn iGet" + name + "Length();"));
             wrapClass.Members.Add(prop);
 
             // public static RowData GetRow(int val)
@@ -90,7 +115,7 @@ namespace XForm
             method.Attributes = MemberAttributes.Static | MemberAttributes.Public;
             method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "val"));
             method.ReturnType = new CodeTypeReference("RowData");//返回值
-            method.Statements.Add(new CodeSnippetStatement("\t\t\tiGet"+name+"Row(val, ref m_data);"));
+            method.Statements.Add(new CodeSnippetStatement("\t\t\tiGet" + name + "Row(val, ref m_data);"));
             method.Statements.Add(new CodeSnippetStatement("\t\t\treturn m_data;"));
             wrapClass.Members.Add(method);
 
@@ -109,12 +134,12 @@ namespace XForm
                 {
                     content2.Append("\n\t\t\tCSeq<" + tb.types[i].Replace("<>", "") + "> " + tb.titles[i].ToLower() + ";");
                 }
-                else if(tb.types[i].Contains("[]"))
+                else if (tb.types[i].Contains("[]"))
                 {
                     content2.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]");
                     content2.Append("\n\t\t\t" + tb.types[i] + " " + tb.titles[i].ToLower() + ";");
                 }
-                else if(tb.types[i].ToLower().Equals("string"))
+                else if (tb.types[i].ToLower().Equals("string"))
                 {
                     content2.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]");
                     content2.Append("\n\t\t\tstring " + tb.titles[i].ToLower() + ";");
@@ -134,13 +159,16 @@ namespace XForm
                 else if (tb.types[i].Contains("[]"))
                 {
                     string tn = tb.titles[i].ToLower();
-                    content2.Append("\n\n\t\t\t" + tb.types[i]  +" "+ FirstUpperStr(tb.titles[i]) + " { ");
+                    string tp = tb.types[i].Replace("[",string.Empty).Replace("]",string.Empty);
+                    content2.Append("\n\n\t\t\t" + tp + "[] " + FirstUpperStr(tn) + " { ");
                     content2.Append("\n\t\t\t\tget { ");
                     content2.Append("\n\t\t\t\t\tif (" + tn + ".Length == 16) {");
-                    content2.Append("\n\t\t\t\t\tList<int> list = new List<int>();");
+                    content2.Append("\n\t\t\t\t\tList<"+tp+"> list = new List<"+tp+">();");
                     content2.Append("\n\t\t\t\t\tfor (int i = " + tn + ".Length - 1; i >= 0; i--)");
                     content2.Append("\n\t\t\t\t\t{");
-                    content2.Append("\n\t\t\t\t\t\tif (" + tn + "[i] != -1) list.Add(" + tn + "[i]);");
+                    string invalid = "-1";
+                    if (tp == "string") invalid = "\"-1\"";
+                    content2.Append("\n\t\t\t\t\t\tif (" + tn + "[i] != " + invalid + ") list.Add(" + tn + "[i]);");
                     content2.Append("\n\t\t\t\t\t}");
                     content2.Append("\n\t\t\t\t\t" + tn + " = list.ToArray();");
                     content2.Append("\n\t\t\t\t\t}");
@@ -157,21 +185,21 @@ namespace XForm
             content2.Append("\r\n\t\t}\r\n");
 
             content2.Append("\n\n\t\t[DllImport(\"XTable\")]");
-            content2.Append("\r\n\t\tstatic extern void iGet"+name+"Row(int val, ref RowData row);");
+            content2.Append("\r\n\t\tstatic extern void iGet" + name + "Row(int val, ref RowData row);");
 
             content2.Append("\n\n\t\t[DllImport(\"XTable\")]");
             content2.Append("\r\n\t\tstatic extern int iGet" + name + "Length();");
 
             fileContent.Replace("public int replace;", content2.ToString());
-            string filePath = destdir + name + ".cs";
+            string filePath = destdir + "C" + name + ".cs";
             File.WriteAllText(filePath, fileContent.ToString());
+            MergeCsproj(name);
         }
 
         private string FirstUpperStr(string s)
         {
             if (!string.IsNullOrEmpty(s))
             {
-                s = s.ToLower();
                 if (s.Length > 1)
                 {
                     return char.ToUpper(s[0]) + s.Substring(1);
@@ -179,6 +207,30 @@ namespace XForm
                 return char.ToUpper(s[0]).ToString();
             }
             return null;
+        }
+
+        private void MergeCsproj(string table)
+        {
+            if (File.Exists(csproj))
+            {
+                string content = File.ReadAllText(csproj);
+                string sign = @"Marshal\C" + table;
+                if (!content.Contains(sign))
+                {
+                    int point = content.LastIndexOf("</ItemGroup>");
+                    string target = "<Compile Include=\"Marshal\\C" + table + ".cs\" />\n\t";
+                    if (point != -1)
+                    {
+                        content = content.Insert(point, target);
+                    }
+                    else throw new Exception("not find csproj item <itemgroup> in lib project");
+                }
+                File.WriteAllText(csproj, content);
+            }
+            else
+            {
+                throw new Exception("not find csproj file in lib project");
+            }
         }
 
     }

@@ -29,6 +29,6 @@ extern std::string UNITY_STREAM_PATH;
 
 extern "C"
 {
-	ENGINE_INTERFACE_EXPORT int iGetQteStatueListLength();
+	ENGINE_INTERFACE_EXPORT int iGetQteStatusListLength();
 	ENGINE_INTERFACE_EXPORT void iGetQteStatusListRow(int val,QteStatusListRow* row);
 };

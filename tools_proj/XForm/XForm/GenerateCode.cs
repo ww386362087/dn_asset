@@ -210,7 +210,8 @@ namespace XForm
             if (File.Exists(csproj))
             {
                 string content = File.ReadAllText(csproj);
-                if (!content.Contains(table))
+                string sign = @"Table\" + table;
+                if (!content.Contains(sign))
                 {
                     int point = content.LastIndexOf("</ItemGroup>");
                     string target = "\t<Compile Include=\"Table\\" + table + ".cs\" />\n\t";

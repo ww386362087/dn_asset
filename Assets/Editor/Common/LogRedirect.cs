@@ -40,12 +40,19 @@ public class LogRedirect
     private static void OnHandleCondition(string condition)
     {
         string[] lines = condition.Split('\n');
-        if (lines.Length <= 2) return;
-        //第一行是打印的内容 第二行是UnityEngine.Debug:Log 
-        bool isXDebug = lines[2].Trim().StartsWith("XDebug");
+        int indx = 0;
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if(lines[i].Trim().StartsWith("XDebug"))
+            {
+                indx = i;
+                break;
+            }
+        }
+        bool isXDebug = indx > 0;
         if (isXDebug)
         {
-            for (int i = 3, max = lines.Length; i < max; i++)
+            for (int i = indx + 1, max = lines.Length; i < max; i++)
             {
                 if (!lines[i].StartsWith("XDebug"))
                 {

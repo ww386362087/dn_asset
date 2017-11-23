@@ -51,7 +51,7 @@ extern "C"
 {
 	QteStatusList *qtestatuslist;
 
-	int iGetQteStatueListLength()
+	int iGetQteStatusListLength()
 	{
 		if(qtestatuslist == NULL)
 		{

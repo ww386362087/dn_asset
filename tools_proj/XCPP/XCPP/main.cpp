@@ -94,7 +94,7 @@ void main()
 	init = (DllInitial)GetProcAddress(hInst,"iInitial");
 	add = (DllAdd)GetProcAddress(hInst,"iAdd");
 	sub = (DllSub)GetProcAddress(hInst,"iSub");
-	qte = (DllReadQteTable)GetProcAddress(hInst,"iGetQteStatueListLength");
+	qte = (DllReadQteTable)GetProcAddress(hInst,"iGetQteStatusListLength");
 	suit = (DllReadSuitTable)GetProcAddress(hInst,"iGetEquipSuitLength");
 	cb(OnCallback);
 	init("","");
