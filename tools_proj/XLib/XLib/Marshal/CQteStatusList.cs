@@ -32,7 +32,7 @@
         [DllImport("XTable")]
         static extern int iGetQteStatueListLength();
 
-        static RowData m_data = new RowData();
+        static RowData m_data;
 
         public static int length { get { return iGetQteStatueListLength(); } }
 

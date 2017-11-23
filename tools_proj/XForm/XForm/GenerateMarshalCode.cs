@@ -43,6 +43,7 @@ namespace XForm
                 GenerateTable(files[i]);
                 f.PCB(files[i].FullName);
             }
+            f.PCB("finish");
         }
 
         private void GenerateTable(FileInfo file)
@@ -67,7 +68,7 @@ namespace XForm
             field.Attributes = MemberAttributes.Public;
             wrapClass.Members.Add(field);
 
-            CodeMemberField field2 = new CodeMemberField(typeof(int), "m_data");
+            CodeMemberField field2 = new CodeMemberField("RowData", "m_data");
             field2.Attributes = MemberAttributes.Static|MemberAttributes.Private;
             wrapClass.Members.Add(field2);
 
@@ -79,7 +80,8 @@ namespace XForm
             prop.HasSet = false;
             prop.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             prop.Type = new CodeTypeReference(typeof(int));
-            prop.GetStatements.Add(new CodeMethodReturnStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "iGetEquipSuitLength()")));
+            var exp = new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "iGet" + name + "Length()");
+            prop.GetStatements.Add(new CodeMethodReturnStatement(exp));
             wrapClass.Members.Add(prop);
 
             // public static RowData GetRow(int val)
@@ -88,7 +90,7 @@ namespace XForm
             method.Attributes = MemberAttributes.Static | MemberAttributes.Public;
             method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "val"));
             method.ReturnType = new CodeTypeReference("RowData");//返回值
-            method.Statements.Add(new CodeSnippetStatement("\t\t\tiGetEquipSuitRow(val, ref m_data);"));
+            method.Statements.Add(new CodeSnippetStatement("\t\t\tiGet"+name+"Row(val, ref m_data);"));
             method.Statements.Add(new CodeSnippetStatement("\t\t\treturn m_data;"));
             wrapClass.Members.Add(method);
 
@@ -99,7 +101,8 @@ namespace XForm
             }
 
             StringBuilder content2 = new StringBuilder();
-            content2.Append("public struct RowData {");
+            content2.Append("[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]");
+            content2.Append("\n\t\tpublic struct RowData {");
             for (int i = 0, max = tb.types.Length; i < max; i++)
             {
                 if (tb.types[i].Contains("<>")) //Seq
@@ -108,8 +111,8 @@ namespace XForm
                 }
                 else if(tb.types[i].Contains("[]"))
                 {
-                    content2.Append("\n\t\t\t [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]");
-                    content2.Append("\n\t\t\t" + tb.types[i] + "[] " + tb.titles[i].ToLower() + ";");
+                    content2.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]");
+                    content2.Append("\n\t\t\t" + tb.types[i] + " " + tb.titles[i].ToLower() + ";");
                 }
                 else if(tb.types[i].ToLower().Equals("string"))
                 {
@@ -126,18 +129,18 @@ namespace XForm
             {
                 if (tb.types[i].Contains("<>")) //Seq
                 {
-                    content2.Append("\n\t\t\tpublic CSeq<" + tb.types[i].Replace("<>", "") + "> " + FirstUpperStr(tb.titles[i]) + "{ get { return " + tb.titles[i].ToLower() + "; } }");
+                    content2.Append("\n\n\t\t\tpublic CSeq<" + tb.types[i].Replace("<>", "") + "> " + FirstUpperStr(tb.titles[i]) + "{ get { return " + tb.titles[i].ToLower() + "; } }");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {
                     string tn = tb.titles[i].ToLower();
-                    content2.Append("\n\t\t\t" + tb.types[i] + "[] " + FirstUpperStr(tb.titles[i]) + " { get { ");
+                    content2.Append("\n\n\t\t\t" + tb.types[i]  +" "+ FirstUpperStr(tb.titles[i]) + " { ");
                     content2.Append("\n\t\t\t\tget { ");
                     content2.Append("\n\t\t\t\t\tif (" + tn + ".Length == 16) {");
                     content2.Append("\n\t\t\t\t\tList<int> list = new List<int>();");
                     content2.Append("\n\t\t\t\t\tfor (int i = " + tn + ".Length - 1; i >= 0; i--)");
                     content2.Append("\n\t\t\t\t\t{");
-                    content2.Append("\n\t\t\t\t\tif (" + tn + "[i] != -1) list.Add(" + tn + "[i]);");
+                    content2.Append("\n\t\t\t\t\t\tif (" + tn + "[i] != -1) list.Add(" + tn + "[i]);");
                     content2.Append("\n\t\t\t\t\t}");
                     content2.Append("\n\t\t\t\t\t" + tn + " = list.ToArray();");
                     content2.Append("\n\t\t\t\t\t}");
@@ -147,21 +150,21 @@ namespace XForm
                 }
                 else
                 {
-                    content2.Append("\n\t\t\tpublic" + tb.types[i] + " " + FirstUpperStr(tb.titles[i]) + "{ get { return " + tb.titles[i].ToLower() + "; } }");
+                    content2.Append("\n\n\t\t\tpublic " + tb.types[i] + " " + FirstUpperStr(tb.titles[i]) + " { get { return " + tb.titles[i].ToLower() + "; } }");
                 }
             }
 
             content2.Append("\r\n\t\t}\r\n");
 
-            content2.Append("\r\n\r\n\t\tprivate RowData[] Table;");
-            content2.Append("\r\n\r\n\t\tpublic override int length { get { return Table.Length; } }");
-            content2.Append("\r\n\r\n\t\tpublic RowData this[int index] { get { return Table[index]; } }");
-            content2.Append("\r\n\r\n\t\tpublic override string bytePath { get { return \"Table/" + name + "\"; } }");
+            content2.Append("\n\n\t\t[DllImport(\"XTable\")]");
+            content2.Append("\r\n\t\tstatic extern void iGet"+name+"Row(int val, ref RowData row);");
+
+            content2.Append("\n\n\t\t[DllImport(\"XTable\")]");
+            content2.Append("\r\n\t\tstatic extern int iGet" + name + "Length();");
 
             fileContent.Replace("public int replace;", content2.ToString());
             string filePath = destdir + name + ".cs";
             File.WriteAllText(filePath, fileContent.ToString());
-            //XDebug.Log("make code: " + fileContent);
         }
 
         private string FirstUpperStr(string s)

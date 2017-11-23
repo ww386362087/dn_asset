@@ -128,6 +128,10 @@ namespace XForm
             _content.Length = 0;
             contentLbl.Text = "";
         }
-        
+
+        private void marshal_Click(object sender, EventArgs e)
+        {
+            GenerateMarshalCode.sington.GenerateAll(this);
+        }
     }
 }

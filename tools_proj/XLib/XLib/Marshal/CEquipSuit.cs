@@ -74,7 +74,7 @@
             public CSeq<int> Effect10 { get { return effect10; } }
         }
 
-        static RowData m_data = new RowData();
+        static RowData m_data;
 
         [DllImport("XTable")]
         public static extern void iGetEquipSuitRow(int val, ref RowData row);
