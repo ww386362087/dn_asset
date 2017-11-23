@@ -56,7 +56,6 @@ public class TestCPP : ITest
         {
             int i = iAdd(8, 7);
             ui_rst = "8+7=" + i;
-            XDebug.LogGreen(ui_rst);
         }
         if (GUILayout.Button("Cal-Sub", ui_opt))
         {
@@ -67,7 +66,6 @@ public class TestCPP : ITest
             Marshal.StructureToPtr(b, p2, false);
             int rst = iSub(p1, p2);
             ui_rst = a + "-" + b + "=" + rst;
-            XDebug.Log(ui_rst);
         }
         ui_qte = GUILayout.TextField(ui_qte, ui_sty, ui_opt);
         if (GUILayout.Button("Get-Qte-Row", ui_opt))
@@ -76,9 +74,8 @@ public class TestCPP : ITest
             int.TryParse(ui_qte, out val);
             int len = CQteStatusList.length;
             var rst = CQteStatusList.GetRow(val);
-            ui_rst = "qte length: " + len + "\n";
+            ui_rst = "\nqte status list table line cnt: " + len + "\n";
             ui_rst += "value:\t"+rst.Value + "\nname:\t" + rst.Name + "\ncomment:\t" + rst.Comment;
-            XDebug.Log(ui_rst);
         }
         ui_suit = GUILayout.TextField(ui_suit, ui_sty, ui_opt);
         if (GUILayout.Button("Get-Suit-Row", ui_opt))
@@ -87,12 +84,11 @@ public class TestCPP : ITest
             int.TryParse(ui_suit, out val);
             int len = CEquipSuit.length;
             var rst = CEquipSuit.GetRow(val);
-            ui_rst = "suit length: " + len + "\n";
-            ui_rst += "suitid:\t" + rst.SuitID + "\nname:\t" + rst.SuitName + "\nlevel:\t" + rst.Level;
-            XDebug.Log(ui_rst);
+            ui_rst = "\nequi suit table line cnt: " + len + "\n";
+            ui_rst += "suitid:\t" + rst.SuitID + "\nname:\t" + rst.SuitName + "\nlevel:\t" + rst.Level+"\nprofid:\t"+rst.ProfID+"\nisCreate:\t"+rst.IsCreateShow;
         }
         GUILayout.EndVertical();
-        GUILayout.Space(20);
+        GUILayout.Space(50);
         GUILayout.TextArea(ui_rst,ui_st2, ui_op2);
         GUILayout.EndHorizontal();
     }
