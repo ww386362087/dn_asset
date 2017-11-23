@@ -393,7 +393,7 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: TEST;Inject
+    1: TEST
     4: TEST
     7: TEST
   platformArchitecture:

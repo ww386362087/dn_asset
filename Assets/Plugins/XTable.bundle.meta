@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 96c25da039de54c1e8053a22f6d3cc4b
+guid: b5f9f9d011f1d435790d27db37649291
 folderAsset: yes
-timeCreated: 1511435161
+timeCreated: 1511437402
 licenseType: Pro
 PluginImporter:
   serializedVersion: 1
@@ -10,62 +10,22 @@ PluginImporter:
   isPreloaded: 0
   isOverridable: 0
   platformData:
-    Android:
-      enabled: 0
-      settings:
-        CPU: ARMv7
     Any:
       enabled: 0
-      settings:
-        Exclude Android: 1
-        Exclude Editor: 0
-        Exclude Linux: 1
-        Exclude Linux64: 1
-        Exclude LinuxUniversal: 1
-        Exclude OSXIntel: 0
-        Exclude OSXIntel64: 0
-        Exclude OSXUniversal: 0
-        Exclude Win: 1
-        Exclude Win64: 1
-        Exclude iOS: 1
+      settings: {}
     Editor:
       enabled: 1
       settings:
-        CPU: AnyCPU
         DefaultValueInitialized: true
-        OS: AnyOS
-    Linux:
-      enabled: 0
-      settings:
-        CPU: x86
-    Linux64:
-      enabled: 0
-      settings:
-        CPU: x86_64
     OSXIntel:
       enabled: 1
-      settings:
-        CPU: AnyCPU
+      settings: {}
     OSXIntel64:
       enabled: 1
-      settings:
-        CPU: AnyCPU
+      settings: {}
     OSXUniversal:
       enabled: 1
       settings: {}
-    Win:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-    Win64:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-    iOS:
-      enabled: 0
-      settings:
-        CompileFlags: 
-        FrameworkDependencies: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 

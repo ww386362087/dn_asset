@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 281346914
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 03001a2cd2bb198a444b0d9fb442785d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4d24bf54f46935ed9e6cf78ac481bb9d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Res/FX_dk.png
+Dependencies: []
