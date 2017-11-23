@@ -26,8 +26,8 @@ public class TestCPP : ITest
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
     GUIStyle ui_st2 = new GUIStyle();
-    string ui_qte = "23";
-    string ui_suit = "80124";
+    string ui_qte = "2";
+    string ui_suit="5";
     string ui_rst = string.Empty;
    
     public void Start()
@@ -36,7 +36,7 @@ public class TestCPP : ITest
         ui_sty.fontStyle = FontStyle.Bold;
         ui_sty.alignment = TextAnchor.MiddleCenter;
         ui_st2.normal.textColor = Color.red;
-        ui_st2.fontSize = 18;
+        ui_st2.fontSize = 24;
         iInitCallbackCommand(new CppDelegate(OnCallback));
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
@@ -72,7 +72,7 @@ public class TestCPP : ITest
         ui_qte = GUILayout.TextField(ui_qte, ui_sty, ui_opt);
         if (GUILayout.Button("Get-Qte-Row", ui_opt))
         {
-            int val = 23;
+            int val = 2;
             int.TryParse(ui_qte, out val);
             int len = CQteStatusList.length;
             var rst = CQteStatusList.GetRow(val);
@@ -83,7 +83,7 @@ public class TestCPP : ITest
         ui_suit = GUILayout.TextField(ui_suit, ui_sty, ui_opt);
         if (GUILayout.Button("Get-Suit-Row", ui_opt))
         {
-            int val = 80125;
+            int val = 5;
             int.TryParse(ui_suit, out val);
             int len = CEquipSuit.length;
             var rst = CEquipSuit.GetRow(val);

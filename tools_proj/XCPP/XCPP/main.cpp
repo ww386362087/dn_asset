@@ -69,9 +69,11 @@ void ESub()
 
 void ERead()
 {
-	qte();
+	int len1 = qte();
 	cout<<endl;
-	suit();
+	int len2 = suit();
+	cout<<endl<<"qtestatus table line cnt: "<<len1;
+	cout<<" equipsuit table line cnt:"<<len2;
 	cout<<endl<<endl;
 }
 

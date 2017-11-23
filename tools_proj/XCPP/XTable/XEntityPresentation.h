@@ -45,13 +45,13 @@ struct XEntityPresentationRow
 	char movefx[MaxStringSize];
 	char freeze[MaxStringSize];
 	char freezefx[MaxStringSize];
-	string hit_f[MaxArraySize];
-	string hit_l[MaxArraySize];
-	string hit_r[MaxArraySize];
+	std::string hit_f[MaxArraySize];
+	std::string hit_l[MaxArraySize];
+	std::string hit_r[MaxArraySize];
 	float hitbackoffsettimescale[MaxArraySize];
-	string hitfly[MaxArraySize];
+	std::string hitfly[MaxArraySize];
 	float hitflyoffsettimescale[MaxArraySize];
-	string hit_roll[MaxArraySize];
+	std::string hit_roll[MaxArraySize];
 	float hitrolloffsettimescale[MaxArraySize];
 	float hitback_recover[MaxArraySize];
 	float hitfly_bounce_getup[MaxArraySize];
@@ -59,7 +59,7 @@ struct XEntityPresentationRow
 	char hitfx[MaxStringSize];
 	char death[MaxStringSize];
 	char deathfx[MaxStringSize];
-	string hitcurves[MaxArraySize];
+	std::string hitcurves[MaxArraySize];
 	char deathcurve[MaxStringSize];
 	char a[MaxStringSize];
 	char aa[MaxStringSize];

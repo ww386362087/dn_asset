@@ -58,13 +58,13 @@ void XEntityPresentation::ReadTable()
 		ReadString(row->movefx);
 		ReadString(row->freeze);
 		ReadString(row->freezefx);
-		ReadArray<string>(row->hit_f);
-		ReadArray<string>(row->hit_l);
-		ReadArray<string>(row->hit_r);
+		ReadArray<std::string>(row->hit_f);
+		ReadArray<std::string>(row->hit_l);
+		ReadArray<std::string>(row->hit_r);
 		ReadArray<float>(row->hitbackoffsettimescale);
-		ReadArray<string>(row->hitfly);
+		ReadArray<std::string>(row->hitfly);
 		ReadArray<float>(row->hitflyoffsettimescale);
-		ReadArray<string>(row->hit_roll);
+		ReadArray<std::string>(row->hit_roll);
 		ReadArray<float>(row->hitrolloffsettimescale);
 		ReadArray<float>(row->hitback_recover);
 		ReadArray<float>(row->hitfly_bounce_getup);
@@ -72,7 +72,7 @@ void XEntityPresentation::ReadTable()
 		ReadString(row->hitfx);
 		ReadString(row->death);
 		ReadString(row->deathfx);
-		ReadArray<string>(row->hitcurves);
+		ReadArray<std::string>(row->hitcurves);
 		ReadString(row->deathcurve);
 		ReadString(row->a);
 		ReadString(row->aa);
