@@ -125,28 +125,28 @@ namespace XForm
                 CodeDomProvider.CreateProvider("CSharp").GenerateCodeFromCompileUnit(compunit, sw, new CodeGeneratorOptions());
             }
 
-            StringBuilder content2 = new StringBuilder();
-            content2.Append("[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]");
-            content2.Append("\n\t\tpublic struct RowData {");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]");
+            sb.Append("\n\t\tpublic struct RowData {");
             for (int i = 0, max = tb.types.Length; i < max; i++)
             {
                 if (tb.types[i].Contains("<>")) //Seq
                 {
-                    content2.Append("\n\t\t\tCSeq<" + tb.types[i].Replace("<>", "") + "> " + tb.titles[i].ToLower() + ";");
+                    sb.Append("\n\t\t\tCSeq<" + tb.types[i].Replace("<>", "") + "> " + tb.titles[i].ToLower() + ";");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {
-                    content2.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]");
-                    content2.Append("\n\t\t\t" + tb.types[i] + " " + tb.titles[i].ToLower() + ";");
+                    sb.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]");
+                    sb.Append("\n\t\t\t" + tb.types[i] + " " + tb.titles[i].ToLower() + ";");
                 }
                 else if (tb.types[i].ToLower().Equals("string"))
                 {
-                    content2.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]");
-                    content2.Append("\n\t\t\tstring " + tb.titles[i].ToLower() + ";");
+                    sb.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]");
+                    sb.Append("\n\t\t\tstring " + tb.titles[i].ToLower() + ";");
                 }
                 else
                 {
-                    content2.Append("\n\t\t\t" + tb.types[i] + " " + tb.titles[i].ToLower() + ";");
+                    sb.Append("\n\t\t\t" + tb.types[i] + " " + tb.titles[i].ToLower() + ";");
                 }
             }
 
@@ -154,46 +154,55 @@ namespace XForm
             {
                 if (tb.types[i].Contains("<>")) //Seq
                 {
-                    content2.Append("\n\n\t\t\tpublic CSeq<" + tb.types[i].Replace("<>", "") + "> " + FirstUpperStr(tb.titles[i]) + "{ get { return " + tb.titles[i].ToLower() + "; } }");
+                    sb.Append("\n\n\t\t\tpublic CSeq<" + tb.types[i].Replace("<>", "") + "> " + FirstUpperStr(tb.titles[i]) + "{ get { return " + tb.titles[i].ToLower() + "; } }");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {
                     string tn = tb.titles[i].ToLower();
                     string tp = tb.types[i].Replace("[",string.Empty).Replace("]",string.Empty);
-                    content2.Append("\n\n\t\t\t" + tp + "[] " + FirstUpperStr(tn) + " { ");
-                    content2.Append("\n\t\t\t\tget { ");
-                    content2.Append("\n\t\t\t\t\tif (" + tn + ".Length == 16) {");
-                    content2.Append("\n\t\t\t\t\tList<"+tp+"> list = new List<"+tp+">();");
-                    content2.Append("\n\t\t\t\t\tfor (int i = " + tn + ".Length - 1; i >= 0; i--)");
-                    content2.Append("\n\t\t\t\t\t{");
+                    sb.Append("\n\n\t\t\t" + tp + "[] " + FirstUpperStr(tn) + " { ");
+                    sb.Append("\n\t\t\t\tget { ");
+                    sb.Append("\n\t\t\t\t\tif (" + tn + ".Length == 16) {");
+                    sb.Append("\n\t\t\t\t\tList<"+tp+"> list = new List<"+tp+">();");
+                    sb.Append("\n\t\t\t\t\tfor (int i = " + tn + ".Length - 1; i >= 0; i--)");
+                    sb.Append("\n\t\t\t\t\t{");
                     string invalid = "-1";
                     if (tp == "string") invalid = "\"-1\"";
-                    content2.Append("\n\t\t\t\t\t\tif (" + tn + "[i] != " + invalid + ") list.Add(" + tn + "[i]);");
-                    content2.Append("\n\t\t\t\t\t}");
-                    content2.Append("\n\t\t\t\t\t" + tn + " = list.ToArray();");
-                    content2.Append("\n\t\t\t\t\t}");
-                    content2.Append("\n\t\t\t\t\t return " + tn + ";");
-                    content2.Append("\n\t\t\t\t}");
-                    content2.Append("\n\t\t\t}");
+                    sb.Append("\n\t\t\t\t\t\tif (" + tn + "[i] != " + invalid + ") list.Add(" + tn + "[i]);");
+                    sb.Append("\n\t\t\t\t\t}");
+                    sb.Append("\n\t\t\t\t\t" + tn + " = list.ToArray();");
+                    sb.Append("\n\t\t\t\t\t}");
+                    sb.Append("\n\t\t\t\t\t return " + tn + ";");
+                    sb.Append("\n\t\t\t\t}");
+                    sb.Append("\n\t\t\t}");
                 }
                 else
                 {
-                    content2.Append("\n\n\t\t\tpublic " + tb.types[i] + " " + FirstUpperStr(tb.titles[i]) + " { get { return " + tb.titles[i].ToLower() + "; } }");
+                    sb.Append("\n\n\t\t\tpublic " + tb.types[i] + " " + FirstUpperStr(tb.titles[i]) + " { get { return " + tb.titles[i].ToLower() + "; } }");
                 }
             }
 
-            content2.Append("\r\n\t\t}\r\n");
+            sb.Append("\r\n\t\t}\r\n");
 
-            content2.Append("\n\n\t\t[DllImport(\"XTable\")]");
-            content2.Append("\r\n\t\tstatic extern void iGet" + name + "Row(int idx, ref RowData row);");
+            AppendExtendAttr(sb);
+            sb.Append("\r\n\t\tstatic extern void iGet" + name + "Row(int idx, ref RowData row);");
+            AppendExtendAttr(sb);
+            sb.Append("\r\n\t\tstatic extern int iGet" + name + "Length();");
 
-            content2.Append("\n\n\t\t[DllImport(\"XTable\")]");
-            content2.Append("\r\n\t\tstatic extern int iGet" + name + "Length();");
-
-            fileContent.Replace("public int replace;", content2.ToString());
+            fileContent.Replace("public int replace;", sb.ToString());
             string filePath = destdir + "C" + name + ".cs";
             File.WriteAllText(filePath, fileContent.ToString());
             MergeCsproj(name);
+        }
+
+
+        private void AppendExtendAttr(StringBuilder sb)
+        {
+            sb.Append("\n\n#if UNITY_IPHONE || UNITY_XBOX360");
+            sb.Append("\n\t\t[DllImport(\"__Internal\")]");
+            sb.Append("\n#else");
+            sb.Append("\n\t\t[DllImport(\"XTable\")]");
+            sb.Append("\n#endif");
         }
 
         private string FirstUpperStr(string s)

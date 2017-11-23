@@ -31,10 +31,18 @@ namespace XTable {
 		}
 
 
+#if UNITY_IPHONE || UNITY_XBOX360
+		[DllImport("__Internal")]
+#else
 		[DllImport("XTable")]
+#endif
 		static extern void iGetQteStatusListRow(int idx, ref RowData row);
 
+#if UNITY_IPHONE || UNITY_XBOX360
+		[DllImport("__Internal")]
+#else
 		[DllImport("XTable")]
+#endif
 		static extern int iGetQteStatusListLength();
         
         private static RowData m_data;

@@ -95,10 +95,18 @@ namespace XTable {
 		}
 
 
+#if UNITY_IPHONE || UNITY_XBOX360
+		[DllImport("__Internal")]
+#else
 		[DllImport("XTable")]
+#endif
 		static extern void iGetDefaultEquipRow(int idx, ref RowData row);
 
+#if UNITY_IPHONE || UNITY_XBOX360
+		[DllImport("__Internal")]
+#else
 		[DllImport("XTable")]
+#endif
 		static extern int iGetDefaultEquipLength();
         
         private static RowData m_data;
