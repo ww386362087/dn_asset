@@ -6,66 +6,6 @@ using UnityEngine;
 
 public class TestCPP : ITest
 {
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public class Seq<T>
-    {
-        public T val0, val1;
-
-        public void Set(T v1, T v2)
-        {
-            val0 = v1;
-            val1 = v2;
-        }
-
-        public T this[int i]
-        {
-            get { return i == 0 ? val0 : val1; }
-        }
-    }
-
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct QteStatusListMarshalRowData
-    {
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-        public string Comment;
-
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-        public string Name;
-        
-        public int Value;
-    }
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct EquipSuitMarshalRowData
-    {
-        public int suitid;
-
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-        public string suitname;
-
-        public int level;
-        public int profid;
-        public int suitquality;
-        public bool iscreate;
-
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-        public int[] euipid;
-
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-        public string effect1;
-
-        Seq<int> effect2;
-        Seq<int> effect3;
-        Seq<int> effect4;
-        Seq<int> effect5;
-        Seq<int> effect6;
-        Seq<int> effect7;
-        Seq<int> effect8;
-        Seq<int> effect9;
-        Seq<int> effect10;
-    }
     
     [DllImport("XTable")]
     public static extern void iInitCallbackCommand(CppDelegate cb);
@@ -79,12 +19,6 @@ public class TestCPP : ITest
     [DllImport("XTable")]
     public static extern int iSub(IntPtr x, IntPtr y);
     
-    [DllImport("XTable")]
-    public static extern void iGetQteStatusListRow(int val,ref QteStatusListMarshalRowData row);
-
-    [DllImport("XTable")]
-    public static extern void iGetEquipSuitRow(int val, ref EquipSuitMarshalRowData row);
-
     public delegate void CppDelegate(IntPtr str);
 
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(160), GUILayout.Height(80) };
@@ -94,9 +28,7 @@ public class TestCPP : ITest
     string ui_qte = "23";
     string ui_suit = "80124";
     string ui_rst = string.Empty;
-    QteStatusListMarshalRowData m_qteMarshalData = new QteStatusListMarshalRowData();
-    EquipSuitMarshalRowData m_suitMarshalData = new EquipSuitMarshalRowData();
-
+   
     public void Start()
     {
         ui_sty.fontSize = 21;
@@ -136,24 +68,26 @@ public class TestCPP : ITest
             ui_rst = "sub rst: " + rst;
             XDebug.Log(ui_rst);
         }
-
         ui_qte = GUILayout.TextField(ui_qte, ui_sty, ui_opt);
         if (GUILayout.Button("Get-Qte-Row", ui_opt))
         {
             int val = 23;
             int.TryParse(ui_qte, out val);
-            iGetQteStatusListRow(val, ref m_qteMarshalData);
-            ui_rst = "value:\t"+m_qteMarshalData.Value + "\nname:\t" + m_qteMarshalData.Name + "\ncomment:\t" + m_qteMarshalData.Comment;
+            int len = CQteStatusList.length;
+            var rst = CQteStatusList.GetRow(val);
+            ui_rst = "qte length: " + len + "\n";
+            ui_rst += "value:\t"+rst.Value + "\nname:\t" + rst.Name + "\ncomment:\t" + rst.Comment;
             XDebug.Log(ui_rst);
         }
-
         ui_suit = GUILayout.TextField(ui_suit, ui_sty, ui_opt);
         if (GUILayout.Button("Get-Suit-Row", ui_opt))
         {
             int val = 80125;
             int.TryParse(ui_suit, out val);
-            iGetEquipSuitRow(val, ref m_suitMarshalData);
-            ui_rst = "suitid:\t" + m_suitMarshalData.suitid + "\nname:\t" + m_suitMarshalData.suitname + "\nlevel:\t" + m_suitMarshalData.level;
+            int len = CEquipSuit.length;
+            var rst = CEquipSuit.GetRow(val);
+            ui_rst = "suit length: " + len + "\n";
+            ui_rst += "suitid:\t" + rst.SuitID + "\nname:\t" + rst.SuitName + "\nlevel:\t" + rst.Level;
             XDebug.Log(ui_rst);
         }
         GUILayout.EndVertical();
