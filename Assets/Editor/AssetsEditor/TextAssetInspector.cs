@@ -40,7 +40,7 @@ namespace XEditor
                     {
                         GUI.enabled = true;
                         GUILayout.Space(12);
-                        if (GUILayout.Button("生成Bytes", GUILayout.Width(90)))
+                        if (GUILayout.Button("Make-Bytes", GUILayout.Width(120)))
                         {
                             if (targets == null || targets.Length == 1)
                             {
@@ -52,30 +52,14 @@ namespace XEditor
                             }
                         }
                         GUILayout.Space(12);
-                        if (GUILayout.Button("生成代码", GUILayout.Width(90)))
+                        if (GUILayout.Button("Make-Win-Dll", GUILayout.Width(120)))
                         {
-                            if (targets == null || targets.Length == 1)
-                            {
-                                TableEditor.Table2Codes(target);
-                            }
-                            else
-                            {
-                                TableEditor.Table2Codes(targets);
-                            }
+                            TableEditor.MakeXlibDll(false);
                         }
                         GUILayout.Space(12);
-                        if (GUILayout.Button("Table2All", GUILayout.Width(90)))
+                        if (GUILayout.Button("Make-IOS-Dll", GUILayout.Width(120)))
                         {
-                            if (targets == null || targets.Length == 1)
-                            {
-                                TableEditor.Table2Bytes(target);
-                                TableEditor.Table2Codes(target);
-                            }
-                            else
-                            {
-                                TableEditor.Table2Codes(targets);
-                                TableEditor.Table2Bytes(targets);
-                            }
+                            TableEditor.MakeXlibDll(true);
                         }
                         GUILayout.Space(12);
                         Assembly ass = Assembly.Load("XLib");

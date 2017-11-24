@@ -5,7 +5,7 @@ using UnityEngine;
 public class XBuildArg
 {
 
-    protected static string bpath
+    public static string bpath
     {
         get { return Path.GetDirectoryName(Application.dataPath); }
     }

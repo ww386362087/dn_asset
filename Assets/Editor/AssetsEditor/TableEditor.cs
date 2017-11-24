@@ -13,11 +13,17 @@ namespace XEditor
             Table2Bytes(objs);
         }
 
-        [MenuItem(@"Assets/Tool/Table/MakeSelect2Codes")]
+        [MenuItem(@"Assets/Tool/Table/MakeXLib-dll(win)")]
         private static void MakeTableCodes()
         {
-            Object[] objs = Selection.GetFiltered(typeof(TextAsset), SelectionMode.DeepAssets);
-            Table2Codes(objs);
+            MakeXlibDll(false);
+        }
+        
+
+        [MenuItem(@"Assets/Tool/Table/MakeXLib-dll(ios)")]
+        private static void MakeTableIosCodes()
+        {
+            MakeXlibDll(true);
         }
 
         [MenuItem(@"Assets/Tool/Table/MakeAll2Bytes")]
@@ -147,23 +153,12 @@ namespace XEditor
             EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
 #endif
         }
+        
 
-        public static void Table2Codes(Object target)
-        {
-            Object[] targets = new Object[1];
-            targets[0] = target;
-            Table2Codes(targets);
-        }
-
-
-        public static void Table2Codes(Object[] targets)
+        public static void MakeXlibDll(bool isIphone)
         {
 #if UNITY_EDITOR_WIN
-            string tables = MakeTableByObjects(targets);
-            if (tables != "")
-            {
-                ExecuteWithArg(tables, "-c ");
-            } 
+            ExecuteWithArg(string.Empty, isIphone?"-i ": "-c ");
             AssetDatabase.Refresh();
             EditorUtility.DisplayDialog("Finish", "All tables processed finish", "OK");
 #endif

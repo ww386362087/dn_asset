@@ -5,6 +5,10 @@ using System.IO;
 
 namespace XForm
 {
+
+    /// <summary>
+    /// 用来编译XLib项目中的代码
+    /// </summary>
     public class CompileCode
     {
 
@@ -51,11 +55,16 @@ namespace XForm
         }
 
 
-        private static CompilerParameters MakeParamters()
+        private static CompilerParameters MakeParamters(bool isIphone)
         {
             CompilerParameters parameters = new CompilerParameters();
             parameters.WarningLevel = 2;
             parameters.GenerateExecutable = false;
+            if (isIphone)
+            {
+                //可以这样设置宏 /define:DEBUG;TUESDAY  
+                parameters.CompilerOptions = "/define:UNITY_IPHONE";
+            }
             parameters.GenerateInMemory = false;
             parameters.OutputAssembly = output;
             parameters.ReferencedAssemblies.Add("System.dll");
@@ -63,10 +72,10 @@ namespace XForm
             return parameters;
         }
 
-        public static void Build()
+        public static void Build(bool isIphone)
         {
             CSharpCodeProvider provider = new CSharpCodeProvider();
-            CompilerParameters parameters = MakeParamters();
+            CompilerParameters parameters = MakeParamters(isIphone);
             string[] sourceFile = ScanFiles(project);
             CompilerResults cr = provider.CompileAssemblyFromFile(parameters, sourceFile);
             if (cr.Errors.Count > 0)
@@ -87,7 +96,7 @@ namespace XForm
         {
             mForm = form;
             CSharpCodeProvider provider = new CSharpCodeProvider();
-            CompilerParameters parameters = MakeParamters();
+            CompilerParameters parameters = MakeParamters(false);
             string[] sourceFile = ScanFiles(project);
             CompilerResults cr = provider.CompileAssemblyFromFile(parameters, sourceFile);
             if (cr.Errors.Count > 0)

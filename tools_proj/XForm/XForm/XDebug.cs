@@ -82,11 +82,8 @@ namespace XForm
         public static void Save()
         {
             TimeSpan span = DateTime.Now - lastSaveTime;
-           // if (span.TotalSeconds > 0.2f)
-            {
-                if (sb.Length > 0) File.WriteAllText(path, sb.ToString());
-                lastSaveTime = DateTime.Now;
-            }
+            if (sb.Length > 0) File.WriteAllText(path, sb.ToString());
+            lastSaveTime = DateTime.Now;
         }
 
 

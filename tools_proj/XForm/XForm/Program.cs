@@ -7,7 +7,8 @@ namespace XForm
     {
 
         static readonly string make_byte = "-t";
-        static readonly string make_code = "-c";
+        static readonly string make_win_code = "-c";
+        static readonly string make_ios_code = "-i";
 
 
         /// <summary>
@@ -31,25 +32,28 @@ namespace XForm
             if (args != null && args.Length > 0)
             {
                 XDebug.Log("arg len:" + args.Length.ToString() + " arg0: " + args[0]);
-                for (int i = 1; i < args.Length; i++)
+                if (args[0].Equals(make_win_code))
                 {
-                    if (args[0].Equals(make_byte))
+                    XDebug.Log("build win code");
+                    CompileCode.Build(false);
+                }
+                else if (args[0].Equals(make_ios_code))
+                {
+                    XDebug.Log("build ios code");
+                    CompileCode.Build(true);
+                }
+                else if (args[0].Equals(make_byte))
+                {
+                    for (int i = 1; i < args.Length; i++)
                     {
                         CheckException(args[i]);
                         XDebug.Log("gennerate bytes: " + args[i]);
                         GenerateBytes.sington.WriteByte(args[i]);
                     }
-                    else if (args[0].Equals(make_code))
-                    {
-                        CheckException(args[i]);
-                        XDebug.Log("gennerate code: " + args[i]);
-                        GenerateCode.sington.GenerateTCode(args[i]);
-                        CompileCode.Build();
-                    }
-                    else
-                    {
-                        XDebug.LogError("exception " + make_code.Length + " args:" + args[0].Length);
-                    }
+                }
+                else
+                {
+                    XDebug.LogError("exception " + make_win_code.Length + " args:" + args[0].Length);
                 }
                 return false;
             }
@@ -65,4 +69,5 @@ namespace XForm
                 throw new Exception("不是csv表格");
         }
     }
+
 }
