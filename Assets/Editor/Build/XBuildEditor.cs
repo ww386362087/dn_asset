@@ -177,7 +177,6 @@ public class XBuildEditor : EditorWindow
         Directory.CreateDirectory(_targetDir);
 
         if (!fast) XPriorBuild.OnPriorBuild(EditorUserBuildSettings.activeBuildTarget);
-        MoveXTableDll();
         string lastName = "";
         if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android) lastName = ".apk";
         else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.StandaloneWindows) lastName = ".exe";
