@@ -120,7 +120,7 @@ public class XBuildEditor : EditorWindow
         PlayerSettings.apiCompatibilityLevel = ApiCompatibilityLevel.NET_2_0;
         PlayerSettings.strippingLevel = StrippingLevel.StripByteCode;
     }
-    
+
     private static void PlayerSetting_iOS()
     {
         _target = BuildTarget.iOS;
@@ -135,7 +135,7 @@ public class XBuildEditor : EditorWindow
         PlayerSettings.apiCompatibilityLevel = ApiCompatibilityLevel.NET_2_0_Subset;
         PlayerSettings.aotOptions = "nrgctx-trampolines=4096,nimt-trampolines=4096,ntrampolines=4096";
         PlayerSettings.iOS.sdkVersion = iOSSdkVersion.DeviceSDK;
-        PlayerSettings.iOS.targetOSVersionString = "7.1";
+        PlayerSettings.iOS.targetOSVersionString = "8.0";
         PlayerSettings.strippingLevel = StrippingLevel.StripByteCode;
         PlayerSettings.iOS.scriptCallOptimization = ScriptCallOptimizationLevel.FastButNoExceptions;
     }
