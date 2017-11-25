@@ -1,1 +1,1 @@
-2017-11-23 18:55:42	function (iInitial)	line 37	c++ initial success with path: 
+2017-11-24 21:27:08	function (iInitial)	line 33	c++ initial success with path: 
