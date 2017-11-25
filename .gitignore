@@ -1,10 +1,11 @@
 /Android/
-Win32/
-IOS/
+/Win32/
+/IOS/
 
 **/tools_proj/XForm/XForm/bin/
 **/tools_proj/XForm/XForm/obj/
 **/tools_proj/XForm/Log/
+**/tools_proj/Android/obj/
 **/tools_proj/XCPP/XCPP/Debug/
 **/tools_proj/XCPP/XCPP/x64/
 **/tools_proj/XCPP/XCPP.opensdf
