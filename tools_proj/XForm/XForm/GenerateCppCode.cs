@@ -169,8 +169,8 @@ namespace XForm
                 string sign_c = "Common.cpp";
                 string target_h = "<ClInclude Include=\"" + table + ".h\">\n\t\t";
                 string target_c = "<ClInclude Include=\"" + table + ".cpp\">\n\t\t";
-                string add_h = "<Filter>头文件</Filter>\n\t</ClInclude>\n\t";
-                string add_c = "<Filter>源文件</Filter>\n\t</ClInclude>\n\t";
+                string add_h = "<Filter>Table</Filter>\n\t</ClInclude>\n\t";
+                string add_c = "<Filter>Table</Filter>\n\t</ClInclude>\n\t";
                 if (!content.Contains(table))
                 {
                     int point = content.LastIndexOf(sign_h) - pivot;

@@ -1,99 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Table">
+      <UniqueIdentifier>{50f8b5bb-a3aa-457f-8ff1-f0589723af16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="资源文件">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Common">
+      <UniqueIdentifier>{89e6cd81-d819-423e-a728-435957a67a10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NativeReader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultEquip.h">
-		<Filter>头文件</Filter>
-	</ClInclude>
-	<ClInclude Include="FashionList.h">
-		<Filter>头文件</Filter>
-	</ClInclude>
-	<ClInclude Include="FashionSuit.h">
-		<Filter>头文件</Filter>
-	</ClInclude>
-	<ClInclude Include="SceneList.h">
-		<Filter>头文件</Filter>
-	</ClInclude>
-	<ClInclude Include="XEntityPresentation.h">
-		<Filter>头文件</Filter>
-	</ClInclude>
-	<ClInclude Include="XEntityStatistics.h">
-		<Filter>头文件</Filter>
-	</ClInclude>
-	<ClInclude Include="XNpcList.h">
-		<Filter>头文件</Filter>
-	</ClInclude>
-	<ClInclude Include="Common.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="NativeInterface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="QteStatusList.h">
-      <Filter>头文件</Filter>
+      <Filter>Table</Filter>
     </ClInclude>
     <ClInclude Include="EquipSuit.h">
-      <Filter>头文件</Filter>
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="FashionList.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="FashionSuit.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="QteStatusList.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityPresentation.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityStatistics.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="XNpcList.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneList.h">
+		<Filter>Table</Filter>
+	</ClInclude>
+	<ClInclude Include="Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeInterface.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeReader.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NativeReader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Log.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="NativeInterface.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Common</Filter>
     </ClCompile>
     <ClInclude Include="DefaultEquip.cpp">
-		<Filter>源文件</Filter>
-	</ClInclude>
-	<ClInclude Include="FashionList.cpp">
-		<Filter>源文件</Filter>
-	</ClInclude>
-	<ClInclude Include="FashionSuit.cpp">
-		<Filter>源文件</Filter>
-	</ClInclude>
-	<ClInclude Include="SceneList.cpp">
-		<Filter>源文件</Filter>
-	</ClInclude>
-	<ClInclude Include="XEntityPresentation.cpp">
-		<Filter>源文件</Filter>
-	</ClInclude>
-	<ClInclude Include="XEntityStatistics.cpp">
-		<Filter>源文件</Filter>
-	</ClInclude>
-	<ClInclude Include="XNpcList.cpp">
-		<Filter>源文件</Filter>
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="FashionList.cpp">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="FashionSuit.cpp">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityPresentation.cpp">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityStatistics.cpp">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="XNpcList.cpp">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneList.cpp">
+		<Filter>Table</Filter>
 	</ClInclude>
 	<ClCompile Include="Common.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeInterface.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeReader.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="QteStatusList.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Table</Filter>
     </ClCompile>
     <ClCompile Include="EquipSuit.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Table</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
