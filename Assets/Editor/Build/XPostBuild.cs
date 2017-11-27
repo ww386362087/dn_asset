@@ -16,7 +16,7 @@ public class XPostBuild : XBuildArg
     }
     */
 
-    public static void OnPostBuild(BuildTarget target)
+    public static void OnPostBuild(bool fast, BuildTarget target)
     {
         MoveFolder(ai_editor);
         MoveFolder(ai_xeditor);

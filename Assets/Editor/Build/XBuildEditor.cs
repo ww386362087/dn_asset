@@ -176,7 +176,7 @@ public class XBuildEditor : EditorWindow
         }
         Directory.CreateDirectory(_targetDir);
 
-        if (!fast) XPriorBuild.OnPriorBuild(EditorUserBuildSettings.activeBuildTarget);
+        if (!fast) XPriorBuild.OnPriorBuild(fast, EditorUserBuildSettings.activeBuildTarget);
         string lastName = "";
         if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android) lastName = ".apk";
         else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.StandaloneWindows) lastName = ".exe";
@@ -187,24 +187,12 @@ public class XBuildEditor : EditorWindow
         PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, macro);
         PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, macro);
         PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, macro);
-        if (!fast) XPostBuild.OnPostBuild(EditorUserBuildSettings.activeBuildTarget);
+        if (!fast) XPostBuild.OnPostBuild(fast, EditorUserBuildSettings.activeBuildTarget);
         EditorUtility.DisplayDialog("Package Build Finish", "Package Build Finish!(" + res + ")", "OK");
         HelperEditor.Open(_targetDir);
     }
     
-    private static void MoveXTableDll()
-    {
-        if (_target == BuildTarget.iOS)
-        {
-            string src = Path.Combine(XBuildArg.bpath, "Shell/XLib-IOS.dll");
-            string dst = Path.Combine(Application.dataPath, "Lib/XLib.dll");
-            File.Delete(dst);
-            File.Move(src, dst);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-        }
-    }
-
+    
     private static string[] FindEnabledEditorScenes()
     {
         List<string> EditorScenes = new List<string>();

@@ -17,12 +17,12 @@ public class XPriorBuild : XBuildArg
     */
 
 
-    public static void OnPriorBuild(BuildTarget target)
+    public static void OnPriorBuild(bool fast, BuildTarget target)
     {
         if (Directory.Exists(temp_dir))
             Directory.Delete(temp_dir, true);
         Directory.CreateDirectory(temp_dir);
-        
+
         MoveFolder(ai_editor);
         MoveFolder(ai_xeditor);
         MoveFolder(skill_xeditor);
