@@ -70,7 +70,6 @@ namespace XForm
                 GenerateBytes.sington.GenerateAllBytes(this);
                 string str = "生成表格完毕!";
                 AppendContent(str);
-                // MessageBox.Show(str);
             }
             catch (Exception ex)
             {
@@ -86,7 +85,6 @@ namespace XForm
             GenerateCode.sington.GenerateAll(this);
             string str = "生成代码完毕!";
             AppendContent(str);
-            //MessageBox.Show(str);
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
@@ -111,8 +109,6 @@ namespace XForm
             ClearContent();
             AppendContent("开始编译表格代码.");
             CompileCode.Build(this);
-
-
         }
         
         private void AppendContent(string str)
@@ -131,11 +127,15 @@ namespace XForm
 
         private void marshal_Click(object sender, EventArgs e)
         {
+            ClearContent();
+            AppendContent("开始生成Marshal代码.");
             GenerateMarshalCode.sington.GenerateAll(this);
         }
 
         private void cpp_Click(object sender, EventArgs e)
         {
+            ClearContent();
+            AppendContent("开始生成c++代码.");
             GenerateCppCode.sington.GenerateAll(this);
         }
     }
