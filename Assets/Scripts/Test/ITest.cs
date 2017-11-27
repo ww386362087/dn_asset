@@ -48,7 +48,7 @@ public class TestManager
                 case "world":
                     test = new TestWorld();
                     break;
-                case "cutScene":
+                case "cutscene":
                     test = new TestCutScene();
                     break;
                 case "ai":
