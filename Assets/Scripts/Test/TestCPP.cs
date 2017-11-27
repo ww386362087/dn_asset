@@ -40,18 +40,12 @@ public class TestCPP : ITest
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(160), GUILayout.Height(80) };
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
-    GUIStyle ui_st2 = new GUIStyle();
-    string ui_qte = "2";
-    string ui_suit="5";
     string ui_rst = string.Empty;
    
     public void Start()
     {
-        ui_sty.fontSize = 21;
-        ui_sty.fontStyle = FontStyle.Bold;
-        ui_sty.alignment = TextAnchor.MiddleCenter;
-        ui_st2.normal.textColor = Color.red;
-        ui_st2.fontSize = 24;
+        ui_sty.normal.textColor = Color.red;
+        ui_sty.fontSize = 20;
         iInitCallbackCommand(new CppDelegate(OnCallback));
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
@@ -82,29 +76,29 @@ public class TestCPP : ITest
             int rst = iSub(p1, p2);
             ui_rst = a + "-" + b + "=" + rst;
         }
-        ui_qte = GUILayout.TextField(ui_qte, ui_sty, ui_opt);
         if (GUILayout.Button("Get-Qte-Row", ui_opt))
         {
-            int val = 2;
-            int.TryParse(ui_qte, out val);
             int len = CQteStatusList.length;
-            var rst = CQteStatusList.GetRow(val);
             ui_rst = "\nqte status list table line cnt: " + len + "\n";
-            ui_rst += "value:\t"+rst.Value + "\nname:\t" + rst.Name + "\ncomment:\t" + rst.Comment;
+            for (int i = 0; i < 22; i++)
+            {
+                var rst = CQteStatusList.GetRow(i);
+                ui_rst += "\nvalue:" + rst.Value + "name:\t" + rst.Name + "comment:\t" + rst.Comment;
+            }
         }
-        ui_suit = GUILayout.TextField(ui_suit, ui_sty, ui_opt);
         if (GUILayout.Button("Get-Suit-Row", ui_opt))
         {
-            int val = 5;
-            int.TryParse(ui_suit, out val);
             int len = CEquipSuit.length;
-            var rst = CEquipSuit.GetRow(val);
             ui_rst = "\nequi suit table line cnt: " + len + "\n";
-            ui_rst += "suitid:\t" + rst.SuitID + "\nname:\t" + rst.SuitName + "\nlevel:\t" + rst.Level+"\nprofid:\t"+rst.ProfID+"\nisCreate:\t"+rst.IsCreateShow;
+            for (int i = 0; i < 22; i++)
+            {
+                var rst = CEquipSuit.GetRow(i);
+                ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + "level:" + rst.Level + " profid:" + rst.ProfID + " isCreate:" + rst.IsCreateShow;
+            }
         }
         GUILayout.EndVertical();
         GUILayout.Space(50);
-        GUILayout.TextArea(ui_rst,ui_st2, ui_op2);
+        GUILayout.TextArea(ui_rst,ui_sty, ui_op2);
         GUILayout.EndHorizontal();
     }
 
