@@ -43,7 +43,7 @@ LOCAL_SRC_FILES  := $(MY_SRC_LIST)
 LOCAL_C_INCLUDES := $(MY_ALL_DIRS)
 
 #在这里设置宏
-LOCAL_CFLAGS := -D_USE_LOCALE
+#LOCAL_CFLAGS := -D_USE_LOCALE
 
 # Add additional include directories
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../
