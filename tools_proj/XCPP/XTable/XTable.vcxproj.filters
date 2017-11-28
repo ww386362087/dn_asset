@@ -63,6 +63,9 @@
     <ClInclude Include="AIBehaviour.h">
       <Filter>AI</Filter>
     </ClInclude>
+    <ClInclude Include="picotest.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">

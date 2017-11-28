@@ -1,11 +1,6 @@
 #include "NativeInterface.h"
 #include <fstream>
-//#include "rapidjson\document.h"
-//#include "rapidjson\prettywriter.h"
-//#include "rapidjson\filereadstream.h"  
-//#include "rapidjson\filewritestream.h"  
-//#include "rapidjson\stringbuffer.h"  
-
+#include "picotest.h"
 
 extern "C"
 {
@@ -36,12 +31,13 @@ extern "C"
 
 	void iJson()
 	{
+		LOG("READ JSON START");
 		std::ifstream json_file;  
 		json_file.open("json.txt");  
 		std::string json;  
 		if (!json_file.is_open())  
 		{  
-			std::cout << "Error opening file" << std::endl;  
+			ERROR("Error opening file");
 			exit(1);  
 		}  
 		std::string s;
@@ -50,37 +46,37 @@ extern "C"
 			json+=s;
 		}
 		json_file.close();
+		
+		/*picojsonÊ¹ÓÃ²ÎÕÕ: 
+		 *	http://www.sokoide.com/wp/2015/07/26/header-only-cpp-json-library-picojson/
+		 *	https://github.com/kazuho/picojson
+		 */
+		picojson::value v;
+		std::string err = picojson::parse(v, json);
+	    if(err.size())
+		{
+			ERROR(err);
+			return;
+		}
+		
+		picojson::object& o = v.get<picojson::object>();
+		std::string sub = o["data_subtype"].get<std::string>();
+		std::string task = o["task_type"].get<std::string>();
 
-	/*	rapidjson::Document doc;  
-		doc.Parse<0>(json.c_str());  
-		std::string task_type = doc["task_type"].GetString();
-		std::string data_type = doc["data_type"].GetString();
-		LOG("task_type:"+task_type);
-		LOG("data_type:"+data_type);
+		picojson::array ar = o["questions"].get<picojson::array>();
+		for (picojson::array::iterator it = ar.begin(); it != ar.end(); it++)
+		{
+			picojson::object& item = it->get<picojson::object>();
+			double imageid = item["image_id"].get<double>();
+			double questid = item["question_id"].get<double>();
 
-		rapidjson::Value & ques = doc["questions"];  
-		std::string temp_ques;  
-		int temp_ima_id, temp_ques_id;  
-		if (ques.IsArray())  
-		{  
-			for (size_t i = 0; i < ques.Size(); ++i)  
-			{  
-				rapidjson::Value& v = ques[i];  
-				assert(v.IsObject());  
-				if (v.HasMember("question") && v["question"].IsString()) {  
-					temp_ques = v["question"].GetString();  
-				}  
-				if (v.HasMember("image_id") && v["image_id"].IsInt()) {  
-					temp_ima_id = v["image_id"].GetInt();  
-				}  
-				if (v.HasMember("question_id") && v["question_id"].IsInt()) {  
-					temp_ques_id = v["question_id"].GetInt();  
-				}
-				LOG("temp_ques:"+temp_ques);
-				LOG("image_id:"+tostring(temp_ima_id));
-				LOG("question_id:"+tostring(temp_ques_id));
-			}  
-		}*/ 
+			double rt = imageid-questid;
+			std::string que = item["question"].get<std::string>();
+			LOG("question:"+que);
+			LOG("imageid: "+tostring(imageid));
+			LOG("questid: "+tostring(questid));
+			LOG("sub rt£º"+tostring(rt));
+		 }
 	}
 
 }

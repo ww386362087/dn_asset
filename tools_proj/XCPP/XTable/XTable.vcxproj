@@ -162,6 +162,7 @@
     <ClInclude Include="DefaultEquip.h" />
     <ClInclude Include="FashionList.h" />
     <ClInclude Include="FashionSuit.h" />
+    <ClInclude Include="picotest.h" />
     <ClInclude Include="SceneList.h" />
     <ClInclude Include="XEntityPresentation.h" />
     <ClInclude Include="XEntityStatistics.h" />

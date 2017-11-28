@@ -17,23 +17,23 @@
     "questions": [
         {
             "question": "What is the table made of?",
-            "image_id": 350623,
-            "question_id": 3506232
+            "image_id": 3506,
+            "question_id": 35032
         },
         {
             "question": "Is the food napping on the table?",
-            "image_id": 350623,
-            "question_id": 3506230
+            "image_id": 503,
+            "question_id": 3506
         },
         {
             "question": "What has been upcycled to make lights?",
-            "image_id": 350623,
-            "question_id": 3506231
+            "image_id": 3503,
+            "question_id": 6231
         },
         {
             "question": "Is there water in the water bottle?",
-            "image_id": 552610,
-            "question_id": 5526102
+            "image_id": 5520,
+            "question_id": 55261
         }
     ]
 }
