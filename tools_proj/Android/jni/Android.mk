@@ -42,6 +42,9 @@ MY_ALL_DIRS := $(call uniq,$(MY_ALL_DIRS))
 LOCAL_SRC_FILES  := $(MY_SRC_LIST)
 LOCAL_C_INCLUDES := $(MY_ALL_DIRS)
 
+#在这里设置宏
+#LOCAL_CFLAGS := -D_MSC_VER
+
 # Add additional include directories
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../
 #LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../Eigen-3.2.2   

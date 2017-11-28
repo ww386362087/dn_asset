@@ -27,7 +27,6 @@ void NativeReader::Close()
 	if(reader.is_open()) reader.close();
 }
 
-
 void NativeReader::ReadString(char buff[])
 {
 	char len =0;

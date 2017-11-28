@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Table">
@@ -6,6 +6,9 @@
     </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{89e6cd81-d819-423e-a728-435957a67a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{8c8aae28-a030-499a-8036-de2b72c76afc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,9 +37,9 @@
       <Filter>Table</Filter>
     </ClInclude>
     <ClInclude Include="SceneList.h">
-		<Filter>Table</Filter>
-	</ClInclude>
-	<ClInclude Include="Common.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
@@ -47,6 +50,18 @@
     </ClInclude>
     <ClInclude Include="NativeReader.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="AIFactory.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AITree.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AITreeData.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AIBehaviour.h">
+      <Filter>AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +87,9 @@
       <Filter>Table</Filter>
     </ClInclude>
     <ClInclude Include="SceneList.cpp">
-		<Filter>Table</Filter>
-	</ClInclude>
-	<ClCompile Include="Common.cpp">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClCompile Include="Common.cpp">
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="NativeInterface.cpp">
@@ -88,6 +103,15 @@
     </ClCompile>
     <ClCompile Include="EquipSuit.cpp">
       <Filter>Table</Filter>
+    </ClCompile>
+    <ClCompile Include="AIFactory.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AITree.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AIBehaviour.cpp">
+      <Filter>AI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -121,29 +121,4 @@ namespace AI.Runtime
         }
     }
 
-    public class AIRuntimeConditional : AIRunTimeBase
-    {
-        public override void Init(AIRuntimeTaskData data)
-        {
-        }
-
-        public override AIRuntimeStatus OnTick(XEntity entity)
-        {
-            return AIRuntimeStatus.Success;
-        }
-    }
-
-
-    public class AIRuntimeAction : AIRunTimeBase
-    {
-        public override void Init(AIRuntimeTaskData data)
-        {
-        }
-
-        public override AIRuntimeStatus OnTick(XEntity entity)
-        {
-            return AIRuntimeStatus.Success;
-        }
-    }
-
 }

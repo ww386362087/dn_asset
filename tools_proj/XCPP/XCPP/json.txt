@@ -1,0 +1,39 @@
+{
+    "info": {
+        "description": "This is v1.0 of the VQA dataset.",
+        "url": "http://visualqa.org",
+        "version": "1.0",
+        "year": 2015,
+        "contributor": "VQA Team",
+        "date_created": "2015-10-02 19:35:04"
+    },
+    "task_type": "Open-Ended",
+    "data_type": "mscoco",
+    "license": {
+        "url": "http://creativecommons.org/licenses/by/4.0/",
+        "name": "Creative Commons Attribution 4.0 International License"
+    },
+    "data_subtype": "val2014",
+    "questions": [
+        {
+            "question": "What is the table made of?",
+            "image_id": 350623,
+            "question_id": 3506232
+        },
+        {
+            "question": "Is the food napping on the table?",
+            "image_id": 350623,
+            "question_id": 3506230
+        },
+        {
+            "question": "What has been upcycled to make lights?",
+            "image_id": 350623,
+            "question_id": 3506231
+        },
+        {
+            "question": "Is there water in the water bottle?",
+            "image_id": 552610,
+            "question_id": 5526102
+        }
+    ]
+}

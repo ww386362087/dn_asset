@@ -12,12 +12,14 @@ typedef int(*DllAdd)(int,int);
 typedef int(*DllSub)(int*,int*);
 typedef int(*DllReadQteTable)();
 typedef int(*DllReadSuitTable)();
+typedef void(*DllReadJson)();
 DllCommand cb;
 DllInitial init;
 DllAdd add;
 DllSub sub;
 DllReadQteTable qte;
 DllReadSuitTable suit;
+DllReadJson json;
 
 void DebugInfo()
 {
@@ -98,6 +100,7 @@ void main()
 	sub = (DllSub)GetProcAddress(hInst,"iSub");
 	qte = (DllReadQteTable)GetProcAddress(hInst,"iGetQteStatusListLength");
 	suit = (DllReadSuitTable)GetProcAddress(hInst,"iGetEquipSuitLength");
+	json = (DllReadJson)GetProcAddress(hInst,"iJson");
 	cb(OnCallback);
 	init("","");
 
@@ -122,6 +125,10 @@ void main()
 				break;
 			case 'q':
 				jump = true;
+				break;
+			case 'j':
+				json();
+				cout<<endl<<endl;
 				break;
 			default:
 				cout<<"invalid command"<<endl<<endl;

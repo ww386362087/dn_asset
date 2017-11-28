@@ -4,13 +4,6 @@
 #include <iostream>
 #include "Log.h"
 
-class NativeInterface
-{
-public:
-	NativeInterface(void);
-	~NativeInterface(void);
-};
-
 
 extern "C"
 {
@@ -21,4 +14,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iAdd(int, int);
 	ENGINE_INTERFACE_EXPORT int iSub(int*, int*);
 	ENGINE_INTERFACE_EXPORT void iInitial(const char*,const char*);
+	ENGINE_INTERFACE_EXPORT void iJson();
 };

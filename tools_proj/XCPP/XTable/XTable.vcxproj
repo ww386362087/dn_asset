@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -84,6 +84,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;XTABLE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -153,14 +155,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DefaultEquip.h"/>
-	<ClInclude Include="FashionList.h"/>
-	<ClInclude Include="FashionSuit.h"/>
-	<ClInclude Include="SceneList.h"/>
-	<ClInclude Include="XEntityPresentation.h"/>
-	<ClInclude Include="XEntityStatistics.h"/>
-	<ClInclude Include="XNpcList.h"/>
-	<ClInclude Include="Common.h" />
+    <ClInclude Include="AIBehaviour.h" />
+    <ClInclude Include="AIFactory.h" />
+    <ClInclude Include="AITree.h" />
+    <ClInclude Include="AITreeData.h" />
+    <ClInclude Include="DefaultEquip.h" />
+    <ClInclude Include="FashionList.h" />
+    <ClInclude Include="FashionSuit.h" />
+    <ClInclude Include="SceneList.h" />
+    <ClInclude Include="XEntityPresentation.h" />
+    <ClInclude Include="XEntityStatistics.h" />
+    <ClInclude Include="XNpcList.h" />
+    <ClInclude Include="Common.h" />
     <ClInclude Include="EquipSuit.h" />
     <ClInclude Include="QteStatusList.h" />
     <ClInclude Include="Log.h" />
@@ -168,14 +174,17 @@
     <ClInclude Include="NativeReader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DefaultEquip.cpp"/>
-	<ClInclude Include="FashionList.cpp"/>
-	<ClInclude Include="FashionSuit.cpp"/>
-	<ClInclude Include="SceneList.cpp"/>
-	<ClInclude Include="XEntityPresentation.cpp"/>
-	<ClInclude Include="XEntityStatistics.cpp"/>
-	<ClInclude Include="XNpcList.cpp"/>
-	<ClCompile Include="Common.cpp" />
+    <ClInclude Include="DefaultEquip.cpp" />
+    <ClInclude Include="FashionList.cpp" />
+    <ClInclude Include="FashionSuit.cpp" />
+    <ClInclude Include="SceneList.cpp" />
+    <ClInclude Include="XEntityPresentation.cpp" />
+    <ClInclude Include="XEntityStatistics.cpp" />
+    <ClInclude Include="XNpcList.cpp" />
+    <ClCompile Include="AIBehaviour.cpp" />
+    <ClCompile Include="AIFactory.cpp" />
+    <ClCompile Include="AITree.cpp" />
+    <ClCompile Include="Common.cpp" />
     <ClCompile Include="EquipSuit.cpp" />
     <ClCompile Include="QteStatusList.cpp" />
     <ClCompile Include="Log.cpp" />
