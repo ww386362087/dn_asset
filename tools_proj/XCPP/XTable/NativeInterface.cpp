@@ -56,7 +56,6 @@ extern "C"
 	    if(err.size())
 		{
 			ERROR(err);
-
 			return;
 		}
 		
