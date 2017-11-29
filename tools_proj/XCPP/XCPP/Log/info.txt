@@ -1,18 +1,1 @@
-2017-11-29 16:49:33	function (iInitial)	line 24	c++ initial success with path: 
-2017-11-29 16:49:35	function (iJson)	line 34	READ JSON START
-2017-11-29 16:49:35	function (iJson)	line 75	question:What is the table made of?
-2017-11-29 16:49:35	function (iJson)	line 76	imageid: 3506
-2017-11-29 16:49:35	function (iJson)	line 77	questid: 35032
-2017-11-29 16:49:35	function (iJson)	line 78	sub rt£º-31526
-2017-11-29 16:49:35	function (iJson)	line 75	question:Is the food napping on the table?
-2017-11-29 16:49:35	function (iJson)	line 76	imageid: 503
-2017-11-29 16:49:35	function (iJson)	line 77	questid: 3506
-2017-11-29 16:49:35	function (iJson)	line 78	sub rt£º-3003
-2017-11-29 16:49:35	function (iJson)	line 75	question:What has been upcycled to make lights?
-2017-11-29 16:49:35	function (iJson)	line 76	imageid: 3503
-2017-11-29 16:49:35	function (iJson)	line 77	questid: 6231
-2017-11-29 16:49:35	function (iJson)	line 78	sub rt£º-2728
-2017-11-29 16:49:35	function (iJson)	line 75	question:Is there water in the water bottle?
-2017-11-29 16:49:35	function (iJson)	line 76	imageid: 5520
-2017-11-29 16:49:35	function (iJson)	line 77	questid: 55261
-2017-11-29 16:49:35	function (iJson)	line 78	sub rt£º-49741
+2017-11-29 20:15:07	function (iInitial)	line 24	c++ initial success with path: 
