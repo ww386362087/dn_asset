@@ -1,1 +1,0 @@
-2017-11-29 20:15:07	function (iInitial)	line 24	c++ initial success with path: 
