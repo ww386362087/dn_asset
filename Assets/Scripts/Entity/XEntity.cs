@@ -35,6 +35,7 @@ public class XEntity : XObject
     protected Transform _transf = null;
     protected int _layer = 0;
     protected float _speed = 0.03f;
+    protected bool _freeze = false;
     protected SkinnedMeshRenderer _skin = null;
     protected Vector3 _forward = Vector3.zero;
     protected bool _force_move = false;
@@ -55,17 +56,7 @@ public class XEntity : XObject
     {
         get { return (_eEntity_Type & EntityType.Role) != 0; }
     }
-
-    public bool IsEnemy
-    {
-        get { return (_eEntity_Type & EntityType.Enemy) != 0; }
-    }
-
-    public bool IsAlly
-    {
-        get { return (_eEntity_Type & EntityType.Ally) != 0; }
-    }
-
+    
     public bool IsBoss
     {
         get { return (_eEntity_Type & EntityType.Boss) != 0; }
@@ -75,6 +66,7 @@ public class XEntity : XObject
     {
         get { return (_eEntity_Type & EntityType.Npc) != 0; }
     }
+
     public XStateDefine CurState { get { return _state; } }
 
     public float Radius
@@ -109,14 +101,9 @@ public class XEntity : XObject
 
     public float Speed
     {
-        get { return _speed; }
+        get { return _freeze ? 0.001f : _speed; }
     }
-
-    public virtual bool HasAI
-    {
-        get { return GetComponent<XAIComponent>() == null; }
-    }
-
+    
     public Vector3 Position
     {
         get { return _transf != null ? _transf.position : Vector3.zero; }
@@ -180,19 +167,17 @@ public class XEntity : XObject
     public virtual void OnUpdate(float delta)
     {
         UpdateComponents(delta);
-
+        
         if (_force_move && _transf != null)
         {
             _transf.forward = _forward;
-            _pos = Position + _forward.normalized * _speed;
+            _pos = Position + _forward.normalized * Speed;
             _pos.y = XScene.singleton.TerrainY(_pos) + 0.02f;
             _transf.position = _pos;
         }
     }
 
-    public virtual void OnLateUpdate()
-    {
-    }
+    public virtual void OnLateUpdate() { }
 
     public bool TestVisible(Plane[] planes, bool fully)
     {
@@ -257,24 +242,30 @@ public class XEntity : XObject
     public void OnDied()
     {
         _state = XStateDefine.XState_Death;
-
+        DetachAllComponents();
+        XAnimComponent an = GetComponent<XAnimComponent>();
+        if (an != null)
+        {
+            AnimationClip clip = XResources.Load<AnimationClip>(present.Death, AssetType.Anim);
+            an.OverrideAnim(AnimTriger.ToDeath, clip);
+        }
     }
 
-    public void OnSkill(bool cast)
+    public virtual void OnSkill(bool cast)
     {
         if (_state != XStateDefine.XState_Death)
         {
             _state = cast ? XStateDefine.XState_Skill : XStateDefine.XState_Idle;
-           if(IsPlayer) XVirtualTab.singleton.Freezed = cast;
+            if (IsPlayer) _freeze = cast;
         }
     }
 
-    public void OnHit(bool hit)
+    public virtual void OnHit(bool hit)
     {
         if (_state != XStateDefine.XState_Death)
         {
             _state = hit ? XStateDefine.XState_BeHit : XStateDefine.XState_Idle;
-            if (IsPlayer) XVirtualTab.singleton.Freezed = hit;
+            if (IsPlayer) _freeze = hit;
         }
     }
 

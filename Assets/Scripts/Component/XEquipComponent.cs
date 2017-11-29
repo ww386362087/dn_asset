@@ -26,7 +26,7 @@ public class XEquipComponent : XComponent
             matCombineInstanceArrayCache.Add(new CombineInstance[i + 1]);
         }
     }
-
+    
     public override void OnInitial(XObject o)
     {
         base.OnInitial(o);
@@ -72,6 +72,22 @@ public class XEquipComponent : XComponent
         RegisterEvent(XEventDefine.XEvent_Detach_Host, OnDetachHost);
 
         EquipPart(m_FashionList[0]);
+    }
+
+    public override void OnUninit()
+    {
+        m_EquipList.Clear();
+        m_FashionList.Clear();
+        Object.Destroy(skin);
+        mpb = null;
+        skin = null;
+        m_PartLoaded = null;
+        if (fashionList != null)
+        {
+            fashionList.Clear();
+            fashionList = null;
+        }
+        base.OnUninit();
     }
 
     public void EquipPart(EquipPart part)

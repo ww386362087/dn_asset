@@ -23,14 +23,9 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
     public bool Freezed
     {
         get { return _bFreeze; }
-        set
-        {
-            _bFreeze = value;
-            Cancel();
-        }
+        set { _bFreeze = value; Cancel(); }
     }
-
-
+    
     public Vector3 Direction { get { return _direction; } }
 
     public float MaxDistance { get { return _max_distance; } }
@@ -53,7 +48,6 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
                     if (XTouch.IsActiveTouch(touch))
                     {
                         Vector2 delta = touch.Position - _center;
-
                         if (delta.sqrMagnitude > _dead_zone * _dead_zone)
                         {
                             _bFeeding = true;

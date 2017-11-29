@@ -6,7 +6,7 @@ public class XRole : XEntity
     protected CharacterController controller;
     protected XNavComponent nav;
     protected XAnimComponent ani;
-    
+
     public int profession = 1;
     public DefaultEquip.RowData defEquip = null;
 
@@ -51,29 +51,31 @@ public class XRole : XEntity
 
     private void InitAnim()
     {
-        OverrideAnim("A", present.A);
-        OverrideAnim("AA", present.AA);
-        OverrideAnim("AAA", "Player_archer_attack_run");
-        OverrideAnim("AAAA", "Player_archer_attack_run");
-        OverrideAnim("AAAAA", present.AAAAA);
-        OverrideAnim("Walk", present.Walk);
-        OverrideAnim("Idle", present.Idle);
-        OverrideAnim("Death", present.Death);
-        OverrideAnim("Run", present.Run);
-        OverrideAnim("RunLeft", present.RunLeft);
-        OverrideAnim("RunRight", present.RunRight);
-        OverrideAnim("Freezed", present.Freeze);
-        OverrideAnim("HitLanding", present.Hit_l[0]);
-        OverrideAnim("Phase0", "Player_archer_jump");
-        OverrideAnim("Phase1", "Player_archer_attack_lifttwinshot");
-        OverrideAnim("Phase2", "Player_archer_attack_aerialchainshot");
-        OverrideAnim("Art", "Player_archer_victory");
+        OverrideAnim(Clip.A, present.A);
+        OverrideAnim(Clip.AA, present.AA);
+        OverrideAnim(Clip.AAA, "Player_archer_attack_run");
+        OverrideAnim(Clip.AAAA, "Player_archer_attack_run");
+        OverrideAnim(Clip.AAAAA, present.AAAAA);
+        OverrideAnim(Clip.Walk, present.Walk);
+        OverrideAnim(Clip.Idle, present.Idle);
+        OverrideAnim(Clip.Death, present.Death);
+        OverrideAnim(Clip.Run, present.Run);
+        OverrideAnim(Clip.RunLeft, present.RunLeft);
+        OverrideAnim(Clip.RunRight, present.RunRight);
+        OverrideAnim(Clip.Freezed, present.Freeze);
+        OverrideAnim(Clip.HitLanding, present.Hit_l[0]);
+        OverrideAnim(Clip.PresentStraight, present.HitFly[0]);
+        OverrideAnim(Clip.GetUp, present.HitFly[2]);
+        OverrideAnim(Clip.Phase0, "Player_archer_jump");
+        OverrideAnim(Clip.Phase1, "Player_archer_attack_lifttwinshot");
+        OverrideAnim(Clip.Phase2, "Player_archer_attack_aerialchainshot");
+        OverrideAnim(Clip.Art, "Player_archer_victory");
     }
 
 
-    private void OverrideAnim(string key,string clip)
+    private void OverrideAnim(string key, string clip)
     {
-        string path = present.AnimLocation+clip;
+        string path = present.AnimLocation + clip;
         ani.OverrideAnim(key, path);
     }
 

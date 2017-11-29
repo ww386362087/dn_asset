@@ -105,7 +105,6 @@ public class XHitAttribute
                         {
                             elapsed = present_straight;
                             ator.speed = 1;
-
                             if ((change_to_fly || data.State == XBeHitState.Hit_Fly) && present.HitFly != null && present.HitFly.Length > 0)
                             {
                                 ator.SetTrigger(AnimTriger.ToBeHit_Landing);
@@ -340,6 +339,7 @@ public class XHitAttribute
 
         ator.speed = 1;
         DestroyFx();
+        //ator.SetTrigger(AnimTriger.EndSkill);
         ator.SetTrigger(AnimTriger.ToStand);
     }
 

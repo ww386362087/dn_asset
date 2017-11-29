@@ -26,7 +26,7 @@ public class XBeHitComponent : XComponent, IHitHoster
         InitHitAnim();
         InitAttr();
     }
-
+    
     private void InitHitAnim()
     {
         _anim = _entity.GetComponent<XAnimComponent>();
@@ -39,8 +39,7 @@ public class XBeHitComponent : XComponent, IHitHoster
         string path = present.HitFly != null && present.HitFly.Length == 0 ? null : present.AnimLocation + present.HitFly[1];
         _anim.OverrideAnim(Clip.HitLanding, path);
     }
-
-
+    
     private void InitAttr()
     {
         _attr = new XHitAttribute(_entity.EntityTransfer,
@@ -48,8 +47,7 @@ public class XBeHitComponent : XComponent, IHitHoster
             _anim.Ator,
             _entity.present);
     }
-
-
+    
     public override void OnUpdate(float delta)
     {
         base.OnUpdate(delta);
@@ -61,9 +59,7 @@ public class XBeHitComponent : XComponent, IHitHoster
             }
         }
     }
-
-
-
+    
     public void Begin(ISkillHoster hoster, XHitData data, Vector3 dir, bool bAttackOnHitDown)
     {
         if (_attr != null && _entity.CurState != XStateDefine.XState_Death)

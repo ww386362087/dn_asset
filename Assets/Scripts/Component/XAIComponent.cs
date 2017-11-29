@@ -63,6 +63,10 @@ public class XAIComponent : XComponent
 
     public override void OnUninit()
     {
+        _entity = null;
+        _target = null;
+        _tick = 0;
+        _tree = null;
         base.OnUninit();
     }
 

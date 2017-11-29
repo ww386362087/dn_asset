@@ -10,9 +10,8 @@ internal class XGesture : XSingleton<XGesture>
     private bool _one = false;
     private bool _one_up = false;
     private bool _bswype = false;
-    private float _last_swype_at = 0;
     private bool _bFreeze = false;
-    
+
     private float _swype_dis = 0;
 
     private Vector2 _start = Vector2.zero;
@@ -23,25 +22,16 @@ internal class XGesture : XSingleton<XGesture>
     private Vector3 _touchpos = Vector3.zero;
 
     private float _last_touch_down_at = 0;
-    
+
     public bool Freezed
     {
         get { return _bFreeze; }
-        set
-        {
-            _bFreeze = value;
-            Cancel();
-        }
+        set { _bFreeze = value; Cancel(); }
     }
 
     public bool Working
     {
         get { return _finger_id != -1; }
-    }
-
-    public float LastSwypeAt
-    {
-        get { return _last_swype_at; }
     }
 
     public Vector3 GesturePosition
@@ -88,14 +78,13 @@ internal class XGesture : XSingleton<XGesture>
     public void Cancel()
     {
         XEventMgr.singleton.FireEvent(new XGestureCancelEvent());
-
         _bTouch = false;
         _one = false;
         _bswype = false;
         _finger_id = -1;
     }
 
-    
+
     private bool OneUpdate(XTouchItem touch)
     {
         if (touch.Phase == TouchPhase.Began &&
@@ -129,7 +118,7 @@ internal class XGesture : XSingleton<XGesture>
                 Vector2 delta;
                 delta.x = _touchpos.x - touch.Position.x;
                 delta.y = _touchpos.y - touch.Position.y;
-                
+
                 if (delta.magnitude < _dead_zone)
                 {
                     _touchpos = touch.Position;
@@ -147,10 +136,8 @@ internal class XGesture : XSingleton<XGesture>
         {
             _end = touch.Position;
             Vector2 delta = _end - _swype_start;
-
             float endAt = Time.time;
             _swype_dis = delta.magnitude;
-
             if (_swype_dis > _dead_zone)
             {
                 _swype_start = _end;
@@ -159,11 +146,9 @@ internal class XGesture : XSingleton<XGesture>
                 _swypedir.z = delta.y;
                 _swypedir.Normalize();
                 _gesturepos = _end;
-                _last_swype_at = endAt;
                 return true;
             }
         }
-
         return false;
     }
 

@@ -54,7 +54,7 @@ public class XSkillComponent : XComponent, ISkillHoster
         _attribute = new XSkillAttributes(this, _entity.EntityTransfer);
         _anim = _entity.GetComponent<XAnimComponent>();
     }
-
+    
 
     public override void OnUpdate(float delta)
     {

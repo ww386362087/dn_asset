@@ -4,14 +4,16 @@
 public class XMonster : XEntity
 {
     private XAnimComponent anim;
+    private int hitCnt = 0;
+    private int maxHit = 4;
 
     public override void OnInitial()
     {
         _eEntity_Type |= EntityType.Monster;
         base.OnInitial();
         _layer = LayerMask.NameToLayer("Enemy");
-        _speed = 0.01f;
-        
+        _speed = 0.001f;
+
         anim = AttachComponent<XAnimComponent>();
         AttachComponent<XAIComponent>();
         AttachComponent<XNavComponent>();
@@ -21,8 +23,7 @@ public class XMonster : XEntity
         InitAnim();
     }
 
-
-
+    
     private void InitAnim()
     {
         OverrideAnim("Idle", _present.AttackIdle);
@@ -38,15 +39,24 @@ public class XMonster : XEntity
         OverrideAnim("HitLanding", hit);
     }
 
-
-
+    
     private void OverrideAnim(string key, string clip)
     {
-
         if (anim != null)
         {
             string path = present.AnimLocation + clip;
             anim.OverrideAnim(key, path);
+        }
+    }
+
+
+    public override void OnHit(bool hit)
+    {
+        base.OnHit(hit);
+        hitCnt++;
+        if (hitCnt >= maxHit)
+        {
+           // OnDied();
         }
     }
 

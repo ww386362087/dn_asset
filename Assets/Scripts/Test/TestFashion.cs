@@ -57,13 +57,17 @@ public class TestFashion : ITest
 
     int space = 30;
     string[] anims = {
-        "ToArtSkill",
-        "EndSkill",
+        AnimTriger.ToArtSkill,
+        AnimTriger.EndSkill,
         XSkillData.Combined_Command[0],
         XSkillData.Combined_Command[1],
         XSkillData.Combined_Command[2],
-        "ToMove",
-        "ToStand"
+        AnimTriger.ToBeHit_Landing,
+        AnimTriger.ToBeHit_Hard,
+        AnimTriger.ToBeHit_GetUp,
+        AnimTriger.ToBeHit,
+        AnimTriger.ToMove,
+        AnimTriger.ToStand
     };
 
     string[] weapons = {

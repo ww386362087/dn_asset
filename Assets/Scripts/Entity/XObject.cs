@@ -140,6 +140,7 @@ public class XObject
         if (components != null && components.ContainsKey(uid))
         {
             components[uid].OnUninit();
+            components[uid] = null;
             components.Remove(uid);
             return true;
         }
