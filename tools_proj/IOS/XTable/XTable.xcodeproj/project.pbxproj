@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EA77D241FCEDB550021AEB2 /* AIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D141FCEDB530021AEB2 /* AIBase.cpp */; };
+		4EA77D251FCEDB550021AEB2 /* AITree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D161FCEDB530021AEB2 /* AITree.cpp */; };
+		4EA77D261FCEDB550021AEB2 /* AIBehaviour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D181FCEDB530021AEB2 /* AIBehaviour.cpp */; };
+		4EA77D271FCEDB550021AEB2 /* AIInterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D191FCEDB540021AEB2 /* AIInterval.cpp */; };
+		4EA77D281FCEDB550021AEB2 /* AITreeData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D1A1FCEDB540021AEB2 /* AITreeData.cpp */; };
+		4EA77D291FCEDB550021AEB2 /* AIFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D1D1FCEDB540021AEB2 /* AIFactory.cpp */; };
+		4EA77D2A1FCEDB550021AEB2 /* AISequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D1E1FCEDB540021AEB2 /* AISequence.cpp */; };
+		4EA77D2B1FCEDB550021AEB2 /* AISelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D211FCEDB550021AEB2 /* AISelector.cpp */; };
 		4EBA59351FC6EF1500C3FEB7 /* XTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59341FC6EF1500C3FEB7 /* XTable.m */; };
 		4EBA59361FC6EF1500C3FEB7 /* XTable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4EBA59331FC6EF1500C3FEB7 /* XTable.h */; };
 		4EBA59561FC6EF3700C3FEB7 /* FashionSuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59401FC6EF3400C3FEB7 /* FashionSuit.cpp */; };
@@ -38,6 +46,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4EA77D141FCEDB530021AEB2 /* AIBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBase.cpp; path = ../../../XCPP/XTable/AIBase.cpp; sourceTree = "<group>"; };
+		4EA77D151FCEDB530021AEB2 /* AIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIFactory.h; path = ../../../XCPP/XTable/AIFactory.h; sourceTree = "<group>"; };
+		4EA77D161FCEDB530021AEB2 /* AITree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AITree.cpp; path = ../../../XCPP/XTable/AITree.cpp; sourceTree = "<group>"; };
+		4EA77D171FCEDB530021AEB2 /* AIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBase.h; path = ../../../XCPP/XTable/AIBase.h; sourceTree = "<group>"; };
+		4EA77D181FCEDB530021AEB2 /* AIBehaviour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBehaviour.cpp; path = ../../../XCPP/XTable/AIBehaviour.cpp; sourceTree = "<group>"; };
+		4EA77D191FCEDB540021AEB2 /* AIInterval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIInterval.cpp; path = ../../../XCPP/XTable/AIInterval.cpp; sourceTree = "<group>"; };
+		4EA77D1A1FCEDB540021AEB2 /* AITreeData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AITreeData.cpp; path = ../../../XCPP/XTable/AITreeData.cpp; sourceTree = "<group>"; };
+		4EA77D1B1FCEDB540021AEB2 /* AIBehaviour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBehaviour.h; path = ../../../XCPP/XTable/AIBehaviour.h; sourceTree = "<group>"; };
+		4EA77D1C1FCEDB540021AEB2 /* AISequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISequence.h; path = ../../../XCPP/XTable/AISequence.h; sourceTree = "<group>"; };
+		4EA77D1D1FCEDB540021AEB2 /* AIFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIFactory.cpp; path = ../../../XCPP/XTable/AIFactory.cpp; sourceTree = "<group>"; };
+		4EA77D1E1FCEDB540021AEB2 /* AISequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISequence.cpp; path = ../../../XCPP/XTable/AISequence.cpp; sourceTree = "<group>"; };
+		4EA77D1F1FCEDB550021AEB2 /* AISelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISelector.h; path = ../../../XCPP/XTable/AISelector.h; sourceTree = "<group>"; };
+		4EA77D201FCEDB550021AEB2 /* AITree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AITree.h; path = ../../../XCPP/XTable/AITree.h; sourceTree = "<group>"; };
+		4EA77D211FCEDB550021AEB2 /* AISelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISelector.cpp; path = ../../../XCPP/XTable/AISelector.cpp; sourceTree = "<group>"; };
+		4EA77D221FCEDB550021AEB2 /* AITreeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AITreeData.h; path = ../../../XCPP/XTable/AITreeData.h; sourceTree = "<group>"; };
+		4EA77D231FCEDB550021AEB2 /* AIInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIInterval.h; path = ../../../XCPP/XTable/AIInterval.h; sourceTree = "<group>"; };
 		4EBA59301FC6EF1500C3FEB7 /* libXTable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXTable.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBA59331FC6EF1500C3FEB7 /* XTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTable.h; sourceTree = "<group>"; };
 		4EBA59341FC6EF1500C3FEB7 /* XTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTable.m; sourceTree = "<group>"; };
@@ -108,6 +132,22 @@
 				4EBA59521FC6EF3600C3FEB7 /* EquipSuit.h */,
 				4EBA59501FC6EF3600C3FEB7 /* FashionList.cpp */,
 				4EBA594B1FC6EF3500C3FEB7 /* FashionList.h */,
+				4EA77D141FCEDB530021AEB2 /* AIBase.cpp */,
+				4EA77D171FCEDB530021AEB2 /* AIBase.h */,
+				4EA77D181FCEDB530021AEB2 /* AIBehaviour.cpp */,
+				4EA77D1B1FCEDB540021AEB2 /* AIBehaviour.h */,
+				4EA77D1D1FCEDB540021AEB2 /* AIFactory.cpp */,
+				4EA77D151FCEDB530021AEB2 /* AIFactory.h */,
+				4EA77D191FCEDB540021AEB2 /* AIInterval.cpp */,
+				4EA77D231FCEDB550021AEB2 /* AIInterval.h */,
+				4EA77D211FCEDB550021AEB2 /* AISelector.cpp */,
+				4EA77D1F1FCEDB550021AEB2 /* AISelector.h */,
+				4EA77D1E1FCEDB540021AEB2 /* AISequence.cpp */,
+				4EA77D1C1FCEDB540021AEB2 /* AISequence.h */,
+				4EA77D161FCEDB530021AEB2 /* AITree.cpp */,
+				4EA77D201FCEDB550021AEB2 /* AITree.h */,
+				4EA77D1A1FCEDB540021AEB2 /* AITreeData.cpp */,
+				4EA77D221FCEDB550021AEB2 /* AITreeData.h */,
 				4EBA59401FC6EF3400C3FEB7 /* FashionSuit.cpp */,
 				4EBA59421FC6EF3400C3FEB7 /* FashionSuit.h */,
 				4EBA594A1FC6EF3500C3FEB7 /* Log.cpp */,
@@ -188,16 +228,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA77D291FCEDB550021AEB2 /* AIFactory.cpp in Sources */,
 				4EBA595A1FC6EF3700C3FEB7 /* QteStatusList.cpp in Sources */,
+				4EA77D281FCEDB550021AEB2 /* AITreeData.cpp in Sources */,
 				4EBA59351FC6EF1500C3FEB7 /* XTable.m in Sources */,
 				4EBA595E1FC6EF3700C3FEB7 /* SceneList.cpp in Sources */,
+				4EA77D2A1FCEDB550021AEB2 /* AISequence.cpp in Sources */,
 				4EBA595C1FC6EF3700C3FEB7 /* DefaultEquip.cpp in Sources */,
 				4EBA59601FC6EF3700C3FEB7 /* FashionList.cpp in Sources */,
+				4EA77D251FCEDB550021AEB2 /* AITree.cpp in Sources */,
 				4EBA595D1FC6EF3700C3FEB7 /* Log.cpp in Sources */,
 				4EBA59621FC6EF3700C3FEB7 /* XNpcList.cpp in Sources */,
 				4EBA59571FC6EF3700C3FEB7 /* NativeReader.cpp in Sources */,
+				4EA77D241FCEDB550021AEB2 /* AIBase.cpp in Sources */,
 				4EBA59591FC6EF3700C3FEB7 /* NativeInterface.cpp in Sources */,
 				4EBA59581FC6EF3700C3FEB7 /* XEntityStatistics.cpp in Sources */,
+				4EA77D271FCEDB550021AEB2 /* AIInterval.cpp in Sources */,
+				4EA77D2B1FCEDB550021AEB2 /* AISelector.cpp in Sources */,
+				4EA77D261FCEDB550021AEB2 /* AIBehaviour.cpp in Sources */,
 				4EBA59561FC6EF3700C3FEB7 /* FashionSuit.cpp in Sources */,
 				4EBA59611FC6EF3700C3FEB7 /* EquipSuit.cpp in Sources */,
 				4EBA595B1FC6EF3700C3FEB7 /* XEntityPresentation.cpp in Sources */,
