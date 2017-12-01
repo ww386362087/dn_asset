@@ -46,7 +46,7 @@ public class TestCPP : ITest
     {
         ui_sty.normal.textColor = Color.red;
         ui_sty.fontSize = 20;
-       // iInitCallbackCommand(new CppDelegate(OnCallback));
+        iInitCallbackCommand(new CppDelegate(OnCallback));
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
 
