@@ -63,8 +63,8 @@ public class TestCPP : ITest
         GUILayout.BeginVertical();
         if (GUILayout.Button("Cal-Add", ui_opt))
         {
-            int i = iAdd(8, 7);
-            ui_rst = "8+7=" + i;
+              int i = iAdd(8, 7);
+              ui_rst = "8+7=" + i;
         }
         if (GUILayout.Button("Cal-Sub", ui_opt))
         {

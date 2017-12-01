@@ -18,9 +18,10 @@ extern "C"
 	void iInitial(const char* stream,const char* cache)
 	{
 		std::string s = cache;
+        LOG(stream);
 		InitPath(stream,cache);
-		LOG(UNITY_STREAM_PATH);
-		InitLogger(s+"Log/info.txt",s+"Log/warn.txt",s+"Log/error.txt");
+		LOG(s);
+		//InitLogger(s+"Log/info.txt",s+"Log/warn.txt",s+"Log/error.txt");
 		LOG("c++ initial success with path: "+ s);
 	}
 
@@ -75,7 +76,7 @@ extern "C"
 			LOG("question:"+que);
 			LOG("imageid: "+tostring(imageid));
 			LOG("questid: "+tostring(questid));
-			LOG("sub rt£º"+tostring(rt));
+			LOG("sub"+tostring(rt));
 		 }
 	}
 

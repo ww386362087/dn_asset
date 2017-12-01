@@ -9,7 +9,7 @@ PlayerSettings:
   defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
-  accelerometerFrequency: 60
+  accelerometerFrequency: 0
   companyName: yunstudio
   productName: "\u8C37\u57FA"
   defaultCursor: {fileID: 0}
@@ -129,12 +129,12 @@ PlayerSettings:
   AndroidBundleVersionCode: 171120
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 0
-  aotOptions: 
+  aotOptions: nrgctx-trampolines=4096,nimt-trampolines=4096,ntrampolines=4096
   apiCompatibilityLevel: 2
   stripEngineCode: 1
-  iPhoneStrippingLevel: 0
-  iPhoneScriptCallOptimization: 0
-  iPhoneBuildNumber: 0
+  iPhoneStrippingLevel: 2
+  iPhoneScriptCallOptimization: 1
+  iPhoneBuildNumber: 0.0.0
   ForceInternetPermission: 1
   ForceSDCardPermission: 1
   CreateWallpaper: 0
@@ -145,7 +145,7 @@ PlayerSettings:
     serializedVersion: 2
     m_Bits: 238
   iPhoneSdkVersion: 988
-  iOSTargetOSVersionString: 7.0
+  iOSTargetOSVersionString: 8.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 
@@ -393,9 +393,9 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: TEST
-    4: TEST
-    7: TEST
+    1: TEST;Inject
+    4: TEST;Inject
+    7: TEST;Inject
   platformArchitecture:
     iOS: 0
   scriptingBackend:
