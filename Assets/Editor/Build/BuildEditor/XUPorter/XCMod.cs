@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.IO;
 
+
+
 namespace UnityEditor.XCodeEditor
 {
     public class XCMod
@@ -74,7 +76,7 @@ namespace UnityEditor.XCodeEditor
             name = Path.GetFileNameWithoutExtension(filename);
             path = Path.GetDirectoryName(filename);
             string contents = projectFileInfo.OpenText().ReadToEnd();
-            _datastore = (Hashtable)MiniJSON.Json.Deserialize(contents);
+            _datastore = (Hashtable)MiniJSON.jsonDecode(contents);
         }
     }
 
