@@ -21,7 +21,7 @@ extern "C"
         LOG(stream);
 		InitPath(stream,cache);
 		LOG(s);
-		//InitLogger(s+"Log/info.txt",s+"Log/warn.txt",s+"Log/error.txt");
+		InitLogger(s+"Log/info.txt",s+"Log/warn.txt",s+"Log/error.txt");
 		LOG("c++ initial success with path: "+ s);
 	}
 

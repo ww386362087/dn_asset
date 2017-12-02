@@ -1,5 +1,6 @@
 ﻿#if TEST
 
+using AOT;
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -50,7 +51,9 @@ public class TestCPP : ITest
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
 
-    void OnCallback(IntPtr ptr)
+
+    [MonoPInvokeCallback(typeof(CppDelegate))]
+    static void OnCallback(IntPtr ptr)
     {
         string command = Marshal.PtrToStringAnsi(ptr);
         XDebug.LogC(command);
