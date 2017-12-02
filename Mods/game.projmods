@@ -1,0 +1,10 @@
+{
+    "group": "Mods",
+    "libs": [],
+    "frameworks": [ "StoreKit.framework",
+    				"CoreTelephony.framework"],
+    "headerpaths": [],                    
+    "files":   [],
+    "folders": ["iOS"],    
+    "excludes": ["^.*.meta$", "^.*.mdown$", "^.*.pdf$","^.*.DS_Store$"]
+}

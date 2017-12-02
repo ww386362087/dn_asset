@@ -292,7 +292,7 @@ namespace XEditor
             }
             if (GUILayout.Button("Cancel", GUILayout.ExpandWidth(false)))
             {
-                this.Close();
+                Close();
             }
         }
     }

@@ -291,11 +291,11 @@ namespace XEditor
             if (GUILayout.Button("OK", GUILayout.ExpandWidth(false)))
             {
                 MakeGameObject();
-                this.Close();
+                Close();
             }
             if (GUILayout.Button("Cancel", GUILayout.ExpandWidth(false)))
             {
-                this.Close();
+                Close();
             }
         }
     }

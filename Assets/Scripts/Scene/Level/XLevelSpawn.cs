@@ -22,10 +22,10 @@ namespace Level
                         string[] strPreWaves = preWaves.Split(',');
                         for (int i = 0; i < strPreWaves.Length; i++)
                         {
-                            int preWave = 0;
-                            if (int.TryParse(strPreWaves[i], out preWave))
+                            int pre = 0;
+                            if (int.TryParse(strPreWaves[i], out pre))
                             {
-                                this.preWave.Add(preWave);
+                                preWave.Add(pre);
                             }
                         }
                     }

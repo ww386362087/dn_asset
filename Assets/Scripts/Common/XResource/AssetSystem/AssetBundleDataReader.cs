@@ -102,9 +102,9 @@ public class AssetBundleDataReader
             abd.dependList = new AssetBundleData[abd.dependencies.Length];
             for (int i = 0; i < abd.dependencies.Length; i++)
             {
-                AssetBundleData dep = this.GetAssetBundleInfo(abd.dependencies[i]);
+                AssetBundleData dep = GetAssetBundleInfo(abd.dependencies[i]);
                 abd.dependList[i] = dep;
-                this.Analyze(dep);
+                Analyze(dep);
             }
         }
     }

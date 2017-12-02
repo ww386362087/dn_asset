@@ -354,10 +354,10 @@ namespace ABSystem
 
         public void WriteCache(StreamWriter sw)
         {
-            sw.WriteLine(this.assetPath);
+            sw.WriteLine(assetPath);
             sw.WriteLine(GetHash());
             sw.WriteLine(_metaHash);
-            sw.WriteLine(this._bundleCrc);
+            sw.WriteLine(_bundleCrc);
             HashSet<AssetTarget> deps = new HashSet<AssetTarget>();
             GetDependencies(deps);
             sw.WriteLine(deps.Count.ToString());

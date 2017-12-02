@@ -191,7 +191,7 @@ half4 BRDF1_Unity_PBS (half3 diffColor, half3 specColor, half oneMinusReflectivi
 	// NdotV should not be negative for visible pixels, but it can happen due to perspective projection and normal mapping
 	// In this case normal should be modified to become valid (i.e facing camera) and not cause weird artifacts.
 	// but this operation adds few ALU and users may not want it. Alternative is to simply take the abs of NdotV (less correct but works too).
-	// Following define allow to control this. Set it to 0 if ALU is critical on your platform.
+	// Following define allow to control  Set it to 0 if ALU is critical on your platform.
 	// This correction is interesting for GGX with SmithJoint visibility function because artifacts are more visible in this case due to highlight edge of rough surface
 	// Edit: Disable this code by default for now as it is not compatible with two sided lighting used in SpeedTree.
 	#define UNITY_HANDLE_CORRECTLY_NEGATIVE_NDOTV 0 

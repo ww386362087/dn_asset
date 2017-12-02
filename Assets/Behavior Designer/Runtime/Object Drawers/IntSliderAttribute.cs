@@ -7,10 +7,10 @@ namespace BehaviorDesigner.Runtime.ObjectDrawers
         public int min;
         public int max;
 
-        public IntSliderAttribute(int min, int max)
+        public IntSliderAttribute(int mi, int ma)
         {
-            this.min = min;
-            this.max = max;
+            min = mi;
+            max = ma;
         }
     }
 }

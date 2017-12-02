@@ -29,17 +29,17 @@ public class CombineConfig : MonoBehaviour
 
     public CombineConfig()
     {
-        this.BodyString = "_body";
-        this.LegString = "_leg";
-        this.GloveString = "_glove";
-        this.BootString = "_boots";
-        this.HeadString = "_head";
-        this.FaceString = "_face";
-        this.HairString = "_hair";
-        this.HelmetString = "_helmet";
-        this.professionCount = 6;
+        BodyString = "_body";
+        LegString = "_leg";
+        GloveString = "_glove";
+        BootString = "_boots";
+        HeadString = "_head";
+        FaceString = "_face";
+        HairString = "_hair";
+        HelmetString = "_helmet";
+        professionCount = 6;
 
-        this.EquipFolderName = new string[] {
+        EquipFolderName = new string[] {
             "Warrior",
             "Archer", 
             "Sorcer", 
@@ -47,7 +47,7 @@ public class CombineConfig : MonoBehaviour
             "Academic", 
             "Assassin" };
 
-        this.SecondaryWeapon = new string[] {
+        SecondaryWeapon = new string[] {
             "_gauntlet", 
             "_quiver", 
             "_book", 
@@ -55,7 +55,7 @@ public class CombineConfig : MonoBehaviour
             "_gauntlet", 
             "_scimitar" };
 
-        this.BandposeName = new string[] { 
+        BandposeName = new string[] { 
             "player_warrior_bandpose",
             "player_archer_bandpose",
             "player_sorceress_bandpose",
@@ -63,7 +63,7 @@ public class CombineConfig : MonoBehaviour
             "player_academic_bandpose",
             "player_assassin_bandpose" };
 
-        this.PrefabName = new string[] { 
+        PrefabName = new string[] { 
             "ZJ_zhanshi_SkinnedMesh",
             "Player_archer_SkinnedMesh_createchar",
             "Player_sorceress_SkinnedMesh",
@@ -71,14 +71,14 @@ public class CombineConfig : MonoBehaviour
             "Player_academic_SkinnedMesh",
             "Player_assassin_SkinnedMesh" };
 
-        this.SkillFolderName = new string[] { "Player_warrior", 
+        SkillFolderName = new string[] { "Player_warrior", 
             "Player_archer", 
             "Player_sorceress",
             "Player_cleric", 
             "Player_academic",
             "Player_assassin" };
 
-        this.IdleAnimName = new string[] { 
+        IdleAnimName = new string[] { 
             "Animation/Player_warrior/Player_warrior_idle_normal", 
             "Animation/Player_archer/Player_archer_idle_normal",
             "Animation/Player_sorceress/Player_sorceress_stand_normal",
@@ -86,7 +86,7 @@ public class CombineConfig : MonoBehaviour
             "Animation/Player_academic/Player_academic_idle_normal",
             "Animation/Player_assassin/Player_assassin_idle_normal" };
 
-        this.FashionListColumn = new string[] { 
+        FashionListColumn = new string[] { 
             "ModelPrefabWarrior",
             "ModelPrefabArcher",
             "ModelPrefabSorcer", 

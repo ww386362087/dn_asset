@@ -40,9 +40,9 @@ public class XSerialized<T> where T : class
         Set(_class);
     }
 
-    public void Set(T _class)
+    public void Set(T _c)
     {
-        this._class = _class;
+        _class = _c;
         Serialize();
     }
 

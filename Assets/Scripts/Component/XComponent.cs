@@ -19,7 +19,7 @@ public class XComponent : XObject
     /// </summary>
     public XObject xobj = null;
 
-    public virtual uint ID { get { return XCommon.singleton.XHash(this.GetType().Name); } }
+    public virtual uint ID { get { return XCommon.singleton.XHash(GetType().Name); } }
 
     protected virtual UpdateState state { get { return UpdateState.NONE; } }
 
