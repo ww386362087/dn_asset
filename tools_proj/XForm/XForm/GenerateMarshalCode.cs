@@ -156,7 +156,7 @@ namespace XForm
                 if (tb.types[i].Contains("<>")) //Seq
                 {
                     string ctype = "CSeq< " + tb.types[i].Replace("<", "");
-                    sb.Append("\n\n\t\t\tpublic " + ctype + " " + FirstUpperStr(tb.titles[i]) + "{ get { return new " + ctype + "(ref " + tb.titles[i].ToLower() + "; } }");
+                    sb.Append("\n\n\t\t\tpublic " + ctype + " " + FirstUpperStr(tb.titles[i]) + "{ get { return new " + ctype + "(ref " + tb.titles[i].ToLower() + "); } }");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {

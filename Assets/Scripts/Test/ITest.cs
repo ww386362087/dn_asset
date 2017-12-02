@@ -39,9 +39,6 @@ public class TestManager
            //  XDebug.Log("scene name: "+name);
             switch (name.ToLower())
             {
-                case "cpp":
-                    test = new TestCPP();
-                    break;
                 case "fashion":
                     test = new TestFashion();
                     break;

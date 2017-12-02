@@ -75,23 +75,23 @@ namespace XTable {
 
 			public string Effect1 { get { return effect1; } }
 
-			public CSeq< uint> Effect2{ get { return new CSeq< uint>(ref effect2; } }
+			public CSeq< uint> Effect2{ get { return new CSeq< uint>(ref effect2); } }
 
-			public CSeq< uint> Effect3{ get { return new CSeq< uint>(ref effect3; } }
+			public CSeq< uint> Effect3{ get { return new CSeq< uint>(ref effect3); } }
 
-			public CSeq< uint> Effect4{ get { return new CSeq< uint>(ref effect4; } }
+			public CSeq< uint> Effect4{ get { return new CSeq< uint>(ref effect4); } }
 
-			public CSeq< uint> Effect5{ get { return new CSeq< uint>(ref effect5; } }
+			public CSeq< uint> Effect5{ get { return new CSeq< uint>(ref effect5); } }
 
-			public CSeq< uint> Effect6{ get { return new CSeq< uint>(ref effect6; } }
+			public CSeq< uint> Effect6{ get { return new CSeq< uint>(ref effect6); } }
 
-			public CSeq< uint> Effect7{ get { return new CSeq< uint>(ref effect7; } }
+			public CSeq< uint> Effect7{ get { return new CSeq< uint>(ref effect7); } }
 
-			public CSeq< uint> Effect8{ get { return new CSeq< uint>(ref effect8; } }
+			public CSeq< uint> Effect8{ get { return new CSeq< uint>(ref effect8); } }
 
-			public CSeq< uint> Effect9{ get { return new CSeq< uint>(ref effect9; } }
+			public CSeq< uint> Effect9{ get { return new CSeq< uint>(ref effect9); } }
 
-			public CSeq< uint> Effect10{ get { return new CSeq< uint>(ref effect10; } }
+			public CSeq< uint> Effect10{ get { return new CSeq< uint>(ref effect10); } }
 		}
 
 

@@ -132,7 +132,7 @@ PlayerSettings:
   aotOptions: nrgctx-trampolines=4096,nimt-trampolines=4096,ntrampolines=4096
   apiCompatibilityLevel: 2
   stripEngineCode: 1
-  iPhoneStrippingLevel: 2
+  iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 1
   iPhoneBuildNumber: 0.0.0
   ForceInternetPermission: 1
@@ -198,7 +198,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: /Users/huailiang.peng/Documents/unity/dn_asset/Assets/Editor/Build/yunstudio.keystore
+  AndroidKeystoreName: D:/projects/dn_asset/Assets/Editor/Build/yunstudio.keystore
   AndroidKeyaliasName: yunstudio
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
@@ -394,8 +394,8 @@ PlayerSettings:
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
     1: TEST;Inject
-    4: TEST;Release
-    7: TEST;Inject
+    4: TEST;Inject
+    7: TEST;Release
   platformArchitecture:
     iOS: 0
   scriptingBackend:

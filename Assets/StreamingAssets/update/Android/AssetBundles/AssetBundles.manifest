@@ -1,0 +1,41 @@
+ManifestFileVersion: 0
+CRC: 2290733357
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: 2123369345.ab
+      Dependencies:
+        Dependency_0: 749732696.ab
+    Info_1:
+      Name: 626367443.ab
+      Dependencies:
+        Dependency_0: 749732696.ab
+        Dependency_1: 3508662206.ab
+    Info_2:
+      Name: 1792139362.ab
+      Dependencies:
+        Dependency_0: 3508662206.ab
+    Info_3:
+      Name: 4003618764.ab
+      Dependencies:
+        Dependency_0: 2639486614.ab
+    Info_4:
+      Name: 3363197988.ab
+      Dependencies:
+        Dependency_0: 749732696.ab
+    Info_5:
+      Name: 2869043774.ab
+      Dependencies: {}
+    Info_6:
+      Name: 784396374.ab
+      Dependencies:
+        Dependency_0: 2639486614.ab
+    Info_7:
+      Name: 749732696.ab
+      Dependencies: {}
+    Info_8:
+      Name: 3508662206.ab
+      Dependencies: {}
+    Info_9:
+      Name: 2639486614.ab
+      Dependencies: {}

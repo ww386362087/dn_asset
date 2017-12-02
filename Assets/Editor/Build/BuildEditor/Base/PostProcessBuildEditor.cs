@@ -14,13 +14,12 @@ namespace UnityEditor.XBuild
             ps = new ProjectSettingIOS_Tencent();
 #endif
 
-            if (ps == null)
+            if (ps != null)
             {
-                Debug.LogError("No platform matched, please check it!");
-                return;
+                ps.PostProcessBuild(target, path);
+                Debug.Log("Build Task over !");
             }
-            ps.PostProcessBuild(target, path);
-            Debug.Log("Build Task over !");
+           
         }
     }
 

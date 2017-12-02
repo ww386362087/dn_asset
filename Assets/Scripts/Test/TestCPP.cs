@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using XTable;
 
-public class TestCPP : ITest
+public class TestCPP : MonoBehaviour
 {
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
@@ -41,7 +41,7 @@ public class TestCPP : ITest
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
     string ui_rst = string.Empty;
-   
+
     public void Start()
     {
         ui_sty.normal.textColor = Color.red;
@@ -103,12 +103,7 @@ public class TestCPP : ITest
         GUILayout.TextArea(ui_rst,ui_sty, ui_op2);
         GUILayout.EndHorizontal();
     }
-
-    public void Update() { }
-
-    public void LateUpdate() { }
-
-    public void OnQuit() { }
+    
 
 }
 
