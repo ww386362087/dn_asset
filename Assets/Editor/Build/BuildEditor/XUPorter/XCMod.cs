@@ -14,18 +14,12 @@ namespace UnityEditor.XCodeEditor
 
         public string group
         {
-            get
-            {
-                return (string)_datastore["group"];
-            }
+            get { return (string)_datastore["group"]; }
         }
 
         public ArrayList patches
         {
-            get
-            {
-                return (ArrayList)_datastore["patches"];
-            }
+            get { return (ArrayList)_datastore["patches"]; }
         }
 
         public ArrayList libs
@@ -46,42 +40,27 @@ namespace UnityEditor.XCodeEditor
 
         public ArrayList frameworks
         {
-            get
-            {
-                return (ArrayList)_datastore["frameworks"];
-            }
+            get { return (ArrayList)_datastore["frameworks"]; }
         }
 
         public ArrayList headerpaths
         {
-            get
-            {
-                return (ArrayList)_datastore["headerpaths"];
-            }
+            get { return (ArrayList)_datastore["headerpaths"]; }
         }
 
         public ArrayList files
         {
-            get
-            {
-                return (ArrayList)_datastore["files"];
-            }
+            get { return (ArrayList)_datastore["files"]; }
         }
 
         public ArrayList folders
         {
-            get
-            {
-                return (ArrayList)_datastore["folders"];
-            }
+            get { return (ArrayList)_datastore["folders"]; }
         }
 
         public ArrayList excludes
         {
-            get
-            {
-                return (ArrayList)_datastore["excludes"];
-            }
+            get { return (ArrayList)_datastore["excludes"]; }
         }
 
         public XCMod(string filename)
@@ -94,7 +73,6 @@ namespace UnityEditor.XCodeEditor
 
             name = Path.GetFileNameWithoutExtension(filename);
             path = Path.GetDirectoryName(filename);
-
             string contents = projectFileInfo.OpenText().ReadToEnd();
             _datastore = (Hashtable)MiniJSON.Json.Deserialize(contents);
         }

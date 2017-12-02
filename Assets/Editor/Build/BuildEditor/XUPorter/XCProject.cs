@@ -52,22 +52,21 @@ namespace UnityEditor.XCodeEditor
 
         public XCProject(string filePath) : this()
         {
-            if (!System.IO.Directory.Exists(filePath))
+            if (!Directory.Exists(filePath))
             {
                 Debug.LogWarning("Path does not exists.");
                 return;
             }
-
             if (filePath.EndsWith(".xcodeproj"))
             {
                 Debug.Log("Opening project " + filePath);
-                this.projectRootPath = Path.GetDirectoryName(filePath);
+                projectRootPath = Path.GetDirectoryName(filePath);
                 this.filePath = filePath;
             }
             else
             {
                 Debug.Log("Looking for xcodeproj files in " + filePath);
-                string[] projects = System.IO.Directory.GetDirectories(filePath, "*.xcodeproj");
+                string[] projects = Directory.GetDirectories(filePath, "*.xcodeproj");
                 if (projects.Length == 0)
                 {
                     Debug.LogWarning("Error: missing xcodeproj file");
@@ -344,7 +343,7 @@ namespace UnityEditor.XCodeEditor
             }
 
             //Check if there is already a file
-            PBXFileReference fileReference = GetFile(System.IO.Path.GetFileName(filePath));
+            PBXFileReference fileReference = GetFile(Path.GetFileName(filePath));
             if (fileReference != null)
             {
                 Debug.LogWarning("File is already exists: " + filePath);
@@ -359,7 +358,6 @@ namespace UnityEditor.XCodeEditor
             //Create a build file for reference
             if (!string.IsNullOrEmpty(fileReference.buildPhase) && createBuildFiles)
             {
-
                 switch (fileReference.buildPhase)
                 {
                     case "PBXFrameworksBuildPhase":
@@ -370,7 +368,7 @@ namespace UnityEditor.XCodeEditor
                         if (!string.IsNullOrEmpty(absPath) && (tree.CompareTo("SOURCE_ROOT") == 0) && File.Exists(absPath))
                         {
                             string libraryPath = Path.Combine("$(SRCROOT)", Path.GetDirectoryName(filePath));
-                            this.AddLibrarySearchPaths(new PBXList(libraryPath));
+                            AddLibrarySearchPaths(new PBXList(libraryPath));
                         }
                         break;
                     case "PBXResourcesBuildPhase":
@@ -614,14 +612,9 @@ namespace UnityEditor.XCodeEditor
 
         public void Backup()
         {
-            string backupPath = Path.Combine(this.filePath, "project.backup.pbxproj");
-
-            // Delete previous backup file
-            if (File.Exists(backupPath))
-                File.Delete(backupPath);
-
-            // Backup original pbxproj file first
-            File.Copy(Path.Combine(this.filePath, "project.pbxproj"), backupPath);
+            string backupPath = Path.Combine(filePath, "project.backup.pbxproj");
+            if (File.Exists(backupPath)) File.Delete(backupPath);
+            File.Copy(Path.Combine(filePath, "project.pbxproj"), backupPath);
         }
 
         /// <summary>
@@ -642,7 +635,7 @@ namespace UnityEditor.XCodeEditor
 
             // Parse result object directly into file
             PBXParser parser = new PBXParser();
-            StreamWriter saveFile = File.CreateText(Path.Combine(this.filePath, "project.pbxproj"));
+            StreamWriter saveFile = File.CreateText(Path.Combine(filePath, "project.pbxproj"));
             saveFile.Write(parser.Encode(result, false));
             saveFile.Close();
         }
