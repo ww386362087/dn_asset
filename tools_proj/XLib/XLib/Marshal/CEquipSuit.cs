@@ -14,76 +14,89 @@ namespace XTable {
     
     
     public class CEquipSuit {
-        
+
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-		public struct RowData {
-			int suitid;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-			string suitname;
-			int level;
-			int profid;
-			int suitquality;
-			bool iscreateshow;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			int[] equipid;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-			string effect1;
-			CSeq<uint> effect2;
-			CSeq<uint> effect3;
-			CSeq<uint> effect4;
-			CSeq<uint> effect5;
-			CSeq<uint> effect6;
-			CSeq<uint> effect7;
-			CSeq<uint> effect8;
-			CSeq<uint> effect9;
-			CSeq<uint> effect10;
+        public struct RowData
+        {
+            int suitid;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+            string suitname;
+            int level;
+            int profid;
+            int suitquality;
+            bool iscreateshow;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
+            int[] equipid;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+            string effect1;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect2;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect3;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect4;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect5;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect6;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect7;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect8;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect9;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            uint[] effect10;
 
-			public int SuitID { get { return suitid; } }
+            public int SuitID { get { return suitid; } }
 
-			public string SuitName { get { return suitname; } }
+            public string SuitName { get { return suitname; } }
 
-			public int Level { get { return level; } }
+            public int Level { get { return level; } }
 
-			public int ProfID { get { return profid; } }
+            public int ProfID { get { return profid; } }
 
-			public int SuitQuality { get { return suitquality; } }
+            public int SuitQuality { get { return suitquality; } }
 
-			public bool IsCreateShow { get { return iscreateshow; } }
+            public bool IsCreateShow { get { return iscreateshow; } }
 
-			int[] Equipid { 
-				get { 
-					if (equipid.Length == 16) {
-					List<int> list = new List<int>();
-					for (int i = equipid.Length - 1; i >= 0; i--)
-					{
-						if (equipid[i] != -1) list.Add(equipid[i]);
-					}
-					equipid = list.ToArray();
-					}
-					 return equipid;
-				}
-			}
+            int[] Equipid
+            {
+                get
+                {
+                    if (equipid.Length == 16)
+                    {
+                        List<int> list = new List<int>();
+                        for (int i = equipid.Length - 1; i >= 0; i--)
+                        {
+                            if (equipid[i] != -1) list.Add(equipid[i]);
+                        }
+                        equipid = list.ToArray();
+                    }
+                    return equipid;
+                }
+            }
 
-			public string Effect1 { get { return effect1; } }
+            public string Effect1 { get { return effect1; } }
 
-			public CSeq<uint> Effect2{ get { return effect2; } }
+            public CSeq<uint> Effect2 { get { return new CSeq<uint>(ref effect2); } }
 
-			public CSeq<uint> Effect3{ get { return effect3; } }
+            public CSeq<uint> Effect3 { get { return new CSeq<uint>(ref effect3); } }
 
-			public CSeq<uint> Effect4{ get { return effect4; } }
+            public CSeq<uint> Effect4 { get { return new CSeq<uint>(ref effect4); } }
 
-			public CSeq<uint> Effect5{ get { return effect5; } }
+            public CSeq<uint> Effect5 { get { return new CSeq<uint>(ref effect5); } }
 
-			public CSeq<uint> Effect6{ get { return effect6; } }
+            public CSeq<uint> Effect6 { get { return new CSeq<uint>(ref effect6); } }
 
-			public CSeq<uint> Effect7{ get { return effect7; } }
+            public CSeq<uint> Effect7 { get { return new CSeq<uint>(ref effect7); } }
 
-			public CSeq<uint> Effect8{ get { return effect8; } }
+            public CSeq<uint> Effect8 { get { return new CSeq<uint>(ref effect8); } }
 
-			public CSeq<uint> Effect9{ get { return effect9; } }
+            public CSeq<uint> Effect9 { get { return new CSeq<uint>(ref effect9); } }
 
-			public CSeq<uint> Effect10{ get { return effect10; } }
-		}
+            public CSeq<uint> Effect10 { get { return new CSeq<uint>(ref effect10); } }
+        }
 
 
 #if UNITY_IPHONE || UNITY_XBOX360

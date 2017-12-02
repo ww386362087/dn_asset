@@ -37,7 +37,6 @@ public class TestCPP : ITest
     public static extern int iSub(IntPtr x, IntPtr y);
     
     public delegate void CppDelegate(IntPtr str);
-
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(160), GUILayout.Height(80) };
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
@@ -86,7 +85,7 @@ public class TestCPP : ITest
             for (int i = 0; i < 22; i++)
             {
                 var rst = CQteStatusList.GetRow(i);
-                ui_rst += "\nvalue:" + rst.Value + "name:\t" + rst.Name + "comment:\t" + rst.Comment;
+                ui_rst += string.Format("\nvalue:{0,-4} name:{1,-20} comment:{2,-30}",rst.Value,rst.Name,rst.Comment);
             }
         }
         if (GUILayout.Button("Get-Suit-Row", ui_opt))
@@ -96,7 +95,7 @@ public class TestCPP : ITest
             for (int i = 0; i < 22; i++)
             {
                 var rst = CEquipSuit.GetRow(i);
-                ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + "level:" + rst.Level + " profid:" + rst.ProfID + " isCreate:" + rst.IsCreateShow;
+                ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + " level:" + rst.Level + " profid:" + rst.ProfID + " isCreate:" + rst.IsCreateShow +" effect2: "+rst.Effect2[0];
             }
         }
         GUILayout.EndVertical();
