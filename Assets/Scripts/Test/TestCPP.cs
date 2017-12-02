@@ -36,7 +36,13 @@ public class TestCPP : MonoBehaviour
 #endif
     public static extern int iSub(IntPtr x, IntPtr y);
     
-    public delegate void CppDelegate(IntPtr str);
+    //c++的回调指令 最多支持256个指令
+    public const byte CLog   = 76;//'L'
+    public const byte CWarn  = 87;//'W'
+    public const byte CError = 69;//'E'
+
+    public delegate void CppDelegate(byte type, IntPtr p);
+    
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(160), GUILayout.Height(80) };
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
@@ -49,13 +55,20 @@ public class TestCPP : MonoBehaviour
         iInitCallbackCommand(new CppDelegate(OnCallback));
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
-
-
+    
     [MonoPInvokeCallback(typeof(CppDelegate))]
-    static void OnCallback(IntPtr ptr)
+    static void OnCallback(byte t, IntPtr ptr)
     {
         string command = Marshal.PtrToStringAnsi(ptr);
-        XDebug.LogC(command);
+        switch (t)
+        {
+            case CLog: XDebug.TCLog(command); break;
+            case CWarn: XDebug.TCWarn(command); break;
+            case CError: XDebug.TCError(command); break;
+            default:
+                XDebug.LogError(t+ " is not parse symbol: "+command);
+                break;
+        }
     }
     
     public void OnGUI()

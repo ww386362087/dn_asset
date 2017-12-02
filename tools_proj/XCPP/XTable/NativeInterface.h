@@ -7,7 +7,7 @@
 
 extern "C"
 {
-	typedef void(*CALLBACK)(const char*);
+	typedef void(*CALLBACK)(unsigned char,const char*);
 	extern CALLBACK callback;
 
 	ENGINE_INTERFACE_EXPORT void iInitCallbackCommand(CALLBACK cb);

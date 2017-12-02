@@ -47,7 +47,19 @@ std::ostream& Log::Start(LogLevel level,std::string text,const int line,const st
    strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S",localtime(&tm));
    char buff[255];   
    strcpy(buff,text.c_str());
-   //if(callback!= NULL) callback(buff);
+   if(callback) 
+   {
+	   switch(level)
+	   {
+			case INFO:callback(CLog,buff);break;
+			case WARN:callback(CWarn,buff);break;
+			case ERROR:callback(CError,buff);break;
+	   }
+   }
+   else
+   {
+	   std::cout<<"xxxxxxxxx  1234  xxxxxxxxxx"<<std::endl;
+   }
    std::ostringstream ostr;
    ostr<<tmp<<"\t"<<"function ("<<func<< ")"<< "\tline "<<line<<"\t";
    return GetStream(level)<<ostr.str()<<text;  

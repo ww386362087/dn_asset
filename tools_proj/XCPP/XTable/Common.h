@@ -17,6 +17,10 @@ typedef unsigned int  uint;
 #define MaxStringSize 64
 #define MaxArraySize 16
 
+#define CLog 'L'
+#define CWarn 'W'
+#define CError 'E'
+
 extern std::string UNITY_STREAM_PATH;
 extern std::string UNITY_CACHE_PATH;
 

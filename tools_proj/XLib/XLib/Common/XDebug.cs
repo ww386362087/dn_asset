@@ -97,11 +97,9 @@ public class XDebug
             Write(shareSB);
         }
     }
-
-    /// <summary>
-    /// 专门给C/C++调用的Log
-    /// </summary>
-    public static void LogC(string param)
+    
+    // 专门给C/C++调用的Log
+    public static void TCLog(string param)
     {
         if (loglevel <= LogLevel.Cpp)
         {
@@ -109,6 +107,31 @@ public class XDebug
             shareSB.Append("++> ");
             shareSB.Append(param);
             Debug.Log(shareSB);
+            Write(shareSB);
+        }
+    }
+
+    // 专门给C/C++调用的Log
+    public static void TCWarn(string param)
+    {
+        if (loglevel <= LogLevel.Cpp)
+        {
+            shareSB.Length = 0;
+            shareSB.Append("++> ");
+            shareSB.Append(param);
+            Debug.LogWarning(shareSB);
+            Write(shareSB);
+        }
+    }
+
+    public static void TCError(string param)
+    {
+        if (loglevel <= LogLevel.Cpp)
+        {
+            shareSB.Length = 0;
+            shareSB.Append("++> ");
+            shareSB.Append(param);
+            Debug.LogError(shareSB);
             Write(shareSB);
         }
     }
