@@ -17,6 +17,8 @@ cd tools_proj/IOS/XTable
 
 echo "xcode clean "
 
+rm -r libXTable.a
+
 xcodebuild clean 
 
 echo "xcode build"
