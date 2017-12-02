@@ -132,7 +132,7 @@ PlayerSettings:
   aotOptions: nrgctx-trampolines=4096,nimt-trampolines=4096,ntrampolines=4096
   apiCompatibilityLevel: 2
   stripEngineCode: 1
-  iPhoneStrippingLevel: 0
+  iPhoneStrippingLevel: 2
   iPhoneScriptCallOptimization: 1
   iPhoneBuildNumber: 0.0.0
   ForceInternetPermission: 1
@@ -395,7 +395,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: TEST;Inject
     4: TEST;Inject
-    7: TEST;Release
+    7: TEST;Inject
   platformArchitecture:
     iOS: 0
   scriptingBackend:

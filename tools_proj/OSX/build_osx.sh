@@ -22,6 +22,8 @@ ls -al
 
 echo "start mv to unity Plugins dir"
 
+rm -drf ${path}/Assets/Plugins/XTable.bundle
+
 mv -f XTable.bundle ${path}/Assets/Plugins/XTable.bundle
 
 echo "done, bye!"
