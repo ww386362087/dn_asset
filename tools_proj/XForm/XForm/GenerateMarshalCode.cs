@@ -132,7 +132,8 @@ namespace XForm
             {
                 if (tb.types[i].Contains("<>")) //Seq
                 {
-                    sb.Append("\n\t\t\tCSeq<" + tb.types[i].Replace("<>", "") + "> " + tb.titles[i].ToLower() + ";");
+                    sb.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]");
+                    sb.Append("\n\t\t\t" + tb.types[i].Replace("<>", "[] ") +  tb.titles[i].ToLower() + ";");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {
@@ -154,16 +155,17 @@ namespace XForm
             {
                 if (tb.types[i].Contains("<>")) //Seq
                 {
-                    sb.Append("\n\n\t\t\tpublic CSeq<" + tb.types[i].Replace("<>", "") + "> " + FirstUpperStr(tb.titles[i]) + "{ get { return " + tb.titles[i].ToLower() + "; } }");
+                    string ctype = "CSeq< " + tb.types[i].Replace("<", "");
+                    sb.Append("\n\n\t\t\tpublic " + ctype + " " + FirstUpperStr(tb.titles[i]) + "{ get { return new " + ctype + "(ref " + tb.titles[i].ToLower() + "; } }");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {
                     string tn = tb.titles[i].ToLower();
-                    string tp = tb.types[i].Replace("[",string.Empty).Replace("]",string.Empty);
+                    string tp = tb.types[i].Replace("[", string.Empty).Replace("]", string.Empty);
                     sb.Append("\n\n\t\t\t" + tp + "[] " + FirstUpperStr(tn) + " { ");
                     sb.Append("\n\t\t\t\tget { ");
                     sb.Append("\n\t\t\t\t\tif (" + tn + ".Length == 16) {");
-                    sb.Append("\n\t\t\t\t\tList<"+tp+"> list = new List<"+tp+">();");
+                    sb.Append("\n\t\t\t\t\tList<" + tp + "> list = new List<" + tp + ">();");
                     sb.Append("\n\t\t\t\t\tfor (int i = " + tn + ".Length - 1; i >= 0; i--)");
                     sb.Append("\n\t\t\t\t\t{");
                     string invalid = "-1";

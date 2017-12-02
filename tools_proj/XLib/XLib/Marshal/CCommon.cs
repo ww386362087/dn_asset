@@ -1,8 +1,7 @@
 ﻿namespace XTable
 {
     using System.Runtime.InteropServices;
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    
     public class CSeq<T>
     {
         public T val0, val1;
