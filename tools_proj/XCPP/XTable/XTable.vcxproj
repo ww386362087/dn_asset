@@ -162,6 +162,8 @@
     <ClInclude Include="DefaultEquip.h" />
     <ClInclude Include="FashionList.h" />
     <ClInclude Include="FashionSuit.h" />
+    <ClInclude Include="patch.h" />
+    <ClInclude Include="patch_types.h" />
     <ClInclude Include="picotest.h" />
     <ClInclude Include="SceneList.h" />
     <ClInclude Include="XEntityPresentation.h" />
@@ -187,6 +189,7 @@
     <ClCompile Include="AITree.cpp" />
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="EquipSuit.cpp" />
+    <ClCompile Include="patch.c" />
     <ClCompile Include="QteStatusList.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="NativeInterface.cpp" />

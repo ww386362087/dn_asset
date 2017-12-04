@@ -10,6 +10,9 @@
     <Filter Include="AI">
       <UniqueIdentifier>{8c8aae28-a030-499a-8036-de2b72c76afc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HPatch">
+      <UniqueIdentifier>{762ec9a9-c9c9-4950-9e47-f6ea0ecce6ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DefaultEquip.h">
@@ -66,6 +69,12 @@
     <ClInclude Include="picotest.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="patch.h">
+      <Filter>HPatch</Filter>
+    </ClInclude>
+    <ClInclude Include="patch_types.h">
+      <Filter>HPatch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -115,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="AIBehaviour.cpp">
       <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="patch.c">
+      <Filter>HPatch</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
