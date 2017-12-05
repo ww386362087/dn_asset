@@ -16,7 +16,7 @@ typedef int(*DllAdd)(int,int);
 typedef int(*DllSub)(int*,int*);
 typedef int(*DllReadQteTable)();
 typedef int(*DllReadSuitTable)();
-typedef void(*DllReadJson)();
+typedef void(*DllReadJson)(const char*);
 typedef void(*DllPatch)(const char*,const char*,const char*);
 DllCommand cb;
 DllInitial init;
@@ -136,7 +136,7 @@ void main()
 				jump = true;
 				break;
 			case 'j':
-				json();
+				json("json.txt");
 				cout<<endl<<endl;
 				break;
 			case 'p':

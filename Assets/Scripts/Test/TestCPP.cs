@@ -30,7 +30,15 @@ public class TestCPP : MonoBehaviour
     [DllImport("XTable")]
 #endif
     public static extern int iAdd(int x, int y);
-    
+
+
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("XTable")]
+#endif
+    public static extern void iJson(String file);
+
 
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
@@ -102,6 +110,11 @@ public class TestCPP : MonoBehaviour
             Marshal.StructureToPtr(b, p2, false);
             int rst = iSub(p1, p2);
             ui_rst = a + "-" + b + "=" + rst;
+        }
+        if (GUILayout.Button("Native-Json", ui_opt))
+        {
+            iJson(Application.streamingAssetsPath + "/Patch/json.txt");
+            XDebug.Log("native parse json finish!");
         }
         if (GUILayout.Button("Native-Patch", ui_opt))
         {

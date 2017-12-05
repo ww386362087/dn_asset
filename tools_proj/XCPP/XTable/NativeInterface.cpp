@@ -37,11 +37,11 @@ extern "C"
 		Dodiff(old_file,diff_file,new_file);
 	}
 
-	void iJson()
+	void iJson(const char* file)
 	{
 		LOG("READ JSON START");
 		std::ifstream json_file;  
-		json_file.open("json.txt");  
+		json_file.open(file);  
 		std::string json;  
 		if (!json_file.is_open())  
 		{  

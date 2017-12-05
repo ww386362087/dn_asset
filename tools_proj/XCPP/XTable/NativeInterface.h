@@ -13,6 +13,6 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iAdd(int, int);
 	ENGINE_INTERFACE_EXPORT int iSub(int*, int*);
 	ENGINE_INTERFACE_EXPORT void iInitial(const char*,const char*);
-	ENGINE_INTERFACE_EXPORT void iJson();
+	ENGINE_INTERFACE_EXPORT void iJson(const char*);
 	ENGINE_INTERFACE_EXPORT void iPatch(const char*,const char*,const char*);
 };
