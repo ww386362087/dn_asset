@@ -1,4 +1,4 @@
-//patch.c
+﻿//patch.c
 //
 /*
  The MIT License (MIT)

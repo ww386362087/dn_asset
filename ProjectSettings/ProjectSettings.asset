@@ -126,13 +126,13 @@ PlayerSettings:
   m_HolographicPauseOnTrackingLoss: 1
   xboxOneDisableKinectGpuReservation: 0
   protectGraphicsMemory: 0
-  AndroidBundleVersionCode: 171202
+  AndroidBundleVersionCode: 171205
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 0
   aotOptions: nrgctx-trampolines=4096,nimt-trampolines=4096,ntrampolines=4096
   apiCompatibilityLevel: 2
   stripEngineCode: 1
-  iPhoneStrippingLevel: 2
+  iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 1
   iPhoneBuildNumber: 0.0.0
   ForceInternetPermission: 1
@@ -395,7 +395,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: TEST;Inject
     4: TEST;Inject
-    7: TEST;Inject
+    7: TEST;Release
   platformArchitecture:
     iOS: 0
   scriptingBackend:

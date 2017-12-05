@@ -8,6 +8,7 @@ using XTable;
 
 public class TestCPP : MonoBehaviour
 {
+    
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
@@ -22,12 +23,14 @@ public class TestCPP : MonoBehaviour
 #endif
     public static extern void iInitial(string stream,string persist);
 
+    
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
     [DllImport("XTable")]
 #endif
     public static extern int iAdd(int x, int y);
+    
 
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
@@ -35,7 +38,16 @@ public class TestCPP : MonoBehaviour
     [DllImport("XTable")]
 #endif
     public static extern int iSub(IntPtr x, IntPtr y);
+
     
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("XTable")]
+#endif
+    public static extern void iPatch(string oldf,string diff,string newf);
+
+
     //c++的回调指令 最多支持256个指令
     public const byte CLog   = 76;//'L'
     public const byte CWarn  = 87;//'W'
@@ -91,6 +103,15 @@ public class TestCPP : MonoBehaviour
             int rst = iSub(p1, p2);
             ui_rst = a + "-" + b + "=" + rst;
         }
+        if (GUILayout.Button("Native-Patch", ui_opt))
+        {
+            string old = Application.streamingAssetsPath + "/Patch/old.txt";
+            string diff = Application.streamingAssetsPath + "/Patch/diff.patch";
+            string newf = Application.streamingAssetsPath + "/Patch/new.txt";
+            XDebug.Log(old + " " + diff + " " + newf);
+            iPatch(old, diff, newf);
+            XDebug.Log("patch finish");
+        }
         if (GUILayout.Button("Get-Qte-Row", ui_opt))
         {
             int len = CQteStatusList.length;
@@ -117,7 +138,6 @@ public class TestCPP : MonoBehaviour
         GUILayout.EndHorizontal();
     }
     
-
 }
 
 #endif

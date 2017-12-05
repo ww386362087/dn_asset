@@ -66,14 +66,17 @@
     <ClInclude Include="AIBehaviour.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="picotest.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="patch.h">
       <Filter>HPatch</Filter>
     </ClInclude>
     <ClInclude Include="patch_types.h">
       <Filter>HPatch</Filter>
+    </ClInclude>
+    <ClInclude Include="picojson.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="HPatchTest.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

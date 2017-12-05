@@ -5,9 +5,9 @@
 
 using namespace std;
 
-#define MLog 'L'
-#define MWarn 'W'
-#define MError 'E'
+#define MLog	'L'
+#define MWarn	'W'
+#define MError	'E'
 
 typedef void(*CB)(unsigned char command,const char*);
 typedef void(*DllCommand)(CB);
@@ -17,6 +17,7 @@ typedef int(*DllSub)(int*,int*);
 typedef int(*DllReadQteTable)();
 typedef int(*DllReadSuitTable)();
 typedef void(*DllReadJson)();
+typedef void(*DllPatch)(const char*,const char*,const char*);
 DllCommand cb;
 DllInitial init;
 DllAdd add;
@@ -24,6 +25,7 @@ DllSub sub;
 DllReadQteTable qte;
 DllReadSuitTable suit;
 DllReadJson json;
+DllPatch patch;
 
 void DebugInfo()
 {
@@ -107,6 +109,7 @@ void main()
 	qte = (DllReadQteTable)GetProcAddress(hInst,"iGetQteStatusListLength");
 	suit = (DllReadSuitTable)GetProcAddress(hInst,"iGetEquipSuitLength");
 	json = (DllReadJson)GetProcAddress(hInst,"iJson");
+	patch = (DllPatch)GetProcAddress(hInst,"iPatch");
 	cb(OnCallback);
 	init("","");
 
@@ -136,11 +139,16 @@ void main()
 				json();
 				cout<<endl<<endl;
 				break;
+			case 'p':
+				patch("D:/projects/dn_asset/Assets/StreamingAssets/Patch/old.txt",
+					"D:/projects/dn_asset/Assets/StreamingAssets/Patch/diff.patch",
+					"D:/projects/dn_asset/Assets/StreamingAssets/Patch/nex.txt");
+				cout<<"patch finish!"<<endl<<endl;
+				break;
 			default:
 				cout<<"invalid command"<<endl<<endl;
 		}
-		if(jump)
-			break;
+		if(jump) break;
 	}
 	
 	FreeLibrary(hInst);
