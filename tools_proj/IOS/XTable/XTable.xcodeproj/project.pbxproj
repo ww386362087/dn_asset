@@ -7,29 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4EA77D241FCEDB550021AEB2 /* AIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D141FCEDB530021AEB2 /* AIBase.cpp */; };
-		4EA77D251FCEDB550021AEB2 /* AITree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D161FCEDB530021AEB2 /* AITree.cpp */; };
-		4EA77D261FCEDB550021AEB2 /* AIBehaviour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D181FCEDB530021AEB2 /* AIBehaviour.cpp */; };
-		4EA77D271FCEDB550021AEB2 /* AIInterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D191FCEDB540021AEB2 /* AIInterval.cpp */; };
-		4EA77D281FCEDB550021AEB2 /* AITreeData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D1A1FCEDB540021AEB2 /* AITreeData.cpp */; };
-		4EA77D291FCEDB550021AEB2 /* AIFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D1D1FCEDB540021AEB2 /* AIFactory.cpp */; };
-		4EA77D2A1FCEDB550021AEB2 /* AISequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D1E1FCEDB540021AEB2 /* AISequence.cpp */; };
-		4EA77D2B1FCEDB550021AEB2 /* AISelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA77D211FCEDB550021AEB2 /* AISelector.cpp */; };
-		4EBA59351FC6EF1500C3FEB7 /* XTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59341FC6EF1500C3FEB7 /* XTable.m */; };
-		4EBA59361FC6EF1500C3FEB7 /* XTable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4EBA59331FC6EF1500C3FEB7 /* XTable.h */; };
-		4EBA59561FC6EF3700C3FEB7 /* FashionSuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59401FC6EF3400C3FEB7 /* FashionSuit.cpp */; };
-		4EBA59571FC6EF3700C3FEB7 /* NativeReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59411FC6EF3400C3FEB7 /* NativeReader.cpp */; };
-		4EBA59581FC6EF3700C3FEB7 /* XEntityStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59431FC6EF3400C3FEB7 /* XEntityStatistics.cpp */; };
-		4EBA59591FC6EF3700C3FEB7 /* NativeInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59441FC6EF3400C3FEB7 /* NativeInterface.cpp */; };
-		4EBA595A1FC6EF3700C3FEB7 /* QteStatusList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59461FC6EF3500C3FEB7 /* QteStatusList.cpp */; };
-		4EBA595B1FC6EF3700C3FEB7 /* XEntityPresentation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59471FC6EF3500C3FEB7 /* XEntityPresentation.cpp */; };
-		4EBA595C1FC6EF3700C3FEB7 /* DefaultEquip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59481FC6EF3500C3FEB7 /* DefaultEquip.cpp */; };
-		4EBA595D1FC6EF3700C3FEB7 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA594A1FC6EF3500C3FEB7 /* Log.cpp */; };
-		4EBA595E1FC6EF3700C3FEB7 /* SceneList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA594D1FC6EF3500C3FEB7 /* SceneList.cpp */; };
-		4EBA595F1FC6EF3700C3FEB7 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA594F1FC6EF3600C3FEB7 /* Common.cpp */; };
-		4EBA59601FC6EF3700C3FEB7 /* FashionList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59501FC6EF3600C3FEB7 /* FashionList.cpp */; };
-		4EBA59611FC6EF3700C3FEB7 /* EquipSuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59541FC6EF3700C3FEB7 /* EquipSuit.cpp */; };
-		4EBA59621FC6EF3700C3FEB7 /* XNpcList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA59551FC6EF3700C3FEB7 /* XNpcList.cpp */; };
+		4E2DCEBE1FD688F700B956DF /* AIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCE8F1FD688F400B956DF /* AIBase.cpp */; };
+		4E2DCEBF1FD688F700B956DF /* AITree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCE931FD688F400B956DF /* AITree.cpp */; };
+		4E2DCEC01FD688F700B956DF /* patch.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCE951FD688F400B956DF /* patch.c */; };
+		4E2DCEC11FD688F700B956DF /* AIBehaviour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCE961FD688F400B956DF /* AIBehaviour.cpp */; };
+		4E2DCEC21FD688F700B956DF /* AIFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCE9A1FD688F500B956DF /* AIFactory.cpp */; };
+		4E2DCEC31FD688F700B956DF /* FashionSuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCE9B1FD688F500B956DF /* FashionSuit.cpp */; };
+		4E2DCEC41FD688F700B956DF /* NativeReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCE9F1FD688F500B956DF /* NativeReader.cpp */; };
+		4E2DCEC51FD688F700B956DF /* AISelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEA11FD688F500B956DF /* AISelector.cpp */; };
+		4E2DCEC61FD688F700B956DF /* XEntityStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEA21FD688F500B956DF /* XEntityStatistics.cpp */; };
+		4E2DCEC71FD688F700B956DF /* NativeInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEA41FD688F500B956DF /* NativeInterface.cpp */; };
+		4E2DCEC81FD688F700B956DF /* QteStatusList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEA61FD688F500B956DF /* QteStatusList.cpp */; };
+		4E2DCEC91FD688F700B956DF /* XEntityPresentation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEA71FD688F500B956DF /* XEntityPresentation.cpp */; };
+		4E2DCECA1FD688F700B956DF /* AIInterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEA91FD688F500B956DF /* AIInterval.cpp */; };
+		4E2DCECB1FD688F700B956DF /* AITreeData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEAA1FD688F600B956DF /* AITreeData.cpp */; };
+		4E2DCECC1FD688F700B956DF /* DefaultEquip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEAB1FD688F600B956DF /* DefaultEquip.cpp */; };
+		4E2DCECD1FD688F700B956DF /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEAE1FD688F600B956DF /* Log.cpp */; };
+		4E2DCECE1FD688F700B956DF /* SceneList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEAF1FD688F600B956DF /* SceneList.cpp */; };
+		4E2DCECF1FD688F700B956DF /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEB21FD688F600B956DF /* Common.cpp */; };
+		4E2DCED01FD688F700B956DF /* AISequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEB41FD688F600B956DF /* AISequence.cpp */; };
+		4E2DCED11FD688F700B956DF /* FashionList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEB51FD688F700B956DF /* FashionList.cpp */; };
+		4E2DCED21FD688F700B956DF /* EquipSuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEBC1FD688F700B956DF /* EquipSuit.cpp */; };
+		4E2DCED31FD688F700B956DF /* XNpcList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DCEBD1FD688F700B956DF /* XNpcList.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,58 +38,60 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				4EBA59361FC6EF1500C3FEB7 /* XTable.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4EA77D141FCEDB530021AEB2 /* AIBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBase.cpp; path = ../../../XCPP/XTable/AIBase.cpp; sourceTree = "<group>"; };
-		4EA77D151FCEDB530021AEB2 /* AIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIFactory.h; path = ../../../XCPP/XTable/AIFactory.h; sourceTree = "<group>"; };
-		4EA77D161FCEDB530021AEB2 /* AITree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AITree.cpp; path = ../../../XCPP/XTable/AITree.cpp; sourceTree = "<group>"; };
-		4EA77D171FCEDB530021AEB2 /* AIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBase.h; path = ../../../XCPP/XTable/AIBase.h; sourceTree = "<group>"; };
-		4EA77D181FCEDB530021AEB2 /* AIBehaviour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBehaviour.cpp; path = ../../../XCPP/XTable/AIBehaviour.cpp; sourceTree = "<group>"; };
-		4EA77D191FCEDB540021AEB2 /* AIInterval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIInterval.cpp; path = ../../../XCPP/XTable/AIInterval.cpp; sourceTree = "<group>"; };
-		4EA77D1A1FCEDB540021AEB2 /* AITreeData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AITreeData.cpp; path = ../../../XCPP/XTable/AITreeData.cpp; sourceTree = "<group>"; };
-		4EA77D1B1FCEDB540021AEB2 /* AIBehaviour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBehaviour.h; path = ../../../XCPP/XTable/AIBehaviour.h; sourceTree = "<group>"; };
-		4EA77D1C1FCEDB540021AEB2 /* AISequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISequence.h; path = ../../../XCPP/XTable/AISequence.h; sourceTree = "<group>"; };
-		4EA77D1D1FCEDB540021AEB2 /* AIFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIFactory.cpp; path = ../../../XCPP/XTable/AIFactory.cpp; sourceTree = "<group>"; };
-		4EA77D1E1FCEDB540021AEB2 /* AISequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISequence.cpp; path = ../../../XCPP/XTable/AISequence.cpp; sourceTree = "<group>"; };
-		4EA77D1F1FCEDB550021AEB2 /* AISelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISelector.h; path = ../../../XCPP/XTable/AISelector.h; sourceTree = "<group>"; };
-		4EA77D201FCEDB550021AEB2 /* AITree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AITree.h; path = ../../../XCPP/XTable/AITree.h; sourceTree = "<group>"; };
-		4EA77D211FCEDB550021AEB2 /* AISelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISelector.cpp; path = ../../../XCPP/XTable/AISelector.cpp; sourceTree = "<group>"; };
-		4EA77D221FCEDB550021AEB2 /* AITreeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AITreeData.h; path = ../../../XCPP/XTable/AITreeData.h; sourceTree = "<group>"; };
-		4EA77D231FCEDB550021AEB2 /* AIInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIInterval.h; path = ../../../XCPP/XTable/AIInterval.h; sourceTree = "<group>"; };
+		4E2DCE8F1FD688F400B956DF /* AIBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBase.cpp; path = ../../../XCPP/XTable/AIBase.cpp; sourceTree = "<group>"; };
+		4E2DCE901FD688F400B956DF /* AIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIFactory.h; path = ../../../XCPP/XTable/AIFactory.h; sourceTree = "<group>"; };
+		4E2DCE911FD688F400B956DF /* SceneList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneList.h; path = ../../../XCPP/XTable/SceneList.h; sourceTree = "<group>"; };
+		4E2DCE921FD688F400B956DF /* XNpcList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XNpcList.h; path = ../../../XCPP/XTable/XNpcList.h; sourceTree = "<group>"; };
+		4E2DCE931FD688F400B956DF /* AITree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AITree.cpp; path = ../../../XCPP/XTable/AITree.cpp; sourceTree = "<group>"; };
+		4E2DCE941FD688F400B956DF /* NativeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NativeReader.h; path = ../../../XCPP/XTable/NativeReader.h; sourceTree = "<group>"; };
+		4E2DCE951FD688F400B956DF /* patch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = patch.c; path = ../../../XCPP/XTable/patch.c; sourceTree = "<group>"; };
+		4E2DCE961FD688F400B956DF /* AIBehaviour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBehaviour.cpp; path = ../../../XCPP/XTable/AIBehaviour.cpp; sourceTree = "<group>"; };
+		4E2DCE971FD688F400B956DF /* patch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = patch.h; path = ../../../XCPP/XTable/patch.h; sourceTree = "<group>"; };
+		4E2DCE981FD688F400B956DF /* AIBehaviour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBehaviour.h; path = ../../../XCPP/XTable/AIBehaviour.h; sourceTree = "<group>"; };
+		4E2DCE991FD688F400B956DF /* HPatchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HPatchTest.h; path = ../../../XCPP/XTable/HPatchTest.h; sourceTree = "<group>"; };
+		4E2DCE9A1FD688F500B956DF /* AIFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIFactory.cpp; path = ../../../XCPP/XTable/AIFactory.cpp; sourceTree = "<group>"; };
+		4E2DCE9B1FD688F500B956DF /* FashionSuit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FashionSuit.cpp; path = ../../../XCPP/XTable/FashionSuit.cpp; sourceTree = "<group>"; };
+		4E2DCE9C1FD688F500B956DF /* XEntityPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XEntityPresentation.h; path = ../../../XCPP/XTable/XEntityPresentation.h; sourceTree = "<group>"; };
+		4E2DCE9D1FD688F500B956DF /* patch_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = patch_types.h; path = ../../../XCPP/XTable/patch_types.h; sourceTree = "<group>"; };
+		4E2DCE9E1FD688F500B956DF /* AISelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISelector.h; path = ../../../XCPP/XTable/AISelector.h; sourceTree = "<group>"; };
+		4E2DCE9F1FD688F500B956DF /* NativeReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NativeReader.cpp; path = ../../../XCPP/XTable/NativeReader.cpp; sourceTree = "<group>"; };
+		4E2DCEA01FD688F500B956DF /* FashionSuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FashionSuit.h; path = ../../../XCPP/XTable/FashionSuit.h; sourceTree = "<group>"; };
+		4E2DCEA11FD688F500B956DF /* AISelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISelector.cpp; path = ../../../XCPP/XTable/AISelector.cpp; sourceTree = "<group>"; };
+		4E2DCEA21FD688F500B956DF /* XEntityStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XEntityStatistics.cpp; path = ../../../XCPP/XTable/XEntityStatistics.cpp; sourceTree = "<group>"; };
+		4E2DCEA31FD688F500B956DF /* AIInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIInterval.h; path = ../../../XCPP/XTable/AIInterval.h; sourceTree = "<group>"; };
+		4E2DCEA41FD688F500B956DF /* NativeInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NativeInterface.cpp; path = ../../../XCPP/XTable/NativeInterface.cpp; sourceTree = "<group>"; };
+		4E2DCEA51FD688F500B956DF /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ../../../XCPP/XTable/Common.h; sourceTree = "<group>"; };
+		4E2DCEA61FD688F500B956DF /* QteStatusList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QteStatusList.cpp; path = ../../../XCPP/XTable/QteStatusList.cpp; sourceTree = "<group>"; };
+		4E2DCEA71FD688F500B956DF /* XEntityPresentation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XEntityPresentation.cpp; path = ../../../XCPP/XTable/XEntityPresentation.cpp; sourceTree = "<group>"; };
+		4E2DCEA81FD688F500B956DF /* AIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBase.h; path = ../../../XCPP/XTable/AIBase.h; sourceTree = "<group>"; };
+		4E2DCEA91FD688F500B956DF /* AIInterval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIInterval.cpp; path = ../../../XCPP/XTable/AIInterval.cpp; sourceTree = "<group>"; };
+		4E2DCEAA1FD688F600B956DF /* AITreeData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AITreeData.cpp; path = ../../../XCPP/XTable/AITreeData.cpp; sourceTree = "<group>"; };
+		4E2DCEAB1FD688F600B956DF /* DefaultEquip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultEquip.cpp; path = ../../../XCPP/XTable/DefaultEquip.cpp; sourceTree = "<group>"; };
+		4E2DCEAC1FD688F600B956DF /* DefaultEquip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultEquip.h; path = ../../../XCPP/XTable/DefaultEquip.h; sourceTree = "<group>"; };
+		4E2DCEAD1FD688F600B956DF /* FashionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FashionList.h; path = ../../../XCPP/XTable/FashionList.h; sourceTree = "<group>"; };
+		4E2DCEAE1FD688F600B956DF /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Log.cpp; path = ../../../XCPP/XTable/Log.cpp; sourceTree = "<group>"; };
+		4E2DCEAF1FD688F600B956DF /* SceneList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneList.cpp; path = ../../../XCPP/XTable/SceneList.cpp; sourceTree = "<group>"; };
+		4E2DCEB01FD688F600B956DF /* AISequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISequence.h; path = ../../../XCPP/XTable/AISequence.h; sourceTree = "<group>"; };
+		4E2DCEB11FD688F600B956DF /* NativeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NativeInterface.h; path = ../../../XCPP/XTable/NativeInterface.h; sourceTree = "<group>"; };
+		4E2DCEB21FD688F600B956DF /* Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Common.cpp; path = ../../../XCPP/XTable/Common.cpp; sourceTree = "<group>"; };
+		4E2DCEB31FD688F600B956DF /* XEntityStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XEntityStatistics.h; path = ../../../XCPP/XTable/XEntityStatistics.h; sourceTree = "<group>"; };
+		4E2DCEB41FD688F600B956DF /* AISequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISequence.cpp; path = ../../../XCPP/XTable/AISequence.cpp; sourceTree = "<group>"; };
+		4E2DCEB51FD688F700B956DF /* FashionList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FashionList.cpp; path = ../../../XCPP/XTable/FashionList.cpp; sourceTree = "<group>"; };
+		4E2DCEB61FD688F700B956DF /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Log.h; path = ../../../XCPP/XTable/Log.h; sourceTree = "<group>"; };
+		4E2DCEB71FD688F700B956DF /* AITree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AITree.h; path = ../../../XCPP/XTable/AITree.h; sourceTree = "<group>"; };
+		4E2DCEB81FD688F700B956DF /* EquipSuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EquipSuit.h; path = ../../../XCPP/XTable/EquipSuit.h; sourceTree = "<group>"; };
+		4E2DCEB91FD688F700B956DF /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = picojson.h; path = ../../../XCPP/XTable/picojson.h; sourceTree = "<group>"; };
+		4E2DCEBA1FD688F700B956DF /* QteStatusList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QteStatusList.h; path = ../../../XCPP/XTable/QteStatusList.h; sourceTree = "<group>"; };
+		4E2DCEBB1FD688F700B956DF /* AITreeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AITreeData.h; path = ../../../XCPP/XTable/AITreeData.h; sourceTree = "<group>"; };
+		4E2DCEBC1FD688F700B956DF /* EquipSuit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EquipSuit.cpp; path = ../../../XCPP/XTable/EquipSuit.cpp; sourceTree = "<group>"; };
+		4E2DCEBD1FD688F700B956DF /* XNpcList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XNpcList.cpp; path = ../../../XCPP/XTable/XNpcList.cpp; sourceTree = "<group>"; };
 		4EBA59301FC6EF1500C3FEB7 /* libXTable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXTable.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EBA59331FC6EF1500C3FEB7 /* XTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTable.h; sourceTree = "<group>"; };
-		4EBA59341FC6EF1500C3FEB7 /* XTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTable.m; sourceTree = "<group>"; };
-		4EBA593C1FC6EF3400C3FEB7 /* XNpcList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XNpcList.h; path = ../../../XCPP/XTable/XNpcList.h; sourceTree = "<group>"; };
-		4EBA593D1FC6EF3400C3FEB7 /* SceneList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneList.h; path = ../../../XCPP/XTable/SceneList.h; sourceTree = "<group>"; };
-		4EBA593E1FC6EF3400C3FEB7 /* NativeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NativeReader.h; path = ../../../XCPP/XTable/NativeReader.h; sourceTree = "<group>"; };
-		4EBA593F1FC6EF3400C3FEB7 /* XEntityPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XEntityPresentation.h; path = ../../../XCPP/XTable/XEntityPresentation.h; sourceTree = "<group>"; };
-		4EBA59401FC6EF3400C3FEB7 /* FashionSuit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FashionSuit.cpp; path = ../../../XCPP/XTable/FashionSuit.cpp; sourceTree = "<group>"; };
-		4EBA59411FC6EF3400C3FEB7 /* NativeReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NativeReader.cpp; path = ../../../XCPP/XTable/NativeReader.cpp; sourceTree = "<group>"; };
-		4EBA59421FC6EF3400C3FEB7 /* FashionSuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FashionSuit.h; path = ../../../XCPP/XTable/FashionSuit.h; sourceTree = "<group>"; };
-		4EBA59431FC6EF3400C3FEB7 /* XEntityStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XEntityStatistics.cpp; path = ../../../XCPP/XTable/XEntityStatistics.cpp; sourceTree = "<group>"; };
-		4EBA59441FC6EF3400C3FEB7 /* NativeInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NativeInterface.cpp; path = ../../../XCPP/XTable/NativeInterface.cpp; sourceTree = "<group>"; };
-		4EBA59451FC6EF3500C3FEB7 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ../../../XCPP/XTable/Common.h; sourceTree = "<group>"; };
-		4EBA59461FC6EF3500C3FEB7 /* QteStatusList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QteStatusList.cpp; path = ../../../XCPP/XTable/QteStatusList.cpp; sourceTree = "<group>"; };
-		4EBA59471FC6EF3500C3FEB7 /* XEntityPresentation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XEntityPresentation.cpp; path = ../../../XCPP/XTable/XEntityPresentation.cpp; sourceTree = "<group>"; };
-		4EBA59481FC6EF3500C3FEB7 /* DefaultEquip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultEquip.cpp; path = ../../../XCPP/XTable/DefaultEquip.cpp; sourceTree = "<group>"; };
-		4EBA59491FC6EF3500C3FEB7 /* DefaultEquip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultEquip.h; path = ../../../XCPP/XTable/DefaultEquip.h; sourceTree = "<group>"; };
-		4EBA594A1FC6EF3500C3FEB7 /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Log.cpp; path = ../../../XCPP/XTable/Log.cpp; sourceTree = "<group>"; };
-		4EBA594B1FC6EF3500C3FEB7 /* FashionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FashionList.h; path = ../../../XCPP/XTable/FashionList.h; sourceTree = "<group>"; };
-		4EBA594C1FC6EF3500C3FEB7 /* XEntityStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XEntityStatistics.h; path = ../../../XCPP/XTable/XEntityStatistics.h; sourceTree = "<group>"; };
-		4EBA594D1FC6EF3500C3FEB7 /* SceneList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneList.cpp; path = ../../../XCPP/XTable/SceneList.cpp; sourceTree = "<group>"; };
-		4EBA594E1FC6EF3600C3FEB7 /* NativeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NativeInterface.h; path = ../../../XCPP/XTable/NativeInterface.h; sourceTree = "<group>"; };
-		4EBA594F1FC6EF3600C3FEB7 /* Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Common.cpp; path = ../../../XCPP/XTable/Common.cpp; sourceTree = "<group>"; };
-		4EBA59501FC6EF3600C3FEB7 /* FashionList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FashionList.cpp; path = ../../../XCPP/XTable/FashionList.cpp; sourceTree = "<group>"; };
-		4EBA59511FC6EF3600C3FEB7 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Log.h; path = ../../../XCPP/XTable/Log.h; sourceTree = "<group>"; };
-		4EBA59521FC6EF3600C3FEB7 /* EquipSuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EquipSuit.h; path = ../../../XCPP/XTable/EquipSuit.h; sourceTree = "<group>"; };
-		4EBA59531FC6EF3600C3FEB7 /* QteStatusList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QteStatusList.h; path = ../../../XCPP/XTable/QteStatusList.h; sourceTree = "<group>"; };
-		4EBA59541FC6EF3700C3FEB7 /* EquipSuit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EquipSuit.cpp; path = ../../../XCPP/XTable/EquipSuit.cpp; sourceTree = "<group>"; };
-		4EBA59551FC6EF3700C3FEB7 /* XNpcList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XNpcList.cpp; path = ../../../XCPP/XTable/XNpcList.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,50 +124,53 @@
 		4EBA59321FC6EF1500C3FEB7 /* XTable */ = {
 			isa = PBXGroup;
 			children = (
-				4EBA59331FC6EF1500C3FEB7 /* XTable.h */,
-				4EBA594F1FC6EF3600C3FEB7 /* Common.cpp */,
-				4EBA59451FC6EF3500C3FEB7 /* Common.h */,
-				4EBA59481FC6EF3500C3FEB7 /* DefaultEquip.cpp */,
-				4EBA59491FC6EF3500C3FEB7 /* DefaultEquip.h */,
-				4EBA59541FC6EF3700C3FEB7 /* EquipSuit.cpp */,
-				4EBA59521FC6EF3600C3FEB7 /* EquipSuit.h */,
-				4EBA59501FC6EF3600C3FEB7 /* FashionList.cpp */,
-				4EBA594B1FC6EF3500C3FEB7 /* FashionList.h */,
-				4EA77D141FCEDB530021AEB2 /* AIBase.cpp */,
-				4EA77D171FCEDB530021AEB2 /* AIBase.h */,
-				4EA77D181FCEDB530021AEB2 /* AIBehaviour.cpp */,
-				4EA77D1B1FCEDB540021AEB2 /* AIBehaviour.h */,
-				4EA77D1D1FCEDB540021AEB2 /* AIFactory.cpp */,
-				4EA77D151FCEDB530021AEB2 /* AIFactory.h */,
-				4EA77D191FCEDB540021AEB2 /* AIInterval.cpp */,
-				4EA77D231FCEDB550021AEB2 /* AIInterval.h */,
-				4EA77D211FCEDB550021AEB2 /* AISelector.cpp */,
-				4EA77D1F1FCEDB550021AEB2 /* AISelector.h */,
-				4EA77D1E1FCEDB540021AEB2 /* AISequence.cpp */,
-				4EA77D1C1FCEDB540021AEB2 /* AISequence.h */,
-				4EA77D161FCEDB530021AEB2 /* AITree.cpp */,
-				4EA77D201FCEDB550021AEB2 /* AITree.h */,
-				4EA77D1A1FCEDB540021AEB2 /* AITreeData.cpp */,
-				4EA77D221FCEDB550021AEB2 /* AITreeData.h */,
-				4EBA59401FC6EF3400C3FEB7 /* FashionSuit.cpp */,
-				4EBA59421FC6EF3400C3FEB7 /* FashionSuit.h */,
-				4EBA594A1FC6EF3500C3FEB7 /* Log.cpp */,
-				4EBA59511FC6EF3600C3FEB7 /* Log.h */,
-				4EBA59441FC6EF3400C3FEB7 /* NativeInterface.cpp */,
-				4EBA594E1FC6EF3600C3FEB7 /* NativeInterface.h */,
-				4EBA59411FC6EF3400C3FEB7 /* NativeReader.cpp */,
-				4EBA593E1FC6EF3400C3FEB7 /* NativeReader.h */,
-				4EBA59461FC6EF3500C3FEB7 /* QteStatusList.cpp */,
-				4EBA59531FC6EF3600C3FEB7 /* QteStatusList.h */,
-				4EBA594D1FC6EF3500C3FEB7 /* SceneList.cpp */,
-				4EBA593D1FC6EF3400C3FEB7 /* SceneList.h */,
-				4EBA59471FC6EF3500C3FEB7 /* XEntityPresentation.cpp */,
-				4EBA593F1FC6EF3400C3FEB7 /* XEntityPresentation.h */,
-				4EBA59431FC6EF3400C3FEB7 /* XEntityStatistics.cpp */,
-				4EBA594C1FC6EF3500C3FEB7 /* XEntityStatistics.h */,
-				4EBA59551FC6EF3700C3FEB7 /* XNpcList.cpp */,
-				4EBA593C1FC6EF3400C3FEB7 /* XNpcList.h */,
-				4EBA59341FC6EF1500C3FEB7 /* XTable.m */,
+				4E2DCE8F1FD688F400B956DF /* AIBase.cpp */,
+				4E2DCEA81FD688F500B956DF /* AIBase.h */,
+				4E2DCE961FD688F400B956DF /* AIBehaviour.cpp */,
+				4E2DCE981FD688F400B956DF /* AIBehaviour.h */,
+				4E2DCE9A1FD688F500B956DF /* AIFactory.cpp */,
+				4E2DCE901FD688F400B956DF /* AIFactory.h */,
+				4E2DCEA91FD688F500B956DF /* AIInterval.cpp */,
+				4E2DCEA31FD688F500B956DF /* AIInterval.h */,
+				4E2DCEA11FD688F500B956DF /* AISelector.cpp */,
+				4E2DCE9E1FD688F500B956DF /* AISelector.h */,
+				4E2DCEB41FD688F600B956DF /* AISequence.cpp */,
+				4E2DCEB01FD688F600B956DF /* AISequence.h */,
+				4E2DCE931FD688F400B956DF /* AITree.cpp */,
+				4E2DCEB71FD688F700B956DF /* AITree.h */,
+				4E2DCEAA1FD688F600B956DF /* AITreeData.cpp */,
+				4E2DCEBB1FD688F700B956DF /* AITreeData.h */,
+				4E2DCEB21FD688F600B956DF /* Common.cpp */,
+				4E2DCEA51FD688F500B956DF /* Common.h */,
+				4E2DCEAB1FD688F600B956DF /* DefaultEquip.cpp */,
+				4E2DCEAC1FD688F600B956DF /* DefaultEquip.h */,
+				4E2DCEBC1FD688F700B956DF /* EquipSuit.cpp */,
+				4E2DCEB81FD688F700B956DF /* EquipSuit.h */,
+				4E2DCEB51FD688F700B956DF /* FashionList.cpp */,
+				4E2DCEAD1FD688F600B956DF /* FashionList.h */,
+				4E2DCE9B1FD688F500B956DF /* FashionSuit.cpp */,
+				4E2DCEA01FD688F500B956DF /* FashionSuit.h */,
+				4E2DCE991FD688F400B956DF /* HPatchTest.h */,
+				4E2DCEAE1FD688F600B956DF /* Log.cpp */,
+				4E2DCEB61FD688F700B956DF /* Log.h */,
+				4E2DCEA41FD688F500B956DF /* NativeInterface.cpp */,
+				4E2DCEB11FD688F600B956DF /* NativeInterface.h */,
+				4E2DCE9F1FD688F500B956DF /* NativeReader.cpp */,
+				4E2DCE941FD688F400B956DF /* NativeReader.h */,
+				4E2DCE9D1FD688F500B956DF /* patch_types.h */,
+				4E2DCE951FD688F400B956DF /* patch.c */,
+				4E2DCE971FD688F400B956DF /* patch.h */,
+				4E2DCEB91FD688F700B956DF /* picojson.h */,
+				4E2DCEA61FD688F500B956DF /* QteStatusList.cpp */,
+				4E2DCEBA1FD688F700B956DF /* QteStatusList.h */,
+				4E2DCEAF1FD688F600B956DF /* SceneList.cpp */,
+				4E2DCE911FD688F400B956DF /* SceneList.h */,
+				4E2DCEA71FD688F500B956DF /* XEntityPresentation.cpp */,
+				4E2DCE9C1FD688F500B956DF /* XEntityPresentation.h */,
+				4E2DCEA21FD688F500B956DF /* XEntityStatistics.cpp */,
+				4E2DCEB31FD688F600B956DF /* XEntityStatistics.h */,
+				4E2DCEBD1FD688F700B956DF /* XNpcList.cpp */,
+				4E2DCE921FD688F400B956DF /* XNpcList.h */,
 			);
 			path = XTable;
 			sourceTree = "<group>";
@@ -228,28 +232,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EA77D291FCEDB550021AEB2 /* AIFactory.cpp in Sources */,
-				4EBA595A1FC6EF3700C3FEB7 /* QteStatusList.cpp in Sources */,
-				4EA77D281FCEDB550021AEB2 /* AITreeData.cpp in Sources */,
-				4EBA59351FC6EF1500C3FEB7 /* XTable.m in Sources */,
-				4EBA595E1FC6EF3700C3FEB7 /* SceneList.cpp in Sources */,
-				4EA77D2A1FCEDB550021AEB2 /* AISequence.cpp in Sources */,
-				4EBA595C1FC6EF3700C3FEB7 /* DefaultEquip.cpp in Sources */,
-				4EBA59601FC6EF3700C3FEB7 /* FashionList.cpp in Sources */,
-				4EA77D251FCEDB550021AEB2 /* AITree.cpp in Sources */,
-				4EBA595D1FC6EF3700C3FEB7 /* Log.cpp in Sources */,
-				4EBA59621FC6EF3700C3FEB7 /* XNpcList.cpp in Sources */,
-				4EBA59571FC6EF3700C3FEB7 /* NativeReader.cpp in Sources */,
-				4EA77D241FCEDB550021AEB2 /* AIBase.cpp in Sources */,
-				4EBA59591FC6EF3700C3FEB7 /* NativeInterface.cpp in Sources */,
-				4EBA59581FC6EF3700C3FEB7 /* XEntityStatistics.cpp in Sources */,
-				4EA77D271FCEDB550021AEB2 /* AIInterval.cpp in Sources */,
-				4EA77D2B1FCEDB550021AEB2 /* AISelector.cpp in Sources */,
-				4EA77D261FCEDB550021AEB2 /* AIBehaviour.cpp in Sources */,
-				4EBA59561FC6EF3700C3FEB7 /* FashionSuit.cpp in Sources */,
-				4EBA59611FC6EF3700C3FEB7 /* EquipSuit.cpp in Sources */,
-				4EBA595B1FC6EF3700C3FEB7 /* XEntityPresentation.cpp in Sources */,
-				4EBA595F1FC6EF3700C3FEB7 /* Common.cpp in Sources */,
+				4E2DCEC21FD688F700B956DF /* AIFactory.cpp in Sources */,
+				4E2DCEC91FD688F700B956DF /* XEntityPresentation.cpp in Sources */,
+				4E2DCECF1FD688F700B956DF /* Common.cpp in Sources */,
+				4E2DCEC31FD688F700B956DF /* FashionSuit.cpp in Sources */,
+				4E2DCED31FD688F700B956DF /* XNpcList.cpp in Sources */,
+				4E2DCED11FD688F700B956DF /* FashionList.cpp in Sources */,
+				4E2DCECC1FD688F700B956DF /* DefaultEquip.cpp in Sources */,
+				4E2DCEC81FD688F700B956DF /* QteStatusList.cpp in Sources */,
+				4E2DCEC71FD688F700B956DF /* NativeInterface.cpp in Sources */,
+				4E2DCEC51FD688F700B956DF /* AISelector.cpp in Sources */,
+				4E2DCECE1FD688F700B956DF /* SceneList.cpp in Sources */,
+				4E2DCEC41FD688F700B956DF /* NativeReader.cpp in Sources */,
+				4E2DCECB1FD688F700B956DF /* AITreeData.cpp in Sources */,
+				4E2DCED01FD688F700B956DF /* AISequence.cpp in Sources */,
+				4E2DCED21FD688F700B956DF /* EquipSuit.cpp in Sources */,
+				4E2DCEC01FD688F700B956DF /* patch.c in Sources */,
+				4E2DCECD1FD688F700B956DF /* Log.cpp in Sources */,
+				4E2DCEBE1FD688F700B956DF /* AIBase.cpp in Sources */,
+				4E2DCECA1FD688F700B956DF /* AIInterval.cpp in Sources */,
+				4E2DCEC61FD688F700B956DF /* XEntityStatistics.cpp in Sources */,
+				4E2DCEBF1FD688F700B956DF /* AITree.cpp in Sources */,
+				4E2DCEC11FD688F700B956DF /* AIBehaviour.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

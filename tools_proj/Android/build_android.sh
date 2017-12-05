@@ -1,8 +1,10 @@
 #!/bin/bash
 
-cd pwd
+path=/Users/huailiang.peng/Documents/unity/dn_asset/tools_proj/
 
-cd jni
+cd ${path}
+
+cd Android/jni
 
 echo "start clean last so files"
 
