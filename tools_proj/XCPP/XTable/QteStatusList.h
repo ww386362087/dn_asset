@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __QteStatusList__
+#define __QteStatusList__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -37,3 +39,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetQteStatusListLength();
 	ENGINE_INTERFACE_EXPORT void iGetQteStatusListRow(int idx,QteStatusListRow* row);
 };
+
+#endif

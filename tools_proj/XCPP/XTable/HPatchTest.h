@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __HPatchTest__
+#define __HPatchTest__
+
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
@@ -259,3 +261,6 @@ int Dodiff( const char* oldFileName, const char* diffFileName, const char* outNe
 	_check_error(!TFileStreamInput_close(&oldData),"oldFile close error!");
     return exitCode;
 }
+
+
+#endif

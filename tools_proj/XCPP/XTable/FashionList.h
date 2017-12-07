@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __FashionList__
+#define __FashionList__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -52,3 +54,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetFashionListLength();
 	ENGINE_INTERFACE_EXPORT void iGetFashionListRow(int idx,FashionListRow* row);
 };
+
+#endif

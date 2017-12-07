@@ -1,9 +1,12 @@
-#pragma once
+#ifndef __NativeReader__
+#define __NativeReader__
+
 #include<string>
 #include<fstream>
 #include<iostream>
 #include<vector>
 #include"Common.h"
+#include "Log.h"
 
 #define BINARY_READ(reader,value) reader.read((char *)&value, sizeof(value))
 
@@ -57,3 +60,4 @@ void NativeReader::ReadSeq(Seq<T>& v)
 	Read(&v.value1);
 }
 
+#endif

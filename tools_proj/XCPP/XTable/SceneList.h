@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __SceneList__
+#define __SceneList__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -151,3 +153,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetSceneListLength();
 	ENGINE_INTERFACE_EXPORT void iGetSceneListRow(int idx,SceneListRow* row);
 };
+
+#endif

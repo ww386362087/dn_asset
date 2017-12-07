@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __XEntityPresentation__
+#define __XEntityPresentation__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -114,3 +116,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetXEntityPresentationLength();
 	ENGINE_INTERFACE_EXPORT void iGetXEntityPresentationRow(int idx,XEntityPresentationRow* row);
 };
+
+#endif

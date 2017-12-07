@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __XNpcList__
+#define __XNpcList__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -51,3 +53,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetXNpcListLength();
 	ENGINE_INTERFACE_EXPORT void iGetXNpcListRow(int idx,XNpcListRow* row);
 };
+
+#endif

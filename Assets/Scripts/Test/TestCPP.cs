@@ -114,7 +114,8 @@ public class TestCPP : MonoBehaviour
         if (GUILayout.Button("Native-Json", ui_opt))
         {
             iJson(Application.streamingAssetsPath + "/Patch/json.txt");
-            XDebug.Log("native parse json finish!");
+            ui_rst = "native parse json finish!";
+            XDebug.Log(ui_rst);
         }
         if (GUILayout.Button("Native-Patch", ui_opt))
         {
@@ -123,7 +124,8 @@ public class TestCPP : MonoBehaviour
             string newf = Application.streamingAssetsPath + "/Patch/new.txt";
             XDebug.Log(old + " " + diff + " " + newf);
             iPatch(old, diff, newf);
-            XDebug.Log("patch finish");
+            ui_rst = "patch finish";
+            XDebug.Log(ui_rst);
         }
         if (GUILayout.Button("Get-Qte-Row", ui_opt))
         {

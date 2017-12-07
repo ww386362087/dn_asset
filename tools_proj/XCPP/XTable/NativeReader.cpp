@@ -1,6 +1,4 @@
 #include "NativeReader.h"
-#include "Log.h"
-
 
 NativeReader::~NativeReader(void)
 {

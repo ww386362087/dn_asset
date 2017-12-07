@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __Common__
+#define __Common__
+
 #if defined(__CYGWIN32__)
 #define ENGINE_INTERFACE_EXPORT __declspec(dllexport)
 #elif defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(WINAPI_FAMILY)
@@ -49,3 +51,5 @@ uint xhash(const char* ch);
 bool isNumber(const std::string& value);
 
 int countUTF8Char(const std::string &s);
+
+#endif

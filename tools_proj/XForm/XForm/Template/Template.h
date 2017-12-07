@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __[*Table*]__
+#define __[*Table*]__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -34,3 +36,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGet[*Table*]Length();
 	ENGINE_INTERFACE_EXPORT void iGet[*Table*]Row(int idx,[*Table*]Row* row);
 };
+
+#endif

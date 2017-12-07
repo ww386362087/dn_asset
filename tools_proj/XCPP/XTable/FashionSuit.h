@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __FashionSuit__
+#define __FashionSuit__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -58,3 +60,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetFashionSuitLength();
 	ENGINE_INTERFACE_EXPORT void iGetFashionSuitRow(int idx,FashionSuitRow* row);
 };
+
+#endif

@@ -1,8 +1,15 @@
-#pragma once
+#ifndef __NativeInterface__
+#define __NativeInterface__
+
+
 #include "Common.h"
 #include <string>
 #include <iostream>
 #include "Log.h"
+#include <fstream>
+#include "picojson.h"
+//#include "HPatchTest.h"
+
 
 extern "C"
 {
@@ -16,3 +23,6 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT void iJson(const char*);
 	ENGINE_INTERFACE_EXPORT void iPatch(const char*,const char*,const char*);
 };
+
+
+#endif

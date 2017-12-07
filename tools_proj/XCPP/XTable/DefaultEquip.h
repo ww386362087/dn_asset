@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __DefaultEquip__
+#define __DefaultEquip__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -53,3 +55,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetDefaultEquipLength();
 	ENGINE_INTERFACE_EXPORT void iGetDefaultEquipRow(int idx,DefaultEquipRow* row);
 };
+
+#endif

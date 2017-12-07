@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __EquipSuit__
+#define __EquipSuit__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -51,3 +53,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetEquipSuitLength();
 	ENGINE_INTERFACE_EXPORT void iGetEquipSuitRow(int idx,EquipSuitRow* row);
 };
+
+#endif

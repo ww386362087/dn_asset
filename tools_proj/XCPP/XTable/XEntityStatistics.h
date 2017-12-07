@@ -5,7 +5,9 @@
  * </auto-generated>
  */
 
-#pragma once
+#ifndef __XEntityStatistics__
+#define __XEntityStatistics__
+
 #include"NativeReader.h"
 #include <vector>
 #include"Log.h"
@@ -98,3 +100,5 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT int iGetXEntityStatisticsLength();
 	ENGINE_INTERFACE_EXPORT void iGetXEntityStatisticsRow(int idx,XEntityStatisticsRow* row);
 };
+
+#endif
