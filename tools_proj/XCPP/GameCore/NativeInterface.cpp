@@ -31,7 +31,7 @@ extern "C"
 	void iPatch(const char* old_file,const char* diff_file,const char* new_file)
 	{
 		LOG("old:"+tostring(old_file)+" diff: "+tostring(diff_file)+" new_file: "+tostring(new_file));
-		Dodiff(old_file,diff_file,new_file);
+		//Dodiff(old_file,diff_file,new_file);
 	}
 
 	void iJson(const char* file)

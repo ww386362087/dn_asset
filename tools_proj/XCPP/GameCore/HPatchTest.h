@@ -5,7 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <iostream>
-#include "Log.h"
 #include "patch.h"
 
 typedef unsigned char byte;
@@ -212,14 +211,11 @@ int Dodiff( const char* oldFileName, const char* diffFileName, const char* outNe
     TFileStreamOutput newData;
     TFileStreamInput diffData;
     TFileStreamInput oldData;
-    LOG("***");
     hpatch_TStreamInput* poldData=&oldData.base;
 	memset(&oldData,0,sizeof(TFileStreamInput));
 	memset(&diffData,0,sizeof(TFileStreamInput));
 	memset(&newData,0,sizeof(TFileStreamOutput));
 	
-    LOG("****");
-
     //open file
     int kNewDataSizeSavedSize=9;
     byte buf[9];
@@ -230,14 +226,12 @@ int Dodiff( const char* oldFileName, const char* diffFileName, const char* outNe
     if (!TFileStreamInput_open(&diffData,diffFileName))
 		std::cout<<"open diffFile error!";
 
-     LOG("*******");
     //read savedNewSize
     if (kNewDataSizeSavedSize>diffData.base.streamSize)
         kNewDataSizeSavedSize=(int)diffData.base.streamSize;
     if (kNewDataSizeSavedSize!=diffData.base.read(diffData.base.streamHandle,0, buf,buf+kNewDataSizeSavedSize))
 		std::cout<<"read savedNewSize error!";
     
-     LOG("*********");
     kNewDataSizeSavedSize=readSavedSize(buf,kNewDataSizeSavedSize,&savedNewSize);
 	if (kNewDataSizeSavedSize<=0) std::cout<<"read savedNewSize error!";
     TFileStreamInput_setOffset(&diffData,kNewDataSizeSavedSize);

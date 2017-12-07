@@ -8,7 +8,7 @@
 #include "Log.h"
 #include <fstream>
 #include "picojson.h"
-#include "HPatchTest.h"
+//#include "HPatchTest.h"
 
 
 extern "C"
