@@ -16,9 +16,9 @@ echo "make new so success"
 
 cd ../libs
 
-cp -f armeabi-v7a/libXTable.so ../../../Assets/Plugins/Android/libs/armeabi-v7a/libXTable.so
+cp -f armeabi-v7a/libGameCore.so ../../../Assets/Plugins/Android/libs/armeabi-v7a/libGameCore.so
 
-cp -f x86/libXTable.so ../../../Assets/Plugins/Android/libs/x86/libXTable.so
+cp -f x86/libGameCore.so ../../../Assets/Plugins/Android/libs/x86/libGameCore.so
 
 echo "copy so success, bye!"
 

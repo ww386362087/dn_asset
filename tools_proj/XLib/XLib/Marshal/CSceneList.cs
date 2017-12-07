@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace XTable {
+namespace GameCore {
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
     
@@ -631,14 +631,14 @@ namespace XTable {
 #if UNITY_IPHONE || UNITY_XBOX360
 		[DllImport("__Internal")]
 #else
-		[DllImport("XTable")]
+		[DllImport("GameCore")]
 #endif
 		static extern void iGetSceneListRow(int idx, ref RowData row);
 
 #if UNITY_IPHONE || UNITY_XBOX360
 		[DllImport("__Internal")]
 #else
-		[DllImport("XTable")]
+		[DllImport("GameCore")]
 #endif
 		static extern int iGetSceneListLength();
         

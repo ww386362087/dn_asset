@@ -8,10 +8,10 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 #so 文件名
-LOCAL_MODULE   := XTable
+LOCAL_MODULE   := GameCore
 
 #  c++目录的相对路径
-MY_FILES_PATH  :=  $(LOCAL_PATH)/../../XCPP/XTable
+MY_FILES_PATH  :=  $(LOCAL_PATH)/../../XCPP/GameCore
 
 #$(warning $(MY_FILES_PATH))
 

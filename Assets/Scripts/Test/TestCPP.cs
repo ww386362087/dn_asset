@@ -4,7 +4,7 @@ using AOT;
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using XTable;
+using GameCore;
 
 public class TestCPP : MonoBehaviour
 {
@@ -12,14 +12,14 @@ public class TestCPP : MonoBehaviour
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
-    [DllImport("XTable")]
+    [DllImport("GameCore")]
 #endif
     public static extern void iInitCallbackCommand(CppDelegate cb);
 
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
-    [DllImport("XTable")]
+    [DllImport("GameCore")]
 #endif
     public static extern void iInitial(string stream,string persist);
 
@@ -27,7 +27,7 @@ public class TestCPP : MonoBehaviour
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
-    [DllImport("XTable")]
+    [DllImport("GameCore")]
 #endif
     public static extern int iAdd(int x, int y);
 
@@ -35,7 +35,7 @@ public class TestCPP : MonoBehaviour
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
-    [DllImport("XTable")]
+    [DllImport("GameCore")]
 #endif
     public static extern void iJson(String file);
 
@@ -43,7 +43,7 @@ public class TestCPP : MonoBehaviour
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
-    [DllImport("XTable")]
+    [DllImport("GameCore")]
 #endif
     public static extern int iSub(IntPtr x, IntPtr y);
 
@@ -51,7 +51,7 @@ public class TestCPP : MonoBehaviour
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
-    [DllImport("XTable")]
+    [DllImport("GameCore")]
 #endif
     public static extern void iPatch(string oldf,string diff,string newf);
 

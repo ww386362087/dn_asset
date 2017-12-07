@@ -13,11 +13,11 @@ path=/Users/huailiang.peng/Documents/unity/dn_asset
 
 cd ${path}
 
-cd tools_proj/IOS/XTable
+cd tools_proj/IOS/GameCore
 
 echo "xcode clean "
 
-rm -r libXTable.a
+rm -r libGameCore.a
 
 xcodebuild clean 
 
@@ -26,25 +26,25 @@ echo "xcode build"
 echo "start build for iphoneos"
 
 #编译 release 版本的.a
-xcodebuild -configuration "Release" -target XTable -sdk iphoneos clean build
+xcodebuild -configuration "Release" -target GameCore -sdk iphoneos clean build
 
 eho "start build for simulator"
 
 #编译 release 版本的.a
-xcodebuild -configuration "Release" -target XTable -sdk iphonesimulator clean build
+xcodebuild -configuration "Release" -target GameCore -sdk iphonesimulator clean build
 
 echo "build success"
 
 echo "merge diff start library"
 
-lipo -create build/Release-iphoneos/libXTable.a build/Release-iphonesimulator/libXTable.a -output libXTable.a
+lipo -create build/Release-iphoneos/libGameCore.a build/Release-iphonesimulator/libGameCore.a -output libGameCore.a
 
-lipo -info libXTable.a
+lipo -info libGameCore.a
 
-echo "make libXtable.a success"
+echo "make libGameCore.a success"
 
 echo "start mv to unity Plugins dir"
 
-mv -f libXTable.a ${path}/Assets/Plugins/iOS/libXTable.a
+mv -f libGameCore.a ${path}/Assets/Plugins/iOS/libGameCore.a
 
 echo "done, bye!"

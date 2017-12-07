@@ -1,0 +1,41 @@
+﻿  XNpcList.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\xnpclist.cpp(54): warning C4018: “<”: 有符号/无符号不匹配
+  XEntityStatistics.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\xentitystatistics.cpp(101): warning C4018: “<”: 有符号/无符号不匹配
+  XEntityPresentation.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\xentitypresentation.cpp(117): warning C4018: “<”: 有符号/无符号不匹配
+  SceneList.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\scenelist.cpp(154): warning C4018: “<”: 有符号/无符号不匹配
+  QteStatusList.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\qtestatuslist.cpp(40): warning C4018: “<”: 有符号/无符号不匹配
+  NativeReader.cpp
+  NativeInterface.cpp
+  Log.cpp
+  FashionSuit.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\fashionsuit.cpp(61): warning C4018: “<”: 有符号/无符号不匹配
+  FashionList.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\fashionlist.cpp(55): warning C4018: “<”: 有符号/无符号不匹配
+  EquipSuit.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\equipsuit.cpp(54): warning C4018: “<”: 有符号/无符号不匹配
+  DefaultEquip.cpp
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\defaultequip.cpp(56): warning C4018: “<”: 有符号/无符号不匹配
+  Common.cpp
+  AITreeData.cpp
+  AITree.cpp
+  AISequence.cpp
+  AISelector.cpp
+  AIInterval.cpp
+  AIFactory.cpp
+  AIBehaviour.cpp
+  正在生成代码...
+  正在编译...
+  AIBase.cpp
+  正在生成代码...
+  patch.c
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\patch.c(84): warning C4127: 条件表达式是常量
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\patch.c(651): warning C4100: “covers”: 未引用的形参
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\patch.c(1007): warning C4100: “readFromPos”: 未引用的形参
+d:\projects\dn_asset\tools_proj\xcpp\gamecore\patch.c(1419): warning C4100: “cache_buf_end”: 未引用的形参
+    正在创建库 D:\projects\dn_asset\tools_proj\XCPP\Debug\GameCore.lib 和对象 D:\projects\dn_asset\tools_proj\XCPP\Debug\GameCore.exp
+  GameCore.vcxproj -> D:\projects\dn_asset\tools_proj\XCPP\Debug\GameCore.dll
+  GameCore.vcxproj -> D:\projects\dn_asset\tools_proj\XCPP\Debug\GameCore.pdb (Full PDB)

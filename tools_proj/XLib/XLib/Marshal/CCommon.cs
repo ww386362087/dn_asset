@@ -1,4 +1,4 @@
-﻿namespace XTable
+﻿namespace GameCore
 {
     using System.Runtime.InteropServices;
     

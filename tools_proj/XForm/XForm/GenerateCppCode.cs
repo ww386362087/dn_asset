@@ -26,7 +26,7 @@ namespace XForm
             {
                 if (string.IsNullOrEmpty(_destDir))
                 {
-                    _destDir = XCForm.unity_proj_path + @"tools_proj\XCPP\XTable\";
+                    _destDir = XCForm.unity_proj_path + @"tools_proj\XCPP\GameCore\";
                 }
                 return _destDir;
             }
@@ -133,7 +133,7 @@ namespace XForm
         private const int pivot = 20;
         private void MergeVcxproj(string table)
         {
-            string vcxproj = destdir + "XTable.vcxproj";
+            string vcxproj = destdir + "GameCore.vcxproj";
             if (File.Exists(vcxproj))
             {
                 string content = File.ReadAllText(vcxproj);
@@ -161,7 +161,7 @@ namespace XForm
 
         private void MergeProjFilter(string table)
         {
-            string vcxproj = destdir + "XTable.vcxproj.filters";
+            string vcxproj = destdir + "GameCore.vcxproj.filters";
             if (File.Exists(vcxproj))
             {
                 string content = File.ReadAllText(vcxproj);

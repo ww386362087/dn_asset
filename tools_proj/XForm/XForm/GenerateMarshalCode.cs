@@ -79,7 +79,7 @@ namespace XForm
 
             //声明代码的部分
             CodeCompileUnit compunit = new CodeCompileUnit();
-            CodeNamespace sample = new CodeNamespace("XTable");
+            CodeNamespace sample = new CodeNamespace("GameCore");
             //引用命名空间
             sample.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
             sample.Imports.Add(new CodeNamespaceImport("System.Runtime.InteropServices"));
@@ -203,7 +203,7 @@ namespace XForm
             sb.Append("\n\n#if UNITY_IPHONE || UNITY_XBOX360");
             sb.Append("\n\t\t[DllImport(\"__Internal\")]");
             sb.Append("\n#else");
-            sb.Append("\n\t\t[DllImport(\"XTable\")]");
+            sb.Append("\n\t\t[DllImport(\"GameCore\")]");
             sb.Append("\n#endif");
         }
 

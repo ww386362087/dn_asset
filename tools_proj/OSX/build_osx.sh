@@ -4,7 +4,7 @@ path=/Users/huailiang.peng/Documents/unity/dn_asset/
 
 cd ${path}
 
-cd tools_proj/OSX/XTable
+cd tools_proj/OSX/GameCore
 
 echo "start clean "
 
@@ -22,8 +22,8 @@ ls -al
 
 echo "start mv to unity Plugins dir"
 
-rm -drf ${path}/Assets/Plugins/XTable.bundle
+rm -drf ${path}/Assets/Plugins/GameCore.bundle
 
-mv -f XTable.bundle ${path}/Assets/Plugins/XTable.bundle
+mv -f GameCore.bundle ${path}/Assets/Plugins/GameCore.bundle
 
 echo "done, bye!"

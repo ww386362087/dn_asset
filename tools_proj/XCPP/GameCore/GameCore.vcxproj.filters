@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="NativeInterface.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeReader.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="AISequence.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AITree.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AITreeData.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AIBase.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AIBehaviour.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AIFactory.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AIInterval.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AISelector.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="XEntityPresentation.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="XEntityStatistics.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="XNpcList.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultEquip.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipSuit.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="FashionList.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="FashionSuit.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="QteStatusList.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneList.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="patch.c">
+      <Filter>patch</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\picojson.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeInterface.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeReader.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="AISequence.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AITree.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AITreeData.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AIBase.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AIBehaviour.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AIFactory.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AIInterval.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AISelector.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneList.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityPresentation.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityStatistics.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="XNpcList.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultEquip.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipSuit.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="FashionList.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="FashionSuit.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="QteStatusList.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="patch.h">
+      <Filter>patch</Filter>
+    </ClInclude>
+    <ClInclude Include="patch_types.h">
+      <Filter>patch</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ai">
+      <UniqueIdentifier>{b9649c8d-c10f-479b-bca3-c7d051788d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{c3565040-4f67-468a-86e1-f461f97e3f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="patch">
+      <UniqueIdentifier>{dec344fb-4d1f-4ed8-8049-db6a3209dffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="table">
+      <UniqueIdentifier>{4307d103-28ef-45d5-82a5-c2ee804387ab}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
