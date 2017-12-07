@@ -9,17 +9,17 @@
 /tools_proj/XCPP/ipch/
 /tools_proj/XCPP/Debug/
 /tools_proj/XCPP/Release/
-/tools_proj/IOS/XTable/build/
-/tools_proj/OSX/XTable/build/
+/tools_proj/IOS/GameCore/build/
+/tools_proj/OSX/GameCore/build/
 /tools_proj/XCPP/x64/
 /tools_proj/XCPP/XCPP/Debug/
 /tools_proj/XCPP/XCPP/x64/
 /tools_proj/XCPP/XCPP.opensdf
 /tools_proj/XCPP/XCPP/Log/
 /tools_proj/XCPP/XCPP/Release/
-/tools_proj/XCPP/XTable/Debug/
-/tools_proj/XCPP/XTable/Release/
-/tools_proj/XCPP/XTable/x64/
+/tools_proj/XCPP/GameCore/Debug/
+/tools_proj/XCPP/GameCore/Release/
+/tools_proj/XCPP/GameCore/x64/
 /tools_proj/XLib/XLib/bin/
 /tools_proj/XLib/XLib/obj/
 
