@@ -1,0 +1,413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4E97AC7D1FD9381A00B91774 /* FashionList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC4E1FD9380D00B91774 /* FashionList.cpp */; };
+		4E97AC7E1FD9381A00B91774 /* XEntityPresentation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC501FD9380D00B91774 /* XEntityPresentation.cpp */; };
+		4E97AC7F1FD9381A00B91774 /* XNpcList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC521FD9380D00B91774 /* XNpcList.cpp */; };
+		4E97AC801FD9381A00B91774 /* AIInterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC531FD9380D00B91774 /* AIInterval.cpp */; };
+		4E97AC811FD9381A00B91774 /* AISelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC541FD9380D00B91774 /* AISelector.cpp */; };
+		4E97AC821FD9381A00B91774 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC5B1FD9380E00B91774 /* Common.cpp */; };
+		4E97AC831FD9381A00B91774 /* FashionSuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC5D1FD9380E00B91774 /* FashionSuit.cpp */; };
+		4E97AC841FD9381A00B91774 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC601FD9380F00B91774 /* Log.cpp */; };
+		4E97AC851FD9381A00B91774 /* DefaultEquip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC611FD9380F00B91774 /* DefaultEquip.cpp */; };
+		4E97AC861FD9381A00B91774 /* patch.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC631FD9380F00B91774 /* patch.c */; };
+		4E97AC871FD9381A00B91774 /* QteStatusList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC641FD9380F00B91774 /* QteStatusList.cpp */; };
+		4E97AC881FD9381A00B91774 /* NativeReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC651FD9380F00B91774 /* NativeReader.cpp */; };
+		4E97AC891FD9381A00B91774 /* SceneList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC661FD9380F00B91774 /* SceneList.cpp */; };
+		4E97AC8A1FD9381A00B91774 /* XEntityStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC671FD9381000B91774 /* XEntityStatistics.cpp */; };
+		4E97AC8B1FD9381A00B91774 /* EquipSuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC6C1FD9381300B91774 /* EquipSuit.cpp */; };
+		4E97AC8C1FD9381A00B91774 /* AISequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC6D1FD9381400B91774 /* AISequence.cpp */; };
+		4E97AC8D1FD9381A00B91774 /* AITreeData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC701FD9381400B91774 /* AITreeData.cpp */; };
+		4E97AC8E1FD9381A00B91774 /* AITree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC731FD9381800B91774 /* AITree.cpp */; };
+		4E97AC8F1FD9381A00B91774 /* NativeInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC741FD9381800B91774 /* NativeInterface.cpp */; };
+		4E97AC901FD9381A00B91774 /* AIBehaviour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC751FD9381800B91774 /* AIBehaviour.cpp */; };
+		4E97AC911FD9381A00B91774 /* AIFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC771FD9381900B91774 /* AIFactory.cpp */; };
+		4E97AC921FD9381A00B91774 /* AIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E97AC7B1FD9381A00B91774 /* AIBase.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4E97AC401FD937CD00B91774 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4E97AC421FD937CD00B91774 /* libGameCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGameCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E97AC4E1FD9380D00B91774 /* FashionList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FashionList.cpp; path = ../../../XCPP/GameCore/FashionList.cpp; sourceTree = "<group>"; };
+		4E97AC4F1FD9380D00B91774 /* AISelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISelector.h; path = ../../../XCPP/GameCore/AISelector.h; sourceTree = "<group>"; };
+		4E97AC501FD9380D00B91774 /* XEntityPresentation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XEntityPresentation.cpp; path = ../../../XCPP/GameCore/XEntityPresentation.cpp; sourceTree = "<group>"; };
+		4E97AC511FD9380D00B91774 /* XEntityPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XEntityPresentation.h; path = ../../../XCPP/GameCore/XEntityPresentation.h; sourceTree = "<group>"; };
+		4E97AC521FD9380D00B91774 /* XNpcList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XNpcList.cpp; path = ../../../XCPP/GameCore/XNpcList.cpp; sourceTree = "<group>"; };
+		4E97AC531FD9380D00B91774 /* AIInterval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIInterval.cpp; path = ../../../XCPP/GameCore/AIInterval.cpp; sourceTree = "<group>"; };
+		4E97AC541FD9380D00B91774 /* AISelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISelector.cpp; path = ../../../XCPP/GameCore/AISelector.cpp; sourceTree = "<group>"; };
+		4E97AC551FD9380D00B91774 /* NativeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NativeReader.h; path = ../../../XCPP/GameCore/NativeReader.h; sourceTree = "<group>"; };
+		4E97AC561FD9380D00B91774 /* DefaultEquip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultEquip.h; path = ../../../XCPP/GameCore/DefaultEquip.h; sourceTree = "<group>"; };
+		4E97AC571FD9380E00B91774 /* SceneList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneList.h; path = ../../../XCPP/GameCore/SceneList.h; sourceTree = "<group>"; };
+		4E97AC581FD9380E00B91774 /* AIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBase.h; path = ../../../XCPP/GameCore/AIBase.h; sourceTree = "<group>"; };
+		4E97AC591FD9380E00B91774 /* AIInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIInterval.h; path = ../../../XCPP/GameCore/AIInterval.h; sourceTree = "<group>"; };
+		4E97AC5A1FD9380E00B91774 /* AISequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AISequence.h; path = ../../../XCPP/GameCore/AISequence.h; sourceTree = "<group>"; };
+		4E97AC5B1FD9380E00B91774 /* Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Common.cpp; path = ../../../XCPP/GameCore/Common.cpp; sourceTree = "<group>"; };
+		4E97AC5C1FD9380E00B91774 /* FashionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FashionList.h; path = ../../../XCPP/GameCore/FashionList.h; sourceTree = "<group>"; };
+		4E97AC5D1FD9380E00B91774 /* FashionSuit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FashionSuit.cpp; path = ../../../XCPP/GameCore/FashionSuit.cpp; sourceTree = "<group>"; };
+		4E97AC5E1FD9380F00B91774 /* FashionSuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FashionSuit.h; path = ../../../XCPP/GameCore/FashionSuit.h; sourceTree = "<group>"; };
+		4E97AC5F1FD9380F00B91774 /* HPatchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HPatchTest.h; path = ../../../XCPP/GameCore/HPatchTest.h; sourceTree = "<group>"; };
+		4E97AC601FD9380F00B91774 /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Log.cpp; path = ../../../XCPP/GameCore/Log.cpp; sourceTree = "<group>"; };
+		4E97AC611FD9380F00B91774 /* DefaultEquip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultEquip.cpp; path = ../../../XCPP/GameCore/DefaultEquip.cpp; sourceTree = "<group>"; };
+		4E97AC621FD9380F00B91774 /* patch_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = patch_types.h; path = ../../../XCPP/GameCore/patch_types.h; sourceTree = "<group>"; };
+		4E97AC631FD9380F00B91774 /* patch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = patch.c; path = ../../../XCPP/GameCore/patch.c; sourceTree = "<group>"; };
+		4E97AC641FD9380F00B91774 /* QteStatusList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QteStatusList.cpp; path = ../../../XCPP/GameCore/QteStatusList.cpp; sourceTree = "<group>"; };
+		4E97AC651FD9380F00B91774 /* NativeReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NativeReader.cpp; path = ../../../XCPP/GameCore/NativeReader.cpp; sourceTree = "<group>"; };
+		4E97AC661FD9380F00B91774 /* SceneList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneList.cpp; path = ../../../XCPP/GameCore/SceneList.cpp; sourceTree = "<group>"; };
+		4E97AC671FD9381000B91774 /* XEntityStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XEntityStatistics.cpp; path = ../../../XCPP/GameCore/XEntityStatistics.cpp; sourceTree = "<group>"; };
+		4E97AC681FD9381100B91774 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Log.h; path = ../../../XCPP/GameCore/Log.h; sourceTree = "<group>"; };
+		4E97AC691FD9381100B91774 /* patch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = patch.h; path = ../../../XCPP/GameCore/patch.h; sourceTree = "<group>"; };
+		4E97AC6A1FD9381300B91774 /* QteStatusList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QteStatusList.h; path = ../../../XCPP/GameCore/QteStatusList.h; sourceTree = "<group>"; };
+		4E97AC6B1FD9381300B91774 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ../../../XCPP/GameCore/Common.h; sourceTree = "<group>"; };
+		4E97AC6C1FD9381300B91774 /* EquipSuit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EquipSuit.cpp; path = ../../../XCPP/GameCore/EquipSuit.cpp; sourceTree = "<group>"; };
+		4E97AC6D1FD9381400B91774 /* AISequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AISequence.cpp; path = ../../../XCPP/GameCore/AISequence.cpp; sourceTree = "<group>"; };
+		4E97AC6E1FD9381400B91774 /* EquipSuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EquipSuit.h; path = ../../../XCPP/GameCore/EquipSuit.h; sourceTree = "<group>"; };
+		4E97AC6F1FD9381400B91774 /* XEntityStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XEntityStatistics.h; path = ../../../XCPP/GameCore/XEntityStatistics.h; sourceTree = "<group>"; };
+		4E97AC701FD9381400B91774 /* AITreeData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AITreeData.cpp; path = ../../../XCPP/GameCore/AITreeData.cpp; sourceTree = "<group>"; };
+		4E97AC711FD9381700B91774 /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = picojson.h; path = ../../../XCPP/GameCore/picojson.h; sourceTree = "<group>"; };
+		4E97AC721FD9381700B91774 /* AITreeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AITreeData.h; path = ../../../XCPP/GameCore/AITreeData.h; sourceTree = "<group>"; };
+		4E97AC731FD9381800B91774 /* AITree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AITree.cpp; path = ../../../XCPP/GameCore/AITree.cpp; sourceTree = "<group>"; };
+		4E97AC741FD9381800B91774 /* NativeInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NativeInterface.cpp; path = ../../../XCPP/GameCore/NativeInterface.cpp; sourceTree = "<group>"; };
+		4E97AC751FD9381800B91774 /* AIBehaviour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBehaviour.cpp; path = ../../../XCPP/GameCore/AIBehaviour.cpp; sourceTree = "<group>"; };
+		4E97AC761FD9381800B91774 /* XNpcList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XNpcList.h; path = ../../../XCPP/GameCore/XNpcList.h; sourceTree = "<group>"; };
+		4E97AC771FD9381900B91774 /* AIFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIFactory.cpp; path = ../../../XCPP/GameCore/AIFactory.cpp; sourceTree = "<group>"; };
+		4E97AC781FD9381900B91774 /* NativeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NativeInterface.h; path = ../../../XCPP/GameCore/NativeInterface.h; sourceTree = "<group>"; };
+		4E97AC791FD9381900B91774 /* AIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIFactory.h; path = ../../../XCPP/GameCore/AIFactory.h; sourceTree = "<group>"; };
+		4E97AC7A1FD9381900B91774 /* AIBehaviour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIBehaviour.h; path = ../../../XCPP/GameCore/AIBehaviour.h; sourceTree = "<group>"; };
+		4E97AC7B1FD9381A00B91774 /* AIBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIBase.cpp; path = ../../../XCPP/GameCore/AIBase.cpp; sourceTree = "<group>"; };
+		4E97AC7C1FD9381A00B91774 /* AITree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AITree.h; path = ../../../XCPP/GameCore/AITree.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4E97AC3F1FD937CD00B91774 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4E97AC391FD937CD00B91774 = {
+			isa = PBXGroup;
+			children = (
+				4E97AC441FD937CD00B91774 /* GameCore */,
+				4E97AC431FD937CD00B91774 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4E97AC431FD937CD00B91774 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E97AC421FD937CD00B91774 /* libGameCore.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4E97AC441FD937CD00B91774 /* GameCore */ = {
+			isa = PBXGroup;
+			children = (
+				4E97AC7B1FD9381A00B91774 /* AIBase.cpp */,
+				4E97AC581FD9380E00B91774 /* AIBase.h */,
+				4E97AC751FD9381800B91774 /* AIBehaviour.cpp */,
+				4E97AC7A1FD9381900B91774 /* AIBehaviour.h */,
+				4E97AC771FD9381900B91774 /* AIFactory.cpp */,
+				4E97AC791FD9381900B91774 /* AIFactory.h */,
+				4E97AC531FD9380D00B91774 /* AIInterval.cpp */,
+				4E97AC591FD9380E00B91774 /* AIInterval.h */,
+				4E97AC541FD9380D00B91774 /* AISelector.cpp */,
+				4E97AC4F1FD9380D00B91774 /* AISelector.h */,
+				4E97AC6D1FD9381400B91774 /* AISequence.cpp */,
+				4E97AC5A1FD9380E00B91774 /* AISequence.h */,
+				4E97AC731FD9381800B91774 /* AITree.cpp */,
+				4E97AC7C1FD9381A00B91774 /* AITree.h */,
+				4E97AC701FD9381400B91774 /* AITreeData.cpp */,
+				4E97AC721FD9381700B91774 /* AITreeData.h */,
+				4E97AC5B1FD9380E00B91774 /* Common.cpp */,
+				4E97AC6B1FD9381300B91774 /* Common.h */,
+				4E97AC611FD9380F00B91774 /* DefaultEquip.cpp */,
+				4E97AC561FD9380D00B91774 /* DefaultEquip.h */,
+				4E97AC6C1FD9381300B91774 /* EquipSuit.cpp */,
+				4E97AC6E1FD9381400B91774 /* EquipSuit.h */,
+				4E97AC4E1FD9380D00B91774 /* FashionList.cpp */,
+				4E97AC5C1FD9380E00B91774 /* FashionList.h */,
+				4E97AC5D1FD9380E00B91774 /* FashionSuit.cpp */,
+				4E97AC5E1FD9380F00B91774 /* FashionSuit.h */,
+				4E97AC5F1FD9380F00B91774 /* HPatchTest.h */,
+				4E97AC601FD9380F00B91774 /* Log.cpp */,
+				4E97AC681FD9381100B91774 /* Log.h */,
+				4E97AC741FD9381800B91774 /* NativeInterface.cpp */,
+				4E97AC781FD9381900B91774 /* NativeInterface.h */,
+				4E97AC651FD9380F00B91774 /* NativeReader.cpp */,
+				4E97AC551FD9380D00B91774 /* NativeReader.h */,
+				4E97AC621FD9380F00B91774 /* patch_types.h */,
+				4E97AC631FD9380F00B91774 /* patch.c */,
+				4E97AC691FD9381100B91774 /* patch.h */,
+				4E97AC711FD9381700B91774 /* picojson.h */,
+				4E97AC641FD9380F00B91774 /* QteStatusList.cpp */,
+				4E97AC6A1FD9381300B91774 /* QteStatusList.h */,
+				4E97AC661FD9380F00B91774 /* SceneList.cpp */,
+				4E97AC571FD9380E00B91774 /* SceneList.h */,
+				4E97AC501FD9380D00B91774 /* XEntityPresentation.cpp */,
+				4E97AC511FD9380D00B91774 /* XEntityPresentation.h */,
+				4E97AC671FD9381000B91774 /* XEntityStatistics.cpp */,
+				4E97AC6F1FD9381400B91774 /* XEntityStatistics.h */,
+				4E97AC521FD9380D00B91774 /* XNpcList.cpp */,
+				4E97AC761FD9381800B91774 /* XNpcList.h */,
+			);
+			path = GameCore;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4E97AC411FD937CD00B91774 /* GameCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E97AC4B1FD937CD00B91774 /* Build configuration list for PBXNativeTarget "GameCore" */;
+			buildPhases = (
+				4E97AC3E1FD937CD00B91774 /* Sources */,
+				4E97AC3F1FD937CD00B91774 /* Frameworks */,
+				4E97AC401FD937CD00B91774 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GameCore;
+			productName = GameCore;
+			productReference = 4E97AC421FD937CD00B91774 /* libGameCore.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4E97AC3A1FD937CD00B91774 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "___FULLUSERNE___";
+				TargetAttributes = {
+					4E97AC411FD937CD00B91774 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4E97AC3D1FD937CD00B91774 /* Build configuration list for PBXProject "GameCore" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4E97AC391FD937CD00B91774;
+			productRefGroup = 4E97AC431FD937CD00B91774 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4E97AC411FD937CD00B91774 /* GameCore */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E97AC3E1FD937CD00B91774 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E97AC8A1FD9381A00B91774 /* XEntityStatistics.cpp in Sources */,
+				4E97AC911FD9381A00B91774 /* AIFactory.cpp in Sources */,
+				4E97AC8F1FD9381A00B91774 /* NativeInterface.cpp in Sources */,
+				4E97AC831FD9381A00B91774 /* FashionSuit.cpp in Sources */,
+				4E97AC8C1FD9381A00B91774 /* AISequence.cpp in Sources */,
+				4E97AC7D1FD9381A00B91774 /* FashionList.cpp in Sources */,
+				4E97AC871FD9381A00B91774 /* QteStatusList.cpp in Sources */,
+				4E97AC841FD9381A00B91774 /* Log.cpp in Sources */,
+				4E97AC7F1FD9381A00B91774 /* XNpcList.cpp in Sources */,
+				4E97AC821FD9381A00B91774 /* Common.cpp in Sources */,
+				4E97AC921FD9381A00B91774 /* AIBase.cpp in Sources */,
+				4E97AC801FD9381A00B91774 /* AIInterval.cpp in Sources */,
+				4E97AC8D1FD9381A00B91774 /* AITreeData.cpp in Sources */,
+				4E97AC901FD9381A00B91774 /* AIBehaviour.cpp in Sources */,
+				4E97AC891FD9381A00B91774 /* SceneList.cpp in Sources */,
+				4E97AC881FD9381A00B91774 /* NativeReader.cpp in Sources */,
+				4E97AC851FD9381A00B91774 /* DefaultEquip.cpp in Sources */,
+				4E97AC811FD9381A00B91774 /* AISelector.cpp in Sources */,
+				4E97AC861FD9381A00B91774 /* patch.c in Sources */,
+				4E97AC8B1FD9381A00B91774 /* EquipSuit.cpp in Sources */,
+				4E97AC7E1FD9381A00B91774 /* XEntityPresentation.cpp in Sources */,
+				4E97AC8E1FD9381A00B91774 /* AITree.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4E97AC491FD937CD00B91774 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4E97AC4A1FD937CD00B91774 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4E97AC4C1FD937CD00B91774 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4E97AC4D1FD937CD00B91774 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4E97AC3D1FD937CD00B91774 /* Build configuration list for PBXProject "GameCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E97AC491FD937CD00B91774 /* Debug */,
+				4E97AC4A1FD937CD00B91774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E97AC4B1FD937CD00B91774 /* Build configuration list for PBXNativeTarget "GameCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E97AC4C1FD937CD00B91774 /* Debug */,
+				4E97AC4D1FD937CD00B91774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4E97AC3A1FD937CD00B91774 /* Project object */;
+}
