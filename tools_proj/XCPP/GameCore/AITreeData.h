@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "Common.h"
+#include <unordered_map>
+
 
 enum Mode
 {
@@ -21,14 +23,17 @@ public:
 	std::string val;
 };
 
+
 class AIVar
 {
 public:
 	std::string type;
 	std::string name;
+	object val;
 };
 
-class AISharedVar
+
+class AISharedVar:public AIVar
 {
 public:
 	std::string bindName;
@@ -48,19 +53,15 @@ public:
 class AITreeData 
 {
 public :
-	template<typename T> void SetVariable(std::string name,T* value);
+	void SetVariable(std::string name,object value);
+	std::unordered_map<uint,object> GetCache();
 	
 private:
 	std::vector<AITreeVar> vars;
-	//std::map<uint,int> cache;
+	std::unordered_map<uint,object> cache;
 	AITaskData task;
 };
 
-template<typename T> 
-void SetVariable(std::string name,T* value)
-{
-	uint hash = xhash(name.c_str());
-	//cache[hash] = T;
-}
+
 
 #endif

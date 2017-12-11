@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="NativeInterface.cpp">
@@ -7,28 +7,13 @@
     <ClCompile Include="NativeReader.cpp">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="AISequence.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
     <ClCompile Include="AITree.cpp">
       <Filter>ai</Filter>
     </ClCompile>
     <ClCompile Include="AITreeData.cpp">
       <Filter>ai</Filter>
     </ClCompile>
-    <ClCompile Include="AIBase.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
     <ClCompile Include="AIBehaviour.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
-    <ClCompile Include="AIFactory.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
-    <ClCompile Include="AIInterval.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
-    <ClCompile Include="AISelector.cpp">
       <Filter>ai</Filter>
     </ClCompile>
     <ClCompile Include="XEntityPresentation.cpp">
@@ -67,6 +52,9 @@
     <ClCompile Include="Log.cpp">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="AIFactory.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\picojson.h">
@@ -78,28 +66,13 @@
     <ClInclude Include="NativeReader.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="AISequence.h">
-      <Filter>ai</Filter>
-    </ClInclude>
     <ClInclude Include="AITree.h">
       <Filter>ai</Filter>
     </ClInclude>
     <ClInclude Include="AITreeData.h">
       <Filter>ai</Filter>
     </ClInclude>
-    <ClInclude Include="AIBase.h">
-      <Filter>ai</Filter>
-    </ClInclude>
     <ClInclude Include="AIBehaviour.h">
-      <Filter>ai</Filter>
-    </ClInclude>
-    <ClInclude Include="AIFactory.h">
-      <Filter>ai</Filter>
-    </ClInclude>
-    <ClInclude Include="AIInterval.h">
-      <Filter>ai</Filter>
-    </ClInclude>
-    <ClInclude Include="AISelector.h">
       <Filter>ai</Filter>
     </ClInclude>
     <ClInclude Include="SceneList.h">
@@ -140,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="AIFactory.h">
+      <Filter>ai</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

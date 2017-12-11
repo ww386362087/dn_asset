@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,12 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AIBase.cpp" />
     <ClCompile Include="AIBehaviour.cpp" />
     <ClCompile Include="AIFactory.cpp" />
-    <ClCompile Include="AIInterval.cpp" />
-    <ClCompile Include="AISelector.cpp" />
-    <ClCompile Include="AISequence.cpp" />
     <ClCompile Include="AITree.cpp" />
     <ClCompile Include="AITreeData.cpp" />
     <ClCompile Include="Common.cpp" />
@@ -43,12 +39,8 @@
     <ClCompile Include="XNpcList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIBase.h" />
     <ClInclude Include="AIBehaviour.h" />
     <ClInclude Include="AIFactory.h" />
-    <ClInclude Include="AIInterval.h" />
-    <ClInclude Include="AISelector.h" />
-    <ClInclude Include="AISequence.h" />
     <ClInclude Include="AITree.h" />
     <ClInclude Include="AITreeData.h" />
     <ClInclude Include="Common.h" />

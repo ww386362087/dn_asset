@@ -64,7 +64,7 @@ extern "C"
 			return;
 		}
 		
-		picojson::object& o = v.get<picojson::object>();
+		object& o = v.get<object>();
 		std::string sub = o["data_subtype"].get<std::string>();
 		std::string task = o["task_type"].get<std::string>();
 
