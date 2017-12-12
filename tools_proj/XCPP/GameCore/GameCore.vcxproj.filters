@@ -55,6 +55,12 @@
     <ClCompile Include="AIFactory.cpp">
       <Filter>ai</Filter>
     </ClCompile>
+    <ClCompile Include="AIUtil.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\picojson.h">
@@ -117,6 +123,15 @@
     <ClInclude Include="AIFactory.h">
       <Filter>ai</Filter>
     </ClInclude>
+    <ClInclude Include="AIUtil.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="XMath.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -130,6 +145,9 @@
     </Filter>
     <Filter Include="table">
       <UniqueIdentifier>{4307d103-28ef-45d5-82a5-c2ee804387ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{8f70ddfe-23da-496f-a818-1ae154c35ef7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

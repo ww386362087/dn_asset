@@ -64,9 +64,12 @@ extern "C"
 			return;
 		}
 		
-		object& o = v.get<object>();
+		picojson::object& o = v.get<picojson::object>();
 		std::string sub = o["data_subtype"].get<std::string>();
 		std::string task = o["task_type"].get<std::string>();
+		picojson::value vv = o["task_type"];
+		std::string rst = vv.get<std::string>();
+		LOG("subtype: " + sub + " sub2:" + rst);
 
 		picojson::array ar = o["questions"].get<picojson::array>();
 		for (picojson::array::iterator it = ar.begin(); it != ar.end(); it++)

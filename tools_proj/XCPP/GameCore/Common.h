@@ -16,7 +16,7 @@
 #include"picojson.h"
 
 typedef unsigned int  uint;
-typedef picojson::object object;
+typedef picojson::value object;
 #define MaxStringSize 64
 #define MaxArraySize 16
 
