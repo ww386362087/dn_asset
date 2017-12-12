@@ -3,10 +3,9 @@
 
 
 #include "Common.h"
-#include <string>
 #include <iostream>
 #include "Log.h"
-#include <fstream>
+#include "Vector3.h"
 
 extern "C"
 {
@@ -19,6 +18,7 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT void iInitial(const char*,const char*);
 	ENGINE_INTERFACE_EXPORT void iJson(const char*);
 	ENGINE_INTERFACE_EXPORT void iPatch(const char*,const char*,const char*);
+	ENGINE_INTERFACE_EXPORT void iVector();
 };
 
 

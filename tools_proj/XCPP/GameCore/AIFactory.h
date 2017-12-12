@@ -11,7 +11,7 @@ public:
 	AIFactory(void);
 	~AIFactory(void);
 
-	AIBase* MakeRuntime(AITaskData* data, AITree* tree);
+	static AIBase* MakeRuntime(AITaskData* data, AITree* tree);
 };
 
 #endif

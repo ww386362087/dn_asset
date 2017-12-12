@@ -53,13 +53,15 @@ public:
 class AITreeData 
 {
 public :
+	std::vector<AITreeVar> vars;
+	AITaskData task;
+
 	void SetVariable(std::string name,object value);
 	std::unordered_map<uint,object> GetCache();
 	
 private:
-	std::vector<AITreeVar> vars;
 	std::unordered_map<uint,object> cache;
-	AITaskData task;
+	
 };
 
 

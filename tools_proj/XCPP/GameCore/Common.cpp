@@ -54,3 +54,14 @@ int countUTF8Char(const std::string &s)
 	}
 	return Count;
 }
+
+
+std::string readFile(const char* file)
+{
+	std::ifstream ifile(file);
+	std::ostringstream buf;
+	char ch;
+	while (buf&&ifile.get(ch)) buf.put(ch);
+	ifile.close();
+	return buf.str();
+}

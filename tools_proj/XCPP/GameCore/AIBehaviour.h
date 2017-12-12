@@ -3,6 +3,7 @@
 
 
 #include "AITree.h"
+#include "AIFactory.h"
 #include <vector>
 
 enum AIStatus
@@ -18,7 +19,7 @@ class AIBase
 {
 public:
 	virtual void Init(AITaskData* data);
-	virtual void OnTick();
+	virtual AIStatus OnTick();
 	void SetTree(AITree* tree);
 
 protected:
@@ -30,7 +31,7 @@ class AISequence:public AIBase
 {
 public:
 	virtual void Init(AITaskData* data);
-	virtual void OnTick();
+	virtual AIStatus OnTick();
 private:
 	std::vector<AIBase> list;
 };
@@ -40,7 +41,7 @@ class AISelector:public AIBase
 {
 public :
 	virtual void Init(AITaskData* data);
-	virtual void OnTick();
+	virtual AIStatus OnTick();
 
 private:
 	std::vector<AIBase> list;
@@ -51,10 +52,10 @@ class AIInterval:public AIBase
 {
 public:
 	virtual void Init(AITaskData* data);
-	virtual void OnTick();
+	virtual AIStatus OnTick();
 
 private:
-	AIBase node;
+	AIBase* node;
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "AITree.h"
-
+#include "AIUtil.h"
+#include "AIFactory.h"
 
 AITree::AITree(void)
 {
@@ -9,7 +10,6 @@ AITree::AITree(void)
 		"Inverter" };
 
 }
-
 
 AITree::~AITree(void)
 {
@@ -23,14 +23,18 @@ void AITree::EnableBehaviourTree(bool enable)
 
 bool AITree::SetBehaviourTree(std::string name)
 {
-
+	 AIUtil::Load(name,*_tree_data);
+	_tree_behaviour = AIFactory::MakeRuntime(&_tree_data->task, this);
 	return true;
 }
 
 
 void AITree::SetVariable(std::string name, object value)
 {
-
+	if (_enable && _tree_data)
+	{
+		_tree_data->SetVariable(name, value);
+	}
 }
 
 
@@ -48,11 +52,14 @@ void AITree::GetVariable(std::string name,object& obj)
 
 void AITree::SetManual(bool enable)
 {
-
+	//do nothing here 
 }
 
 
 void AITree::TickBehaviorTree()
 {
-
+	if (_enable && _tree_behaviour)
+	{
+		_tree_behaviour->OnTick();
+	}
 }

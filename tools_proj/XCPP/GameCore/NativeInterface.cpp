@@ -37,21 +37,8 @@ extern "C"
 	void iJson(const char* file)
 	{
 		LOG("READ JSON START");
-		std::ifstream json_file;  
-		json_file.open(file);  
-		std::string json;  
-		if (!json_file.is_open())  
-		{  
-			ERROR("Error opening file");
-			exit(1);  
-		}  
-		std::string s;
-		while(getline(json_file,s))
-		{
-			json+=s;
-		}
-		json_file.close();
-		
+		std::string json = readFile(file);
+
 		/*picojson π”√≤Œ’’: 
 		 *	http://www.sokoide.com/wp/2015/07/26/header-only-cpp-json-library-picojson/
 		 *	https://github.com/kazuho/picojson
@@ -67,7 +54,7 @@ extern "C"
 		picojson::object& o = v.get<picojson::object>();
 		std::string sub = o["data_subtype"].get<std::string>();
 		std::string task = o["task_type"].get<std::string>();
-		picojson::value vv = o["task_type"];
+		object vv = o["task_type"];
 		std::string rst = vv.get<std::string>();
 		LOG("subtype: " + sub + " sub2:" + rst);
 
@@ -85,6 +72,18 @@ extern "C"
 			LOG("questid: "+tostring(questid));
 			LOG("sub"+tostring(rt));
 		 }
+	}
+
+	void iVector()
+	{
+		Vector3* v3 = new Vector3(2.0, 2.0, 4.0);
+		LOG(tostring(*v3));
+		Vector3* v4 = new Vector3(1.0, 1.2, 2);
+		*v3 = Vector3::one + *v4;
+		LOG(tostring(*v3));
+
+		Vector3 zv = Vector3::zero;
+		LOG(tostring(zv));
 	}
 
 }

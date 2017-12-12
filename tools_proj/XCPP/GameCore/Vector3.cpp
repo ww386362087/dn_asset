@@ -9,9 +9,9 @@ const Vector3 Vector3::right(1, 0, 0);
 const Vector3 Vector3::one(1, 1, 1);
 const Vector3 Vector3::zero(0, 0, 0);
 
-std::ostream & operator<<(std::ostream &stream, const Vector3 &pos)
+std::ostream& operator<<(std::ostream &stream, const Vector3 &pos)
 {
-	stream << "(" << pos.x << ", " << pos.y << ", " << pos.z << ")";
+	stream << "(" << pos.x << "," << pos.y << "," << pos.z << ")";
 	return stream;
 }
 

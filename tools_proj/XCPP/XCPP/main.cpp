@@ -18,6 +18,7 @@ typedef int(*DllReadQteTable)();
 typedef int(*DllReadSuitTable)();
 typedef void(*DllReadJson)(const char*);
 typedef void(*DllPatch)(const char*, const char*, const char*);
+typedef void(*DllVector)();
 DllCommand cb;
 DllInitial init;
 DllAdd add;
@@ -26,6 +27,7 @@ DllReadQteTable qte;
 DllReadSuitTable suit;
 DllReadJson json;
 DllPatch patch;
+DllVector vect;
 
 void DebugInfo()
 {
@@ -112,6 +114,7 @@ void main()
 	suit = (DllReadSuitTable)GetProcAddress(hInst, "iGetEquipSuitLength");
 	json = (DllReadJson)GetProcAddress(hInst, "iJson");
 	patch = (DllPatch)GetProcAddress(hInst, "iPatch");
+	vect = (DllVector)GetProcAddress(hInst, "iVector");
 	cb(OnCallback);
 	init("", "");
 
@@ -146,6 +149,9 @@ void main()
 				"D:/projects/dn_asset/Assets/StreamingAssets/Patch/diff.patch",
 				"D:/projects/dn_asset/Assets/StreamingAssets/Patch/nex.txt");
 			cout << "patch finish!" << endl << endl;
+			break;
+		case 'v':
+			vect();
 			break;
 		default:
 			cout << "invalid command" << endl << endl;

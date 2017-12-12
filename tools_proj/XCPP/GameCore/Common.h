@@ -12,8 +12,9 @@
 #endif
 
 #include <sstream> 
-#include<string>
+#include <string>
 #include"picojson.h"
+#include <fstream>
 
 typedef unsigned int  uint;
 typedef picojson::value object;
@@ -52,5 +53,7 @@ uint xhash(const char* ch);
 bool isNumber(const std::string& value);
 
 int countUTF8Char(const std::string &s);
+
+std::string readFile(const char* file);
 
 #endif
