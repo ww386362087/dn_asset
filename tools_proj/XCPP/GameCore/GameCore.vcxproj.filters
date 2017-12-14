@@ -61,6 +61,9 @@
     <ClCompile Include="Vector3.cpp">
       <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="AIRuntimeRotateSelf.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\picojson.h">
@@ -132,6 +135,12 @@
     <ClInclude Include="Vector3.h">
       <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="AIRuntimeRotateSelf.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="AIType.h">
+      <Filter>ai</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -148,6 +157,9 @@
     </Filter>
     <Filter Include="math">
       <UniqueIdentifier>{8f70ddfe-23da-496f-a818-1ae154c35ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ai\runtime">
+      <UniqueIdentifier>{8f95295f-633e-41ba-abce-bda739526be3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

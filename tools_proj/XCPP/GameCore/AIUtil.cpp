@@ -10,7 +10,7 @@ void AIUtil::Load(std::string name, AITreeData& data)
 	Parse(str, name, data);
 }
 
-void AIUtil::Parse(std::string json, std::string name, AITreeData& data)
+void AIUtil::Parse(std::string json, std::string name, AITreeData& tree)
 {
 	picojson::value v;
 	std::string err = picojson::parse(v, json);
@@ -20,17 +20,16 @@ void AIUtil::Parse(std::string json, std::string name, AITreeData& data)
 		return;
 	}
 	picojson::object& o = v.get<picojson::object>();
-	AITreeData* tree = new AITreeData();
-	tree->vars.clear();
+	tree.vars.clear();
 	picojson::array ar = o["Variables"].get<picojson::array>();
 	for (picojson::array::iterator it = ar.begin(); it != ar.end(); it++)
 	{
 		AITreeVar* var = new AITreeVar();
 		ParseTreeVar(it->get<picojson::object>(), *var);
-		tree->vars.push_back(*var);
+		tree.vars.push_back(*var);
 	}
 	picojson::object root = o["RootTask"].get<picojson::object>();
-	ParseTask(root, tree->task);
+	ParseTask(root, tree.task);
 }
 
 void AIUtil::ParseTreeVar(picojson::object& arg, AITreeVar& var)

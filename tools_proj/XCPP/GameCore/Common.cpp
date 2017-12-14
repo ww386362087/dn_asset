@@ -24,8 +24,8 @@ uint xhash(const char* pChar)
 {
 	if(pChar == NULL) return 0;
 	uint hash = 0;
-	uint len = strlen(pChar);
-	for (unsigned int i = 0; i < len; ++i)
+	size_t len = strlen(pChar);
+	for (size_t i = 0; i < len; ++i)
 	{
 		hash = (hash << 5) + hash + pChar[i];
 	}

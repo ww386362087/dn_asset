@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="AIBehaviour.cpp" />
     <ClCompile Include="AIFactory.cpp" />
+    <ClCompile Include="AIRuntimeRotateSelf.cpp" />
     <ClCompile Include="AITree.cpp" />
     <ClCompile Include="AITreeData.cpp" />
     <ClCompile Include="AIUtil.cpp" />
@@ -43,8 +44,10 @@
   <ItemGroup>
     <ClInclude Include="AIBehaviour.h" />
     <ClInclude Include="AIFactory.h" />
+    <ClInclude Include="AIRuntimeRotateSelf.h" />
     <ClInclude Include="AITree.h" />
     <ClInclude Include="AITreeData.h" />
+    <ClInclude Include="AIType.h" />
     <ClInclude Include="AIUtil.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="common\picojson.h" />

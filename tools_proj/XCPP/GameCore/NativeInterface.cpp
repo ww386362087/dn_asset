@@ -76,14 +76,14 @@ extern "C"
 
 	void iVector()
 	{
-		Vector3* v3 = new Vector3(2.0, 2.0, 4.0);
+		Vector3* v3 = new Vector3(2.0f, 2.0f, 4.0f);
 		LOG(tostring(*v3));
-		Vector3* v4 = new Vector3(1.0, 1.2, 2);
+		Vector3* v4 = new Vector3(1.0f, 1.2f, 2.0f);
 		*v3 = Vector3::one + *v4;
 		LOG(tostring(*v3));
 
 		Vector3 zv = Vector3::zero;
-		LOG(tostring(zv));
+		LOG(tostring(zv));		
 	}
 
 }

@@ -43,9 +43,8 @@ void AITree::GetVariable(std::string name,object& obj)
 	if (_enable)
 	{
 		uint hash = xhash(name.c_str());
-		_tree_data->GetCache();
-
-	
+		std::unordered_map<uint,object> map = _tree_data->GetCache();
+		obj = map[hash];
 	}
 }
 

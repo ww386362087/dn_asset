@@ -17,7 +17,7 @@ void AISequence::Init(AITaskData* data)
 	if (data->children.size()>0)
 	{
 		list.clear();
-		for (int i = 0, max = data->children.size(); i < max; i++)
+		for (size_t i = 0, max = data->children.size(); i < max; i++)
 		{
 			AIBase* run = AIFactory::MakeRuntime(&data->children[i], _tree);
 			list.push_back(*run);
@@ -30,7 +30,7 @@ AIStatus AISequence::OnTick()
 {
 	if (list.size() > 0)
 	{
-		for (int i = 0, max = list.size(); i < max; i++)
+		for (size_t i = 0, max = list.size(); i < max; i++)
 		{
 			if (list[i].OnTick() == Failure)
 			{
@@ -47,7 +47,7 @@ void AISelector::Init(AITaskData* data)
 	if (data->children.size()>0)
 	{
 		list.clear();
-		for (int i = 0, max = data->children.size(); i < max; i++)
+		for (size_t i = 0, max = data->children.size(); i < max; i++)
 		{
 			AIBase* run = AIFactory::MakeRuntime(&data->children[i], _tree);
 			list.push_back(*run);
@@ -60,7 +60,7 @@ AIStatus AISelector::OnTick()
 {
 	if (list.size() > 0)
 	{
-		for (int i = 0, max = list.size(); i < max; i++)
+		for (size_t i = 0, max = list.size(); i < max; i++)
 		{
 			if (list[i].OnTick() == Success)
 			{
