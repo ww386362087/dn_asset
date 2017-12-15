@@ -64,11 +64,14 @@
     <ClCompile Include="AIRuntimeRotateSelf.cpp">
       <Filter>ai\runtime</Filter>
     </ClCompile>
+    <ClCompile Include="GameMain.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common\picojson.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="NativeInterface.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -141,6 +144,21 @@
     <ClInclude Include="AIType.h">
       <Filter>ai</Filter>
     </ClInclude>
+    <ClInclude Include="GameMain.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="picojson.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -160,6 +178,9 @@
     </Filter>
     <Filter Include="ai\runtime">
       <UniqueIdentifier>{8f95295f-633e-41ba-abce-bda739526be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{9b015484-d1f3-46cf-b123-f18a3b47b58b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

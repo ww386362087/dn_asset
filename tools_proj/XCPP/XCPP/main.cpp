@@ -18,7 +18,8 @@ typedef int(*DllReadQteTable)();
 typedef int(*DllReadSuitTable)();
 typedef void(*DllReadJson)(const char*);
 typedef void(*DllPatch)(const char*, const char*, const char*);
-typedef void(*DllVector)();
+typedef void(*DllCallWithVoid)();
+
 DllCommand cb;
 DllInitial init;
 DllAdd add;
@@ -27,7 +28,9 @@ DllReadQteTable qte;
 DllReadSuitTable suit;
 DllReadJson json;
 DllPatch patch;
-DllVector vect;
+DllCallWithVoid vect;
+DllCallWithVoid start;
+DllCallWithVoid stop;
 
 void DebugInfo()
 {
@@ -114,7 +117,9 @@ void main()
 	suit = (DllReadSuitTable)GetProcAddress(hInst, "iGetEquipSuitLength");
 	json = (DllReadJson)GetProcAddress(hInst, "iJson");
 	patch = (DllPatch)GetProcAddress(hInst, "iPatch");
-	vect = (DllVector)GetProcAddress(hInst, "iVector");
+	vect = (DllCallWithVoid)GetProcAddress(hInst, "iVector");
+	start = (DllCallWithVoid)GetProcAddress(hInst, "iStartGame");
+	stop = (DllCallWithVoid)GetProcAddress(hInst, "iStopGame");
 	cb(OnCallback);
 	init("", "");
 
@@ -152,6 +157,12 @@ void main()
 			break;
 		case 'v':
 			vect();
+			break;
+		case 'r':
+			start();
+			break;
+		case 'o':
+			stop();
 			break;
 		default:
 			cout << "invalid command" << endl << endl;

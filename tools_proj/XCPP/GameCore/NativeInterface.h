@@ -7,6 +7,7 @@
 #include "Log.h"
 #include "Vector3.h"
 
+
 extern "C"
 {
 	typedef void(*CALLBACK)(unsigned char,const char*);
