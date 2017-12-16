@@ -70,6 +70,42 @@
     <ClCompile Include="GameTime.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerMgr.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="XObject.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XEntity.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XRole.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XAIComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XBeHitComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XNavigationComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XAudioComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XEntityMgr.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XPlayer.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XSkillComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NativeInterface.h">
@@ -150,14 +186,47 @@
     <ClInclude Include="GameTime.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="picojson.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerMgr.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="XObject.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntity.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XRole.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XAIComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XBeHitComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XNavigationComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XAudioComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityMgr.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XPlayer.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XSkillComponent.h">
+      <Filter>component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +250,12 @@
     </Filter>
     <Filter Include="main">
       <UniqueIdentifier>{9b015484-d1f3-46cf-b123-f18a3b47b58b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entity">
+      <UniqueIdentifier>{b75a89e7-0ddf-40bf-b22b-88b68ea43ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="component">
+      <UniqueIdentifier>{12ee08ad-95e8-49e2-b891-509351cdc818}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

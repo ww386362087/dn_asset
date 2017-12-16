@@ -1,39 +1,32 @@
-#ifndef  __timer__
-#define  __timer__
+#ifndef  __Timer__
+#define  __Timer__
 
 #include "Common.h"
+#include "TimerMgr.h"
 
-
-class ITimer
+class Timer
 {
 public:
-	virtual ~ITimer() {}
-	
-	virtual void OnTimer(uint dwID, uint dwCount) = 0;
+	Timer(int time, int loop, OnTimerUpdate handler, uint sequence, uint arg);
+	void Update(int deltaTime);
+	bool IsFinished();
+	int GetCurrentTime();
+	void Pause();
+	void Resume();
+	void Reset();
+	bool IsSequenceMatched(uint sequence);
+	bool IsDelegateMatched(OnTimerUpdate handler);
+
+
+private:
+	OnTimerUpdate m_timeUpHandler;
+	uint m_arg;
+	int m_loop;
+	int m_totalTime;
+	int m_currentTime;
+	bool m_isFinished;
+	bool m_isRunning;
+	uint m_sequence;
 };
-
-
-
-class  ITimerMgr
-{
-public:
-	virtual	~ITimerMgr() {}
-
-	//poTimer:		Timer回调接口
-	//dwID:			定时Identifier
-	//dwInterval:	定时间隔，毫秒为单位	
-	//nCount:		触发次数, -1为永远触发 
-	//返回token
-	virtual uint SetTimer(ITimer* pTimer, uint dwID, uint dwInterval, uint dwCount) = 0;
-
-	virtual uint GetTimeLeft(uint token) = 0;
-
-	virtual void KillTimer(uint token) = 0;
-
-	virtual void Update() = 0;
-
-	virtual void Release() = 0;
-};
-
 
 #endif

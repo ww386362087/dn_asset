@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "GameTime.h"
 #include "Singleton.h"
+#include <ctime> 
 
 /*
 	fps:30 tick = run + sleep
@@ -18,13 +19,13 @@ class GameMain:public Singleton<GameMain>
 
 public:
 	void Run();
-	void Ontick();
+	void Ontick(long diff);
 	void Start();
 	void Stop();
 
 private :
-	uint diff = 0;
-	bool start = false;
+	long m_diff = 0;
+	bool m_start = false;
 };
 
 

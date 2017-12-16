@@ -19,7 +19,7 @@ namespace GameTime
 
 	void sleep(unsigned milliseconds)
 	{
-#ifdef _WIN32
+#ifdef _WIN32 
 		Sleep(milliseconds);
 #else
 		usleep(milliseconds * 1000);

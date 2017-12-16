@@ -38,10 +38,22 @@
     <ClCompile Include="QteStatusList.cpp" />
     <ClCompile Include="SceneList.cpp" />
     <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TimerMgr.cpp" />
+    <ClCompile Include="XAIComponent.cpp" />
+    <ClCompile Include="XAudioComponent.cpp" />
+    <ClCompile Include="XBeHitComponent.cpp" />
+    <ClCompile Include="XEntity.cpp" />
+    <ClCompile Include="XEntityMgr.cpp" />
     <ClCompile Include="XEntityPresentation.cpp" />
     <ClCompile Include="XEntityStatistics.cpp" />
+    <ClCompile Include="XNavigationComponent.cpp" />
     <ClCompile Include="XNpcList.cpp" />
     <ClCompile Include="Vector3.cpp" />
+    <ClCompile Include="XObject.cpp" />
+    <ClCompile Include="XPlayer.cpp" />
+    <ClCompile Include="XRole.cpp" />
+    <ClCompile Include="XSkillComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIBehaviour.h" />
@@ -68,11 +80,22 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TimerMgr.h" />
+    <ClInclude Include="XAIComponent.h" />
+    <ClInclude Include="XAudioComponent.h" />
+    <ClInclude Include="XBeHitComponent.h" />
+    <ClInclude Include="XEntity.h" />
+    <ClInclude Include="XEntityMgr.h" />
     <ClInclude Include="XEntityPresentation.h" />
     <ClInclude Include="XEntityStatistics.h" />
     <ClInclude Include="XMath.h" />
+    <ClInclude Include="XNavigationComponent.h" />
     <ClInclude Include="XNpcList.h" />
     <ClInclude Include="Vector3.h" />
+    <ClInclude Include="XObject.h" />
+    <ClInclude Include="XPlayer.h" />
+    <ClInclude Include="XRole.h" />
+    <ClInclude Include="XSkillComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E0F3B7DD-2CFB-4B09-8A42-C742879ABA2F}</ProjectGuid>

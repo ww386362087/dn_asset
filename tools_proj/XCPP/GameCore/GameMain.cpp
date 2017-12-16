@@ -1,43 +1,44 @@
 #include "GameMain.h"
-
+#include "XEntityMgr.h"
 
 void GameMain::Run()
 {
-	while (start)
+	while (m_start)
 	{
-		time_t time = GameTime::GetMSTime();
-
-		Ontick();
-
-		time_t _now = GameTime::GetMSTime();
-		diff = (uint)(_now - time);
-		if (diff < GAME_TICK)
+		clock_t time = clock();
+		Ontick(m_diff);
+		long ex = clock() - time;
+		if (ex < GAME_TICK)
 		{
-			GameTime::sleep((GAME_TICK - diff));
+			GameTime::sleep(GAME_TICK - ex);
 		}
-		time = GameTime::GetMSTime();
+		m_diff = clock() - time;
 	}
 }
 
 int i = 0;
-void GameMain::Ontick()
+void GameMain::Ontick(long diff)
 {
 	i++;
-	std::cout << "i is: "<<i << std::endl;
+	std::cout << " tick" << i << " : " << diff << std::endl;
+	float ft = 1000;
+	float delta = diff / ft;
+	XEntityMgr::Instance()->Update(diff);
+	XEntityMgr::Instance()->LateUpdate();
 }
 
 
 void GameMain::Start()
 {
-	start = true;
-	diff = 0;
+	m_start = true;
+	m_diff = 0;
 	Run();
 }
 
 
 void GameMain::Stop()
 {
-	start = false;
+	m_start = false;
 }
 
 
