@@ -43,7 +43,6 @@ public:
 	void AttachToHost();
 	void DetachFromHost();
 	XEntity* GetEntity(uint id);
-	//XEntity* CreateEntity<T>(uint staticid, Vector3 pos, Quaternion rot) where T : XEntity
 	XRole* CreateTestRole();
 	XPlayer* CreatePlayer();
 
@@ -51,7 +50,7 @@ private:
 	std::vector<XEntity*> _empty;
 	std::unordered_set<XEntity*> _hash_entities;
 	std::unordered_map<uint, XEntity*> _dic_entities;
-	std::unordered_map<EntityType, std::vector<XEntity*>> _map_entities;
+	//std::unordered_map<EntityType, std::vector<XEntity*>> _map_entities;
 };
 
 #endif
