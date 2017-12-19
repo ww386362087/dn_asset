@@ -7,8 +7,10 @@ class GameObject
 {
 public:
 	GameObject();
+	GameObject(const char* nm);
 	~GameObject();
 
+	const char* name;
 	const char* tag;
 	Transform* transform;
 	int layer;

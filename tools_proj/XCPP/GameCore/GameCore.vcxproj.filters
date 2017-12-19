@@ -121,6 +121,9 @@
     <ClCompile Include="Transform.cpp">
       <Filter>common\unity</Filter>
     </ClCompile>
+    <ClCompile Include="XAttributes.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -261,8 +264,14 @@
     <ClInclude Include="Transform.h">
       <Filter>common\unity</Filter>
     </ClInclude>
+    <ClInclude Include="XAttributes.h">
+      <Filter>component</Filter>
+    </ClInclude>
     <ClInclude Include="XStateDefine.h">
-      <Filter>common</Filter>
+      <Filter>common\def</Filter>
+    </ClInclude>
+    <ClInclude Include="XAttributeDefine.h">
+      <Filter>common\def</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +319,9 @@
     </Filter>
     <Filter Include="common\unity">
       <UniqueIdentifier>{5beea8bd-414f-4845-95a3-1ec38c7f253c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\def">
+      <UniqueIdentifier>{a6bd96aa-7df5-4cc5-8124-9465b612cc64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

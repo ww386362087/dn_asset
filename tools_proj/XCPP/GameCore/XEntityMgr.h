@@ -1,16 +1,19 @@
 #ifndef  __XEntityMgr__
 #define  __XEntityMgr__
 
-#include<vector>
-#include<unordered_map>
-#include<unordered_set>
-#include"Common.h"
-//#include "NativeInterface.h"
-#include"Singleton.h"
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include "Common.h"
+#include "Singleton.h"
 
 class XEntity;
 class XRole;
 class XPlayer;
+class Vector3;
+class XAttributes;
+class GameObject;
+class Transform;
 
 enum EntityType
 {
@@ -33,7 +36,6 @@ enum EntityType
 	Ship_End = 11
 };
 
-
 class XEntityMgr:public Singleton<XEntityMgr>
 {
 public:
@@ -44,6 +46,10 @@ public:
 	XEntity* GetEntity(uint id);
 	XRole* CreateTestRole();
 	XPlayer* CreatePlayer();
+	void UnloadAll();
+	XEntity* PrepareEntity(XAttributes* attr);
+	void UnloadEntity(uint id);
+	XEntity* CreateEntity(uint staticid, Vector3* pos, Vector3* rot);
 
 private:
 	std::vector<XEntity*> _empty;
@@ -51,6 +57,8 @@ private:
 	std::unordered_map<uint, XEntity*> _dic_entities;
 	std::unordered_map<int, std::vector<XEntity*>> _map_entities;
 };
+
+
 
 
 #endif

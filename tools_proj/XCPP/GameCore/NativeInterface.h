@@ -6,7 +6,7 @@
 #include <iostream>
 #include "Log.h"
 #include "Vector3.h"
-
+#include "XEntityMgr.h"
 
 extern "C"
 {

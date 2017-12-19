@@ -9,18 +9,19 @@ void XEntity::Update(float delta)
 
 void XEntity::LateUpdate()
 {
-
 }
 
 void XEntity::AttachToHost()
 {
-
 }
 
 void XEntity::DetachFromHost()
 {
-
 }
+
+void XEntity::OnInitial() {}
+
+void XEntity::OnUnintial() {}
 
 bool XEntity::IsBoss()
 {
@@ -48,15 +49,21 @@ void XEntity::MoveForward(Vector3 forward)
 	_force_move = true;
 }
 
-
 void XEntity::StopMove()
 {
 	_force_move = false;
 	_forward = Vector3::zero;
 }
 
-
 void XEntity::OnDied()
 {
 	_state = XState_Death;
+}
+
+void XEntity::UnloadEntity()
+{
+	_attr = 0;
+	_object = 0;
+	OnUnintial();
+	Unload();
 }

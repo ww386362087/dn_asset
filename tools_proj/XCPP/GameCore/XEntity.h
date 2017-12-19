@@ -8,6 +8,8 @@
 #include "Vector3.h"
 #include "XStateDefine.h"
 
+class  XAttributes;
+
 class XEntity:public XObject
 {
 public:
@@ -16,6 +18,8 @@ public:
 	virtual void LateUpdate();
 	virtual void AttachToHost();
 	virtual void DetachFromHost();
+	virtual void OnInitial();
+	virtual void OnUnintial();
 
 	bool IsPlayer();
 	bool IsRole();
@@ -25,7 +29,7 @@ public:
 	void MoveForward(Vector3 forward);
 	void StopMove();
 	void OnDied();
-
+	void UnloadEntity();
 	uint EntityID;
 
 protected:
@@ -37,6 +41,7 @@ protected:
 	bool _force_move = false;
 	bool _freeze = false;
 	Vector3 _forward = Vector3::zero;
+	XAttributes* _attr;
 	XStateDefine _state = XState_Idle;
 
 };
