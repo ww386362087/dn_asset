@@ -12,7 +12,7 @@ protected:
 public:
 	static T* Instance()
 	{
-		if (m_instance == NULL)
+		if (m_instance == 0)
 		{
 			m_instance = new T();
 		}
@@ -24,7 +24,7 @@ public:
 		if (m_instance)
 		{
 			delete m_instance;
-			m_instance = NULL;
+			m_instance = 0;
 		}
 	}
 
@@ -32,6 +32,6 @@ protected:
 	static T* m_instance;
 };
 
-template <typename T> T* Singleton<T>::m_instance = NULL;
+template <typename T> T* Singleton<T>::m_instance = 0;
 
 #endif

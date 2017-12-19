@@ -1,14 +1,14 @@
 #include "Timer.h"
 
 
-Timer::Timer(int time, int loop, OnTimerUpdate handler, uint sequence, uint arg)
+Timer::Timer(int time, int loop, ITimerCallback* handler, uint sequence, ITimerArg* arg)
 {
 	if (loop == 0) loop = -1;
 
 	m_totalTime = time;
 	m_arg = arg;
 	m_loop = loop;
-	m_timeUpHandler = handler;
+	m_handler = handler;
 	m_sequence = sequence;
 
 	m_currentTime = 0;
@@ -29,9 +29,9 @@ void Timer::Update(int deltaTime)
 		m_currentTime += deltaTime;
 		if (m_currentTime >= m_totalTime)
 		{
-			if (m_timeUpHandler)
+			if (m_handler)
 			{
-				m_timeUpHandler(m_arg);
+				m_handler->TimerCallback(m_arg);
 			}
 			m_currentTime = 0;
 			m_loop--;
@@ -69,7 +69,7 @@ bool Timer::IsSequenceMatched(uint sequence)
 	return (m_sequence == sequence);
 }
 
-bool Timer::IsDelegateMatched(OnTimerUpdate handler)
+bool Timer::IsDelegateMatched(ITimerCallback* handler)
 {
-	return (m_timeUpHandler == handler);
+	return (m_handler == handler);
 }

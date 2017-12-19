@@ -13,7 +13,7 @@ public class XEventMgr : XSingleton<XEventMgr>
 {
 
 
-    public Dictionary<XEventDefine, HashSet<XObject>> pool;
+    private Dictionary<XEventDefine, HashSet<XObject>> pool;
 
 
     public void AddRegist(XEventDefine def, XObject obj)

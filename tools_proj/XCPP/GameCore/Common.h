@@ -19,6 +19,9 @@
 typedef unsigned int  uint;
 typedef unsigned long long ulong;
 typedef picojson::value object;
+
+
+
 #define MaxStringSize 64
 #define MaxArraySize 16
 

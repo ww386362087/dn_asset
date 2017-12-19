@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="NativeInterface.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="NativeReader.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="AITree.cpp">
       <Filter>ai</Filter>
     </ClCompile>
@@ -49,9 +43,6 @@
     <ClCompile Include="patch.c">
       <Filter>patch</Filter>
     </ClCompile>
-    <ClCompile Include="Log.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="AIFactory.cpp">
       <Filter>ai</Filter>
     </ClCompile>
@@ -69,12 +60,6 @@
     </ClCompile>
     <ClCompile Include="GameTime.cpp">
       <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="TimerMgr.cpp">
-      <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="XObject.cpp">
       <Filter>entity</Filter>
@@ -106,14 +91,35 @@
     <ClCompile Include="XSkillComponent.cpp">
       <Filter>component</Filter>
     </ClCompile>
+    <ClCompile Include="XComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XEventDef.cpp">
+      <Filter>common\event</Filter>
+    </ClCompile>
+    <ClCompile Include="XEventArgs.cpp">
+      <Filter>common\event</Filter>
+    </ClCompile>
+    <ClCompile Include="XEventMgr.cpp">
+      <Filter>common\event</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>common\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="XTimerMgr.cpp">
+      <Filter>common\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>common\log</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeReader.cpp">
+      <Filter>common\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeInterface.cpp">
+      <Filter>common\native</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NativeInterface.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="NativeReader.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="AITree.h">
       <Filter>ai</Filter>
     </ClInclude>
@@ -159,9 +165,6 @@
     <ClInclude Include="patch_types.h">
       <Filter>patch</Filter>
     </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="AIFactory.h">
       <Filter>ai</Filter>
     </ClInclude>
@@ -190,12 +193,6 @@
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="picojson.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="TimerMgr.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="XObject.h">
@@ -228,6 +225,36 @@
     <ClInclude Include="XSkillComponent.h">
       <Filter>component</Filter>
     </ClInclude>
+    <ClInclude Include="XComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XEventDef.h">
+      <Filter>common\event</Filter>
+    </ClInclude>
+    <ClInclude Include="XEventArgs.h">
+      <Filter>common\event</Filter>
+    </ClInclude>
+    <ClInclude Include="XEventMgr.h">
+      <Filter>common\event</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>common\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="XTimerMgr.h">
+      <Filter>common\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="ITimerCallback.h">
+      <Filter>common\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>common\log</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeReader.h">
+      <Filter>common\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeInterface.h">
+      <Filter>common\native</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -256,6 +283,21 @@
     </Filter>
     <Filter Include="component">
       <UniqueIdentifier>{12ee08ad-95e8-49e2-b891-509351cdc818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\timer">
+      <UniqueIdentifier>{4fe5b529-944b-40d1-b6a9-fa9887d9ec54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\log">
+      <UniqueIdentifier>{a9914f35-9e58-498d-b3c7-9da3c198646c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\reader">
+      <UniqueIdentifier>{c413834c-5f74-49f6-99ab-6d286cb2d179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\native">
+      <UniqueIdentifier>{7f281820-c500-4f2c-b6e3-78e6f5f52986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\event">
+      <UniqueIdentifier>{74dba9bc-4a14-4af8-a9c8-2300dfcb8038}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

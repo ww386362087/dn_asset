@@ -2,7 +2,8 @@
 #include<Windows.h>
 #include<time.h>
 #include<string> 
-
+#include<unordered_map>
+#include<unordered_set>
 
 using namespace std;
 
@@ -35,12 +36,7 @@ DllCallWithVoid stop;
 
 void DebugInfo()
 {
-	cout << "********* op *********" << endl;
-	cout << "** a stands for Add **" << endl;
-	cout << "** s stands for Sub **" << endl;
-	cout << "** t stands for Read *" << endl;
-	cout << "** j stands for Json *" << endl;
-	cout << "** q stands for Quit *" << endl;
+	cout << "** a-Add  s-Sub  t-Read j-Json  q-Quit **" << endl;
 	cout << "** input your command:";
 }
 
@@ -97,6 +93,28 @@ void OnCallback(unsigned char type, const char* cont)
 		cout << "> " << cont << endl;
 	else
 		cout << "no parse symbol" << endl;
+}
+
+struct Str
+{
+	int a;
+};
+unordered_map<int, vector<bool>> mpool;
+void StlTest()
+{
+	mpool[2].push_back(true);
+	cout << "map size:" << mpool.size() << " set size: " << mpool[2].size() << endl << endl;
+
+	std::vector<Str> vec;
+	Str* s = new Str();
+	s->a = 3;
+	vec.push_back(*s);
+
+	cout << s << endl;
+	delete s;
+	vec.erase(vec.begin());
+	cout << s << " size: "<<vec.size()<<endl << endl;
+
 }
 
 void main()
@@ -164,6 +182,9 @@ void main()
 			break;
 		case 'o':
 			stop();
+			break;
+		case 'b':
+			StlTest();
 			break;
 		default:
 			cout << "invalid command" << endl << endl;

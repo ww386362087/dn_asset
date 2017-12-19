@@ -23,7 +23,7 @@ void GameMain::Ontick(long diff)
 	std::cout << " tick" << i << " : " << diff << std::endl;
 	float ft = 1000;
 	float delta = diff / ft;
-	XEntityMgr::Instance()->Update(diff);
+	XEntityMgr::Instance()->Update(delta);
 	XEntityMgr::Instance()->LateUpdate();
 }
 
@@ -46,7 +46,6 @@ extern "C"
 {
 	void iStartGame()
 	{
-
 		GameMain::Instance()->Start();
 	}
 

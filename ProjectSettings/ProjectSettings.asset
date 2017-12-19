@@ -126,7 +126,7 @@ PlayerSettings:
   m_HolographicPauseOnTrackingLoss: 1
   xboxOneDisableKinectGpuReservation: 0
   protectGraphicsMemory: 0
-  AndroidBundleVersionCode: 171214
+  AndroidBundleVersionCode: 171216
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 0
   aotOptions: nrgctx-trampolines=4096,nimt-trampolines=4096,ntrampolines=4096
