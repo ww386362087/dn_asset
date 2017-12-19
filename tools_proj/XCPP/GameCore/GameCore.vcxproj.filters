@@ -94,9 +94,6 @@
     <ClCompile Include="XComponent.cpp">
       <Filter>component</Filter>
     </ClCompile>
-    <ClCompile Include="XEventDef.cpp">
-      <Filter>common\event</Filter>
-    </ClCompile>
     <ClCompile Include="XEventArgs.cpp">
       <Filter>common\event</Filter>
     </ClCompile>

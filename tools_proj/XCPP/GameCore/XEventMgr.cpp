@@ -39,13 +39,13 @@ bool XEventMgr::FireEvent(XEventArgs* arg)
 void XEventMgr::TimerCallback(ITimerArg* arg)
 {
 	LOG("CALLBACK");
-	XEventArgs* e_arg = (XEventArgs*)arg;
-	FireEvent(e_arg);
+	XEventArgs* e_arg = dynamic_cast<XEventArgs*>(arg);
+	if (e_arg) FireEvent(e_arg);
 }
 
 bool XEventMgr::FireEvent(XEventArgs* arg, float delay)
 {
-	/*ITimerArg* t_arg = dynamic_cast<ITimerArg*>(arg);
-	XTimerMgr::Instance()->SetTimer(delay, this, t_arg);*/
+	ITimerArg* t_arg = dynamic_cast<ITimerArg*>(arg);
+	if (t_arg)	XTimerMgr::Instance()->SetTimer(delay, this, t_arg);
 	return true;
 }

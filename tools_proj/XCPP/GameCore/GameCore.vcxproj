@@ -49,7 +49,6 @@
     <ClCompile Include="XEntityPresentation.cpp" />
     <ClCompile Include="XEntityStatistics.cpp" />
     <ClCompile Include="XEventArgs.cpp" />
-    <ClCompile Include="XEventDef.cpp" />
     <ClCompile Include="XEventMgr.cpp" />
     <ClCompile Include="XNavigationComponent.cpp" />
     <ClCompile Include="XNpcList.cpp" />

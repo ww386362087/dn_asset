@@ -1,12 +1,11 @@
 #ifndef  __XObject__
 #define  __XObject__
 
-#include<unordered_map>
-#include"Common.h"
-#include"XComponent.h"
-#include"XEventDef.h"
-#include"XEventMgr.h"
-
+#include <unordered_map>
+#include "Common.h"
+#include "XComponent.h"
+#include "XEventDef.h"
+#include "XEventMgr.h"
 
 class XObject
 {

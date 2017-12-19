@@ -21,3 +21,9 @@ XEventDefine XEventArgs::GetEventDef()
 {
 	return _argsDefine;
 }
+
+
+void XEventArgs::SetEventDef(XEventDefine def)
+{
+	_eDefine = def;
+}

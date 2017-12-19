@@ -1,5 +1,5 @@
-#ifndef  __XObject__
-#define  __XObject__
+#ifndef  __XPlayer__
+#define  __XPlayer__
 
 
 class XPlayer
