@@ -6,6 +6,7 @@ class XAIComponent
 public:
 	XAIComponent();
 	~XAIComponent();
+	
 };
 
 #endif

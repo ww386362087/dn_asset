@@ -64,3 +64,9 @@ bool XObject::DispatchEvent(XEventArgs* e)
 {
 	return true;
 }
+
+
+void XObject::DetachAllComponents()
+{
+
+}
