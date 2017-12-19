@@ -6,7 +6,7 @@
 #include "GameObject.h"
 #include "Transform.h"
 #include "Vector3.h"
-//#include "XStateDefine.h"
+#include "XStateDefine.h"
 
 class XEntity:public XObject
 {
@@ -22,9 +22,9 @@ public:
 	bool IsBoss();
 	bool IsNpc();
 
-	//void MoveForward(Vector3 forward);
-	//void StopMove();
-	//void OnDied();
+	void MoveForward(Vector3 forward);
+	void StopMove();
+	void OnDied();
 
 	uint EntityID;
 
@@ -36,9 +36,9 @@ protected:
 	float _speed = 0.03f;
 	bool _force_move = false;
 	bool _freeze = false;
-//	Vector3 _forward = Vector3::zero;
-//	XStateDefine _state = XState_Idle;
-//	EntyCallBack _callback;
+	Vector3 _forward = Vector3::zero;
+	XStateDefine _state = XState_Idle;
+
 };
 
 #endif

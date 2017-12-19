@@ -15,7 +15,7 @@ enum XStateDefine
 	XState_Charge,
 	XState_Skill,
 	XState_PushOut
-}
+};
 
 
 #endif

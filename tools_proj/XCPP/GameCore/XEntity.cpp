@@ -41,22 +41,22 @@ bool XEntity::IsPlayer()
 {
 	return (_eEntity_Type & Player) != 0;
 }
-//
-//void XEntity::MoveForward(Vector3 forward)
-//{
-//	_forward = forward;
-//	_force_move = true;
-//}
-//
-//
-//void XEntity::StopMove()
-//{
-//	_force_move = false;
-//	_forward = Vector3::zero;
-//}
-//
-//
-//void XEntity::OnDied()
-//{
-//	_state = XState_Death;
-//}
+
+void XEntity::MoveForward(Vector3 forward)
+{
+	_forward = forward;
+	_force_move = true;
+}
+
+
+void XEntity::StopMove()
+{
+	_force_move = false;
+	_forward = Vector3::zero;
+}
+
+
+void XEntity::OnDied()
+{
+	_state = XState_Death;
+}
