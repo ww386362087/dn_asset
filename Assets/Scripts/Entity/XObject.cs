@@ -125,7 +125,7 @@ public class XObject
         return null;
     }
 
-    //lua interface
+    //for native or lua interface
     public object GetComponent(string name)
     {
         uint uid = XCommon.singleton.XHash(name);
@@ -133,7 +133,7 @@ public class XObject
         return null;
     }
 
-    //lua interface
+    //for native or lua interface
     public bool DetachComponent(string name)
     {
         uint uid = XCommon.singleton.XHash(name);

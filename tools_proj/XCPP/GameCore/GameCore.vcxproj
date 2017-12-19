@@ -31,6 +31,7 @@
     <ClCompile Include="FashionList.cpp" />
     <ClCompile Include="FashionSuit.cpp" />
     <ClCompile Include="GameMain.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="NativeInterface.cpp" />
     <ClCompile Include="NativeReader.cpp" />
@@ -39,6 +40,7 @@
     <ClCompile Include="SceneList.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="XTimerMgr.cpp" />
     <ClCompile Include="XAIComponent.cpp" />
     <ClCompile Include="XAudioComponent.cpp" />
@@ -64,7 +66,6 @@
     <ClInclude Include="AIRuntimeRotateSelf.h" />
     <ClInclude Include="AITree.h" />
     <ClInclude Include="AITreeData.h" />
-    <ClInclude Include="AIType.h" />
     <ClInclude Include="AIUtil.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="DefaultEquip.h" />
@@ -72,6 +73,7 @@
     <ClInclude Include="FashionList.h" />
     <ClInclude Include="FashionSuit.h" />
     <ClInclude Include="GameMain.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="NativeInterface.h" />
     <ClInclude Include="NativeReader.h" />
@@ -84,6 +86,8 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="ITimerCallback.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="XStateDefine.h" />
     <ClInclude Include="XTimerMgr.h" />
     <ClInclude Include="XAIComponent.h" />
     <ClInclude Include="XAudioComponent.h" />

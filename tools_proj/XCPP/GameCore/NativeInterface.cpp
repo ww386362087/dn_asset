@@ -13,24 +13,34 @@ extern "C"
 		return *a - *b;
 	}
 
-	void iInitial(const char* stream,const char* cache)
+	void iInitial(const char* stream, const char* cache)
 	{
 		std::string s = cache;
-        LOG(stream);
-		InitPath(stream,cache);
+		LOG(stream);
+		InitPath(stream, cache);
 		LOG(s);
-		InitLogger(s+"Log/info.txt",s+"Log/warn.txt",s+"Log/error.txt");
-		LOG("c++ initial success with path: "+ s);
+		InitLogger(s + "Log/info.txt", s + "Log/warn.txt", s + "Log/error.txt");
+		LOG("c++ initial success with path: " + s);
 	}
 
 	void iInitCallbackCommand(CALLBACK cb)
 	{
-		callback = cb;   
+		callback = cb;
 	}
 
-	void iPatch(const char* old_file,const char* diff_file,const char* new_file)
+	void  iInitEntityCall(EntyCallBack cb)
 	{
-		LOG("old:"+tostring(old_file)+" diff: "+tostring(diff_file)+" new_file: "+tostring(new_file));
+		eCallback = cb;
+	}
+
+	void iInitCompnentCall(CompCallBack cb)
+	{
+		cCallback = cb;
+	}
+
+	void iPatch(const char* old_file, const char* diff_file, const char* new_file)
+	{
+		LOG("old:" + tostring(old_file) + " diff: " + tostring(diff_file) + " new_file: " + tostring(new_file));
 		//Dodiff(old_file,diff_file,new_file);
 	}
 

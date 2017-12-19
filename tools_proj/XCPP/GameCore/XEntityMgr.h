@@ -5,6 +5,7 @@
 #include<unordered_map>
 #include<unordered_set>
 #include"Common.h"
+//#include "NativeInterface.h"
 #include"Singleton.h"
 
 class XEntity;
@@ -36,8 +37,6 @@ enum EntityType
 class XEntityMgr:public Singleton<XEntityMgr>
 {
 public:
-	XEntityMgr();
-	~XEntityMgr();
 	void Update(float delta);
 	void LateUpdate();
 	void AttachToHost();
@@ -50,7 +49,8 @@ private:
 	std::vector<XEntity*> _empty;
 	std::unordered_set<XEntity*> _hash_entities;
 	std::unordered_map<uint, XEntity*> _dic_entities;
-	//std::unordered_map<EntityType, std::vector<XEntity*>> _map_entities;
+	std::unordered_map<int, std::vector<XEntity*>> _map_entities;
 };
+
 
 #endif

@@ -1,15 +1,6 @@
 #include "XEntityMgr.h"
 #include "XEntity.h"
 
-XEntityMgr::XEntityMgr()
-{
-
-}
-
-XEntityMgr::~XEntityMgr()
-{
-
-}
 
 void XEntityMgr::Update(float delta)
 {
@@ -57,3 +48,4 @@ XPlayer* XEntityMgr::CreatePlayer()
 {
 	return NULL;
 }
+

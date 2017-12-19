@@ -115,6 +115,12 @@
     <ClCompile Include="NativeInterface.cpp">
       <Filter>common\native</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>common\unity</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>common\unity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -176,9 +182,6 @@
     </ClInclude>
     <ClInclude Include="AIRuntimeRotateSelf.h">
       <Filter>ai\runtime</Filter>
-    </ClInclude>
-    <ClInclude Include="AIType.h">
-      <Filter>ai</Filter>
     </ClInclude>
     <ClInclude Include="GameMain.h">
       <Filter>main</Filter>
@@ -252,6 +255,15 @@
     <ClInclude Include="NativeInterface.h">
       <Filter>common\native</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>common\unity</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>common\unity</Filter>
+    </ClInclude>
+    <ClInclude Include="XStateDefine.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -295,6 +307,9 @@
     </Filter>
     <Filter Include="common\event">
       <UniqueIdentifier>{74dba9bc-4a14-4af8-a9c8-2300dfcb8038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\unity">
+      <UniqueIdentifier>{5beea8bd-414f-4845-95a3-1ec38c7f253c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

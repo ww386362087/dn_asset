@@ -33,6 +33,15 @@ float Vector3::Angle(const Vector3& v, const Vector3& u)
 	return XRad2Deg(acosf(f));
 }
 
+void Vector3::Normalize()
+{
+	if (IsZero()) return;
+	float len = Magnitude(*this);
+	x /= len;
+	y /= len;
+	z /= len;
+}
+
 Vector3 Vector3::Normalized(const Vector3& v)
 {
 	if (v.IsZero()) return Vector3::zero;
