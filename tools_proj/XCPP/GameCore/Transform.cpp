@@ -4,8 +4,18 @@
 
 Transform::Transform()
 {
+	Vector3 vz = Vector3::zero;
+	Vector3 vo = Vector3::one;
+	position = &vz;
+	rotatiion = &vz;
+	scale = &vo;
 }
 
+Transform::Transform(const char* nm)
+{
+	name = nm;
+	Transform();
+}
 
 Transform::~Transform()
 {

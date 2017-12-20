@@ -7,6 +7,7 @@
 #include "Log.h"
 #include "Vector3.h"
 #include "XEntityMgr.h"
+#include "tinyxml2.h"
 
 extern "C"
 {

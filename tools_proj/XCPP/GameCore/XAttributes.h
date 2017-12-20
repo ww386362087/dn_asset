@@ -2,6 +2,7 @@
 #define  __XAttributes__
 
 #include "Common.h"
+#include "XAttributeDefine.h"
 class Vector3;
 
 class XAttributes
@@ -21,8 +22,25 @@ public:
 	void setFightGroup(int val);
 	bool getBlocked();
 	void setBlocked(bool val);
+	double GetAttr(XAttributeDefine def);
+
 
 	int AiHit;
+	int FightGroup;
+	bool Blocked;
+	bool IsFixedInCD;
+	bool Outline;
+	int SummonGroup;
+	bool EndShow;
+	bool GeneralCutScene;
+	float NormalAttackProb;
+	float EnterFightRange;
+	float FloatingMax;
+	float FloatingMin;
+	float AIStartTime;
+	float AIActionGap;
+	const char* AiBehavior;
+	float FightTogetherDis;
 
 private:
 	uint _id = 0;

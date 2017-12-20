@@ -38,6 +38,8 @@ public:
 
 	void Normalize();
 
+	float magnitude();
+
 	void Zero() { x = 0; y = 0; z = 0; }
 
 	bool IsZero() const { return x == 0 && y == 0 && z == 0; }

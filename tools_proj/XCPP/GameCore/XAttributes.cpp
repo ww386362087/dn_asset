@@ -71,3 +71,8 @@ void XAttributes::setBlocked(bool val)
 {
 	_block = val;
 }
+
+double XAttributes::GetAttr(XAttributeDefine def)
+{
+	return 0;
+}

@@ -44,14 +44,19 @@ public:
 	void AttachToHost();
 	void DetachFromHost();
 	XEntity* GetEntity(uint id);
-	XRole* CreateTestRole();
 	XPlayer* CreatePlayer();
 	void UnloadAll();
 	XEntity* PrepareEntity(XAttributes* attr);
 	void UnloadEntity(uint id);
 	XEntity* CreateEntity(uint staticid, Vector3* pos, Vector3* rot);
 
+public:
+	XPlayer* Player;
+
+
 private:
+	bool Add(EntityType type, XEntity* e);
+
 	std::vector<XEntity*> _empty;
 	std::unordered_set<XEntity*> _hash_entities;
 	std::unordered_map<uint, XEntity*> _dic_entities;

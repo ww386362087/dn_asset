@@ -6,87 +6,63 @@ XObject::~XObject() {}
 
 bool XObject::Initilize()
 {
+	EventSubscribe();
 	return true;
 }
 
-void XObject::Uninitilize()
+void XObject::Uninitilize() 
 {
+	EventUnsubscribe();
 }
 
-void XObject::OnCreated()
-{
-}
+void XObject::OnCreated() {}
 
-void XObject::OnEnterScene()
-{
-}
+void XObject::OnEnterScene() {}
 
-void XObject::OnSceneReady()
-{
-}
+void XObject::OnSceneReady() {}
 
-void XObject::OnLeaveScene()
-{
-}
+void XObject::OnLeaveScene() {}
 
-void XObject::Unload()
-{
-	delete this;
-}
+void XObject::Unload() {}
 
-void XObject::EventSubscribe()
-{
+void XObject::EventSubscribe() {}
 
-}
+void XObject::EventUnsubscribe() {}
 
 void XObject::RegisterEvent(XEventDefine eventID, XEventHandler handler)
 {
-
+	std::unordered_map<uint, EventHandler*>::iterator itr = _eventMap.find((uint)eventID);
+	if (itr == _eventMap.end())
+	{
+		EventHandler* eh = new EventHandler();
+		eh->eventDefine = eventID;
+		eh->handler = handler;
+		_eventMap.insert(std::make_pair(eventID, eh));
+		XEventMgr::Instance()->AddRegist(eventID, this);
+	}
 }
 
 bool XObject::DispatchEvent(XEventArgs* e)
 {
-	return true;
-}
-
-
-void XObject::DetachAllComponents()
-{
-}
-
-XComponent* XObject::GetComponent()
-{
-	uint uid = xhash("typeid");
-	return components[uid];
-}
-
-bool XObject::DetachComponent()
-{
-	uint uid = xhash("typeid(T).name()");
-	std::unordered_map<uint, XComponent*>::iterator  itr = components.find(uid);
-	if (itr != components.end())
+	XEventDefine def = e->GetEventDef();
+	std::unordered_map<uint, EventHandler*>::iterator itr = _eventMap.find((uint)def);
+	if (itr != _eventMap.end())
 	{
-		XComponent* cp = itr->second;
-		cp->OnUninit();
-		components.erase(uid);
+		EventHandler* eh = itr->second;
+		if (eh) eh->handler(e);
 		return true;
 	}
 	return false;
 }
 
-XComponent* XObject::AttachComponent()
+
+void XObject::DetachAllComponents()
 {
-	uint uid = xhash("typeid(T).name()");
-	std::unordered_map<uint, XComponent*>::iterator  itr = components.find(uid);
-	if (itr != components.end())
+	std::unordered_map<uint, XComponent*>::iterator itr;
+	for (itr = components.begin(); itr != components.end(); itr++)
 	{
-		return components[uid];
+		itr->second->OnUninit();
 	}
-	else
-	{
-		XComponent* comp = new XComponent();
-		comp->OnInitial(this);
-		components.insert(std::make_pair(uid, comp));
-		return comp;
-	}
+	components.clear();
 }
+

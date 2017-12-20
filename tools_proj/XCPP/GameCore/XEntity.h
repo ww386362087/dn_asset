@@ -13,7 +13,6 @@ class  XAttributes;
 class XEntity:public XObject
 {
 public:
-	
 	virtual void Update(float delta);
 	virtual void LateUpdate();
 	virtual void AttachToHost();
@@ -26,12 +25,20 @@ public:
 	bool IsRole();
 	bool IsBoss();
 	bool IsNpc();
+	bool IsDead();
+	EntityType GetType();
 
 	void MoveForward(Vector3 forward);
 	void StopMove();
 	void OnDied();
 	void UnloadEntity();
 	uint EntityID;
+	static bool Valide(XEntity* e);
+
+public:
+	Vector3* getPostion();
+	GameObject* getEntityObject();
+	XAttributes* getAttributes();
 
 protected:
 	EntityType _eEntity_Type = Entity;

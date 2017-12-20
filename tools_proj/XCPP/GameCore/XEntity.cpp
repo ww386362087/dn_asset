@@ -3,6 +3,7 @@
 #include "XBeHitComponent.h"
 #include "XAIComponent.h"
 #include "XSkillComponent.h"
+#include "Transform.h"
 
 EntyCallBack eCallback;
 CompCallBack cCallback;
@@ -26,13 +27,14 @@ void XEntity::DetachFromHost()
 void XEntity::Initilize(GameObject* go, XAttributes* attr)
 {
 	XObject::Initilize();
-	XObject::TAttachComponent<XAudioComponent>();
-	XObject::TAttachComponent<XSkillComponent>();
-	XObject::TAttachComponent<XAIComponent>();
-	XObject::TAttachComponent<XBeHitComponent>();
-	XObject::TGetComponnet<XAudioComponent>();
-	XObject::TGetComponnet<XBeHitComponent>();
-	XObject::TDetachComponent<XAudioComponent>();
+	XObject::AttachComponent<XSkillComponent>();
+	XObject::AttachComponent<XAIComponent>();
+	XAIComponent* ai = XObject::GetComponnet<XAIComponent>();
+	XBeHitComponent* hit = XObject::GetComponnet<XBeHitComponent>();
+	LOG("AI:" + tostring(ai == 0) + " hit: " + tostring(hit == NULL));
+	XObject::DetachComponent<XAIComponent>();
+	ai = XObject::GetComponnet<XAIComponent>();
+	LOG("AI:" + tostring(ai == 0));
 	_object = go;
 	_transf = go->transform;
 	_attr = attr;
@@ -80,10 +82,47 @@ void XEntity::OnDied()
 	_state = XState_Death;
 }
 
+bool XEntity::IsDead()
+{
+	return _state == XState_Death;
+}
+
+EntityType XEntity::GetType()
+{
+	return _eEntity_Type;
+}
+
 void XEntity::UnloadEntity()
 {
 	_attr = 0;
 	_object = 0;
 	OnUnintial();
 	Unload();
+}
+
+bool XEntity::Valide(XEntity* e)
+{
+	return e && e->_attr && !e->IsDead();
+}
+
+Vector3* XEntity::getPostion()
+{
+	if (_transf)
+	{
+		return _transf->position;
+	}
+	else
+	{
+		return  new Vector3(0, 0, 0);
+	}
+}
+
+GameObject* XEntity::getEntityObject()
+{
+	return _object;
+}
+
+XAttributes* XEntity::getAttributes()
+{
+	return _attr;
 }

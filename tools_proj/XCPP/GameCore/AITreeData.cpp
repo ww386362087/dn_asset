@@ -1,13 +1,49 @@
 #include "AITreeData.h"
 
 
-void AITreeData::SetVariable(std::string name, object value)
+void AITreeData::SetVariable(std::string name, float value)
 {
 	uint hash = xhash(name.c_str());
-	cache[hash] = value;
+	f_cache[hash] = value;
 }
 
-std::unordered_map<uint, object> AITreeData::GetCache()
+void AITreeData::SetVariable(std::string name, int value)
 {
-	return this->cache;
+	uint hash = xhash(name.c_str());
+	i_cache[hash] = value;
 }
+
+void AITreeData::SetVariable(std::string name, bool value)
+{
+	uint hash = xhash(name.c_str());
+	b_cache[hash] = value;
+}
+
+void AITreeData::SetVariable(std::string name, GameObject* value)
+{
+	uint hash = xhash(name.c_str());
+	g_cache[hash] = value;
+}
+
+std::unordered_map<uint, float> AITreeData::GetFloatCache()
+{
+	return this->f_cache;
+}
+
+std::unordered_map<uint, int> AITreeData::GetIntCache()
+{
+	return this->i_cache;
+}
+
+
+std::unordered_map<uint, bool> AITreeData::GetBoolCache()
+{
+	return this->b_cache;
+}
+
+
+std::unordered_map<uint, GameObject*> AITreeData::GetGoCache()
+{
+	return this->g_cache;
+}
+

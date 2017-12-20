@@ -1,8 +1,10 @@
 #ifndef  __XPlayer__
 #define  __XPlayer__
 
+#include "XRole.h"
 
-class XPlayer
+
+class XPlayer:public XRole
 {
 public:
 	XPlayer();

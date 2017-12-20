@@ -54,7 +54,6 @@ public class XObject
         {
             if (_eventMap == null)
                 _eventMap = new Dictionary<XEventDefine, EventHandler>();
-            int length = _eventMap.Count;
             if (_eventMap.ContainsKey(eventID)) return;
             EventHandler eh = new EventHandler();
             eh.eventDefine = eventID;

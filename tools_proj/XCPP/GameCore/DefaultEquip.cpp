@@ -53,7 +53,7 @@ void DefaultEquip::ReadTable()
 void DefaultEquip::GetRow(int idx,DefaultEquipRow* row)
 {
 	size_t len = m_data.size();
-	if(idx<len)
+	if(idx<(int)len)
 	{
 		*row = m_data[idx];
 	}

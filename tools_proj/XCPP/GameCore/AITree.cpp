@@ -4,11 +4,10 @@
 
 AITree::AITree(void)
 {
-	composites = new std::string[3]{
+	composites = new const char*[3]{
 		"Sequence",
 		"Selector",
 		"Inverter" };
-
 }
 
 AITree::~AITree(void)
@@ -16,12 +15,17 @@ AITree::~AITree(void)
 	delete[] composites;
 }
 
+void AITree::Initial(XEntity* e)
+{
+	_entity = e;
+}
+
 void AITree::EnableBehaviourTree(bool enable)
 {
 	_enable = enable;
 }
 
-bool AITree::SetBehaviourTree(std::string name)
+bool AITree::SetBehaviourTree(const char* name)
 {
 	 AIUtil::Load(name,*_tree_data);
 	_tree_behaviour = AIFactory::MakeRuntime(&_tree_data->task, this);
@@ -29,7 +33,31 @@ bool AITree::SetBehaviourTree(std::string name)
 }
 
 
-void AITree::SetVariable(std::string name, object value)
+void AITree::SetVariable(const char* name, float value)
+{
+	if (_enable && _tree_data)
+	{
+		_tree_data->SetVariable(name, value);
+	}
+}
+
+void AITree::SetVariable(const char* name, int value)
+{
+	if (_enable && _tree_data)
+	{
+		_tree_data->SetVariable(name, value);
+	}
+}
+
+void AITree::SetVariable(const char* name, bool value)
+{
+	if (_enable && _tree_data)
+	{
+		_tree_data->SetVariable(name, value);
+	}
+}
+
+void AITree::SetVariable(const char* name, GameObject* value)
 {
 	if (_enable && _tree_data)
 	{
@@ -38,14 +66,32 @@ void AITree::SetVariable(std::string name, object value)
 }
 
 
-void AITree::GetVariable(std::string name,object& obj)
+float AITree::GetFloatVariable(const char* name)
 {
-	if (_enable)
-	{
-		uint hash = xhash(name.c_str());
-		std::unordered_map<uint,object> map = _tree_data->GetCache();
-		obj = map[hash];
-	}
+	uint hash = xhash(name);
+	std::unordered_map<uint, float> map = _tree_data->GetFloatCache();
+	return map[hash];
+}
+
+int AITree::GetIntVariable(const char* name)
+{
+	uint hash = xhash(name);
+	std::unordered_map<uint, int> map = _tree_data->GetIntCache();
+	return map[hash];
+}
+
+bool AITree::GetBoolVariable(const char* name)
+{
+	uint hash = xhash(name);
+	std::unordered_map<uint, bool> map = _tree_data->GetBoolCache();
+	return map[hash];
+}
+
+GameObject* AITree::GetGoVariable(const char* name)
+{
+	uint hash = xhash(name);
+	std::unordered_map<uint, GameObject*> map = _tree_data->GetGoCache();
+	return map[hash];
 }
 
 

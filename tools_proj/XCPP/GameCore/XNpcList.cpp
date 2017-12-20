@@ -51,7 +51,7 @@ void XNpcList::ReadTable()
 void XNpcList::GetRow(int idx,XNpcListRow* row)
 {
 	size_t len = m_data.size();
-	if(idx<len)
+	if(idx<(int)len)
 	{
 		*row = m_data[idx];
 	}

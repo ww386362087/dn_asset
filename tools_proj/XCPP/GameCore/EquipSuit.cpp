@@ -51,7 +51,7 @@ void EquipSuit::ReadTable()
 void EquipSuit::GetRow(int idx,EquipSuitRow* row)
 {
 	size_t len = m_data.size();
-	if(idx<len)
+	if(idx<(int)len)
 	{
 		*row = m_data[idx];
 	}

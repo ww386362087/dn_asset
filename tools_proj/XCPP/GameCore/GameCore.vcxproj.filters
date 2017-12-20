@@ -270,6 +270,12 @@
     <ClInclude Include="XAttributeDefine.h">
       <Filter>common\def</Filter>
     </ClInclude>
+    <ClInclude Include="AITreeArg.h">
+      <Filter>common\def</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">

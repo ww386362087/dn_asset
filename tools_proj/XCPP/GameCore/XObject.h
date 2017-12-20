@@ -30,18 +30,16 @@ public:
     virtual bool DispatchEvent(XEventArgs* e);
 
 	void DetachAllComponents();
-	XComponent* GetComponent();
-	bool DetachComponent();
-	XComponent* AttachComponent();
-	template<class T> T* TAttachComponent();
-	template<class T> T* TGetComponnet();
-	template<class T> bool TDetachComponent();
+	template<class T> T* AttachComponent();
+	template<class T> T* GetComponnet();
+	template<class T> bool DetachComponent();
 
 protected:
 	virtual bool Initilize();
 	virtual void Uninitilize();
 	virtual void Unload();
 	virtual void EventSubscribe();
+	virtual void EventUnsubscribe();
 	virtual void RegisterEvent(XEventDefine eventID, XEventHandler handler);
 
 	std::unordered_map<uint, XComponent*> components;
@@ -69,7 +67,8 @@ private:
 	bool _double = false;
 };
 
-template<class T> T* XObject::TAttachComponent()
+
+template<class T> T* XObject::AttachComponent()
 {
 	std::string name = typeid(T).name();
 	uint uid = xhash(name.c_str());
@@ -87,15 +86,14 @@ template<class T> T* XObject::TAttachComponent()
 	}
 }
 
-
-template<class T> T* XObject::TGetComponnet()
+template<class T> T* XObject::GetComponnet()
 {
 	std::string name = typeid(T).name();
 	uint uid = xhash(name.c_str());
 	return dynamic_cast<T*>(components[uid]);
 }
 
-template<class T> bool XObject::TDetachComponent()
+template<class T> bool XObject::DetachComponent()
 {
 	std::string name = typeid(T).name();
 	uint uid = xhash(name.c_str());

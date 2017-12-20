@@ -1,6 +1,7 @@
 #include "XEntityMgr.h"
 #include "XEntity.h"
 #include "XAttributes.h"
+#include "XPlayer.h"
 
 void XEntityMgr::Update(float delta)
 {
@@ -41,7 +42,7 @@ XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 	o->name = tostring(attr->getid()).c_str();
 	o->transform->position = attr->getAppearPostion();
 	o->transform->rotatiion = attr->getAppearQuaternion();
-	//x->Initilize();
+	x->Initilize(o, attr);
 	uint id = attr->getid();
 	if (!x->IsPlayer()) _dic_entities.insert(std::make_pair(id, x));
 	return x;
@@ -52,8 +53,21 @@ XEntity* XEntityMgr::CreateEntity(uint staticid, Vector3* pos, Vector3* rot)
 	XAttributes* attr = new XAttributes();// InitAttrFromClient((int)staticid);
 	attr->setAppearPosition(pos);
 	attr->setAppearQuaternion(rot);
-	return PrepareEntity(attr);
-	//Add(Entity, e);
+	XEntity* ent = PrepareEntity(attr);
+	Add(Entity, ent);
+	return ent;
+}
+
+bool XEntityMgr::Add(EntityType type, XEntity* e)
+{
+	std::vector<XEntity*> vec = _map_entities[(int)type];
+	bool exit = false;
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		if (vec[i] == e) exit = true;
+	}
+	if (exit) vec.push_back(e);
+	return !exit;
 }
 
 void XEntityMgr::UnloadEntity(uint id)
@@ -100,17 +114,24 @@ void XEntityMgr::UnloadAll()
 
 XEntity* XEntityMgr::GetEntity(uint id)
 {
-	return NULL;
+	if (Player && id == Player->EntityID)
+	{
+		return Player;
+	}
+	else
+	{
+		return _dic_entities[id];
+	}
 }
 
-XRole* XEntityMgr::CreateTestRole()
-{
-	return NULL;
-}
 
 XPlayer* XEntityMgr::CreatePlayer()
 {
-	return NULL;
+	XAttributes* attr = new XAttributes();// InitAttrFromClient((int)staticid);
+	Vector3 v = Vector3::zero;
+	attr->setAppearPosition(&v);
+	attr->setAppearQuaternion(&v);
+	return Player = dynamic_cast<XPlayer*>(PrepareEntity(attr));
 }
 
 

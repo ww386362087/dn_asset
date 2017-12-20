@@ -53,11 +53,7 @@ std::ostream& Log::Start(LogLevel level,std::string text,const int line,const st
 			case ERROR:callback(CError,buff);break;
 	   }
    }
-   else
-   {
-	   std::cout<<"xxxxxxxxx  1234  xxxxxxxxxx"<<std::endl;
-   }
    std::ostringstream ostr;
-   ostr<<tmp<<"\t"<<"function ("<<func<< ")"<< "\tline "<<line<<"\t";
+   ostr<<tmp<<"\t"<<"("<<func<< ")"<< "\tline "<<line<<"\t";
    return GetStream(level)<<ostr.str()<<text;  
 }

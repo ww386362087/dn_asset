@@ -151,7 +151,7 @@ void SceneList::ReadTable()
 void SceneList::GetRow(int idx,SceneListRow* row)
 {
 	size_t len = m_data.size();
-	if(idx<len)
+	if(idx<(int)len)
 	{
 		*row = m_data[idx];
 	}

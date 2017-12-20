@@ -98,7 +98,7 @@ void XEntityStatistics::ReadTable()
 void XEntityStatistics::GetRow(int idx,XEntityStatisticsRow* row)
 {
 	size_t len = m_data.size();
-	if(idx<len)
+	if(idx<(int)len)
 	{
 		*row = m_data[idx];
 	}

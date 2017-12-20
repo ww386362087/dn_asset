@@ -66,6 +66,7 @@
     <ClInclude Include="AIFactory.h" />
     <ClInclude Include="AIRuntimeRotateSelf.h" />
     <ClInclude Include="AITree.h" />
+    <ClInclude Include="AITreeArg.h" />
     <ClInclude Include="AITreeData.h" />
     <ClInclude Include="AIUtil.h" />
     <ClInclude Include="Common.h" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="ITimerCallback.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="XAttributeDefine.h" />
     <ClInclude Include="XAttributes.h" />

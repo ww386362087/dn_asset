@@ -8,6 +8,7 @@ class Transform
 {
 public:
 	Transform();
+	Transform(const char* nm);
 	~Transform();
 	
 	Vector3* position;

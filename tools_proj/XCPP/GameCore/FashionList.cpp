@@ -52,7 +52,7 @@ void FashionList::ReadTable()
 void FashionList::GetRow(int idx,FashionListRow* row)
 {
 	size_t len = m_data.size();
-	if(idx<len)
+	if(idx<(int)len)
 	{
 		*row = m_data[idx];
 	}

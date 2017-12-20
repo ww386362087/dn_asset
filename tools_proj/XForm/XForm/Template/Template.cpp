@@ -34,7 +34,7 @@ void [*Table*]::ReadTable()
 void [*Table*]::GetRow(int idx,[*Table*]Row* row)
 {
 	size_t len = m_data.size();
-	if(idx<len)
+	if(idx<(int)len)
 	{
 		*row = m_data[idx];
 	}

@@ -42,6 +42,11 @@ void Vector3::Normalize()
 	z /= len;
 }
 
+float Vector3::magnitude()
+{
+	return IsZero() ? 0 : sqrt(Dot(*this, *this));
+}
+
 Vector3 Vector3::Normalized(const Vector3& v)
 {
 	if (v.IsZero()) return Vector3::zero;
