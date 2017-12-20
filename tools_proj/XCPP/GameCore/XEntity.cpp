@@ -30,6 +30,9 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	XObject::TAttachComponent<XSkillComponent>();
 	XObject::TAttachComponent<XAIComponent>();
 	XObject::TAttachComponent<XBeHitComponent>();
+	XObject::TGetComponnet<XAudioComponent>();
+	XObject::TGetComponnet<XBeHitComponent>();
+	XObject::TDetachComponent<XAudioComponent>();
 	_object = go;
 	_transf = go->transform;
 	_attr = attr;

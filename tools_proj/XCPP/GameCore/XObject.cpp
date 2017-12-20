@@ -1,5 +1,4 @@
 #include "XObject.h"
-#include "XComponent.h"
 
 XObject::XObject() {}
 

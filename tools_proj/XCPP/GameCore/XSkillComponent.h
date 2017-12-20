@@ -1,7 +1,7 @@
 #ifndef  __XSkillComponent__
 #define  __XSkillComponent__
 
-#include "XComponent.h"
+#include "XObject.h"
 
 class XSkillComponent :public XComponent
 {

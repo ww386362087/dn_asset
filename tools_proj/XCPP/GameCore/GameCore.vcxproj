@@ -95,7 +95,6 @@
     <ClInclude Include="XAIComponent.h" />
     <ClInclude Include="XAudioComponent.h" />
     <ClInclude Include="XBeHitComponent.h" />
-    <ClInclude Include="XComponent.h" />
     <ClInclude Include="XEntity.h" />
     <ClInclude Include="XEntityMgr.h" />
     <ClInclude Include="XEntityPresentation.h" />

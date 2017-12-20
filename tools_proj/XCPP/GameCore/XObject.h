@@ -6,6 +6,15 @@
 #include "XEventDef.h"
 #include "XEventMgr.h"
 
+enum UpdateState
+{
+	NONE,  //不调用
+	TIMER, //每秒一次
+	FRAME, //每帧调用
+	DOUBLE,//每两帧调用
+};
+
+
 class XComponent;
 
 class XObject
@@ -26,7 +35,7 @@ public:
 	XComponent* AttachComponent();
 	template<class T> T* TAttachComponent();
 	template<class T> T* TGetComponnet();
-
+	template<class T> bool TDetachComponent();
 
 protected:
 	virtual bool Initilize();
@@ -40,20 +49,64 @@ protected:
 };
 
 
+class XComponent :public XObject
+{
+public:
+	XComponent();
+	~XComponent();
+
+	virtual void OnUninit();
+	virtual void OnInitial(XObject* _obj);
+	void Update(float delta);
+	virtual void OnUpdate(float delta);
+	XObject* xobj;
+
+protected:
+	UpdateState state = NONE;
+
+private:
+	float _time = 0;
+	bool _double = false;
+};
 
 template<class T> T* XObject::TAttachComponent()
 {
-	T* t = new T();
-	std::string name= tostring(t);
-	t->OnInitial(this);
-	return t;
+	std::string name = typeid(T).name();
+	uint uid = xhash(name.c_str());
+	std::unordered_map<uint, XComponent*>::iterator  itr = components.find(uid);
+	if (itr != components.end())
+	{
+		return dynamic_cast<T*>(components[uid]);
+	}
+	else
+	{
+		T* t = new T();
+		t->OnInitial(this);
+		components.insert(std::make_pair(uid, t));
+		return t;
+	}
 }
 
 
 template<class T> T* XObject::TGetComponnet()
 {
-	return 0;
+	std::string name = typeid(T).name();
+	uint uid = xhash(name.c_str());
+	return dynamic_cast<T*>(components[uid]);
 }
 
+template<class T> bool XObject::TDetachComponent()
+{
+	std::string name = typeid(T).name();
+	uint uid = xhash(name.c_str());
+	std::unordered_map<uint, XComponent*>::iterator  itr = components.find(uid);
+	if (itr != components.end())
+	{
+		itr->second->OnUninit();
+		components.erase(uid);
+		return true;
+	}
+	return false;
+}
 
 #endif

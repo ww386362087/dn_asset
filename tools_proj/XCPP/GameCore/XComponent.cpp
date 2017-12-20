@@ -1,4 +1,4 @@
-#include "XComponent.h"
+#include "XObject.h"
 
 
 XComponent::XComponent()

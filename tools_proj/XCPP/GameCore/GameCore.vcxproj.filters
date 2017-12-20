@@ -228,9 +228,6 @@
     <ClInclude Include="XSkillComponent.h">
       <Filter>component</Filter>
     </ClInclude>
-    <ClInclude Include="XComponent.h">
-      <Filter>component</Filter>
-    </ClInclude>
     <ClInclude Include="XEventDef.h">
       <Filter>common\event</Filter>
     </ClInclude>

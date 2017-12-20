@@ -1,7 +1,7 @@
 #ifndef  __XAIComponent__
 #define  __XAIComponent__
 
-#include "XComponent.h"
+#include "XObject.h"
 
 class XAIComponent :public XComponent
 {

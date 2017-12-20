@@ -1,7 +1,7 @@
 #ifndef  __XBeHitComponent__
 #define  __XBeHitComponent__
 
-#include "XComponent.h"
+#include "XObject.h"
 
 class XBeHitComponent :public XComponent
 {
