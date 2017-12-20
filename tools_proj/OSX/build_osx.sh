@@ -24,6 +24,6 @@ echo "start mv to unity Plugins dir"
 
 rm -drf ${path}/Assets/Plugins/GameCore.bundle
 
-mv -f GameCore.bundle ${path}/Assets/Plugins/GameCore.bundle
+mv -f GameCore.bundle ${path}/Assets/Plugins/OSX/
 
 echo "done, bye!"

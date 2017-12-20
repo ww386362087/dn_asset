@@ -3,9 +3,33 @@
 <plist version="1.0">
 <dict>
 	<key>files</key>
-	<dict/>
+	<dict>
+		<key>Resources/GameCore.vcxproj</key>
+		<data>
+		7F9caVRxtUe5cnUM6SQ68DXOBI0=
+		</data>
+		<key>Resources/GameCore.vcxproj.filters</key>
+		<data>
+		hlEQVWUKog9QH9wROMjRMRB+6/8=
+		</data>
+	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>Resources/GameCore.vcxproj</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Qaef/O+idkm3SmQKfWaNTuJSh3130S1Ro6HK9Y8Ps2A=
+			</data>
+		</dict>
+		<key>Resources/GameCore.vcxproj.filters</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KRTn1YruzlBCYHelRS24fTuls2pn0pUrf/TTzmZjkfI=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^Resources/</key>

@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="AITree.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AITreeData.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AIBehaviour.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="XEntityPresentation.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="XEntityStatistics.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="XNpcList.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultEquip.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipSuit.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="FashionList.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="FashionSuit.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="QteStatusList.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneList.cpp">
+      <Filter>table</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="patch.c">
+      <Filter>patch</Filter>
+    </ClCompile>
+    <ClCompile Include="AIFactory.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="AIUtil.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="AIRuntimeRotateSelf.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMain.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="XObject.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XEntity.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XRole.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XAIComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XBeHitComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XNavigationComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XAudioComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XEntityMgr.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XPlayer.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="XSkillComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="XEventArgs.cpp">
+      <Filter>common\event</Filter>
+    </ClCompile>
+    <ClCompile Include="XEventMgr.cpp">
+      <Filter>common\event</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>common\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="XTimerMgr.cpp">
+      <Filter>common\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>common\log</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeReader.cpp">
+      <Filter>common\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeInterface.cpp">
+      <Filter>common\native</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>common\unity</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>common\unity</Filter>
+    </ClCompile>
+    <ClCompile Include="XAttributes.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AITree.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AITreeData.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AIBehaviour.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneList.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityPresentation.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityStatistics.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="XNpcList.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultEquip.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipSuit.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="FashionList.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="FashionSuit.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="QteStatusList.h">
+      <Filter>table</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="patch.h">
+      <Filter>patch</Filter>
+    </ClInclude>
+    <ClInclude Include="patch_types.h">
+      <Filter>patch</Filter>
+    </ClInclude>
+    <ClInclude Include="AIFactory.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="AIUtil.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="XMath.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="AIRuntimeRotateSelf.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMain.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="picojson.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="XObject.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntity.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XRole.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XAIComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XBeHitComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XNavigationComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XAudioComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XEntityMgr.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XPlayer.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XSkillComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XEventDef.h">
+      <Filter>common\event</Filter>
+    </ClInclude>
+    <ClInclude Include="XEventArgs.h">
+      <Filter>common\event</Filter>
+    </ClInclude>
+    <ClInclude Include="XEventMgr.h">
+      <Filter>common\event</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>common\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="XTimerMgr.h">
+      <Filter>common\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="ITimerCallback.h">
+      <Filter>common\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>common\log</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeReader.h">
+      <Filter>common\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeInterface.h">
+      <Filter>common\native</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>common\unity</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>common\unity</Filter>
+    </ClInclude>
+    <ClInclude Include="XAttributes.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XStateDefine.h">
+      <Filter>common\def</Filter>
+    </ClInclude>
+    <ClInclude Include="XAttributeDefine.h">
+      <Filter>common\def</Filter>
+    </ClInclude>
+    <ClInclude Include="AITreeArg.h">
+      <Filter>common\def</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ai">
+      <UniqueIdentifier>{b9649c8d-c10f-479b-bca3-c7d051788d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{c3565040-4f67-468a-86e1-f461f97e3f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="patch">
+      <UniqueIdentifier>{dec344fb-4d1f-4ed8-8049-db6a3209dffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="table">
+      <UniqueIdentifier>{4307d103-28ef-45d5-82a5-c2ee804387ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{8f70ddfe-23da-496f-a818-1ae154c35ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ai\runtime">
+      <UniqueIdentifier>{8f95295f-633e-41ba-abce-bda739526be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{9b015484-d1f3-46cf-b123-f18a3b47b58b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entity">
+      <UniqueIdentifier>{b75a89e7-0ddf-40bf-b22b-88b68ea43ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="component">
+      <UniqueIdentifier>{12ee08ad-95e8-49e2-b891-509351cdc818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\timer">
+      <UniqueIdentifier>{4fe5b529-944b-40d1-b6a9-fa9887d9ec54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\log">
+      <UniqueIdentifier>{a9914f35-9e58-498d-b3c7-9da3c198646c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\reader">
+      <UniqueIdentifier>{c413834c-5f74-49f6-99ab-6d286cb2d179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\native">
+      <UniqueIdentifier>{7f281820-c500-4f2c-b6e3-78e6f5f52986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\event">
+      <UniqueIdentifier>{74dba9bc-4a14-4af8-a9c8-2300dfcb8038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\unity">
+      <UniqueIdentifier>{5beea8bd-414f-4845-95a3-1ec38c7f253c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\def">
+      <UniqueIdentifier>{a6bd96aa-7df5-4cc5-8124-9465b612cc64}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
