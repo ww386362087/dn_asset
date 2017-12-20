@@ -53,7 +53,6 @@ bool XObject::DispatchEvent(XEventArgs* e)
 
 void XObject::DetachAllComponents()
 {
-
 }
 
 XComponent* XObject::GetComponent()

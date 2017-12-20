@@ -1,7 +1,9 @@
 #ifndef  __XAIComponent__
 #define  __XAIComponent__
 
-class XAIComponent
+#include "XComponent.h"
+
+class XAIComponent :public XComponent
 {
 public:
 	XAIComponent();

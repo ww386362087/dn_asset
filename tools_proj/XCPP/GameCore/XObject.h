@@ -24,6 +24,10 @@ public:
 	XComponent* GetComponent();
 	bool DetachComponent();
 	XComponent* AttachComponent();
+	template<class T> T* TAttachComponent();
+	template<class T> T* TGetComponnet();
+
+
 protected:
 	virtual bool Initilize();
 	virtual void Uninitilize();
@@ -34,5 +38,22 @@ protected:
 	std::unordered_map<uint, XComponent*> components;
 	std::unordered_map<uint, EventHandler*> _eventMap;
 };
+
+
+
+template<class T> T* XObject::TAttachComponent()
+{
+	T* t = new T();
+	std::string name= tostring(t);
+	t->OnInitial(this);
+	return t;
+}
+
+
+template<class T> T* XObject::TGetComponnet()
+{
+	return 0;
+}
+
 
 #endif

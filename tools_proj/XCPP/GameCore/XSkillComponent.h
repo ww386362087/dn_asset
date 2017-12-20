@@ -1,8 +1,9 @@
 #ifndef  __XSkillComponent__
 #define  __XSkillComponent__
 
+#include "XComponent.h"
 
-class XSkillComponent
+class XSkillComponent :public XComponent
 {
 public:
 	XSkillComponent();

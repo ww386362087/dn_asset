@@ -1,4 +1,8 @@
 #include "XEntity.h"
+#include "XAudioComponent.h"
+#include "XBeHitComponent.h"
+#include "XAIComponent.h"
+#include "XSkillComponent.h"
 
 EntyCallBack eCallback;
 CompCallBack cCallback;
@@ -17,6 +21,19 @@ void XEntity::AttachToHost()
 
 void XEntity::DetachFromHost()
 {
+}
+
+void XEntity::Initilize(GameObject* go, XAttributes* attr)
+{
+	XObject::Initilize();
+	XObject::TAttachComponent<XAudioComponent>();
+	XObject::TAttachComponent<XSkillComponent>();
+	XObject::TAttachComponent<XAIComponent>();
+	XObject::TAttachComponent<XBeHitComponent>();
+	_object = go;
+	_transf = go->transform;
+	_attr = attr;
+	OnInitial();
 }
 
 void XEntity::OnInitial() {}

@@ -21,6 +21,7 @@ public:
 	virtual void OnInitial();
 	virtual void OnUnintial();
 
+	void Initilize(GameObject* go, XAttributes* attr);
 	bool IsPlayer();
 	bool IsRole();
 	bool IsBoss();
