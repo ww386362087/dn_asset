@@ -8,11 +8,11 @@ cd tools_proj/OSX/GameCore
 
 echo "start clean "
 
-xcodebuild clean 
+#xcodebuild clean
 
 echo "start build"
 
-xcodebuild 
+#xcodebuild
 
 echo "build success"
 
@@ -22,7 +22,7 @@ ls -al
 
 echo "start mv to unity Plugins dir"
 
-rm -drf ${path}/Assets/Plugins/GameCore.bundle
+rm -drf ${path}/Assets/Plugins/OSX/GameCore.bundle
 
 mv -f GameCore.bundle ${path}/Assets/Plugins/OSX/
 
