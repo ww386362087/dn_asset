@@ -124,6 +124,12 @@
     <ClCompile Include="XAttributes.cpp">
       <Filter>component</Filter>
     </ClCompile>
+    <ClCompile Include="SkillReader.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>plugin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -193,9 +199,6 @@
       <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="picojson.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="XObject.h">
@@ -274,7 +277,13 @@
       <Filter>common\def</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
-      <Filter>common</Filter>
+      <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="picojson.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillReader.h">
+      <Filter>component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +334,9 @@
     </Filter>
     <Filter Include="common\def">
       <UniqueIdentifier>{a6bd96aa-7df5-4cc5-8124-9465b612cc64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="plugin">
+      <UniqueIdentifier>{a310231f-b3f7-45a2-a50b-fca4b286094a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

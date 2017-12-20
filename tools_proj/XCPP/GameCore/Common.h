@@ -48,6 +48,15 @@ T Add(T a,T b)
 	return a+b;
 }
 
+template<typename T>
+T convert(const char *str)
+{
+	std::stringstream ss(str);
+	T t;
+	ss >> t;
+	return t;
+}
+
 void tobytes(std::string str);
 
 void InitPath(std::string stream,std::string cache);

@@ -39,7 +39,9 @@
     <ClCompile Include="QteStatusList.cpp" />
     <ClCompile Include="SceneList.cpp" />
     <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="SkillReader.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="XAttributes.cpp" />
     <ClCompile Include="XTimerMgr.cpp" />
@@ -86,6 +88,7 @@
     <ClInclude Include="SceneList.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SkillReader.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="ITimerCallback.h" />
     <ClInclude Include="tinyxml2.h" />
