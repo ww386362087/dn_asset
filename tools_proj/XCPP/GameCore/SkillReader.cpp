@@ -89,21 +89,6 @@ static void LoadJa(XSkillData * skillData, XMLElement * elem)
 	}
 }
 
-static void LoadCombined(XSkillData * skillData, XMLElement * elem)
-{
-	const char *ListRootNodeName = "XCombinedData";
-	for (XMLElement *current = elem->FirstChildElement(ListRootNodeName);
-		current != NULL; current = current->NextSiblingElement(ListRootNodeName))
-	{
-		XMLElement *node = NULL;
-		skillData->Combined.push_back(XCombinedData());
-		XCombinedData *pCombined = &skillData->Combined.back();
-		GetFloatValue(pCombined, At);
-		GetFloatValue(pCombined, End);
-		GetStringValue(pCombined, Name);
-		GetIntValue(pCombined, Index);
-	}
-}
 
 static void LoadWarning(XSkillData * skillData, XMLElement * elem)
 {

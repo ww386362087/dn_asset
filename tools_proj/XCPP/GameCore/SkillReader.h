@@ -2,7 +2,6 @@
 #define  __SkillReader__
 
 #include <vector>
-#include <limits.h>
 #include <map>
 #include <assert.h>
 #include "tinyxml2.h"
@@ -18,7 +17,6 @@ struct XBaseData
 	}
 };
 
-
 enum XResultBulletType
 {
 	Sphere,
@@ -32,8 +30,6 @@ enum XResultAffectDirection
 	AttackDir,
 	ChargeDir
 };
-
-
 
 struct XLongAttackResultData
 {
@@ -201,7 +197,6 @@ struct XChargeData : public XBaseData
 		StandOnAtEnd = true;
 		AimTarget = false;
 		Control_Towards = false;
-
 		Curve_Forward = "";
 		Curve_Side = "";
 		Curve_Up = "";
@@ -221,7 +216,6 @@ struct XJAData : public XBaseData
 		At = 0;
 		End = 0;
 		Point = 0;
-
 		Next_Name = "";
 		Name = "";
 	}
@@ -305,7 +299,6 @@ struct XMobUnitData : public XBaseData
 		TemplateID = 0;
 		LifewithinSkill = false;
 		Shield = false;
-
 		Offset_At_X = 0;
 		Offset_At_Y = 0;
 		Offset_At_Z = 0;
@@ -349,13 +342,10 @@ struct XWarningData : public XBaseData
 {
 	XWarningType Type;
 	float At;
-
 	float OffsetX;
 	float OffsetY;
 	float OffsetZ;
-
 	bool Mobs_Inclusived;
-
 	int MaxRandomTarget;
 	bool RandomWarningPos;
 	float PosRandomRange;
@@ -365,13 +355,10 @@ struct XWarningData : public XBaseData
 	{
 		Type = Warning_None;
 		At = 0;
-
 		OffsetX = 0;
 		OffsetY = 0;
 		OffsetZ = 0;
-
 		Mobs_Inclusived = false;
-
 		MaxRandomTarget = 0;
 		RandomWarningPos = false;
 		PosRandomRange = 0;
@@ -400,12 +387,10 @@ class XSkillData
 public:
 	inline bool IsDirty() { return _dirty; }
 	inline bool IsNoneReferenced() { return 0 == _reference; }
-
 	void Release();
 
 public:
 	const char*  Prefix;
-
 	const char*  Name;
 	int    TypeToken;
 	bool   NeedTarget;

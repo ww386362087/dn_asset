@@ -2,28 +2,13 @@
 
 
 
-XEventArgs::XEventArgs()
-{
-}
-
-
-XEventArgs::~XEventArgs()
-{
-}
-
-
-void XEventArgs::Debug()
-{
-}
-
-
-XEventDefine XEventArgs::GetEventDef()
+XEventDefine XEventArgs::getEventDef()
 {
 	return _argsDefine;
 }
 
 
-void XEventArgs::SetEventDef(XEventDefine def)
+void XEventArgs::setEventDef(XEventDefine def)
 {
 	_eDefine = def;
 }

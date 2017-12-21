@@ -21,7 +21,7 @@ void XEventMgr::RemoveRegist(XObject* o)
 
 bool XEventMgr::FireEvent(XEventArgs* arg)
 {
-	XEventDefine def = arg->GetEventDef();
+	XEventDefine def = arg->getEventDef();
 	int idef = (int)def;
 	std::unordered_map<int, std::unordered_set<XObject*>>::iterator itr = pool.find(idef);
 	if (itr != pool.end())

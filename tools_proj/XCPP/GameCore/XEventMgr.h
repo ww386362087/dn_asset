@@ -1,7 +1,6 @@
 #ifndef  __XEventMgr__
 #define  __XEventMgr__
 
-#include "XEventArgs.h"
 #include "Singleton.h"
 #include <unordered_map>
 #include <unordered_set>
@@ -9,17 +8,10 @@
 #include "Log.h"
 #include "XTimerMgr.h"
 #include "ITimerCallback.h"
+#include "XEventDef.h"
 
 class  XObject;
 class  XEventArgs;
-
-typedef void(*XEventHandler)(XEventArgs* e);
-
-struct EventHandler
-{
-	XEventDefine eventDefine;
-	XEventHandler handler;
-};
 
 class XEventMgr:public Singleton<XEventMgr>,ITimerCallback
 {

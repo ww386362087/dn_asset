@@ -95,6 +95,8 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="XAttributeDefine.h" />
     <ClInclude Include="XAttributes.h" />
+    <ClInclude Include="XComponentDef.h" />
+    <ClInclude Include="XDelegate.h" />
     <ClInclude Include="XStateDefine.h" />
     <ClInclude Include="XTimerMgr.h" />
     <ClInclude Include="XAIComponent.h" />

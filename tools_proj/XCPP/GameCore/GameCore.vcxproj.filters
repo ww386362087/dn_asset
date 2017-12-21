@@ -231,12 +231,6 @@
     <ClInclude Include="XSkillComponent.h">
       <Filter>component</Filter>
     </ClInclude>
-    <ClInclude Include="XEventDef.h">
-      <Filter>common\event</Filter>
-    </ClInclude>
-    <ClInclude Include="XEventArgs.h">
-      <Filter>common\event</Filter>
-    </ClInclude>
     <ClInclude Include="XEventMgr.h">
       <Filter>common\event</Filter>
     </ClInclude>
@@ -284,6 +278,18 @@
     </ClInclude>
     <ClInclude Include="SkillReader.h">
       <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="XEventDef.h">
+      <Filter>common\def</Filter>
+    </ClInclude>
+    <ClInclude Include="XComponentDef.h">
+      <Filter>common\def</Filter>
+    </ClInclude>
+    <ClInclude Include="XDelegate.h">
+      <Filter>common\event</Filter>
+    </ClInclude>
+    <ClInclude Include="XEventArgs.h">
+      <Filter>common\event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

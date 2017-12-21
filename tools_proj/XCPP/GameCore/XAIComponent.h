@@ -3,8 +3,11 @@
 
 #include "XObject.h"
 #include "AITree.h"
+#include "XDelegate.h"
+#include "XEventArgs.h"
 
 class  XEntity;
+
 
 class XAIComponent :public XComponent
 {
@@ -20,6 +23,8 @@ public:
 	void SetBehaviorTree(const char* tree);
 	void InitVariables();
 	void OnTickAI();
+	bool OnStartSkill(IArgs*, void*);
+	bool OnEndSkill(IArgs*, void*);
 
 public:
 	bool getIsCastingSkill(); 

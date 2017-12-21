@@ -5,6 +5,9 @@
 #include "Common.h"
 #include "XEventDef.h"
 #include "XEventMgr.h"
+#include "XComponentDef.h"
+#include "XEventArgs.h"
+#include "XDelegate.h"
 
 enum UpdateState
 {
@@ -14,8 +17,9 @@ enum UpdateState
 	DOUBLE,//每两帧调用
 };
 
-
 class XComponent;
+
+#define CALLBACK(T_, Func_, Inst_) &(XDelegate::registerMethod<T_, &T_::Func_>(Inst_))
 
 class XObject
 {
@@ -27,6 +31,7 @@ public:
 	virtual void OnEnterScene();
 	virtual void OnSceneReady();
 	virtual void OnLeaveScene();
+	virtual void RegisterEvent(XEventDefine eventID, XDelegate* handler);
     virtual bool DispatchEvent(XEventArgs* e);
 
 	void DetachAllComponents();
@@ -40,10 +45,9 @@ protected:
 	virtual void Unload();
 	virtual void EventSubscribe();
 	virtual void EventUnsubscribe();
-	virtual void RegisterEvent(XEventDefine eventID, XEventHandler handler);
-
+	
 	std::unordered_map<uint, XComponent*> components;
-	std::unordered_map<uint, EventHandler*> _eventMap;
+	std::unordered_map<uint, XDelegate*> eventMap;
 };
 
 

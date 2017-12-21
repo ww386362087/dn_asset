@@ -5,8 +5,9 @@
 class ITimerArg
 {
 public:
-	virtual void Debug() {};
+	virtual ~ITimerArg() {};
 };
+
 
 class ITimerCallback
 {

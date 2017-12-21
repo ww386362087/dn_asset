@@ -29,27 +29,25 @@ void XObject::EventSubscribe() {}
 
 void XObject::EventUnsubscribe() {}
 
-void XObject::RegisterEvent(XEventDefine eventID, XEventHandler handler)
+void XObject::RegisterEvent(XEventDefine eventID, XDelegate* handler)
 {
-	std::unordered_map<uint, EventHandler*>::iterator itr = _eventMap.find((uint)eventID);
-	if (itr == _eventMap.end())
+	std::unordered_map<uint, XDelegate*>::iterator itr = eventMap.find((uint)eventID);
+	if (itr == eventMap.end())
 	{
-		EventHandler* eh = new EventHandler();
-		eh->eventDefine = eventID;
-		eh->handler = handler;
-		_eventMap.insert(std::make_pair(eventID, eh));
+		eventMap.insert(std::make_pair(eventID, handler));
 		XEventMgr::Instance()->AddRegist(eventID, this);
 	}
 }
 
 bool XObject::DispatchEvent(XEventArgs* e)
 {
-	XEventDefine def = e->GetEventDef();
-	std::unordered_map<uint, EventHandler*>::iterator itr = _eventMap.find((uint)def);
-	if (itr != _eventMap.end())
+	XEventDefine def = e->getEventDef();
+	if (def<0 || def>XEvent_MAX) return false;
+	std::unordered_map<uint, XDelegate*>::iterator itr = eventMap.find(def);
+	if (itr != eventMap.end())
 	{
-		EventHandler* eh = itr->second;
-		if (eh) eh->handler(e);
+		XDelegate* eh = itr->second;
+		if (eh) (*eh)(e, NULL);
 		return true;
 	}
 	return false;

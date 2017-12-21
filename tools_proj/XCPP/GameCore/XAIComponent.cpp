@@ -30,11 +30,22 @@ void XAIComponent::OnUninit()
 	XComponent::OnUninit();
 }
 
+
 void XAIComponent::EventSubscribe()
 {
 	XComponent::EventSubscribe();
-	//RegisterEvent(XEvent_AIStartSkill, OnStartSkill);
-	//RegisterEvent(XEvent_AIEndSkill, OnEndSkill);
+	RegisterEvent(XEvent_AIStartSkill, CALLBACK(XAIComponent, OnStartSkill, this));
+	RegisterEvent(XEvent_AIEndSkill, CALLBACK(XAIComponent, OnEndSkill, this));
+}
+
+bool XAIComponent::OnStartSkill(IArgs* e, void*)
+{
+	return true;
+}
+
+bool XAIComponent::OnEndSkill(IArgs*, void*)
+{
+	return true;
 }
 
 void XAIComponent::OnUpdate(float delta)
@@ -124,7 +135,6 @@ void XAIComponent::OnTickAI()
 		_tree->TickBehaviorTree();
 	}
 }
-
 
 void XAIComponent::UpdateVariable()
 {
