@@ -34,8 +34,10 @@ void XAIComponent::OnUninit()
 void XAIComponent::EventSubscribe()
 {
 	XComponent::EventSubscribe();
-	RegisterEvent(XEvent_AIStartSkill, CALLBACK(XAIComponent, OnStartSkill, this));
-	RegisterEvent(XEvent_AIEndSkill, CALLBACK(XAIComponent, OnEndSkill, this));
+	XDelegate start = CALLBACK(XAIComponent, OnStartSkill, this);
+	XDelegate end = CALLBACK(XAIComponent, OnStartSkill, this);
+	RegisterEvent(XEvent_AIStartSkill, &start);
+	RegisterEvent(XEvent_AIEndSkill, &end);
 }
 
 bool XAIComponent::OnStartSkill(IArgs* e, void*)
