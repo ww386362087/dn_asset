@@ -93,6 +93,12 @@ EntityType XEntity::GetType()
 	return _eEntity_Type;
 }
 
+XSkillMgr* XEntity::SkillManager()
+{
+	XSkillComponent* pskill = GetComponnet<XSkillComponent>();
+	return pskill ? pskill->SkillManager() : NULL;
+}
+
 void XEntity::UnloadEntity()
 {
 	_attr = 0;

@@ -21,6 +21,7 @@ public:
 	void Execute();
 	bool OnResult(IArgs*, void* param);
 	void AddedTimerToken(uint token) { _tokens.push_back(token); }
+	bool Casting() const { return _casting; }
 
 	static const int XJAComboSkillHash;
 	static const int XArtsSkillHash;

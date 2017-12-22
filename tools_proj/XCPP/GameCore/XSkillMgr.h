@@ -11,7 +11,6 @@ class XSkill;
 class XSkillCore;
 class XSkillData;
 
-
 class XSkillMgr
 {
 public:
@@ -27,6 +26,9 @@ public:
 	void AttachSkill(XSkillData* data, bool attach = true);
 	void AttachSkillByID(uint id);
 	void DetachSkill(uint id);
+
+private:
+	XSkillCore* CreateSkillCore(XSkillData* data);
 
 private:
 	XEntity* _host;

@@ -47,9 +47,11 @@
     <ClCompile Include="XAttributes.cpp" />
     <ClCompile Include="XBullet.cpp" />
     <ClCompile Include="XBulletCore.cpp" />
+    <ClCompile Include="XJAComboSkill.cpp" />
     <ClCompile Include="XSkill.cpp" />
     <ClCompile Include="XSkillCore.cpp" />
     <ClCompile Include="XSkillMgr.cpp" />
+    <ClCompile Include="XStateMachine.cpp" />
     <ClCompile Include="XTimerMgr.cpp" />
     <ClCompile Include="XAIComponent.cpp" />
     <ClCompile Include="XBeHitComponent.cpp" />
@@ -83,6 +85,7 @@
     <ClInclude Include="FashionSuit.h" />
     <ClInclude Include="GameMain.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="IXStateTransform.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="NativeInterface.h" />
     <ClInclude Include="NativeReader.h" />
@@ -104,10 +107,12 @@
     <ClInclude Include="XBulletCore.h" />
     <ClInclude Include="XComponentDef.h" />
     <ClInclude Include="XDelegate.h" />
+    <ClInclude Include="XJAComboSkill.h" />
     <ClInclude Include="XSkill.h" />
     <ClInclude Include="XSkillCore.h" />
     <ClInclude Include="XSkillMgr.h" />
     <ClInclude Include="XStateDefine.h" />
+    <ClInclude Include="XStateMachine.h" />
     <ClInclude Include="XTimerMgr.h" />
     <ClInclude Include="XAIComponent.h" />
     <ClInclude Include="XBeHitComponent.h" />

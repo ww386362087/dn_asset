@@ -67,6 +67,15 @@ public:
 	float TimeScale;
 };
 
+class XIdleArgs : public XEventArgs
+{
+public:
+	XIdleArgs()
+	{
+		_eDefine = XEvent_Idle;
+	}
+};
+
 
 class XChargeActionArgs : public XEventArgs
 {

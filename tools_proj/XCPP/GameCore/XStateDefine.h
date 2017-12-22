@@ -14,7 +14,9 @@ enum XStateDefine
 	XState_Death,
 	XState_Charge,
 	XState_Skill,
-	XState_PushOut
+	XState_PushOut,
+
+	XState_Max
 };
 
 

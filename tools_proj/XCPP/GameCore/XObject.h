@@ -60,6 +60,7 @@ public:
 	virtual void OnInitial(XObject* _obj);
 	void Update(float delta);
 	virtual void OnUpdate(float delta);
+	inline XObject* GetHost() { return xobj; }
 	XObject* xobj;
 
 protected:

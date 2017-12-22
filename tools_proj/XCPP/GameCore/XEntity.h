@@ -9,6 +9,8 @@
 #include "XStateDefine.h"
 
 class  XAttributes;
+class XSkillMgr;
+class XStateMachine;
 
 class XEntity:public XObject
 {
@@ -27,6 +29,9 @@ public:
 	bool IsNpc();
 	bool IsDead();
 	EntityType GetType();
+	XSkillMgr* SkillManager();
+
+	inline XStateMachine* StateMachine() const { return _pmachine; }
 
 	void MoveForward(Vector3 forward);
 	void StopMove();
@@ -42,6 +47,7 @@ public:
 	XAttributes* getAttributes();
 
 protected:
+	XStateMachine* _pmachine;
 	EntityType _eEntity_Type = Entity;
 	GameObject* _object;
 	Transform* _transf;

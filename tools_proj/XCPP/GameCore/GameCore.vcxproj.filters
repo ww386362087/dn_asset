@@ -142,7 +142,15 @@
     <ClCompile Include="XBullet.cpp">
       <Filter>skill</Filter>
     </ClCompile>
-    <ClCompile Include="XBulletCore.cpp" />
+    <ClCompile Include="XBulletCore.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XJAComboSkill.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XStateMachine.cpp">
+      <Filter>state</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -313,7 +321,18 @@
     <ClInclude Include="XBullet.h">
       <Filter>skill</Filter>
     </ClInclude>
-    <ClInclude Include="XBulletCore.h" />
+    <ClInclude Include="XJAComboSkill.h">
+      <Filter>skill</Filter>
+    </ClInclude>
+    <ClInclude Include="XBulletCore.h">
+      <Filter>skill</Filter>
+    </ClInclude>
+    <ClInclude Include="XStateMachine.h">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="IXStateTransform.h">
+      <Filter>state</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -369,6 +388,9 @@
     </Filter>
     <Filter Include="skill">
       <UniqueIdentifier>{58825f78-bf4c-4e2a-bc88-89d59c6d61de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="state">
+      <UniqueIdentifier>{cdbc3320-4fc3-4812-97da-5104bc3cb0f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

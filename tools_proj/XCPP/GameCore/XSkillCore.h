@@ -2,6 +2,7 @@
 #define  __XSkillCore__
 
 #include "Common.h"
+#include "XStateDefine.h"
 
 class XEntity;
 class XSkill;
@@ -11,7 +12,7 @@ class Enemy;
 class XSkillCore
 {
 public:
-	XSkillCore();
+	XSkillCore(XEntity* firer, XSkillData* data);
 	~XSkillCore();
 
 	bool CooledDown() const { return !_is_init_cooling && _current_running_time > 0; }
@@ -27,7 +28,7 @@ public:
 	uint Level() const { return _skill_level; }
 	void Halt() { _carrier = NULL; }
 	XSkillData* GetSoul() const { return _soul; }
-
+	bool CanCast(uint token);
 
 	bool Fire(XSkill* carrier);
 	void Execute(XSkill* carrier);

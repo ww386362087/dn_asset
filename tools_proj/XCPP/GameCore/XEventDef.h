@@ -16,6 +16,7 @@ enum  XEventDefine
 	XEvent_AIEndSkill,
 	XEvent_Attack,
 	XAction_Charge,
+	XEvent_Idle,
 	XEvent_MAX
 };
 

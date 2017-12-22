@@ -3,6 +3,9 @@
 #include "XSkill.h"
 #include "SkillReader.h"
 #include "XEntity.h"
+#include "SkillReader.h"
+#include "XArtsSkill.h"
+#include "XJAComboSkill.h"
 
 XSkillMgr::XSkillMgr(XEntity* host)
 {
@@ -14,7 +17,20 @@ XSkillMgr::~XSkillMgr()
 
 XSkill* XSkillMgr::GetCarrier(int id)
 {
-	return 0;
+	std::unordered_map<int, XSkill*>::iterator it = _carriers.find(id);
+	if (it == _carriers.end())
+	{
+		XSkill* pSkill = NULL;
+		switch (id)
+		{
+		case 0: pSkill = new XJAComboSkill(_host); break;
+		case 1: pSkill = new XArtsSkill(_host); break;
+		}
+		if (pSkill) _carriers[id] = pSkill;
+		return pSkill;
+	}
+	else
+		return it->second;
 }
 
 XSkillCore* XSkillMgr::GetPhysicalSkill()
@@ -47,14 +63,19 @@ bool XSkillMgr::IsCooledDown(uint id)
 	return IsCooledDown(GetSkill(id));
 }
 
+XSkillCore* XSkillMgr::CreateSkillCore(XSkillData* data)
+{
+	return new XSkillCore(_host, data);
+}
+
 void XSkillMgr::AttachSkill(XSkillData* data, bool attach)
 {
-	//uint id = xhash(data->Name);
-	//if (_full_skill.find(id) == _full_skill.end())
-	//{
-	//	XSkillCore* pCore = CreateSkillCore(data);
-	//	_full_skill[id] = pCore;
-	//}
+	uint id = xhash(data->Name);
+	if (_full_skill.find(id) == _full_skill.end())
+	{
+		XSkillCore* pCore = CreateSkillCore(data);
+		_full_skill[id] = pCore;
+	}
 
 	//XSkillCore* pSkillCore = _full_skill[id];
 	///*
