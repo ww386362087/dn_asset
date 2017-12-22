@@ -17,10 +17,14 @@ void GameMain::Run()
 	}
 }
 
-int i = 0;
+
+void GameMain::OnStart()
+{
+	XEntityMgr::Instance()->CreateEntity(2, Vector3::zero, Vector3::zero);
+}
+
 void GameMain::Ontick(long diff)
 {
-	i++;
 	//std::cout << " ticktime" << " : " << diff << " ex: " << m_ex << " sleep: " << m_sleep << std::endl;
 	float ft = 1000;
 	float delta = diff / ft;
@@ -29,12 +33,6 @@ void GameMain::Ontick(long diff)
 	XEntityMgr::Instance()->LateUpdate();
 }
 
-bool GameMain::TTimer(IArgs* arg,void *)
-{
-	int* a = (int*)arg;
-	std::cout << "..... timer  ...." << *a << std::endl;
-	return true;
-}
 
 
 void GameMain::Start()

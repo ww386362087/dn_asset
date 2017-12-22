@@ -1,7 +1,7 @@
 #ifndef  __XDelegate__
 #define  __XDelegate__
 
-#define CALLBACK(T_, Func_, Inst_) XDelegate::registerMethod<T_, &T_::Func_>(Inst_)
+#define DelCALLBACK(T_, Func_, Inst_) XDelegate::registerMethod<T_, &T_::Func_>(Inst_)
 
 class IArgs
 {

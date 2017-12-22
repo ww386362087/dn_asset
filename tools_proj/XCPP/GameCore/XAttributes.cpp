@@ -11,22 +11,22 @@ void XAttributes::setid(uint val)
 	_id = val;
 }
 
-Vector3* XAttributes::getAppearPostion()
+Vector3 XAttributes::getAppearPostion()
 {
 	return _pos;
 }
 
-void XAttributes::setAppearPosition(Vector3* val)
+void XAttributes::setAppearPosition(Vector3 val)
 {
 	_pos = val;
 }
 
-Vector3* XAttributes::getAppearQuaternion()
+Vector3 XAttributes::getAppearQuaternion()
 {
 	return _rot;
 }
 
-void XAttributes::setAppearQuaternion(Vector3* rot)
+void XAttributes::setAppearQuaternion(Vector3 rot)
 {
 	_rot = rot;
 }
@@ -49,6 +49,25 @@ bool XAttributes::getDead()
 void XAttributes::setDead(bool val)
 {
 	_dead = val;
+}
+
+
+const char* XAttributes::getName()
+{
+	return _name;
+}
+
+void XAttributes::setName(const char* val)
+{
+	_name = val;
+}
+const char* XAttributes::getPrefab()
+{
+	return _prefab_name;
+}
+void XAttributes::setPrefab(const char* val)
+{
+	_prefab_name = val;
 }
 
 int XAttributes::getFightGroup()

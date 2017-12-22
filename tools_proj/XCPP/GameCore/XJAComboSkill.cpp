@@ -97,7 +97,7 @@ void XJAComboSkill::JAAt()
 {
 	if (_data->Ja.size() == 1)
 	{
-		XDelegate del = CALLBACK(XJAComboSkill, Refire, this);
+		XDelegate del = DelCALLBACK(XJAComboSkill, Refire, this);
 		AddedTimerToken(XTimerMgr::Instance()->SetTimer((float)(_data->Ja[0].Point * _time_scale), &del));
 		_during_ja = true;
 	}

@@ -25,7 +25,7 @@ extern "C"
 		LOG("c++ initial success with path: " + s);
 	}
 
-	void iInitCallbackCommand(CALLBACK cb)
+	void iInitCallbackCommand(SharpCALLBACK cb)
 	{
 		callback = cb;
 	}
@@ -97,10 +97,7 @@ extern "C"
 		Vector3 zv = Vector3::zero;
 		LOG(tostring(zv));
 
-		Vector3 vone = Vector3::one;
-		Vector3 vzero = Vector3::zero;
-		Vector3* pos = &vone, *rot = &vzero;
-		XEntityMgr::Instance()->CreateEntity(2, pos, rot);
+		XEntityMgr::Instance()->CreateEntity(2, Vector3::zero, Vector3::one);
 
 	}
 

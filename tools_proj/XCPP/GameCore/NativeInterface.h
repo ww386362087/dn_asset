@@ -11,14 +11,14 @@
 
 extern "C"
 {
-	typedef void(*CALLBACK)(unsigned char,const char*);
+	typedef void(*SharpCALLBACK)(unsigned char,const char*);
 	typedef void(*EntyCallBack)(int entityid, const char* method, const char* arg);
 	typedef void(*CompCallBack)(int entityid, const char* compnent, const char* arg);
-	extern CALLBACK callback;
+	extern SharpCALLBACK callback;
 	extern EntyCallBack eCallback;
 	extern CompCallBack cCallback;
 
-	ENGINE_INTERFACE_EXPORT void iInitCallbackCommand(CALLBACK cb);
+	ENGINE_INTERFACE_EXPORT void iInitCallbackCommand(SharpCALLBACK cb);
 	ENGINE_INTERFACE_EXPORT void iInitEntityCall(EntyCallBack cb);
 	ENGINE_INTERFACE_EXPORT void iInitCompnentCall(CompCallBack cb);
 	ENGINE_INTERFACE_EXPORT int iAdd(int, int);

@@ -19,13 +19,13 @@
 
 
 // 日志文件的类型    
-typedef enum 
+enum LogLevel
 {  
    INFO,  
    WARN,  
    ERROR,  
    FATAL  
-}LogLevel;  
+};  
 
 
 /// 初始化日志文件  

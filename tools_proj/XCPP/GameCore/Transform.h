@@ -11,9 +11,9 @@ public:
 	Transform(const char* nm);
 	~Transform();
 	
-	Vector3* position;
-	Vector3* scale;
-	Vector3* rotatiion;
+	Vector3 position;
+	Vector3 scale;
+	Vector3 rotatiion;
 	Transform* parent;
 	const char* name;
 	GameObject* gameObject;

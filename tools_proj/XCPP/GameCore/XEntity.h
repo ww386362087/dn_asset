@@ -42,7 +42,7 @@ public:
 	static XEntity* ValidEntity(uint id);
 
 public:
-	Vector3* getPostion();
+	Vector3 getPostion();
 	GameObject* getEntityObject();
 	XAttributes* getAttributes();
 

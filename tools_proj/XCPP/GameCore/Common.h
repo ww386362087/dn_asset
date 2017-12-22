@@ -31,6 +31,7 @@ typedef picojson::value object;
 
 extern std::string UNITY_STREAM_PATH;
 extern std::string UNITY_CACHE_PATH;
+static int id = 0;
 
 template<typename T>
 std::string tostring(T val)
@@ -62,6 +63,8 @@ void tobytes(std::string str);
 void InitPath(std::string stream,std::string cache);
 
 uint xhash(const char* ch);
+
+int new_id();
 
 bool isNumber(const std::string& value);
 

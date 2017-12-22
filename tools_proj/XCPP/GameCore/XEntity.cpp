@@ -118,7 +118,7 @@ XEntity* XEntity::ValidEntity(uint id)
 	return XEntityMgr::Instance()->GetEntity(id);
 }
 
-Vector3* XEntity::getPostion()
+Vector3 XEntity::getPostion()
 {
 	if (_transf)
 	{
@@ -126,7 +126,7 @@ Vector3* XEntity::getPostion()
 	}
 	else
 	{
-		return  new Vector3(0, 0, 0);
+		return Vector3::zero;
 	}
 }
 

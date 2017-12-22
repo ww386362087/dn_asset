@@ -48,7 +48,8 @@ public:
 	void UnloadAll();
 	XEntity* PrepareEntity(XAttributes* attr);
 	void UnloadEntity(uint id);
-	XEntity* CreateEntity(uint staticid, Vector3* pos, Vector3* rot);
+	XEntity* CreateEntity(uint staticid, Vector3 pos, Vector3 rot);
+	XAttributes* InitAttr(int staticid);
 
 public:
 	XPlayer* Player;

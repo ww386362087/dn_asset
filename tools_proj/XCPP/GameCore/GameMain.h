@@ -6,6 +6,7 @@
 #include "Singleton.h"
 #include "XTimerMgr.h"
 #include <ctime> 
+#include "Vector3.h"
 #include "XDelegate.h"
 /*
  *	fps:30 tick = run + sleep
@@ -20,10 +21,10 @@ class GameMain:public Singleton<GameMain>
 
 public:
 	void Run();
+	void OnStart();
 	void Ontick(long diff);
 	void Start();
 	void Stop();
-	bool TTimer(IArgs*, void*);
 
 private :
 	long m_diff = 0;

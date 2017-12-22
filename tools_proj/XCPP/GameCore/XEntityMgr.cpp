@@ -35,6 +35,20 @@ void XEntityMgr::DetachFromHost()
 	}
 }
 
+XAttributes* XEntityMgr::InitAttr(int staticid)
+{
+	/*XEntityStatisticsRow* srow;
+	iGetXEntityStatisticsRow(staticid, srow);
+	XEntityPresentationRow* prow;
+	iGetXEntityPresentationRow(srow->presentid, prow);*/
+	XAttributes* attr = new XAttributes();
+	attr->setid(new_id());
+	//attr->setPresentID(srow->presentid);
+	//attr->setPrefab(prow->prefab);
+	//attr->setName(prow->name);
+	return attr;
+}
+
 XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 {
 	XEntity* x = new XEntity();
@@ -48,9 +62,9 @@ XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 	return x;
 }
 
-XEntity* XEntityMgr::CreateEntity(uint staticid, Vector3* pos, Vector3* rot)
+XEntity* XEntityMgr::CreateEntity(uint staticid, Vector3 pos, Vector3 rot)
 {
-	XAttributes* attr = new XAttributes();// InitAttrFromClient((int)staticid);
+	XAttributes* attr = InitAttr((int)staticid);
 	attr->setAppearPosition(pos);
 	attr->setAppearQuaternion(rot);
 	XEntity* ent = PrepareEntity(attr);
@@ -127,12 +141,10 @@ XEntity* XEntityMgr::GetEntity(uint id)
 
 XPlayer* XEntityMgr::CreatePlayer()
 {
-	XAttributes* attr = new XAttributes();// InitAttrFromClient((int)staticid);
-	Vector3 v = Vector3::zero;
-	attr->setAppearPosition(&v);
-	attr->setAppearQuaternion(&v);
+	int staticid = 2;
+	XAttributes* attr = InitAttr(staticid);
+	attr->setAppearPosition(Vector3::zero);
+	attr->setAppearQuaternion(Vector3::zero);
 	return Player = dynamic_cast<XPlayer*>(PrepareEntity(attr));
 }
-
-
 

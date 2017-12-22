@@ -5,7 +5,7 @@ std::ofstream Log::m_error_log_file;
 std::ofstream Log::m_info_log_file;  
 std::ofstream Log::m_warn_log_file;
 
-CALLBACK callback;
+SharpCALLBACK callback;
 
 void InitLogger(const std::string& info_log_filename,const std::string& warn_log_filename,const std::string& error_log_filename){  
 	Log::m_info_log_file.open(info_log_filename.c_str());  
