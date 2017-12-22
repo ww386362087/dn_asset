@@ -9,8 +9,6 @@ class XJAComboSkill:public XArtsSkill
 public:
 	XJAComboSkill(XEntity* firer);
 	virtual ~XJAComboSkill();
-
-	bool ReFire(IArgs* args, void*);
 	inline bool DuringJA() { return _during_ja; }
 
 protected:

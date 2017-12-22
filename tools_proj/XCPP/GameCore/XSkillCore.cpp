@@ -39,7 +39,7 @@ bool XSkillCore::CanCast(uint token)
 bool XSkillCore::Fire(XSkill* carrier)
 {
 	if (_ever_fired) return false;
-	if (carrier != NULL && CooledDown())
+	if (carrier && CooledDown())
 	{
 		_carrier = carrier;
 		OnCdCall(_current_running_time - 1);
@@ -63,12 +63,12 @@ void XSkillCore::Execute(XSkill* carrier)
 
 void XSkillCore::ClearHurtTarget()
 {
-	//std::vector<set<uint> >::iterator it = _hurt_target.begin();
-	//while (it != _hurt_target.end())
-	//{
-	//	(*it).clear();
-	//	++it;
-	//}
+	std::vector<std::set<uint> >::iterator it = _hurt_target.begin();
+	while (it != _hurt_target.end())
+	{
+		(*it).clear();
+		++it;
+	}
 }
 
 void XSkillCore::ClearWarningPos()

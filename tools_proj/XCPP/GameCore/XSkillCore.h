@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "XStateDefine.h"
+#include <set>
 
 class XEntity;
 class XSkill;
@@ -57,6 +58,16 @@ private:
 	float _static_cd;
 	float _init_cd;
 	uint _skill_level;
+
+
+	std::vector<std::set<uint> > _hurt_target;
+
+	float _semi_dynamic_cd_ratio;
+	float _last_dynamic_cd;
+	float _dynamic_cd_ratio;
+	float _dynamic_cd_delta;
+
+	uint _sync_at_sequence;
 };
 
 #endif
