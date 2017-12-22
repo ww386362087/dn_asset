@@ -14,12 +14,10 @@ enum  XEventDefine
 	XEvent_Detach_Host,
 	XEvent_AIStartSkill,
 	XEvent_AIEndSkill,
+	XEvent_Attack,
+	XAction_Charge,
 	XEvent_MAX
 };
-
-
-
-
 
 
 

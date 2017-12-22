@@ -13,6 +13,12 @@ void AITreeData::SetVariable(std::string name, int value)
 	i_cache[hash] = value;
 }
 
+void AITreeData::SetVariable(std::string name, uint value)
+{
+	uint hash = xhash(name.c_str());
+	u_cache[hash] = value;
+}
+
 void AITreeData::SetVariable(std::string name, bool value)
 {
 	uint hash = xhash(name.c_str());
@@ -35,12 +41,15 @@ std::unordered_map<uint, int> AITreeData::GetIntCache()
 	return this->i_cache;
 }
 
+std::unordered_map<uint, uint> AITreeData::GetUintCache()
+{
+	return this->u_cache;
+}
 
 std::unordered_map<uint, bool> AITreeData::GetBoolCache()
 {
 	return this->b_cache;
 }
-
 
 std::unordered_map<uint, GameObject*> AITreeData::GetGoCache()
 {

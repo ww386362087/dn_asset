@@ -36,16 +36,16 @@ bool XEventMgr::FireEvent(XEventArgs* arg)
 	return true;
 }
 
-void XEventMgr::TimerCallback(ITimerArg* arg)
+bool XEventMgr::OnDelay(IArgs* arg, void *)
 {
-	LOG("CALLBACK");
 	XEventArgs* e_arg = dynamic_cast<XEventArgs*>(arg);
-	if (e_arg) FireEvent(e_arg);
+	FireEvent(e_arg);
+	return true;
 }
 
 bool XEventMgr::FireEvent(XEventArgs* arg, float delay)
 {
-	ITimerArg* t_arg = dynamic_cast<ITimerArg*>(arg);
-	if (t_arg)	XTimerMgr::Instance()->SetTimer(delay, this, t_arg);
+	XDelegate del = CALLBACK(XEventMgr, OnDelay, this);
+	if (arg) XTimerMgr::Instance()->SetTimer(delay, &del, arg);
 	return true;
 }

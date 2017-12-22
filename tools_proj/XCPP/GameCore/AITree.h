@@ -18,13 +18,14 @@ public:
 	bool SetBehaviourTree(const char* name);
 	void SetVariable(const char* name, float value);
 	void SetVariable(const char* name, int value);
+	void SetVariable(const char* name, uint value);
 	void SetVariable(const char* name, bool value);
 	void SetVariable(const char* name, GameObject* value);
 	float GetFloatVariable(const char* name);
 	int GetIntVariable(const char* name);
+	uint GetUintVariable(const char* name);
 	bool GetBoolVariable(const char* name);
 	GameObject* GetGoVariable(const char* name);
-	void SetManual(bool enable);
 	void TickBehaviorTree();
 
 

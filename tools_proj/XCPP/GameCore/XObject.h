@@ -19,7 +19,6 @@ enum UpdateState
 
 class XComponent;
 
-#define CALLBACK(T_, Func_, Inst_) XDelegate::registerMethod<T_, &T_::Func_>(Inst_)
 
 class XObject
 {

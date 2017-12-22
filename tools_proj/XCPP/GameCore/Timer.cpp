@@ -1,10 +1,9 @@
 #include "Timer.h"
+#include "XDelegate.h"
 
-
-Timer::Timer(int time, int loop, ITimerCallback* handler, uint sequence, ITimerArg* arg)
+Timer::Timer(int time, int loop, XDelegate* handler, uint sequence, IArgs* arg)
 {
 	if (loop == 0) loop = -1;
-
 	m_totalTime = time;
 	m_arg = arg;
 	m_loop = loop;
@@ -29,10 +28,7 @@ void Timer::Update(int deltaTime)
 		m_currentTime += deltaTime;
 		if (m_currentTime >= m_totalTime)
 		{
-			if (m_handler)
-			{
-				m_handler->TimerCallback(m_arg);
-			}
+			if (m_handler)(*m_handler)(m_arg, NULL);
 			m_currentTime = 0;
 			m_loop--;
 		}
@@ -69,7 +65,3 @@ bool Timer::IsSequenceMatched(uint sequence)
 	return (m_sequence == sequence);
 }
 
-bool Timer::IsDelegateMatched(ITimerCallback* handler)
-{
-	return (m_handler == handler);
-}

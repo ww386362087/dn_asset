@@ -79,9 +79,6 @@
     <ClCompile Include="XNavigationComponent.cpp">
       <Filter>component</Filter>
     </ClCompile>
-    <ClCompile Include="XAudioComponent.cpp">
-      <Filter>component</Filter>
-    </ClCompile>
     <ClCompile Include="XEntityMgr.cpp">
       <Filter>entity</Filter>
     </ClCompile>
@@ -124,11 +121,26 @@
     <ClCompile Include="XAttributes.cpp">
       <Filter>component</Filter>
     </ClCompile>
-    <ClCompile Include="SkillReader.cpp">
-      <Filter>component</Filter>
-    </ClCompile>
     <ClCompile Include="tinyxml2.cpp">
       <Filter>plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillReader.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XSkill.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XSkillCore.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XSkillMgr.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XArtsSkill.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XBullet.cpp">
+      <Filter>skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,9 +231,6 @@
     <ClInclude Include="XNavigationComponent.h">
       <Filter>component</Filter>
     </ClInclude>
-    <ClInclude Include="XAudioComponent.h">
-      <Filter>component</Filter>
-    </ClInclude>
     <ClInclude Include="XEntityMgr.h">
       <Filter>entity</Filter>
     </ClInclude>
@@ -238,9 +247,6 @@
       <Filter>common\timer</Filter>
     </ClInclude>
     <ClInclude Include="XTimerMgr.h">
-      <Filter>common\timer</Filter>
-    </ClInclude>
-    <ClInclude Include="ITimerCallback.h">
       <Filter>common\timer</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
@@ -276,9 +282,6 @@
     <ClInclude Include="picojson.h">
       <Filter>plugin</Filter>
     </ClInclude>
-    <ClInclude Include="SkillReader.h">
-      <Filter>component</Filter>
-    </ClInclude>
     <ClInclude Include="XEventDef.h">
       <Filter>common\def</Filter>
     </ClInclude>
@@ -290,6 +293,24 @@
     </ClInclude>
     <ClInclude Include="XEventArgs.h">
       <Filter>common\event</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillReader.h">
+      <Filter>skill</Filter>
+    </ClInclude>
+    <ClInclude Include="XSkill.h">
+      <Filter>skill</Filter>
+    </ClInclude>
+    <ClInclude Include="XSkillCore.h">
+      <Filter>skill</Filter>
+    </ClInclude>
+    <ClInclude Include="XSkillMgr.h">
+      <Filter>skill</Filter>
+    </ClInclude>
+    <ClInclude Include="XArtsSkill.h">
+      <Filter>skill</Filter>
+    </ClInclude>
+    <ClInclude Include="XBullet.h">
+      <Filter>skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +364,9 @@
     </Filter>
     <Filter Include="plugin">
       <UniqueIdentifier>{a310231f-b3f7-45a2-a50b-fca4b286094a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="skill">
+      <UniqueIdentifier>{58825f78-bf4c-4e2a-bc88-89d59c6d61de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #ifndef  __XDelegate__
 #define  __XDelegate__
 
-
+#define CALLBACK(T_, Func_, Inst_) XDelegate::registerMethod<T_, &T_::Func_>(Inst_)
 
 class IArgs
 {
@@ -12,10 +12,7 @@ public:
 class XDelegate
 {
 public:
-	XDelegate()
-		: object_ptr(0)
-		, stub_ptr(0)
-	{}
+	XDelegate() : object_ptr(0), stub_ptr(0) {}
 
 	template <class T, bool (T::*TMethod)(IArgs*, void *)>
 	static XDelegate registerMethod(T* object_ptr)
@@ -45,7 +42,6 @@ private:
 	static bool method_stub(void* object_ptr, IArgs *pargs, void *arg)
 	{
 		T* ptr = static_cast<T*>(object_ptr);
-		//invocation here as fast as direct method invocation (because its value is known at compile time)
 		return (ptr->*TMethod)(pargs, arg);
 	}
 };

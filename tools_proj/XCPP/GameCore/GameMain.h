@@ -4,11 +4,12 @@
 #include "Common.h"
 #include "GameTime.h"
 #include "Singleton.h"
+#include "XTimerMgr.h"
 #include <ctime> 
-
+#include "XDelegate.h"
 /*
-	fps:30 tick = run + sleep
-*/
+ *	fps:30 tick = run + sleep
+ */
 
 
 //33ms tick once, and ensure game run as 30fps
@@ -22,9 +23,12 @@ public:
 	void Ontick(long diff);
 	void Start();
 	void Stop();
+	bool TTimer(IArgs*, void*);
 
 private :
 	long m_diff = 0;
+	long m_ex = 0;
+	long m_sleep = 0;
 	bool m_start = false;
 };
 

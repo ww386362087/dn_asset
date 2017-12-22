@@ -101,6 +101,7 @@ extern "C"
 		Vector3 vzero = Vector3::zero;
 		Vector3* pos = &vone, *rot = &vzero;
 		XEntityMgr::Instance()->CreateEntity(2, pos, rot);
+
 	}
 
 }

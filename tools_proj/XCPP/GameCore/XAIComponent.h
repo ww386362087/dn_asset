@@ -37,7 +37,7 @@ private:
 	void UpdateVariable();
 	void SetTreeVariable(AITree* tree);
 
-private :
+private:
 	bool _is_inited = false;
 	AITree* _tree;
 	float _ai_tick = 1.0f;  //AIÐÄÌø¼ä¸ô 

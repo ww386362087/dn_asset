@@ -59,16 +59,19 @@ public:
 
 	void SetVariable(std::string name, float value);
 	void SetVariable(std::string name, int value);
+	void SetVariable(std::string name, uint value);
 	void SetVariable(std::string name, bool value);
 	void SetVariable(std::string name, GameObject* value);
 	std::unordered_map<uint, float> GetFloatCache();
 	std::unordered_map<uint, int> GetIntCache();
+	std::unordered_map<uint, uint> GetUintCache();
 	std::unordered_map<uint, bool> GetBoolCache();
 	std::unordered_map<uint, GameObject*> GetGoCache();
 
 private:
 	std::unordered_map<uint, float> f_cache;
 	std::unordered_map<uint, int> i_cache;
+	std::unordered_map<uint, uint> u_cache;
 	std::unordered_map<uint, bool> b_cache;
 	std::unordered_map<uint, GameObject*> g_cache;
 };

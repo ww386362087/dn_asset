@@ -1,5 +1,4 @@
 #include "XEntity.h"
-#include "XAudioComponent.h"
 #include "XBeHitComponent.h"
 #include "XAIComponent.h"
 #include "XSkillComponent.h"
@@ -27,6 +26,10 @@ void XEntity::DetachFromHost()
 void XEntity::Initilize(GameObject* go, XAttributes* attr)
 {
 	XObject::Initilize();
+	_object = go;
+	_transf = go->transform;
+	_attr = attr;
+
 	XObject::AttachComponent<XSkillComponent>();
 	XObject::AttachComponent<XAIComponent>();
 	XAIComponent* ai = XObject::GetComponnet<XAIComponent>();
@@ -35,9 +38,7 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	XObject::DetachComponent<XAIComponent>();
 	ai = XObject::GetComponnet<XAIComponent>();
 	LOG("AI:" + tostring(ai == 0));
-	_object = go;
-	_transf = go->transform;
-	_attr = attr;
+
 	OnInitial();
 }
 

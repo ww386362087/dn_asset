@@ -3,12 +3,12 @@
 
 #include "Common.h"
 #include "XTimerMgr.h"
-#include "ITimerCallback.h"
+#include "XDelegate.h"
 
 class Timer
 {
 public:
-	Timer(int time, int loop, ITimerCallback* handler, uint sequence, ITimerArg* arg);
+	Timer(int time, int loop, XDelegate* handler, uint sequence, IArgs* arg);
 	void Update(int deltaTime);
 	bool IsFinished();
 	int GetCurrentTime();
@@ -16,12 +16,11 @@ public:
 	void Resume();
 	void Reset();
 	bool IsSequenceMatched(uint sequence);
-	bool IsDelegateMatched(ITimerCallback* handler);
 
 
 private:
-	ITimerCallback* m_handler;
-	ITimerArg* m_arg;
+	XDelegate* m_handler;
+	IArgs* m_arg;
 	int m_loop;
 	int m_totalTime;
 	int m_currentTime;

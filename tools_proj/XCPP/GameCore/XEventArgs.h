@@ -3,6 +3,8 @@
 
 #include "XEventDef.h"
 #include "XDelegate.h"
+#include "Common.h"
+#include "SkillReader.h"
 
 class XEventArgs :public IArgs
 {
@@ -17,5 +19,86 @@ protected:
 };
 
 
+class XAIStartSkillEventArgs : public XEventArgs
+{
+public:
+	XAIStartSkillEventArgs() : XEventArgs()
+	{
+		SkillId = 0;
+		IsCaster = false;
+		_eDefine = XEvent_AIStartSkill;
+	}
+
+	int SkillId;
+	bool IsCaster;
+};
+
+
+class XAIEndSkillEventArgs : public XEventArgs
+{
+public:
+	XAIEndSkillEventArgs() : XEventArgs()
+	{
+		SkillId = 0;
+		IsCaster = false;
+		_eDefine = XEvent_AIEndSkill;
+	}
+
+	int SkillId;
+	bool IsCaster;
+};
+
+
+class XAttackArgs : public XEventArgs
+{
+public:
+	XAttackArgs()
+		:Identify(0), Target(0), Slot(-1), HasManualFace(false), ManualFace(0), TimeScale(1.0f)
+	{
+		_eDefine = XEvent_Attack;
+	}
+	virtual ~XAttackArgs() { }
+
+	uint Identify;
+	uint Target;
+	uint Slot;
+	bool HasManualFace;
+	float ManualFace;
+	float TimeScale;
+};
+
+
+class XChargeActionArgs : public XEventArgs
+{
+public:
+	XChargeActionArgs()
+	{
+		new(this) XChargeActionArgs(NULL);
+	}
+
+	XChargeActionArgs(const XChargeData* data)
+		:XEventArgs(),
+		Height(0),
+		TimeSpan(0),
+		Target(0),
+		TimeGone(0),
+		TimeScale(1.0f)
+	{
+		_eDefine = XAction_Charge;
+		_data = data;
+	}
+
+	float Height;
+	float TimeSpan;
+	uint Target;
+	float TimeGone;
+	float TimeScale;
+
+public:
+	inline const XChargeData* Data() const { return _data; }
+
+private:
+	const XChargeData* _data;
+};
 
 #endif

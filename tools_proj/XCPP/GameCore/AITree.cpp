@@ -40,7 +40,13 @@ void AITree::SetVariable(const char* name, float value)
 		_tree_data->SetVariable(name, value);
 	}
 }
-
+void AITree::SetVariable(const char* name, uint value)
+{
+	if (_enable && _tree_data)
+	{
+		_tree_data->SetVariable(name, value);
+	}
+}
 void AITree::SetVariable(const char* name, int value)
 {
 	if (_enable && _tree_data)
@@ -76,15 +82,19 @@ float AITree::GetFloatVariable(const char* name)
 int AITree::GetIntVariable(const char* name)
 {
 	uint hash = xhash(name);
-	std::unordered_map<uint, int> map = _tree_data->GetIntCache();
-	return map[hash];
+	return _tree_data->GetIntCache()[hash];
+}
+
+uint AITree::GetUintVariable(const char* name)
+{
+	uint hash = xhash(name);
+	return _tree_data->GetUintCache()[hash];
 }
 
 bool AITree::GetBoolVariable(const char* name)
 {
 	uint hash = xhash(name);
-	std::unordered_map<uint, bool> map = _tree_data->GetBoolCache();
-	return map[hash];
+	return _tree_data->GetBoolCache()[hash];
 }
 
 GameObject* AITree::GetGoVariable(const char* name)
@@ -93,13 +103,6 @@ GameObject* AITree::GetGoVariable(const char* name)
 	std::unordered_map<uint, GameObject*> map = _tree_data->GetGoCache();
 	return map[hash];
 }
-
-
-void AITree::SetManual(bool enable)
-{
-	//do nothing here 
-}
-
 
 void AITree::TickBehaviorTree()
 {

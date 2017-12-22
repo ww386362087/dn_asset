@@ -42,11 +42,32 @@ void XAIComponent::EventSubscribe()
 
 bool XAIComponent::OnStartSkill(IArgs* e, void*)
 {
+	XAIStartSkillEventArgs* startSkill = (XAIStartSkillEventArgs*)e;
+	if (startSkill->IsCaster)
+	{
+		_is_hurt_oppo = false;
+		_is_casting_skill = true;
+		_cast_skillid = startSkill->SkillId;
+		_tree->SetVariable(AITreeArg::SkillID, _cast_skillid);
+		_tree->SetVariable(AITreeArg::IsHurtOppo, _is_hurt_oppo);
+		_tree->SetVariable(AITreeArg::IsCastingSkill, _is_casting_skill);
+	}
 	return true;
 }
 
-bool XAIComponent::OnEndSkill(IArgs*, void*)
+bool XAIComponent::OnEndSkill(IArgs* e, void*)
 {
+	XAIEndSkillEventArgs* endSkill = (XAIEndSkillEventArgs*)e;
+
+	if (endSkill->IsCaster)
+	{
+		//if ((int)_entity->SkillManager()->GetDashIdentity() != endSkill->SkillId)
+		{
+			_is_casting_skill = false;
+			_cast_skillid = 0;
+			_tree->SetVariable(AITreeArg::SkillID, _is_casting_skill);
+		}
+	}
 	return true;
 }
 
@@ -77,7 +98,6 @@ void XAIComponent::SetTarget(XEntity* target)
 		{
 			Vector3 diff = *(_entity->getPostion()) - *(_target->getPostion());
 			_target_distance = diff.magnitude();
-		
 			_tree->SetVariable(AITreeArg::TargetDistance, _target_distance);
 			_tree->SetVariable(AITreeArg::TARGET, _target->getEntityObject());
 		}
@@ -87,7 +107,6 @@ void XAIComponent::SetTarget(XEntity* target)
 void XAIComponent::InitTree()
 {
 	_tree = new AITree();
-
 	const char* tree = "";
 	if (_entity->IsPlayer())
 	{
@@ -103,13 +122,12 @@ void XAIComponent::InitTree()
 
 void XAIComponent::SetBehaviorTree(const char* tree)
 {
-	if (tree!="")
+	if (tree)
 	{
 		_is_inited = true;
 		_tree->Initial(_entity);
 		_tree->SetBehaviourTree(tree);
 		_tree->EnableBehaviourTree(true);
-		_tree->SetManual(true);
 		_tick = _ai_tick * _tick_factor;
 	}
 	else
@@ -195,7 +213,6 @@ void XAIComponent::SetTreeVariable(AITree* tree)
 	tree->SetVariable(AITreeArg::IsCastingSkill, _is_casting_skill);
 	tree->SetVariable(AITreeArg::IsFighting, _is_fighting);
 	tree->SetVariable(AITreeArg::IsQteState, _is_qte_state);
-	tree->SetVariable(AITreeArg::BornPos, _entity->getPostion());
 }
 
 
