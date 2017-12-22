@@ -46,6 +46,7 @@
     <ClCompile Include="XArtsSkill.cpp" />
     <ClCompile Include="XAttributes.cpp" />
     <ClCompile Include="XBullet.cpp" />
+    <ClCompile Include="XBulletCore.cpp" />
     <ClCompile Include="XSkill.cpp" />
     <ClCompile Include="XSkillCore.cpp" />
     <ClCompile Include="XSkillMgr.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="XAttributeDefine.h" />
     <ClInclude Include="XAttributes.h" />
     <ClInclude Include="XBullet.h" />
+    <ClInclude Include="XBulletCore.h" />
     <ClInclude Include="XComponentDef.h" />
     <ClInclude Include="XDelegate.h" />
     <ClInclude Include="XSkill.h" />

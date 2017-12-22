@@ -106,6 +106,12 @@ bool XEntity::Valide(XEntity* e)
 	return e && e->_attr && !e->IsDead();
 }
 
+XEntity* XEntity::ValidEntity(uint id)
+{
+	if (id == 0) return NULL;
+	return XEntityMgr::Instance()->GetEntity(id);
+}
+
 Vector3* XEntity::getPostion()
 {
 	if (_transf)

@@ -34,6 +34,7 @@ public:
 	void UnloadEntity();
 	uint EntityID;
 	static bool Valide(XEntity* e);
+	static XEntity* ValidEntity(uint id);
 
 public:
 	Vector3* getPostion();

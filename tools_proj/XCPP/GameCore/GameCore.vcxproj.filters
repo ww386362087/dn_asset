@@ -142,6 +142,7 @@
     <ClCompile Include="XBullet.cpp">
       <Filter>skill</Filter>
     </ClCompile>
+    <ClCompile Include="XBulletCore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -312,6 +313,7 @@
     <ClInclude Include="XBullet.h">
       <Filter>skill</Filter>
     </ClInclude>
+    <ClInclude Include="XBulletCore.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
