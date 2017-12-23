@@ -131,7 +131,7 @@ public class TestCPP : MonoBehaviour
         {
             int len = CQteStatusList.length;
             ui_rst = "\nqte status list table line cnt: " + len + "\n";
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 26; i++)
             {
                 var rst = CQteStatusList.GetRow(i);
                 ui_rst += string.Format("\nvalue:{0,-4} name:{1,-20} comment:{2,-30}",rst.Value,rst.Name,rst.Comment);
@@ -141,10 +141,20 @@ public class TestCPP : MonoBehaviour
         {
             int len = CEquipSuit.length;
             ui_rst = "\nequi suit table line cnt: " + len + "\n";
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 26; i++)
             {
                 var rst = CEquipSuit.GetRow(i);
                 ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + " level:" + rst.Level + " profid:" + rst.ProfID + " isCreate:" + rst.IsCreateShow +" effect2: "+rst.Effect2[0];
+            }
+        }
+        if (GUILayout.Button("Get-Statics-Row", ui_opt))
+        {
+            int len = CXEntityStatistics.length;
+            ui_rst = "\nequi statics table line cnt: " + len + "\n";
+            for (int i = 0; i < 26; i++)
+            {
+                var rst = CXEntityStatistics.GetRow(i);
+                ui_rst += "\nuid:" + rst.UID + " name:" + rst.Name + " preid:" + rst.PresentID + " type:" + rst.Type;
             }
         }
         GUILayout.EndVertical();
