@@ -94,8 +94,8 @@ public:
 
 protected:
 	std::string name;
-	std::vector<XEntityStatisticsRow> m_data;
-	std::unordered_map<uint, XEntityStatisticsRow> m_map;
+	std::vector<XEntityStatisticsRow*> m_data;
+	std::unordered_map<uint, XEntityStatisticsRow*> m_map;
 };
 
 

@@ -48,8 +48,8 @@ public:
 
 protected:
 	std::string name;
-	std::vector<FashionListRow> m_data;
-	std::unordered_map<uint, FashionListRow> m_map;
+	std::vector<FashionListRow*> m_data;
+	std::unordered_map<uint, FashionListRow*> m_map;
 };
 
 

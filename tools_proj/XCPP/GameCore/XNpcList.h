@@ -47,8 +47,8 @@ public:
 
 protected:
 	std::string name;
-	std::vector<XNpcListRow> m_data;
-	std::unordered_map<uint, XNpcListRow> m_map;
+	std::vector<XNpcListRow*> m_data;
+	std::unordered_map<uint, XNpcListRow*> m_map;
 };
 
 

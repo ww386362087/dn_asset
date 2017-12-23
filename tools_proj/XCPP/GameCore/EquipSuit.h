@@ -47,8 +47,8 @@ public:
 
 protected:
 	std::string name;
-	std::vector<EquipSuitRow> m_data;
-	std::unordered_map<uint, EquipSuitRow> m_map;
+	std::vector<EquipSuitRow*> m_data;
+	std::unordered_map<uint, EquipSuitRow*> m_map;
 };
 
 

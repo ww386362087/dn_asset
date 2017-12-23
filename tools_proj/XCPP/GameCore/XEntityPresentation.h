@@ -110,8 +110,8 @@ public:
 
 protected:
 	std::string name;
-	std::vector<XEntityPresentationRow> m_data;
-	std::unordered_map<uint, XEntityPresentationRow> m_map;
+	std::vector<XEntityPresentationRow*> m_data;
+	std::unordered_map<uint, XEntityPresentationRow*> m_map;
 };
 
 

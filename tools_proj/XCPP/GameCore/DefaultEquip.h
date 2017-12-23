@@ -49,8 +49,8 @@ public:
 
 protected:
 	std::string name;
-	std::vector<DefaultEquipRow> m_data;
-	std::unordered_map<uint, DefaultEquipRow> m_map;
+	std::vector<DefaultEquipRow*> m_data;
+	std::unordered_map<uint, DefaultEquipRow*> m_map;
 };
 
 

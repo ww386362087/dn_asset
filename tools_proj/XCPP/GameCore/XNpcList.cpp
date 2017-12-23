@@ -42,8 +42,8 @@ void XNpcList::ReadTable()
 		ReadString(row->showup);
 		Read(&(row->disappeartask));
 		Read(&(row->npctype));
-		m_data.push_back(*row);
-		m_map.insert(std::make_pair(row->npcid, *row));
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->npcid, row));
 	}
 	this->Close();
 }
@@ -53,7 +53,7 @@ void XNpcList::GetRow(int idx,XNpcListRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
@@ -63,8 +63,8 @@ void XNpcList::GetRow(int idx,XNpcListRow* row)
 
 void XNpcList::GetByUID(uint idx, XNpcListRow* row)
 {
- *row = m_map[idx];
- }
+ *row = *m_map[idx];
+}
 
 int XNpcList::GetLength()
 {

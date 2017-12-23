@@ -142,8 +142,8 @@ void SceneList::ReadTable()
 		ReadString(row->spactivityactivedrop);
 		ReadString(row->spactivitydrop);
 		ReadString(row->viprevivelimit);
-		m_data.push_back(*row);
-		m_map.insert(std::make_pair(row->sceneid, *row));
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->sceneid, row));
 	}
 	this->Close();
 }
@@ -153,7 +153,7 @@ void SceneList::GetRow(int idx,SceneListRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
@@ -163,8 +163,8 @@ void SceneList::GetRow(int idx,SceneListRow* row)
 
 void SceneList::GetByUID(uint idx, SceneListRow* row)
 {
- *row = m_map[idx];
- }
+ *row = *m_map[idx];
+}
 
 int SceneList::GetLength()
 {

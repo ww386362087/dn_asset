@@ -31,7 +31,7 @@ public:
 
 protected:
 	std::string name;
-	std::vector<QteStatusListRow> m_data;
+	std::vector<QteStatusListRow*> m_data;
 };
 
 

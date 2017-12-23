@@ -43,8 +43,8 @@ void FashionList::ReadTable()
 		ReadString(row->presentid);
 		ReadArray<int>(row->replaceid);
 		ReadString(row->againreplaceid);
-		m_data.push_back(*row);
-		m_map.insert(std::make_pair(row->itemid, *row));
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->itemid, row));
 	}
 	this->Close();
 }
@@ -54,7 +54,7 @@ void FashionList::GetRow(int idx,FashionListRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
@@ -64,8 +64,8 @@ void FashionList::GetRow(int idx,FashionListRow* row)
 
 void FashionList::GetByUID(uint idx, FashionListRow* row)
 {
- *row = m_map[idx];
- }
+ *row = *m_map[idx];
+}
 
 int FashionList::GetLength()
 {

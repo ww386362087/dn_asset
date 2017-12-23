@@ -30,8 +30,8 @@ public:
 
 protected:
 	std::string name;
-	std::vector<[*Table*]Row> m_data;
-	[\\]std::unordered_map<uint, [*Table*]Row> m_map;
+	std::vector<[*Table*]Row*> m_data;
+	[\\]std::unordered_map<uint, [*Table*]Row*> m_map;
 };
 
 

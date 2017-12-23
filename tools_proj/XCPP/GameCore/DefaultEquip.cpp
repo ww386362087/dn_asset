@@ -44,8 +44,8 @@ void DefaultEquip::ReadTable()
 		ReadString(row->tailpoint);
 		ReadString(row->fishingpoint);
 		ReadString(row->sideweaponpoint);
-		m_data.push_back(*row);
-		m_map.insert(std::make_pair(row->profid, *row));
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->profid, row));
 	}
 	this->Close();
 }
@@ -55,7 +55,7 @@ void DefaultEquip::GetRow(int idx,DefaultEquipRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
@@ -65,8 +65,8 @@ void DefaultEquip::GetRow(int idx,DefaultEquipRow* row)
 
 void DefaultEquip::GetByUID(uint idx, DefaultEquipRow* row)
 {
- *row = m_map[idx];
- }
+ *row = *m_map[idx];
+}
 
 int DefaultEquip::GetLength()
 {

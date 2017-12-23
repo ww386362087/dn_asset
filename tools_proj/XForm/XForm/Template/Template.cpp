@@ -25,8 +25,8 @@ void [*Table*]::ReadTable()
 	{
 		[*Table*]Row *row = new [*Table*]Row();
 		[**read**]
-		m_data.push_back(*row);
-		[\\]m_map.insert(std::make_pair(row->[*uid*], *row));
+		m_data.push_back(row);
+		[\\]m_map.insert(std::make_pair(row->[*uid*], row));
 	}
 	this->Close();
 }
@@ -36,7 +36,7 @@ void [*Table*]::GetRow(int idx,[*Table*]Row* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
@@ -46,8 +46,8 @@ void [*Table*]::GetRow(int idx,[*Table*]Row* row)
 
 [\\]void [*Table*]::GetByUID(uint idx, [*Table*]Row* row)
 [\\]{
-[\\] *row = m_map[idx];
-[\\] }
+[\\] *row = *m_map[idx];
+[\\]}
 
 int [*Table*]::GetLength()
 {

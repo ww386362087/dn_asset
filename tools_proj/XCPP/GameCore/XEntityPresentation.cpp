@@ -105,8 +105,8 @@ void XEntityPresentation::ReadTable()
 		ReadString(row->recoveryfx);
 		ReadString(row->recoveryhitslowfx);
 		ReadString(row->recoveryhitstopfx);
-		m_data.push_back(*row);
-		m_map.insert(std::make_pair(row->uid, *row));
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->uid, row));
 	}
 	this->Close();
 }
@@ -116,7 +116,7 @@ void XEntityPresentation::GetRow(int idx,XEntityPresentationRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
@@ -126,8 +126,8 @@ void XEntityPresentation::GetRow(int idx,XEntityPresentationRow* row)
 
 void XEntityPresentation::GetByUID(uint idx, XEntityPresentationRow* row)
 {
- *row = m_map[idx];
- }
+ *row = *m_map[idx];
+}
 
 int XEntityPresentation::GetLength()
 {

@@ -147,8 +147,8 @@ public:
 
 protected:
 	std::string name;
-	std::vector<SceneListRow> m_data;
-	std::unordered_map<uint, SceneListRow> m_map;
+	std::vector<SceneListRow*> m_data;
+	std::unordered_map<uint, SceneListRow*> m_map;
 };
 
 

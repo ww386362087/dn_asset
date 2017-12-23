@@ -42,8 +42,8 @@ void EquipSuit::ReadTable()
 		ReadSeq(row->effect8);
 		ReadSeq(row->effect9);
 		ReadSeq(row->effect10);
-		m_data.push_back(*row);
-		m_map.insert(std::make_pair(row->suitid, *row));
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->suitid, row));
 	}
 	this->Close();
 }
@@ -53,7 +53,7 @@ void EquipSuit::GetRow(int idx,EquipSuitRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
@@ -63,8 +63,8 @@ void EquipSuit::GetRow(int idx,EquipSuitRow* row)
 
 void EquipSuit::GetByUID(uint idx, EquipSuitRow* row)
 {
- *row = m_map[idx];
- }
+ *row = *m_map[idx];
+}
 
 int EquipSuit::GetLength()
 {

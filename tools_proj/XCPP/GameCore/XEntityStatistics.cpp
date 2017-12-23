@@ -89,8 +89,8 @@ void XEntityStatistics::ReadTable()
 		ReadString(row->pandoradropids);
 		ReadString(row->dropids);
 		ReadString(row->bigmeleepoints);
-		m_data.push_back(*row);
-		m_map.insert(std::make_pair(row->uid, *row));
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->uid, row));
 	}
 	this->Close();
 }
@@ -100,7 +100,7 @@ void XEntityStatistics::GetRow(int idx,XEntityStatisticsRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
@@ -110,8 +110,8 @@ void XEntityStatistics::GetRow(int idx,XEntityStatisticsRow* row)
 
 void XEntityStatistics::GetByUID(uint idx, XEntityStatisticsRow* row)
 {
- *row = m_map[idx];
- }
+ *row = *m_map[idx];
+}
 
 int XEntityStatistics::GetLength()
 {
