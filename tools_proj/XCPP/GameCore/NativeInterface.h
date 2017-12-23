@@ -11,7 +11,7 @@
 
 extern "C"
 {
-	typedef void(*SharpCALLBACK)(unsigned char,const char*);
+	typedef bool(*SharpCALLBACK)(unsigned char,const char*);
 	typedef void(*EntyCallBack)(int entityid, const char* method, const char* arg);
 	typedef void(*CompCallBack)(int entityid, const char* compnent, const char* arg);
 	extern SharpCALLBACK callback;

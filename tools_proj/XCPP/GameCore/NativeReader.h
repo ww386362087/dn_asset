@@ -28,6 +28,7 @@ public:
 	template<typename T> void ReadArray(T buff[]);
 	template<typename T> void ReadSeq(Seq<T>& v);
 	void ReadString(char buff[]);
+	void ReadStringArray(char buff[MaxArraySize][MaxStringSize]);
 
 private:
     std::ifstream reader;
@@ -44,14 +45,16 @@ void NativeReader::ReadArray(T buff[])
 {
 	char length = 0;
 	Read(&length);
-	memset(buff,-1,MaxArraySize*sizeof(T));
+	memset(buff, 0, MaxArraySize * sizeof(T));
 	T val;
-	for(int i = 0; i < length; i++)
+	for (int i = 0; i < length; i++)
 	{
 		Read(&val);
-		buff[i]=val;
+		buff[i] = val;
 	}
 }
+
+
 
 template<typename T>
 void NativeReader::ReadSeq(Seq<T>& v)

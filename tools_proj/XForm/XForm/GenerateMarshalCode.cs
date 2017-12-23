@@ -133,7 +133,7 @@ namespace XForm
                 if (tb.types[i].Contains("<>")) //Seq
                 {
                     sb.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]");
-                    sb.Append("\n\t\t\t" + tb.types[i].Replace("<>", "[] ") +  tb.titles[i].ToLower() + ";");
+                    sb.Append("\n\t\t\t" + tb.types[i].Replace("<>", "[] ") + tb.titles[i].ToLower() + ";");
                 }
                 else if (tb.types[i].Contains("[]"))
                 {
@@ -188,8 +188,14 @@ namespace XForm
 
             AppendExtendAttr(sb);
             sb.Append("\r\n\t\tstatic extern void iGet" + name + "Row(int idx, ref RowData row);");
+            if (tb.isSort)
+            {
+                AppendExtendAttr(sb);
+                sb.Append("\r\n\t\tstatic extern void iGet" + name + "RowByID(int idx, ref RowData row);");
+            }
             AppendExtendAttr(sb);
             sb.Append("\r\n\t\tstatic extern int iGet" + name + "Length();");
+
 
             fileContent.Replace("public int replace;", sb.ToString());
             string filePath = destdir + "C" + name + ".cs";

@@ -53,7 +53,12 @@ class XAttackArgs : public XEventArgs
 {
 public:
 	XAttackArgs()
-		:Identify(0), Target(0), Slot(-1), HasManualFace(false), ManualFace(0), TimeScale(1.0f)
+		:Identify(0u), 
+		Target(0u), 
+		Slot(0u), 
+		HasManualFace(false), 
+		ManualFace(0.0f), 
+		TimeScale(1.0f)
 	{
 		_eDefine = XEvent_Attack;
 	}

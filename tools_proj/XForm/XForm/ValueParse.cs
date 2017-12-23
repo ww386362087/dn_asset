@@ -155,6 +155,10 @@ namespace XForm
         public override void Write(BinaryWriter stream, string data)
         {
             string v = GetValue(data);
+            if(v.Length>CSVUtil.max_string_size)
+            {
+                v = v.Substring(0, CSVUtil.max_string_size);
+            }
             stream.Write(v);
         }
 
@@ -340,6 +344,7 @@ namespace XForm
                 stream.Write((byte)v.Length);
                 for (int i = 0, max = v.Length; i < max; i++)
                 {
+                    if (v[i].Length > CSVUtil.max_string_size) v[i] = v[i].Substring(0, CSVUtil.max_string_size);
                     stream.Write(v[i]);
                 }
             }

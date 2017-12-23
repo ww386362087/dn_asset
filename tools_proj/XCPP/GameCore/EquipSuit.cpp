@@ -15,7 +15,6 @@ EquipSuit::EquipSuit(void)
 
 void EquipSuit::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -44,6 +43,7 @@ void EquipSuit::ReadTable()
 		ReadSeq(row->effect9);
 		ReadSeq(row->effect10);
 		m_data.push_back(*row);
+		m_map.insert(std::make_pair(row->suitid, *row));
 	}
 	this->Close();
 }
@@ -60,6 +60,11 @@ void EquipSuit::GetRow(int idx,EquipSuitRow* row)
 		LOG("eror, EquipSuit index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
 }
+
+void EquipSuit::GetByUID(uint idx, EquipSuitRow* row)
+{
+ *row = m_map[idx];
+ }
 
 int EquipSuit::GetLength()
 {
@@ -87,5 +92,14 @@ extern "C"
 			equipsuit = new EquipSuit();
 		}
 		equipsuit->GetRow(suitid,row);
+	}
+
+	void iGetEquipSuitRowByID(uint id, EquipSuitRow* row)
+	{
+		if (equipsuit == NULL)
+		{
+		   equipsuit = new EquipSuit();
+		}
+		equipsuit->GetByUID(id, row);
 	}
 }

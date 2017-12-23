@@ -36,24 +36,34 @@ std::ostream& Log::GetStream(LogLevel level){
 }  
 
 
-std::ostream& Log::Start(LogLevel level,std::string text,const int line,const std::string &func) 
-{  
-   time_t tm;  
-   time(&tm);  
-   char tmp[64]; 
-   strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S",localtime(&tm));
-   char buff[255];   
-   strcpy(buff,text.c_str());
-   if(callback) 
-   {
-	   switch(level)
-	   {
-			case INFO:callback(CLog,buff);break;
-			case WARN:callback(CWarn,buff);break;
-			case ERROR:callback(CError,buff);break;
-	   }
-   }
-   std::ostringstream ostr;
-   ostr<<tmp<<"\t"<<"("<<func<< ")"<< "\tline "<<line<<"\t";
-   return GetStream(level)<<ostr.str()<<text;  
+std::ostream& Log::Start(LogLevel level, std::string text, const std::string &file, const int line, const std::string &func)
+{
+	time_t tm;
+	time(&tm);
+	char tmp[64];
+	strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S", localtime(&tm));
+	if (callback)
+	{
+		switch (level)
+		{
+		case INFO:callback(CMLog, text.c_str()); break;
+		case WARN:callback(CMWarn, text.c_str()); break;
+		case ERROR:callback(CMError, text.c_str()); break;
+		}
+	}
+	std::ostringstream ostr;
+	size_t t = file.find_last_of('\\');
+	ostr << tmp << "\t" << func << " at:" << file.substr(t + 1) << ":" << line << "\n";
+	return GetStream(level) << ostr.str() << text;
+}
+
+
+std::ostream& Log::OStart(const std::string &file, const int line, const std::string &func)
+{
+	time_t tm;
+	time(&tm);
+	char time_string[128];
+	strftime(time_string, sizeof(time_string), "%Y-%m-%d %H:%M:%S ", localtime(&tm));
+	size_t t = file.find_last_of('\\');
+	return GetStream(INFO) << time_string << func << " at:" << file.substr(t + 1) << ":" << line << " \n" << std::flush;
 }

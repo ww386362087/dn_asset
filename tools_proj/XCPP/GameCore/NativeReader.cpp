@@ -37,3 +37,16 @@ void NativeReader::ReadString(char buff[])
 		len--;
 	}
 }
+
+
+void NativeReader::ReadStringArray(char buff[MaxArraySize][MaxStringSize])
+{
+	char length = 0;
+	Read(&length);
+	memset(buff, 0, MaxStringSize* MaxArraySize * sizeof(char));
+	for (int i = 0; i < length; i++)
+	{
+		char* ch = buff[i];
+		ReadString(ch);
+	}
+}

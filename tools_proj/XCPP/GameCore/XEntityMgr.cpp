@@ -2,6 +2,8 @@
 #include "XEntity.h"
 #include "XAttributes.h"
 #include "XPlayer.h"
+#include "XEntityStatistics.h"
+#include "XEntityPresentation.h"
 
 void XEntityMgr::Update(float delta)
 {
@@ -37,22 +39,23 @@ void XEntityMgr::DetachFromHost()
 
 XAttributes* XEntityMgr::InitAttr(int staticid)
 {
-	/*XEntityStatisticsRow* srow;
-	iGetXEntityStatisticsRow(staticid, srow);
-	XEntityPresentationRow* prow;
-	iGetXEntityPresentationRow(srow->presentid, prow);*/
+	XEntityStatisticsRow srow;
+	iGetXEntityStatisticsRow(staticid, &srow);
+	XEntityPresentationRow prow;
+	iGetXEntityPresentationRowByID((uint)srow.presentid, &prow);
 	XAttributes* attr = new XAttributes();
 	attr->setid(new_id());
-	//attr->setPresentID(srow->presentid);
-	//attr->setPrefab(prow->prefab);
-	//attr->setName(prow->name);
+	attr->setPresentID(srow.presentid);
+	attr->setPrefab(prow.prefab);
+	attr->setName(prow.name);
 	return attr;
 }
 
 XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 {
 	XEntity* x = new XEntity();
-	GameObject* o = new GameObject();// XResources.LoadInPool("Prefabs/" + attr.Prefab);
+	std::string str = "Prefabs/" + tostring(attr->getPrefab());
+	GameObject* o = new GameObject(str.c_str());
 	o->name = tostring(attr->getid()).c_str();
 	o->transform->position = attr->getAppearPostion();
 	o->transform->rotatiion = attr->getAppearQuaternion();

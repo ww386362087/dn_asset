@@ -8,9 +8,10 @@
 #ifndef __QteStatusList__
 #define __QteStatusList__
 
-#include"NativeReader.h"
+#include "NativeReader.h"
+#include "Log.h"
 #include <vector>
-#include"Log.h"
+
 
 struct QteStatusListRow
 {

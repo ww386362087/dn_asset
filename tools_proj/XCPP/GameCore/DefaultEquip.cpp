@@ -15,7 +15,6 @@ DefaultEquip::DefaultEquip(void)
 
 void DefaultEquip::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -46,6 +45,7 @@ void DefaultEquip::ReadTable()
 		ReadString(row->fishingpoint);
 		ReadString(row->sideweaponpoint);
 		m_data.push_back(*row);
+		m_map.insert(std::make_pair(row->profid, *row));
 	}
 	this->Close();
 }
@@ -62,6 +62,11 @@ void DefaultEquip::GetRow(int idx,DefaultEquipRow* row)
 		LOG("eror, DefaultEquip index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
 }
+
+void DefaultEquip::GetByUID(uint idx, DefaultEquipRow* row)
+{
+ *row = m_map[idx];
+ }
 
 int DefaultEquip::GetLength()
 {
@@ -89,5 +94,14 @@ extern "C"
 			defaultequip = new DefaultEquip();
 		}
 		defaultequip->GetRow(suitid,row);
+	}
+
+	void iGetDefaultEquipRowByID(uint id, DefaultEquipRow* row)
+	{
+		if (defaultequip == NULL)
+		{
+		   defaultequip = new DefaultEquip();
+		}
+		defaultequip->GetByUID(id, row);
 	}
 }

@@ -1,22 +1,30 @@
 #include "GameObject.h"
 #include "Transform.h"
+#include "NativeInterface.h"
+#include "CommandDef.h"
 
-
-GameObject::GameObject()
-{
-	if (transform == NULL)
-	{
-		transform = new Transform(name);
-		transform->gameObject = this;
-	}
-}
+extern SharpCALLBACK callback;
 
 GameObject::GameObject(const char* nm)
 {
 	name = nm;
-	GameObject();
+	if (transform == NULL)
+	{
+		transform = new Transform(name);
+		transform->gameObject = this;
+		callback(CMLoadGo, name);
+	}
 }
 
 GameObject::~GameObject()
 {
+}
+
+
+void GameObject::Unload()
+{
+	if (name)
+	{
+		callback(CMUnloadGo, name);
+	}
 }

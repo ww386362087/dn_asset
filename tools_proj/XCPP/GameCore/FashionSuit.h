@@ -8,9 +8,11 @@
 #ifndef __FashionSuit__
 #define __FashionSuit__
 
-#include"NativeReader.h"
+#include "NativeReader.h"
+#include "Log.h"
 #include <vector>
-#include"Log.h"
+#include <unordered_map>
+
 
 struct FashionSuitRow
 {
@@ -47,11 +49,13 @@ public:
 	FashionSuit(void);
 	void ReadTable();
 	void GetRow(int val,FashionSuitRow* row);
+	void GetByUID(uint id, FashionSuitRow* row);
 	int GetLength();
 
 protected:
 	std::string name;
 	std::vector<FashionSuitRow> m_data;
+	std::unordered_map<uint, FashionSuitRow> m_map;
 };
 
 
@@ -59,6 +63,7 @@ extern "C"
 {
 	ENGINE_INTERFACE_EXPORT int iGetFashionSuitLength();
 	ENGINE_INTERFACE_EXPORT void iGetFashionSuitRow(int idx,FashionSuitRow* row);
+	ENGINE_INTERFACE_EXPORT void iGetFashionSuitRowByID(uint id, FashionSuitRow* row);
 };
 
 #endif

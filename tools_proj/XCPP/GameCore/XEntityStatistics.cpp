@@ -15,7 +15,6 @@ XEntityStatistics::XEntityStatistics(void)
 
 void XEntityStatistics::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -91,6 +90,7 @@ void XEntityStatistics::ReadTable()
 		ReadString(row->dropids);
 		ReadString(row->bigmeleepoints);
 		m_data.push_back(*row);
+		m_map.insert(std::make_pair(row->uid, *row));
 	}
 	this->Close();
 }
@@ -107,6 +107,11 @@ void XEntityStatistics::GetRow(int idx,XEntityStatisticsRow* row)
 		LOG("eror, XEntityStatistics index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
 }
+
+void XEntityStatistics::GetByUID(uint idx, XEntityStatisticsRow* row)
+{
+ *row = m_map[idx];
+ }
 
 int XEntityStatistics::GetLength()
 {
@@ -134,5 +139,14 @@ extern "C"
 			xentitystatistics = new XEntityStatistics();
 		}
 		xentitystatistics->GetRow(suitid,row);
+	}
+
+	void iGetXEntityStatisticsRowByID(uint id, XEntityStatisticsRow* row)
+	{
+		if (xentitystatistics == NULL)
+		{
+		   xentitystatistics = new XEntityStatistics();
+		}
+		xentitystatistics->GetByUID(id, row);
 	}
 }

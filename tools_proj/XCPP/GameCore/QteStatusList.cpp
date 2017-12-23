@@ -15,7 +15,6 @@ QteStatusList::QteStatusList(void)
 
 void QteStatusList::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -47,6 +46,7 @@ void QteStatusList::GetRow(int idx,QteStatusListRow* row)
 	}
 }
 
+
 int QteStatusList::GetLength()
 {
 	return (int)m_data.size();
@@ -74,4 +74,5 @@ extern "C"
 		}
 		qtestatuslist->GetRow(suitid,row);
 	}
+
 }

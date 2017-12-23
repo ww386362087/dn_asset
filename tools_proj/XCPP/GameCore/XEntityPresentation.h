@@ -8,9 +8,11 @@
 #ifndef __XEntityPresentation__
 #define __XEntityPresentation__
 
-#include"NativeReader.h"
+#include "NativeReader.h"
+#include "Log.h"
 #include <vector>
-#include"Log.h"
+#include <unordered_map>
+
 
 struct XEntityPresentationRow
 {
@@ -47,13 +49,13 @@ struct XEntityPresentationRow
 	char movefx[MaxStringSize];
 	char freeze[MaxStringSize];
 	char freezefx[MaxStringSize];
-	std::string hit_f[MaxArraySize];
-	std::string hit_l[MaxArraySize];
-	std::string hit_r[MaxArraySize];
+	char hit_f[MaxArraySize][MaxStringSize];
+	char hit_l[MaxArraySize][MaxStringSize];
+	char hit_r[MaxArraySize][MaxStringSize];
 	float hitbackoffsettimescale[MaxArraySize];
-	std::string hitfly[MaxArraySize];
+	char hitfly[MaxArraySize][MaxStringSize];
 	float hitflyoffsettimescale[MaxArraySize];
-	std::string hit_roll[MaxArraySize];
+	char hit_roll[MaxArraySize][MaxStringSize];
 	float hitrolloffsettimescale[MaxArraySize];
 	float hitback_recover[MaxArraySize];
 	float hitfly_bounce_getup[MaxArraySize];
@@ -61,14 +63,14 @@ struct XEntityPresentationRow
 	char hitfx[MaxStringSize];
 	char death[MaxStringSize];
 	char deathfx[MaxStringSize];
-	std::string hitcurves[MaxArraySize];
+	char hitcurves[MaxArraySize][MaxStringSize];
 	char deathcurve[MaxStringSize];
 	char a[MaxStringSize];
 	char aa[MaxStringSize];
 	char aaa[MaxStringSize];
 	char aaaa[MaxStringSize];
 	char aaaaa[MaxStringSize];
-	char otherskills[MaxStringSize];
+	char otherskills[MaxArraySize][MaxStringSize];
 	char skillnum[MaxStringSize];
 	char dash[MaxStringSize];
 	char ultra[MaxStringSize];
@@ -103,11 +105,13 @@ public:
 	XEntityPresentation(void);
 	void ReadTable();
 	void GetRow(int val,XEntityPresentationRow* row);
+	void GetByUID(uint id, XEntityPresentationRow* row);
 	int GetLength();
 
 protected:
 	std::string name;
 	std::vector<XEntityPresentationRow> m_data;
+	std::unordered_map<uint, XEntityPresentationRow> m_map;
 };
 
 
@@ -115,6 +119,7 @@ extern "C"
 {
 	ENGINE_INTERFACE_EXPORT int iGetXEntityPresentationLength();
 	ENGINE_INTERFACE_EXPORT void iGetXEntityPresentationRow(int idx,XEntityPresentationRow* row);
+	ENGINE_INTERFACE_EXPORT void iGetXEntityPresentationRowByID(uint id, XEntityPresentationRow* row);
 };
 
 #endif

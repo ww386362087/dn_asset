@@ -11,7 +11,7 @@ using namespace std;
 #define MWarn	'W'
 #define MError	'E'
 
-typedef void(*CB)(unsigned char command, const char*);
+typedef bool(*CB)(unsigned char command, const char*);
 typedef void(*DllCommand)(CB);
 typedef void(*DllInitial)(char*, char*);
 typedef int(*DllAdd)(int, int);
@@ -87,12 +87,13 @@ void ERead()
 	cout << endl << endl;
 }
 
-void OnCallback(unsigned char type, const char* cont)
+bool OnCallback(unsigned char type, const char* cont)
 {
 	if (type == MLog || type == MWarn || type == MError)
 		cout << "> " << cont << endl;
 	else
 		cout << "no parse symbol" << endl;
+	return true;
 }
 
 struct Str

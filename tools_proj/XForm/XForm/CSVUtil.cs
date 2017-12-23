@@ -20,6 +20,9 @@ namespace XForm
         public static readonly char[] SpaceSeparator = new char[] { ' ' };
         public readonly char[] eof = { '\r', '\n' };
 
+        public static int max_string_size = 64;
+        public static int max_array_size = 16;
+
         private IntParse intParse;
         private UintParse uintParse;
         private BoolParse boolParse;

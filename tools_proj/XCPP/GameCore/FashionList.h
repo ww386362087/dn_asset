@@ -8,9 +8,11 @@
 #ifndef __FashionList__
 #define __FashionList__
 
-#include"NativeReader.h"
+#include "NativeReader.h"
+#include "Log.h"
 #include <vector>
-#include"Log.h"
+#include <unordered_map>
+
 
 struct FashionListRow
 {
@@ -41,11 +43,13 @@ public:
 	FashionList(void);
 	void ReadTable();
 	void GetRow(int val,FashionListRow* row);
+	void GetByUID(uint id, FashionListRow* row);
 	int GetLength();
 
 protected:
 	std::string name;
 	std::vector<FashionListRow> m_data;
+	std::unordered_map<uint, FashionListRow> m_map;
 };
 
 
@@ -53,6 +57,7 @@ extern "C"
 {
 	ENGINE_INTERFACE_EXPORT int iGetFashionListLength();
 	ENGINE_INTERFACE_EXPORT void iGetFashionListRow(int idx,FashionListRow* row);
+	ENGINE_INTERFACE_EXPORT void iGetFashionListRowByID(uint id, FashionListRow* row);
 };
 
 #endif

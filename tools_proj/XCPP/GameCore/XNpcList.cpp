@@ -15,7 +15,6 @@ XNpcList::XNpcList(void)
 
 void XNpcList::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -44,6 +43,7 @@ void XNpcList::ReadTable()
 		Read(&(row->disappeartask));
 		Read(&(row->npctype));
 		m_data.push_back(*row);
+		m_map.insert(std::make_pair(row->npcid, *row));
 	}
 	this->Close();
 }
@@ -60,6 +60,11 @@ void XNpcList::GetRow(int idx,XNpcListRow* row)
 		LOG("eror, XNpcList index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
 }
+
+void XNpcList::GetByUID(uint idx, XNpcListRow* row)
+{
+ *row = m_map[idx];
+ }
 
 int XNpcList::GetLength()
 {
@@ -87,5 +92,14 @@ extern "C"
 			xnpclist = new XNpcList();
 		}
 		xnpclist->GetRow(suitid,row);
+	}
+
+	void iGetXNpcListRowByID(uint id, XNpcListRow* row)
+	{
+		if (xnpclist == NULL)
+		{
+		   xnpclist = new XNpcList();
+		}
+		xnpclist->GetByUID(id, row);
 	}
 }
