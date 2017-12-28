@@ -48,13 +48,13 @@ std::ostream& Log::Start(LogLevel level, std::string text, const std::string &fi
 		{
 		case INFO:callback(CMLog, text.c_str()); break;
 		case WARN:callback(CMWarn, text.c_str()); break;
-		case ERROR:callback(CMError, text.c_str()); break;
+		case ERR:callback(CMError, text.c_str()); break;
 		}
 	}
 	std::ostringstream ostr;
 	size_t t = file.find_last_of('\\');
-	ostr << tmp << "\t" << func << " at:" << file.substr(t + 1) << ":" << line << "\n";
-	return GetStream(level) << ostr.str() << text;
+	ostr << tmp << " " << func << " at:" << file.substr(t + 1) << ":" << line ;
+	return GetStream(level) << ostr.str();
 }
 
 

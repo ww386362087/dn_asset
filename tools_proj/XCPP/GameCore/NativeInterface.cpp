@@ -1,4 +1,5 @@
 #include "NativeInterface.h"
+#include "GameMain.h"
 
 class XEntity;
 
@@ -22,6 +23,7 @@ extern "C"
 		InitPath(stream, cache);
 		LOG(s);
 		InitLogger(s + "Log/info.txt", s + "Log/warn.txt", s + "Log/error.txt");
+		PRINT << stream << " " << cache;
 		LOG("c++ initial success with path: " + s);
 	}
 
@@ -59,7 +61,7 @@ extern "C"
 		std::string err = picojson::parse(v, json);
 	    if(err.size())
 		{
-			ERROR(err);
+			ERR(err);
 			return;
 		}
 		
@@ -93,12 +95,24 @@ extern "C"
 		Vector3* v4 = new Vector3(1.0f, 1.2f, 2.0f);
 		*v3 = Vector3::one + *v4;
 		LOG(tostring(*v3));
-
 		Vector3 zv = Vector3::zero;
 		LOG(tostring(zv));
-
-		XEntityMgr::Instance()->CreateEntity(2, Vector3::zero, Vector3::one);
-
 	}
 
+
+	void iStartCore()
+	{
+		LOG("iStartCore");
+		GameMain::Instance()->Start();
+	}
+
+	void iStopCore()
+	{
+		GameMain::Instance()->Stop();
+	}
+
+	void iTickCore(float delta)
+	{
+		GameMain::Instance()->Ontick(delta);
+	}
 }

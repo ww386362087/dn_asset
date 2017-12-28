@@ -49,7 +49,7 @@ bool XJAComboSkill::Refire(IArgs* args, void*)
 		else
 		{
 			_during_ja = false;
-			if (_data) ERROR("JA Failed!");
+			if (_data) ERR("JA Failed!");
 		}
 	}
 	else

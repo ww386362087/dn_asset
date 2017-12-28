@@ -1,6 +1,16 @@
 #include "XAttributes.h"
 
 
+XAttributes::XAttributes()
+{
+	AiBehavior = "hello world";
+}
+
+XAttributes::~XAttributes()
+{
+
+}
+
 uint XAttributes::getid()
 {
 	return _id;
@@ -94,4 +104,15 @@ void XAttributes::setBlocked(bool val)
 double XAttributes::GetAttr(XAttributeDefine def)
 {
 	return 0;
+}
+
+const char* XAttributes::getAiBehaviour()
+{
+	return AiBehavior;
+}
+
+
+void XAttributes::setAIBehaviour(const char* ai)
+{
+	AiBehavior = ai;
 }

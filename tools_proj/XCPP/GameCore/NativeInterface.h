@@ -6,7 +6,6 @@
 #include <iostream>
 #include "Log.h"
 #include "Vector3.h"
-#include "XEntityMgr.h"
 #include "tinyxml2.h"
 
 extern "C"
@@ -27,6 +26,9 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT void iJson(const char*);
 	ENGINE_INTERFACE_EXPORT void iPatch(const char*,const char*,const char*);
 	ENGINE_INTERFACE_EXPORT void iVector();
+	ENGINE_INTERFACE_EXPORT void iStartCore();
+	ENGINE_INTERFACE_EXPORT void iStopCore();
+	ENGINE_INTERFACE_EXPORT void iTickCore(float delta);
 };
 
 

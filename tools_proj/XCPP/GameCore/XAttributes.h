@@ -8,6 +8,8 @@
 class XAttributes
 {
 public:
+	XAttributes();
+	~XAttributes();
 	uint getid();
 	void setid(uint val);
 	Vector3 getAppearPostion();
@@ -26,6 +28,8 @@ public:
 	void setFightGroup(int val);
 	bool getBlocked();
 	void setBlocked(bool val);
+	const char* getAiBehaviour();
+	void setAIBehaviour(const char* ai);
 	double GetAttr(XAttributeDefine def);
 
 

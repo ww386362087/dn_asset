@@ -55,11 +55,33 @@ public class TestCPP : MonoBehaviour
 #endif
     public static extern void iPatch(string oldf,string diff,string newf);
 
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("GameCore")]
+#endif
+    public static extern void iStartCore();
+
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("GameCore")]
+#endif
+    public static extern void iStopCore();
+
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("GameCore")]
+#endif
+    public static extern void iTickCore(float delta);
 
     //c++的回调指令 最多支持256个指令
-    public const byte CLog   = 76;//'L'
-    public const byte CWarn  = 87;//'W'
-    public const byte CError = 69;//'E'
+    const byte CLog   = 76;//'L'
+    const byte CWarn  = 87;//'W'
+    const byte CErr = 69;//'E'
+    const byte CLoad  = 71;//'G'
+    const byte CUnLo =  85;//'U'
 
     public delegate void CppDelegate(byte type, IntPtr p);
     
@@ -67,7 +89,9 @@ public class TestCPP : MonoBehaviour
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
     string ui_rst = string.Empty;
-
+    bool m_tick = true;
+    float m_tick_time = 0f;
+    float spf = 0.033f;//30fps
     public void Start()
     {
         ui_sty.normal.textColor = Color.red;
@@ -75,7 +99,20 @@ public class TestCPP : MonoBehaviour
         iInitCallbackCommand(new CppDelegate(OnCallback));
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
-    
+
+    void Update()
+    {
+        if (m_tick)
+        {
+            m_tick_time += Time.deltaTime;
+            if (m_tick_time > spf)
+            {
+                iTickCore(m_tick_time);
+                m_tick_time = 0;
+            }
+        }
+    }
+
     [MonoPInvokeCallback(typeof(CppDelegate))]
     static void OnCallback(byte t, IntPtr ptr)
     {
@@ -84,13 +121,15 @@ public class TestCPP : MonoBehaviour
         {
             case CLog: XDebug.TCLog(command); break;
             case CWarn: XDebug.TCWarn(command); break;
-            case CError: XDebug.TCError(command); break;
+            case CErr: XDebug.TCError(command); break;
+            case CLoad: XDebug.TCLog("load object: " + command); break;
+            case CUnLo: XDebug.TCLog("unload: " + command); break;
             default:
-                XDebug.LogError(t+ " is not parse symbol: "+command);
+                XDebug.LogError(t + " is not parse symbol: " + command);
                 break;
         }
     }
-    
+
     public void OnGUI()
     {
         GUILayout.BeginHorizontal();
@@ -98,8 +137,8 @@ public class TestCPP : MonoBehaviour
         GUILayout.BeginVertical();
         if (GUILayout.Button("Cal-Add", ui_opt))
         {
-              int i = iAdd(8, 7);
-              ui_rst = "8+7=" + i;
+            int i = iAdd(8, 7);
+            ui_rst = "8+7=" + i;
         }
         if (GUILayout.Button("Cal-Sub", ui_opt))
         {
@@ -117,16 +156,6 @@ public class TestCPP : MonoBehaviour
             ui_rst = "native parse json finish!";
             XDebug.Log(ui_rst);
         }
-        if (GUILayout.Button("Native-Patch", ui_opt))
-        {
-            string old = Application.streamingAssetsPath + "/Patch/old.txt";
-            string diff = Application.streamingAssetsPath + "/Patch/diff.patch";
-            string newf = Application.streamingAssetsPath + "/Patch/new.txt";
-            XDebug.Log(old + " " + diff + " " + newf);
-            iPatch(old, diff, newf);
-            ui_rst = "patch finish";
-            XDebug.Log(ui_rst);
-        }
         if (GUILayout.Button("Get-Qte-Row", ui_opt))
         {
             int len = CQteStatusList.length;
@@ -134,7 +163,7 @@ public class TestCPP : MonoBehaviour
             for (int i = 0; i < 26; i++)
             {
                 var rst = CQteStatusList.GetRow(i);
-                ui_rst += string.Format("\nvalue:{0,-4} name:{1,-20} comment:{2,-30}",rst.Value,rst.Name,rst.Comment);
+                ui_rst += string.Format("\nvalue:{0,-4} name:{1,-20} comment:{2,-30}", rst.Value, rst.Name, rst.Comment);
             }
         }
         if (GUILayout.Button("Get-Suit-Row", ui_opt))
@@ -144,7 +173,7 @@ public class TestCPP : MonoBehaviour
             for (int i = 0; i < 26; i++)
             {
                 var rst = CEquipSuit.GetRow(i);
-                ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + " level:" + rst.Level + " profid:" + rst.ProfID + " isCreate:" + rst.IsCreateShow +" effect2: "+rst.Effect2[0];
+                ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + " level:" + rst.Level + " profid:" + rst.ProfID + " isCreate:" + rst.IsCreateShow + " effect2: " + rst.Effect2[0];
             }
         }
         if (GUILayout.Button("Get-Statics-Row", ui_opt))
@@ -157,9 +186,20 @@ public class TestCPP : MonoBehaviour
                 ui_rst += "\nuid:" + rst.UID + " name:" + rst.Name + " preid:" + rst.PresentID + " type:" + rst.Type;
             }
         }
+        if (GUILayout.Button("Native-Start-Game", ui_opt))
+        {
+            m_tick = true;
+            iStartCore();
+        }
+        if (GUILayout.Button("Native-Stop-Game", ui_opt))
+        {
+            m_tick = false;
+            iStopCore();
+            
+        }
         GUILayout.EndVertical();
         GUILayout.Space(50);
-        GUILayout.TextArea(ui_rst,ui_sty, ui_op2);
+        GUILayout.TextArea(ui_rst, ui_sty, ui_op2);
         GUILayout.EndHorizontal();
     }
     

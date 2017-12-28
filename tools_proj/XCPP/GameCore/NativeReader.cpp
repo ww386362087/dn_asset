@@ -4,7 +4,7 @@ NativeReader::~NativeReader(void)
 {
 	if(reader.is_open())
 	{
-		ERROR("warn: not close stream. Closing it ...");
+		ERR("warn: not close stream. Closing it ...");
 		reader.close();
 	}
 }
@@ -16,7 +16,7 @@ void NativeReader::Open(const char* path)
     reader.open(path, std::ios::binary|std::ios::in);
     if(!reader.is_open())
     {
-        ERROR("Could not open file for read: " + tostring(path));
+        ERR("Could not open file for read: " + tostring(path));
     }
 }
 

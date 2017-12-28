@@ -122,18 +122,11 @@ void XAIComponent::InitTree()
 
 void XAIComponent::SetBehaviorTree(const char* tree)
 {
-	if (tree)
-	{
-		_is_inited = true;
-		_tree->Initial(_entity);
-		_tree->SetBehaviourTree(tree);
-		_tree->EnableBehaviourTree(true);
-		_tick = _ai_tick * _tick_factor;
-	}
-	else
-	{
-		WARN("ai error: " + _entity->getAttributes()->getPresentID());
-	}
+	_is_inited = true;
+	_tree->Initial(_entity);
+	_tree->SetBehaviourTree(tree);
+	_tree->EnableBehaviourTree(true);
+	_tick = _ai_tick * _tick_factor;
 }
 
 void XAIComponent::InitVariables()

@@ -16,7 +16,7 @@ void AIUtil::Parse(std::string json, std::string name, AITreeData& tree)
 	std::string err = picojson::parse(v, json);
 	if (err.size())
 	{
-		ERROR(err);
+		ERR(err);
 		return;
 	}
 	picojson::object& o = v.get<picojson::object>();

@@ -62,7 +62,7 @@ void XSkillData::Release()
 	if (_reference > 0)
 		--_reference;
 	else
-		ERROR("Reference of skill " + tostring(Name) + " has already been 0.");
+		ERR("Reference of skill " + tostring(Name) + " has already been 0.");
 
 	if (_reference == 0 && _dirty)
 	{
@@ -301,7 +301,7 @@ XSkillData* SkillReader::LoadSkill(const char *fileName)
 	XMLError error = doc.LoadFile(fileName);
 	if (error != XML_SUCCESS)
 	{
-		ERROR("parser skill file " + tostring(fileName) + " get XMLError code: %d");
+		ERR("parser skill file " + tostring(fileName) + " get XMLError code: %d");
 		assert(false);
 	}
 
