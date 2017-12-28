@@ -25,6 +25,11 @@
 /tools_proj/XCPP/XCPP.VC.VC.opendb
 /tools_proj/Android/libs/
 /tools_proj/build/out/
+/tools_proj/build/CMakeFiles/
+/tools_proj/build/CMakeScripts/
+/tools_proj/build/Project.build/
+/tools_proj/build/Project.xcodeproj
+/tools_proj/build/CMakeCache.txt
 **/[Ll]ibrary/
 **/[Tt]emp/
 **/[Oo]bj/
