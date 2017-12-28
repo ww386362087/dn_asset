@@ -30,6 +30,7 @@
 /tools_proj/build/Project.build/
 /tools_proj/build/Project.xcodeproj
 /tools_proj/build/CMakeCache.txt
+/tools_proj/build/cmake_install.cmake
 **/[Ll]ibrary/
 **/[Tt]emp/
 **/[Oo]bj/
