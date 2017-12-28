@@ -8,9 +8,11 @@
 #ifndef __XEntityStatistics__
 #define __XEntityStatistics__
 
-#include"NativeReader.h"
+#include "NativeReader.h"
+#include "Log.h"
 #include <vector>
-#include"Log.h"
+#include <unordered_map>
+
 
 struct XEntityStatisticsRow
 {
@@ -87,11 +89,13 @@ public:
 	XEntityStatistics(void);
 	void ReadTable();
 	void GetRow(int val,XEntityStatisticsRow* row);
+	void GetByUID(uint id, XEntityStatisticsRow* row);
 	int GetLength();
 
 protected:
 	std::string name;
-	std::vector<XEntityStatisticsRow> m_data;
+	std::vector<XEntityStatisticsRow*> m_data;
+	std::unordered_map<uint, XEntityStatisticsRow*> m_map;
 };
 
 
@@ -99,6 +103,7 @@ extern "C"
 {
 	ENGINE_INTERFACE_EXPORT int iGetXEntityStatisticsLength();
 	ENGINE_INTERFACE_EXPORT void iGetXEntityStatisticsRow(int idx,XEntityStatisticsRow* row);
+	ENGINE_INTERFACE_EXPORT void iGetXEntityStatisticsRowByID(uint id, XEntityStatisticsRow* row);
 };
 
 #endif

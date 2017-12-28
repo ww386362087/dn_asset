@@ -3,7 +3,7 @@
 
 #include <iosfwd>
 #include "XMath.h"
-#include "Log.h"
+#include <sstream>
 
 class Vector3;
 std::ostream &operator<<(std::ostream &stream, const Vector3 &pos);

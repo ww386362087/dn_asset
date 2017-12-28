@@ -30,15 +30,7 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	_transf = go->transform;
 	_attr = attr;
 
-	XObject::AttachComponent<XSkillComponent>();
 	XObject::AttachComponent<XAIComponent>();
-	XAIComponent* ai = XObject::GetComponnet<XAIComponent>();
-	XBeHitComponent* hit = XObject::GetComponnet<XBeHitComponent>();
-	LOG("AI:" + tostring(ai == 0) + " hit: " + tostring(hit == NULL));
-	XObject::DetachComponent<XAIComponent>();
-	ai = XObject::GetComponnet<XAIComponent>();
-	LOG("AI:" + tostring(ai == 0));
-
 	OnInitial();
 }
 
@@ -118,7 +110,7 @@ XEntity* XEntity::ValidEntity(uint id)
 	return XEntityMgr::Instance()->GetEntity(id);
 }
 
-Vector3* XEntity::getPostion()
+Vector3 XEntity::getPostion()
 {
 	if (_transf)
 	{
@@ -126,7 +118,7 @@ Vector3* XEntity::getPostion()
 	}
 	else
 	{
-		return  new Vector3(0, 0, 0);
+		return Vector3::zero;
 	}
 }
 
@@ -138,4 +130,9 @@ GameObject* XEntity::getEntityObject()
 XAttributes* XEntity::getAttributes()
 {
 	return _attr;
+}
+
+void XEntity::setAttributes(XAttributes* attr)
+{
+	_attr = attr;
 }

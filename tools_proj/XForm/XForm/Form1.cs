@@ -48,6 +48,10 @@ namespace XForm
             get { return unity_proj_path + @"Assets\StreamingAssets\Table\"; }
         }
 
+        public static string xform_bytes_path
+        {
+            get { return unity_proj_path + @"tools_proj\XCPP\XCPP\Table\"; }
+        }
 
         public XCForm()
         {
@@ -67,6 +71,7 @@ namespace XForm
                 AppendContent("正在生成表格中.");
                 string dest = unity_bytes_path;
                 GenerateBytes.sington.GenerateAllBytes(this);
+                GenerateBytes.sington.GenerateXFormBytes(this);
                 string str = "生成表格完毕!";
                 AppendContent(str);
             }

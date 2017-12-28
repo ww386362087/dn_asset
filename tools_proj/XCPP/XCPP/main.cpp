@@ -7,11 +7,7 @@
 
 using namespace std;
 
-#define MLog	'L'
-#define MWarn	'W'
-#define MError	'E'
-
-typedef void(*CB)(unsigned char command, const char*);
+typedef bool(*CB)(unsigned char command, const char*);
 typedef void(*DllCommand)(CB);
 typedef void(*DllInitial)(char*, char*);
 typedef int(*DllAdd)(int, int);
@@ -21,6 +17,14 @@ typedef int(*DllReadSuitTable)();
 typedef void(*DllReadJson)(const char*);
 typedef void(*DllPatch)(const char*, const char*, const char*);
 typedef void(*DllCallWithVoid)();
+typedef void(*DllCallFloatWithVoid)(float);
+
+class Node
+{
+public:
+	int a;
+	const char* s;
+};
 
 DllCommand cb;
 DllInitial init;
@@ -33,6 +37,7 @@ DllPatch patch;
 DllCallWithVoid vect;
 DllCallWithVoid start;
 DllCallWithVoid stop;
+DllCallFloatWithVoid tick;
 
 void DebugInfo()
 {
@@ -51,6 +56,7 @@ bool CheckIn()
 	}
 	return true;
 }
+
 
 void EAdd()
 {
@@ -87,12 +93,33 @@ void ERead()
 	cout << endl << endl;
 }
 
-void OnCallback(unsigned char type, const char* cont)
+bool OnCallback(unsigned char type, const char* cont)
 {
-	if (type == MLog || type == MWarn || type == MError)
-		cout << "> " << cont << endl;
-	else
-		cout << "no parse symbol" << endl;
+	switch (type)
+	{
+	case 'L':
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
+		cout << "[log]> " << cont << endl << endl;
+		break;
+	case 'W':
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);
+		cout << "[warn]> " << cont << endl << endl;
+		break;
+	case 'E':
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
+		cout << "[error]> " << cont << endl << endl;
+		break;
+	case 'G':
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE);
+		cout << "[load]> " << cont << endl << endl;
+		break;
+	case 'U':
+		cout << "[unload]> " << cont << endl << endl;
+		break;
+	default:
+		break;
+	}
+	return true;
 }
 
 struct Str
@@ -137,8 +164,9 @@ void main()
 	json = (DllReadJson)GetProcAddress(hInst, "iJson");
 	patch = (DllPatch)GetProcAddress(hInst, "iPatch");
 	vect = (DllCallWithVoid)GetProcAddress(hInst, "iVector");
-	start = (DllCallWithVoid)GetProcAddress(hInst, "iStartGame");
-	stop = (DllCallWithVoid)GetProcAddress(hInst, "iStopGame");
+	start = (DllCallWithVoid)GetProcAddress(hInst, "iStartCore");
+	stop = (DllCallWithVoid)GetProcAddress(hInst, "iStopCore");
+	tick = (DllCallFloatWithVoid)GetProcAddress(hInst, "iTickCore");
 	cb(OnCallback);
 	init("", "");
 
@@ -185,6 +213,9 @@ void main()
 			break;
 		case 'b':
 			StlTest();
+			break;
+		case 'c':
+			tick(0.4f);
 			break;
 		default:
 			cout << "invalid command" << endl << endl;

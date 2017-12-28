@@ -15,7 +15,6 @@ FashionSuit::FashionSuit(void)
 
 void FashionSuit::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -50,7 +49,8 @@ void FashionSuit::ReadTable()
 		Read(&(row->nosale));
 		Read(&(row->showlevel));
 		Read(&(row->overall));
-		m_data.push_back(*row);
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->suitid, row));
 	}
 	this->Close();
 }
@@ -60,12 +60,17 @@ void FashionSuit::GetRow(int idx,FashionSuitRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
 		LOG("eror, FashionSuit index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
+}
+
+void FashionSuit::GetByUID(uint idx, FashionSuitRow* row)
+{
+ *row = *m_map[idx];
 }
 
 int FashionSuit::GetLength()
@@ -94,5 +99,14 @@ extern "C"
 			fashionsuit = new FashionSuit();
 		}
 		fashionsuit->GetRow(suitid,row);
+	}
+
+	void iGetFashionSuitRowByID(uint id, FashionSuitRow* row)
+	{
+		if (fashionsuit == NULL)
+		{
+		   fashionsuit = new FashionSuit();
+		}
+		fashionsuit->GetByUID(id, row);
 	}
 }

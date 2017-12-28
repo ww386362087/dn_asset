@@ -8,7 +8,7 @@
 #include "Vector3.h"
 #include "XStateDefine.h"
 
-class  XAttributes;
+class XAttributes;
 class XSkillMgr;
 class XStateMachine;
 
@@ -42,10 +42,10 @@ public:
 	static XEntity* ValidEntity(uint id);
 
 public:
-	Vector3* getPostion();
+	Vector3 getPostion();
 	GameObject* getEntityObject();
 	XAttributes* getAttributes();
-
+	void setAttributes(XAttributes*);
 protected:
 	XStateMachine* _pmachine;
 	EntityType _eEntity_Type = Entity;

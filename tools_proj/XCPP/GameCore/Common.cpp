@@ -32,6 +32,11 @@ uint xhash(const char* pChar)
 	return hash;
 }
 
+int new_id()
+{
+	return id++;
+}
+
 
 bool isNumber(const std::string& value)
 {

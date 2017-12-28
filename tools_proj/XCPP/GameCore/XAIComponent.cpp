@@ -34,8 +34,8 @@ void XAIComponent::OnUninit()
 void XAIComponent::EventSubscribe()
 {
 	XComponent::EventSubscribe();
-	XDelegate start = CALLBACK(XAIComponent, OnStartSkill, this);
-	XDelegate end = CALLBACK(XAIComponent, OnStartSkill, this);
+	XDelegate start = DelCALLBACK(XAIComponent, OnStartSkill, this);
+	XDelegate end = DelCALLBACK(XAIComponent, OnStartSkill, this);
 	RegisterEvent(XEvent_AIStartSkill, &start);
 	RegisterEvent(XEvent_AIEndSkill, &end);
 }
@@ -96,7 +96,7 @@ void XAIComponent::SetTarget(XEntity* target)
 		_target = target;
 		if (XEntity::Valide(_target))
 		{
-			Vector3 diff = *(_entity->getPostion()) - *(_target->getPostion());
+			Vector3 diff = _entity->getPostion() - _target->getPostion();
 			_target_distance = diff.magnitude();
 			_tree->SetVariable(AITreeArg::TargetDistance, _target_distance);
 			_tree->SetVariable(AITreeArg::TARGET, _target->getEntityObject());
@@ -122,18 +122,11 @@ void XAIComponent::InitTree()
 
 void XAIComponent::SetBehaviorTree(const char* tree)
 {
-	if (tree)
-	{
-		_is_inited = true;
-		_tree->Initial(_entity);
-		_tree->SetBehaviourTree(tree);
-		_tree->EnableBehaviourTree(true);
-		_tick = _ai_tick * _tick_factor;
-	}
-	else
-	{
-		WARN("ai error: " + _entity->getAttributes()->getPresentID());
-	}
+	_is_inited = true;
+	_tree->Initial(_entity);
+	_tree->SetBehaviourTree(tree);
+	_tree->EnableBehaviourTree(true);
+	_tick = _ai_tick * _tick_factor;
 }
 
 void XAIComponent::InitVariables()
@@ -166,19 +159,19 @@ void XAIComponent::UpdateVariable()
 		_current_super_armor = (float)_entity->getAttributes()->GetAttr(XAttr_CurrentSuperArmor_Total);
 	}
 	XPlayer* player = XEntityMgr::Instance()->Player;
-	Vector3* v1 = _entity->getPostion();
-	Vector3* v2 = player->getPostion();
+	Vector3 v1 = _entity->getPostion();
+	Vector3 v2 = player->getPostion();
 	if (XEntity::Valide((XEntity*)player))
 	{
-		Vector3 diff = *v1 - *v2;
+		Vector3 diff = v1 - v2;
 		_master_distance = diff.magnitude();
 	}
 	if (_target  && XEntity::Valide(_target))
 	{
-		_target_distance = (*v1 - *v2).magnitude();
+		_target_distance = (v1 - v2).magnitude();
 		//_target_distance -= _target.Radius;
 		if (_target_distance < 0) _target_distance = 0;
-		Vector3 oDirect1 = *v1 - *v2;
+		Vector3 oDirect1 = v1 - v2;
 		//_target_rotation = Mathf.Abs(XCommon.singleton.AngleWithSign(oDirect1, _target.Forward));
 	}
 	else

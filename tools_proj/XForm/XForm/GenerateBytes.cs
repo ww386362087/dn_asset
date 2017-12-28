@@ -28,7 +28,21 @@ namespace XForm
                 FileInfo file = files[i];
                 int indx = file.Name.LastIndexOf('.');
                 string destname = XCForm.unity_bytes_path + file.Name.Substring(0, indx) + ".bytes";
-                WriteBytes(file, destname);
+                WriteBytes(file, destname, System.Text.Encoding.UTF8);
+                f.PCB(file.FullName);
+            }
+        }
+
+        public void GenerateXFormBytes(XCForm f)
+        {
+            DirectoryInfo dir = new DirectoryInfo(XCForm.unity_table_path);
+            FileInfo[] files = dir.GetFiles("*.csv");
+            for (int i = 0, max = files.Length; i < max; i++)
+            {
+                FileInfo file = files[i];
+                int indx = file.Name.LastIndexOf('.');
+                string destname = XCForm.xform_bytes_path + file.Name.Substring(0, indx) + ".bytes";
+                WriteBytes(file, destname, System.Text.Encoding.Default);
                 f.PCB(file.FullName);
             }
         }
@@ -39,18 +53,18 @@ namespace XForm
             FileInfo file = new FileInfo(path);
             int indx = file.Name.LastIndexOf('.');
             string destname = XCForm.unity_bytes_path + file.Name.Substring(0, indx) + ".bytes";
-            WriteBytes(file, destname);
+            WriteBytes(file, destname,System.Text.Encoding.UTF8);
         }
 
 
-        private void WriteBytes(FileInfo src, string dest)
+        private void WriteBytes(FileInfo src, string dest, System.Text.Encoding coding)
         {
             CSVTable table = CSVUtil.sington.UtilCsv(src);
             try
             {
                 using (FileStream fs = new FileStream(dest, FileMode.Create))
                 {
-                    BinaryWriter write = new BinaryWriter(fs, System.Text.Encoding.UTF8);
+                    BinaryWriter write = new BinaryWriter(fs, coding);
                     //先预留一个long记录文件大小
                     write.Seek(8, SeekOrigin.Begin);
                     write.Write(table.rowCnt);

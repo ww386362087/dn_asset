@@ -6,9 +6,9 @@ class Transform;
 class GameObject
 {
 public:
-	GameObject();
 	GameObject(const char* nm);
 	~GameObject();
+	void Unload();
 
 	const char* name;
 	const char* tag;

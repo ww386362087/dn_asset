@@ -15,7 +15,6 @@ FashionList::FashionList(void)
 
 void FashionList::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -44,7 +43,8 @@ void FashionList::ReadTable()
 		ReadString(row->presentid);
 		ReadArray<int>(row->replaceid);
 		ReadString(row->againreplaceid);
-		m_data.push_back(*row);
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->itemid, row));
 	}
 	this->Close();
 }
@@ -54,12 +54,17 @@ void FashionList::GetRow(int idx,FashionListRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
 		LOG("eror, FashionList index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
+}
+
+void FashionList::GetByUID(uint idx, FashionListRow* row)
+{
+ *row = *m_map[idx];
 }
 
 int FashionList::GetLength()
@@ -88,5 +93,14 @@ extern "C"
 			fashionlist = new FashionList();
 		}
 		fashionlist->GetRow(suitid,row);
+	}
+
+	void iGetFashionListRowByID(uint id, FashionListRow* row)
+	{
+		if (fashionlist == NULL)
+		{
+		   fashionlist = new FashionList();
+		}
+		fashionlist->GetByUID(id, row);
 	}
 }

@@ -15,7 +15,6 @@ SceneList::SceneList(void)
 
 void SceneList::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -143,7 +142,8 @@ void SceneList::ReadTable()
 		ReadString(row->spactivityactivedrop);
 		ReadString(row->spactivitydrop);
 		ReadString(row->viprevivelimit);
-		m_data.push_back(*row);
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->sceneid, row));
 	}
 	this->Close();
 }
@@ -153,12 +153,17 @@ void SceneList::GetRow(int idx,SceneListRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
 		LOG("eror, SceneList index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
+}
+
+void SceneList::GetByUID(uint idx, SceneListRow* row)
+{
+ *row = *m_map[idx];
 }
 
 int SceneList::GetLength()
@@ -187,5 +192,14 @@ extern "C"
 			scenelist = new SceneList();
 		}
 		scenelist->GetRow(suitid,row);
+	}
+
+	void iGetSceneListRowByID(uint id, SceneListRow* row)
+	{
+		if (scenelist == NULL)
+		{
+		   scenelist = new SceneList();
+		}
+		scenelist->GetByUID(id, row);
 	}
 }

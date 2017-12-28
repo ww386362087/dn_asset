@@ -7,13 +7,6 @@
 #include "XArtsSkill.h"
 #include "XJAComboSkill.h"
 
-XSkillMgr::XSkillMgr(XEntity* host)
-{
-}
-
-XSkillMgr::~XSkillMgr()
-{
-}
 
 XSkill* XSkillMgr::GetCarrier(int id)
 {

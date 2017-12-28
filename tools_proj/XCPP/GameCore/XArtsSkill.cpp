@@ -109,7 +109,7 @@ bool XArtsSkill::ChargeTo(IArgs*, void* param)
 	args.TimeSpan = _data->Charge[i].End - (_data->Charge[i].Using_Curve ? 0 : _data->Charge[i].At);
 	if (!_data->Charge[i].Using_Curve && args.TimeSpan <= 0)
 	{
-		ERROR("Zero Charge TimeSpan of skill " + tostring(_data->Name));
+		ERR("Zero Charge TimeSpan of skill " + tostring(_data->Name));
 		return false;
 	}
 	else

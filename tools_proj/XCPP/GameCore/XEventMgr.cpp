@@ -45,7 +45,7 @@ bool XEventMgr::OnDelay(IArgs* arg, void *)
 
 bool XEventMgr::FireEvent(XEventArgs* arg, float delay)
 {
-	XDelegate del = CALLBACK(XEventMgr, OnDelay, this);
+	XDelegate del = DelCALLBACK(XEventMgr, OnDelay, this);
 	if (arg) XTimerMgr::Instance()->SetTimer(delay, &del, arg);
 	return true;
 }

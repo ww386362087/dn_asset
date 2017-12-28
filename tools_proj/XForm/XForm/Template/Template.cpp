@@ -15,7 +15,6 @@
 
 void [*Table*]::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -26,7 +25,8 @@ void [*Table*]::ReadTable()
 	{
 		[*Table*]Row *row = new [*Table*]Row();
 		[**read**]
-		m_data.push_back(*row);
+		m_data.push_back(row);
+		[\\]m_map.insert(std::make_pair(row->[*uid*], row));
 	}
 	this->Close();
 }
@@ -36,13 +36,18 @@ void [*Table*]::GetRow(int idx,[*Table*]Row* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
 		LOG("eror, [*Table*] index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
 }
+
+[\\]void [*Table*]::GetByUID(uint idx, [*Table*]Row* row)
+[\\]{
+[\\] *row = *m_map[idx];
+[\\]}
 
 int [*Table*]::GetLength()
 {
@@ -71,4 +76,13 @@ extern "C"
 		}
 		[*table*]->GetRow(suitid,row);
 	}
+
+	[\\]void iGet[*Table*]RowByID(uint id, [*Table*]Row* row)
+	[\\]{
+	[\\]	if ([*table*] == NULL)
+	[\\]	{
+	[\\]	   [*table*] = new [*Table*]();
+	[\\]	}
+	[\\]	[*table*]->GetByUID(id, row);
+	[\\]}
 }

@@ -8,9 +8,11 @@
 #ifndef __SceneList__
 #define __SceneList__
 
-#include"NativeReader.h"
+#include "NativeReader.h"
+#include "Log.h"
 #include <vector>
-#include"Log.h"
+#include <unordered_map>
+
 
 struct SceneListRow
 {
@@ -140,11 +142,13 @@ public:
 	SceneList(void);
 	void ReadTable();
 	void GetRow(int val,SceneListRow* row);
+	void GetByUID(uint id, SceneListRow* row);
 	int GetLength();
 
 protected:
 	std::string name;
-	std::vector<SceneListRow> m_data;
+	std::vector<SceneListRow*> m_data;
+	std::unordered_map<uint, SceneListRow*> m_map;
 };
 
 
@@ -152,6 +156,7 @@ extern "C"
 {
 	ENGINE_INTERFACE_EXPORT int iGetSceneListLength();
 	ENGINE_INTERFACE_EXPORT void iGetSceneListRow(int idx,SceneListRow* row);
+	ENGINE_INTERFACE_EXPORT void iGetSceneListRowByID(uint id, SceneListRow* row);
 };
 
 #endif

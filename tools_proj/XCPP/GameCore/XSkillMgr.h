@@ -5,6 +5,7 @@
 #include "Common.h"
 #include "Vector3.h"
 #include <set>
+#include <unordered_map>
 
 class XEntity;
 class XSkill;
@@ -14,9 +15,7 @@ class XSkillData;
 class XSkillMgr
 {
 public:
-	XSkillMgr(XEntity* host);
-	~XSkillMgr();
-
+	XSkillMgr(XEntity* host) :_host(host) {};
 	XSkill* GetCarrier(int id);
 	XSkillCore* GetPhysicalSkill();
 	XSkillCore* GetSkill(uint id);
@@ -35,7 +34,6 @@ private:
 	std::unordered_map<int, XSkill*> _carriers;
 	std::unordered_map<uint, XSkillCore*> _full_skill;
 	std::unordered_map<uint, XSkillCore*> _core;
-	std::unordered_map<uint, std::vector<uint> > _qte;
 	std::set<uint> _physicals;
 
 	uint _physical;

@@ -8,9 +8,11 @@
 #ifndef __DefaultEquip__
 #define __DefaultEquip__
 
-#include"NativeReader.h"
+#include "NativeReader.h"
+#include "Log.h"
 #include <vector>
-#include"Log.h"
+#include <unordered_map>
+
 
 struct DefaultEquipRow
 {
@@ -42,11 +44,13 @@ public:
 	DefaultEquip(void);
 	void ReadTable();
 	void GetRow(int val,DefaultEquipRow* row);
+	void GetByUID(uint id, DefaultEquipRow* row);
 	int GetLength();
 
 protected:
 	std::string name;
-	std::vector<DefaultEquipRow> m_data;
+	std::vector<DefaultEquipRow*> m_data;
+	std::unordered_map<uint, DefaultEquipRow*> m_map;
 };
 
 
@@ -54,6 +58,7 @@ extern "C"
 {
 	ENGINE_INTERFACE_EXPORT int iGetDefaultEquipLength();
 	ENGINE_INTERFACE_EXPORT void iGetDefaultEquipRow(int idx,DefaultEquipRow* row);
+	ENGINE_INTERFACE_EXPORT void iGetDefaultEquipRowByID(uint id, DefaultEquipRow* row);
 };
 
 #endif

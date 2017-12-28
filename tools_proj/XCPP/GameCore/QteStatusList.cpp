@@ -15,7 +15,6 @@ QteStatusList::QteStatusList(void)
 
 void QteStatusList::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -29,7 +28,7 @@ void QteStatusList::ReadTable()
 		ReadString(row->comment);
 		ReadString(row->name);
 		Read(&(row->value));
-		m_data.push_back(*row);
+		m_data.push_back(row);
 	}
 	this->Close();
 }
@@ -39,13 +38,14 @@ void QteStatusList::GetRow(int idx,QteStatusListRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
 		LOG("eror, QteStatusList index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
 }
+
 
 int QteStatusList::GetLength()
 {
@@ -74,4 +74,5 @@ extern "C"
 		}
 		qtestatuslist->GetRow(suitid,row);
 	}
+
 }

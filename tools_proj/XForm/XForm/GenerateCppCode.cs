@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace XForm
 {
@@ -66,9 +67,35 @@ namespace XForm
             f.PCB("generate cpp finish");
         }
 
+        private void HandleSort(bool sort, ref string con)
+        {
+            string sign = @"[\\]";
+            if (sort)
+            {
+                con = con.Replace(sign, string.Empty);
+            }
+            else
+            {
+                string[] arr = con.Split('\n');
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (arr[i].Contains(sign))
+                    {
+                        arr[i] = string.Empty;
+                    }
+                }
+                con = string.Empty;
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(arr[i])) con += arr[i] + '\n';
+                }
+            }
+        }
+
         private void GenerateHead(CSVTable tb, string name)
         {
             string new_h = temp_h_content.Replace("[*Table*]", name);
+            HandleSort(tb.isSort, ref new_h);
             StringBuilder sb = new StringBuilder();
             for (int i = 0, max = tb.types.Length; i < max; i++)
             {
@@ -76,10 +103,14 @@ namespace XForm
                 {
                     sb.Append("\n\tSeq<" + tb.types[i].Replace("<>", "") + "> " + tb.titles[i].ToLower() + ";");
                 }
+                else if (tb.types[i].ToLower().Equals("string[]")) //stringarray
+                {
+                    string tp = tb.types[i].Replace("[]", " ");
+                    sb.Append("\n\tchar " + tb.titles[i].ToLower() + "[MaxArraySize][MaxStringSize];");
+                }
                 else if (tb.types[i].Contains("[]"))
                 {
                     string tp = tb.types[i].Replace("[]", " ");
-                    if (tp == "string ") tp = "std::string ";
                     sb.Append("\n\t" + tp + tb.titles[i].ToLower() + "[MaxArraySize];");
                 }
                 else if (tb.types[i].ToLower().Equals("string"))
@@ -100,7 +131,9 @@ namespace XForm
         private void GenerateCpp(CSVTable tb, string name)
         {
             string new_c = temp_c_content.Replace("[*Table*]", name);
+            HandleSort(tb.isSort, ref new_c);
             new_c = new_c.Replace("[*table*]", name.ToLower());
+            new_c = new_c.Replace("[*uid*]",tb.titles[0].ToLower());
             StringBuilder sb = new StringBuilder();
             for (int i = 0, max = tb.types.Length; i < max; i++)
             {
@@ -108,11 +141,15 @@ namespace XForm
                 {
                     sb.Append("\n\t\tReadSeq(row->" + tb.titles[i].ToLower() + ");");
                 }
-                else if (tb.types[i].Contains("[]"))
+                else if (tb.types[i].ToLower().Equals("string[]")) //stringarray
+                {
+                    sb.Append("\n\t\tReadStringArray(row->" + tb.titles[i].ToLower() + ");");
+                }
+                else if (tb.types[i].Contains("[]")) //general array
                 {
                     string tp = tb.types[i].Replace("[]", "");
                     if (tp == "string") tp = "std::string";
-                    sb.Append("\n\t\tReadArray<" + tp+">(row->" + tb.titles[i].ToLower() + ");");
+                    sb.Append("\n\t\tReadArray<" + tp + ">(row->" + tb.titles[i].ToLower() + ");");
                 }
                 else if (tb.types[i].ToLower().Equals("string"))
                 {

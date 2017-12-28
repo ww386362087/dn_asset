@@ -14,23 +14,19 @@
 #include <sstream> 
 #include <string>
 #include"picojson.h"
+#include "CommandDef.h"
 #include <fstream>
 
 typedef unsigned int  uint;
 typedef unsigned long long ulong;
 typedef picojson::value object;
 
-
-
 #define MaxStringSize 64
 #define MaxArraySize 16
 
-#define CLog 'L'
-#define CWarn 'W'
-#define CError 'E'
-
 extern std::string UNITY_STREAM_PATH;
 extern std::string UNITY_CACHE_PATH;
+static int id = 0;
 
 template<typename T>
 std::string tostring(T val)
@@ -62,6 +58,8 @@ void tobytes(std::string str);
 void InitPath(std::string stream,std::string cache);
 
 uint xhash(const char* ch);
+
+int new_id();
 
 bool isNumber(const std::string& value);
 

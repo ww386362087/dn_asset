@@ -19,7 +19,7 @@ float Vector3::Angle(const Vector3& v, const Vector3& u)
 {
 	if (v.IsZero() || u.IsZero())
 	{
-		ERROR("Error Vector3 to calc Angle.");
+		//ERROR("Error Vector3 to calc Angle.");
 		return 0;
 	}
 

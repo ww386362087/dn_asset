@@ -8,9 +8,11 @@
 #ifndef __XNpcList__
 #define __XNpcList__
 
-#include"NativeReader.h"
+#include "NativeReader.h"
+#include "Log.h"
 #include <vector>
-#include"Log.h"
+#include <unordered_map>
+
 
 struct XNpcListRow
 {
@@ -40,11 +42,13 @@ public:
 	XNpcList(void);
 	void ReadTable();
 	void GetRow(int val,XNpcListRow* row);
+	void GetByUID(uint id, XNpcListRow* row);
 	int GetLength();
 
 protected:
 	std::string name;
-	std::vector<XNpcListRow> m_data;
+	std::vector<XNpcListRow*> m_data;
+	std::unordered_map<uint, XNpcListRow*> m_map;
 };
 
 
@@ -52,6 +56,7 @@ extern "C"
 {
 	ENGINE_INTERFACE_EXPORT int iGetXNpcListLength();
 	ENGINE_INTERFACE_EXPORT void iGetXNpcListRow(int idx,XNpcListRow* row);
+	ENGINE_INTERFACE_EXPORT void iGetXNpcListRowByID(uint id, XNpcListRow* row);
 };
 
 #endif

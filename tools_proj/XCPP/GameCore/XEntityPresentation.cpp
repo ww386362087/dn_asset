@@ -15,7 +15,6 @@ XEntityPresentation::XEntityPresentation(void)
 
 void XEntityPresentation::ReadTable()
 {
-	LOG("read:"+name);
 	Open(name.c_str());
 	long long filesize =0;
 	int lineCnt = 0;
@@ -58,13 +57,13 @@ void XEntityPresentation::ReadTable()
 		ReadString(row->movefx);
 		ReadString(row->freeze);
 		ReadString(row->freezefx);
-		ReadArray<std::string>(row->hit_f);
-		ReadArray<std::string>(row->hit_l);
-		ReadArray<std::string>(row->hit_r);
+		ReadStringArray(row->hit_f);
+		ReadStringArray(row->hit_l);
+		ReadStringArray(row->hit_r);
 		ReadArray<float>(row->hitbackoffsettimescale);
-		ReadArray<std::string>(row->hitfly);
+		ReadStringArray(row->hitfly);
 		ReadArray<float>(row->hitflyoffsettimescale);
-		ReadArray<std::string>(row->hit_roll);
+		ReadStringArray(row->hit_roll);
 		ReadArray<float>(row->hitrolloffsettimescale);
 		ReadArray<float>(row->hitback_recover);
 		ReadArray<float>(row->hitfly_bounce_getup);
@@ -72,14 +71,14 @@ void XEntityPresentation::ReadTable()
 		ReadString(row->hitfx);
 		ReadString(row->death);
 		ReadString(row->deathfx);
-		ReadArray<std::string>(row->hitcurves);
+		ReadStringArray(row->hitcurves);
 		ReadString(row->deathcurve);
 		ReadString(row->a);
 		ReadString(row->aa);
 		ReadString(row->aaa);
 		ReadString(row->aaaa);
 		ReadString(row->aaaaa);
-		ReadString(row->otherskills);
+		ReadStringArray(row->otherskills);
 		ReadString(row->skillnum);
 		ReadString(row->dash);
 		ReadString(row->ultra);
@@ -106,7 +105,8 @@ void XEntityPresentation::ReadTable()
 		ReadString(row->recoveryfx);
 		ReadString(row->recoveryhitslowfx);
 		ReadString(row->recoveryhitstopfx);
-		m_data.push_back(*row);
+		m_data.push_back(row);
+		m_map.insert(std::make_pair(row->uid, row));
 	}
 	this->Close();
 }
@@ -116,12 +116,17 @@ void XEntityPresentation::GetRow(int idx,XEntityPresentationRow* row)
 	size_t len = m_data.size();
 	if(idx<(int)len)
 	{
-		*row = m_data[idx];
+		*row = *m_data[idx];
 	}
 	else
 	{
 		LOG("eror, XEntityPresentation index out of range, size: "+tostring(len)+" idx: "+tostring(idx));
 	}
+}
+
+void XEntityPresentation::GetByUID(uint idx, XEntityPresentationRow* row)
+{
+ *row = *m_map[idx];
 }
 
 int XEntityPresentation::GetLength()
@@ -150,5 +155,14 @@ extern "C"
 			xentitypresentation = new XEntityPresentation();
 		}
 		xentitypresentation->GetRow(suitid,row);
+	}
+
+	void iGetXEntityPresentationRowByID(uint id, XEntityPresentationRow* row)
+	{
+		if (xentitypresentation == NULL)
+		{
+		   xentitypresentation = new XEntityPresentation();
+		}
+		xentitypresentation->GetByUID(id, row);
 	}
 }

@@ -4,7 +4,7 @@
 
 #ifndef  __logger__  
 #define  __logger__  
-   
+
 #include <iostream>  
 #include <iomanip>  
 #include <fstream>  
@@ -19,13 +19,13 @@
 
 
 // 日志文件的类型    
-typedef enum 
+enum LogLevel
 {  
    INFO,  
    WARN,  
-   ERROR,  
+   ERR,  
    FATAL  
-}LogLevel;  
+};  
 
 
 /// 初始化日志文件  
@@ -46,8 +46,8 @@ friend void InitLogger(const std::string& info_log_filename,
 public:
 	Log(LogLevel level) : m_log_level(level) {};  
 	~Log(void);
-	static std::ostream& Start(LogLevel level,std::string text,const int line,const std::string& function);  
-	
+	static std::ostream& Start(LogLevel level,std::string text, const std::string &file, const int line,const std::string& function);
+	static std::ostream& OStart(const std::string &file, const int line, const std::string& function);
 private:  
    static std::ostream& GetStream(LogLevel log_rank);  //根据等级获取相应的日志输出流 
    static std::ofstream m_info_log_file;  //信息日子的输出流  
@@ -57,30 +57,32 @@ private:
 };
 
 // 根据不同等级进行用不同的输出流进行读写  
-#define LOG(text) Log(INFO).Start(INFO, text,__LINE__,__FUNCTION__)  
+#define LOG(text) Log(INFO).Start(INFO, text,__FILE__,__LINE__,__FUNCTION__)  
 
-#define WARN(text) Log(WARN).Start(WARN,text,__LINE__,__FUNCTION__)
+#define WARN(text) Log(WARN).Start(WARN,text,__FILE__,__LINE__,__FUNCTION__)
 
-#define ERROR(text) Log(ERROR).Start(ERROR,text,__LINE__,__FUNCTION__)
+#define ERR(text) Log(ERR).Start(ERR,text,__FILE__,__LINE__,__FUNCTION__)
+
+#define PRINT Log(INFO).OStart(__FILE__,__LINE__,__FUNCTION__) 
     
 // 利用日记进行检查的各种宏  
-#define CHECK(a) if(!(a)){ LOG(ERROR)<<" CHECK failed "<<endl<<#a<< "= "<< (a)<<endl;abort(); }                                                      
+#define CHECK(a) if(!(a)){ LOG(ERR)<<" CHECK failed "<<endl<<#a<< "= "<< (a)<<endl;abort(); }                                                      
    
-#define CHECK_NOTNULL(a) if( NULL == (a)){ LOG(ERROR)<<" CHECK_NOTNULL failed "<< #a << "== NULL "<<endl; abort();}
+#define CHECK_NOTNULL(a) if( NULL == (a)){ LOG(ERR)<<" CHECK_NOTNULL failed "<< #a << "== NULL "<<endl; abort();}
    
-#define CHECK_NULL(a) if( NULL != (a)){ LOG(ERROR)<<" CHECK_NULL failed "<<endl<<#a<< "!= NULL "<<endl; abort();} 
+#define CHECK_NULL(a) if( NULL != (a)){ LOG(ERR)<<" CHECK_NULL failed "<<endl<<#a<< "!= NULL "<<endl; abort();} 
    
-#define CHECK_EQ(a, b) if(!((a) == (b))) { LOG(ERROR)<<" CHECK_EQ failed "<< endl<<#a<< "= "<<(a) <<endl<< #b<< "= "<<b<< endl; abort();}  
+#define CHECK_EQ(a, b) if(!((a) == (b))) { LOG(ERR)<<" CHECK_EQ failed "<< endl<<#a<< "= "<<(a) <<endl<< #b<< "= "<<b<< endl; abort();}  
    
-#define CHECK_NE(a, b) if(!((a) != (b))) { LOG(ERROR)<<" CHECK_NE failed "<< endl<< #a<< "= "<<(a)<< endl<<#b<<"= "<<b<< endl; abort();}  
+#define CHECK_NE(a, b) if(!((a) != (b))) { LOG(ERR)<<" CHECK_NE failed "<< endl<< #a<< "= "<<(a)<< endl<<#b<<"= "<<b<< endl; abort();}  
    
-#define CHECK_LT(a, b)if(!((a) < (b))) { LOG(ERROR)<<" CHECK_LT failed "<< #a<<"= "<<(a)<< endl<< #b<<"= "<<b<<endl; abort();}  
+#define CHECK_LT(a, b)if(!((a) < (b))) { LOG(ERR)<<" CHECK_LT failed "<< #a<<"= "<<(a)<< endl<< #b<<"= "<<b<<endl; abort();}  
    
-#define CHECK_GT(a, b) if(!((a) > (b))) { LOG(ERROR)<<" CHECK_GT failed "<< endl<< #a<<" = "<<a<< endl<<#b<<"= "<<b<< endl; abort(); } 
+#define CHECK_GT(a, b) if(!((a) > (b))) { LOG(ERR)<<" CHECK_GT failed "<< endl<< #a<<" = "<<a<< endl<<#b<<"= "<<b<< endl; abort(); } 
    
-#define CHECK_LE(a, b) if(!((a) <= (b))) { LOG(ERROR)<<" CHECK_LE failed "<< endl<< #a << "= " <<a<< endl<<#b<<"= "<<b<< endl;abort(); }  
+#define CHECK_LE(a, b) if(!((a) <= (b))) { LOG(ERR)<<" CHECK_LE failed "<< endl<< #a << "= " <<a<< endl<<#b<<"= "<<b<< endl;abort(); }  
    
-#define CHECK_GE(a, b) if(!((a) >= (b))) { LOG(ERROR)<<" CHECK_GE failed "<< endl<<#a<<" = "<<a<< endl<<#b<<"= "<<b<< endl;abort();}  
+#define CHECK_GE(a, b) if(!((a) >= (b))) { LOG(ERR)<<" CHECK_GE failed "<< endl<<#a<<" = "<<a<< endl<<#b<<"= "<<b<< endl;abort();}  
    
 #define CHECK_DOUBLE_EQ(a, b)do { CHECK_LE((a), (b)+0.000000000000001L); CHECK_GE((a), (b)-0.000000000000001L); }while (0)  
 
