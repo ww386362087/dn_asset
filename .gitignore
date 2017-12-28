@@ -24,6 +24,7 @@
 /tools_proj/XLib/XLib/obj/
 /tools_proj/XCPP/XCPP.VC.VC.opendb
 /tools_proj/Android/libs/
+/tools_proj/build/out/
 **/[Ll]ibrary/
 **/[Tt]emp/
 **/[Oo]bj/
