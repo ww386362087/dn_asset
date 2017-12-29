@@ -21,8 +21,6 @@
   <ItemGroup>
     <ClCompile Include="AIBehaviour.cpp" />
     <ClCompile Include="AIFactory.cpp" />
-    <ClCompile Include="AIRuntimeRotateSelf.cpp" />
-    <ClCompile Include="AIRuntimeRotateToTarget.cpp" />
     <ClCompile Include="AITree.cpp" />
     <ClCompile Include="AITreeData.cpp" />
     <ClCompile Include="AIUtil.cpp" />
@@ -38,6 +36,20 @@
     <ClCompile Include="NativeReader.cpp" />
     <ClCompile Include="patch.c" />
     <ClCompile Include="QteStatusList.cpp" />
+    <ClCompile Include="runtime\AIRuntimeDoSelectNearest.cpp" />
+    <ClCompile Include="runtime\AIRuntimeFindTargetByDistance.cpp" />
+    <ClCompile Include="runtime\AIRuntimeLog.cpp" />
+    <ClCompile Include="runtime\AIRuntimeMoveForward.cpp" />
+    <ClCompile Include="runtime\AIRuntimeNavToTarget.cpp" />
+    <ClCompile Include="runtime\AIRuntimeResetTarget.cpp" />
+    <ClCompile Include="runtime\AIRuntimeRotateSelf.cpp" />
+    <ClCompile Include="runtime\AIRuntimeRotateToTarget.cpp" />
+    <ClCompile Include="runtime\AIRuntimeStatusRandom.cpp" />
+    <ClCompile Include="runtime\AIRuntimeStopNavMove.cpp" />
+    <ClCompile Include="runtime\AIRuntimeValueDistance.cpp" />
+    <ClCompile Include="runtime\AIRuntimeValueHP.cpp" />
+    <ClCompile Include="runtime\AIRuntimeWait.cpp" />
+    <ClCompile Include="runtime\AIRuntimeXAIActionSkill.cpp" />
     <ClCompile Include="SceneList.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="SkillReader.cpp" />
@@ -74,8 +86,6 @@
   <ItemGroup>
     <ClInclude Include="AIBehaviour.h" />
     <ClInclude Include="AIFactory.h" />
-    <ClInclude Include="AIRuntimeRotateSelf.h" />
-    <ClInclude Include="AIRuntimeRotateToTarget.h" />
     <ClInclude Include="AITree.h" />
     <ClInclude Include="AITreeArg.h" />
     <ClInclude Include="AITreeData.h" />
@@ -96,6 +106,20 @@
     <ClInclude Include="patch_types.h" />
     <ClInclude Include="picojson.h" />
     <ClInclude Include="QteStatusList.h" />
+    <ClInclude Include="runtime\AIRuntimeDoSelectNearest.h" />
+    <ClInclude Include="runtime\AIRuntimeFindTargetByDistance.h" />
+    <ClInclude Include="runtime\AIRuntimeLog.h" />
+    <ClInclude Include="runtime\AIRuntimeMoveForward.h" />
+    <ClInclude Include="runtime\AIRuntimeNavToTarget.h" />
+    <ClInclude Include="runtime\AIRuntimeResetTarget.h" />
+    <ClInclude Include="runtime\AIRuntimeRotateSelf.h" />
+    <ClInclude Include="runtime\AIRuntimeRotateToTarget.h" />
+    <ClInclude Include="runtime\AIRuntimeStatusRandom.h" />
+    <ClInclude Include="runtime\AIRuntimeStopNavMove.h" />
+    <ClInclude Include="runtime\AIRuntimeValueDistance.h" />
+    <ClInclude Include="runtime\AIRuntimeValueHP.h" />
+    <ClInclude Include="runtime\AIRuntimeWait.h" />
+    <ClInclude Include="runtime\AIRuntimeXAIActionSkill.h" />
     <ClInclude Include="SceneList.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Singleton.h" />

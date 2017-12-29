@@ -52,9 +52,6 @@
     <ClCompile Include="Vector3.cpp">
       <Filter>math</Filter>
     </ClCompile>
-    <ClCompile Include="AIRuntimeRotateSelf.cpp">
-      <Filter>ai\runtime</Filter>
-    </ClCompile>
     <ClCompile Include="GameMain.cpp">
       <Filter>main</Filter>
     </ClCompile>
@@ -151,7 +148,46 @@
     <ClCompile Include="XStateMachine.cpp">
       <Filter>state</Filter>
     </ClCompile>
-    <ClCompile Include="AIRuntimeRotateToTarget.cpp">
+    <ClCompile Include="runtime\AIRuntimeMoveForward.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeNavToTarget.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeResetTarget.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeRotateSelf.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeRotateToTarget.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeStatusRandom.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeStopNavMove.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeValueDistance.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeValueHP.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeWait.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeXAIActionSkill.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeDoSelectNearest.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeFindTargetByDistance.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="runtime\AIRuntimeLog.cpp">
       <Filter>ai\runtime</Filter>
     </ClCompile>
   </ItemGroup>
@@ -212,9 +248,6 @@
     </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>math</Filter>
-    </ClInclude>
-    <ClInclude Include="AIRuntimeRotateSelf.h">
-      <Filter>ai\runtime</Filter>
     </ClInclude>
     <ClInclude Include="GameMain.h">
       <Filter>main</Filter>
@@ -339,7 +372,46 @@
     <ClInclude Include="CommandDef.h">
       <Filter>common\def</Filter>
     </ClInclude>
-    <ClInclude Include="AIRuntimeRotateToTarget.h">
+    <ClInclude Include="runtime\AIRuntimeMoveForward.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeNavToTarget.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeResetTarget.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeRotateSelf.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeRotateToTarget.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeStatusRandom.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeStopNavMove.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeValueDistance.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeValueHP.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeWait.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeXAIActionSkill.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeDoSelectNearest.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeFindTargetByDistance.h">
+      <Filter>ai\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="runtime\AIRuntimeLog.h">
       <Filter>ai\runtime</Filter>
     </ClInclude>
   </ItemGroup>
@@ -358,9 +430,6 @@
     </Filter>
     <Filter Include="math">
       <UniqueIdentifier>{8f70ddfe-23da-496f-a818-1ae154c35ef7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ai\runtime">
-      <UniqueIdentifier>{8f95295f-633e-41ba-abce-bda739526be3}</UniqueIdentifier>
     </Filter>
     <Filter Include="main">
       <UniqueIdentifier>{9b015484-d1f3-46cf-b123-f18a3b47b58b}</UniqueIdentifier>
@@ -400,6 +469,9 @@
     </Filter>
     <Filter Include="state">
       <UniqueIdentifier>{cdbc3320-4fc3-4812-97da-5104bc3cb0f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ai\runtime">
+      <UniqueIdentifier>{752807b0-8cb2-4a1a-ace5-a94f0608e462}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

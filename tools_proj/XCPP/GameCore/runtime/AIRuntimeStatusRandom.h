@@ -1,0 +1,21 @@
+#ifndef  __AIRuntimeStatusRandom__
+#define  __AIRuntimeStatusRandom__
+
+#include "../AIBehaviour.h"
+#include "../GameObject.h"
+#include "../Vector3.h"
+
+
+class AIRuntimeStatusRandom:public AIBase
+{
+public:
+	virtual void Init(AITaskData* data);
+	virtual AIStatus OnTick();
+	
+
+private:
+	int mAIArgProb;
+	
+};
+
+#endif

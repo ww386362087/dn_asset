@@ -71,6 +71,7 @@ public class AICodeMaker
             if (!maker_list.Contains(task.type))
             {
                 GenerateTaskCode(task);
+                AICppMaker.GenerateTaskCode(task);
             }
         }
         if (task.children != null)
