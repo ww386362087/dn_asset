@@ -51,11 +51,11 @@ public class XRole : XEntity
 
     private void InitAnim()
     {
-        OverrideAnim(Clip.A, present.A);
-        OverrideAnim(Clip.AA, present.AA);
+        //OverrideAnim(Clip.A, present.A);
+        //OverrideAnim(Clip.AA, present.AA);
         OverrideAnim(Clip.AAA, "Player_archer_attack_run");
         OverrideAnim(Clip.AAAA, "Player_archer_attack_run");
-        OverrideAnim(Clip.AAAAA, present.AAAAA);
+        //OverrideAnim(Clip.AAAAA, present.AAAAA);
         OverrideAnim(Clip.Walk, present.Walk);
         OverrideAnim(Clip.Idle, present.Idle);
         OverrideAnim(Clip.Death, present.Death);

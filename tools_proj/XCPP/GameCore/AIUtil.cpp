@@ -6,8 +6,16 @@ std::string AIUtil::Type = "Type";
 
 void AIUtil::Load(std::string name, AITreeData& data)
 {
-	std::string str = readFile(name.c_str());
-	Parse(str, name, data);
+	try
+	{
+		std::string str = readFile(name.c_str());
+		Parse(str, name, data);
+	}
+	catch (const std::exception& e)
+	{
+		std::string s = tostring(e.what());
+		ERR(s);
+	}
 }
 
 void AIUtil::Parse(std::string json, std::string name, AITreeData& tree)

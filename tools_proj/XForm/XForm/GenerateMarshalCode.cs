@@ -135,6 +135,11 @@ namespace XForm
                     sb.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]");
                     sb.Append("\n\t\t\t" + tb.types[i].Replace("<>", "[] ") + tb.titles[i].ToLower() + ";");
                 }
+                else if (tb.types[i].ToLower().Equals("string[]")) //stringarray
+                {
+                    sb.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]");
+                    sb.Append("\n\t\t\tbyte[] " + tb.titles[i].ToLower() + ";");
+                }
                 else if (tb.types[i].Contains("[]"))
                 {
                     sb.Append("\n\t\t\t[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]");
@@ -158,18 +163,37 @@ namespace XForm
                     string ctype = "CSeq< " + tb.types[i].Replace("<", "");
                     sb.Append("\n\n\t\t\tpublic " + ctype + " " + FirstUpperStr(tb.titles[i]) + "{ get { return new " + ctype + "(ref " + tb.titles[i].ToLower() + "); } }");
                 }
+                else if (tb.types[i].ToLower().Equals("string[]")) //stringarray
+                {
+                    string tn = tb.titles[i].ToLower();
+                    string tp = tb.types[i].Replace("[", string.Empty).Replace("]", string.Empty);
+                    sb.Append("\n\n\t\t\tpublic string[] " + FirstUpperStr(tn) + " { ");
+                    sb.Append("\n\t\t\t\tget { ");
+                    sb.Append("\n\t\t\t\t\tint ptr = 0;");
+                    sb.Append("\n\t\t\t\t\tstring[] ss = new string[16];");
+                    sb.Append("\n\t\t\t\t\tfor (int i = 0; i < 16; i++)");
+                    sb.Append("\n\t\t\t\t\t{");
+                    sb.Append("\n\t\t\t\t\t\tbyte[] bytes = new byte[64];");
+                    sb.Append("\n\t\t\t\t\t\tSystem.Array.Copy(hit_f, ptr, bytes, 0, 64);");
+                    sb.Append("\n\t\t\t\t\t\tss[i] = System.Text.Encoding.Default.GetString(bytes);");
+                    sb.Append("\n\t\t\t\t\t\tptr += 64;");
+                    sb.Append("\n\t\t\t\t\t}");
+                    sb.Append("\n\t\t\t\t\treturn ss;");
+                    sb.Append("\n\t\t\t\t}");
+                    sb.Append("\n\t\t\t}");
+                }
                 else if (tb.types[i].Contains("[]"))
                 {
                     string tn = tb.titles[i].ToLower();
                     string tp = tb.types[i].Replace("[", string.Empty).Replace("]", string.Empty);
-                    sb.Append("\n\n\t\t\t" + tp + "[] " + FirstUpperStr(tn) + " { ");
+                    sb.Append("\n\n\t\t\tpublic " + tp + "[] " + FirstUpperStr(tn) + " { ");
                     sb.Append("\n\t\t\t\tget { ");
                     sb.Append("\n\t\t\t\t\tif (" + tn + ".Length == 16) {");
                     sb.Append("\n\t\t\t\t\tList<" + tp + "> list = new List<" + tp + ">();");
                     sb.Append("\n\t\t\t\t\tfor (int i = " + tn + ".Length - 1; i >= 0; i--)");
                     sb.Append("\n\t\t\t\t\t{");
-                    string invalid = "-1";
-                    if (tp == "string") invalid = "\"-1\"";
+                    string invalid = "0";
+                    if (tp == "string") invalid = "\"0\"";
                     sb.Append("\n\t\t\t\t\t\tif (" + tn + "[i] != " + invalid + ") list.Add(" + tn + "[i]);");
                     sb.Append("\n\t\t\t\t\t}");
                     sb.Append("\n\t\t\t\t\t" + tn + " = list.ToArray();");

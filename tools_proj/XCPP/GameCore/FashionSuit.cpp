@@ -92,13 +92,13 @@ extern "C"
 		return fashionsuit->GetLength();
 	}
 
-	void iGetFashionSuitRow(int suitid,FashionSuitRow* row)
+	void iGetFashionSuitRow(int id,FashionSuitRow* row)
 	{
 		if(fashionsuit==NULL)
 		{
 			fashionsuit = new FashionSuit();
 		}
-		fashionsuit->GetRow(suitid,row);
+		fashionsuit->GetRow(id,row);
 	}
 
 	void iGetFashionSuitRowByID(uint id, FashionSuitRow* row)

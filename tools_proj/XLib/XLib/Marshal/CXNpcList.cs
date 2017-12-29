@@ -56,13 +56,13 @@ namespace GameCore {
 
 			public int NPCScene { get { return npcscene; } }
 
-			float[] Npcposition { 
+			public float[] Npcposition { 
 				get { 
 					if (npcposition.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = npcposition.Length - 1; i >= 0; i--)
 					{
-						if (npcposition[i] != -1) list.Add(npcposition[i]);
+						if (npcposition[i] != 0) list.Add(npcposition[i]);
 					}
 					npcposition = list.ToArray();
 					}
@@ -70,13 +70,13 @@ namespace GameCore {
 				}
 			}
 
-			float[] Npcrotation { 
+			public float[] Npcrotation { 
 				get { 
 					if (npcrotation.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = npcrotation.Length - 1; i >= 0; i--)
 					{
-						if (npcrotation[i] != -1) list.Add(npcrotation[i]);
+						if (npcrotation[i] != 0) list.Add(npcrotation[i]);
 					}
 					npcrotation = list.ToArray();
 					}

@@ -66,13 +66,13 @@ extern "C"
 		return qtestatuslist->GetLength();
 	}
 
-	void iGetQteStatusListRow(int suitid,QteStatusListRow* row)
+	void iGetQteStatusListRow(int id,QteStatusListRow* row)
 	{
 		if(qtestatuslist==NULL)
 		{
 			qtestatuslist = new QteStatusList();
 		}
-		qtestatuslist->GetRow(suitid,row);
+		qtestatuslist->GetRow(id,row);
 	}
 
 }

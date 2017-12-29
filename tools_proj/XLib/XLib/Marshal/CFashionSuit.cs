@@ -62,13 +62,13 @@ namespace GameCore {
 
 			public string SuitIcon { get { return suiticon; } }
 
-			int[] Fashionid { 
+			public int[] Fashionid { 
 				get { 
 					if (fashionid.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = fashionid.Length - 1; i >= 0; i--)
 					{
-						if (fashionid[i] != -1) list.Add(fashionid[i]);
+						if (fashionid[i] != 0) list.Add(fashionid[i]);
 					}
 					fashionid = list.ToArray();
 					}

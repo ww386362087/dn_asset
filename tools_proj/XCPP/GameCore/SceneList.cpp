@@ -185,13 +185,13 @@ extern "C"
 		return scenelist->GetLength();
 	}
 
-	void iGetSceneListRow(int suitid,SceneListRow* row)
+	void iGetSceneListRow(int id,SceneListRow* row)
 	{
 		if(scenelist==NULL)
 		{
 			scenelist = new SceneList();
 		}
-		scenelist->GetRow(suitid,row);
+		scenelist->GetRow(id,row);
 	}
 
 	void iGetSceneListRowByID(uint id, SceneListRow* row)

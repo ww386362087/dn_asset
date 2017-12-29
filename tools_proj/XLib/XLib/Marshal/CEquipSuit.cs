@@ -59,13 +59,13 @@ namespace GameCore {
 
 			public bool IsCreateShow { get { return iscreateshow; } }
 
-			int[] Equipid { 
+			public int[] Equipid { 
 				get { 
 					if (equipid.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = equipid.Length - 1; i >= 0; i--)
 					{
-						if (equipid[i] != -1) list.Add(equipid[i]);
+						if (equipid[i] != 0) list.Add(equipid[i]);
 					}
 					equipid = list.ToArray();
 					}

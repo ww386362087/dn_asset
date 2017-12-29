@@ -132,13 +132,13 @@ extern "C"
 		return xentitystatistics->GetLength();
 	}
 
-	void iGetXEntityStatisticsRow(int suitid,XEntityStatisticsRow* row)
+	void iGetXEntityStatisticsRow(int id,XEntityStatisticsRow* row)
 	{
 		if(xentitystatistics==NULL)
 		{
 			xentitystatistics = new XEntityStatistics();
 		}
-		xentitystatistics->GetRow(suitid,row);
+		xentitystatistics->GetRow(id,row);
 	}
 
 	void iGetXEntityStatisticsRowByID(uint id, XEntityStatisticsRow* row)

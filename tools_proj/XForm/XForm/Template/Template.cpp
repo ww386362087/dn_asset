@@ -68,13 +68,13 @@ extern "C"
 		return [*table*]->GetLength();
 	}
 
-	void iGet[*Table*]Row(int suitid,[*Table*]Row* row)
+	void iGet[*Table*]Row(int id,[*Table*]Row* row)
 	{
 		if([*table*]==NULL)
 		{
 			[*table*] = new [*Table*]();
 		}
-		[*table*]->GetRow(suitid,row);
+		[*table*]->GetRow(id,row);
 	}
 
 	[\\]void iGet[*Table*]RowByID(uint id, [*Table*]Row* row)

@@ -222,13 +222,13 @@ namespace GameCore {
 
 			public int PreTask { get { return pretask; } }
 
-			int[] Prescene { 
+			public int[] Prescene { 
 				get { 
 					if (prescene.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = prescene.Length - 1; i >= 0; i--)
 					{
-						if (prescene[i] != -1) list.Add(prescene[i]);
+						if (prescene[i] != 0) list.Add(prescene[i]);
 					}
 					prescene = list.ToArray();
 					}
@@ -264,13 +264,13 @@ namespace GameCore {
 
 			public string BlockFilePath { get { return blockfilepath; } }
 
-			int[] Operationsettings { 
+			public int[] Operationsettings { 
 				get { 
 					if (operationsettings.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = operationsettings.Length - 1; i >= 0; i--)
 					{
-						if (operationsettings[i] != -1) list.Add(operationsettings[i]);
+						if (operationsettings[i] != 0) list.Add(operationsettings[i]);
 					}
 					operationsettings = list.ToArray();
 					}
@@ -280,13 +280,13 @@ namespace GameCore {
 
 			public string StartPos { get { return startpos; } }
 
-			int[] Startface { 
+			public int[] Startface { 
 				get { 
 					if (startface.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = startface.Length - 1; i >= 0; i--)
 					{
-						if (startface[i] != -1) list.Add(startface[i]);
+						if (startface[i] != 0) list.Add(startface[i]);
 					}
 					startface = list.ToArray();
 					}
@@ -294,13 +294,13 @@ namespace GameCore {
 				}
 			}
 
-			float[] Startrot { 
+			public float[] Startrot { 
 				get { 
 					if (startrot.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = startrot.Length - 1; i >= 0; i--)
 					{
-						if (startrot[i] != -1) list.Add(startrot[i]);
+						if (startrot[i] != 0) list.Add(startrot[i]);
 					}
 					startrot = list.ToArray();
 					}
@@ -310,13 +310,13 @@ namespace GameCore {
 
 			public string Chapter { get { return chapter; } }
 
-			int[] Uipos { 
+			public int[] Uipos { 
 				get { 
 					if (uipos.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = uipos.Length - 1; i >= 0; i--)
 					{
-						if (uipos[i] != -1) list.Add(uipos[i]);
+						if (uipos[i] != 0) list.Add(uipos[i]);
 					}
 					uipos = list.ToArray();
 					}
@@ -330,13 +330,13 @@ namespace GameCore {
 
 			public string FatigueCost { get { return fatiguecost; } }
 
-			int[] Viewabledroplist { 
+			public int[] Viewabledroplist { 
 				get { 
 					if (viewabledroplist.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = viewabledroplist.Length - 1; i >= 0; i--)
 					{
-						if (viewabledroplist[i] != -1) list.Add(viewabledroplist[i]);
+						if (viewabledroplist[i] != 0) list.Add(viewabledroplist[i]);
 					}
 					viewabledroplist = list.ToArray();
 					}
@@ -346,13 +346,13 @@ namespace GameCore {
 
 			public int Exp { get { return exp; } }
 
-			int[] Drop { 
+			public int[] Drop { 
 				get { 
 					if (drop.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = drop.Length - 1; i >= 0; i--)
 					{
-						if (drop[i] != -1) list.Add(drop[i]);
+						if (drop[i] != 0) list.Add(drop[i]);
 					}
 					drop = list.ToArray();
 					}
@@ -360,13 +360,13 @@ namespace GameCore {
 				}
 			}
 
-			int[] Drop1 { 
+			public int[] Drop1 { 
 				get { 
 					if (drop1.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = drop1.Length - 1; i >= 0; i--)
 					{
-						if (drop1[i] != -1) list.Add(drop1[i]);
+						if (drop1[i] != 0) list.Add(drop1[i]);
 					}
 					drop1 = list.ToArray();
 					}
@@ -374,13 +374,13 @@ namespace GameCore {
 				}
 			}
 
-			int[] Drop2 { 
+			public int[] Drop2 { 
 				get { 
 					if (drop2.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = drop2.Length - 1; i >= 0; i--)
 					{
-						if (drop2[i] != -1) list.Add(drop2[i]);
+						if (drop2[i] != 0) list.Add(drop2[i]);
 					}
 					drop2 = list.ToArray();
 					}
@@ -388,13 +388,13 @@ namespace GameCore {
 				}
 			}
 
-			int[] Drop3 { 
+			public int[] Drop3 { 
 				get { 
 					if (drop3.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = drop3.Length - 1; i >= 0; i--)
 					{
-						if (drop3[i] != -1) list.Add(drop3[i]);
+						if (drop3[i] != 0) list.Add(drop3[i]);
 					}
 					drop3 = list.ToArray();
 					}
@@ -402,13 +402,13 @@ namespace GameCore {
 				}
 			}
 
-			int[] Drop4 { 
+			public int[] Drop4 { 
 				get { 
 					if (drop4.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = drop4.Length - 1; i >= 0; i--)
 					{
-						if (drop4[i] != -1) list.Add(drop4[i]);
+						if (drop4[i] != 0) list.Add(drop4[i]);
 					}
 					drop4 = list.ToArray();
 					}
@@ -416,13 +416,13 @@ namespace GameCore {
 				}
 			}
 
-			int[] Drop5 { 
+			public int[] Drop5 { 
 				get { 
 					if (drop5.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = drop5.Length - 1; i >= 0; i--)
 					{
-						if (drop5[i] != -1) list.Add(drop5[i]);
+						if (drop5[i] != 0) list.Add(drop5[i]);
 					}
 					drop5 = list.ToArray();
 					}
@@ -434,13 +434,13 @@ namespace GameCore {
 
 			public int FirstDownExp { get { return firstdownexp; } }
 
-			int[] Firstdowndrop { 
+			public int[] Firstdowndrop { 
 				get { 
 					if (firstdowndrop.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = firstdowndrop.Length - 1; i >= 0; i--)
 					{
-						if (firstdowndrop[i] != -1) list.Add(firstdowndrop[i]);
+						if (firstdowndrop[i] != 0) list.Add(firstdowndrop[i]);
 					}
 					firstdowndrop = list.ToArray();
 					}
@@ -540,13 +540,13 @@ namespace GameCore {
 
 			public string MiniMap { get { return minimap; } }
 
-			int[] Minimapsize { 
+			public int[] Minimapsize { 
 				get { 
 					if (minimapsize.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = minimapsize.Length - 1; i >= 0; i--)
 					{
-						if (minimapsize[i] != -1) list.Add(minimapsize[i]);
+						if (minimapsize[i] != 0) list.Add(minimapsize[i]);
 					}
 					minimapsize = list.ToArray();
 					}
@@ -578,13 +578,13 @@ namespace GameCore {
 
 			public int SweepNeedPPT { get { return sweepneedppt; } }
 
-			int[] Timecounter { 
+			public int[] Timecounter { 
 				get { 
 					if (timecounter.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = timecounter.Length - 1; i >= 0; i--)
 					{
-						if (timecounter[i] != -1) list.Add(timecounter[i]);
+						if (timecounter[i] != 0) list.Add(timecounter[i]);
 					}
 					timecounter = list.ToArray();
 					}

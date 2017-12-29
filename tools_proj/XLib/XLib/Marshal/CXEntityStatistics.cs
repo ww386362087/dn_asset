@@ -117,13 +117,13 @@ namespace GameCore {
 
 			public float RunSpeed { get { return runspeed; } }
 
-			float[] Floatheight { 
+			public float[] Floatheight { 
 				get { 
 					if (floatheight.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = floatheight.Length - 1; i >= 0; i--)
 					{
-						if (floatheight[i] != -1) list.Add(floatheight[i]);
+						if (floatheight[i] != 0) list.Add(floatheight[i]);
 					}
 					floatheight = list.ToArray();
 					}

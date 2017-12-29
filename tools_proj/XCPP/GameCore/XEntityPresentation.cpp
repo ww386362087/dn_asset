@@ -148,13 +148,13 @@ extern "C"
 		return xentitypresentation->GetLength();
 	}
 
-	void iGetXEntityPresentationRow(int suitid,XEntityPresentationRow* row)
+	void iGetXEntityPresentationRow(int id,XEntityPresentationRow* row)
 	{
 		if(xentitypresentation==NULL)
 		{
 			xentitypresentation = new XEntityPresentation();
 		}
-		xentitypresentation->GetRow(suitid,row);
+		xentitypresentation->GetRow(id,row);
 	}
 
 	void iGetXEntityPresentationRowByID(uint id, XEntityPresentationRow* row)

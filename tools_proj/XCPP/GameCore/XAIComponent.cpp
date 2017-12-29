@@ -124,6 +124,7 @@ void XAIComponent::SetBehaviorTree(const char* tree)
 {
 	_is_inited = true;
 	_tree->Initial(_entity);
+	return;
 	_tree->SetBehaviourTree(tree);
 	_tree->EnableBehaviourTree(true);
 	_tick = _ai_tick * _tick_factor;

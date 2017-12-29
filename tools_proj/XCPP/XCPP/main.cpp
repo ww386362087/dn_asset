@@ -18,6 +18,7 @@ typedef void(*DllReadJson)(const char*);
 typedef void(*DllPatch)(const char*, const char*, const char*);
 typedef void(*DllCallWithVoid)();
 typedef void(*DllCallFloatWithVoid)(float);
+typedef void(*DllGetRow)(int, void*);
 
 class Node
 {
@@ -38,6 +39,7 @@ DllCallWithVoid vect;
 DllCallWithVoid start;
 DllCallWithVoid stop;
 DllCallFloatWithVoid tick;
+DllGetRow row;
 
 void DebugInfo()
 {
@@ -167,6 +169,7 @@ void main()
 	start = (DllCallWithVoid)GetProcAddress(hInst, "iStartCore");
 	stop = (DllCallWithVoid)GetProcAddress(hInst, "iStopCore");
 	tick = (DllCallFloatWithVoid)GetProcAddress(hInst, "iTickCore");
+	row = (DllGetRow)GetProcAddress(hInst, "iGetXEntityPresentationRow");
 	cb(OnCallback);
 	init("", "");
 

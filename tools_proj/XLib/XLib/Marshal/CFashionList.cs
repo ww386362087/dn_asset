@@ -82,13 +82,13 @@ namespace GameCore {
 
 			public string PresentID { get { return presentid; } }
 
-			int[] Replaceid { 
+			public int[] Replaceid { 
 				get { 
 					if (replaceid.Length == 16) {
 					List<int> list = new List<int>();
 					for (int i = replaceid.Length - 1; i >= 0; i--)
 					{
-						if (replaceid[i] != -1) list.Add(replaceid[i]);
+						if (replaceid[i] != 0) list.Add(replaceid[i]);
 					}
 					replaceid = list.ToArray();
 					}

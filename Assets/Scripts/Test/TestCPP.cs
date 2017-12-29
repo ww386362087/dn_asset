@@ -85,7 +85,7 @@ public class TestCPP : MonoBehaviour
 
     public delegate void CppDelegate(byte type, IntPtr p);
     
-    GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(160), GUILayout.Height(80) };
+    GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(120), GUILayout.Height(40) };
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
     string ui_rst = string.Empty;
@@ -134,6 +134,117 @@ public class TestCPP : MonoBehaviour
     {
         GUILayout.BeginHorizontal();
         GUILayout.Space(10);
+        TableGUI();
+        NativeGUI();
+        GUILayout.Space(50);
+        GUILayout.TextArea(ui_rst, ui_sty, ui_op2);
+        GUILayout.EndHorizontal();
+    }
+    
+    
+    private void TableGUI()
+    {
+        GUILayout.BeginVertical();
+        if (GUILayout.Button("Get-Qte-Row", ui_opt))
+        {
+            int len = CQteStatusList.length;
+            ui_rst = "\nqte status list table line cnt: " + len + "\n";
+            for (int i = 0; i < 26; i++)
+            {
+                var rst = CQteStatusList.GetRow(i);
+                ui_rst += string.Format("\nvalue:{0,-4} name:{1,-20} comment:{2,-30}", rst.Value, rst.Name, rst.Comment);
+            }
+        }
+        if (GUILayout.Button("Get-Suit-Row", ui_opt))
+        {
+            int len = CEquipSuit.length;
+            ui_rst = "\nequi suit table line cnt: " + len;
+            for (int i = 0; i < 26; i++)
+            {
+                var rst = CEquipSuit.GetRow(i);
+                ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + " level:" + rst.Level + " effect2: " + rst.Effect2[0];
+            }
+        }
+        if (GUILayout.Button("Get-Statics-Row", ui_opt))
+        {
+            int len = CXEntityStatistics.length;
+            ui_rst = "\nstatics table line cnt: " + len;
+            for (int i = 0; i < 26; i++)
+            {
+                var rst = CXEntityStatistics.GetRow(i);
+                ui_rst += "\nuid:" + rst.UID + " name:" + rst.Name + " preid:" + rst.PresentID;
+            }
+        }
+        if (GUILayout.Button("Get-Fashion-Row", ui_opt))
+        {
+            int len = CFashionList.length;
+            ui_rst = "\nfashionlist table line cnt: " + len;
+            for (int i = 0; i < 12; i++)
+            {
+                var rst = CFashionList.GetRow(i);
+                ui_rst += "\nuid:" + rst.ItemID + " name:" + rst.ItemName + " pos:" + rst.EquipPos;
+            }
+        }
+        if (GUILayout.Button("Get-Fasuit-Row", ui_opt))
+        {
+            int len = CFashionSuit.length;
+            ui_rst = "\ntable line cnt: " + len;
+            for (int i = 0; i < 12; i++)
+            {
+                var rst = CFashionSuit.GetRow(i);
+                ui_rst += "\nuid:" + rst.SuitID + " name:" + rst.SuitName + " preid:" + rst.SuitIcon;
+            }
+        }
+        if (GUILayout.Button("Get-Defaut-Row", ui_opt))
+        {
+            int len = CDefaultEquip.length;
+            ui_rst = "\ntable line cnt: " + len;
+            for (int i = 0; i < 12; i++)
+            {
+                var rst = CDefaultEquip.GetRow(i);
+                ui_rst += "\nuid:" + rst.ProfID + " hair:" + rst.Hair + " face:" + rst.Face;
+            }
+        }
+        if (GUILayout.Button("Get-NPCList-Row", ui_opt))
+        {
+            int len = CXNpcList.length;
+            ui_rst = "\ntable line cnt: " + len;
+            for (int i = 0; i < 12; i++)
+            {
+                var rst = CXNpcList.GetRow(i);
+                ui_rst += "\nuid:" + rst.NPCID + " name:" + rst.NPCName + " type:" + rst.NPCType;
+            }
+        }
+        if (GUILayout.Button("Get-Scene-Row", ui_opt))
+        {
+            int len = CSceneList.length;
+            ui_rst = "\ntable line cnt: " + len;
+            for (int i = 0; i < 12; i++)
+            {
+                var rst = CSceneList.GetRow(i);
+                ui_rst += "\nuid:" + rst.SceneID + " path:" + rst.ScenePath;
+            }
+        }
+        if (GUILayout.Button("Get-Present-Row", ui_opt))
+        {
+            int len = CXEntityPresentation.length;
+            ui_rst = "\npresent table line cnt: " + len;
+            for (int i = 0; i < 20; i++)
+            {
+                var rst = CXEntityPresentation.GetRow(i);
+                ui_rst += "\nuid:" + rst.UID + " name:" + rst.Name + " pref: " + rst.Prefab + " ani: " + rst.AnimLocation;
+                for (int j = 0, max = rst.Hit_f.Length; j < max; j++)
+                {
+                    Debug.Log(rst.Hit_f[j]);
+                }
+            }
+        }
+        GUILayout.EndVertical();
+    }
+
+
+    private void NativeGUI()
+    {
         GUILayout.BeginVertical();
         if (GUILayout.Button("Cal-Add", ui_opt))
         {
@@ -156,51 +267,34 @@ public class TestCPP : MonoBehaviour
             ui_rst = "native parse json finish!";
             XDebug.Log(ui_rst);
         }
-        if (GUILayout.Button("Get-Qte-Row", ui_opt))
+        if (GUILayout.Button("Native-Patch", ui_opt))
         {
-            int len = CQteStatusList.length;
-            ui_rst = "\nqte status list table line cnt: " + len + "\n";
-            for (int i = 0; i < 26; i++)
-            {
-                var rst = CQteStatusList.GetRow(i);
-                ui_rst += string.Format("\nvalue:{0,-4} name:{1,-20} comment:{2,-30}", rst.Value, rst.Name, rst.Comment);
-            }
-        }
-        if (GUILayout.Button("Get-Suit-Row", ui_opt))
-        {
-            int len = CEquipSuit.length;
-            ui_rst = "\nequi suit table line cnt: " + len + "\n";
-            for (int i = 0; i < 26; i++)
-            {
-                var rst = CEquipSuit.GetRow(i);
-                ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + " level:" + rst.Level + " profid:" + rst.ProfID + " isCreate:" + rst.IsCreateShow + " effect2: " + rst.Effect2[0];
-            }
-        }
-        if (GUILayout.Button("Get-Statics-Row", ui_opt))
-        {
-            int len = CXEntityStatistics.length;
-            ui_rst = "\nequi statics table line cnt: " + len + "\n";
-            for (int i = 0; i < 26; i++)
-            {
-                var rst = CXEntityStatistics.GetRow(i);
-                ui_rst += "\nuid:" + rst.UID + " name:" + rst.Name + " preid:" + rst.PresentID + " type:" + rst.Type;
-            }
+            string old = Application.streamingAssetsPath + "/Patch/old.txt";
+            string diff = Application.streamingAssetsPath + "/Patch/diff.patch";
+            string newf = Application.streamingAssetsPath + "/Patch/new.txt";
+            XDebug.Log(old + " " + diff + " " + newf);
+            iPatch(old, diff, newf);
+            XDebug.Log("patch finish");
         }
         if (GUILayout.Button("Native-Start-Game", ui_opt))
         {
             m_tick = true;
+            ui_rst = "start gamecore ";
             iStartCore();
         }
         if (GUILayout.Button("Native-Stop-Game", ui_opt))
         {
             m_tick = false;
+            ui_rst = "stop gamecore";
             iStopCore();
-            
+        }
+        if (GUILayout.Button("Native-Tick-Game", ui_opt))
+        {
+            m_tick = false;
+            ui_rst = "tick gamecore";
+            iTickCore(Time.deltaTime);
         }
         GUILayout.EndVertical();
-        GUILayout.Space(50);
-        GUILayout.TextArea(ui_rst, ui_sty, ui_op2);
-        GUILayout.EndHorizontal();
     }
     
 }

@@ -85,13 +85,13 @@ extern "C"
 		return equipsuit->GetLength();
 	}
 
-	void iGetEquipSuitRow(int suitid,EquipSuitRow* row)
+	void iGetEquipSuitRow(int id,EquipSuitRow* row)
 	{
 		if(equipsuit==NULL)
 		{
 			equipsuit = new EquipSuit();
 		}
-		equipsuit->GetRow(suitid,row);
+		equipsuit->GetRow(id,row);
 	}
 
 	void iGetEquipSuitRowByID(uint id, EquipSuitRow* row)

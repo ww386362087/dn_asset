@@ -87,13 +87,13 @@ extern "C"
 		return defaultequip->GetLength();
 	}
 
-	void iGetDefaultEquipRow(int suitid,DefaultEquipRow* row)
+	void iGetDefaultEquipRow(int id,DefaultEquipRow* row)
 	{
 		if(defaultequip==NULL)
 		{
 			defaultequip = new DefaultEquip();
 		}
-		defaultequip->GetRow(suitid,row);
+		defaultequip->GetRow(id,row);
 	}
 
 	void iGetDefaultEquipRowByID(uint id, DefaultEquipRow* row)

@@ -74,20 +74,20 @@ namespace GameCore {
 			string freeze;
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
 			string freezefx;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			string[] hit_f;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			string[] hit_l;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			string[] hit_r;
+			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+			byte[] hit_f;
+			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+			byte[] hit_l;
+			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+			byte[] hit_r;
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
 			float[] hitbackoffsettimescale;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			string[] hitfly;
+			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+			byte[] hitfly;
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
 			float[] hitflyoffsettimescale;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			string[] hit_roll;
+			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+			byte[] hit_roll;
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
 			float[] hitrolloffsettimescale;
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
@@ -101,8 +101,8 @@ namespace GameCore {
 			string death;
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
 			string deathfx;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			string[] hitcurves;
+			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+			byte[] hitcurves;
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
 			string deathcurve;
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
@@ -115,8 +115,8 @@ namespace GameCore {
 			string aaaa;
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
 			string aaaaa;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			string[] otherskills;
+			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+			byte[] otherskills;
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
 			string skillnum;
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
@@ -185,13 +185,13 @@ namespace GameCore {
 
 			public float BoundRadius { get { return boundradius; } }
 
-			float[] Boundradiusoffset { 
+			public float[] Boundradiusoffset { 
 				get { 
 					if (boundradiusoffset.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = boundradiusoffset.Length - 1; i >= 0; i--)
 					{
-						if (boundradiusoffset[i] != -1) list.Add(boundradiusoffset[i]);
+						if (boundradiusoffset[i] != 0) list.Add(boundradiusoffset[i]);
 					}
 					boundradiusoffset = list.ToArray();
 					}
@@ -245,55 +245,58 @@ namespace GameCore {
 
 			public string FreezeFx { get { return freezefx; } }
 
-			string[] Hit_f { 
+			public string[] Hit_f { 
 				get { 
-					if (hit_f.Length == 16) {
-					List<string> list = new List<string>();
-					for (int i = hit_f.Length - 1; i >= 0; i--)
+					int ptr = 0;
+					string[] ss = new string[16];
+					for (int i = 0; i < 16; i++)
 					{
-						if (hit_f[i] != "-1") list.Add(hit_f[i]);
+						byte[] bytes = new byte[64];
+						System.Array.Copy(hit_f, ptr, bytes, 0, 64);
+						ss[i] = System.Text.Encoding.Default.GetString(bytes);
+						ptr += 64;
 					}
-					hit_f = list.ToArray();
-					}
-					 return hit_f;
+					return ss;
 				}
 			}
 
-			string[] Hit_l { 
+			public string[] Hit_l { 
 				get { 
-					if (hit_l.Length == 16) {
-					List<string> list = new List<string>();
-					for (int i = hit_l.Length - 1; i >= 0; i--)
+					int ptr = 0;
+					string[] ss = new string[16];
+					for (int i = 0; i < 16; i++)
 					{
-						if (hit_l[i] != "-1") list.Add(hit_l[i]);
+						byte[] bytes = new byte[64];
+						System.Array.Copy(hit_f, ptr, bytes, 0, 64);
+						ss[i] = System.Text.Encoding.Default.GetString(bytes);
+						ptr += 64;
 					}
-					hit_l = list.ToArray();
-					}
-					 return hit_l;
+					return ss;
 				}
 			}
 
-			string[] Hit_r { 
+			public string[] Hit_r { 
 				get { 
-					if (hit_r.Length == 16) {
-					List<string> list = new List<string>();
-					for (int i = hit_r.Length - 1; i >= 0; i--)
+					int ptr = 0;
+					string[] ss = new string[16];
+					for (int i = 0; i < 16; i++)
 					{
-						if (hit_r[i] != "-1") list.Add(hit_r[i]);
+						byte[] bytes = new byte[64];
+						System.Array.Copy(hit_f, ptr, bytes, 0, 64);
+						ss[i] = System.Text.Encoding.Default.GetString(bytes);
+						ptr += 64;
 					}
-					hit_r = list.ToArray();
-					}
-					 return hit_r;
+					return ss;
 				}
 			}
 
-			float[] Hitbackoffsettimescale { 
+			public float[] Hitbackoffsettimescale { 
 				get { 
 					if (hitbackoffsettimescale.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = hitbackoffsettimescale.Length - 1; i >= 0; i--)
 					{
-						if (hitbackoffsettimescale[i] != -1) list.Add(hitbackoffsettimescale[i]);
+						if (hitbackoffsettimescale[i] != 0) list.Add(hitbackoffsettimescale[i]);
 					}
 					hitbackoffsettimescale = list.ToArray();
 					}
@@ -301,27 +304,28 @@ namespace GameCore {
 				}
 			}
 
-			string[] Hitfly { 
+			public string[] Hitfly { 
 				get { 
-					if (hitfly.Length == 16) {
-					List<string> list = new List<string>();
-					for (int i = hitfly.Length - 1; i >= 0; i--)
+					int ptr = 0;
+					string[] ss = new string[16];
+					for (int i = 0; i < 16; i++)
 					{
-						if (hitfly[i] != "-1") list.Add(hitfly[i]);
+						byte[] bytes = new byte[64];
+						System.Array.Copy(hit_f, ptr, bytes, 0, 64);
+						ss[i] = System.Text.Encoding.Default.GetString(bytes);
+						ptr += 64;
 					}
-					hitfly = list.ToArray();
-					}
-					 return hitfly;
+					return ss;
 				}
 			}
 
-			float[] Hitflyoffsettimescale { 
+			public float[] Hitflyoffsettimescale { 
 				get { 
 					if (hitflyoffsettimescale.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = hitflyoffsettimescale.Length - 1; i >= 0; i--)
 					{
-						if (hitflyoffsettimescale[i] != -1) list.Add(hitflyoffsettimescale[i]);
+						if (hitflyoffsettimescale[i] != 0) list.Add(hitflyoffsettimescale[i]);
 					}
 					hitflyoffsettimescale = list.ToArray();
 					}
@@ -329,27 +333,28 @@ namespace GameCore {
 				}
 			}
 
-			string[] Hit_roll { 
+			public string[] Hit_roll { 
 				get { 
-					if (hit_roll.Length == 16) {
-					List<string> list = new List<string>();
-					for (int i = hit_roll.Length - 1; i >= 0; i--)
+					int ptr = 0;
+					string[] ss = new string[16];
+					for (int i = 0; i < 16; i++)
 					{
-						if (hit_roll[i] != "-1") list.Add(hit_roll[i]);
+						byte[] bytes = new byte[64];
+						System.Array.Copy(hit_f, ptr, bytes, 0, 64);
+						ss[i] = System.Text.Encoding.Default.GetString(bytes);
+						ptr += 64;
 					}
-					hit_roll = list.ToArray();
-					}
-					 return hit_roll;
+					return ss;
 				}
 			}
 
-			float[] Hitrolloffsettimescale { 
+			public float[] Hitrolloffsettimescale { 
 				get { 
 					if (hitrolloffsettimescale.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = hitrolloffsettimescale.Length - 1; i >= 0; i--)
 					{
-						if (hitrolloffsettimescale[i] != -1) list.Add(hitrolloffsettimescale[i]);
+						if (hitrolloffsettimescale[i] != 0) list.Add(hitrolloffsettimescale[i]);
 					}
 					hitrolloffsettimescale = list.ToArray();
 					}
@@ -357,13 +362,13 @@ namespace GameCore {
 				}
 			}
 
-			float[] Hitback_recover { 
+			public float[] Hitback_recover { 
 				get { 
 					if (hitback_recover.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = hitback_recover.Length - 1; i >= 0; i--)
 					{
-						if (hitback_recover[i] != -1) list.Add(hitback_recover[i]);
+						if (hitback_recover[i] != 0) list.Add(hitback_recover[i]);
 					}
 					hitback_recover = list.ToArray();
 					}
@@ -371,13 +376,13 @@ namespace GameCore {
 				}
 			}
 
-			float[] Hitfly_bounce_getup { 
+			public float[] Hitfly_bounce_getup { 
 				get { 
 					if (hitfly_bounce_getup.Length == 16) {
 					List<float> list = new List<float>();
 					for (int i = hitfly_bounce_getup.Length - 1; i >= 0; i--)
 					{
-						if (hitfly_bounce_getup[i] != -1) list.Add(hitfly_bounce_getup[i]);
+						if (hitfly_bounce_getup[i] != 0) list.Add(hitfly_bounce_getup[i]);
 					}
 					hitfly_bounce_getup = list.ToArray();
 					}
@@ -393,17 +398,18 @@ namespace GameCore {
 
 			public string DeathFx { get { return deathfx; } }
 
-			string[] Hitcurves { 
+			public string[] Hitcurves { 
 				get { 
-					if (hitcurves.Length == 16) {
-					List<string> list = new List<string>();
-					for (int i = hitcurves.Length - 1; i >= 0; i--)
+					int ptr = 0;
+					string[] ss = new string[16];
+					for (int i = 0; i < 16; i++)
 					{
-						if (hitcurves[i] != "-1") list.Add(hitcurves[i]);
+						byte[] bytes = new byte[64];
+						System.Array.Copy(hit_f, ptr, bytes, 0, 64);
+						ss[i] = System.Text.Encoding.Default.GetString(bytes);
+						ptr += 64;
 					}
-					hitcurves = list.ToArray();
-					}
-					 return hitcurves;
+					return ss;
 				}
 			}
 
@@ -419,17 +425,18 @@ namespace GameCore {
 
 			public string AAAAA { get { return aaaaa; } }
 
-			string[] Otherskills { 
+			public string[] Otherskills { 
 				get { 
-					if (otherskills.Length == 16) {
-					List<string> list = new List<string>();
-					for (int i = otherskills.Length - 1; i >= 0; i--)
+					int ptr = 0;
+					string[] ss = new string[16];
+					for (int i = 0; i < 16; i++)
 					{
-						if (otherskills[i] != "-1") list.Add(otherskills[i]);
+						byte[] bytes = new byte[64];
+						System.Array.Copy(hit_f, ptr, bytes, 0, 64);
+						ss[i] = System.Text.Encoding.Default.GetString(bytes);
+						ptr += 64;
 					}
-					otherskills = list.ToArray();
-					}
-					 return otherskills;
+					return ss;
 				}
 			}
 

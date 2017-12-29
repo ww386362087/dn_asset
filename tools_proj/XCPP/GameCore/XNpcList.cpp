@@ -85,13 +85,13 @@ extern "C"
 		return xnpclist->GetLength();
 	}
 
-	void iGetXNpcListRow(int suitid,XNpcListRow* row)
+	void iGetXNpcListRow(int id,XNpcListRow* row)
 	{
 		if(xnpclist==NULL)
 		{
 			xnpclist = new XNpcList();
 		}
-		xnpclist->GetRow(suitid,row);
+		xnpclist->GetRow(id,row);
 	}
 
 	void iGetXNpcListRowByID(uint id, XNpcListRow* row)
