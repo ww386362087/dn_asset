@@ -26,6 +26,7 @@ AIBase* AIFactory::MakeRuntime(AITaskData* data, AITree* tree)
 	{
 		rst = new AIInterval();
 	}
+	
 	if (rst != NULL) 
 	{
 		rst->SetTree(tree);

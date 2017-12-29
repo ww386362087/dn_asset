@@ -151,6 +151,9 @@
     <ClCompile Include="XStateMachine.cpp">
       <Filter>state</Filter>
     </ClCompile>
+    <ClCompile Include="AIRuntimeRotateToTarget.cpp">
+      <Filter>ai\runtime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -335,6 +338,9 @@
     </ClInclude>
     <ClInclude Include="CommandDef.h">
       <Filter>common\def</Filter>
+    </ClInclude>
+    <ClInclude Include="AIRuntimeRotateToTarget.h">
+      <Filter>ai\runtime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

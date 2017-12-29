@@ -61,6 +61,7 @@ void AIUtil::ParseTask(picojson::object& root, AITaskData& data)
 	data.vars.clear();
 	for (picojson::object::iterator it = root.begin(); it != root.end(); it++)
 	{
+		bool isObj = it->second.is<picojson::object>();
 		if (it->first == Type)
 		{
 			data.type = it->second.get<std::string>();
@@ -77,7 +78,7 @@ void AIUtil::ParseTask(picojson::object& root, AITaskData& data)
 				data.children.push_back(*td);
 			}
 		}
-		else if (it->second.contains("IsShared"))
+		else if (isObj && it->second.contains("IsShared"))
 		{
 			AISharedVar* var = new AISharedVar();
 			picojson::object ox = it->second.get<picojson::object>();

@@ -74,9 +74,7 @@ XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 	o->name = tostring(attr->getid()).c_str();
 	o->transform->position = attr->getAppearPostion();
 	o->transform->rotatiion = attr->getAppearQuaternion();
-	LOG("beg>" + tostring(x->getAttributes()->AiBehavior));
-	//x->Initilize(o, attr);
-	LOG("aft>" + tostring(x->getAttributes()->AiBehavior));
+	x->Initilize(o, attr);
 	uint id = attr->getid();
 	if (!x->IsPlayer()) _dic_entities.insert(std::make_pair(id, x));
 	return x;

@@ -12,6 +12,10 @@ AITree::AITree(void)
 
 AITree::~AITree(void)
 {
+	delete _tree_behaviour;
+	delete _tree_data;
+	_tree_data = NULL;
+	_tree_behaviour = NULL;
 	delete[] composites;
 }
 
@@ -23,11 +27,16 @@ void AITree::Initial(XEntity* e)
 void AITree::EnableBehaviourTree(bool enable)
 {
 	_enable = enable;
+	if (_tree_data == NULL)
+	{
+		_tree_data = new AITreeData();
+	}
 }
 
 bool AITree::SetBehaviourTree(const char* name)
 {
-	 AIUtil::Load(name,*_tree_data);
+	std::string path = UNITY_STREAM_PATH + "AITree/" + tostring(name) + ".txt";
+	AIUtil::Load(path.c_str(), *_tree_data);
 	_tree_behaviour = AIFactory::MakeRuntime(&_tree_data->task, this);
 	return true;
 }

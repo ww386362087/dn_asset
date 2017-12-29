@@ -196,7 +196,7 @@ void main()
 			jump = true;
 			break;
 		case 'j':
-			json("json.txt");
+			json("PlayerAutoFight.txt");
 			cout << endl << endl;
 			break;
 		case 'p':

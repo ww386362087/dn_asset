@@ -53,18 +53,19 @@ extern "C"
 		LOG("READ JSON START");
 		std::string json = readFile(file);
 
-		/*picojson使用参照: 
+
+		/*picojson使用参照:
 		 *	http://www.sokoide.com/wp/2015/07/26/header-only-cpp-json-library-picojson/
 		 *	https://github.com/kazuho/picojson
 		 */
 		picojson::value v;
 		std::string err = picojson::parse(v, json);
-	    if(err.size())
+		if (err.size())
 		{
 			ERR(err);
 			return;
 		}
-		
+
 		picojson::object& o = v.get<picojson::object>();
 		std::string sub = o["data_subtype"].get<std::string>();
 		std::string task = o["task_type"].get<std::string>();
@@ -79,13 +80,13 @@ extern "C"
 			double imageid = item["image_id"].get<double>();
 			double questid = item["question_id"].get<double>();
 
-			double rt = imageid-questid;
+			double rt = imageid - questid;
 			std::string que = item["question"].get<std::string>();
-			LOG("question:"+que);
-			LOG("imageid: "+tostring(imageid));
-			LOG("questid: "+tostring(questid));
-			LOG("sub"+tostring(rt));
-		 }
+			LOG("question:" + que);
+			LOG("imageid: " + tostring(imageid));
+			LOG("questid: " + tostring(questid));
+			LOG("sub" + tostring(rt));
+		}
 	}
 
 	void iVector()

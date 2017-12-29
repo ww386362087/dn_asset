@@ -5,10 +5,11 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using GameCore;
+using System.Text;
 
 public class TestCPP : MonoBehaviour
 {
-    
+
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
@@ -21,9 +22,9 @@ public class TestCPP : MonoBehaviour
 #else
     [DllImport("GameCore")]
 #endif
-    public static extern void iInitial(string stream,string persist);
+    public static extern void iInitial(string stream, string persist);
 
-    
+
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
@@ -47,13 +48,13 @@ public class TestCPP : MonoBehaviour
 #endif
     public static extern int iSub(IntPtr x, IntPtr y);
 
-    
+
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
     [DllImport("GameCore")]
 #endif
-    public static extern void iPatch(string oldf,string diff,string newf);
+    public static extern void iPatch(string oldf, string diff, string newf);
 
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
@@ -77,21 +78,23 @@ public class TestCPP : MonoBehaviour
     public static extern void iTickCore(float delta);
 
     //c++的回调指令 最多支持256个指令
-    const byte CLog   = 76;//'L'
-    const byte CWarn  = 87;//'W'
-    const byte CErr = 69;//'E'
-    const byte CLoad  = 71;//'G'
-    const byte CUnLo =  85;//'U'
+    const byte CLtog = 76;//'L'
+    const byte CWarn = 87;//'W'
+    const byte CEror = 69;//'E'
+    const byte CLoad = 71;//'G'
+    const byte CUnLo = 85;//'U'
 
     public delegate void CppDelegate(byte type, IntPtr p);
-    
+
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(120), GUILayout.Height(40) };
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
     string ui_rst = string.Empty;
+    StringBuilder ui_sb = new StringBuilder();
     bool m_tick = true;
     float m_tick_time = 0f;
     float spf = 0.033f;//30fps
+
     public void Start()
     {
         ui_sty.normal.textColor = Color.red;
@@ -119,9 +122,9 @@ public class TestCPP : MonoBehaviour
         string command = Marshal.PtrToStringAnsi(ptr);
         switch (t)
         {
-            case CLog: XDebug.TCLog(command); break;
+            case CLtog: XDebug.TCLog(command); break;
             case CWarn: XDebug.TCWarn(command); break;
-            case CErr: XDebug.TCError(command); break;
+            case CEror: XDebug.TCError(command); break;
             case CLoad: XDebug.TCLog("load object: " + command); break;
             case CUnLo: XDebug.TCLog("unload: " + command); break;
             default:
@@ -141,7 +144,6 @@ public class TestCPP : MonoBehaviour
         GUILayout.EndHorizontal();
     }
     
-    
     private void TableGUI()
     {
         GUILayout.BeginVertical();
@@ -158,86 +160,98 @@ public class TestCPP : MonoBehaviour
         if (GUILayout.Button("Get-Suit-Row", ui_opt))
         {
             int len = CEquipSuit.length;
-            ui_rst = "\nequi suit table line cnt: " + len;
+            ui_sb.Length = 0;
+            ui_sb.AppendLine("table line cnt: " + len);
             for (int i = 0; i < 26; i++)
             {
                 var rst = CEquipSuit.GetRow(i);
-                ui_rst += "\nsuitid:" + rst.SuitID + " name:" + rst.SuitName + " level:" + rst.Level + " effect2: " + rst.Effect2[0];
+                ui_sb.AppendLine("suitid:" + rst.SuitID + " name:" + rst.SuitName + " level:" + rst.Level + " effect2: " + rst.Effect2[0]);
             }
+            ui_rst = ui_sb.ToString();
         }
         if (GUILayout.Button("Get-Statics-Row", ui_opt))
         {
             int len = CXEntityStatistics.length;
-            ui_rst = "\nstatics table line cnt: " + len;
+            ui_sb.Length = 0;
+            ui_sb.AppendLine("table line cnt: " + len);
             for (int i = 0; i < 26; i++)
             {
                 var rst = CXEntityStatistics.GetRow(i);
-                ui_rst += "\nuid:" + rst.UID + " name:" + rst.Name + " preid:" + rst.PresentID;
+                ui_sb.AppendLine("uid:" + rst.UID + " name:" + rst.Name + " preid:" + rst.PresentID);
             }
+            ui_rst = ui_sb.ToString();
         }
         if (GUILayout.Button("Get-Fashion-Row", ui_opt))
         {
             int len = CFashionList.length;
-            ui_rst = "\nfashionlist table line cnt: " + len;
+            ui_sb.Length = 0;
+            ui_sb.AppendLine("table line cnt: " + len);
             for (int i = 0; i < 12; i++)
             {
                 var rst = CFashionList.GetRow(i);
-                ui_rst += "\nuid:" + rst.ItemID + " name:" + rst.ItemName + " pos:" + rst.EquipPos;
+                ui_sb.AppendLine("uid:" + rst.ItemID + " name:" + rst.ItemName + " pos:" + rst.EquipPos);
             }
+            ui_rst = ui_sb.ToString();
         }
         if (GUILayout.Button("Get-Fasuit-Row", ui_opt))
         {
             int len = CFashionSuit.length;
-            ui_rst = "\ntable line cnt: " + len;
+            ui_sb.Length = 0;
+            ui_sb.AppendLine("table line cnt: " + len);
             for (int i = 0; i < 12; i++)
             {
                 var rst = CFashionSuit.GetRow(i);
-                ui_rst += "\nuid:" + rst.SuitID + " name:" + rst.SuitName + " preid:" + rst.SuitIcon;
+                ui_sb.AppendLine("uid:" + rst.SuitID + " name:" + rst.SuitName + " preid:" + rst.SuitIcon);
             }
+            ui_rst = ui_sb.ToString();
         }
         if (GUILayout.Button("Get-Defaut-Row", ui_opt))
         {
             int len = CDefaultEquip.length;
-            ui_rst = "\ntable line cnt: " + len;
+            ui_sb.Length = 0;
+            ui_sb.AppendLine("table line cnt: " + len);
             for (int i = 0; i < 12; i++)
             {
                 var rst = CDefaultEquip.GetRow(i);
-                ui_rst += "\nuid:" + rst.ProfID + " hair:" + rst.Hair + " face:" + rst.Face;
+                ui_sb.AppendLine("uid:" + rst.ProfID + " hair:" + rst.Hair + " face:" + rst.Face);
             }
+            ui_rst = ui_sb.ToString();
         }
         if (GUILayout.Button("Get-NPCList-Row", ui_opt))
         {
             int len = CXNpcList.length;
-            ui_rst = "\ntable line cnt: " + len;
+            ui_sb.Length = 0;
+            ui_sb.AppendLine("table line cnt: " + len);
             for (int i = 0; i < 12; i++)
             {
                 var rst = CXNpcList.GetRow(i);
-                ui_rst += "\nuid:" + rst.NPCID + " name:" + rst.NPCName + " type:" + rst.NPCType;
+                ui_sb.AppendLine("uid:" + rst.NPCID + " name:" + rst.NPCName + " type:" + rst.NPCType);
             }
+            ui_rst = ui_sb.ToString();
         }
         if (GUILayout.Button("Get-Scene-Row", ui_opt))
         {
             int len = CSceneList.length;
-            ui_rst = "\ntable line cnt: " + len;
+            ui_sb.Length = 0;
+            ui_sb.AppendLine("table line cnt: " + len);
             for (int i = 0; i < 12; i++)
             {
                 var rst = CSceneList.GetRow(i);
-                ui_rst += "\nuid:" + rst.SceneID + " path:" + rst.ScenePath;
+                ui_sb.AppendLine("uid:" + rst.SceneID + " path:" + rst.ScenePath + " icon:" + rst.UIIcon);
             }
+            ui_rst = ui_sb.ToString();
         }
         if (GUILayout.Button("Get-Present-Row", ui_opt))
         {
             int len = CXEntityPresentation.length;
-            ui_rst = "\npresent table line cnt: " + len;
-            for (int i = 0; i < 20; i++)
+            ui_sb.Length = 0;
+            ui_sb.AppendLine("present table line cnt: " + len);
+            for (int i = 0; i < 24; i++)
             {
                 var rst = CXEntityPresentation.GetRow(i);
-                ui_rst += "\nuid:" + rst.UID + " name:" + rst.Name + " pref: " + rst.Prefab + " ani: " + rst.AnimLocation;
-                for (int j = 0, max = rst.Hit_f.Length; j < max; j++)
-                {
-                    Debug.Log(rst.Hit_f[j]);
-                }
+                ui_sb.AppendLine("uid:" + rst.UID + " name:" + rst.Name + " pref: " + rst.Prefab + " ani: " + rst.AnimLocation);
             }
+            ui_rst = ui_sb.ToString();
         }
         GUILayout.EndVertical();
     }
@@ -296,7 +310,7 @@ public class TestCPP : MonoBehaviour
         }
         GUILayout.EndVertical();
     }
-    
+
 }
 
 #endif

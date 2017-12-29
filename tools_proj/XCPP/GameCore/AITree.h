@@ -3,6 +3,7 @@
 
 #include "AITreeData.h"
 #include <unordered_map>
+#include <string>
 
 class  GameObject;
 class AIBase;
