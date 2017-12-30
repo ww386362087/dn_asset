@@ -67,11 +67,10 @@ public class AICppMaker
         
         if (task.vars != null)
         {
-            //Init(AITaskData* data)
             string init_str = string.Empty;
             for (int i = 0, max = task.vars.Count; i < max; i++)
             {
-                string val = "data->vars[" + i + "]->val";
+                string val = "data->vars[\"" + task.vars[i].name + "\"]->val";
                 string op = GetOpByType(task.vars[i].type, val);
                 if (!string.IsNullOrEmpty(op))
                 {
@@ -117,9 +116,8 @@ public class AICppMaker
 
         File.WriteAllText(dest_c, ai_n_c);
     }
-
-    [MenuItem("Tools/AI-CheckFactoryCode")]
-    private static void GenerateFactoryCode()
+    
+    public static void GenerateFactoryCode()
     {
         var dirr = Path.GetDirectoryName(Application.dataPath);
         path_dest = Path.Combine(dirr, "tools_proj/XCPP/GameCore/runtime");
@@ -134,7 +132,6 @@ public class AICppMaker
         {
             string name = files[i].Name;
             string tname = name.Substring(9, name.Length - 11);
-            XDebug.Log("name: " + name + " tname: " + tname);
             if (!txt.Contains(name))
             {
                 str_h += "\n#include \"runtime\\" + name + "\"";

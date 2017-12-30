@@ -4,7 +4,7 @@
 void AIRuntimeValueDistance::Init(AITaskData* data)
 {
 	AIBase::Init(data);
-	floatmAIArgMaxDistance = data->vars[1]->val.get<double>(); 
+	floatmAIArgMaxDistance = data->vars["floatmAIArgMaxDistance"]->val.get<double>(); 
 	
 }
 

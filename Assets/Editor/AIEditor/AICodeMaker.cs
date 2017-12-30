@@ -38,6 +38,7 @@ public class AICodeMaker
             Parse(content, name);
         }
         GenerateFactoryCode();
+        AICppMaker.GenerateFactoryCode();
         EditorUtility.ClearProgressBar();
         AssetDatabase.Refresh();
         EditorUtility.DisplayDialog("AI Auto Code", "AI Code Make Finish!", "OK");

@@ -19,7 +19,6 @@ public:
 	static void ParseTask(picojson::object& root, AITaskData* data);
 	static void ParseSharedVar(std::string key, picojson::object& obj, AISharedVar* var,bool shared);
 	static void ParseCustomVar(std::string key, object val, AIVar* var);
-	static std::string TransfType(object type);
 
 private:
 	static std::string Children; 

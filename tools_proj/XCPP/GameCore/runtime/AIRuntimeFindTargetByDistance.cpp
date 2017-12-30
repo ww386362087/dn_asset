@@ -4,8 +4,8 @@
 void AIRuntimeFindTargetByDistance::Init(AITaskData* data)
 {
 	AIBase::Init(data);
-	floatmAIArgDistance = data->vars[0]->val.get<double>(); 
-	mAIArgAngle = data->vars[1]->val.get<double>(); 
+	floatmAIArgDistance = data->vars["floatmAIArgDistance"]->val.get<double>(); 
+	mAIArgAngle = data->vars["mAIArgAngle"]->val.get<double>(); 
 	
 }
 

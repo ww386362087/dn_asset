@@ -4,7 +4,7 @@
 void AIRuntimeStatusRandom::Init(AITaskData* data)
 {
 	AIBase::Init(data);
-	mAIArgProb = data->vars[0]->val.get<double>(); 
+	mAIArgProb = data->vars["mAIArgProb"]->val.get<double>(); 
 	
 }
 

@@ -4,7 +4,7 @@
 void AIRuntimeXAIActionSkill::Init(AITaskData* data)
 {
 	AIBase::Init(data);
-	mAIArgSkillScript = data->vars[0]->val.get<std::string>(); 
+	mAIArgSkillScript = data->vars["mAIArgSkillScript"]->val.get<std::string>(); 
 	
 }
 

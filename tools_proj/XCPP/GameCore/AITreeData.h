@@ -28,7 +28,7 @@ public:
 class AIVar
 {
 public:
-	std::string type;
+	//std::string type; // var's type is not need to use
 	std::string name;
 	object val;
 };
@@ -47,7 +47,7 @@ class AITaskData
 public:
 	Mode mode;
 	std::string type;
-	std::vector<AIVar*> vars;
+	std::unordered_map<std::string,AIVar*> vars;
 	std::vector<AITaskData*> children;
 };
 

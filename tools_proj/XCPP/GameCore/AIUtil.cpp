@@ -62,13 +62,13 @@ void AIUtil::ParseTask(picojson::object& root, AITaskData* data)
 	data->vars.clear();
 	for (picojson::object::iterator it = root.begin(); it != root.end(); it++)
 	{
-		bool isObj = it->second.is<picojson::object>();
+		bool is_obj = it->second.is<picojson::object>();
 		if (it->first == Type)
 		{
 			data->type = it->second.get<std::string>();
 			data->mode = Type2Mode(data->type);
 		}
-		else if(it->first == Children)
+		else if (it->first == Children)
 		{
 			picojson::array ar = it->second.get<picojson::array>();
 			for (picojson::array::iterator iat = ar.begin(); iat != ar.end(); iat++)
@@ -79,19 +79,20 @@ void AIUtil::ParseTask(picojson::object& root, AITaskData* data)
 				data->children.push_back(td);
 			}
 		}
-		else if (isObj)  //sharedvar
+		else if (is_obj)  //sharedvar
 		{
 			bool isShared = it->second.contains("IsShared");
 			AISharedVar* var = new AISharedVar();
 			picojson::object ox = it->second.get<picojson::object>();
 			ParseSharedVar(it->first, ox, var, isShared);
-			data->vars.push_back(var);
+			data->vars.insert(std::make_pair(it->first, var));
 		}
 		else
 		{
-			AIVar* var = new AIVar();
-			ParseCustomVar(it->first, it->second, var);
-			data->vars.push_back(var);
+			AIVar* v = new AIVar();
+			v->name = it->first;
+			v->val = it->second;
+			data->vars.insert(std::make_pair(it->first, v));
 		}
 	}
 }
@@ -101,40 +102,19 @@ void AIUtil::ParseSharedVar(std::string key, picojson::object& obj, AISharedVar*
 	var->name = key;
 	var->bindName = obj["Name"].get<std::string>();
 	var->isShared = shared ? obj["IsShared"].get<bool>() : false;
-	var->type = TransfType(obj["Type"]);
 	for (picojson::object::iterator it = obj.begin(); it != obj.end(); it++)
 	{
-		rsize_t t = it->first.find("Value");//contains value
-		if (t < 50) 
+		rsize_t t = it->first.find("Value");
+		if (t < 50) //contains value
 		{
 			var->val = it->second;
-			if (var->type == "float")
-			{
-				PRINT <<"float:"<< var->val.get<double>();
-			}
 		}
 	}
 }
 
 void AIUtil::ParseCustomVar(std::string key, object val, AIVar* var)
 {
-	std::string arr[] = { "float", "Int32", "bool", "string", "Vector3", "Vector2", "Vector4", "GameObject", "Transform" };
-	for (int i = 0; i < 9; i++)
-	{
-		size_t t = key.find(arr[i]);
-		if (t == 0) // startwith
-		{
-			AIVar* v = new AIVar();
-			v->type = arr[i];
-			v->name = key;
-			v->val = val;
-			break;
-		}
-	}
+	AIVar* v = new AIVar();
+	v->name = key;
+	v->val = val;
 }
-
-std::string AIUtil::TransfType(object type)
-{
-	return type.get<std::string>();
-}
-
