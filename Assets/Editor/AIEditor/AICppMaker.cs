@@ -139,16 +139,18 @@ public class AICppMaker
             {
                 str_h += "\n#include \"runtime\\" + name + "\"";
                 str_c += "\n\telse if (data->type == \"" + tname + "\")";
+                str_c += "\n\t{";
                 str_c += "\n\t\trst = new AIRuntime" + tname + "();";
                 str_c += "\n\t}";
             }
         }
         string head_h = "AIFactory.h";
         int index_h = txt.IndexOf(head_h) + head_h.Length + 2;
-        txt.Insert(index_h, str_h);
+        txt = txt.Insert(index_h, str_h);
+
         string cont_h = "if (rst != NULL)";
         int index_c = txt.IndexOf(cont_h) - 2;
-        txt.Insert(index_c, str_c);
+        txt = txt.Insert(index_c, str_c);
         File.WriteAllText(path_fact, txt);
     }
 
