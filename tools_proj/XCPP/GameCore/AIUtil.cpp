@@ -104,7 +104,7 @@ void AIUtil::ParseSharedVar(std::string key, picojson::object& obj, AISharedVar*
 	var->isShared = shared ? obj["IsShared"].get<bool>() : false;
 	for (picojson::object::iterator it = obj.begin(); it != obj.end(); it++)
 	{
-		rsize_t t = it->first.find("Value");
+		size_t t = it->first.find("Value");
 		if (t < 50) //contains value
 		{
 			var->val = it->second;
