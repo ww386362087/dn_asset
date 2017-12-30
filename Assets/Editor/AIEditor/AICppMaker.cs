@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AI.Runtime;
 using AI;
+using UnityEditor;
 
 /// <summary>
 /// author: alexpeng
@@ -14,7 +15,7 @@ using AI;
 public class AICppMaker
 {
 
-    static string path_ori_h, path_ori_c, path_dest;
+    static string path_ori_h, path_ori_c, path_dest,path_fact;
     static string ai_h, ai_c;
 
     public static void GenerateTaskCode(AIRuntimeTaskData task)
@@ -33,6 +34,7 @@ public class AICppMaker
             path_ori_h = Path.Combine(dir, "Shell/AITemplate.h");
             path_ori_c = Path.Combine(dir, "Shell/AITemplate.cpp");
             path_dest = Path.Combine(dir, "tools_proj/XCPP/GameCore/runtime");
+            path_fact = Path.Combine(dir, "tools_proj/XCPP/GameCore/AIFactory.cpp");
             ai_h = File.ReadAllText(path_ori_h);
             ai_c = File.ReadAllText(path_ori_c);
         }
@@ -116,12 +118,39 @@ public class AICppMaker
         File.WriteAllText(dest_c, ai_n_c);
     }
 
-
+    [MenuItem("Tools/AI-CheckFactoryCode")]
     private static void GenerateFactoryCode()
     {
+        var dirr = Path.GetDirectoryName(Application.dataPath);
+        path_dest = Path.Combine(dirr, "tools_proj/XCPP/GameCore/runtime");
+        path_fact = Path.Combine(dirr, "tools_proj/XCPP/GameCore/AIFactory.cpp");
+
+        string txt = File.ReadAllText(path_fact);
+        DirectoryInfo dir = new DirectoryInfo(path_dest);
+
+        string str_h = string.Empty, str_c = string.Empty;
+        FileInfo[] files = dir.GetFiles("*.h");
+        for (int i = 0, max = files.Length; i < max; i++)
+        {
+            string name = files[i].Name;
+            string tname = name.Substring(9, name.Length - 11);
+            XDebug.Log("name: " + name + " tname: " + tname);
+            if (!txt.Contains(name))
+            {
+                str_h += "\n#include \"runtime\\" + name + "\"";
+                str_c += "\n\telse if (data->type == \"" + tname + "\")";
+                str_c += "\n\t\trst = new AIRuntime" + tname + "();";
+                str_c += "\n\t}";
+            }
+        }
+        string head_h = "AIFactory.h";
+        int index_h = txt.IndexOf(head_h) + head_h.Length + 2;
+        txt.Insert(index_h, str_h);
+        string cont_h = "if (rst != NULL)";
+        int index_c = txt.IndexOf(cont_h) - 2;
+        txt.Insert(index_c, str_c);
+        File.WriteAllText(path_fact, txt);
     }
-
-
 
     private static string GetTreeVarCode(string type,string bindname)
     {
@@ -181,7 +210,7 @@ public class AICppMaker
             case "GameObject":
             case "Transform":
                 t = string.Empty;
-                XDebug.Log("make cpp code err, gameobject or transform can't initial by editor ");
+                XDebug.LogWarning("make cpp code err, gameobject or transform can't initial by editor ");
                 break;
             default:
                 t = obj + ";";

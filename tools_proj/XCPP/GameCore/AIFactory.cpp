@@ -1,6 +1,5 @@
 #include "AIFactory.h"
 
-
 AIFactory::AIFactory(void)
 {
 }

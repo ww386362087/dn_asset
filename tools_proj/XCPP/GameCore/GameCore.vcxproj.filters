@@ -40,9 +40,6 @@
     <ClCompile Include="Common.cpp">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="patch.c">
-      <Filter>patch</Filter>
-    </ClCompile>
     <ClCompile Include="AIFactory.cpp">
       <Filter>ai</Filter>
     </ClCompile>
@@ -190,6 +187,9 @@
     <ClCompile Include="runtime\AIRuntimeLog.cpp">
       <Filter>ai\runtime</Filter>
     </ClCompile>
+    <ClCompile Include="patch.c">
+      <Filter>plugin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -230,12 +230,6 @@
     </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="patch.h">
-      <Filter>patch</Filter>
-    </ClInclude>
-    <ClInclude Include="patch_types.h">
-      <Filter>patch</Filter>
     </ClInclude>
     <ClInclude Include="AIFactory.h">
       <Filter>ai</Filter>
@@ -414,6 +408,12 @@
     <ClInclude Include="runtime\AIRuntimeLog.h">
       <Filter>ai\runtime</Filter>
     </ClInclude>
+    <ClInclude Include="patch_types.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="patch.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -421,9 +421,6 @@
     </Filter>
     <Filter Include="common">
       <UniqueIdentifier>{c3565040-4f67-468a-86e1-f461f97e3f0e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="patch">
-      <UniqueIdentifier>{dec344fb-4d1f-4ed8-8049-db6a3209dffd}</UniqueIdentifier>
     </Filter>
     <Filter Include="table">
       <UniqueIdentifier>{4307d103-28ef-45d5-82a5-c2ee804387ab}</UniqueIdentifier>

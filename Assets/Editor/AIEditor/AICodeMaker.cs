@@ -22,6 +22,8 @@ public class AICodeMaker
 
     static List<string> maker_list = new List<string>();
 
+
+
     [MenuItem("Tools/AI-MakeRuntimeCode")]
     public static void MakeRuntimeCode()
     {
