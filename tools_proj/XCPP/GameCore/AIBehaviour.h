@@ -22,8 +22,9 @@ class AIBase
 public:
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
+	~AIBase();
 	void SetTree(AITree* tree);
-	Vector3 Obj2Vector3(object obj);
+	Vector3 Obj2Vector(object obj);
 protected:
 	AITree* _tree;
 };
@@ -32,6 +33,7 @@ protected:
 class AISequence:public AIBase
 {
 public:
+	~AISequence();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 private:
@@ -42,6 +44,7 @@ private:
 class AISelector:public AIBase
 {
 public :
+	~AISelector();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 
@@ -53,6 +56,7 @@ private:
 class AIInterval:public AIBase
 {
 public:
+	~AIInterval();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 

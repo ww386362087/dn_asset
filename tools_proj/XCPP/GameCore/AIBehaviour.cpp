@@ -4,12 +4,17 @@ void AIBase::Init(AITaskData* data)
 {
 }
 
+AIBase::~AIBase()
+{
+	delete _tree;
+}
+
 void AIBase::SetTree(AITree* tree)
 {
 	_tree= tree;
 }
 
-Vector3 AIBase::Obj2Vector3(object obj)
+Vector3 AIBase::Obj2Vector(object obj)
 {
 	std::string str = obj.get<std::string>();
 	return Vector3::Parse(str);
@@ -17,6 +22,14 @@ Vector3 AIBase::Obj2Vector3(object obj)
 
 AIStatus AIBase::OnTick() { return Success; }
 
+AISequence::~AISequence()
+{
+	for (size_t i = 0; i < list.size(); i++)
+	{
+		delete list[i];
+	}
+	list.clear();
+}
 
 void AISequence::Init(AITaskData* data)
 {
@@ -48,6 +61,15 @@ AIStatus AISequence::OnTick()
 }
 
 
+AISelector::~AISelector()
+{
+	for (size_t i = 0; i < list.size(); i++)
+	{
+		delete list[i];
+	}
+	list.clear();
+}
+
 void AISelector::Init(AITaskData* data)
 {
 	if (data->children.size()>0)
@@ -78,6 +100,10 @@ AIStatus AISelector::OnTick()
 }
 
 
+AIInterval::~AIInterval()
+{
+	delete node;
+}
 
 void AIInterval::Init(AITaskData* data)
 {

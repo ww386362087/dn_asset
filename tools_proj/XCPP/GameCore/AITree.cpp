@@ -35,7 +35,7 @@ void AITree::EnableBehaviourTree(bool enable)
 
 bool AITree::SetBehaviourTree(const char* name)
 {
-	std::string path = UNITY_STREAM_PATH + "AITree/" + "PlayerAutoFight"/*tostring(name)*/ + ".txt";
+	std::string path = UNITY_STREAM_PATH + "AITree/" + tostring(name) + ".txt";
 	AIUtil::Load(path.c_str(), _tree_data);
 	_tree_behaviour = AIFactory::MakeRuntime(_tree_data->task, this);
 	return true;

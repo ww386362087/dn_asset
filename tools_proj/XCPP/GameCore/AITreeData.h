@@ -45,6 +45,21 @@ public:
 class AITaskData
 {
 public:
+
+	~AITaskData()
+	{
+		for (std::unordered_map<std::string, AIVar*>::iterator it = vars.begin(); it != vars.end(); it++)
+		{
+			delete it->second;
+		}
+		for (size_t i = 0; i < children.size(); i++)
+		{
+			delete children[i];
+		}
+		vars.clear();
+		children.clear();
+	}
+
 	Mode mode;
 	std::string type;
 	std::unordered_map<std::string,AIVar*> vars;
@@ -54,6 +69,9 @@ public:
 class AITreeData
 {
 public:
+
+	~AITreeData();
+
 	std::vector<AITreeVar*> vars;
 	AITaskData* task;
 

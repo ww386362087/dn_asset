@@ -1,5 +1,20 @@
 #include "AITreeData.h"
+#include "GameObject.h"
 
+AITreeData::~AITreeData()
+{
+	for (std::unordered_map<uint, GameObject*>::iterator it = g_cache.begin(); it != g_cache.end(); it++)
+	{
+		delete it->second;
+	}
+	for (size_t i = 0; i < vars.size(); i++)
+	{
+		delete vars[i];
+	}
+	vars.clear();
+	g_cache.clear();
+	delete task;
+}
 
 void AITreeData::SetVariable(std::string name, float value)
 {
