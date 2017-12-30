@@ -3,6 +3,7 @@
 
 void AIRuntimeResetTarget::Init(AITaskData* data)
 {
+	AIBase::Init(data);
 }
 
 

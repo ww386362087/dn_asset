@@ -3,6 +3,7 @@
 
 void AIRuntimeFindTargetByDistance::Init(AITaskData* data)
 {
+	AIBase::Init(data);
 }
 
 

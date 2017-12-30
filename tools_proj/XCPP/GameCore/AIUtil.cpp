@@ -34,7 +34,7 @@ void AIUtil::Parse(std::string json, std::string name, AITreeData& tree)
 	{
 		AITreeVar* var = new AITreeVar();
 		ParseTreeVar(it->get<picojson::object>(), *var);
-		tree.vars.push_back(*var);
+		tree.vars.push_back(var);
 	}
 	picojson::object root = o["RootTask"].get<picojson::object>();
 	ParseTask(root, tree.task);
@@ -75,7 +75,7 @@ void AIUtil::ParseTask(picojson::object& root, AITaskData& data)
 				picojson::object obj = iat->get<picojson::object>();
 				AITaskData* td = new AITaskData();
 				ParseTask(obj, *td);
-				data.children.push_back(*td);
+				data.children.push_back(td);
 			}
 		}
 		else if (isObj && it->second.contains("IsShared"))
@@ -83,13 +83,13 @@ void AIUtil::ParseTask(picojson::object& root, AITaskData& data)
 			AISharedVar* var = new AISharedVar();
 			picojson::object ox = it->second.get<picojson::object>();
 			ParseSharedVar(it->first, ox, *var);
-			data.vars.push_back(*var);
+			data.vars.push_back(var);
 		}
 		else
 		{
 			AIVar* var = new AIVar();
 			ParseCustomVar(it->first, it->second, *var);
-			data.vars.push_back(*var);
+			data.vars.push_back(var);
 		}
 	}
 }

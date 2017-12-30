@@ -3,6 +3,7 @@
 
 void AIRuntimeValueDistance::Init(AITaskData* data)
 {
+	AIBase::Init(data);
 }
 
 

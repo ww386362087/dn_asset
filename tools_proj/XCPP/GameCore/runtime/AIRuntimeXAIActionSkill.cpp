@@ -3,6 +3,7 @@
 
 void AIRuntimeXAIActionSkill::Init(AITaskData* data)
 {
+	AIBase::Init(data);
 }
 
 

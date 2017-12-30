@@ -9,6 +9,12 @@ void AIBase::SetTree(AITree* tree)
 	_tree= tree;
 }
 
+Vector3 AIBase::Obj2Vector3(object obj)
+{
+	std::string str = obj.get<std::string>();
+	return Vector3::Parse(str);
+}
+
 AIStatus AIBase::OnTick() { return Success; }
 
 
@@ -19,8 +25,8 @@ void AISequence::Init(AITaskData* data)
 		list.clear();
 		for (size_t i = 0, max = data->children.size(); i < max; i++)
 		{
-			AIBase* run = AIFactory::MakeRuntime(&data->children[i], _tree);
-			list.push_back(*run);
+			AIBase* run = AIFactory::MakeRuntime(data->children[i], _tree);
+			list.push_back(run);
 		}
 	}
 }
@@ -32,7 +38,7 @@ AIStatus AISequence::OnTick()
 	{
 		for (size_t i = 0, max = list.size(); i < max; i++)
 		{
-			if (list[i].OnTick() == Failure)
+			if (list[i]->OnTick() == Failure)
 			{
 				return Failure;
 			}
@@ -49,8 +55,8 @@ void AISelector::Init(AITaskData* data)
 		list.clear();
 		for (size_t i = 0, max = data->children.size(); i < max; i++)
 		{
-			AIBase* run = AIFactory::MakeRuntime(&data->children[i], _tree);
-			list.push_back(*run);
+			AIBase* run = AIFactory::MakeRuntime(data->children[i], _tree);
+			list.push_back(run);
 		}
 	}
 }
@@ -62,7 +68,7 @@ AIStatus AISelector::OnTick()
 	{
 		for (size_t i = 0, max = list.size(); i < max; i++)
 		{
-			if (list[i].OnTick() == Success)
+			if (list[i]->OnTick() == Success)
 			{
 				return Success;
 			}
@@ -75,7 +81,7 @@ AIStatus AISelector::OnTick()
 
 void AIInterval::Init(AITaskData* data)
 {
-	node = AIFactory::MakeRuntime(&data->children[0], _tree);
+	node = AIFactory::MakeRuntime(data->children[0], _tree);
 }
 
 

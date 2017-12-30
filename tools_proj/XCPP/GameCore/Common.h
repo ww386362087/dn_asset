@@ -59,6 +59,8 @@ void InitPath(std::string stream,std::string cache);
 
 uint xhash(const char* ch);
 
+void split(const std::string& s, std::vector<std::string>& v, const std::string& c);
+
 int new_id();
 
 bool isNumber(const std::string& value);

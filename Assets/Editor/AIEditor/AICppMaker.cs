@@ -62,6 +62,20 @@ public class AICppMaker
         string ai_n_c = ai_c;
         ai_n_c = ai_n_c.Replace("[*Name*]", task.type);
         string dest_c = Path.Combine(path_dest, "AIRuntime" + task.type + ".cpp");
+
+        string init_str = string.Empty;
+        for (int i = 0, max = task.vars.Count; i < max; i++)
+        {
+            if (task.vars[i] is AITreeSharedVar)
+            {
+            }
+            else
+            {
+
+            }
+        }
+
+
         File.WriteAllText(dest_c, ai_n_c);
     }
 

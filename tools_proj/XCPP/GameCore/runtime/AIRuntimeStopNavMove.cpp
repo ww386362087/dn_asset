@@ -3,6 +3,7 @@
 
 void AIRuntimeStopNavMove::Init(AITaskData* data)
 {
+	AIBase::Init(data);
 }
 
 

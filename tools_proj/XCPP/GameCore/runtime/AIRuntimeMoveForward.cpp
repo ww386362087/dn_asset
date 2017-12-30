@@ -3,6 +3,7 @@
 
 void AIRuntimeMoveForward::Init(AITaskData* data)
 {
+	AIBase::Init(data);
 }
 
 

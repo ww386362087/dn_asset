@@ -47,14 +47,14 @@ class AITaskData
 public:
 	Mode mode;
 	std::string type;
-	std::vector<AIVar> vars;
-	std::vector<AITaskData> children;
+	std::vector<AIVar*> vars;
+	std::vector<AITaskData*> children;
 };
 
 class AITreeData
 {
 public:
-	std::vector<AITreeVar> vars;
+	std::vector<AITreeVar*> vars;
 	AITaskData task;
 
 	void SetVariable(std::string name, float value);

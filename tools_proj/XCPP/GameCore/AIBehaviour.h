@@ -4,7 +4,9 @@
 
 #include "AITree.h"
 #include "AIFactory.h"
+#include "Vector3.h"
 #include <vector>
+#include <string>
 
 enum AIStatus
 {
@@ -21,7 +23,7 @@ public:
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	void SetTree(AITree* tree);
-
+	Vector3 Obj2Vector3(object obj);
 protected:
 	AITree* _tree;
 };
@@ -33,7 +35,7 @@ public:
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 private:
-	std::vector<AIBase> list;
+	std::vector<AIBase*> list;
 };
 
 
@@ -44,7 +46,7 @@ public :
 	virtual AIStatus OnTick();
 
 private:
-	std::vector<AIBase> list;
+	std::vector<AIBase*> list;
 };
 
 

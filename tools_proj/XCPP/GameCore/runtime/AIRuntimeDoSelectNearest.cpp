@@ -3,6 +3,7 @@
 
 void AIRuntimeDoSelectNearest::Init(AITaskData* data)
 {
+	AIBase::Init(data);
 }
 
 

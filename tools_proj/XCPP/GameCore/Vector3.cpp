@@ -61,6 +61,25 @@ Vector3 Vector3::Cross(const Vector3& v, const Vector3& u)
 		v.x * u.y - v.y * u.x);
 }
 
+Vector3 Vector3::Parse(std::string str)
+{
+	//(1,2,3)
+	size_t len = str.length();
+	str = str.substr(1, len - 2);
+	float arr[3];
+	std::string::size_type pos1, pos2;
+	pos1 = 0;
+	pos2 = str.find(",");
+	for (int i = 0; i < 3; i++)
+	{
+		std::stringstream s(str.substr(pos1, pos2 - pos1));
+		s >> arr[i];
+		pos1 = pos2 + 1;
+		pos2 = str.find(",", pos1);
+	}
+	return Vector3(arr[0], arr[1], arr[2]);
+}
+
 float Vector3::Distance(const Vector3& v, const Vector3& u)
 {
 	return Magnitude(v - u);

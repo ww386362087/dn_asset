@@ -3,6 +3,7 @@
 
 void AIRuntimeWait::Init(AITaskData* data)
 {
+	AIBase::Init(data);
 }
 
 

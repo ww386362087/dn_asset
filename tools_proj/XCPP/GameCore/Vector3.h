@@ -4,6 +4,7 @@
 #include <iosfwd>
 #include "XMath.h"
 #include <sstream>
+#include <string>
 
 class Vector3;
 std::ostream &operator<<(std::ostream &stream, const Vector3 &pos);
@@ -54,6 +55,8 @@ public:
 	static Vector3 Normalized(const Vector3& v);
 
 	static Vector3 Cross(const Vector3& v, const Vector3& u);
+
+	static Vector3 Parse(std::string str);
 
 	static float Distance(const Vector3& v, const Vector3& u);
 
