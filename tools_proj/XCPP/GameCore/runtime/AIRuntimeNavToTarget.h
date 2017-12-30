@@ -14,8 +14,8 @@ public:
 	
 
 private:
-	GameObject mAIArgTarget;
-	GameObject mAIArgNavTarget;
+	GameObject* mAIArgTarget;
+	GameObject* mAIArgNavTarget;
 	Vector3 mAIArgNavPos;
 	
 };

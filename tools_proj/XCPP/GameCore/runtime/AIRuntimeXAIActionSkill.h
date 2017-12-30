@@ -15,7 +15,7 @@ public:
 
 private:
 	std::string mAIArgSkillScript;
-	GameObject mAIArgTarget;
+	GameObject* mAIArgTarget;
 	
 };
 

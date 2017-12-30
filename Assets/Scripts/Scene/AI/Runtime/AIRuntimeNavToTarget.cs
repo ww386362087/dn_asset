@@ -22,6 +22,8 @@ namespace AI.Runtime {
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
+			if(data.vars[1].val != null)
+				mAIArgNavTarget = (GameObject)data.vars[1].val;
 			if(data.vars[2].val != null)
 				mAIArgNavPos = (Vector3)data.vars[2].val;
         }

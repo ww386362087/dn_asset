@@ -233,7 +233,7 @@ inline value::value(double n) : type_(number_type), u_() {
 #ifdef _MSC_VER
       !_finite(n)
 #else
-      isnan(n) || isinf(n)
+      isnan(n) 
 #endif
           ) {
     throw std::overflow_error("");

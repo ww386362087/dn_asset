@@ -62,19 +62,56 @@ public class AICppMaker
         string ai_n_c = ai_c;
         ai_n_c = ai_n_c.Replace("[*Name*]", task.type);
         string dest_c = Path.Combine(path_dest, "AIRuntime" + task.type + ".cpp");
-
-        string init_str = string.Empty;
-        for (int i = 0, max = task.vars.Count; i < max; i++)
+        
+        if (task.vars != null)
         {
-            if (task.vars[i] is AITreeSharedVar)
+            //Init(AITaskData* data)
+            string init_str = string.Empty;
+            for (int i = 0, max = task.vars.Count; i < max; i++)
             {
+                string val = "data->vars[" + i + "]->val";
+                string op = GetOpByType(task.vars[i].type, val);
+                if (!string.IsNullOrEmpty(op))
+                {
+                    if (task.vars[i] is AITreeSharedVar)
+                    {
+                        AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
+                        if (!var.IsShared)
+                        {
+                            init_str += var.name + " = " + op + " \n\t";
+                        }
+                    }
+                    else
+                    {
+                        init_str += task.vars[i].name + " = " + op + " \n\t";
+                    }
+                }
             }
-            else
-            {
+            ai_n_c = ai_n_c.Replace("[*arg-1*]", init_str);
 
+            //OnTick()
+            string tick_str = string.Empty;
+            if (task.vars != null)
+            {
+                for (int i = 0, max = task.vars.Count; i < max; i++)
+                {
+                    if (task.vars[i] is AITreeSharedVar)
+                    {
+                        AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
+                        if (var.IsShared)
+                        {
+                            tick_str += var.name + " = " + GetTreeVarCode(var.type, var.BindName) + "\n\t";
+                        }
+                    }
+                }
             }
+            ai_n_c = ai_n_c.Replace("[*arg-2*]", tick_str);
         }
-
+        else
+        {
+            ai_n_c = ai_n_c.Replace("[*arg-1*]", "");
+            ai_n_c = ai_n_c.Replace("[*arg-2*]", "");
+        }
 
         File.WriteAllText(dest_c, ai_n_c);
     }
@@ -84,6 +121,74 @@ public class AICppMaker
     {
     }
 
+
+
+    private static string GetTreeVarCode(string type,string bindname)
+    {
+        string t = type;
+        switch (type)
+        {
+            case "GameObject":
+                t = "_tree->GetGoVariable(\"" + bindname + "\");";
+                break;
+            case "System.Boolean":
+            case "bool":
+                t = "_tree->GetBoolVariable(\"" + bindname + "\");";
+                break;
+            case "System.UInt32":
+            case "uint":
+                t = "_tree->GetUintVariable(\"" + bindname + "\");";
+                break;
+            case "System.Single":
+            case "float":
+                t = "_tree->GetFloatVariable(\"" + bindname + "\");";
+                break;
+            case "System.Int32":
+            case "int":
+                t = "_tree->GetIntVariable(\"" + bindname + "\");";
+                break;
+            default:
+                XDebug.LogError("make cpp code err, not release type:" + type);
+                break;
+        }
+        return t;
+    }
+    
+    private static string GetOpByType(string type,string obj)
+    {
+        string t = type;
+        switch (type)
+        {
+            case "Vector3":
+                t = "Obj2Vector3(" + obj + ");";
+                break;
+            case "System.String":
+            case "string":
+                t = obj + ".get<std::string>();";
+                break;
+            case "System.Int32":
+            case "int":
+            case "System.Single":
+            case "float":
+            case "System.UInt32":
+            case "uint":
+                t = obj + ".get<double>();";
+                break;
+            case "System.Boolean":
+            case "bool":
+                t = obj + ".get<bool>();";
+                break;
+            case "GameObject":
+            case "Transform":
+                t = string.Empty;
+                XDebug.Log("make cpp code err, gameobject or transform can't initial by editor ");
+                break;
+            default:
+                t = obj + ";";
+                break;
+        }
+        return t;
+    }
 
     private static string TransCppType(string type)
     {
@@ -104,6 +209,12 @@ public class AICppMaker
                 break;
             case "System.UInt32":
                 t = "uint";
+                break;
+            case "GameObject":
+                t = "GameObject*";
+                break;
+            case "Transform":
+                t = "Transform*";
                 break;
         }
         return t;

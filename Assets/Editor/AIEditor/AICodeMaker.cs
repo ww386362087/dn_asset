@@ -83,6 +83,13 @@ public class AICodeMaker
         }
     }
 
+    private static void InnerMakeTask(AIVar var,int i, CodeMemberMethod method)
+    {
+        string st = "if(data.vars[" + i + "].val != null)";
+        string st2 = "\t" + var.name + " = (" + var.type + ")data.vars[" + i + "].val;";
+        AddState(method, st);
+        AddState(method, st2);
+    }
 
     private static void GenerateTaskCode(AIRuntimeTaskData task)
     {
@@ -123,29 +130,12 @@ public class AICodeMaker
                 if (task.vars[i] is AITreeSharedVar)
                 {
                     AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
-                    if (!var.IsShared)
-                    {
-                        if (var.val != null)
-                        {
-                            string st = "if(data.vars[" + i + "].val != null)";
-                            string st2 = "\t" + var.name + " = (" + var.type + ")data.vars[" + i + "].val;";
-                            AddState(method, st);
-                            AddState(method, st2);
-                        }
-                    }
+                    if (!var.IsShared) InnerMakeTask(var, i, method);
                 }
                 else
                 {
                     AIVar var = task.vars[i];
-                    if (var.val != null)
-                    {
-                        //string st = var.name + " = " + var.val + ";";
-                        //AddState(method, st);
-                        string st = "if(data.vars[" + i + "].val != null)";
-                        string st2 = "\t" + var.name + " = (" + var.type + ")data.vars[" + i + "].val;";
-                        AddState(method, st);
-                        AddState(method, st2);
-                    }
+                    if (var.val != null) InnerMakeTask(var, i, method);
                 }
             }
         }

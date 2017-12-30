@@ -14,7 +14,7 @@ public:
 	
 
 private:
-	GameObject mAIArgTarget;
+	GameObject* mAIArgTarget;
 	float floatmAIArgMaxDistance;
 	
 };
