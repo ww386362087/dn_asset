@@ -13,8 +13,8 @@ canvas12.prefab
 780c3392b5e12ded75e3dc60731251a6
 2
 2
-3508662206.ab
 749732696.ab
+3508662206.ab
 <------------->
 Assets\Resources\UI\Canvas2.prefab
 1792139362.ab

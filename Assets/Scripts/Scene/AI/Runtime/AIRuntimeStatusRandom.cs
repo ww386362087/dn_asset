@@ -14,16 +14,16 @@ namespace AI.Runtime {
     
     public class AIRuntimeStatusRandom : AIRunTimeBase {
         
-        public int mAIArgProb;
+        public int Int32mAIArgProb;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[0].val != null)
-				mAIArgProb = (System.Int32)data.vars[0].val;
+				Int32mAIArgProb = (System.Int32)data.vars[0].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.StatusRandomUpdate(entity, mAIArgProb);
+			return AITreeImpleted.StatusRandomUpdate(entity, Int32mAIArgProb);
         }
     }
 }

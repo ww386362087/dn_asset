@@ -135,7 +135,8 @@ public class XEntityMgr : XSingleton<XEntityMgr>
         float.TryParse(ss[2], out fp[2]);
         attr.AppearPostion = new Vector3(fp[0], fp[1], fp[2]);
         attr.AppearQuaternion = Quaternion.Euler(row.StartRot[0], row.StartRot[1], row.StartRot[2]);
-        return Player = PrepareEntity<XPlayer>(attr);
+        Player = PrepareEntity<XPlayer>(attr);
+        return Player;
     }
 
     public XNPC CreateNPC(XNpcList.RowData row)

@@ -14,8 +14,8 @@ public:
 	
 
 private:
-	int mAIArgMaxHP;
-	int mAIArgMinHP;
+	int Int32mAIArgMaxHP;
+	int Int32mAIArgMinHP;
 	
 };
 

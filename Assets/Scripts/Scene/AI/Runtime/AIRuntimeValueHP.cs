@@ -14,20 +14,20 @@ namespace AI.Runtime {
     
     public class AIRuntimeValueHP : AIRunTimeBase {
         
-        public int mAIArgMaxHP;
+        public int Int32mAIArgMaxHP;
         
-        public int mAIArgMinHP;
+        public int Int32mAIArgMinHP;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[0].val != null)
-				mAIArgMaxHP = (System.Int32)data.vars[0].val;
+				Int32mAIArgMaxHP = (System.Int32)data.vars[0].val;
 			if(data.vars[1].val != null)
-				mAIArgMinHP = (System.Int32)data.vars[1].val;
+				Int32mAIArgMinHP = (System.Int32)data.vars[1].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.ValueHPUpdate(entity, mAIArgMaxHP, mAIArgMinHP);
+			return AITreeImpleted.ValueHPUpdate(entity, Int32mAIArgMaxHP, Int32mAIArgMinHP);
         }
     }
 }

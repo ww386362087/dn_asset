@@ -107,7 +107,7 @@ namespace AI.Runtime
             dic.TryGetValue("Name", out v.bindName);
             dic.TryGetValue("IsShared", out v.isShared);
             v.type = TransfType(dic["Type"]);
-            if (key.StartsWith(v.type)) v.name = key.Replace(v.type, string.Empty);
+            v.name = key;
             foreach (var item in dic)
             {
                 if (item.Key.Contains("Value"))
@@ -129,7 +129,7 @@ namespace AI.Runtime
                 {
                     AIVar v = new AIVar();
                     v.type = i <= 4 ? "System." + arr[i] : arr[i];
-                    v.name = key.Replace(arr[i], string.Empty);
+                    v.name = key;
                     ParseVarValue(v, val);
                     return v;
                 }
@@ -166,7 +166,7 @@ namespace AI.Runtime
 
         private static string TransfType(object type)
         {
-            string[] arr = { "float", "int", "bool", "string" };
+            string[] arr = { "float", "Int32", "bool", "string" };
             string[] arr2 = { "System.Single", "System.Int32", "System.Boolean", "System.String" };
             for (int i = 0, max = arr.Length; i < max; i++)
             {

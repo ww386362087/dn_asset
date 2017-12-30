@@ -14,8 +14,8 @@ public:
 	
 
 private:
-	float mAIArgMax;
-	float mAIArgMin;
+	float SinglemAIArgMax;
+	float SinglemAIArgMin;
 	
 };
 

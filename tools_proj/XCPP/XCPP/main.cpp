@@ -43,6 +43,7 @@ DllGetRow row;
 
 void DebugInfo()
 {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 	cout << "** a-Add  s-Sub  t-Read j-Json  q-Quit **" << endl;
 	cout << "** input your command:";
 }

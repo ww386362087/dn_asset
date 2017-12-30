@@ -14,7 +14,7 @@ public:
 	
 
 private:
-	int mAIArgProb;
+	int Int32mAIArgProb;
 	
 };
 

@@ -10,8 +10,8 @@ e2789836f95089e4b2fc864c55a2ca2f3eac57b2
 0
 780c3392b5e12ded75e3dc60731251a6
 2
-Assets\Res\2.png
 Assets\Res\FX_dk.png
+Assets\Res\2.png
 ***************************************
 Assets\Resources\UI\Canvas2.prefab
 43b1d96084427f61b0bd2dd08db48ae80ceccde6
@@ -89,14 +89,14 @@ Assets\Res\YD_dk_0.png
 
 0
 ***************************************
-Assets\Res\YD_1gj.png
-a72303ac147da90f0d736dbeb558dd47f416c87d
+Assets\Res\JNcd_1.png
+875837ba6d07460b47197d8e6023d7c44fe332a5
 0
 
 0
 ***************************************
-Assets\Res\JNcd_1.png
-875837ba6d07460b47197d8e6023d7c44fe332a5
+Assets\Res\YD_1gj.png
+a72303ac147da90f0d736dbeb558dd47f416c87d
 0
 
 0

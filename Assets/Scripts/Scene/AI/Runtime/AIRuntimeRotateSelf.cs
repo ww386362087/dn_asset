@@ -14,20 +14,20 @@ namespace AI.Runtime {
     
     public class AIRuntimeRotateSelf : AIRunTimeBase {
         
-        public float mAIArgMax;
+        public float SinglemAIArgMax;
         
-        public float mAIArgMin;
+        public float SinglemAIArgMin;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[0].val != null)
-				mAIArgMax = (System.Single)data.vars[0].val;
+				SinglemAIArgMax = (System.Single)data.vars[0].val;
 			if(data.vars[1].val != null)
-				mAIArgMin = (System.Single)data.vars[1].val;
+				SinglemAIArgMin = (System.Single)data.vars[1].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.RotateSelfUpdate(entity, mAIArgMax, mAIArgMin);
+			return AITreeImpleted.RotateSelfUpdate(entity, SinglemAIArgMax, SinglemAIArgMin);
         }
     }
 }

@@ -16,18 +16,18 @@ namespace AI.Runtime {
         
         public float floatmAIArgDistance;
         
-        public float mAIArgAngle;
+        public float SinglemAIArgAngle;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[0].val != null)
 				floatmAIArgDistance = (System.Single)data.vars[0].val;
 			if(data.vars[1].val != null)
-				mAIArgAngle = (System.Single)data.vars[1].val;
+				SinglemAIArgAngle = (System.Single)data.vars[1].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			return AITreeImpleted.FindTargetByDistanceUpdate(entity, floatmAIArgDistance, mAIArgAngle);
+			return AITreeImpleted.FindTargetByDistanceUpdate(entity, floatmAIArgDistance, SinglemAIArgAngle);
         }
     }
 }

@@ -37,19 +37,11 @@ public class GameEntrance : MonoBehaviour
 
     void ToStartTest(bool st)
     {
-        try
-        {
 #if TEST
-            start = true;
-            TestManager.Get().Start();
+        start = true;
+        TestManager.Get().Start();
 #endif
-        }
-        catch(System.Exception e)
-        {
-            Debug.Log("TEST:" + e.StackTrace);
-        }
     }
-
 
     void Update()
     {

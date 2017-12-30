@@ -4,8 +4,8 @@
 void AIRuntimeValueHP::Init(AITaskData* data)
 {
 	AIBase::Init(data);
-	mAIArgMaxHP = data->vars["mAIArgMaxHP"]->val.get<double>(); 
-	mAIArgMinHP = data->vars["mAIArgMinHP"]->val.get<double>(); 
+	Int32mAIArgMaxHP = data->vars["Int32mAIArgMaxHP"]->val.get<double>(); 
+	Int32mAIArgMinHP = data->vars["Int32mAIArgMinHP"]->val.get<double>(); 
 	
 }
 

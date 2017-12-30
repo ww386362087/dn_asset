@@ -15,7 +15,7 @@ public:
 
 private:
 	float floatmAIArgDistance;
-	float mAIArgAngle;
+	float SinglemAIArgAngle;
 	
 };
 

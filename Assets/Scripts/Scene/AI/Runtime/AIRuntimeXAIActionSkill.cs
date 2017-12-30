@@ -14,20 +14,20 @@ namespace AI.Runtime {
     
     public class AIRuntimeXAIActionSkill : AIRunTimeBase {
         
-        public string mAIArgSkillScript;
+        public string StringmAIArgSkillScript;
         
         public GameObject mAIArgTarget;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[0].val != null)
-				mAIArgSkillScript = (System.String)data.vars[0].val;
+				StringmAIArgSkillScript = (System.String)data.vars[0].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
 			var inmAIArgTarget = _tree.GetVariable("target"); 
 			if (inmAIArgTarget != null) mAIArgTarget = (GameObject)inmAIArgTarget;
-			return AITreeImpleted.XAIActionSkillUpdate(entity, mAIArgSkillScript, mAIArgTarget);
+			return AITreeImpleted.XAIActionSkillUpdate(entity, StringmAIArgSkillScript, mAIArgTarget);
         }
     }
 }

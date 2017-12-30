@@ -4,8 +4,8 @@
 void AIRuntimeRotateSelf::Init(AITaskData* data)
 {
 	AIBase::Init(data);
-	mAIArgMax = data->vars["mAIArgMax"]->val.get<double>(); 
-	mAIArgMin = data->vars["mAIArgMin"]->val.get<double>(); 
+	SinglemAIArgMax = data->vars["SinglemAIArgMax"]->val.get<double>(); 
+	SinglemAIArgMin = data->vars["SinglemAIArgMin"]->val.get<double>(); 
 	
 }
 
