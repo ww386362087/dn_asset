@@ -1,6 +1,11 @@
 #include "AIRuntime[*Name*].h"
 
 
+AIRuntime[*Name*]::~AIRuntime[*Name*]()
+{
+	[*arg-0*]
+}
+
 void AIRuntime[*Name*]::Init(AITaskData* data)
 {
 	AIBase::Init(data);

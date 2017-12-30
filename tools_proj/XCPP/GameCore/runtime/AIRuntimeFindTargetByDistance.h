@@ -6,9 +6,10 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeFindTargetByDistance:public AIBase
+class AIRuntimeFindTargetByDistance :public AIBase
 {
 public:
+	~AIRuntimeFindTargetByDistance();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	

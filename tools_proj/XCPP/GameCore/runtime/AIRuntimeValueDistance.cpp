@@ -1,6 +1,11 @@
 #include "AIRuntimeValueDistance.h"
 
 
+AIRuntimeValueDistance::~AIRuntimeValueDistance()
+{
+	delete GameObjectmAIArgTarget;
+}
+
 void AIRuntimeValueDistance::Init(AITaskData* data)
 {
 	AIBase::Init(data);
@@ -11,7 +16,7 @@ void AIRuntimeValueDistance::Init(AITaskData* data)
 
 AIStatus AIRuntimeValueDistance::OnTick()
 {
-	mAIArgTarget = _tree->GetGoVariable("target");
+	GameObjectmAIArgTarget = _tree->GetGoVariable("target");
 	
 	return Success;
 }

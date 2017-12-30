@@ -1,6 +1,11 @@
 #include "AIRuntimeWait.h"
 
 
+AIRuntimeWait::~AIRuntimeWait()
+{
+	
+}
+
 void AIRuntimeWait::Init(AITaskData* data)
 {
 	AIBase::Init(data);

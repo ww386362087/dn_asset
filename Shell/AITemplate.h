@@ -6,9 +6,10 @@
 #include "../Vector3.h"
 
 
-class AIRuntime[*Name*]:public AIBase
+class AIRuntime[*Name*] :public AIBase
 {
 public:
+	~AIRuntime[*Name*]();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	

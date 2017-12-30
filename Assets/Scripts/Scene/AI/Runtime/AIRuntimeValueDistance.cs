@@ -14,7 +14,7 @@ namespace AI.Runtime {
     
     public class AIRuntimeValueDistance : AIRunTimeBase {
         
-        public GameObject mAIArgTarget;
+        public GameObject GameObjectmAIArgTarget;
         
         public float floatmAIArgMaxDistance;
         
@@ -25,9 +25,9 @@ namespace AI.Runtime {
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			var inmAIArgTarget = _tree.GetVariable("target"); 
-			if (inmAIArgTarget != null) mAIArgTarget = (GameObject)inmAIArgTarget;
-			return AITreeImpleted.ValueDistanceUpdate(entity, mAIArgTarget, floatmAIArgMaxDistance);
+			var inGameObjectmAIArgTarget = _tree.GetVariable("target"); 
+			if (inGameObjectmAIArgTarget != null) GameObjectmAIArgTarget = (GameObject)inGameObjectmAIArgTarget;
+			return AITreeImpleted.ValueDistanceUpdate(entity, GameObjectmAIArgTarget, floatmAIArgMaxDistance);
         }
     }
 }

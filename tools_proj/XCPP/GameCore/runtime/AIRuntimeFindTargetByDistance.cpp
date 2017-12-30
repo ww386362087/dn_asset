@@ -1,6 +1,11 @@
 #include "AIRuntimeFindTargetByDistance.h"
 
 
+AIRuntimeFindTargetByDistance::~AIRuntimeFindTargetByDistance()
+{
+	
+}
+
 void AIRuntimeFindTargetByDistance::Init(AITaskData* data)
 {
 	AIBase::Init(data);

@@ -1,6 +1,11 @@
 #include "AIRuntimeXAIActionSkill.h"
 
 
+AIRuntimeXAIActionSkill::~AIRuntimeXAIActionSkill()
+{
+	delete GameObjectmAIArgTarget;
+}
+
 void AIRuntimeXAIActionSkill::Init(AITaskData* data)
 {
 	AIBase::Init(data);
@@ -11,7 +16,7 @@ void AIRuntimeXAIActionSkill::Init(AITaskData* data)
 
 AIStatus AIRuntimeXAIActionSkill::OnTick()
 {
-	mAIArgTarget = _tree->GetGoVariable("target");
+	GameObjectmAIArgTarget = _tree->GetGoVariable("target");
 	
 	return Success;
 }

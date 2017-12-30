@@ -14,24 +14,24 @@ namespace AI.Runtime {
     
     public class AIRuntimeNavToTarget : AIRunTimeBase {
         
-        public GameObject mAIArgTarget;
+        public GameObject GameObjectmAIArgTarget;
         
-        public GameObject mAIArgNavTarget;
+        public GameObject GameObjectmAIArgNavTarget;
         
-        public Vector3 mAIArgNavPos;
+        public Vector3 Vector3mAIArgNavPos;
         
         public override void Init(AI.Runtime.AIRuntimeTaskData data) {
 			base.Init(data);
 			if(data.vars[1].val != null)
-				mAIArgNavTarget = (GameObject)data.vars[1].val;
+				GameObjectmAIArgNavTarget = (GameObject)data.vars[1].val;
 			if(data.vars[2].val != null)
-				mAIArgNavPos = (Vector3)data.vars[2].val;
+				Vector3mAIArgNavPos = (Vector3)data.vars[2].val;
         }
         
         public override AIRuntimeStatus OnTick(XEntity entity) {
-			var inmAIArgTarget = _tree.GetVariable("target"); 
-			if (inmAIArgTarget != null) mAIArgTarget = (GameObject)inmAIArgTarget;
-			return AITreeImpleted.NavToTargetUpdate(entity, mAIArgTarget, mAIArgNavTarget, mAIArgNavPos);
+			var inGameObjectmAIArgTarget = _tree.GetVariable("target"); 
+			if (inGameObjectmAIArgTarget != null) GameObjectmAIArgTarget = (GameObject)inGameObjectmAIArgTarget;
+			return AITreeImpleted.NavToTargetUpdate(entity, GameObjectmAIArgTarget, GameObjectmAIArgNavTarget, Vector3mAIArgNavPos);
         }
     }
 }

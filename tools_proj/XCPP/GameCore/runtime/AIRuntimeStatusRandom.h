@@ -6,9 +6,10 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeStatusRandom:public AIBase
+class AIRuntimeStatusRandom :public AIBase
 {
 public:
+	~AIRuntimeStatusRandom();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	

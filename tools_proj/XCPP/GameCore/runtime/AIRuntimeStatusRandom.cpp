@@ -1,6 +1,11 @@
 #include "AIRuntimeStatusRandom.h"
 
 
+AIRuntimeStatusRandom::~AIRuntimeStatusRandom()
+{
+	
+}
+
 void AIRuntimeStatusRandom::Init(AITaskData* data)
 {
 	AIBase::Init(data);

@@ -6,9 +6,10 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeDoSelectNearest:public AIBase
+class AIRuntimeDoSelectNearest :public AIBase
 {
 public:
+	~AIRuntimeDoSelectNearest();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	

@@ -1,6 +1,11 @@
 #include "AIRuntimeValueHP.h"
 
 
+AIRuntimeValueHP::~AIRuntimeValueHP()
+{
+	
+}
+
 void AIRuntimeValueHP::Init(AITaskData* data)
 {
 	AIBase::Init(data);

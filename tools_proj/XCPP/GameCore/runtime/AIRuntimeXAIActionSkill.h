@@ -6,16 +6,17 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeXAIActionSkill:public AIBase
+class AIRuntimeXAIActionSkill :public AIBase
 {
 public:
+	~AIRuntimeXAIActionSkill();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	
 
 private:
 	std::string StringmAIArgSkillScript;
-	GameObject* mAIArgTarget;
+	GameObject* GameObjectmAIArgTarget;
 	
 };
 

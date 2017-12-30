@@ -6,15 +6,16 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeRotateToTarget:public AIBase
+class AIRuntimeRotateToTarget :public AIBase
 {
 public:
+	~AIRuntimeRotateToTarget();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	
 
 private:
-	GameObject* mAIArgTarget;
+	GameObject* GameObjectmAIArgTarget;
 	float floatmAIArgAngle;
 	
 };

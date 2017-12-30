@@ -1,6 +1,11 @@
 #include "AIRuntimeRotateToTarget.h"
 
 
+AIRuntimeRotateToTarget::~AIRuntimeRotateToTarget()
+{
+	delete GameObjectmAIArgTarget;
+}
+
 void AIRuntimeRotateToTarget::Init(AITaskData* data)
 {
 	AIBase::Init(data);
@@ -11,7 +16,7 @@ void AIRuntimeRotateToTarget::Init(AITaskData* data)
 
 AIStatus AIRuntimeRotateToTarget::OnTick()
 {
-	mAIArgTarget = _tree->GetGoVariable("target");
+	GameObjectmAIArgTarget = _tree->GetGoVariable("target");
 	
 	return Success;
 }

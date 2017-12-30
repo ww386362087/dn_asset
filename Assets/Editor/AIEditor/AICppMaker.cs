@@ -64,9 +64,21 @@ public class AICppMaker
         string ai_n_c = ai_c;
         ai_n_c = ai_n_c.Replace("[*Name*]", task.type);
         string dest_c = Path.Combine(path_dest, "AIRuntime" + task.type + ".cpp");
-        
+
         if (task.vars != null)
         {
+            string rel_str = string.Empty;
+            for (int i = 0, max = task.vars.Count; i < max; i++)
+            {
+                AIVar var = task.vars[i];
+                if(var.type == "GameObject" || var.type == "Transform")
+                {
+                    rel_str += "delete " + var.name + ";";
+                }
+            }
+            ai_n_c = ai_n_c.Replace("[*arg-0*]", rel_str);
+
+            //Init(AITaskData* data)
             string init_str = string.Empty;
             for (int i = 0, max = task.vars.Count; i < max; i++)
             {
@@ -110,6 +122,7 @@ public class AICppMaker
         }
         else
         {
+            ai_n_c = ai_n_c.Replace("[*arg-0*]", "");
             ai_n_c = ai_n_c.Replace("[*arg-1*]", "");
             ai_n_c = ai_n_c.Replace("[*arg-2*]", "");
         }
@@ -188,7 +201,7 @@ public class AICppMaker
         switch (type)
         {
             case "Vector3":
-                t = "Obj2Vector3(" + obj + ");";
+                t = "Obj2Vector(" + obj + ");";
                 break;
             case "System.String":
             case "string":

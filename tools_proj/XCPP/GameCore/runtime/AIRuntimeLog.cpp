@@ -1,6 +1,11 @@
 #include "AIRuntimeLog.h"
 
 
+AIRuntimeLog::~AIRuntimeLog()
+{
+	
+}
+
 void AIRuntimeLog::Init(AITaskData* data)
 {
 	AIBase::Init(data);

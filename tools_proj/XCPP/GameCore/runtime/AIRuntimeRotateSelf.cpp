@@ -1,6 +1,11 @@
 #include "AIRuntimeRotateSelf.h"
 
 
+AIRuntimeRotateSelf::~AIRuntimeRotateSelf()
+{
+	
+}
+
 void AIRuntimeRotateSelf::Init(AITaskData* data)
 {
 	AIBase::Init(data);

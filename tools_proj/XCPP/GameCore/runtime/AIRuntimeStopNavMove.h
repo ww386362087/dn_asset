@@ -6,9 +6,10 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeStopNavMove:public AIBase
+class AIRuntimeStopNavMove :public AIBase
 {
 public:
+	~AIRuntimeStopNavMove();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	

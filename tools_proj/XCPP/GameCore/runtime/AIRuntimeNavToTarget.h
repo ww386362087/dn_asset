@@ -6,17 +6,18 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeNavToTarget:public AIBase
+class AIRuntimeNavToTarget :public AIBase
 {
 public:
+	~AIRuntimeNavToTarget();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	
 
 private:
-	GameObject* mAIArgTarget;
-	GameObject* mAIArgNavTarget;
-	Vector3 mAIArgNavPos;
+	GameObject* GameObjectmAIArgTarget;
+	GameObject* GameObjectmAIArgNavTarget;
+	Vector3 Vector3mAIArgNavPos;
 	
 };
 

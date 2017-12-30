@@ -6,9 +6,10 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeRotateSelf:public AIBase
+class AIRuntimeRotateSelf :public AIBase
 {
 public:
+	~AIRuntimeRotateSelf();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	

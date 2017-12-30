@@ -6,15 +6,16 @@
 #include "../Vector3.h"
 
 
-class AIRuntimeValueDistance:public AIBase
+class AIRuntimeValueDistance :public AIBase
 {
 public:
+	~AIRuntimeValueDistance();
 	virtual void Init(AITaskData* data);
 	virtual AIStatus OnTick();
 	
 
 private:
-	GameObject* mAIArgTarget;
+	GameObject* GameObjectmAIArgTarget;
 	float floatmAIArgMaxDistance;
 	
 };
