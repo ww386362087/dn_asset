@@ -55,7 +55,7 @@ class AITreeData
 {
 public:
 	std::vector<AITreeVar*> vars;
-	AITaskData task;
+	AITaskData* task;
 
 	void SetVariable(std::string name, float value);
 	void SetVariable(std::string name, int value);

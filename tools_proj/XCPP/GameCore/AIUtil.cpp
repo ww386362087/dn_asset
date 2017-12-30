@@ -4,7 +4,7 @@ std::string  AIUtil::Children = "Children";
 std::string AIUtil::Type = "Type";
 
 
-void AIUtil::Load(std::string name, AITreeData& data)
+void AIUtil::Load(std::string name, AITreeData* data)
 {
 	try
 	{
@@ -18,7 +18,7 @@ void AIUtil::Load(std::string name, AITreeData& data)
 	}
 }
 
-void AIUtil::Parse(std::string json, std::string name, AITreeData& tree)
+void AIUtil::Parse(std::string json, std::string name, AITreeData* data)
 {
 	picojson::value v;
 	std::string err = picojson::parse(v, json);
@@ -28,23 +28,24 @@ void AIUtil::Parse(std::string json, std::string name, AITreeData& tree)
 		return;
 	}
 	picojson::object& o = v.get<picojson::object>();
-	tree.vars.clear();
+	data->vars.clear();
+	data->task = new AITaskData();
 	picojson::array ar = o["Variables"].get<picojson::array>();
 	for (picojson::array::iterator it = ar.begin(); it != ar.end(); it++)
 	{
 		AITreeVar* var = new AITreeVar();
-		ParseTreeVar(it->get<picojson::object>(), *var);
-		tree.vars.push_back(var);
+		ParseTreeVar(it->get<picojson::object>(), var);
+		data->vars.push_back(var);
 	}
 	picojson::object root = o["RootTask"].get<picojson::object>();
-	ParseTask(root, tree.task);
+	ParseTask(root, data->task);
 }
 
-void AIUtil::ParseTreeVar(picojson::object& arg, AITreeVar& var)
+void AIUtil::ParseTreeVar(picojson::object& arg, AITreeVar* var)
 {
-	var.name = arg["Name"].get<std::string>();
-	var.type = arg["Type"].get<std::string>();
-	var.isShared = arg["IsShared"].get<bool>();
+	var->name = arg["Name"].get<std::string>();
+	var->type = arg["Type"].get<std::string>();
+	var->isShared = arg["IsShared"].get<bool>();
 }
 
 Mode AIUtil::Type2Mode(std::string type)
@@ -55,17 +56,17 @@ Mode AIUtil::Type2Mode(std::string type)
 	return Custom;
 }
 
-void AIUtil::ParseTask(picojson::object& root, AITaskData& data)
+void AIUtil::ParseTask(picojson::object& root, AITaskData* data)
 {
-	data.children.clear();
-	data.vars.clear();
+	data->children.clear();
+	data->vars.clear();
 	for (picojson::object::iterator it = root.begin(); it != root.end(); it++)
 	{
 		bool isObj = it->second.is<picojson::object>();
 		if (it->first == Type)
 		{
-			data.type = it->second.get<std::string>();
-			data.mode = Type2Mode(data.type);
+			data->type = it->second.get<std::string>();
+			data->mode = Type2Mode(data->type);
 		}
 		else if(it->first == Children)
 		{
@@ -74,52 +75,60 @@ void AIUtil::ParseTask(picojson::object& root, AITaskData& data)
 			{
 				picojson::object obj = iat->get<picojson::object>();
 				AITaskData* td = new AITaskData();
-				ParseTask(obj, *td);
-				data.children.push_back(td);
+				ParseTask(obj, td);
+				data->children.push_back(td);
 			}
 		}
-		else if (isObj && it->second.contains("IsShared"))
+		else if (isObj)  //sharedvar
 		{
+			bool isShared = it->second.contains("IsShared");
 			AISharedVar* var = new AISharedVar();
 			picojson::object ox = it->second.get<picojson::object>();
-			ParseSharedVar(it->first, ox, *var);
-			data.vars.push_back(var);
+			ParseSharedVar(it->first, ox, var, isShared);
+			data->vars.push_back(var);
 		}
 		else
 		{
 			AIVar* var = new AIVar();
-			ParseCustomVar(it->first, it->second, *var);
-			data.vars.push_back(var);
+			ParseCustomVar(it->first, it->second, var);
+			data->vars.push_back(var);
 		}
 	}
 }
 
-void AIUtil::ParseSharedVar(std::string key, picojson::object& obj, AISharedVar& var)
+void AIUtil::ParseSharedVar(std::string key, picojson::object& obj, AISharedVar* var,bool shared)
 {
-	var.name = key;
-	var.bindName = obj["Name"].get<std::string>();
-	var.isShared = obj["IsShared"].get<bool>();
-	var.type = TransfType(obj["Type"]);
+	var->name = key;
+	var->bindName = obj["Name"].get<std::string>();
+	var->isShared = shared ? obj["IsShared"].get<bool>() : false;
+	var->type = TransfType(obj["Type"]);
 	for (picojson::object::iterator it = obj.begin(); it != obj.end(); it++)
 	{
-		if (it->first.find("Value"))
+		rsize_t t = it->first.find("Value");//contains value
+		if (t < 50) 
 		{
-			var.val = it->second;
+			var->val = it->second;
+			if (var->type == "float")
+			{
+				PRINT <<"float:"<< var->val.get<double>();
+			}
 		}
 	}
 }
 
-void AIUtil::ParseCustomVar(std::string key, object val, AIVar& var)
+void AIUtil::ParseCustomVar(std::string key, object val, AIVar* var)
 {
-	std::string arr[] = { "float", "int", "bool", "string", "Vector3", "Vector2", "Vector4", "GameObject", "Transform" };
+	std::string arr[] = { "float", "Int32", "bool", "string", "Vector3", "Vector2", "Vector4", "GameObject", "Transform" };
 	for (int i = 0; i < 9; i++)
 	{
-		if (key.find(arr[i])) // startwith
+		size_t t = key.find(arr[i]);
+		if (t == 0) // startwith
 		{
 			AIVar* v = new AIVar();
 			v->type = arr[i];
 			v->name = key;
 			v->val = val;
+			break;
 		}
 	}
 }
