@@ -148,7 +148,7 @@ public class AICppMaker
             string tname = name.Substring(9, name.Length - 11);
             if (!txt.Contains(name))
             {
-                str_h += "\n#include \"runtime\\" + name + "\"";
+                str_h += "\n#include \"runtime/" + name + "\"";
                 str_c += "\n\telse if (data->type == \"" + tname + "\")";
                 str_c += "\n\t{";
                 str_c += "\n\t\trst = new AIRuntime" + tname + "();";
