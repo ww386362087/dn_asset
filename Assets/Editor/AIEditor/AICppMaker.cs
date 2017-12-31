@@ -68,7 +68,7 @@ public class AICppMaker
             for (int i = 0, max = task.vars.Count; i < max; i++)
             {
                 AIVar var = task.vars[i];
-                if(var.type == "GameObject" || var.type == "Transform")
+                if (var.type == "GameObject" || var.type == "Transform")
                 {
                     rel_str += "delete " + var.name + ";";
                 }
@@ -101,10 +101,12 @@ public class AICppMaker
 
             //OnTick()
             string tick_str = string.Empty;
+            string imp_str = string.Empty;
             if (task.vars != null)
             {
                 for (int i = 0, max = task.vars.Count; i < max; i++)
                 {
+                    imp_str += "," + task.vars[i].name;
                     if (task.vars[i] is AITreeSharedVar)
                     {
                         AITreeSharedVar var = task.vars[i] as AITreeSharedVar;
@@ -116,12 +118,14 @@ public class AICppMaker
                 }
             }
             ai_n_c = ai_n_c.Replace("[*arg-2*]", tick_str);
+            ai_n_c = ai_n_c.Replace("[*tickarg*]", imp_str);
         }
         else
         {
             ai_n_c = ai_n_c.Replace("[*arg-0*]", "");
             ai_n_c = ai_n_c.Replace("[*arg-1*]", "");
             ai_n_c = ai_n_c.Replace("[*arg-2*]", "");
+            ai_n_c = ai_n_c.Replace("[*tickarg*]", "");
         }
 
         File.WriteAllText(dest_c, ai_n_c);

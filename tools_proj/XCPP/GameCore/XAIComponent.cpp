@@ -222,7 +222,7 @@ void XAIComponent::OnTickAI()
 	{
 		UpdateVariable();
 		SetTreeVariable(_tree);
-		_tree->TickBehaviorTree();
+		_tree->TickBehaviorTree(_entity);
 	}
 }
 

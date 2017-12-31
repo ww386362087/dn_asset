@@ -24,8 +24,8 @@ void AIRuntimeWait::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeWait::OnTick()
+AIStatus AIRuntimeWait::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::WaitUpdate(entity,floatwaitTime,boolrandomWait,floatrandomWaitMin,floatrandomWaitMax);
 }

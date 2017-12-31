@@ -8,6 +8,9 @@
 #include <vector>
 #include <string>
 
+
+class XEntity;
+
 enum AIStatus
 {
 	Inactive = 0,
@@ -21,7 +24,7 @@ class AIBase
 {
 public:
 	virtual void Init(AITaskData* data);
-	virtual AIStatus OnTick();
+	virtual AIStatus OnTick(XEntity* entity);
 	~AIBase();
 	void SetTree(AITree* tree);
 	Vector3 Obj2Vector(object obj);
@@ -35,7 +38,7 @@ class AISequence:public AIBase
 public:
 	~AISequence();
 	virtual void Init(AITaskData* data);
-	virtual AIStatus OnTick();
+	virtual AIStatus OnTick(XEntity* entity);
 private:
 	std::vector<AIBase*> list;
 };
@@ -46,7 +49,7 @@ class AISelector:public AIBase
 public :
 	~AISelector();
 	virtual void Init(AITaskData* data);
-	virtual AIStatus OnTick();
+	virtual AIStatus OnTick(XEntity* entity);
 
 private:
 	std::vector<AIBase*> list;
@@ -58,7 +61,7 @@ class AIInterval:public AIBase
 public:
 	~AIInterval();
 	virtual void Init(AITaskData* data);
-	virtual AIStatus OnTick();
+	virtual AIStatus OnTick(XEntity* entity);
 
 private:
 	AIBase* node;

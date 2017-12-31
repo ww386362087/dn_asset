@@ -20,8 +20,8 @@ void AIRuntimeResetTarget::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeResetTarget::OnTick()
+AIStatus AIRuntimeResetTarget::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::ResetTargetUpdate(entity);
 }

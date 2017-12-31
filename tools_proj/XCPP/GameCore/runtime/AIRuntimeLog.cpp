@@ -22,8 +22,8 @@ void AIRuntimeLog::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeLog::OnTick()
+AIStatus AIRuntimeLog::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::LogUpdate(entity,stringtext,boollogError);
 }

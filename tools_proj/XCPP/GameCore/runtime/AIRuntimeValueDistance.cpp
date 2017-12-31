@@ -21,9 +21,9 @@ void AIRuntimeValueDistance::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeValueDistance::OnTick()
+AIStatus AIRuntimeValueDistance::OnTick(XEntity* entity)
 {
 	GameObjectmAIArgTarget = _tree->GetGoVariable("target");
 	
-	return Success;
+	return AITreeImpleted::ValueDistanceUpdate(entity,GameObjectmAIArgTarget,floatmAIArgMaxDistance);
 }

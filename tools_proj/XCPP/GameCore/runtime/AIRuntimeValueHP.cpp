@@ -22,8 +22,8 @@ void AIRuntimeValueHP::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeValueHP::OnTick()
+AIStatus AIRuntimeValueHP::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::ValueHPUpdate(entity,Int32mAIArgMaxHP,Int32mAIArgMinHP);
 }

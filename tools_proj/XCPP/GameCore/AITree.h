@@ -28,7 +28,7 @@ public:
 	uint GetUintVariable(const char* name);
 	bool GetBoolVariable(const char* name);
 	GameObject* GetGoVariable(const char* name);
-	void TickBehaviorTree();
+	void TickBehaviorTree(XEntity* entity);
 
 
 private:

@@ -21,9 +21,9 @@ void AIRuntimeRotateToTarget::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeRotateToTarget::OnTick()
+AIStatus AIRuntimeRotateToTarget::OnTick(XEntity* entity)
 {
 	GameObjectmAIArgTarget = _tree->GetGoVariable("target");
 	
-	return Success;
+	return AITreeImpleted::RotateToTargetUpdate(entity,GameObjectmAIArgTarget,floatmAIArgAngle);
 }

@@ -20,8 +20,8 @@ void AIRuntimeMoveForward::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeMoveForward::OnTick()
+AIStatus AIRuntimeMoveForward::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::MoveForwardUpdate(entity);
 }

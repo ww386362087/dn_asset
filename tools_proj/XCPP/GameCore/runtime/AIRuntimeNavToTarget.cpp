@@ -21,9 +21,9 @@ void AIRuntimeNavToTarget::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeNavToTarget::OnTick()
+AIStatus AIRuntimeNavToTarget::OnTick(XEntity* entity)
 {
 	GameObjectmAIArgTarget = _tree->GetGoVariable("target");
 	
-	return Success;
+	return AITreeImpleted::NavToTargetUpdate(entity,GameObjectmAIArgTarget,GameObjectmAIArgNavTarget,Vector3mAIArgNavPos);
 }

@@ -21,8 +21,8 @@ void AIRuntimeStatusRandom::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeStatusRandom::OnTick()
+AIStatus AIRuntimeStatusRandom::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::StatusRandomUpdate(entity,Int32mAIArgProb);
 }

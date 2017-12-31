@@ -22,8 +22,8 @@ void AIRuntimeRotateSelf::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeRotateSelf::OnTick()
+AIStatus AIRuntimeRotateSelf::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::RotateSelfUpdate(entity,SinglemAIArgMax,SinglemAIArgMin);
 }

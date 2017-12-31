@@ -20,8 +20,8 @@ void AIRuntimeStopNavMove::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeStopNavMove::OnTick()
+AIStatus AIRuntimeStopNavMove::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::StopNavMoveUpdate(entity);
 }

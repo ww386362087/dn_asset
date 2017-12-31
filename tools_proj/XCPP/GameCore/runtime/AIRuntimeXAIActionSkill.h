@@ -11,14 +11,16 @@
 #include "../AIBehaviour.h"
 #include "../GameObject.h"
 #include "../Vector3.h"
+#include "../AITreeImpleted.h"
 
+class XEntity;
 
 class AIRuntimeXAIActionSkill :public AIBase
 {
 public:
 	~AIRuntimeXAIActionSkill();
 	virtual void Init(AITaskData* data);
-	virtual AIStatus OnTick();
+	virtual AIStatus OnTick(XEntity* entity);
 	
 
 private:

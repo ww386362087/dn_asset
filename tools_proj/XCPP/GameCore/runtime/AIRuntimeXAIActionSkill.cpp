@@ -21,9 +21,9 @@ void AIRuntimeXAIActionSkill::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeXAIActionSkill::OnTick()
+AIStatus AIRuntimeXAIActionSkill::OnTick(XEntity* entity)
 {
 	GameObjectmAIArgTarget = _tree->GetGoVariable("target");
 	
-	return Success;
+	return AITreeImpleted::XAIActionSkillUpdate(entity,StringmAIArgSkillScript,GameObjectmAIArgTarget);
 }

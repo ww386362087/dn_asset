@@ -20,8 +20,8 @@ void AIRuntimeDoSelectNearest::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeDoSelectNearest::OnTick()
+AIStatus AIRuntimeDoSelectNearest::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::DoSelectNearestUpdate(entity);
 }

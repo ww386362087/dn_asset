@@ -20,8 +20,8 @@ void AIRuntime[*Name*]::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntime[*Name*]::OnTick()
+AIStatus AIRuntime[*Name*]::OnTick(XEntity* entity)
 {
 	[*arg-2*]
-	return Success;
+	return AITreeImpleted::[*Name*]Update(entity[*tickarg*]);
 }

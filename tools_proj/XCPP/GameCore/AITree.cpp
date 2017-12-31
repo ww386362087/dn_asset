@@ -122,10 +122,10 @@ GameObject* AITree::GetGoVariable(const char* name)
 	return map[hash];
 }
 
-void AITree::TickBehaviorTree()
+void AITree::TickBehaviorTree( XEntity* entity)
 {
 	if (_enable && _tree_behaviour)
 	{
-		_tree_behaviour->OnTick();
+		_tree_behaviour->OnTick(entity);
 	}
 }

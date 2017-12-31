@@ -20,7 +20,7 @@ Vector3 AIBase::Obj2Vector(object obj)
 	return Vector3::Parse(str);
 }
 
-AIStatus AIBase::OnTick() { return Success; }
+AIStatus AIBase::OnTick(XEntity* entity) { return Success; }
 
 AISequence::~AISequence()
 {
@@ -45,13 +45,13 @@ void AISequence::Init(AITaskData* data)
 }
 
 
-AIStatus AISequence::OnTick()
+AIStatus AISequence::OnTick(XEntity* entity)
 {
 	if (list.size() > 0)
 	{
 		for (size_t i = 0, max = list.size(); i < max; i++)
 		{
-			if (list[i]->OnTick() == Failure)
+			if (list[i]->OnTick(entity) == Failure)
 			{
 				return Failure;
 			}
@@ -84,13 +84,13 @@ void AISelector::Init(AITaskData* data)
 }
 
 
-AIStatus AISelector::OnTick()
+AIStatus AISelector::OnTick(XEntity* entity)
 {
 	if (list.size() > 0)
 	{
 		for (size_t i = 0, max = list.size(); i < max; i++)
 		{
-			if (list[i]->OnTick() == Success)
+			if (list[i]->OnTick(entity) == Success)
 			{
 				return Success;
 			}
@@ -111,11 +111,11 @@ void AIInterval::Init(AITaskData* data)
 }
 
 
-AIStatus AIInterval::OnTick()
+AIStatus AIInterval::OnTick(XEntity* entity)
 {
 	if (node)
 	{
-		AIStatus rst = node->OnTick();
+		AIStatus rst = node->OnTick(entity);
 		if (rst == Failure)
 		{
 			return Success;

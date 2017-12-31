@@ -22,8 +22,8 @@ void AIRuntimeFindTargetByDistance::Init(AITaskData* data)
 }
 
 
-AIStatus AIRuntimeFindTargetByDistance::OnTick()
+AIStatus AIRuntimeFindTargetByDistance::OnTick(XEntity* entity)
 {
 	
-	return Success;
+	return AITreeImpleted::FindTargetByDistanceUpdate(entity,floatmAIArgDistance,SinglemAIArgAngle);
 }
