@@ -190,6 +190,9 @@
     <ClCompile Include="patch.c">
       <Filter>plugin</Filter>
     </ClCompile>
+    <ClCompile Include="AITreeImpleted.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -413,6 +416,9 @@
     </ClInclude>
     <ClInclude Include="patch.h">
       <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="AITreeImpleted.h">
+      <Filter>ai</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

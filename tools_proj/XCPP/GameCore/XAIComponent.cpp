@@ -55,6 +55,83 @@ bool XAIComponent::OnStartSkill(IArgs* e, void*)
 	return true;
 }
 
+bool XAIComponent::FindTargetByDistance(float dist, float angle)
+{
+	std::vector<XEntity*> list = XEntityMgr::Instance()->GetAllEnemy(_entity);
+	targets.clear();
+	for (int i = 0; i < list.size(); i++)
+	{
+		XEntity* enemy = list[i];
+		if (XEntity::Valide(enemy))
+		{
+			Vector3 v = enemy->getPostion() - _entity->getPostion();
+			float distance = Vector3::sqrtMagnitude(v);
+			if (distance < dist * dist)
+			{
+				float targetangle = Vector3::Angle(v, _entity->getForward());
+				if (targetangle < angle)
+				{
+					targets.push_back(enemy);
+				}
+			}
+		}
+	}
+	return targets.size() > 0;
+}
+
+bool XAIComponent::ResetTarget()
+{
+	targets.clear();
+	_target = NULL;
+	_tree->ResetVariable(AITreeArg::TARGET);
+	return true;
+}
+
+bool XAIComponent::DoSelectNearest()
+{
+	float near = 1 << 10;
+	for (int i = 0; i < targets.size(); i++)
+	{
+		Vector3 v = _entity->getPostion() - targets[i]->getPostion();
+		float dis = v.magnitude();
+		if (dis < near)
+		{
+			_target = targets[i];
+			near = dis;
+		}
+	}
+	SetTarget(_target);
+	return true;
+}
+
+bool XAIComponent::DoSelectFarthest()
+{
+	float far = 0;
+	for (int i = 0; i < targets.size(); i++)
+	{
+		float dis = (_entity->getPostion()- targets[i]->getPostion()).magnitude();
+		if (dis > far)
+		{
+			_target = targets[i];
+			far = dis;
+		}
+	}
+	SetTarget(_target);
+	return true;
+}
+
+bool XAIComponent::DoSelectRandom()
+{
+	if (targets.size() > 0)
+	{
+		int cnt = (int)targets.size();
+		int randx = Random(0, cnt);
+		_target = targets[randx];
+		SetTarget(_target);
+	}
+	return true;
+}
+
 bool XAIComponent::OnEndSkill(IArgs* e, void*)
 {
 	XAIEndSkillEventArgs* endSkill = (XAIEndSkillEventArgs*)e;

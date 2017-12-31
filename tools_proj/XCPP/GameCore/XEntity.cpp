@@ -87,7 +87,7 @@ EntityType XEntity::GetType()
 
 XSkillMgr* XEntity::SkillManager()
 {
-	XSkillComponent* pskill = GetComponnet<XSkillComponent>();
+	XSkillComponent* pskill = GetComponent<XSkillComponent>();
 	return pskill ? pskill->SkillManager() : NULL;
 }
 
@@ -127,6 +127,16 @@ GameObject* XEntity::getEntityObject()
 	return _object;
 }
 
+Transform* XEntity::getTransfer()
+{
+	return _transf;
+}
+
+Vector3 XEntity::getForward()
+{
+	return _transf->forward;
+}
+
 XAttributes* XEntity::getAttributes()
 {
 	return _attr;
@@ -135,4 +145,9 @@ XAttributes* XEntity::getAttributes()
 void XEntity::setAttributes(XAttributes* attr)
 {
 	_attr = attr;
+}
+
+XStateDefine XEntity::getState()
+{
+	return _state;
 }

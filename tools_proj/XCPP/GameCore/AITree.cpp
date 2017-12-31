@@ -80,6 +80,15 @@ void AITree::SetVariable(const char* name, GameObject* value)
 	}
 }
 
+bool AITree::ResetVariable(const char* name)
+{
+	if (_enable && _tree_data)
+	{
+		return	_tree_data->ResetVariable(name);
+	}
+	return false;
+}
+
 
 float AITree::GetFloatVariable(const char* name)
 {

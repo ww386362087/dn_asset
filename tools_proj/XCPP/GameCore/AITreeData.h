@@ -80,6 +80,7 @@ public:
 	void SetVariable(std::string name, uint value);
 	void SetVariable(std::string name, bool value);
 	void SetVariable(std::string name, GameObject* value);
+	bool ResetVariable(const char* name);
 	std::unordered_map<uint, float> GetFloatCache();
 	std::unordered_map<uint, int> GetIntCache();
 	std::unordered_map<uint, uint> GetUintCache();

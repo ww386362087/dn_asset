@@ -106,6 +106,11 @@ double XAttributes::GetAttr(XAttributeDefine def)
 	return 0;
 }
 
+uint  XAttributes::getTypeID()
+{
+	return _type_id;
+}
+
 const char* XAttributes::getAiBehaviour()
 {
 	return AiBehavior;

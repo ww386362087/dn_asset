@@ -22,6 +22,7 @@ public:
 	void SetVariable(const char* name, uint value);
 	void SetVariable(const char* name, bool value);
 	void SetVariable(const char* name, GameObject* value);
+	bool ResetVariable(const char* name);
 	float GetFloatVariable(const char* name);
 	int GetIntVariable(const char* name);
 	uint GetUintVariable(const char* name);

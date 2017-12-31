@@ -44,8 +44,12 @@ public:
 public:
 	Vector3 getPostion();
 	GameObject* getEntityObject();
+	Transform* getTransfer();
+	Vector3 getForward();
 	XAttributes* getAttributes();
 	void setAttributes(XAttributes*);
+	XStateDefine getState();
+
 protected:
 	XStateMachine* _pmachine;
 	EntityType _eEntity_Type = Entity;

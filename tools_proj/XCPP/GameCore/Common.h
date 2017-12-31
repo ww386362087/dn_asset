@@ -16,6 +16,7 @@
 #include "picojson.h"
 #include "CommandDef.h"
 #include <fstream>
+#include<stdlib.h>
 
 typedef unsigned int  uint;
 typedef unsigned long long ulong;
@@ -23,6 +24,7 @@ typedef picojson::value object;
 
 #define MaxStringSize 64
 #define MaxArraySize 16
+#define Random(min,max) (rand() % max + min) //[min,max)
 
 extern std::string UNITY_STREAM_PATH;
 extern std::string UNITY_CACHE_PATH;

@@ -23,6 +23,7 @@
     <ClCompile Include="AIFactory.cpp" />
     <ClCompile Include="AITree.cpp" />
     <ClCompile Include="AITreeData.cpp" />
+    <ClCompile Include="AITreeImpleted.cpp" />
     <ClCompile Include="AIUtil.cpp" />
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="DefaultEquip.cpp" />
@@ -89,6 +90,7 @@
     <ClInclude Include="AITree.h" />
     <ClInclude Include="AITreeArg.h" />
     <ClInclude Include="AITreeData.h" />
+    <ClInclude Include="AITreeImpleted.h" />
     <ClInclude Include="AIUtil.h" />
     <ClInclude Include="CommandDef.h" />
     <ClInclude Include="Common.h" />

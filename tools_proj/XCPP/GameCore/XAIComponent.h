@@ -25,6 +25,11 @@ public:
 	void OnTickAI();
 	bool OnStartSkill(IArgs*, void*);
 	bool OnEndSkill(IArgs*, void*);
+	bool FindTargetByDistance(float dist, float angle);
+	bool ResetTarget();
+	bool DoSelectNearest();
+	bool DoSelectFarthest();
+	bool DoSelectRandom();
 
 public:
 	bool getIsCastingSkill(); 
@@ -46,6 +51,7 @@ private:
 	float _tick = 0;
 	float _timer = 0;
 	XEntity* _entity;
+	std::vector<XEntity*> targets;
 
 	// 行为树相关的变量
 	XEntity* _target;

@@ -46,6 +46,38 @@ void AITreeData::SetVariable(std::string name, GameObject* value)
 	g_cache[hash] = value;
 }
 
+bool AITreeData::ResetVariable(const char* name)
+{
+	bool rst =  false;
+	uint hash = xhash(name);
+	if (g_cache.find(hash)!= g_cache.end())
+	{
+		rst = true;
+		g_cache.erase(hash);
+	}
+	if (f_cache.find(hash) != f_cache.end())
+	{
+		rst = true;
+		f_cache.erase(hash);
+	}
+	if (i_cache.find(hash) != i_cache.end())
+	{
+		rst = true;
+		i_cache.erase(hash);
+	}
+	if (u_cache.find(hash) != u_cache.end())
+	{
+		rst = true;
+		u_cache.erase(hash);
+	}
+	if (b_cache.find(hash) != b_cache.end())
+	{
+		rst = true;
+		b_cache.erase(hash);
+	}
+	return rst;
+}
+
 std::unordered_map<uint, float> AITreeData::GetFloatCache()
 {
 	return this->f_cache;

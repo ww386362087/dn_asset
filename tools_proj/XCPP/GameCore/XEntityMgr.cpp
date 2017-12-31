@@ -52,6 +52,28 @@ void XEntityMgr::DetachFromHost()
 }
 
 
+ std::vector<XEntity*> XEntityMgr::GetAllEnemy(XEntity* e)
+ {
+	 EntityType type = (EntityType)(1 << (e->getAttributes()->FightGroup + Ship_Start));
+	 if (type == Ally) return _map_entities[Enemy];
+	 else if (type == Enemy) return _map_entities[Ally];
+	 return _empty;
+ }
+
+
+ std::vector<XEntity*> XEntityMgr::GetAllAlly(XEntity* e)
+ {
+	 EntityType type = (EntityType)(1 << (e->getAttributes()->FightGroup + Ship_Start));
+	 if (type == Ally) return _map_entities[Enemy];
+	 else if (type == Enemy) return _map_entities[Ally];
+	 return _empty;
+ }
+
+ std::vector<XEntity*> XEntityMgr::GetAllNPC()
+ {
+	 return _map_entities[Npc];
+ }
+
 XEntity* XEntityMgr::CreateEntity(uint staticid, Vector3 pos, Vector3 rot)
 {
 	XAttributes* attr = new XAttributes();

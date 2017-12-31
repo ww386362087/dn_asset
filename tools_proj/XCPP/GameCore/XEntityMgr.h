@@ -50,6 +50,9 @@ public:
 	void UnloadEntity(uint id);
 	XEntity* CreateEntity(uint staticid, Vector3 pos, Vector3 rot);
 	void InitAttr(int, XAttributes*);
+	std::vector<XEntity*> GetAllEnemy(XEntity* e);
+	std::vector<XEntity*> GetAllAlly(XEntity* e);
+	std::vector<XEntity*> GetAllNPC();
 
 public:
 	XPlayer* Player;

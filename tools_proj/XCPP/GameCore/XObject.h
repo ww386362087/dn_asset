@@ -35,7 +35,7 @@ public:
 
 	void DetachAllComponents();
 	template<class T> T* AttachComponent();
-	template<class T> T* GetComponnet();
+	template<class T> T* GetComponent();
 	template<class T> bool DetachComponent();
 
 protected:
@@ -90,7 +90,7 @@ template<class T> T* XObject::AttachComponent()
 	}
 }
 
-template<class T> T* XObject::GetComponnet()
+template<class T> T* XObject::GetComponent()
 {
 	std::string name = typeid(T).name();
 	uint uid = xhash(name.c_str());

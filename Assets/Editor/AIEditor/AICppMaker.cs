@@ -1,9 +1,6 @@
 ﻿using System.IO;
-using System.Collections.Generic;
 using UnityEngine;
 using AI.Runtime;
-using AI;
-using UnityEditor;
 
 /// <summary>
 /// author: alexpeng

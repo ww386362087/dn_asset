@@ -31,7 +31,7 @@ public:
 	const char* getAiBehaviour();
 	void setAIBehaviour(const char* ai);
 	double GetAttr(XAttributeDefine def);
-
+	uint getTypeID();
 
 	int AiHit;
 	int FightGroup;
