@@ -16,6 +16,8 @@ rm -rf CMakeFiles/
 
 rm -rf CMakeScripts/
 
+rm -rf Makefile
+
 rm -rf *.build/
 
 echo "clean success"

@@ -11,7 +11,7 @@ sh build_clean.sh
 echo "clean ..."
 
 #generate ios project
-cmake -DCMAKE_TOOLCHAIN_FILE=toolchains/ios.toolchain.cmake -DIOS_PLATFORM=iPhoneOS -DCMAKE_OSX_ARCHITECTURES='armv7s arm64' -GXcode 
+cmake -DCMAKE_TOOLCHAIN_FILE=toolchains/ios.toolchain.cmake -DIOS_PLATFORM=iPhoneOS -DCMAKE_OSX_ARCHITECTURES='armv7 armv7s arm64' -GXcode 
 	
 echo "xcode clean "
 
