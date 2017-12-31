@@ -48,7 +48,6 @@ void XEntityMgr::DetachFromHost()
 	attr->setPrefab(prow.prefab);
 	attr->setName(prow.name);
 	attr->setAIBehaviour(srow.aibehavior);
-	LOG("init:" + tostring(attr->AiBehavior));
 }
 
 
@@ -79,7 +78,6 @@ XEntity* XEntityMgr::CreateEntity(uint staticid, Vector3 pos, Vector3 rot)
 	XAttributes* attr = new XAttributes();
 	InitAttr(staticid, attr);
 
-	LOG("inxt:" + tostring(attr->AiBehavior));
 	attr->setAppearPosition(pos);
 	attr->setAppearQuaternion(rot);
 	XEntity* ent = PrepareEntity(attr);
@@ -95,7 +93,7 @@ XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 	GameObject* o = GameObjectMgr::Instance()->Create(str.c_str());
 	o->name = tostring(attr->getid()).c_str();
 	o->transform->position = attr->getAppearPostion();
-	o->transform->rotatiion = attr->getAppearQuaternion();
+	o->transform->rotation = attr->getAppearQuaternion();
 	x->Initilize(o, attr);
 	uint id = attr->getid();
 	if (!x->IsPlayer()) _dic_entities.insert(std::make_pair(id, x));
@@ -111,6 +109,7 @@ bool XEntityMgr::Add(EntityType type, XEntity* e)
 		if (vec[i] == e) exit = true;
 	}
 	if (exit) vec.push_back(e);
+	_hash_entities.insert(e);
 	return !exit;
 }
 
@@ -119,9 +118,9 @@ void XEntityMgr::UnloadEntity(uint id)
 	std::unordered_map<uint, XEntity*>::iterator itr = _dic_entities.find(id);
 	if (itr != _dic_entities.end())
 	{
-		_hash_entities.erase(itr->second);
-		itr->second->UnloadEntity();
 		_dic_entities.erase(id);
+		_hash_entities.erase(itr->second);
+		delete itr->second;
 	}
 	std::unordered_map<int, std::vector<XEntity*>>::iterator it;
 	for (it = _map_entities.begin(); it != _map_entities.end(); it++)
@@ -147,7 +146,6 @@ void XEntityMgr::UnloadAll()
 	std::unordered_set<XEntity*>::iterator itr;
 	for (itr = _hash_entities.begin(); itr != _hash_entities.end(); itr++)
 	{
-		(*itr)->UnloadEntity();
 		delete *itr;
 	}
 	_hash_entities.clear();

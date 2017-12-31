@@ -3,9 +3,25 @@
 #include "XAIComponent.h"
 #include "XSkillComponent.h"
 #include "Transform.h"
+#include "XAttributes.h"
+#include "XStateMachine.h"
 
 EntyCallBack eCallback;
 CompCallBack cCallback;
+
+
+XEntity::~XEntity()
+{
+	Unload();
+	OnUnintial();
+	delete _object;
+	delete _attr;
+	delete _pmachine;
+	_attr = NULL;
+	_object = NULL;
+	_transf = NULL;
+	_pmachine = NULL;
+}
 
 void XEntity::Update(float delta)
 {
@@ -91,13 +107,7 @@ XSkillMgr* XEntity::SkillManager()
 	return pskill ? pskill->SkillManager() : NULL;
 }
 
-void XEntity::UnloadEntity()
-{
-	_attr = 0;
-	_object = 0;
-	OnUnintial();
-	Unload();
-}
+
 
 bool XEntity::Valide(XEntity* e)
 {

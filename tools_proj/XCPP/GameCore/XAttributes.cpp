@@ -8,7 +8,8 @@ XAttributes::XAttributes()
 
 XAttributes::~XAttributes()
 {
-
+	_rot = Vector3::zero;
+	_pos = Vector3::zero;
 }
 
 uint XAttributes::getid()

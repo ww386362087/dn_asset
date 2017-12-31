@@ -23,7 +23,6 @@ extern "C"
 		InitPath(stream, cache);
 		LOG(s);
 		InitLogger(s + "Log/info.txt", s + "Log/warn.txt", s + "Log/error.txt");
-		PRINT << stream << " " << cache;
 		LOG("c++ initial success with path: " + s);
 	}
 
@@ -117,6 +116,11 @@ extern "C"
 	void iStopCore()
 	{
 		GameMain::Instance()->Stop();
+	}
+
+	void iQuitCore()
+	{
+		GameMain::Instance()->Quit();
 	}
 
 	void iTickCore(float delta)

@@ -20,6 +20,7 @@ class GameMain:public Singleton<GameMain>
 public:
 	void Start();
 	void Stop();
+	void Quit();
 	void Ontick(float delta);
 
 private:

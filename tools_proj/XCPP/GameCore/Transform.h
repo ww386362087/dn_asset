@@ -12,7 +12,7 @@ public:
 	
 	Vector3 position;
 	Vector3 scale;
-	Vector3 rotatiion;
+	Vector3 rotation;
 	Vector3 forward;
 	Transform* parent;
 	const char* name;

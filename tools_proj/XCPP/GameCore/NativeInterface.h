@@ -30,6 +30,7 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT void iStartCore();
 	ENGINE_INTERFACE_EXPORT void iStopCore();
 	ENGINE_INTERFACE_EXPORT void iTickCore(float delta);
+	ENGINE_INTERFACE_EXPORT void iQuitCore();
 };
 
 

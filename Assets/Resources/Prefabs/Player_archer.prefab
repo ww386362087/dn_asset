@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 54655358407414842}
   - component: {fileID: 137482232026764992}
   m_Layer: 11
-  m_Name: Player_archer_SkinnedMesh_createchar
+  m_Name: Player_archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

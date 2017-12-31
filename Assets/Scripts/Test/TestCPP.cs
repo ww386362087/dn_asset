@@ -82,6 +82,15 @@ public class TestCPP : MonoBehaviour
 #else
     [DllImport("GameCore")]
 #endif
+    public static extern void iQuitCore();
+
+
+
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("GameCore")]
+#endif
     public static extern void iGoInfo(string name,byte command, ref VectorArr vec);
 
     public delegate void CppDelegate(byte type, IntPtr p);
@@ -133,7 +142,8 @@ public class TestCPP : MonoBehaviour
                 break;
             case ASCII.G:
                 XDebug.TCLog("load object: " + command);
-                XResources.LoadInPool(command);
+                //XDebug.TCLog("cammond: " + command.Length);
+                //XResources.LoadInPool(command);
                 break;
             case ASCII.U:
                 XDebug.TCLog("unload: " + command);
@@ -154,7 +164,12 @@ public class TestCPP : MonoBehaviour
         GUILayout.TextArea(ui_rst, ui_sty, ui_op2);
         GUILayout.EndHorizontal();
     }
-    
+
+    void OnApplicationQuit()
+    {
+        iQuitCore();
+    }
+
     private void TableGUI()
     {
         GUILayout.BeginVertical();

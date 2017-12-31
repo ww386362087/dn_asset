@@ -15,6 +15,7 @@ class XStateMachine;
 class XEntity:public XObject
 {
 public:
+	~XEntity();
 	virtual void Update(float delta);
 	virtual void LateUpdate();
 	virtual void AttachToHost();
@@ -36,7 +37,6 @@ public:
 	void MoveForward(Vector3 forward);
 	void StopMove();
 	void OnDied();
-	void UnloadEntity();
 	uint EntityID;
 	static bool Valide(XEntity* e);
 	static XEntity* ValidEntity(uint id);

@@ -95,7 +95,7 @@ extern "C"
 			break;
 		case 'r':
 		case 'R':
-			arr = vec2arr(go->transform->rotatiion);
+			arr = vec2arr(go->transform->rotation);
 			break;
 		case 's':
 		case 'S':

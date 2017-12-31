@@ -28,3 +28,9 @@ void GameMain::Stop()
 {
 	m_start = false;
 }
+
+void GameMain::Quit()
+{
+	XEntityMgr::Instance()->UnloadAll();
+	XTimerMgr::Instance()->RemoveAllTimer();
+}

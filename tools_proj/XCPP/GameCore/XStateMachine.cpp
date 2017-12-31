@@ -1,5 +1,5 @@
 #include "XStateMachine.h"
-
+#include "XSkillComponent.h"
 
 
 XStateMachine::XStateMachine()
@@ -9,6 +9,15 @@ XStateMachine::XStateMachine()
 
 XStateMachine::~XStateMachine()
 {
+	delete _current;
+	delete _pre;
+	delete _default;
+	delete _skill;
+
+	_skill = NULL;
+	_default = NULL;
+	_current = NULL;
+	_skill = NULL;
 }
 
 

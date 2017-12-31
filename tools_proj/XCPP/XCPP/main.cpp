@@ -38,6 +38,7 @@ DllPatch patch;
 DllCallWithVoid vect;
 DllCallWithVoid start;
 DllCallWithVoid stop;
+DllCallWithVoid quit;
 DllCallFloatWithVoid tick;
 DllGetRow row;
 
@@ -125,28 +126,6 @@ bool OnCallback(unsigned char type, const char* cont)
 	return true;
 }
 
-struct Str
-{
-	int a;
-};
-unordered_map<int, vector<bool>> mpool;
-void StlTest()
-{
-	mpool[2].push_back(true);
-	cout << "map size:" << mpool.size() << " set size: " << mpool[2].size() << endl << endl;
-
-	std::vector<Str> vec;
-	Str* s = new Str();
-	s->a = 3;
-	vec.push_back(*s);
-
-	cout << s << endl;
-	delete s;
-	vec.erase(vec.begin());
-	cout << s << " size: "<<vec.size()<<endl << endl;
-
-}
-
 void main()
 {
 	cout << "**********  main **********" << endl;
@@ -169,7 +148,8 @@ void main()
 	vect = (DllCallWithVoid)GetProcAddress(hInst, "iVector");
 	start = (DllCallWithVoid)GetProcAddress(hInst, "iStartCore");
 	stop = (DllCallWithVoid)GetProcAddress(hInst, "iStopCore");
-	tick = (DllCallFloatWithVoid)GetProcAddress(hInst, "iTickCore");
+	quit = (DllCallWithVoid)GetProcAddress(hInst, "iQuitCore");
+	tick = (DllCallFloatWithVoid)GetProcAddress(hInst, "iQuitCore");
 	row = (DllGetRow)GetProcAddress(hInst, "iGetXEntityPresentationRow");
 	cb(OnCallback);
 	init("", "");
@@ -216,8 +196,8 @@ void main()
 		case 'o':
 			stop();
 			break;
-		case 'b':
-			StlTest();
+		case 'u':
+			quit();
 			break;
 		case 'c':
 			tick(0.4f);
