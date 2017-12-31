@@ -7,7 +7,6 @@ class  GameObject;
 class Transform
 {
 public:
-	Transform();
 	Transform(const char* nm);
 	~Transform();
 	
