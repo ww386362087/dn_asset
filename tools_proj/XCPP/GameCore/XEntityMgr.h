@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include "Common.h"
 #include "Singleton.h"
+#include "GameObjectMgr.h"
 
 class XEntity;
 class XRole;

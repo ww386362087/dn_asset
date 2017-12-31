@@ -14,9 +14,10 @@
 #include <sstream> 
 #include <string>
 #include "picojson.h"
+#include "Vector3.h"
 #include "CommandDef.h"
 #include <fstream>
-#include<stdlib.h>
+#include <stdlib.h>
 
 typedef unsigned int  uint;
 typedef unsigned long long ulong;
@@ -60,6 +61,8 @@ void tobytes(std::string str);
 void InitPath(std::string stream,std::string cache);
 
 uint xhash(const char* ch);
+
+float* vec2arr(Vector3 v);
 
 void split(const std::string& s, std::vector<std::string>& v, const std::string& c);
 

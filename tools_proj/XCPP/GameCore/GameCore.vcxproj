@@ -32,6 +32,7 @@
     <ClCompile Include="FashionSuit.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectMgr.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="NativeInterface.cpp" />
     <ClCompile Include="NativeReader.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="FashionSuit.h" />
     <ClInclude Include="GameMain.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectMgr.h" />
     <ClInclude Include="IXStateTransform.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="NativeInterface.h" />

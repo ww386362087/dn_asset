@@ -16,7 +16,7 @@ AIRuntimeStatusRandom::~AIRuntimeStatusRandom()
 void AIRuntimeStatusRandom::Init(AITaskData* data)
 {
 	AIBase::Init(data);
-	Int32mAIArgProb = data->vars["Int32mAIArgProb"]->val.get<double>(); 
+	Int32mAIArgProb = (int)data->vars["Int32mAIArgProb"]->val.get<double>(); 
 	
 }
 

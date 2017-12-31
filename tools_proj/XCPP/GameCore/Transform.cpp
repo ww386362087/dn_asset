@@ -1,7 +1,6 @@
 #include "Transform.h"
 
 
-
 Transform::Transform()
 {
 	position = Vector3::zero;
@@ -17,6 +16,10 @@ Transform::Transform(const char* nm)
 
 Transform::~Transform()
 {
+	delete[] name;
+	delete parent;
+	delete gameObject;
+	name = NULL;
 }
 
 

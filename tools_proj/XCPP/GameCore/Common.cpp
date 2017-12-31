@@ -32,6 +32,15 @@ uint xhash(const char* pChar)
 	return hash;
 }
 
+float* vec2arr(Vector3 v)
+{
+	float* f = new float[3];
+	f[0] = v.x;
+	f[1] = v.y;
+	f[2] = v.z;
+	return f;
+}
+
 void split(const std::string& s, std::vector<std::string>& v, const std::string& c)
 {
 	std::string::size_type pos1, pos2;

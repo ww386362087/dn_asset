@@ -16,7 +16,7 @@ AIRuntimeRotateToTarget::~AIRuntimeRotateToTarget()
 void AIRuntimeRotateToTarget::Init(AITaskData* data)
 {
 	AIBase::Init(data);
-	floatmAIArgAngle = data->vars["floatmAIArgAngle"]->val.get<double>(); 
+	floatmAIArgAngle = (float)data->vars["floatmAIArgAngle"]->val.get<double>(); 
 	
 }
 

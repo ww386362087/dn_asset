@@ -107,10 +107,10 @@
       <Filter>common\native</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>common\unity</Filter>
+      <Filter>unity</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>common\unity</Filter>
+      <Filter>unity</Filter>
     </ClCompile>
     <ClCompile Include="XAttributes.cpp">
       <Filter>component</Filter>
@@ -192,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="AITreeImpleted.cpp">
       <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectMgr.cpp">
+      <Filter>unity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,10 +304,10 @@
       <Filter>common\native</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>common\unity</Filter>
+      <Filter>unity</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>common\unity</Filter>
+      <Filter>unity</Filter>
     </ClInclude>
     <ClInclude Include="XAttributes.h">
       <Filter>component</Filter>
@@ -420,6 +423,9 @@
     <ClInclude Include="AITreeImpleted.h">
       <Filter>ai</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectMgr.h">
+      <Filter>unity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -458,9 +464,6 @@
     <Filter Include="common\event">
       <UniqueIdentifier>{74dba9bc-4a14-4af8-a9c8-2300dfcb8038}</UniqueIdentifier>
     </Filter>
-    <Filter Include="common\unity">
-      <UniqueIdentifier>{5beea8bd-414f-4845-95a3-1ec38c7f253c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="common\def">
       <UniqueIdentifier>{a6bd96aa-7df5-4cc5-8124-9465b612cc64}</UniqueIdentifier>
     </Filter>
@@ -475,6 +478,9 @@
     </Filter>
     <Filter Include="ai\runtime">
       <UniqueIdentifier>{752807b0-8cb2-4a1a-ace5-a94f0608e462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unity">
+      <UniqueIdentifier>{5beea8bd-414f-4845-95a3-1ec38c7f253c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

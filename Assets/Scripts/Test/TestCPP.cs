@@ -77,12 +77,12 @@ public class TestCPP : MonoBehaviour
 #endif
     public static extern void iTickCore(float delta);
 
-    //c++的回调指令 最多支持256个指令
-    const byte CLtog = 76;//'L'
-    const byte CWarn = 87;//'W'
-    const byte CEror = 69;//'E'
-    const byte CLoad = 71;//'G'
-    const byte CUnLo = 85;//'U'
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("GameCore")]
+#endif
+    public static extern void iGoInfo(string name,byte command, ref VectorArr vec);
 
     public delegate void CppDelegate(byte type, IntPtr p);
 
@@ -122,11 +122,22 @@ public class TestCPP : MonoBehaviour
         string command = Marshal.PtrToStringAnsi(ptr);
         switch (t)
         {
-            case CLtog: XDebug.TCLog(command); break;
-            case CWarn: XDebug.TCWarn(command); break;
-            case CEror: XDebug.TCError(command); break;
-            case CLoad: XDebug.TCLog("load object: " + command); break;
-            case CUnLo: XDebug.TCLog("unload: " + command); break;
+            case ASCII.L:
+                XDebug.TCLog(command);
+                break;
+            case ASCII.W:
+                XDebug.TCWarn(command);
+                break;
+            case ASCII.E:
+                XDebug.TCError(command);
+                break;
+            case ASCII.G:
+                XDebug.TCLog("load object: " + command);
+                XResources.LoadInPool(command);
+                break;
+            case ASCII.U:
+                XDebug.TCLog("unload: " + command);
+                break;
             default:
                 XDebug.LogError(t + " is not parse symbol: " + command);
                 break;

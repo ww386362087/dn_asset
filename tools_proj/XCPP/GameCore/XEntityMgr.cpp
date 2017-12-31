@@ -92,7 +92,7 @@ XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 	XEntity* x = new XEntity();
 	x->setAttributes(attr);
 	std::string str = "Prefabs/" + tostring(attr->getPrefab());
-	GameObject* o = new GameObject(str.c_str());
+	GameObject* o = GameObjectMgr::Instance()->Create(str.c_str());
 	o->name = tostring(attr->getid()).c_str();
 	o->transform->position = attr->getAppearPostion();
 	o->transform->rotatiion = attr->getAppearQuaternion();

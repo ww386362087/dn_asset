@@ -210,11 +210,15 @@ public class AICppMaker
                 break;
             case "System.Int32":
             case "int":
-            case "System.Single":
-            case "float":
+                t = "(int)" + obj + ".get<double>();";
+                break;
             case "System.UInt32":
             case "uint":
-                t = obj + ".get<double>();";
+                t = "(uint)" + obj + ".get<double>();";
+                break;
+            case "System.Single":
+            case "float":
+                t = "(float)"+obj + ".get<double>();";
                 break;
             case "System.Boolean":
             case "bool":

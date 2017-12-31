@@ -1,9 +1,7 @@
 #include "GameObject.h"
 #include "Transform.h"
-#include "NativeInterface.h"
 #include "CommandDef.h"
 
-extern SharpCALLBACK callback;
 
 GameObject::GameObject(const char* nm)
 {
@@ -11,20 +9,22 @@ GameObject::GameObject(const char* nm)
 	if (transform == NULL)
 	{
 		transform = new Transform(name);
+		uid = xhash(name);
+		transform->position = Vector3::zero;
+		transform->rotatiion = Vector3::zero;
+		transform->scale = Vector3::one;
 		transform->gameObject = this;
-		callback(CMLoadGo, name);
 	}
 }
 
 GameObject::~GameObject()
 {
+	delete transform;
+	delete[] name;
+	delete[] tag;
+	name = NULL;
+	tag = NULL;
+	delete gameObject;
 }
 
 
-void GameObject::Unload()
-{
-	if (name)
-	{
-		callback(CMUnloadGo, name);
-	}
-}
