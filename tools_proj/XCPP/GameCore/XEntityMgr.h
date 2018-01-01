@@ -40,6 +40,7 @@ enum EntityType
 class XEntityMgr:public Singleton<XEntityMgr>
 {
 public:
+	~XEntityMgr();
 	void Update(float delta);
 	void LateUpdate();
 	void AttachToHost();

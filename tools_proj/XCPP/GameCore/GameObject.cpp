@@ -20,13 +20,9 @@ GameObject::GameObject(const char* nm)
 GameObject::~GameObject()
 {
 	delete transform;
-	delete gameObject;
-	//delete[] name;
-	//delete[] tag;
-	//name = NULL;
-	//tag = NULL;
+	name = NULL;
+	tag = NULL;
 	transform = NULL;
-	gameObject = NULL;
 }
 
 

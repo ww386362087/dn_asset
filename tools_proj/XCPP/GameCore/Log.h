@@ -17,8 +17,6 @@
 #include <sstream>
 #include "NativeInterface.h"
 
-
-// 日志文件的类型    
 enum LogLevel
 {  
    INFO,  
@@ -28,10 +26,6 @@ enum LogLevel
 };  
 
 
-/// 初始化日志文件  
-/// param info_log_filename 信息文件的名字  
-/// param warn_log_filename 警告文件的名字  
-/// param error_log_filename 错误文件的名字 
 void InitLogger(const std::string& info_log_filename,  
                 const std::string& warn_log_filename,  
                 const std::string& error_log_filename); 

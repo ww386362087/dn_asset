@@ -85,7 +85,6 @@ public class TestCPP : MonoBehaviour
     public static extern void iQuitCore();
 
 
-
 #if UNITY_IPHONE || UNITY_XBOX360
 	[DllImport("__Internal")]
 #else
@@ -141,9 +140,9 @@ public class TestCPP : MonoBehaviour
                 XDebug.TCError(command);
                 break;
             case ASCII.G:
-                XDebug.TCLog("load object: " + command);
-                //XDebug.TCLog("cammond: " + command.Length);
-                //XResources.LoadInPool(command);
+                XDebug.TCLog("load object: " + command+" len: "+command.Length);
+                GameObject go = XResources.Load<GameObject>(command,AssetType.Prefab);
+                go.name = command;
                 break;
             case ASCII.U:
                 XDebug.TCLog("unload: " + command);

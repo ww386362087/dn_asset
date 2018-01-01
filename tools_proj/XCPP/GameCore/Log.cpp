@@ -51,10 +51,10 @@ std::ostream& Log::Start(LogLevel level, std::string text, const std::string &fi
 		case ERR:callback(CMError, text.c_str()); break;
 		}
 	}
-	std::ostringstream ostr;
+	std::ostream& ostr = GetStream(level);
 	size_t t = file.find_last_of('\\');
-	ostr << tmp << " " << func << " at:" << file.substr(t + 1) << ":" << line ;
-	return GetStream(level) << ostr.str();
+	ostr << tmp << " " << func << " at:" << file.substr(t + 1) << ":" << line << std::endl;
+	return  ostr;
 }
 
 

@@ -12,7 +12,9 @@ Transform::Transform(const char* nm)
 
 Transform::~Transform()
 {
-	//delete[] name;
+	parent = 0;
+	name = 0;
+	gameObject = 0;
 }
 
 

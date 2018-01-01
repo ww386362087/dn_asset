@@ -7,9 +7,10 @@
 
 extern SharpCALLBACK callback;
 
-GameObjectMgr::~GameObjectMgr()
+
+void GameObjectMgr::Clear()
 {
-	for (std::unordered_map<uint, GameObject*>::iterator it = pool.begin(); it != pool.end(); it++)
+	for (std::map<uint, GameObject*>::iterator it = pool.begin(); it != pool.end(); it++)
 	{
 		delete it->second;
 	}

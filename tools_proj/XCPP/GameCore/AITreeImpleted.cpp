@@ -340,7 +340,7 @@ AIStatus AITreeImpleted::RandomCompareUpdate(XEntity* entity, int prob)
 Transform* AITreeImpleted::SelectMoveTargetById(XEntity* entity, int objectid)
 {
 	std::vector<XEntity*> ens = XEntityMgr::Instance()->GetAllEnemy(entity);
-	for (int i = 0, max = ens.size(); i < max; i++)
+	for (size_t i = 0, max = ens.size(); i < max; i++)
 	{
 		if (XEntity::Valide(ens[i]) && ens[i]->getAttributes()->getTypeID() == objectid)
 		{

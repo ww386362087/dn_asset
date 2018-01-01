@@ -1,7 +1,7 @@
 #ifndef  __GameObjectPool__
 #define  __GameObjectPool__
 
-#include <unordered_map>
+#include <map>
 #include "Common.h"
 #include "Singleton.h"
 
@@ -10,8 +10,7 @@ class GameObject;
 class GameObjectMgr:public Singleton<GameObjectMgr>
 {
 public:
-	~GameObjectMgr();
-
+	void Clear();
 	GameObject* Create(const char* name);
 	bool Remv(GameObject*);
 	bool Remv(const char* name);
@@ -21,7 +20,7 @@ public:
 
 private:
 	bool Add(GameObject*);
-	std::unordered_map<uint, GameObject*> pool;
+	std::map<uint, GameObject*> pool;
 
 };
 

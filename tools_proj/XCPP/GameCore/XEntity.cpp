@@ -14,8 +14,6 @@ XEntity::~XEntity()
 {
 	Unload();
 	OnUnintial();
-	delete _object;
-	delete _attr;
 	delete _pmachine;
 	_attr = NULL;
 	_object = NULL;

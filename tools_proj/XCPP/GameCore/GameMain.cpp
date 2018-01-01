@@ -31,6 +31,7 @@ void GameMain::Stop()
 
 void GameMain::Quit()
 {
+	GameObjectMgr::Instance()->Clear();
 	XEntityMgr::Instance()->UnloadAll();
 	XTimerMgr::Instance()->RemoveAllTimer();
 }

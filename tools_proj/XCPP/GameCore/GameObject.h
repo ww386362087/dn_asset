@@ -15,7 +15,6 @@ public:
 	const char* tag;
 	Transform* transform;
 	int layer;
-	GameObject* gameObject;
 
 private:
 	uint uid;

@@ -44,7 +44,6 @@ DllGetRow row;
 
 void DebugInfo()
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 	cout << "** a-Add  s-Sub  t-Read j-Json  q-Quit **" << endl;
 	cout << "** input your command:";
 }
@@ -102,16 +101,16 @@ bool OnCallback(unsigned char type, const char* cont)
 	switch (type)
 	{
 	case 'L':
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
-		cout << "[log]> " << cont << endl << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN);
+		cout << "[log]> " << cont << endl ;
 		break;
 	case 'W':
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);
-		cout << "[warn]> " << cont << endl << endl;
+		cout << "[warn]> " << cont << endl ;
 		break;
 	case 'E':
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
-		cout << "[error]> " << cont << endl << endl;
+		cout << "[error]> " << cont << endl ;
 		break;
 	case 'G':
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE);
@@ -123,6 +122,7 @@ bool OnCallback(unsigned char type, const char* cont)
 	default:
 		break;
 	}
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 	return true;
 }
 
@@ -177,8 +177,7 @@ void main()
 			jump = true;
 			break;
 		case 'j':
-			json("json.txt");
-			//json("PlayerAutoFight.txt");
+			json("json.txt"); //json("PlayerAutoFight.txt");
 			cout << endl << endl;
 			break;
 		case 'p':
@@ -198,6 +197,7 @@ void main()
 			break;
 		case 'u':
 			quit();
+			cout << "has quit game" << endl;
 			break;
 		case 'c':
 			tick(0.4f);

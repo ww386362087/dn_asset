@@ -5,6 +5,10 @@
 #include "XEntityStatistics.h"
 #include "XEntityPresentation.h"
 
+XEntityMgr::~XEntityMgr()
+{
+}
+
 void XEntityMgr::Update(float delta)
 {
 	for (std::unordered_set<XEntity*>::iterator itr = _hash_entities.begin(); itr != _hash_entities.end(); itr++)
@@ -93,10 +97,12 @@ XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 	GameObject* o = GameObjectMgr::Instance()->Create(str.c_str());
 	o->name = tostring(attr->getid()).c_str();
 	o->transform->position = attr->getAppearPostion();
-	o->transform->rotation = attr->getAppearQuaternion();
+	Vector3 rot = attr->getAppearQuaternion();
+	o->transform->rotation = rot;
 	x->Initilize(o, attr);
 	uint id = attr->getid();
-	if (!x->IsPlayer()) _dic_entities.insert(std::make_pair(id, x));
+	if (!x->IsPlayer()) 
+		_dic_entities.insert(std::make_pair(id, x));
 	return x;
 }
 
@@ -146,11 +152,14 @@ void XEntityMgr::UnloadAll()
 	std::unordered_set<XEntity*>::iterator itr;
 	for (itr = _hash_entities.begin(); itr != _hash_entities.end(); itr++)
 	{
+		delete (*itr)->getAttributes();
 		delete *itr;
 	}
 	_hash_entities.clear();
 	_map_entities.clear();
 	_dic_entities.clear();
+	delete Player;
+	Player = NULL;
 }
 
 
