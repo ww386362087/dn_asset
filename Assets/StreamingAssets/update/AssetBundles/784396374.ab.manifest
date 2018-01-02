@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1124712105
+CRC: 672748318
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 42edcefb31798969bc551f2643635b8b
+    Hash: f39a4e1e0d777e141d4ad30b5fefbb75
   TypeTreeHash:
     serializedVersion: 2
     Hash: feb5a159a40dace7173aee3bc56ad240
@@ -48,4 +48,4 @@ ClassTypes:
 Assets:
 - Assets/Resources/UI/UIRoot.prefab
 Dependencies:
-- D:/projects/dn_asset/Assets/StreamingAssets/update/AssetBundles/2639486614.ab
+- D:/projects/dn_asset/Assets/StreamingAssets/update/Android/AssetBundles/2639486614.ab

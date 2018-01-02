@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 418695402
+CRC: 1855215143
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a1026f370b3b22fe7131c262f23af242
+    Hash: c11326673c2fe0d71aaf8c911ac75545
   TypeTreeHash:
     serializedVersion: 2
     Hash: 189ea49457fee455dd67458895b48280
@@ -34,4 +34,4 @@ ClassTypes:
 Assets:
 - Assets/Resources/UI/Canvas1.prefab
 Dependencies:
-- D:/projects/dn_asset/Assets/StreamingAssets/update/AssetBundles/749732696.ab
+- D:/projects/dn_asset/Assets/StreamingAssets/update/Android/AssetBundles/749732696.ab

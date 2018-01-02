@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2270844716
+CRC: 1940981136
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 016c3211b699317b86e0f10a470fb03d
+    Hash: 61d68983e3c7d93fea98b36cc375cfa3
   TypeTreeHash:
     serializedVersion: 2
     Hash: c1b4406871f256ee5d914e81be9796c0
@@ -26,4 +26,4 @@ ClassTypes:
 Assets:
 - Assets/Resources/UI/JoyStick.prefab
 Dependencies:
-- D:/projects/dn_asset/Assets/StreamingAssets/update/AssetBundles/749732696.ab
+- D:/projects/dn_asset/Assets/StreamingAssets/update/Android/AssetBundles/749732696.ab
