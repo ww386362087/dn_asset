@@ -45,6 +45,7 @@ protected:
 	virtual void EventSubscribe();
 	virtual void EventUnsubscribe();
 	
+protected:
 	std::unordered_map<uint, XComponent*> components;
 	std::unordered_map<uint, XDelegate*> eventMap;
 };

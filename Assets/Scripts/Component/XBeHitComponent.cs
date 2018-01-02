@@ -19,10 +19,10 @@ public class XBeHitComponent : XComponent, IHitHoster
 
     protected override UpdateState state { get { return UpdateState.FRAME; } }
 
-    public override void OnInitial(XObject _obj)
+    public override void OnInitial(XEntity enty)
     {
-        base.OnInitial(_obj);
-        _entity = _obj as XEntity;
+        base.OnInitial(enty);
+        _entity = enty;
         InitHitAnim();
         InitAttr();
     }

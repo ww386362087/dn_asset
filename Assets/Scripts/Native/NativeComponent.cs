@@ -1,4 +1,4 @@
-﻿public class NativeComponent
+﻿public class NativeComponent:XObject
 {
     private float _time = 0;
     private bool _double = false;

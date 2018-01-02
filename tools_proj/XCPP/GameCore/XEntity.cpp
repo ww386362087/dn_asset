@@ -23,11 +23,12 @@ XEntity::~XEntity()
 
 void XEntity::Update(float delta)
 {
+	for (std::unordered_map<uint, XComponent*>::iterator it = components.begin();it!=components.end();it++)
+	{
+		it->second->Update(delta);
+	}
 }
 
-void XEntity::LateUpdate()
-{
-}
 
 void XEntity::AttachToHost()
 {
@@ -103,7 +104,6 @@ XSkillMgr* XEntity::SkillManager()
 	XSkillComponent* pskill = GetComponent<XSkillComponent>();
 	return pskill ? pskill->SkillManager() : NULL;
 }
-
 
 
 bool XEntity::Valide(XEntity* e)

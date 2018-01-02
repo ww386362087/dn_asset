@@ -20,14 +20,6 @@ void XEntityMgr::Update(float delta)
 	}
 }
 
-void XEntityMgr::LateUpdate()
-{
-	for (std::unordered_set<XEntity*>::iterator itr = _hash_entities.begin(); itr != _hash_entities.end(); itr++)
-	{
-		(*itr)->LateUpdate();
-	}
-}
-
 void XEntityMgr::AttachToHost()
 {
 	for (std::unordered_set<XEntity*>::iterator itr = _hash_entities.begin(); itr != _hash_entities.end(); itr++)
@@ -195,8 +187,6 @@ XPlayer* XEntityMgr::CreatePlayer()
 	int staticid = 2;
 	XAttributes* attr = new XAttributes();
 	InitAttr(staticid, attr);
-	attr->setAppearPosition(Vector3::zero);
-	attr->setAppearQuaternion(Vector3::zero);
 	return Player = dynamic_cast<XPlayer*>(PrepareEntity(attr));
 }
 

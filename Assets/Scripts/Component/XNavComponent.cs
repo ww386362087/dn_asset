@@ -20,10 +20,10 @@ public class XNavComponent : XComponent
         get { return UpdateState.FRAME; }
     }
 
-    public override void OnInitial(XObject o)
+    public override void OnInitial(XEntity enty)
     {
-        base.OnInitial(o);
-        _entity = o as XEntity;
+        base.OnInitial(enty);
+        _entity = enty;
         _bNav = false;
     }
 

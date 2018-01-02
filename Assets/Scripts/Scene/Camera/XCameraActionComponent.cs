@@ -5,7 +5,7 @@
 /// 或者插值到设定的目标值
 /// </summary>
 
-class XCameraActionComponent : XComponent
+class XCameraActionComponent : XObject
 {
     private XCamera _camera = null;
 
@@ -27,21 +27,14 @@ class XCameraActionComponent : XComponent
     private float _flowSpeed = 0.2f;//the value must be less 1f
     
 
-    protected override UpdateState state
+    public void OnInitial(XCamera obj)
     {
-        get { return UpdateState.FRAME; }
-    }
-
-    public override void OnInitial(XObject _obj)
-    {
-        base.OnInitial(_obj);
-        _camera = _obj as XCamera;
+        _camera = obj;
     }
 
 
-    public override void OnUninit()
+    public void OnUninit()
     {
-        base.OnUninit();
         _camera = null;
     }
 
@@ -52,7 +45,7 @@ class XCameraActionComponent : XComponent
         RegisterEvent(XEventDefine.XEvent_Camera_Action, OnCameraAction);
     }
 
-    public override void OnUpdate(float delta)
+    public void Update(float delta)
     {
         if (XGesture.singleton.Working)
         {
@@ -111,8 +104,7 @@ class XCameraActionComponent : XComponent
             _auto = false;
         }
     }
-
-
+    
 
     private void OnCameraAction(XEventArgs e)
     {

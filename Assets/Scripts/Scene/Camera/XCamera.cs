@@ -24,6 +24,9 @@ public class XCamera : XObject
     private Vector3 _dummyCamera_pos = Vector3.zero;
     private Quaternion _dummyCamera_quat = Quaternion.identity;
 
+    private XCameraActionComponent _act_component;
+    private XCameraCloseUpComponent _close_component;
+
 
     public Transform CameraTrans { get { return _cameraTransform; } }
 
@@ -76,8 +79,10 @@ public class XCamera : XObject
     public void OnEnterSceneFinally()
     {
         _target = XEntityMgr.singleton.Player;
-        AttachComponent<XCameraActionComponent>();
-        AttachComponent<XCameraCloseUpComponent>();
+        _act_component = new XCameraActionComponent();
+        _act_component.OnInitial(this);
+        _close_component = new XCameraCloseUpComponent();
+        _close_component.OnInitial(this);
     }
 
     public void Uninitial()
@@ -89,13 +94,17 @@ public class XCamera : XObject
         _overrideController = null;
         _target = null;
         GameObject.Destroy(_dummyObject);
-        DetachAllComponents();
+        _act_component.OnUninit();
+        _close_component.OnUninit();
         base.Unload();
     }
 
     public void Update(float delta)
     {
-        UpdateComponents(delta);
+        if (_act_component != null)
+        {
+            _act_component.Update(delta);
+        }
     }
 
     public void LateUpdate()

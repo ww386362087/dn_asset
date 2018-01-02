@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using XTable;
 
 /// <summary>
@@ -41,6 +42,8 @@ public class XEntity : XObject
     protected bool _force_move = false;
     private Vector3 _pos = Vector3.zero;
     protected XStateDefine _state = XStateDefine.XState_Idle;
+
+    protected Dictionary<uint, XComponent> components;
 
     public uint EntityID
     {
@@ -148,15 +151,17 @@ public class XEntity : XObject
         _transf = o.transform;
         _attr = attr;
         _present = XTableMgr.GetTable<XEntityPresentation>().GetItemID(_attr.PresentID);
+        components = new Dictionary<uint, XComponent>();
         OnInitial();
     }
 
     public void UnloadEntity()
     {
+        OnUnintial();
         _attr = null;
         XResources.Destroy(_object);
         _object = null;
-        OnUnintial();
+        DetachAllComponents();
         base.Unload();
     }
 
@@ -290,6 +295,83 @@ public class XEntity : XObject
             _timer = Time.time;
         }
         return false;
+    }
+
+    public T AttachComponent<T>() where T : XComponent, new()
+    {
+        uint uid = XCommon.singleton.XHash(typeof(T).Name);
+        if (components.ContainsKey(uid))
+        {
+            return components[uid] as T;
+        }
+        else
+        {
+            T com = new T();
+            com.OnInitial(this);
+            components.Add(uid, com);
+            return com;
+        }
+    }
+
+    public bool DetachComponent<T>() where T : XComponent, new()
+    {
+        return DetachComponent(typeof(T).Name);
+    }
+
+
+    public T GetComponent<T>() where T : XComponent
+    {
+        uint uid = XCommon.singleton.XHash(typeof(T).Name);
+        if (components != null && components.ContainsKey(uid)) return components[uid] as T;
+        return null;
+    }
+
+    //for native or lua interface
+    public object GetComponent(string name)
+    {
+        uint uid = XCommon.singleton.XHash(name);
+        if (components != null && components.ContainsKey(uid)) return components[uid];
+        return null;
+    }
+
+    //for native or lua interface
+    public bool DetachComponent(string name)
+    {
+        uint uid = XCommon.singleton.XHash(name);
+        if (components != null && components.ContainsKey(uid))
+        {
+            components[uid].OnUninit();
+            components[uid] = null;
+            components.Remove(uid);
+            return true;
+        }
+        return false;
+    }
+
+
+    public void DetachAllComponents()
+    {
+        if (components != null)
+        {
+            var e = components.GetEnumerator();
+            while (e.MoveNext())
+            {
+                e.Current.Value.OnUninit();
+            }
+        }
+        components.Clear();
+    }
+
+    protected void UpdateComponents(float delta)
+    {
+        if (components != null)
+        {
+            var e = components.GetEnumerator();
+            while (e.MoveNext())
+            {
+                e.Current.Value.Update(delta);
+            }
+        }
     }
 
 }

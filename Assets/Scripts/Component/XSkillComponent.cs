@@ -47,10 +47,10 @@ public class XSkillComponent : XComponent, ISkillHoster
         }
     }
 
-    public override void OnInitial(XObject _obj)
+    public override void OnInitial(XEntity enty)
     {
-        base.OnInitial(_obj);
-        _entity = _obj as XEntity;
+        base.OnInitial(enty);
+        _entity = enty;
         _attribute = new XSkillAttributes(this, _entity.EntityTransfer);
         _anim = _entity.GetComponent<XAnimComponent>();
     }

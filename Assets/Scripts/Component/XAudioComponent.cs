@@ -1,12 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class XAudioComponent : XComponent
+﻿public class XAudioComponent : XComponent
 {
    
-    public override void OnInitial(XObject _obj)
+    public override void OnInitial(XEntity enty)
     {
-        base.OnInitial(_obj);
+        base.OnInitial(enty);
     }
 
     public override void OnUninit()

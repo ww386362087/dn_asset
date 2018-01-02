@@ -49,10 +49,10 @@ public class XAIComponent : XComponent
         get { return UpdateState.FRAME; }
     }
 
-    public override void OnInitial(XObject _obj)
+    public override void OnInitial(XEntity enty)
     {
-        base.OnInitial(_obj);
-        _entity = _obj as XEntity;
+        base.OnInitial(enty);
+        _entity = enty;
         if (!Application.isEditor)
         {
             _enable_runtime = true;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class XCameraCloseUpComponent : XComponent
+class XCameraCloseUpComponent :XObject
 {
     private XCamera _camera = null;
 
@@ -8,16 +8,14 @@ class XCameraCloseUpComponent : XComponent
     private float _pre_y = 0;
 
 
-    public override void OnInitial(XObject _obj)
+    public void OnInitial(XCamera cam)
     {
-        base.OnInitial(_obj);
-        _camera = _obj as XCamera;
+        _camera = cam;
     }
 
 
-    public override void OnUninit()
+    public void OnUninit()
     {
-        base.OnUninit();
         _camera = null;
     }
 

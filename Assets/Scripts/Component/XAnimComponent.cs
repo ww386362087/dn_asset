@@ -18,10 +18,10 @@ public class XAnimComponent : XComponent
 
     public Animator Ator { get { return m_Animator; } }
 
-    public override void OnInitial(XObject _obj)
+    public override void OnInitial(XEntity enty)
     {
-        base.OnInitial(_obj);
-        m_Animator = (_obj as XEntity).EntityObject.GetComponent<Animator>();
+        base.OnInitial(enty);
+        m_Animator = enty.EntityObject.GetComponent<Animator>();
         if (m_Animator.runtimeAnimatorController is AnimatorOverrideController)
         {
             m_overrideController = m_Animator.runtimeAnimatorController as AnimatorOverrideController;

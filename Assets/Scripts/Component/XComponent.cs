@@ -8,8 +8,7 @@ public enum UpdateState
 }
 
 /// <summary>
-/// 组件component 也可以挂载组件
-/// 子子孙孙无穷尽也 
+/// 组件component 
 /// </summary>
 public class XComponent : XObject
 {
@@ -17,7 +16,7 @@ public class XComponent : XObject
     /// <summary>
     /// 被挂载的对象
     /// </summary>
-    public XObject xobj = null;
+    public XEntity xentity = null;
 
     public virtual uint ID { get { return XCommon.singleton.XHash(GetType().Name); } }
 
@@ -26,17 +25,17 @@ public class XComponent : XObject
     private bool _double = false;
     private float _time = 0;
     
-    public virtual void OnInitial(XObject _obj)
+    public virtual void OnInitial(XEntity enty)
     {
         base.Initilize();
-        xobj = _obj;
+        xentity = enty;
         _double = false;
         _time = 0;
     }
 
     public virtual void OnUninit()
     {
-        xobj = null;
+        xentity = null;
         _double = false;
         _time = 0;
         base.Unload();
@@ -69,22 +68,6 @@ public class XComponent : XObject
     public virtual void OnUpdate(float delta)
     {
     }
-
-
-    public bool IsRoleComponent()
-    {
-        return xobj is XRole;
-    }
-
-    public bool IsEntityComponent()
-    {
-        return xobj is XEntity;
-    }
-
-
-    public bool IsCameraComponent()
-    {
-        return xobj is XCamera;
-    }
+    
 
 }

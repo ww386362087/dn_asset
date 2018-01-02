@@ -42,7 +42,6 @@ class XEntityMgr:public Singleton<XEntityMgr>
 public:
 	~XEntityMgr();
 	void Update(float delta);
-	void LateUpdate();
 	void AttachToHost();
 	void DetachFromHost();
 	XEntity* GetEntity(uint id);

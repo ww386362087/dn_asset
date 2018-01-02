@@ -4,15 +4,14 @@
 
 void GameMain::OnStart()
 {
-	XEntityMgr::Instance()->CreateEntity(2, Vector3::zero, Vector3::zero);
-	//XEntityMgr::Instance()->CreatePlayer();
+	//XEntityMgr::Instance()->CreateEntity(2, Vector3::zero, Vector3::zero);
+	XEntityMgr::Instance()->CreatePlayer();
 }
 
 void GameMain::Ontick(float delta)
 {
 	XTimerMgr::Instance()->Update(delta);
 	XEntityMgr::Instance()->Update(delta);
-	XEntityMgr::Instance()->LateUpdate();
 }
 
 

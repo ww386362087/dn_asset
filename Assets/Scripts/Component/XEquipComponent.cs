@@ -19,12 +19,12 @@ public class XEquipComponent : XComponent, IEquip
 
     public DefaultEquip.RowData data
     {
-        get { return (xobj as XRole).defEquip; }
+        get { return (xentity as XRole).defEquip; }
     }
 
     GameObject IEquip.EntityObject
     {
-        get { return (xobj as XEntity).EntityObject; }
+        get { return (xentity as XEntity).EntityObject; }
     }
 
     public XEquipComponent()
@@ -36,10 +36,10 @@ public class XEquipComponent : XComponent, IEquip
         }
     }
     
-    public override void OnInitial(XObject o)
+    public override void OnInitial(XEntity enty)
     {
-        base.OnInitial(o);
-        XEntity e = o as XEntity;
+        base.OnInitial(enty);
+        XEntity e = enty;
 
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
@@ -111,7 +111,7 @@ public class XEquipComponent : XComponent, IEquip
             string path = part.partPath[i];
             if (string.IsNullOrEmpty(path))
             {
-                path = XEquipUtil.GetDefaultPath((EPartType)i, (xobj as XRole).defEquip);
+                path = XEquipUtil.GetDefaultPath((EPartType)i, (xentity as XRole).defEquip);
             }
             fpi.equipName = path;
             fashionList.Add(fpi);

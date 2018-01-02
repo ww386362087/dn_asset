@@ -1,7 +1,6 @@
 #ifndef __NativeInterface__
 #define __NativeInterface__
 
-
 #include "Common.h"
 #include <iostream>
 #include "Log.h"
