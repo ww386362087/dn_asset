@@ -56,15 +56,9 @@ void XLevelWave::ParseInfo(const std::string& data)
 
 	switch (type)
 	{
-	case TYPE_NONE:
-	{
-		break;
-	}
 	case TYPE_ID:
-	{
 		m_Id = atoi(rawData.c_str());
-	}
-	break;
+		break;
 	case TYPE_SPAWNTYPE:
 	{
 		m_SpawnType = (LevelSpawnType)(atoi(rawData.c_str()));
@@ -73,14 +67,10 @@ void XLevelWave::ParseInfo(const std::string& data)
 	case TYPE_BASEINFO:
 	{
 		std::vector<std::string> strInfos = SplitNotEscape(rawData, ',');
-
 		m_Time = (int)(convert<float>(strInfos[0].c_str()) * 1000);
 		m_LoopInterval = atoi(strInfos[1].c_str());
-
 		m_EnemyID = atoi(strInfos[2].c_str());
-
 		m_YRotate = atoi(strInfos[5].c_str());
-
 		if (strInfos.size() > 6)
 			m_RoundRidus = (float)atof(strInfos[6].c_str());
 
@@ -88,9 +78,7 @@ void XLevelWave::ParseInfo(const std::string& data)
 			m_RoundCount = atoi(strInfos[7].c_str());
 
 		if (strInfos.size() > 8)
-		{
 			m_RandomID = atoi(strInfos[8].c_str());
-		}
 
 		if (strInfos.size() > 9)
 		{
@@ -98,11 +86,9 @@ void XLevelWave::ParseInfo(const std::string& data)
 			for (size_t i = 0; i < ids.size(); ++i)
 			{
 				int doodadID = atoi(ids[i].c_str());
-				if (doodadID)
-					m_DoodadID.push_back(doodadID);
+				if (doodadID) m_DoodadID.push_back(doodadID);
 			}
 		}
-
 		if (strInfos.size() > 10)
 		{
 			int percent = atoi(strInfos[10].c_str());
@@ -117,15 +103,12 @@ void XLevelWave::ParseInfo(const std::string& data)
 	case TYPE_PREWAVE:
 	{
 		std::vector<std::string> strInfos = split(rawData, '|');
-
 		if (strInfos.size() > 0)
 		{
 			std::string strPreWave = strInfos[0];
-
 			if (!strPreWave.empty())
 			{
 				std::vector<std::string> strPreWaves = split(strPreWave, ',');
-
 				for (size_t i = 0; i < strPreWaves.size(); i++)
 				{
 					int preWave = atoi(strPreWaves[i].c_str());
@@ -134,7 +117,6 @@ void XLevelWave::ParseInfo(const std::string& data)
 				}
 			}
 		}
-
 		if (strInfos.size() > 1)
 		{
 			int percent = atoi(strInfos[1].c_str());
@@ -142,32 +124,23 @@ void XLevelWave::ParseInfo(const std::string& data)
 		}
 	}
 	break;
-	case TYPE_EDITOR:
-		break;
 	case TYPE_MONSTERINFO:
 	{
 		std::vector<std::string> strFloats = split(rawData, ',');
 		int index = atoi(strFloats[0].c_str());
-
 		// generate game object in scene
 		float x = (float)atof(strFloats[1].c_str());
 		float y = (float)atof(strFloats[2].c_str());
 		float z = (float)atof(strFloats[3].c_str());
-
 		m_Monsters.insert(std::make_pair(index, Vector3(x, y, z)));
 		m_MonsterRotation.insert(std::make_pair(index, (float)atof(strFloats[4].c_str())));
 	}
 	break;
 	case TYPE_SCRIPT:
-	{
 		m_Levelscript = rawData;
-	}
-	break;
+		break;
 	case TYPE_EXSTRING:
-	{
-		m_ExString = rawData;
-	}
-	break;
+		m_ExString = rawData;	break;
 
 	default:
 		break;
