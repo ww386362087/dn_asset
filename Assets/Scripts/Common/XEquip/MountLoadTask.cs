@@ -6,12 +6,12 @@ using XTable;
 
 public class MountLoadTask : BaseLoadTask
 {
-    private XEquipComponent component;
+    private IEquip component;
     private GameObject goInstance = null;
     public bool transferRef = false;
     public Renderer mainRender = null;
 
-    public MountLoadTask(EPartType p, XEquipComponent e) : base(p)
+    public MountLoadTask(EPartType p, IEquip e) : base(p)
     {
         component = e;
     }
@@ -90,7 +90,7 @@ public class MountLoadTask : BaseLoadTask
 
     public void ProcessTransfer()
     {
-        goInstance.transform.parent = (component.xobj as XEntity).EntityObject.transform.FindChild(GetMountPoint());
+        goInstance.transform.parent = component.EntityObject.transform.FindChild(GetMountPoint());
         goInstance.transform.localPosition = Vector3.zero;
         goInstance.transform.localRotation = Quaternion.identity;
         goInstance.transform.localScale = Vector3.one;
@@ -99,7 +99,7 @@ public class MountLoadTask : BaseLoadTask
 
     private string GetMountPoint()
     {
-        DefaultEquip.RowData data = (component.xobj as XRole).defEquip;
+        DefaultEquip.RowData data = component.data;
         string point = "";
         switch (part)
         {

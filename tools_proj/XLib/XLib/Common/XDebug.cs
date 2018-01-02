@@ -99,7 +99,7 @@ public class XDebug
     }
     
     // 专门给C/C++调用的Log
-    public static void TCLog(string param)
+    public static void CLog(string param)
     {
         if (loglevel <= LogLevel.Cpp)
         {
@@ -112,7 +112,7 @@ public class XDebug
     }
 
     // 专门给C/C++调用的Log
-    public static void TCWarn(string param)
+    public static void CWarn(string param)
     {
         if (loglevel <= LogLevel.Cpp)
         {
@@ -124,7 +124,7 @@ public class XDebug
         }
     }
 
-    public static void TCError(string param)
+    public static void CError(string param)
     {
         if (loglevel <= LogLevel.Cpp)
         {

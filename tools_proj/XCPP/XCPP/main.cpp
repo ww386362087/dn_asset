@@ -7,8 +7,14 @@
 
 using namespace std;
 
-typedef bool(*CB)(unsigned char command, const char*);
-typedef void(*DllCommand)(CB);
+typedef bool(*InitDef)(unsigned char command, const char*);
+typedef void(*EntyDef)(int entityid, unsigned char method, unsigned int arg);
+typedef void(*CompDef)(int entityid, unsigned char compnent, const char* arg);
+typedef void(*EntySyncDef)(unsigned int entityid, unsigned char command, float* arr);
+typedef void(*DllInit)(InitDef);
+typedef void(*DllEntityCallback)(EntyDef);
+typedef void(*DllCompCallback)(CompDef);
+typedef void(*DllEntitySncCallback)(EntySyncDef);
 typedef void(*DllInitial)(char*, char*);
 typedef int(*DllAdd)(int, int);
 typedef int(*DllSub)(int*, int*);
@@ -27,7 +33,10 @@ public:
 	const char* s;
 };
 
-DllCommand cb;
+DllInit cb;
+DllEntityCallback ent;
+DllCompCallback com;
+DllEntitySncCallback sync;
 DllInitial init;
 DllAdd add;
 DllSub sub;
@@ -126,6 +135,21 @@ bool OnCallback(unsigned char type, const char* cont)
 	return true;
 }
 
+void OnEnty(int entityid, unsigned char method, unsigned int arg)
+{
+
+}
+
+void OnComp(int entityid, unsigned char compnent, const char* arg)
+{
+
+}
+
+void OnSync(unsigned int entityid, unsigned char command, float* arr)
+{
+
+}
+
 void main()
 {
 	cout << "**********  main **********" << endl;
@@ -137,7 +161,10 @@ void main()
 		return;
 	}
 	cout << "load library succ" << endl;
-	cb = (DllCommand)GetProcAddress(hInst, "iInitCallbackCommand");
+	cb = (DllInit)GetProcAddress(hInst, "iInitCallbackCommand");
+	ent = (DllEntityCallback)GetProcAddress(hInst, "iInitEntityCall");
+	com = (DllCompCallback)GetProcAddress(hInst, "iInitCompnentCall");
+	sync = (DllEntitySncCallback)GetProcAddress(hInst, "iInitEntitySyncCall");
 	init = (DllInitial)GetProcAddress(hInst, "iInitial");
 	add = (DllAdd)GetProcAddress(hInst, "iAdd");
 	sub = (DllSub)GetProcAddress(hInst, "iSub");
@@ -152,6 +179,9 @@ void main()
 	tick = (DllCallFloatWithVoid)GetProcAddress(hInst, "iQuitCore");
 	row = (DllGetRow)GetProcAddress(hInst, "iGetXEntityPresentationRow");
 	cb(OnCallback);
+	ent(OnEnty);
+	com(OnComp);
+	sync(OnSync);
 	init("", "");
 
 	while (true)

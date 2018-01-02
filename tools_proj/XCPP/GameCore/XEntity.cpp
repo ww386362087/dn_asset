@@ -43,7 +43,6 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	_object = go;
 	_transf = go->transform;
 	_attr = attr;
-
 	XObject::AttachComponent<XAIComponent>();
 	OnInitial();
 }

@@ -23,7 +23,7 @@ GameObject* GameObjectMgr::Create(const char* name)
 	if (pool.find(hash) == pool.end())
 	{
 		GameObject* go = new GameObject(name);
-		callback(CMLoadGo, name);
+		//callback(CMLoadGo, name);
 		Add(go);
 		return go;
 	}
@@ -59,7 +59,7 @@ bool GameObjectMgr::Remv(uint hash)
 {
 	if (pool.find(hash) != pool.end())
 	{
-		callback(CMUnloadGo, pool[hash]->name);
+		//callback(CMUnloadGo, pool[hash]->name);
 		delete pool[hash];
 		pool.erase(hash);
 		return true;
@@ -81,33 +81,3 @@ size_t GameObjectMgr::Count()
 	return pool.size();
 }
 
-extern "C"
-{
-	void iGoInfo(const char* name, unsigned char prop, float* arr)
-	{
-		uint hash = xhash(name);
-		GameObject* go = GameObjectMgr::Instance()->Get(hash);
-		if (go == NULL) return;
-		switch (prop)
-		{
-		case 'p':
-		case 'P':
-			arr = vec2arr(go->transform->position);
-			break;
-		case 'r':
-		case 'R':
-			arr = vec2arr(go->transform->rotation);
-			break;
-		case 's':
-		case 'S':
-			arr = vec2arr(go->transform->scale);
-			break;
-		case 'f':
-		case 'F':
-			arr = vec2arr(go->transform->forward);
-			break;
-		default:
-			break;
-		}
-	}
-}

@@ -105,6 +105,8 @@ public class TestCPP : MonoBehaviour
 
     public void Start()
     {
+        NativeInterface.InitNative();
+        ShaderMgr.Init();
         ui_sty.normal.textColor = Color.red;
         ui_sty.fontSize = 20;
         iInitCallbackCommand(new CppDelegate(OnCallback));
@@ -131,21 +133,21 @@ public class TestCPP : MonoBehaviour
         switch (t)
         {
             case ASCII.L:
-                XDebug.TCLog(command);
+                XDebug.CLog(command);
                 break;
             case ASCII.W:
-                XDebug.TCWarn(command);
+                XDebug.CWarn(command);
                 break;
             case ASCII.E:
-                XDebug.TCError(command);
+                XDebug.CError(command);
                 break;
             case ASCII.G:
-                XDebug.TCLog("load object: " + command+" len: "+command.Length);
+                XDebug.CLog("load object: " + command+" len: "+command.Length);
                 GameObject go = XResources.Load<GameObject>(command,AssetType.Prefab);
                 go.name = command;
                 break;
             case ASCII.U:
-                XDebug.TCLog("unload: " + command);
+                XDebug.CLog("unload: " + command);
                 break;
             default:
                 XDebug.LogError(t + " is not parse symbol: " + command);
@@ -159,7 +161,7 @@ public class TestCPP : MonoBehaviour
         GUILayout.Space(10);
         TableGUI();
         NativeGUI();
-        GUILayout.Space(50);
+        GUILayout.Space(20);
         GUILayout.TextArea(ui_rst, ui_sty, ui_op2);
         GUILayout.EndHorizontal();
     }

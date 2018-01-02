@@ -1,66 +1,36 @@
 ﻿using UnityEngine;
 using XTable;
 
-public class XRole : XEntity
+public class NativeRole : NativeEntity
 {
-    protected CharacterController controller;
-    protected XNavComponent nav;
-    protected XAnimComponent ani;
-
-    public int profession = 1;
     public DefaultEquip.RowData defEquip = null;
+    protected CharacterController controller;
+    protected NativeAnimComponent ani;
 
-    public override void OnInitial()
+    protected override void OnInitial()
     {
-        _eEntity_Type |= EntityType.Role;
         base.OnInitial();
-        _layer = LayerMask.NameToLayer("Role");
-        profession = 1;
-        defEquip = XTableMgr.GetTable<DefaultEquip>().GetByUID(profession + 1);
+        defEquip = XTableMgr.GetTable<DefaultEquip>().GetByUID(2);
         controller = EntityObject.GetComponent<CharacterController>();
         controller.enabled = false;
-
-        AttachComponent<XAIComponent>();
-        AttachComponent<XEquipComponent>();
-        ani = AttachComponent<XAnimComponent>();
-        nav = AttachComponent<XNavComponent>();
-        AttachComponent<XSkillComponent>();
-        AttachComponent<XBeHitComponent>();
+        AttachComponent<NativeEquipComponent>();
+        ani = AttachComponent<NativeAnimComponent>();
         InitAnim();
     }
 
+
     protected override void OnUnintial()
     {
-        DetachComponent<XEquipComponent>();
+        DetachComponent<NativeEquipComponent>();
+        DetachComponent<NativeAnimComponent>();
+        ani = null;
         base.OnUnintial();
     }
 
-    public void Navigate(Vector3 pos)
-    {
-        nav.Navigate(pos);
-    }
-
-    public void DrawNavPath()
-    {
-        nav.DebugDrawPath();
-    }
-
-    public void EnableCC(bool enable)
-    {
-        if (controller != null)
-        {
-            controller.enabled = enable;
-        }
-    }
-
-
     private void InitAnim()
     {
-        //OverrideAnim(Clip.A, present.A);
-        //OverrideAnim(Clip.AA, present.AA);
         OverrideAnim(Clip.AAA, "Player_archer_attack_run");
         OverrideAnim(Clip.AAAA, "Player_archer_attack_run");
-        //OverrideAnim(Clip.AAAAA, present.AAAAA);
         OverrideAnim(Clip.Walk, present.Walk);
         OverrideAnim(Clip.Idle, present.Idle);
         OverrideAnim(Clip.Death, present.Death);

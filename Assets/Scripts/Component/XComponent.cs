@@ -1,19 +1,19 @@
 ﻿
+public enum UpdateState
+{
+    NONE,  //不调用
+    TIMER, //每秒一次
+    FRAME, //每帧调用
+    DOUBLE,//每两帧调用
+}
+
 /// <summary>
 /// 组件component 也可以挂载组件
 /// 子子孙孙无穷尽也 
 /// </summary>
 public class XComponent : XObject
 {
-
-    public enum UpdateState
-    {
-        NONE,  //不调用
-        TIMER, //每秒一次
-        FRAME, //每帧调用
-        DOUBLE,//每两帧调用
-    }
-
+    
     /// <summary>
     /// 被挂载的对象
     /// </summary>

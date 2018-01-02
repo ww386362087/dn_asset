@@ -9,13 +9,11 @@ public class PartLoadTask : BaseLoadTask
     public GameObject go = null;
     public Mesh mesh = null;
     public Texture tex = null;
-    private PartLoadCallback m_PartLoadCb = null;
-    private XEquipComponent m_equip = null;
+    private IEquip m_equip = null;
 
-    public PartLoadTask(EPartType p, XEquipComponent equip, PartLoadCallback partLoadCb)
+    public PartLoadTask(EPartType p, IEquip equip)
         : base(p)
     {
-        m_PartLoadCb = partLoadCb;
         m_equip = equip;
     }
 
@@ -33,10 +31,6 @@ public class PartLoadTask : BaseLoadTask
                     processStatus = EProcessStatus.EPreProcess;
                 }
             }
-        }
-        if (m_PartLoadCb != null)
-        {
-            m_PartLoadCb(this, !same);
         }
     }
 

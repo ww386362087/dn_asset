@@ -12,15 +12,18 @@
 extern "C"
 {
 	typedef bool(*SharpCALLBACK)(unsigned char,const char*);
-	typedef void(*EntyCallBack)(int entityid, const char* method, const char* arg);
-	typedef void(*CompCallBack)(int entityid, const char* compnent, const char* arg);
+	typedef void(*EntyCallBack)(int entityid, unsigned char method, unsigned int arg);
+	typedef void(*CompCallBack)(int entityid, unsigned char compnent, const char* arg);
+	typedef void(*EntySyncCallBack)(unsigned int entityid, unsigned char command, float* arr);
 	extern SharpCALLBACK callback;
 	extern EntyCallBack eCallback;
+	extern EntySyncCallBack  sncCallback;
 	extern CompCallBack cCallback;
 
 	ENGINE_INTERFACE_EXPORT void iInitCallbackCommand(SharpCALLBACK cb);
 	ENGINE_INTERFACE_EXPORT void iInitEntityCall(EntyCallBack cb);
 	ENGINE_INTERFACE_EXPORT void iInitCompnentCall(CompCallBack cb);
+	ENGINE_INTERFACE_EXPORT void iInitEntitySyncCall(EntySyncCallBack cb);
 	ENGINE_INTERFACE_EXPORT int iAdd(int, int);
 	ENGINE_INTERFACE_EXPORT int iSub(int*, int*);
 	ENGINE_INTERFACE_EXPORT void iInitial(const char*,const char*);

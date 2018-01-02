@@ -5,6 +5,9 @@
 #include "XEntityStatistics.h"
 #include "XEntityPresentation.h"
 
+extern EntyCallBack eCallback;
+EntySyncCallBack sncCallback;
+
 XEntityMgr::~XEntityMgr()
 {
 }
@@ -81,7 +84,6 @@ XEntity* XEntityMgr::CreateEntity(uint staticid, Vector3 pos, Vector3 rot)
 {
 	XAttributes* attr = new XAttributes();
 	InitAttr(staticid, attr);
-
 	attr->setAppearPosition(pos);
 	attr->setAppearQuaternion(rot);
 	XEntity* ent = PrepareEntity(attr);
@@ -99,6 +101,15 @@ XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 	o->transform->position = attr->getAppearPostion();
 	Vector3 rot = attr->getAppearQuaternion();
 	o->transform->rotation = rot;
+
+#ifdef Client
+	eCallback(attr->getid(), 'R', attr->getPresentID());
+	sncCallback(attr->getid(), 'p', vec2arr(Vector3::one));
+	sncCallback(attr->getid(), 'r', vec2arr(attr->getAppearQuaternion()));
+	float scale[] = { 3.0f,3.0f,3.0f };
+	sncCallback(attr->getid(), 's', scale);
+#endif // DEBUG
+
 	x->Initilize(o, attr);
 	uint id = attr->getid();
 	if (!x->IsPlayer()) 
@@ -124,6 +135,9 @@ void XEntityMgr::UnloadEntity(uint id)
 	std::unordered_map<uint, XEntity*>::iterator itr = _dic_entities.find(id);
 	if (itr != _dic_entities.end())
 	{
+#ifdef Client
+		eCallback(id, 'U', 0);
+#endif
 		_dic_entities.erase(id);
 		_hash_entities.erase(itr->second);
 		delete itr->second;

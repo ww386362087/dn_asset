@@ -41,6 +41,11 @@ extern "C"
 		cCallback = cb;
 	}
 
+	void iInitEntitySyncCall(EntySyncCallBack cb)
+	{
+		sncCallback = cb;
+	}
+
 	void iPatch(const char* old_file, const char* diff_file, const char* new_file)
 	{
 		LOG("old:" + tostring(old_file) + " diff: " + tostring(diff_file) + " new_file: " + tostring(new_file));

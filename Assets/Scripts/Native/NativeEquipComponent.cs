@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using XTable;
 
-
-public class XEquipComponent : XComponent, IEquip
+public class NativeEquipComponent : NativeComponent, IEquip
 {
     private List<EquipPart> m_FashionList = null;
     private List<EquipPart> m_EquipList = null;
@@ -11,23 +10,24 @@ public class XEquipComponent : XComponent, IEquip
     public BaseLoadTask[] parts = new BaseLoadTask[(int)EPartType.ENum];
     public SkinnedMeshRenderer skin { get; set; }
     public MaterialPropertyBlock mpb { get; set; }
+    
+    public DefaultEquip.RowData data
+    {
+        get { return (entity as NativeRole).defEquip; }
+    }
+
+    GameObject IEquip.EntityObject
+    {
+        get { return entity.EntityObject; }
+    }
 
     List<FashionPositionInfo> fashionList = null;
 
     public static int MaxPartCount = 8;
     private List<CombineInstance[]> matCombineInstanceArrayCache = new List<CombineInstance[]>();
 
-    public DefaultEquip.RowData data
-    {
-        get { return (xobj as XRole).defEquip; }
-    }
 
-    GameObject IEquip.EntityObject
-    {
-        get { return (xobj as XEntity).EntityObject; }
-    }
-
-    public XEquipComponent()
+    public NativeEquipComponent()
     {
         mpb = new MaterialPropertyBlock();
         for (int i = 0; i < MaxPartCount; ++i)
@@ -35,11 +35,10 @@ public class XEquipComponent : XComponent, IEquip
             matCombineInstanceArrayCache.Add(new CombineInstance[i + 1]);
         }
     }
-    
-    public override void OnInitial(XObject o)
+
+    public override void OnInitial(NativeEntity enty)
     {
-        base.OnInitial(o);
-        XEntity e = o as XEntity;
+        base.OnInitial(enty);
 
         //时装
         TempEquipSuit fashions = new TempEquipSuit();
@@ -64,11 +63,11 @@ public class XEquipComponent : XComponent, IEquip
                 XEquipUtil.MakeEquip(row.SuitName, row.EquipID, m_EquipList, fashions, -1);
         }
 
-        Transform skinmesh = e.EntityObject.transform;
+        Transform skinmesh = enty.transfrom;
         skin = skinmesh.GetComponent<SkinnedMeshRenderer>();
         if (skin == null) skin = skinmesh.gameObject.AddComponent<SkinnedMeshRenderer>();
         skin.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-        e.skin = skin;
+        enty.skin = skin;
 
         for (EPartType part = EPartType.ECombinePartStart; part < EPartType.ECombinePartEnd; ++part)
         {
@@ -78,8 +77,6 @@ public class XEquipComponent : XComponent, IEquip
         {
             parts[(int)part] = new MountLoadTask(part, this);
         }
-        RegisterEvent(XEventDefine.XEvent_Detach_Host, OnDetachHost);
-
         EquipPart(m_FashionList[0]);
     }
 
@@ -111,7 +108,7 @@ public class XEquipComponent : XComponent, IEquip
             string path = part.partPath[i];
             if (string.IsNullOrEmpty(path))
             {
-                path = XEquipUtil.GetDefaultPath((EPartType)i, (xobj as XRole).defEquip);
+                path = XEquipUtil.GetDefaultPath((EPartType)i, (entity as NativeRole).defEquip);
             }
             fpi.equipName = path;
             fashionList.Add(fpi);
@@ -136,7 +133,7 @@ public class XEquipComponent : XComponent, IEquip
             EquipAll(fashionList.ToArray());
         }
     }
-    
+
     public void EquipAll(FashionPositionInfo[] fashionList)
     {
         if (fashionList == null)
@@ -171,7 +168,7 @@ public class XEquipComponent : XComponent, IEquip
             if (p != null) p.Reset();
         }
     }
-    
+
 
     /// <summary>
     /// 处理mesh和tex的对应关系，并处理uv
@@ -254,5 +251,4 @@ public class XEquipComponent : XComponent, IEquip
         }
         return null;
     }
-
 }

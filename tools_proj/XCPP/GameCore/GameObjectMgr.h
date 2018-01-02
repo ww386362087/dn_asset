@@ -25,10 +25,4 @@ private:
 };
 
 
-extern "C"
-{
-	ENGINE_INTERFACE_EXPORT void iGoInfo(const char*,unsigned char, float arr[]);
-}
-
-
 #endif
