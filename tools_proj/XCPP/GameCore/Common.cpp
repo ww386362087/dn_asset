@@ -41,21 +41,80 @@ float* vec2arr(Vector3 v)
 	return f;
 }
 
-void split(const std::string& s, std::vector<std::string>& v, const std::string& c)
-{
-	std::string::size_type pos1, pos2;
-	pos2 = s.find(c);
-	pos1 = 0;
-	while (std::string::npos != pos2)
-	{
-		v.push_back(s.substr(pos1, pos2 - pos1));
-
-		pos1 = pos2 + c.size();
-		pos2 = s.find(c, pos1);
-	}
-	if (pos1 != s.length())
-		v.push_back(s.substr(pos1));
+std::string trimLeft(const std::string& str) {
+	std::string t = str;
+	t.erase(0, t.find_first_not_of(" /t/n/r"));
+	return t;
 }
+
+std::string trimRight(const std::string& str) {
+	std::string t = str;
+	t.erase(t.find_last_not_of(" /t/n/r") + 1);
+	return t;
+}
+
+std::string trim(const std::string& str) {
+	std::string t = str;
+	t.erase(0, t.find_first_not_of(" /t/n/r"));
+	t.erase(t.find_last_not_of(" /t/n/r") + 1);
+	return t;
+}
+
+std::vector<std::string> split(const std::string& str, const char sep)
+{
+	return split(str, tostring(sep));
+}
+
+std::vector<std::string> split(const std::string& srcstr, const std::string& delimeter)
+{
+	std::vector<std::string> ret(0);//use ret save the spilted reault
+	if (srcstr.empty())    //judge the arguments
+	{
+		return ret;
+	}
+	std::string::size_type pos_begin = srcstr.find_first_not_of(delimeter);//find first element of srcstr
+
+	std::string::size_type dlm_pos;//the delimeter postion
+	std::string temp;              //use third-party temp to save splited element
+	while (pos_begin != std::string::npos)//if not a next of end, continue spliting
+	{
+		dlm_pos = srcstr.find(delimeter, pos_begin);//find the delimeter symbol
+		if (dlm_pos != std::string::npos)
+		{
+			temp = srcstr.substr(pos_begin, dlm_pos - pos_begin);
+			pos_begin = dlm_pos + delimeter.length();
+		}
+		else
+		{
+			temp = srcstr.substr(pos_begin);
+			pos_begin = dlm_pos;
+		}
+		if (!temp.empty())
+			ret.push_back(temp);
+	}
+	return ret;
+}
+
+std::string toLower(const std::string& str) {
+	std::string t = str;
+	transform(t.begin(), t.end(), t.begin(), tolower);
+	return t;
+}
+
+std::string toUpper(const std::string& str) {
+	std::string t = str;
+	transform(t.begin(), t.end(), t.begin(), toupper);
+	return t;
+}
+
+bool startsWith(const std::string& str, const std::string& substr) {
+	return str.find(substr) == 0;
+}
+
+bool endsWith(const std::string& str, const std::string& substr) {
+	return str.rfind(substr) == (str.length() - substr.length());
+}
+
 
 int new_id()
 {

@@ -4,6 +4,7 @@
 
 XPlayer::XPlayer()
 {
+	_eEntity_Type = Player;
 }
 
 

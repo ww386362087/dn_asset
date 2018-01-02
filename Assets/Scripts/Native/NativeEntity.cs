@@ -60,7 +60,7 @@ public class NativeEntity
     public void Unload()
     {
         OnInitial();
-        XResources.DestroyInPool(_path);
+        XResources.RecyleInPool(_go, _path);
         _present = null;
         components = null;
     }

@@ -8,10 +8,14 @@
 
 EntyCallBack eCallback;
 CompCallBack cCallback;
-
+EntySyncCallBack sncCallback;
 
 XEntity::~XEntity()
 {
+#ifdef Client
+	eCallback(this->EntityID, 'U', 0);
+#endif
+
 	Unload();
 	OnUnintial();
 	delete _pmachine;
@@ -38,13 +42,32 @@ void XEntity::DetachFromHost()
 {
 }
 
+void XEntity::DetachAllComponents()
+{
+	std::unordered_map<uint, XComponent*>::iterator itr;
+	for (itr = components.begin(); itr != components.end(); itr++)
+	{
+		itr->second->OnUninit();
+	}
+	components.clear();
+}
+
 void XEntity::Initilize(GameObject* go, XAttributes* attr)
 {
 	XObject::Initilize();
 	_object = go;
 	_transf = go->transform;
 	_attr = attr;
-	XObject::AttachComponent<XAIComponent>();
+
+#ifdef Client
+	eCallback(attr->getid(), 'R', attr->getPresentID());
+	sncCallback(attr->getid(), 'p', vec2arr(Vector3::one));
+	sncCallback(attr->getid(), 'r', vec2arr(attr->getAppearQuaternion()));
+	float scale[] = { 3.0f,3.0f,3.0f };
+	sncCallback(attr->getid(), 's', scale);
+#endif // DEBUG
+
+	AttachComponent<XAIComponent>();
 	OnInitial();
 }
 

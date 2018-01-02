@@ -14,7 +14,7 @@ class XAIComponent :public XComponent
 public:
 	XAIComponent();
 	~XAIComponent();
-	virtual void OnInitial(XObject* _obj);
+	virtual void OnInitial(XEntity* enty);
 	virtual void OnUninit();
 	virtual void EventSubscribe();
 	virtual void OnUpdate(float delta);

@@ -63,6 +63,8 @@
     <ClCompile Include="XBullet.cpp" />
     <ClCompile Include="XBulletCore.cpp" />
     <ClCompile Include="XJAComboSkill.cpp" />
+    <ClCompile Include="XLevelSpawnMgr.cpp" />
+    <ClCompile Include="XLevelWave.cpp" />
     <ClCompile Include="XSkill.cpp" />
     <ClCompile Include="XSkillCore.cpp" />
     <ClCompile Include="XSkillMgr.cpp" />
@@ -139,6 +141,8 @@
     <ClInclude Include="XComponentDef.h" />
     <ClInclude Include="XDelegate.h" />
     <ClInclude Include="XJAComboSkill.h" />
+    <ClInclude Include="XLevelSpawnMgr.h" />
+    <ClInclude Include="XLevelWave.h" />
     <ClInclude Include="XSkill.h" />
     <ClInclude Include="XSkillCore.h" />
     <ClInclude Include="XSkillMgr.h" />

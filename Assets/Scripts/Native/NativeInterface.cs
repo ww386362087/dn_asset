@@ -43,6 +43,7 @@ class NativeInterface
     [MonoPInvokeCallback(typeof(NativeEntityDelegate))]
     static void OnEntityCallback(uint entityid, byte command, uint arg)
     {
+        XDebug.Log("entity " + entityid, " arg: ", arg, " command: ", command);
         switch (command)
         {
             case ASCII.E:
@@ -60,20 +61,21 @@ class NativeInterface
     [MonoPInvokeCallback(typeof(NativeComptDelegate))]
     static void OnEntitySync(uint entityid, byte command,ref VectorArr vec)
     {
+        XDebug.Log("entityid: ", entityid, " arg:", vec.ToVector());
         NativeEntity entity = NativeEntityMgr.singleton.Get(entityid);
         switch (command)
         {
             case ASCII.p:
-                entity.transfrom.position = vec.TVector();
+                entity.transfrom.position = vec.ToVector();
                 break;
             case ASCII.s:
-                entity.transfrom.localScale = vec.TVector();
+                entity.transfrom.localScale = vec.ToVector();
                 break;
             case ASCII.r:
-                entity.transfrom.rotation = Quaternion.Euler(vec.TVector());
+                entity.transfrom.rotation = Quaternion.Euler(vec.ToVector());
                 break;
             case ASCII.f:
-                entity.transfrom.forward = vec.TVector();
+                entity.transfrom.forward = vec.ToVector();
                 break;
         }
     }

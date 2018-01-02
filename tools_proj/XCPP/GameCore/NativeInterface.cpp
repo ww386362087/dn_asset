@@ -102,13 +102,6 @@ extern "C"
 		LOG(tostring(*v3));
 		Vector3 zv = Vector3::zero;
 		LOG(tostring(zv));
-
-		std::string type = "float";
-		std::string str = "boolrandomWait";
-		size_t t= str.find(type);
-		size_t t2 = str.find("bool");
-		size_t t3 = str.find("rand");
-		PRINT << "t: " << t << " t2: " << t2<<" t3: "<<t3;
 	}
 
 

@@ -30,6 +30,7 @@ void GameMain::Stop()
 
 void GameMain::Quit()
 {
+	m_start = false;
 	GameObjectMgr::Instance()->Clear();
 	XEntityMgr::Instance()->UnloadAll();
 	XTimerMgr::Instance()->RemoveAllTimer();

@@ -10,16 +10,16 @@ XComponent::~XComponent()
 {
 }
 
-void XComponent::OnInitial(XObject* _obj)
+void XComponent::OnInitial(XEntity* _obj)
 {
-	xobj = _obj;
+	xenty = _obj;
 	_double = false;
 	_time = 0;
 }
 
 void XComponent::OnUninit()
 {
-	xobj = 0;
+	xenty = 0;
 	_double = false;
 	_time = 0;
 	Unload();
@@ -28,6 +28,8 @@ void XComponent::OnUninit()
 void XComponent::OnUpdate(float delta)
 {
 }
+
+
 
 void XComponent::Update(float delta)
 {

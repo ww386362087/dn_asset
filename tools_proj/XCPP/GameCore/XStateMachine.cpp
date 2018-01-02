@@ -53,7 +53,7 @@ void XStateMachine::ForceToDefaultState(bool ignoredeath)
 void XStateMachine::TransferToDefaultState()
 {
 	XIdleArgs args;
-	GetHost()->DispatchEvent(&args);
+	DispatchEvent(&args);
 }
 
 bool XStateMachine::TransferToState(IXStateTransform* next)

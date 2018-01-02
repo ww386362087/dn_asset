@@ -18,7 +18,7 @@ enum UpdateState
 };
 
 class XComponent;
-
+class XEntity;
 
 class XObject
 {
@@ -33,20 +33,14 @@ public:
 	virtual void RegisterEvent(XEventDefine eventID, XDelegate* handler);
     virtual bool DispatchEvent(XEventArgs* e);
 
-	void DetachAllComponents();
-	template<class T> T* AttachComponent();
-	template<class T> T* GetComponent();
-	template<class T> bool DetachComponent();
-
+	
 protected:
 	virtual bool Initilize();
 	virtual void Uninitilize();
 	virtual void Unload();
 	virtual void EventSubscribe();
 	virtual void EventUnsubscribe();
-	
-protected:
-	std::unordered_map<uint, XComponent*> components;
+
 	std::unordered_map<uint, XDelegate*> eventMap;
 };
 
@@ -58,14 +52,15 @@ public:
 	~XComponent();
 
 	virtual void OnUninit();
-	virtual void OnInitial(XObject* _obj);
+	virtual void OnInitial(XEntity* _obj);
 	void Update(float delta);
 	virtual void OnUpdate(float delta);
-	inline XObject* GetHost() { return xobj; }
-	XObject* xobj;
+	inline XEntity* GetHost() { return xenty; }
+	XEntity* xenty;
 
 protected:
 	UpdateState state = NONE;
+	
 
 private:
 	float _time = 0;
@@ -73,43 +68,5 @@ private:
 };
 
 
-template<class T> T* XObject::AttachComponent()
-{
-	std::string name = typeid(T).name();
-	uint uid = xhash(name.c_str());
-	std::unordered_map<uint, XComponent*>::iterator  itr = components.find(uid);
-	if (itr != components.end())
-	{
-		return dynamic_cast<T*>(components[uid]);
-	}
-	else
-	{
-		T* t = new T();
-		t->OnInitial(this);
-		components.insert(std::make_pair(uid, t));
-		return t;
-	}
-}
-
-template<class T> T* XObject::GetComponent()
-{
-	std::string name = typeid(T).name();
-	uint uid = xhash(name.c_str());
-	return dynamic_cast<T*>(components[uid]);
-}
-
-template<class T> bool XObject::DetachComponent()
-{
-	std::string name = typeid(T).name();
-	uint uid = xhash(name.c_str());
-	std::unordered_map<uint, XComponent*>::iterator  itr = components.find(uid);
-	if (itr != components.end())
-	{
-		itr->second->OnUninit();
-		components.erase(uid);
-		return true;
-	}
-	return false;
-}
 
 #endif

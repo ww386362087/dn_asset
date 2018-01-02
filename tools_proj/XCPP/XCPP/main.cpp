@@ -137,17 +137,17 @@ bool OnCallback(unsigned char type, const char* cont)
 
 void OnEnty(int entityid, unsigned char method, unsigned int arg)
 {
-
+	cout << "create entity: " << entityid << " arg:" << arg << endl;
 }
 
 void OnComp(int entityid, unsigned char compnent, const char* arg)
 {
-
+	cout << "call component method: " << entityid << " arg:" << arg << endl;
 }
 
 void OnSync(unsigned int entityid, unsigned char command, float* arr)
 {
-
+	cout << "sync transform: " << entityid << " arg:" << arr[0] << endl;
 }
 
 void main()

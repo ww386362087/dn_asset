@@ -5,8 +5,6 @@
 #include "XEntityStatistics.h"
 #include "XEntityPresentation.h"
 
-extern EntyCallBack eCallback;
-EntySyncCallBack sncCallback;
 
 XEntityMgr::~XEntityMgr()
 {
@@ -17,6 +15,10 @@ void XEntityMgr::Update(float delta)
 	for (std::unordered_set<XEntity*>::iterator itr = _hash_entities.begin(); itr != _hash_entities.end(); itr++)
 	{
 		(*itr)->Update(delta);
+	}
+	if (Player)
+	{
+		Player->Update(delta);
 	}
 }
 
@@ -78,15 +80,15 @@ XEntity* XEntityMgr::CreateEntity(uint staticid, Vector3 pos, Vector3 rot)
 	InitAttr(staticid, attr);
 	attr->setAppearPosition(pos);
 	attr->setAppearQuaternion(rot);
-	XEntity* ent = PrepareEntity(attr);
+	XEntity* ent = new XEntity();
+	PrepareEntity(attr,ent);
 	Add(Entity, ent);
 	return ent;
 }
 
-XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
+void XEntityMgr::PrepareEntity(XAttributes* attr, XEntity* ent)
 {
-	XEntity* x = new XEntity();
-	x->setAttributes(attr);
+	ent->setAttributes(attr);
 	std::string str = "Prefabs/" + tostring(attr->getPrefab());
 	GameObject* o = GameObjectMgr::Instance()->Create(str.c_str());
 	o->name = tostring(attr->getid()).c_str();
@@ -94,19 +96,10 @@ XEntity* XEntityMgr::PrepareEntity(XAttributes* attr)
 	Vector3 rot = attr->getAppearQuaternion();
 	o->transform->rotation = rot;
 
-#ifdef Client
-	eCallback(attr->getid(), 'R', attr->getPresentID());
-	sncCallback(attr->getid(), 'p', vec2arr(Vector3::one));
-	sncCallback(attr->getid(), 'r', vec2arr(attr->getAppearQuaternion()));
-	float scale[] = { 3.0f,3.0f,3.0f };
-	sncCallback(attr->getid(), 's', scale);
-#endif // DEBUG
-
-	x->Initilize(o, attr);
-	uint id = attr->getid();
-	if (!x->IsPlayer()) 
-		_dic_entities.insert(std::make_pair(id, x));
-	return x;
+	ent->Initilize(o, attr);
+	ent->EntityID = attr->getid();
+	if (!ent->IsPlayer())
+		_dic_entities.insert(std::make_pair(id, ent));
 }
 
 bool XEntityMgr::Add(EntityType type, XEntity* e)
@@ -127,11 +120,9 @@ void XEntityMgr::UnloadEntity(uint id)
 	std::unordered_map<uint, XEntity*>::iterator itr = _dic_entities.find(id);
 	if (itr != _dic_entities.end())
 	{
-#ifdef Client
-		eCallback(id, 'U', 0);
-#endif
 		_dic_entities.erase(id);
 		_hash_entities.erase(itr->second);
+		delete itr->second->getAttributes();
 		delete itr->second;
 	}
 	std::unordered_map<int, std::vector<XEntity*>>::iterator it;
@@ -164,7 +155,12 @@ void XEntityMgr::UnloadAll()
 	_hash_entities.clear();
 	_map_entities.clear();
 	_dic_entities.clear();
-	delete Player;
+
+	if (Player)
+	{
+		delete Player->getAttributes();
+		delete Player;
+	} 
 	Player = NULL;
 }
 
@@ -187,6 +183,8 @@ XPlayer* XEntityMgr::CreatePlayer()
 	int staticid = 2;
 	XAttributes* attr = new XAttributes();
 	InitAttr(staticid, attr);
-	return Player = dynamic_cast<XPlayer*>(PrepareEntity(attr));
+	Player = new XPlayer();
+	PrepareEntity(attr, Player);
+	return Player;
 }
 

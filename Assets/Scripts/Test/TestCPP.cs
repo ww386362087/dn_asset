@@ -335,6 +335,12 @@ public class TestCPP : MonoBehaviour
             ui_rst = "tick gamecore";
             iTickCore(Time.deltaTime);
         }
+        if (GUILayout.Button("Native-Quit-Game", ui_opt))
+        {
+            m_tick = false;
+            ui_rst = "quit gamecore";
+            iQuitCore();
+        }
         GUILayout.EndVertical();
     }
 

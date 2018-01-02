@@ -4,6 +4,7 @@
 
 XRole::XRole()
 {
+	_eEntity_Type = Role;
 }
 
 

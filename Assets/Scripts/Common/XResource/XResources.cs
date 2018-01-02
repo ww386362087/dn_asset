@@ -153,15 +153,14 @@ public class XResources
     public static void RecyleInPool(GameObject go, string path)
     {
         uint hash = XCommon.singleton.XHash(path);
+        go.transform.position = new Vector3(far, 0, far);
         if (_cache_pool.ContainsKey(hash))
-        {
-            go.transform.position = new Vector3(far, 0, far);
             _cache_pool[hash].Push(go);
-        }
         else
         {
-            _cache_pool.Add(hash, new Stack<GameObject>());
-            _cache_pool[hash].Push(go);
+            Stack<GameObject> stack = new Stack<GameObject>();
+            stack.Push(go);
+            _cache_pool.Add(hash, stack);
         }
     }
 
@@ -175,6 +174,10 @@ public class XResources
                 Destroy(_cache_pool[hash].Pop());
             }
             _cache_pool.Remove(hash);
+        }
+        else
+        {
+            XDebug.LogError("not cache the ", path);
         }
     }
 

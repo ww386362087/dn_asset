@@ -31,6 +31,7 @@ extern std::string UNITY_STREAM_PATH;
 extern std::string UNITY_CACHE_PATH;
 static int id = 0;
 
+
 template<typename T>
 std::string tostring(T val)
 {
@@ -64,7 +65,23 @@ uint xhash(const char* ch);
 
 float* vec2arr(Vector3 v);
 
-void split(const std::string& s, std::vector<std::string>& v, const std::string& c);
+std::vector<std::string> split(const std::string& str, const char sep);
+
+std::vector<std::string> split(const std::string& srcstr, const std::string& delimeter);
+
+std::string trimLeft(const std::string& str);
+
+std::string trimRight(const std::string& str);
+
+std::string trim(const std::string& str);
+
+std::string toLower(const std::string& str);
+
+std::string toUpper(const std::string& str);
+
+bool startsWith(const std::string& str, const std::string& substr);
+
+bool endsWith(const std::string& str, const std::string& substr);
 
 int new_id();
 

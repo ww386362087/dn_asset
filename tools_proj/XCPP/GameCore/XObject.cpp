@@ -54,13 +54,5 @@ bool XObject::DispatchEvent(XEventArgs* e)
 }
 
 
-void XObject::DetachAllComponents()
-{
-	std::unordered_map<uint, XComponent*>::iterator itr;
-	for (itr = components.begin(); itr != components.end(); itr++)
-	{
-		itr->second->OnUninit();
-	}
-	components.clear();
-}
+
 

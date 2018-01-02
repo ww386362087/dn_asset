@@ -8,7 +8,7 @@ public struct VectorArr
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
     float[] arr;
 
-    public Vector3 TVector()
+    public Vector3 ToVector()
     {
         if (arr.Length == 3)
             return new Vector3(arr[0], arr[1], arr[2]);

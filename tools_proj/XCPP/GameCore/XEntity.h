@@ -22,6 +22,11 @@ public:
 	virtual void OnInitial();
 	virtual void OnUnintial();
 
+	void DetachAllComponents();
+	template<class T> T* AttachComponent();
+	template<class T> T* GetComponent();
+	template<class T> bool DetachComponent();
+
 	void Initilize(GameObject* go, XAttributes* attr);
 	bool IsPlayer();
 	bool IsRole();
@@ -62,6 +67,49 @@ protected:
 	XAttributes* _attr;
 	XStateDefine _state = XState_Idle;
 
+	std::unordered_map<uint, XComponent*> components;
+
 };
+
+
+template<class T> T* XEntity::AttachComponent()
+{
+	std::string name = typeid(T).name();
+	uint uid = xhash(name.c_str());
+	std::unordered_map<uint, XComponent*>::iterator  itr = components.find(uid);
+	if (itr != components.end())
+	{
+		return dynamic_cast<T*>(components[uid]);
+	}
+	else
+	{
+		T* t = new T();
+		t->OnInitial(this);
+		components.insert(std::make_pair(uid, t));
+		return t;
+	}
+}
+
+template<class T> T* XEntity::GetComponent()
+{
+	std::string name = typeid(T).name();
+	uint uid = xhash(name.c_str());
+	return dynamic_cast<T*>(components[uid]);
+}
+
+template<class T> bool XEntity::DetachComponent()
+{
+	std::string name = typeid(T).name();
+	uint uid = xhash(name.c_str());
+	std::unordered_map<uint, XComponent*>::iterator  itr = components.find(uid);
+	if (itr != components.end())
+	{
+		itr->second->OnUninit();
+		components.erase(uid);
+		return true;
+	}
+	return false;
+}
+
 
 #endif

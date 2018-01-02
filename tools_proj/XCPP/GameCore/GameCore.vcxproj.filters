@@ -196,6 +196,12 @@
     <ClCompile Include="GameObjectMgr.cpp">
       <Filter>unity</Filter>
     </ClCompile>
+    <ClCompile Include="XLevelSpawnMgr.cpp">
+      <Filter>spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="XLevelWave.cpp">
+      <Filter>spawn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -426,6 +432,12 @@
     <ClInclude Include="GameObjectMgr.h">
       <Filter>unity</Filter>
     </ClInclude>
+    <ClInclude Include="XLevelSpawnMgr.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelWave.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">
@@ -481,6 +493,9 @@
     </Filter>
     <Filter Include="unity">
       <UniqueIdentifier>{5beea8bd-414f-4845-95a3-1ec38c7f253c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spawn">
+      <UniqueIdentifier>{9f1231a3-0674-4710-81be-4816ff51e512}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

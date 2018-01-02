@@ -13,10 +13,10 @@ XAIComponent::~XAIComponent()
 {
 }
 
-void XAIComponent::OnInitial(XObject* _obj)
+void XAIComponent::OnInitial(XEntity* enty)
 {
-	XComponent::OnInitial(_obj);
-	_entity = dynamic_cast<XEntity*>(_obj);
+	XComponent::OnInitial(enty);
+	_entity = enty;
 	InitVariables();
 	InitTree();
 }
