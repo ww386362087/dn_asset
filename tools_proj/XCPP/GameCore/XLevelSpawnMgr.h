@@ -5,6 +5,8 @@
 #include "Common.h"
 #include "XLevelWave.h"
 #include "XLevelScriptMgr.h"
+#include "LevelSpawnType.h"
+#include "XLevelSpawnInfo.h"
 
 struct XLevelStatistic
 {
@@ -63,6 +65,7 @@ private:
 	std::map<uint, XLevelStatistic> m_sceneid2info;
 	std::map<uint, std::map<int, XLevelWave*>> m_StaticWaves;
 	float _time = 0;
+	XLevelSpawnInfo* _curSpawner;
 };
 
 #endif

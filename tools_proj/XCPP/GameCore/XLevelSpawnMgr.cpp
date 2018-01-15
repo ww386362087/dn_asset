@@ -1,6 +1,6 @@
 #include "XLevelSpawnMgr.h"
 #include "XEntityStatistics.h"
-
+#include "XScene.h"
 
 XLevelSpawnMgr::XLevelSpawnMgr()
 {
@@ -8,12 +8,22 @@ XLevelSpawnMgr::XLevelSpawnMgr()
 
 XLevelSpawnMgr::~XLevelSpawnMgr()
 {
+	delete _curSpawner;
+	_curSpawner = NULL;
 }
 
 void XLevelSpawnMgr::OnEnterScene(uint sceneid)
 {
 	_time = 0;
 	XLevelScriptMgr::Instance()->CommandCount = 0;
+	char* configFile = XScene::Instance()->getSceneRow()->scenefile;
+	if (configFile)
+	{
+		_curSpawner = NULL;
+		XLevelScriptMgr::Instance()->ClearWallInfo();
+		XLevelScriptMgr::Instance()->Reset();
+		return;
+	}
 }
 
 bool XLevelSpawnMgr::LoadFile()
@@ -43,7 +53,7 @@ void XLevelSpawnMgr::ParseWave(XLevelStatistic& info, XLevelWave* wave, uint sce
 	{
 		return;
 	}
-	if (wave->m_SpawnType == Spawn_Source_Monster)
+	if (wave->m_SpawnType == Spawn_Monster)
 	{
 		XEntityStatisticsRow* data = new XEntityStatisticsRow();
 		iGetXEntityStatisticsRowByID(wave->m_EnemyID, data);

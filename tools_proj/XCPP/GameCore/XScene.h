@@ -6,7 +6,7 @@
 #include "XEntityMgr.h"
 #include "Singleton.h"
 
-class XScene :Singleton<XScene>
+class XScene : public Singleton<XScene>
 {
 public:
 	XScene();

@@ -6,13 +6,14 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
-#include <queue>
+#include <deque>
 #include "LevelCmd.h"
 
 using namespace std;
 
 class XLevelScriptMgr :public Singleton<XLevelScriptMgr>
 {
+
 public:
 	XLevelScriptMgr();
 	~XLevelScriptMgr();
@@ -35,7 +36,7 @@ public:
 	uint CommandCount = 0;
 
 private:
-	std::queue<LevelCmdDesc*> _CmdQueue;
+	std::deque<LevelCmdDesc*> _CmdQueue;
 	LevelCmdDesc* _currentCmd;
 	vector<string> 	_externalString;
 	vector<string> _onceString;

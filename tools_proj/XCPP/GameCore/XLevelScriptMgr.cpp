@@ -24,7 +24,7 @@ void XLevelScriptMgr::RunScript(string funcName)
 	for (int i = 0; i < funcCmds.size(); i++)
 	{
 		funcCmds[i]->Reset();
-		_CmdQueue.push(funcCmds[i]);
+		_CmdQueue.push_back(funcCmds[i]);
 	}
 	Update();
 }
@@ -148,7 +148,7 @@ void XLevelScriptMgr::Update()
 		_currentCmd = _CmdQueue.size() > 0 ? _CmdQueue.front() : NULL;
 		if (_currentCmd != NULL)
 		{
-			_CmdQueue.pop();
+			_CmdQueue.pop_front();
 			CommandCount++;
 			Execute(_currentCmd);
 		}
@@ -169,7 +169,7 @@ void XLevelScriptMgr::ExecuteNextCmd()
 	_currentCmd = _CmdQueue.size() > 0 ? _CmdQueue.front() : NULL;
 	if (_currentCmd)
 	{
-		_CmdQueue.pop();
+		_CmdQueue.pop_front();
 		Execute(_currentCmd);
 	}
 }
@@ -178,7 +178,7 @@ void XLevelScriptMgr::Reset()
 {
 	_externalString.clear();
 	_onceString.clear();
-	_CmdQueue.empty();
+	_CmdQueue.clear();
 	delete _currentCmd;
 	_currentCmd = NULL;
 	_LevelScripts.clear();

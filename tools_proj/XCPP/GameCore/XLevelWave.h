@@ -6,28 +6,9 @@
 #include <map>
 #include "Vector3.h"
 #include "Common.h"
+#include "LevelSpawnType.h"
 
-enum LevelSpawnType
-{
-	Spawn_Source_Monster,
-	Spawn_Source_Player,
-	Spawn_Source_Random,
-	Spawn_Source_Doodad,
-	Spawn_Source_Robot,
-};
 
-enum LevelInfoType
-{
-	TYPE_NONE,
-	TYPE_ID,
-	TYPE_BASEINFO,
-	TYPE_PREWAVE,
-	TYPE_EDITOR,
-	TYPE_MONSTERINFO,
-	TYPE_SCRIPT,
-	TYPE_EXSTRING,
-	TYPE_SPAWNTYPE,
-};
 
 class XLevelWave
 {

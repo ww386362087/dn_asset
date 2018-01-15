@@ -3,7 +3,7 @@
 #include<time.h>
 #include<string> 
 #include<unordered_map>
-#include<unordered_set>
+#include<deque>
 
 using namespace std;
 
@@ -81,6 +81,18 @@ void EAdd()
 	if (!CheckIn()) return;
 	c = add(a, b);
 	cout << "add result:" << c << endl << endl;
+
+	deque<int> que;
+	que.push_back(2);
+	que.push_back(4);
+	que.push_back(8);
+	cout << "que size1:" << que.size() << endl;
+	cout << "front:" << que.front()<<endl;
+	cout << "back:" << que.back()<<endl;
+	que.pop_front();
+	cout << "front:" << que.front() << endl;
+	que.clear();
+	cout << "que size2:" << que.size() << endl;
 }
 
 void ESub()

@@ -18,6 +18,7 @@
 #include "CommandDef.h"
 #include <fstream>
 #include <stdlib.h>
+#include <unordered_map>
 
 typedef unsigned int  uint;
 typedef unsigned long long ulong;
@@ -27,10 +28,10 @@ typedef picojson::value object;
 #define MaxArraySize 16
 #define Random(min,max) (rand() % max + min) //[min,max)
 
+
 extern std::string UNITY_STREAM_PATH;
 extern std::string UNITY_CACHE_PATH;
 static int id = 0;
-
 
 template<typename T>
 std::string tostring(T val)

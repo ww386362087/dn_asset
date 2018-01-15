@@ -208,6 +208,12 @@
     <ClCompile Include="XLevelScriptMgr.cpp">
       <Filter>spawn</Filter>
     </ClCompile>
+    <ClCompile Include="XLevelSpawnInfo.cpp">
+      <Filter>spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="XLevelTask.cpp">
+      <Filter>spawn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -451,6 +457,15 @@
       <Filter>spawn</Filter>
     </ClInclude>
     <ClInclude Include="LevelCmd.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelSpawnInfo.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSpawnType.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelTask.h">
       <Filter>spawn</Filter>
     </ClInclude>
   </ItemGroup>
