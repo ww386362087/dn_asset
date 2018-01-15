@@ -60,10 +60,8 @@ void XLevelWave::ParseInfo(const std::string& data)
 		m_Id = atoi(rawData.c_str());
 		break;
 	case TYPE_SPAWNTYPE:
-	{
 		m_SpawnType = (LevelSpawnType)(atoi(rawData.c_str()));
-	}
-	break;
+		break;
 	case TYPE_BASEINFO:
 	{
 		std::vector<std::string> strInfos = SplitNotEscape(rawData, ',');

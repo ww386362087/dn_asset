@@ -202,6 +202,12 @@
     <ClCompile Include="XLevelWave.cpp">
       <Filter>spawn</Filter>
     </ClCompile>
+    <ClCompile Include="XScene.cpp">
+      <Filter>spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="XLevelScriptMgr.cpp">
+      <Filter>spawn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AITree.h">
@@ -436,6 +442,15 @@
       <Filter>spawn</Filter>
     </ClInclude>
     <ClInclude Include="XLevelWave.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XScene.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelScriptMgr.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelCmd.h">
       <Filter>spawn</Filter>
     </ClInclude>
   </ItemGroup>

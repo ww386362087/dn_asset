@@ -4,6 +4,7 @@
 #include "Singleton.h"
 #include "Common.h"
 #include "XLevelWave.h"
+#include "XLevelScriptMgr.h"
 
 struct XLevelStatistic
 {
@@ -51,12 +52,8 @@ class XLevelSpawnMgr:Singleton<XLevelSpawnMgr>
 public:
 	XLevelSpawnMgr();
 	~XLevelSpawnMgr();
-
-	bool Init();
-	void Uninit();
-
+	void OnEnterScene(uint sceneid);
 	bool LoadFile();
-	void Release();
 
 private:
 	void ParseWaves();
@@ -65,7 +62,7 @@ private:
 private:
 	std::map<uint, XLevelStatistic> m_sceneid2info;
 	std::map<uint, std::map<int, XLevelWave*>> m_StaticWaves;
-
+	float _time = 0;
 };
 
 #endif

@@ -17,4 +17,11 @@ public static class XCodePostProcess
         project.Save();
     }
 
+    [SerializeField]
+    public class Node
+    {
+        uint numsize;
+        ushort msgid;
+    }
+
 }

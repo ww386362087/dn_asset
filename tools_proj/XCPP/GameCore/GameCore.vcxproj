@@ -63,8 +63,10 @@
     <ClCompile Include="XBullet.cpp" />
     <ClCompile Include="XBulletCore.cpp" />
     <ClCompile Include="XJAComboSkill.cpp" />
+    <ClCompile Include="XLevelScriptMgr.cpp" />
     <ClCompile Include="XLevelSpawnMgr.cpp" />
     <ClCompile Include="XLevelWave.cpp" />
+    <ClCompile Include="XScene.cpp" />
     <ClCompile Include="XSkill.cpp" />
     <ClCompile Include="XSkillCore.cpp" />
     <ClCompile Include="XSkillMgr.cpp" />
@@ -105,6 +107,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectMgr.h" />
     <ClInclude Include="IXStateTransform.h" />
+    <ClInclude Include="LevelCmd.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="NativeInterface.h" />
     <ClInclude Include="NativeReader.h" />
@@ -141,8 +144,10 @@
     <ClInclude Include="XComponentDef.h" />
     <ClInclude Include="XDelegate.h" />
     <ClInclude Include="XJAComboSkill.h" />
+    <ClInclude Include="XLevelScriptMgr.h" />
     <ClInclude Include="XLevelSpawnMgr.h" />
     <ClInclude Include="XLevelWave.h" />
+    <ClInclude Include="XScene.h" />
     <ClInclude Include="XSkill.h" />
     <ClInclude Include="XSkillCore.h" />
     <ClInclude Include="XSkillMgr.h" />

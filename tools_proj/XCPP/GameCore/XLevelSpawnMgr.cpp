@@ -6,35 +6,22 @@ XLevelSpawnMgr::XLevelSpawnMgr()
 {
 }
 
-
 XLevelSpawnMgr::~XLevelSpawnMgr()
 {
 }
 
-
-bool XLevelSpawnMgr::Init()
+void XLevelSpawnMgr::OnEnterScene(uint sceneid)
 {
-	LoadFile();
-
-	return true;
-}
-
-void XLevelSpawnMgr::Uninit()
-{
-	Release();
+	_time = 0;
+	XLevelScriptMgr::Instance()->CommandCount = 0;
 }
 
 bool XLevelSpawnMgr::LoadFile()
 {
-	Release();
 	ParseWaves();
 	return true;
 }
 
-
-void XLevelSpawnMgr::Release()
-{
-}
 
 void XLevelSpawnMgr::ParseWaves()
 {
