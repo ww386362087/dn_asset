@@ -72,7 +72,7 @@ bool CheckIn()
 
 void EAdd()
 {
-	int a, b, c;
+	/*int a, b, c;
 	cout << "input a:";
 	cin >> a;
 	if (!CheckIn()) return;
@@ -80,15 +80,16 @@ void EAdd()
 	cin >> b;
 	if (!CheckIn()) return;
 	c = add(a, b);
-	cout << "add result:" << c << endl << endl;
+	cout << "add result:" << c << endl << endl;*/
 
+	cout << "long:" << sizeof(long) << " point:" << sizeof(void*) << endl;
 	deque<int> que;
 	que.push_back(2);
 	que.push_back(4);
 	que.push_back(8);
 	cout << "que size1:" << que.size() << endl;
-	cout << "front:" << que.front()<<endl;
-	cout << "back:" << que.back()<<endl;
+	cout << "front:" << que.front() << endl;
+	cout << "back:" << que.back() << endl;
 	que.pop_front();
 	cout << "front:" << que.front() << endl;
 	que.clear();

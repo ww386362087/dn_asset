@@ -38,6 +38,19 @@ std::vector<std::string> SplitNotEscape(const std::string &s, const char sep)
 	return vec;
 }
 
+void XLevelWave::ReadFromFile(std::ifstream& infile)
+{
+	std::string line;
+	getline(infile, line);
+	if (line != "bw") return;
+	while (true)
+	{
+		getline(infile, line);
+		if (line == "ew") break;
+		ParseInfo(line);
+	}
+}
+
 void XLevelWave::ParseInfo(const std::string& data)
 {
 	LevelInfoType type = TYPE_NONE;
@@ -52,12 +65,11 @@ void XLevelWave::ParseInfo(const std::string& data)
 
 	int offset = data[data.size() - 1] == '\r' ? 1 : 0;
 	std::string rawData = data.substr(3, data.size() - 3 - offset);
-	//rawData[rawData.size()-1] = 0; // È¥µôÐÐÎ²µÄ '\n'
-
+	
 	switch (type)
 	{
 	case TYPE_ID:
-		m_Id = atoi(rawData.c_str());
+		ID = atoi(rawData.c_str());
 		break;
 	case TYPE_SPAWNTYPE:
 		m_SpawnType = (LevelSpawnType)(atoi(rawData.c_str()));
@@ -70,10 +82,10 @@ void XLevelWave::ParseInfo(const std::string& data)
 		m_EnemyID = atoi(strInfos[2].c_str());
 		m_YRotate = atoi(strInfos[5].c_str());
 		if (strInfos.size() > 6)
-			m_RoundRidus = (float)atof(strInfos[6].c_str());
+			radius = (float)atof(strInfos[6].c_str());
 
 		if (strInfos.size() > 7)
-			m_RoundCount = atoi(strInfos[7].c_str());
+			count = atoi(strInfos[7].c_str());
 
 		if (strInfos.size() > 8)
 			m_RandomID = atoi(strInfos[8].c_str());
@@ -110,7 +122,6 @@ void XLevelWave::ParseInfo(const std::string& data)
 				for (size_t i = 0; i < strPreWaves.size(); i++)
 				{
 					int preWave = atoi(strPreWaves[i].c_str());
-
 					m_PreWaves.push_back(preWave);
 				}
 			}

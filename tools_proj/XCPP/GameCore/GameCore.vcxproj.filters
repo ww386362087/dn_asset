@@ -468,6 +468,9 @@
     <ClInclude Include="XLevelTask.h">
       <Filter>spawn</Filter>
     </ClInclude>
+    <ClInclude Include="XLevelStatistics.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ai">

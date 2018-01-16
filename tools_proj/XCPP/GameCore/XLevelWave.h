@@ -4,16 +4,15 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <fstream>
 #include "Vector3.h"
 #include "Common.h"
 #include "LevelSpawnType.h"
 
-
-
 class XLevelWave
 {
 public:
-	int m_Id;
+	int ID;
 	LevelSpawnType m_SpawnType;
 	int m_Time;
 	int m_LoopInterval;
@@ -28,13 +27,16 @@ public:
 	std::map<int, Vector3> m_Monsters;
 	std::map<int, float> m_MonsterRotation;
 
-	float m_RoundRidus;
-	int m_RoundCount;
+	float radius;
+	int count;
 
 	std::vector<int> m_DoodadID;
 	float m_DoodadPercent;
 	int m_Repeat;
 	std::string m_Levelscript;
+
+public:
+	void ReadFromFile(std::ifstream& infile);
 
 protected:
 	void ParseInfo(const std::string &data);

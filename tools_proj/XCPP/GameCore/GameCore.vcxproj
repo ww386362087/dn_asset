@@ -150,6 +150,7 @@
     <ClInclude Include="XLevelScriptMgr.h" />
     <ClInclude Include="XLevelSpawnInfo.h" />
     <ClInclude Include="XLevelSpawnMgr.h" />
+    <ClInclude Include="XLevelStatistics.h" />
     <ClInclude Include="XLevelTask.h" />
     <ClInclude Include="XLevelWave.h" />
     <ClInclude Include="XScene.h" />
