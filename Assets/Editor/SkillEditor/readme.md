@@ -1,25 +1,25 @@
-¼¼ÄÜÏµÍ³£º
+ï»¿æŠ€èƒ½ç³»ç»Ÿï¼š
 
 
-µã»÷Ò»Ğ©³£ÓÃµÄ¼¼ÄÜµÄ°´Å¥´¥·¢Art Skill
-	²»Í¬µÄ°´Å¥´¥·¢µÄ¶¼ÊÇAnimator->Art(State) Art·Ö±ğ»á²»Í¬µÄAnimation overideµô
+ç‚¹å‡»ä¸€äº›å¸¸ç”¨çš„æŠ€èƒ½çš„æŒ‰é’®è§¦å‘Art Skill
+	ä¸åŒçš„æŒ‰é’®è§¦å‘çš„éƒ½æ˜¯Animator->Art(State) Artåˆ†åˆ«ä¼šä¸åŒçš„Animation overideæ‰
 
-µã»÷ÆÕ¹¥°´Å¥£¨¿ÉÒÔÁ¬Ğøµã»÷£©´¥·¢JA Skill
-	¶¯»­±íÏÖÊÇAnimator->Attack Layer-> Attack -> (JA01, JA02, JA10, JA20 ....) Á¬Ğøµã»÷ÔÚÕâ¼¸¸ö×´Ì¬Ö®¼äÇĞ»»
+ç‚¹å‡»æ™®æ”»æŒ‰é’®ï¼ˆå¯ä»¥è¿ç»­ç‚¹å‡»ï¼‰è§¦å‘JA Skill
+	åŠ¨ç”»è¡¨ç°æ˜¯Animator->Attack Layer-> Attack -> (JA01, JA02, JA10, JA20 ....) è¿ç»­ç‚¹å‡»åœ¨è¿™å‡ ä¸ªçŠ¶æ€ä¹‹é—´åˆ‡æ¢
 
-×éºÏ¼¼ÄÜCombined Skill
-	¶¯»­±íÏÖÊÇAniamtor->Attack Layer->Combined ->(Phase0, Phase1, Phase2, Phase3 ....)
-
-
-Ğ¡¹Ö¡¢Boss¡¢NPCÖ»ÓĞArt Skill 
-Ö»ÓĞPlayer²Å»áÓĞJA Skill, µ±È»Ò²ÓĞArt Skill
+ç»„åˆæŠ€èƒ½Combined Skill
+	åŠ¨ç”»è¡¨ç°æ˜¯Aniamtor->Attack Layer->Combined ->(Phase0, Phase1, Phase2, Phase3 ....)
 
 
-¼¼ÄÜÏà¹ØÅäÖÃËµÃ÷£º
-1. Charge	ÊÜ´Ë¼¼ÄÜÈËÎïÊµÏÖÏòÇ°³å
-2. Manipulate	ÊÜ´Ë¼¼ÄÜ¶ÔÊÖÊµÏÖÎ»ÒÆ
-3. MobUnits	´Ë¼¼ÄÜÉú³É²ÎÕÕÎï
-4. Fx ÌØĞ§Ïà¹Ø
-5. ResultºÍHitEffect ´ò»÷µãÏà¹ØÅäÖÃ
-6. Warning ¾¯¸æÈ¦Ïà¹ØÅäÖÃ
+å°æ€ªã€Bossã€NPCåªæœ‰Art Skill 
+åªæœ‰Playeræ‰ä¼šæœ‰JA Skill, å½“ç„¶ä¹Ÿæœ‰Art Skill
+
+
+æŠ€èƒ½ç›¸å…³é…ç½®è¯´æ˜ï¼š
+1. Charge	å—æ­¤æŠ€èƒ½äººç‰©å®ç°å‘å‰å†²
+2. Manipulate	å—æ­¤æŠ€èƒ½å¯¹æ‰‹å®ç°ä½ç§»
+3. MobUnits	æ­¤æŠ€èƒ½ç”Ÿæˆå‚ç…§ç‰©
+4. Fx ç‰¹æ•ˆç›¸å…³
+5. Resultå’ŒHitEffect æ‰“å‡»ç‚¹ç›¸å…³é…ç½®
+6. Warning è­¦å‘Šåœˆç›¸å…³é…ç½®
 
