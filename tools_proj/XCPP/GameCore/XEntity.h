@@ -53,6 +53,7 @@ public:
 	XAttributes* getAttributes();
 	void setAttributes(XAttributes*);
 	XStateDefine getState();
+	int Wave;
 
 protected:
 	XStateMachine* _pmachine;

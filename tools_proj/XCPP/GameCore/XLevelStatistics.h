@@ -38,7 +38,6 @@ public :
 
 	uint _max_combo;
 	uint _player_behit;
-	float _start_time;
 	float _end_time;
 	bool _key_npc_die;
 	uint _enemy_in_fight;
@@ -47,7 +46,6 @@ public :
 	float _total_damage = 0;
 	float _total_hurt = 0;
 	float _total_heal = 0;
-	std::vector<uint> _monster_refresh_time;
 
 	void AddEntityDieCount(ulong entityID) {}
 
@@ -102,7 +100,6 @@ public :
 		_max_combo = 0;
 		_player_behit = 0;
 
-		_start_time = 0;
 		_end_time = 0;
 
 		_box_enemy_kill = 0;
@@ -113,7 +110,6 @@ public :
 		_total_hurt = 0;
 		_total_heal = 0;
 
-		_monster_refresh_time.clear();
 
 	}
 };

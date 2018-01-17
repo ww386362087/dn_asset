@@ -35,7 +35,6 @@ namespace Level
 
         public uint _max_combo;
         public uint _player_behit;
-        public float _start_time;
         public float _end_time;
         public bool _key_npc_die;
         public uint _enemy_in_fight;
@@ -44,8 +43,7 @@ namespace Level
         public float _total_damage = 0;
         public float _total_hurt = 0;
         public float _total_heal = 0;
-        public List<uint> _monster_refresh_time = new List<uint>();
-
+      
         public void AddEntityDieCount(ulong entityID)
         {
         }
@@ -101,8 +99,7 @@ namespace Level
             _op_team_alive = 0;
             _max_combo = 0;
             _player_behit = 0;
-
-            _start_time = 0;
+            
             _end_time = 0;
 
             _box_enemy_kill = 0;
@@ -113,8 +110,7 @@ namespace Level
             _total_hurt = 0;
             _total_heal = 0;
 
-            _monster_refresh_time.Clear();
-
+          
         }
     }
 

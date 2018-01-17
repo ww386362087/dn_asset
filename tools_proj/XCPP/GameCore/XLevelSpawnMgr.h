@@ -6,11 +6,11 @@
 #include "XLevelWave.h"
 #include "XLevelScriptMgr.h"
 #include "LevelSpawnType.h"
-#include "XLevelSpawnInfo.h"
+#include "XLevelSpawn.h"
 #include "XLevelStatistics.h"
 #include <string>
 
-class XLevelSpawnMgr:Singleton<XLevelSpawnMgr>
+class XLevelSpawnMgr:public Singleton<XLevelSpawnMgr>
 {
 public:
 	XLevelSpawnMgr();
@@ -25,7 +25,7 @@ private:
 	std::map<uint, XLevelStatistics> m_sceneid2info;
 	std::map<uint, std::map<int, XLevelWave*>> m_StaticWaves;
 	float _time = 0;
-	XLevelSpawnInfo* _curSpawner;
+	XLevelSpawn* _curSpawner;
 	bool BossExtarScriptExecuting = false;
 	bool IsCurrentLevelWin;
 	bool IsCurrentLevelFinished;

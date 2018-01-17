@@ -1,5 +1,6 @@
 #include <iostream>
 #include<Windows.h>
+#include <sstream> 
 #include<time.h>
 #include<string> 
 #include<unordered_map>
@@ -70,9 +71,10 @@ bool CheckIn()
 }
 
 
+
 void EAdd()
 {
-	/*int a, b, c;
+	int a, b, c;
 	cout << "input a:";
 	cin >> a;
 	if (!CheckIn()) return;
@@ -80,20 +82,27 @@ void EAdd()
 	cin >> b;
 	if (!CheckIn()) return;
 	c = add(a, b);
-	cout << "add result:" << c << endl << endl;*/
+	cout << "add result:" << c << endl << endl;
 
-	cout << "long:" << sizeof(long) << " point:" << sizeof(void*) << endl;
-	deque<int> que;
-	que.push_back(2);
-	que.push_back(4);
-	que.push_back(8);
-	cout << "que size1:" << que.size() << endl;
-	cout << "front:" << que.front() << endl;
-	cout << "back:" << que.back() << endl;
-	que.pop_front();
-	cout << "front:" << que.front() << endl;
-	que.clear();
-	cout << "que size2:" << que.size() << endl;
+
+	//unordered_map<int, int*> map;
+	//int i = 1001, j = 1002;
+	//int* itr = &i;
+	//int* itr2 = &j;
+	//map.insert(make_pair(2, itr));
+	//cout << "index2:" << *map[2] << endl;
+
+	//deque<int> que;
+	//que.push_back(2);
+	//que.push_back(4);
+	//que.push_back(8);
+	//cout << "que size1:" << que.size() << endl;
+	//cout << "front:" << que.front() << endl;
+	//cout << "back:" << que.back() << endl;
+	//que.pop_front();
+	//cout << "front:" << que.front() << endl;
+	//que.clear();
+	//cout << "que size2:" << que.size() << endl;
 }
 
 void ESub()

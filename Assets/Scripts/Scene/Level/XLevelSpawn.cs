@@ -273,10 +273,9 @@ namespace Level
         {
             if (wave.Count > 0)
             {
-                XLevelStatistics.singleton.ls._monster_refresh_time.Add((uint)(Time.time - XLevelStatistics.singleton.ls._start_time));
                 float angle = 360.0f / wave.Count;
                 XPlayer player = XEntityMgr.singleton.Player;
-                Vector3 pos = wave.isAroundPlayer && player != null ? XEntityMgr.singleton.Player.Position : wave.Pos;
+                Vector3 pos = wave.isAroundPlayer && player != null ? player.Position : wave.Pos;
                 for (int i = 0; i < wave.Count; i++)
                 {
                     XLevelSpawnTask task = new XLevelSpawnTask(this);

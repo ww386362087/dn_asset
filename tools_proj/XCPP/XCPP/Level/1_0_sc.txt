@@ -1,0 +1,158 @@
+﻿
+func:ogrespeakbubble_1
+bubble 50001 藏哪了？ 3
+
+func:ogrespeakbubble_2
+bubble 50001 把先知找出来！ 3
+
+func:ogrespeakbubble_3
+bubble 50001 咦～不在这吗？ 3
+
+func:ogrebattlebubble_1
+bubble 50001 抓住他！别让他跑了！ 3
+
+func:orcspeakbubble_1
+bubble 50007 不能让先知逃掉了。 3
+
+func:orcspeakbubble_2
+bubble 50007 我抓到先知了！ 3
+
+func:orcspeakbubble_3
+bubble 50007 抓到啦，发财啦！吼吼！ 3
+
+func:orcbattlebubble_1
+bubble 50007 有人！ 3
+
+func:trollspeakbubble_1
+bubble 50002 这个小镇现在是我们的了！ 3
+
+func:trollspeakbubble_2
+bubble 50002 破坏、燃烧，哈哈..！ 3
+
+func:trollspeakbubble_3
+bubble 50002 杀光、抢光！ 3
+
+func:trollbattlebubble_1
+bubble 50002 人类！你这是自寻死路！ 3
+
+func:addbuff50125
+addbuff 50001 50125 1
+
+func:goblin
+bubble 50011 这个人好像很厉害，大家一起上！ 5
+
+func:goblin_1
+bubble 50010 别让他救走先知！ 5
+
+func:goblin_2
+bubble 50009 这里还有个人类，消灭他！ 5
+
+func:showskill1
+showskillslot 0
+
+func:levelup
+levelupfx
+
+func:ogrespeak
+notice 食人魔：凭你也想救走先知？！ 6
+
+func:ogrespeak_1
+bubble 50001 朱巴卡很快就会碾碎你们！ 4
+
+func:ogrespeak_2
+notice 你惹怒我了，你这是自寻死路！ 6
+
+func:notice12
+notice 那位勇士，我们来帮你！
+
+func:notice13
+showcutscene CutScene/1_0_start
+
+func:talk
+talkr 13 [ffebad]勇士，感谢您伸出援助之手，但是前方还存在更多的魔物
+talkl [player] [ffebad]放心，交给我了，美丽的凯德拉糟蹋成这样，真是可恶！
+stoptalk
+
+func:direction
+showdirection direction1
+
+
+func:player106
+bubble 106 可恶的魔物 7
+
+func:player108
+bubble 108 勇士！我帮你治疗伤口。 7
+
+func:helpertalk
+newbienotice [ffebad]那位勇士，不要怕，我们会一起帮助你！
+
+func:callhelper
+callnewbiehelper
+
+func:addbuff
+addbuff 0 101 1
+addbuff 0 121 1
+addbuff 0 123 1
+
+func:ultraskill
+settutorial ultraskill
+
+func:closedoor
+opendoor Door on
+
+func:operation1
+clientrecord 100before
+
+func:operation2
+clientrecord 100after
+
+func:cutscene
+showcutscene CutScene/1_0_cutscene_start
+
+func:bosscutscene
+showcutscene CutScene/1_0_cutscene_boss_start 53.19 9.97 62.66 180
+
+func:talk1
+talkl [player] [ffebad]可恶的魔物！
+stoptalk
+
+func:talk2
+talkr 24 [ffebad]这儿还有个小鬼！
+stoptalk
+
+func:settutorial1
+settutorial settutorial1
+
+func:settutorial2
+settutorial settutorial2
+
+func:settutorial3
+settutorial settutorial3
+
+func:settutorial4
+settutorial settutorial4
+
+func:settutorial5
+settutorial settutorial5
+
+func:settutorial6
+settutorial settutorial6
+
+
+func:stage1
+opendoor Ty_task_zyjt1 off
+opendoor Ty_task_zyjt2 on
+
+func:stage2
+opendoor Ty_task_zyjt2 off
+
+func:stage3
+opendoor BlockWall2 off
+
+
+
+
+
+
+
+info:BlockWall2 54.00988|11.06701|81.5148|0 on 50 36.06701 0.1

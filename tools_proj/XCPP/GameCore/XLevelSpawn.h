@@ -36,11 +36,11 @@ public :
 };
 
 
-class XLevelSpawnInfo
+class XLevelSpawn
 {
 public:
-	XLevelSpawnInfo();
-	~XLevelSpawnInfo();
+	XLevelSpawn();
+	~XLevelSpawn();
 	void Clear();
 	void ResetDynamicInfo();
 	void KillSpawn(int waveid);

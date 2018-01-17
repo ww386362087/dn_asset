@@ -9,8 +9,8 @@
 class XScene : public Singleton<XScene>
 {
 public:
-	XScene();
-	~XScene();
+	XScene() {};
+	~XScene() {};
 	SceneListRow* getSceneRow();
 	void Update(float delta);
 	void Enter(uint sceneid);

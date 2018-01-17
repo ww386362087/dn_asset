@@ -163,7 +163,7 @@ void SceneList::GetRow(int idx,SceneListRow* row)
 
 void SceneList::GetByUID(uint idx, SceneListRow* row)
 {
- *row = *m_map[idx];
+	*row = *m_map[idx];
 }
 
 int SceneList::GetLength()

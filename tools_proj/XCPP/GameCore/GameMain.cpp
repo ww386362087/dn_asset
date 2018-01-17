@@ -1,11 +1,11 @@
 #include "GameMain.h"
 #include "XEntityMgr.h"
-
+#include "XScene.h"
 
 void GameMain::OnStart()
 {
-	//XEntityMgr::Instance()->CreateEntity(2, Vector3::zero, Vector3::zero);
-	XEntityMgr::Instance()->CreatePlayer();
+	//XEntityMgr::Instance()->CreatePlayer();
+	XScene::Instance()->Enter(401);
 }
 
 void GameMain::Ontick(float delta)

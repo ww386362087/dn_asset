@@ -17,18 +17,20 @@ void XLevelSpawnMgr::OnEnterScene(uint sceneid)
 {
 	_time = 0;
 	XLevelScriptMgr::Instance()->CommandCount = 0;
-	char* configFile = XScene::Instance()->getSceneRow()->scenefile;
-	if (configFile)
+	SceneListRow* row = XScene::Instance()->getSceneRow();
+	char* configFile = row->scenefile;
+	if (configFile == NULL)
 	{
+		delete _curSpawner;
 		_curSpawner = NULL;
 		XLevelScriptMgr::Instance()->ClearWallInfo();
 		XLevelScriptMgr::Instance()->Reset();
 		return;
 	}
-	if (_curSpawner == NULL) _curSpawner = new XLevelSpawnInfo();
+	if (_curSpawner == NULL) _curSpawner = new XLevelSpawn();
 	else _curSpawner->Clear();
 	ifstream infile;
-	std::string path = "Table/" + tostring(configFile);
+	std::string path = tostring(configFile)+".txt";
 	infile.open(path.data(), ios::in);
 	assert(infile.is_open());
 	string line;
