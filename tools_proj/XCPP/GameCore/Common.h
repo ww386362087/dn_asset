@@ -13,7 +13,7 @@
 
 #include <sstream> 
 #include <string>
-#include "picojson.h"
+#include "plugin/picojson.h"
 #include "Vector3.h"
 #include "CommandDef.h"
 #include <fstream>

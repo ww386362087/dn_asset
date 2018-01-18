@@ -51,6 +51,9 @@ public class TestManager
                 case "ai":
                     test = new TestAI();
                     break;
+                case "nativeai":
+                    test = new TestNativeAI();
+                    break;
                 default:
                     test = new Test();
                     break;

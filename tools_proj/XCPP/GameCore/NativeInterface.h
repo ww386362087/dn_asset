@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Log.h"
 #include "Vector3.h"
-#include "tinyxml2.h"
+#include "plugin/tinyxml2.h"
 #include <string>
 
 extern "C"
