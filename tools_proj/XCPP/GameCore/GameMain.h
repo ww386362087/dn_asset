@@ -22,13 +22,16 @@ public:
 	void Stop();
 	void Quit();
 	void Ontick(float delta);
+	float Time();
+	float DeltaTime();
 
 private:
 	void OnStart();
 	
 private :
-	long m_diff = 0;
+	float m_delta = 0;
 	bool m_start = false;
+	float m_time = 0;
 };
 
 

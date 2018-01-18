@@ -61,8 +61,8 @@ namespace GameTime
 
 	std::string GetDateStr(time_t t);
 
-
 	static int g_timeOffSet;
+
 };
 
 #endif

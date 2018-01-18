@@ -54,6 +54,7 @@ public:
 	void setAttributes(XAttributes*);
 	XStateDefine getState();
 	int Wave;
+	float CreateTime;
 
 protected:
 	XStateMachine* _pmachine;

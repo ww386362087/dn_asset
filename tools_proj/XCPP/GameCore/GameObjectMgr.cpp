@@ -5,8 +5,6 @@
 #include "CommandDef.h"
 #include "NativeInterface.h"
 
-extern SharpCALLBACK callback;
-
 
 void GameObjectMgr::Clear()
 {
@@ -23,7 +21,6 @@ GameObject* GameObjectMgr::Create(const char* name)
 	if (pool.find(hash) == pool.end())
 	{
 		GameObject* go = new GameObject(name);
-		//callback(CMLoadGo, name);
 		Add(go);
 		return go;
 	}
@@ -59,7 +56,6 @@ bool GameObjectMgr::Remv(uint hash)
 {
 	if (pool.find(hash) != pool.end())
 	{
-		//callback(CMUnloadGo, pool[hash]->name);
 		delete pool[hash];
 		pool.erase(hash);
 		return true;

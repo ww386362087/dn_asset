@@ -34,8 +34,8 @@ public :
 
 public:
 	XLevelSpawnTask(XLevelSpawn* ls) :XLevelBaseTask(ls) { _spawner = ls; }
-	XEntity* CreateMonster(uint id, float yRotate, Vector3 pos, int _waveid);
-	XEntity* CreateNPC(uint id, float yRotate, Vector3 pos, int _waveid);
+	XEntity& CreateMonster(uint id, float yRotate, Vector3 pos, int _waveid);
+	XEntity& CreateNPC(uint id, float yRotate, Vector3 pos, int _waveid);
 	virtual bool Execute(float time);
 };
 

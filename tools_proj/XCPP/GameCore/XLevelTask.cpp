@@ -1,15 +1,22 @@
 #include "XLevelTask.h"
 #include "XLevelScriptMgr.h"
+#include "Vector3.h"
+#include "XEntity.h"
+#include "GameMain.h"
+#include "XNpcList.h"
 
-
-XEntity* XLevelSpawnTask::CreateMonster(uint id, float yRotate, Vector3 pos, int _waveid)
+XEntity& XLevelSpawnTask::CreateMonster(uint id, float yRotate, Vector3 pos, int _waveid)
 {
-	return 0;
+	Vector3 rot = Vector3(0, yRotate, 0);
+	XEntity* entity = XEntityMgr::Instance()->CreateEntity(id, pos, rot);
+	entity->Wave = _waveid;
+	entity->CreateTime = GameMain::Instance()->Time();
+	return *entity;
 }
 
-XEntity* XLevelSpawnTask::CreateNPC(uint id, float yRotate, Vector3 pos, int _waveid)
+XEntity& XLevelSpawnTask::CreateNPC(uint id, float yRotate, Vector3 pos, int _waveid)
 {
-	return 0;
+	return CreateMonster(id, yRotate, pos, _waveid);
 }
 
 bool XLevelSpawnTask::Execute(float time)
