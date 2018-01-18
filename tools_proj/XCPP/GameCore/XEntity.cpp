@@ -60,7 +60,14 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	_attr = attr;
 
 #ifdef Client
-	eCallback(attr->getid(), 'R', attr->getPresentID());
+	if (IsRole())
+	{
+		eCallback(attr->getid(), 'R', attr->getPresentID());
+	}
+	else
+	{
+		eCallback(attr->getid(), 'E', attr->getPresentID());
+	}
 	sncCallback(attr->getid(), 'p', vec2arr(Vector3::one));
 	sncCallback(attr->getid(), 'r', vec2arr(attr->getAppearQuaternion()));
 	float scale[] = { 3.0f,3.0f,3.0f };
@@ -87,7 +94,7 @@ bool XEntity::IsNpc()
 
 bool XEntity::IsRole()
 {
-	return (_eEntity_Type & Role) != 0;
+	return (_eEntity_Type & Role) || (_eEntity_Type & Player) != 0;
 }
 
 bool XEntity::IsPlayer()

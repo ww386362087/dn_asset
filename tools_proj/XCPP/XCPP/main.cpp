@@ -15,7 +15,7 @@ typedef void(*DllInit)(InitDef);
 typedef void(*DllEntityCallback)(EntyDef);
 typedef void(*DllCompCallback)(CompDef);
 typedef void(*DllEntitySncCallback)(EntySyncDef);
-typedef void(*DllInitial)(char*, char*);
+typedef void(*DllInitial)(char*, char*, short);
 typedef int(*DllAdd)(int, int);
 typedef int(*DllSub)(int*, int*);
 typedef int(*DllReadQteTable)();
@@ -181,7 +181,7 @@ void main()
 	ent(OnEnty);
 	com(OnComp);
 	sync(OnSync);
-	init("", "");
+	init("", "", -1);
 
 	while (true)
 	{
@@ -220,11 +220,11 @@ void main()
 			break;
 		case 'r':
 			start();
-			while (true)
+			/*while (true)
 			{
 				tick(0.33f);
 				Sleep(111);
-			}
+			}*/
 			break;
 		case 'o':
 			stop();

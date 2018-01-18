@@ -39,6 +39,8 @@ public:
 public:
 	void ReadFromFile(std::ifstream& infile);
 	bool IsScriptWave();
+	~XLevelWave();
+
 
 protected:
 	void ParseInfo(const std::string &data);

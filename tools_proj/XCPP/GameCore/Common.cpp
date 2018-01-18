@@ -2,6 +2,7 @@
 
 std::string UNITY_STREAM_PATH;
 std::string UNITY_CACHE_PATH;
+short UNITY_PLATFORM; //value(-1) while start with c++
 
 void tobytes(std::string str)
 {
@@ -13,10 +14,11 @@ void tobytes(std::string str)
 	printf("\n");
 }
 
-void InitPath(std::string stream,std::string cache)
+void InitPath(std::string stream, std::string cache, short plat)
 {
 	UNITY_STREAM_PATH = stream;
 	UNITY_CACHE_PATH = cache;
+	UNITY_PLATFORM = plat;
 }
 
 

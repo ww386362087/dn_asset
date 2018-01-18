@@ -47,12 +47,11 @@ public:
 	void Update(float time);
 	void SoloUpdate(float time);
 	bool ExecuteWaveExtraScript(int wave);
-
+	XLevelDynamicInfo* GetWaveDynamicInfo(int waveid);
 
 protected:
 	void RunExtraScript(std::string o);
 	void ProcessTaskQueue(float time);
-	XLevelDynamicInfo* GetWaveDynamicInfo(int waveid);
 	XLevelWave* GetWaveInfo(int waveid);
 	void OnMonsterDie(XEntity* entity);
 	void GenerateEntityTask(XLevelWave& wave);

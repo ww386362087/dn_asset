@@ -1,6 +1,7 @@
 #include "GameMain.h"
 #include "XEntityMgr.h"
 #include "XScene.h"
+#include "XLevelSpawnMgr.h"
 
 void GameMain::OnStart()
 {
@@ -36,6 +37,7 @@ void GameMain::Quit()
 	GameObjectMgr::Instance()->Clear();
 	XEntityMgr::Instance()->UnloadAll();
 	XTimerMgr::Instance()->RemoveAllTimer();
+	
 }
 
 float GameMain::Time()

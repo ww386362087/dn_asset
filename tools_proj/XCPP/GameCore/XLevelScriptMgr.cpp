@@ -10,6 +10,26 @@ XLevelScriptMgr::~XLevelScriptMgr()
 {
 	delete _currentCmd;
 	_currentCmd = NULL;
+	for (size_t i = 0; i < _CmdQueue.size(); i++)
+	{
+		delete _CmdQueue[i];
+	}
+	_CmdQueue.clear();
+	for (size_t i = 0; i < _LevelInfos.size(); i++)
+	{
+		delete _LevelInfos[i];
+	}
+	_LevelInfos.clear();
+	for (unordered_map<string, vector<LevelCmdDesc*>>::iterator itr = _LevelScripts.begin();
+		itr != _LevelScripts.end(); itr++)
+	{
+		for (size_t i = 0; i < itr->second.size(); i++)
+		{
+			delete itr->second[i];
+		}
+		itr->second.clear();
+	}
+	_LevelInfos.clear();
 }
 
 void XLevelScriptMgr::RunScript(string funcName)

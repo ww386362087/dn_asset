@@ -28,7 +28,6 @@ typedef picojson::value object;
 #define MaxArraySize 16
 #define Random(min,max) (rand() % max + min) //[min,max)
 
-
 extern std::string UNITY_STREAM_PATH;
 extern std::string UNITY_CACHE_PATH;
 static int id = 0;
@@ -60,7 +59,7 @@ T convert(const char *str)
 
 void tobytes(std::string str);
 
-void InitPath(std::string stream,std::string cache);
+void InitPath(std::string stream, std::string cache, short plat);
 
 uint xhash(const char* ch);
 

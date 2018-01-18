@@ -56,6 +56,8 @@ bool XLevelWave::IsScriptWave()
 	return !levelscript.empty();
 }
 
+XLevelWave::~XLevelWave() { }
+
 void XLevelWave::ParseInfo(const std::string& data)
 {
 	LevelInfoType type = TypeNone;

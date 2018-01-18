@@ -19,7 +19,7 @@ public class TestCPP : MonoBehaviour
 
     public void Start()
     {
-        NativeDef.Init();
+        NativeInterface.Init();
         ShaderMgr.Init();
         ui_sty.normal.textColor = Color.red;
         ui_sty.fontSize = 20;
@@ -32,7 +32,7 @@ public class TestCPP : MonoBehaviour
             m_tick_time += Time.deltaTime;
             if (m_tick_time > spf)
             {
-                NativeDef.iTickCore(m_tick_time);
+                NativeInterface.iTickCore(m_tick_time);
                 m_tick_time = 0;
             }
         }
@@ -52,7 +52,7 @@ public class TestCPP : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        NativeDef.iQuitCore();
+        NativeInterface.iQuitCore();
     }
 
     private void TableGUI()
@@ -173,7 +173,7 @@ public class TestCPP : MonoBehaviour
         GUILayout.BeginVertical();
         if (GUILayout.Button("Cal-Add", ui_opt))
         {
-            int i = NativeDef.iAdd(8, 7);
+            int i = NativeInterface.iAdd(8, 7);
             ui_rst = "8+7=" + i;
         }
         if (GUILayout.Button("Cal-Sub", ui_opt))
@@ -183,12 +183,12 @@ public class TestCPP : MonoBehaviour
             Marshal.StructureToPtr(a, p1, false);
             IntPtr p2 = Marshal.AllocCoTaskMem(Marshal.SizeOf(b));
             Marshal.StructureToPtr(b, p2, false);
-            int rst = NativeDef.iSub(p1, p2);
+            int rst = NativeInterface.iSub(p1, p2);
             ui_rst = a + "-" + b + "=" + rst;
         }
         if (GUILayout.Button("Native-Json", ui_opt))
         {
-            NativeDef.iJson(Application.streamingAssetsPath + "/Patch/json.txt");
+            NativeInterface.iJson(Application.streamingAssetsPath + "/Patch/json.txt");
             ui_rst = "native parse json finish!";
             XDebug.Log(ui_rst);
         }
@@ -198,32 +198,32 @@ public class TestCPP : MonoBehaviour
             string diff = Application.streamingAssetsPath + "/Patch/diff.patch";
             string newf = Application.streamingAssetsPath + "/Patch/new.txt";
             XDebug.Log(old + " " + diff + " " + newf);
-            NativeDef.iPatch(old, diff, newf);
+            NativeInterface.iPatch(old, diff, newf);
             XDebug.Log("patch finish");
         }
         if (GUILayout.Button("Native-Start-Game", ui_opt))
         {
             m_tick = true;
             ui_rst = "start gamecore ";
-            NativeDef.iStartCore();
+            NativeInterface.iStartCore();
         }
         if (GUILayout.Button("Native-Stop-Game", ui_opt))
         {
             m_tick = false;
             ui_rst = "stop gamecore";
-            NativeDef.iStopCore();
+            NativeInterface.iStopCore();
         }
         if (GUILayout.Button("Native-Tick-Game", ui_opt))
         {
             m_tick = false;
             ui_rst = "tick gamecore";
-            NativeDef.iTickCore(Time.deltaTime);
+            NativeInterface.iTickCore(Time.deltaTime);
         }
         if (GUILayout.Button("Native-Quit-Game", ui_opt))
         {
             m_tick = false;
             ui_rst = "quit gamecore";
-            NativeDef.iQuitCore();
+            NativeInterface.iQuitCore();
         }
         GUILayout.EndVertical();
     }

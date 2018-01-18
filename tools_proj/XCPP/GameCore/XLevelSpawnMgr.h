@@ -20,9 +20,9 @@ public:
 	void ForceLevelFinish(bool win);
 	void OnLevelFinish(Vector3 dropInitPos, Vector3 dropGounrdPos, uint money, uint itemCount, bool bKillOpponent);
 	void OnLevelFailed();
+	void ClearAll();
 
 private:
-	std::map<uint, XLevelStatistics> m_sceneid2info;
 	std::map<uint, std::map<int, XLevelWave*>> m_StaticWaves;
 	float _time = 0;
 	XLevelSpawn* _curSpawner;

@@ -126,7 +126,10 @@ void XEntityPresentation::GetRow(int idx,XEntityPresentationRow* row)
 
 void XEntityPresentation::GetByUID(uint idx, XEntityPresentationRow* row)
 {
- *row = *m_map[idx];
+	if (m_map.find(idx)!=m_map.end())
+	{
+		*row = *m_map[idx];
+	}
 }
 
 int XEntityPresentation::GetLength()

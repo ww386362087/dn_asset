@@ -8,7 +8,7 @@ public delegate void NativeEntityDelegate(uint entityid, byte command, uint arg)
 public delegate void NativeEntitySyncInfoDelegate(uint entity, byte command, ref VectorArr vec);
 public delegate void NativeComptDelegate(uint entity, byte command, string arg);
 
-public class NativeDef
+public class NativeInterface
 {
 
 #if UNITY_IPHONE || UNITY_XBOX360
@@ -23,7 +23,7 @@ public class NativeDef
 #else
     [DllImport("GameCore")]
 #endif
-    public static extern void iInitial(string stream, string persist);
+    public static extern void iInitial(string stream, string persist,short plat);
 
 
 #if UNITY_IPHONE || UNITY_XBOX360
@@ -120,7 +120,7 @@ public class NativeDef
         iInitEntityCall(OnEntityCallback);
         iInitCompnentCall(OnComponentCallback);
         iInitEntitySyncCall(OnEntitySync);
-        iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
+        iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/", (short)Application.platform);
     }
 
     [MonoPInvokeCallback(typeof(CppDelegate))]
@@ -155,7 +155,7 @@ public class NativeDef
     [MonoPInvokeCallback(typeof(NativeEntityDelegate))]
     static void OnEntityCallback(uint entityid, byte command, uint arg)
     {
-        XDebug.Log("entity " + entityid, " arg: ", arg, " command: ", command);
+        XDebug.Log("entity:" + entityid, " arg: ", arg, " command: ", command);
         switch (command)
         {
             case ASCII.E:
@@ -173,7 +173,7 @@ public class NativeDef
     [MonoPInvokeCallback(typeof(NativeComptDelegate))]
     static void OnEntitySync(uint entityid, byte command, ref VectorArr vec)
     {
-        XDebug.Log("entityid: ", entityid, " arg:", vec.ToVector());
+        XDebug.Log("sync entityid: ", entityid, " arg:", vec.ToVector());
         NativeEntity entity = NativeEntityMgr.singleton.Get(entityid);
         switch (command)
         {

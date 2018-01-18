@@ -16,11 +16,11 @@ extern "C"
 		return *a - *b;
 	}
 
-	void iInitial(const char* stream, const char* cache)
+	void iInitial(const char* stream, const char* cache,short plat)
 	{
 		std::string s = cache;
 		LOG(stream);
-		InitPath(stream, cache);
+		InitPath(stream, cache, plat);
 		LOG(s);
 		InitLogger(s + "Log/info.txt", s + "Log/warn.txt", s + "Log/error.txt");
 		LOG("c++ initial success with path: " + s);

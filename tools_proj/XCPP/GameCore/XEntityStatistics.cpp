@@ -110,7 +110,10 @@ void XEntityStatistics::GetRow(int idx,XEntityStatisticsRow* row)
 
 void XEntityStatistics::GetByUID(uint idx, XEntityStatisticsRow* row)
 {
- *row = *m_map[idx];
+	if (m_map.find(idx) != m_map.end())
+	{
+		*row = *m_map[idx];
+	}
 }
 
 int XEntityStatistics::GetLength()

@@ -3,14 +3,31 @@
 #include "XScene.h"
 #include <assert.h>
 
+extern std::string UNITY_STREAM_PATH;
+
 XLevelSpawnMgr::XLevelSpawnMgr()
 {
 }
 
 XLevelSpawnMgr::~XLevelSpawnMgr()
 {
+	ClearAll();
+}
+
+void XLevelSpawnMgr::ClearAll()
+{
 	delete _curSpawner;
 	_curSpawner = NULL;
+	for (std::map<uint, std::map<int, XLevelWave*>>::iterator itr = m_StaticWaves.begin();
+		itr != m_StaticWaves.end(); itr++)
+	{
+		for (size_t i = 0; i < itr->second.size(); i++)
+		{
+			delete itr->second[i];
+		}
+		itr->second.clear();
+	}
+	m_StaticWaves.clear();
 }
 
 void XLevelSpawnMgr::OnEnterScene(uint sceneid)
@@ -30,7 +47,7 @@ void XLevelSpawnMgr::OnEnterScene(uint sceneid)
 	if (_curSpawner == NULL) _curSpawner = new XLevelSpawn();
 	else _curSpawner->Clear();
 	ifstream infile;
-	std::string path = tostring(configFile)+".txt";
+	std::string path = UNITY_STREAM_PATH + tostring(configFile)+".txt";
 	infile.open(path.data(), ios::in);
 	assert(infile.is_open());
 	string line;
