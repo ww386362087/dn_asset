@@ -173,7 +173,7 @@ public class NativeInterface
     [MonoPInvokeCallback(typeof(NativeComptDelegate))]
     static void OnEntitySync(uint entityid, byte command, ref VectorArr vec)
     {
-        XDebug.Log("sync entityid: ", entityid, " arg:", vec.ToVector());
+       // XDebug.Log("sync entityid: ", entityid, " arg:", vec.ToVector());
         NativeEntity entity = NativeEntityMgr.singleton.Get(entityid);
         switch (command)
         {

@@ -188,3 +188,26 @@ XPlayer* XEntityMgr::CreatePlayer()
 	return Player;
 }
 
+
+XEntity* XEntityMgr::CreateNPC(XNpcListRow& row, Vector3 pos, Vector3 rot)
+{
+	XAttributes* attr = InitAttrByPresent(row.presentid);
+	attr->setAppearPosition(pos);
+	attr->setAppearQuaternion(rot);
+	XEntity* enty = new XEntity();
+	PrepareEntity(attr, enty);
+	Add(Npc, enty);
+	return enty;
+}
+
+XAttributes* XEntityMgr::InitAttrByPresent(uint presentID)
+{
+	XAttributes* attr = new XAttributes();
+	XEntityPresentationRow row;
+	iGetXEntityPresentationRowByID(presentID, &row);
+	attr->setPresentID(presentID);
+	attr->setPrefab(row.prefab);
+	attr->setid(new_id());
+	attr->setName(row.name);
+	return attr;
+}

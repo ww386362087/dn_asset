@@ -7,6 +7,8 @@
 #include "Common.h"
 #include "Singleton.h"
 #include "GameObjectMgr.h"
+#include "XNpcList.h"
+
 
 class XEntity;
 class XRole;
@@ -46,6 +48,7 @@ public:
 	void DetachFromHost();
 	XEntity* GetEntity(uint id);
 	XPlayer* CreatePlayer();
+	XEntity* CreateNPC(XNpcListRow& row,Vector3 pos,Vector3 rot);
 	void UnloadAll();
 	void PrepareEntity(XAttributes* attr,XEntity* ent);
 	void UnloadEntity(uint id);
@@ -61,6 +64,7 @@ public:
 
 private:
 	bool Add(EntityType type, XEntity* e);
+	XAttributes* InitAttrByPresent(uint presentID);
 
 	std::vector<XEntity*> _empty;
 	std::unordered_set<XEntity*> _hash_entities;

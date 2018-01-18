@@ -6,6 +6,7 @@
 #include "XLevelSpawn.h"
 #include "XNpcList.h"
 #include "XLevelStatistics.h"
+#include "XNpcList.h"
 
 XEntity& XLevelSpawnTask::CreateMonster(uint id, int yRotate, Vector3 pos, int _waveid)
 {
@@ -18,7 +19,13 @@ XEntity& XLevelSpawnTask::CreateMonster(uint id, int yRotate, Vector3 pos, int _
 
 XEntity& XLevelSpawnTask::CreateNPC(uint id, int yRotate, Vector3 pos, int _waveid)
 {
-	return CreateMonster(id, yRotate, pos, _waveid);
+	Vector3 rot = Vector3(0, yRotate, 0);
+	XNpcListRow row;
+	iGetXNpcListRowByID(id, &row);
+	XEntity* entity = XEntityMgr::Instance()->CreateNPC(row, pos, rot);
+	entity->Wave = _waveid;
+	entity->CreateTime = GameMain::Instance()->Time();
+	return *entity;
 }
 
 bool XLevelSpawnTask::Execute(float time)

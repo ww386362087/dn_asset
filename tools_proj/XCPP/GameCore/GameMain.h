@@ -7,6 +7,7 @@
 #include <ctime> 
 #include "Vector3.h"
 #include "XDelegate.h"
+
 /*
  *	fps:30 tick = run + sleep
  */
@@ -28,7 +29,7 @@ public:
 private:
 	void OnStart();
 	
-private :
+private:
 	float m_delta = 0;
 	bool m_start = false;
 	float m_time = 0;
