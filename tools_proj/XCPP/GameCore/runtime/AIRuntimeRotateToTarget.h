@@ -8,10 +8,10 @@
 #ifndef  __AIRuntimeRotateToTarget__
 #define  __AIRuntimeRotateToTarget__
 
-#include "../AIBehaviour.h"
+#include "../ai/AIBehaviour.h"
 #include "../GameObject.h"
 #include "../Vector3.h"
-#include "../AITreeImpleted.h"
+#include "../ai/AITreeImpleted.h"
 
 class XEntity;
 

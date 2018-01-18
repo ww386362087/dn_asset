@@ -2,9 +2,9 @@
 #define  __AIUtil__
 
 #include <string>
-#include "Common.h"
+#include "../Common.h"
 #include "AITreeData.h"
-#include "Log.h"
+#include "../Log.h"
 
 class AITreeVar;
 

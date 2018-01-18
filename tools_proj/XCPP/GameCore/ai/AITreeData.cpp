@@ -1,5 +1,5 @@
 #include "AITreeData.h"
-#include "GameObject.h"
+#include "../GameObject.h"
 
 AITreeData::~AITreeData()
 {

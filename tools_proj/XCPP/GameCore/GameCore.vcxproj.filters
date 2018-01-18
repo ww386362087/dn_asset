@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AITree.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
-    <ClCompile Include="AITreeData.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
-    <ClCompile Include="AIBehaviour.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
     <ClCompile Include="XEntityPresentation.cpp">
       <Filter>table</Filter>
     </ClCompile>
@@ -39,12 +30,6 @@
     </ClCompile>
     <ClCompile Include="Common.cpp">
       <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="AIFactory.cpp">
-      <Filter>ai</Filter>
-    </ClCompile>
-    <ClCompile Include="AIUtil.cpp">
-      <Filter>ai</Filter>
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>math</Filter>
@@ -146,52 +131,49 @@
       <Filter>state</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeMoveForward.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeNavToTarget.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeResetTarget.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeRotateSelf.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeRotateToTarget.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeStatusRandom.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeStopNavMove.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeValueDistance.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeValueHP.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeWait.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeXAIActionSkill.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeDoSelectNearest.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeFindTargetByDistance.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeLog.cpp">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClCompile>
     <ClCompile Include="patch.c">
       <Filter>plugin</Filter>
-    </ClCompile>
-    <ClCompile Include="AITreeImpleted.cpp">
-      <Filter>ai</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectMgr.cpp">
       <Filter>unity</Filter>
@@ -214,17 +196,26 @@
     <ClCompile Include="XLevelSpawn.cpp">
       <Filter>spawn</Filter>
     </ClCompile>
+    <ClCompile Include="ai\AITree.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="ai\AITreeData.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="ai\AITreeImpleted.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="ai\AIUtil.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="ai\AIBehaviour.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
+    <ClCompile Include="ai\AIFactory.cpp">
+      <Filter>ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AITree.h">
-      <Filter>ai</Filter>
-    </ClInclude>
-    <ClInclude Include="AITreeData.h">
-      <Filter>ai</Filter>
-    </ClInclude>
-    <ClInclude Include="AIBehaviour.h">
-      <Filter>ai</Filter>
-    </ClInclude>
     <ClInclude Include="SceneList.h">
       <Filter>table</Filter>
     </ClInclude>
@@ -254,12 +245,6 @@
     </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="AIFactory.h">
-      <Filter>ai</Filter>
-    </ClInclude>
-    <ClInclude Include="AIUtil.h">
-      <Filter>ai</Filter>
     </ClInclude>
     <ClInclude Include="XMath.h">
       <Filter>math</Filter>
@@ -391,55 +376,52 @@
       <Filter>common\def</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeMoveForward.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeNavToTarget.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeResetTarget.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeRotateSelf.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeRotateToTarget.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeStatusRandom.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeStopNavMove.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeValueDistance.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeValueHP.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeWait.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeXAIActionSkill.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeDoSelectNearest.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeFindTargetByDistance.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeLog.h">
-      <Filter>ai\runtime</Filter>
+      <Filter>runtime</Filter>
     </ClInclude>
     <ClInclude Include="patch_types.h">
       <Filter>plugin</Filter>
     </ClInclude>
     <ClInclude Include="patch.h">
       <Filter>plugin</Filter>
-    </ClInclude>
-    <ClInclude Include="AITreeImpleted.h">
-      <Filter>ai</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectMgr.h">
       <Filter>unity</Filter>
@@ -470,6 +452,27 @@
     </ClInclude>
     <ClInclude Include="XLevelSpawn.h">
       <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="ai\AIFactory.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="ai\AITree.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="ai\AITreeArg.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="ai\AITreeData.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="ai\AITreeImpleted.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="ai\AIUtil.h">
+      <Filter>ai</Filter>
+    </ClInclude>
+    <ClInclude Include="ai\AIBehaviour.h">
+      <Filter>ai</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -521,14 +524,14 @@
     <Filter Include="state">
       <UniqueIdentifier>{cdbc3320-4fc3-4812-97da-5104bc3cb0f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ai\runtime">
-      <UniqueIdentifier>{752807b0-8cb2-4a1a-ace5-a94f0608e462}</UniqueIdentifier>
-    </Filter>
     <Filter Include="unity">
       <UniqueIdentifier>{5beea8bd-414f-4845-95a3-1ec38c7f253c}</UniqueIdentifier>
     </Filter>
     <Filter Include="spawn">
       <UniqueIdentifier>{9f1231a3-0674-4710-81be-4816ff51e512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="runtime">
+      <UniqueIdentifier>{752807b0-8cb2-4a1a-ace5-a94f0608e462}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AIBehaviour.cpp" />
-    <ClCompile Include="AIFactory.cpp" />
-    <ClCompile Include="AITree.cpp" />
-    <ClCompile Include="AITreeData.cpp" />
-    <ClCompile Include="AITreeImpleted.cpp" />
-    <ClCompile Include="AIUtil.cpp" />
+    <ClCompile Include="ai\AIBehaviour.cpp" />
+    <ClCompile Include="ai\AIFactory.cpp" />
+    <ClCompile Include="ai\AITree.cpp" />
+    <ClCompile Include="ai\AITreeData.cpp" />
+    <ClCompile Include="ai\AITreeImpleted.cpp" />
+    <ClCompile Include="ai\AIUtil.cpp" />
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="DefaultEquip.cpp" />
     <ClCompile Include="EquipSuit.cpp" />
@@ -92,13 +92,14 @@
     <ClCompile Include="XSkillComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIBehaviour.h" />
-    <ClInclude Include="AIFactory.h" />
-    <ClInclude Include="AITree.h" />
     <ClInclude Include="AITreeArg.h" />
-    <ClInclude Include="AITreeData.h" />
-    <ClInclude Include="AITreeImpleted.h" />
-    <ClInclude Include="AIUtil.h" />
+    <ClInclude Include="ai\AIBehaviour.h" />
+    <ClInclude Include="ai\AIFactory.h" />
+    <ClInclude Include="ai\AITree.h" />
+    <ClInclude Include="ai\AITreeArg.h" />
+    <ClInclude Include="ai\AITreeData.h" />
+    <ClInclude Include="ai\AITreeImpleted.h" />
+    <ClInclude Include="ai\AIUtil.h" />
     <ClInclude Include="CommandDef.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="DefaultEquip.h" />

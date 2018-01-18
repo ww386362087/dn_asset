@@ -1,7 +1,7 @@
 #ifndef  __AITreeArg__
 #define  __AITreeArg__
 
-#include<string>
+#include <string>
 
 
 class AITreeArg
