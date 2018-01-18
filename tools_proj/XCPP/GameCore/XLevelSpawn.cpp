@@ -54,10 +54,7 @@ void XLevelSpawn::KillSpawn(int waveid)
 
 void XLevelSpawn::Update(float time)
 {
-	for (size_t i = 0; i < waves.size(); i++)
-	{
-		XLevelDynamicInfo* dinfo = GetWaveDynamicInfo(waves[i]->ID);
-	}
+	SoloUpdate(time);
 }
 
 void XLevelSpawn::SoloUpdate(float time)

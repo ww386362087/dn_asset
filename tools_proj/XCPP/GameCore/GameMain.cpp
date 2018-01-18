@@ -12,6 +12,7 @@ void GameMain::Ontick(float delta)
 {
 	XTimerMgr::Instance()->Update(delta);
 	XEntityMgr::Instance()->Update(delta);
+	XScene::Instance()->Update(delta);
 }
 
 

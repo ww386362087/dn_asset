@@ -4,7 +4,6 @@
 #include<time.h>
 #include<string> 
 #include<unordered_map>
-#include<deque>
 
 using namespace std;
 
@@ -70,8 +69,6 @@ bool CheckIn()
 	return true;
 }
 
-
-
 void EAdd()
 {
 	int a, b, c;
@@ -91,18 +88,6 @@ void EAdd()
 	//int* itr2 = &j;
 	//map.insert(make_pair(2, itr));
 	//cout << "index2:" << *map[2] << endl;
-
-	//deque<int> que;
-	//que.push_back(2);
-	//que.push_back(4);
-	//que.push_back(8);
-	//cout << "que size1:" << que.size() << endl;
-	//cout << "front:" << que.front() << endl;
-	//cout << "back:" << que.back() << endl;
-	//que.pop_front();
-	//cout << "front:" << que.front() << endl;
-	//que.clear();
-	//cout << "que size2:" << que.size() << endl;
 }
 
 void ESub()
@@ -198,7 +183,7 @@ void main()
 	start = (DllCallWithVoid)GetProcAddress(hInst, "iStartCore");
 	stop = (DllCallWithVoid)GetProcAddress(hInst, "iStopCore");
 	quit = (DllCallWithVoid)GetProcAddress(hInst, "iQuitCore");
-	tick = (DllCallFloatWithVoid)GetProcAddress(hInst, "iQuitCore");
+	tick = (DllCallFloatWithVoid)GetProcAddress(hInst, "iTickCore");
 	row = (DllGetRow)GetProcAddress(hInst, "iGetXEntityPresentationRow");
 	cb(OnCallback);
 	ent(OnEnty);

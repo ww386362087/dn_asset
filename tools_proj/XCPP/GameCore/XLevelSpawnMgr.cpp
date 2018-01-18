@@ -87,8 +87,10 @@ void XLevelSpawnMgr::ForceLevelFinish(bool win)
 
 void XLevelSpawnMgr::OnLevelFinish(Vector3 dropInitPos, Vector3 dropGounrdPos, uint money, uint itemCount, bool bKillOpponent)
 {
+	LOG("LEVEL FINISH");
 }
 
 void XLevelSpawnMgr::OnLevelFailed()
 {
+	LOG("LEVEL FAILED");
 }
