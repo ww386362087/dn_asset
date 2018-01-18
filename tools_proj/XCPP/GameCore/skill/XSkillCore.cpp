@@ -1,6 +1,6 @@
 #include "XSkillCore.h"
-#include "XStateMachine.h"
-#include "XEntity.h"
+#include "../XStateMachine.h"
+#include "../XEntity.h"
 
 XSkillCore::XSkillCore(XEntity* firer, XSkillData* data)
 	:_magic_num(0xFEDCBA98),

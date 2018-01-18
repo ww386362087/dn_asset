@@ -1,10 +1,10 @@
 #ifndef __XScene__
 #define __XScene__
 
-#include "SceneList.h"
-#include "Common.h"
-#include "XEntityMgr.h"
-#include "Singleton.h"
+#include "../SceneList.h"
+#include "../Common.h"
+#include "../XEntityMgr.h"
+#include "../Singleton.h"
 
 class XScene : public Singleton<XScene>
 {

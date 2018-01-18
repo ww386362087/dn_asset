@@ -1,5 +1,5 @@
 #include "XLevelSpawnMgr.h"
-#include "XEntityStatistics.h"
+#include "../XEntityStatistics.h"
 #include "XScene.h"
 #include <assert.h>
 

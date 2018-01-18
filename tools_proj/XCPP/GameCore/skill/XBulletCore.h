@@ -1,10 +1,10 @@
 #ifndef __XBULLETCORE_H__
 #define __XBULLETCORE_H__
 
-#include "Vector3.h"
+#include "../Vector3.h"
 #include "XSkillCore.h"
 #include "SkillReader.h"
-#include "XEntity.h"
+#include "../XEntity.h"
 
 class XBulletCore
 {

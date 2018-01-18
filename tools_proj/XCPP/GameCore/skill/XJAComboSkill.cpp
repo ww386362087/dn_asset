@@ -1,10 +1,10 @@
 #include "XJAComboSkill.h"
-#include "XRole.h"
-#include "XEntity.h"
+#include "../XRole.h"
+#include "../XEntity.h"
 #include "XSkillMgr.h"
 #include "XSkillCore.h"
-#include "XEventArgs.h"
-#include "XRole.h"
+#include "../XEventArgs.h"
+#include "../XRole.h"
 
 XJAComboSkill::XJAComboSkill(XEntity* firer)
 	:XArtsSkill(firer)

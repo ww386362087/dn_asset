@@ -1,8 +1,8 @@
 #ifndef  __XLevelStatistics__
 #define  __XLevelStatistics__
 
-#include "Singleton.h"
-#include "Common.h"
+#include "../Singleton.h"
+#include "../Common.h"
 #include <vector>
 #include <unordered_map>
 

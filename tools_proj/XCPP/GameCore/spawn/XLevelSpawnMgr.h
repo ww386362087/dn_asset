@@ -1,8 +1,8 @@
 #ifndef  __XLevelSpawnMgr__
 #define  __XLevelSpawnMgr__
 
-#include "Singleton.h"
-#include "Common.h"
+#include "../Singleton.h"
+#include "../Common.h"
 #include "XLevelWave.h"
 #include "XLevelScriptMgr.h"
 #include "LevelSpawnType.h"

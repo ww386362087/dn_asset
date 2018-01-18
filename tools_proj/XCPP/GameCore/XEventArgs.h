@@ -4,7 +4,7 @@
 #include "XEventDef.h"
 #include "XDelegate.h"
 #include "Common.h"
-#include "SkillReader.h"
+#include "skill/SkillReader.h"
 
 class XEventArgs :public IArgs
 {

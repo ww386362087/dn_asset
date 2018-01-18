@@ -1,6 +1,6 @@
 #include "XLevelSpawn.h"
-#include "XEntity.h"
-#include "XPlayer.h"
+#include "../XEntity.h"
+#include "../XPlayer.h"
 #include "XLevelStatistics.h"
 #include "XLevelScriptMgr.h"
 

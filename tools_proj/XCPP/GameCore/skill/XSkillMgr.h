@@ -2,8 +2,8 @@
 #define  __XSkillMgr__
 
 
-#include "Common.h"
-#include "Vector3.h"
+#include "../Common.h"
+#include "../Vector3.h"
 #include <set>
 #include <unordered_map>
 

@@ -1,9 +1,9 @@
 #include "XLevelTask.h"
 #include "XLevelScriptMgr.h"
-#include "Vector3.h"
-#include "XEntity.h"
-#include "GameMain.h"
-#include "XNpcList.h"
+#include "../Vector3.h"
+#include "../XEntity.h"
+#include "../GameMain.h"
+#include "../XNpcList.h"
 
 XEntity& XLevelSpawnTask::CreateMonster(uint id, float yRotate, Vector3 pos, int _waveid)
 {
