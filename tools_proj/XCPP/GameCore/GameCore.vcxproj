@@ -36,8 +36,7 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="NativeInterface.cpp" />
     <ClCompile Include="NativeReader.cpp" />
-    <ClCompile Include="plugin\patch.c" />
-    <ClCompile Include="plugin\tinyxml2.cpp" />
+    <ClCompile Include="patch.c" />
     <ClCompile Include="QteStatusList.cpp" />
     <ClCompile Include="runtime\AIRuntimeDoSelectNearest.cpp" />
     <ClCompile Include="runtime\AIRuntimeFindTargetByDistance.cpp" />
@@ -57,6 +56,7 @@
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="SkillReader.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="XArtsSkill.cpp" />
     <ClCompile Include="XAttributes.cpp" />
@@ -114,10 +114,9 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="NativeInterface.h" />
     <ClInclude Include="NativeReader.h" />
-    <ClInclude Include="plugin\patch.h" />
-    <ClInclude Include="plugin\patch_types.h" />
-    <ClInclude Include="plugin\picojson.h" />
-    <ClInclude Include="plugin\tinyxml2.h" />
+    <ClInclude Include="patch.h" />
+    <ClInclude Include="patch_types.h" />
+    <ClInclude Include="picojson.h" />
     <ClInclude Include="QteStatusList.h" />
     <ClInclude Include="runtime\AIRuntimeDoSelectNearest.h" />
     <ClInclude Include="runtime\AIRuntimeFindTargetByDistance.h" />
@@ -138,6 +137,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SkillReader.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="XArtsSkill.h" />
     <ClInclude Include="XAttributeDefine.h" />

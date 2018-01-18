@@ -100,9 +100,6 @@
     <ClCompile Include="XAttributes.cpp">
       <Filter>component</Filter>
     </ClCompile>
-    <ClCompile Include="tinyxml2.cpp">
-      <Filter>plugin</Filter>
-    </ClCompile>
     <ClCompile Include="XStateMachine.cpp">
       <Filter>state</Filter>
     </ClCompile>
@@ -147,9 +144,6 @@
     </ClCompile>
     <ClCompile Include="runtime\AIRuntimeLog.cpp">
       <Filter>runtime</Filter>
-    </ClCompile>
-    <ClCompile Include="patch.c">
-      <Filter>plugin</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectMgr.cpp">
       <Filter>unity</Filter>
@@ -213,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="XScene.cpp">
       <Filter>spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="patch.c">
+      <Filter>plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>plugin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -324,12 +324,6 @@
     <ClInclude Include="AITreeArg.h">
       <Filter>common\def</Filter>
     </ClInclude>
-    <ClInclude Include="tinyxml2.h">
-      <Filter>plugin</Filter>
-    </ClInclude>
-    <ClInclude Include="picojson.h">
-      <Filter>plugin</Filter>
-    </ClInclude>
     <ClInclude Include="XEventDef.h">
       <Filter>common\def</Filter>
     </ClInclude>
@@ -392,12 +386,6 @@
     </ClInclude>
     <ClInclude Include="runtime\AIRuntimeLog.h">
       <Filter>runtime</Filter>
-    </ClInclude>
-    <ClInclude Include="patch_types.h">
-      <Filter>plugin</Filter>
-    </ClInclude>
-    <ClInclude Include="patch.h">
-      <Filter>plugin</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectMgr.h">
       <Filter>unity</Filter>
@@ -470,6 +458,18 @@
     </ClInclude>
     <ClInclude Include="LevelCmd.h">
       <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="patch.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="patch_types.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="picojson.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>plugin</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
