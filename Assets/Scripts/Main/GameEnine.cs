@@ -14,7 +14,7 @@ public sealed class GameEnine : XObject
     {
         _entrance = en;
         Application.targetFrameRate = 60;
-        NativeInterface.InitNative();
+        NativeDef.Init();
         XTimerMgr.singleton.Init();
         XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();

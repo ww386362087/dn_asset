@@ -1,6 +1,5 @@
 ﻿#if TEST
 
-using AOT;
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -9,91 +8,6 @@ using System.Text;
 
 public class TestCPP : MonoBehaviour
 {
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iInitCallbackCommand(CppDelegate cb);
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iInitial(string stream, string persist);
-
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern int iAdd(int x, int y);
-
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iJson(String file);
-
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern int iSub(IntPtr x, IntPtr y);
-
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iPatch(string oldf, string diff, string newf);
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iStartCore();
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iStopCore();
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iTickCore(float delta);
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iQuitCore();
-
-
-#if UNITY_IPHONE || UNITY_XBOX360
-	[DllImport("__Internal")]
-#else
-    [DllImport("GameCore")]
-#endif
-    public static extern void iGoInfo(string name,byte command, ref VectorArr vec);
-
-    public delegate void CppDelegate(byte type, IntPtr p);
-
     GUILayoutOption[] ui_opt = new GUILayoutOption[] { GUILayout.Width(120), GUILayout.Height(40) };
     GUILayoutOption[] ui_op2 = new GUILayoutOption[] { GUILayout.Width(480), GUILayout.Height(240) };
     GUIStyle ui_sty = new GUIStyle();
@@ -105,12 +19,10 @@ public class TestCPP : MonoBehaviour
 
     public void Start()
     {
-        NativeInterface.InitNative();
+        NativeDef.Init();
         ShaderMgr.Init();
         ui_sty.normal.textColor = Color.red;
         ui_sty.fontSize = 20;
-        iInitCallbackCommand(new CppDelegate(OnCallback));
-        iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/");
     }
 
     void Update()
@@ -120,41 +32,13 @@ public class TestCPP : MonoBehaviour
             m_tick_time += Time.deltaTime;
             if (m_tick_time > spf)
             {
-                iTickCore(m_tick_time);
+                NativeDef.iTickCore(m_tick_time);
                 m_tick_time = 0;
             }
         }
     }
 
-    [MonoPInvokeCallback(typeof(CppDelegate))]
-    static void OnCallback(byte t, IntPtr ptr)
-    {
-        string command = Marshal.PtrToStringAnsi(ptr);
-        switch (t)
-        {
-            case ASCII.L:
-                XDebug.CLog(command);
-                break;
-            case ASCII.W:
-                XDebug.CWarn(command);
-                break;
-            case ASCII.E:
-                XDebug.CError(command);
-                break;
-            case ASCII.G:
-                XDebug.CLog("load object: " + command+" len: "+command.Length);
-                GameObject go = XResources.Load<GameObject>(command,AssetType.Prefab);
-                go.name = command;
-                break;
-            case ASCII.U:
-                XDebug.CLog("unload: " + command);
-                break;
-            default:
-                XDebug.LogError(t + " is not parse symbol: " + command);
-                break;
-        }
-    }
-
+    
     public void OnGUI()
     {
         GUILayout.BeginHorizontal();
@@ -168,7 +52,7 @@ public class TestCPP : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        iQuitCore();
+        NativeDef.iQuitCore();
     }
 
     private void TableGUI()
@@ -289,7 +173,7 @@ public class TestCPP : MonoBehaviour
         GUILayout.BeginVertical();
         if (GUILayout.Button("Cal-Add", ui_opt))
         {
-            int i = iAdd(8, 7);
+            int i = NativeDef.iAdd(8, 7);
             ui_rst = "8+7=" + i;
         }
         if (GUILayout.Button("Cal-Sub", ui_opt))
@@ -299,12 +183,12 @@ public class TestCPP : MonoBehaviour
             Marshal.StructureToPtr(a, p1, false);
             IntPtr p2 = Marshal.AllocCoTaskMem(Marshal.SizeOf(b));
             Marshal.StructureToPtr(b, p2, false);
-            int rst = iSub(p1, p2);
+            int rst = NativeDef.iSub(p1, p2);
             ui_rst = a + "-" + b + "=" + rst;
         }
         if (GUILayout.Button("Native-Json", ui_opt))
         {
-            iJson(Application.streamingAssetsPath + "/Patch/json.txt");
+            NativeDef.iJson(Application.streamingAssetsPath + "/Patch/json.txt");
             ui_rst = "native parse json finish!";
             XDebug.Log(ui_rst);
         }
@@ -314,32 +198,32 @@ public class TestCPP : MonoBehaviour
             string diff = Application.streamingAssetsPath + "/Patch/diff.patch";
             string newf = Application.streamingAssetsPath + "/Patch/new.txt";
             XDebug.Log(old + " " + diff + " " + newf);
-            iPatch(old, diff, newf);
+            NativeDef.iPatch(old, diff, newf);
             XDebug.Log("patch finish");
         }
         if (GUILayout.Button("Native-Start-Game", ui_opt))
         {
             m_tick = true;
             ui_rst = "start gamecore ";
-            iStartCore();
+            NativeDef.iStartCore();
         }
         if (GUILayout.Button("Native-Stop-Game", ui_opt))
         {
             m_tick = false;
             ui_rst = "stop gamecore";
-            iStopCore();
+            NativeDef.iStopCore();
         }
         if (GUILayout.Button("Native-Tick-Game", ui_opt))
         {
             m_tick = false;
             ui_rst = "tick gamecore";
-            iTickCore(Time.deltaTime);
+            NativeDef.iTickCore(Time.deltaTime);
         }
         if (GUILayout.Button("Native-Quit-Game", ui_opt))
         {
             m_tick = false;
             ui_rst = "quit gamecore";
-            iQuitCore();
+            NativeDef.iQuitCore();
         }
         GUILayout.EndVertical();
     }
