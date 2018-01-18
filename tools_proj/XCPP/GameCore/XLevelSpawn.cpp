@@ -196,6 +196,7 @@ void XLevelSpawn::GenerateEntityTask(XLevelWave& wave)
 {
 	if (wave.count > 0)
 	{
+		PRINT << "generate wave: " << wave.ID << std::endl;
 		float angle = 360.0f / wave.count;
 		XPlayer* player = XEntityMgr::Instance()->Player;
 		Vector3 pos = wave.isAroundPlayer && player ? player->getPostion() : wave.pos;

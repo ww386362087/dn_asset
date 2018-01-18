@@ -6,7 +6,7 @@ pi:24,1
 bw
 id:2
 st:0
-bi:3,0,50003,1,True,0,2,1,True,0,0,False
+bi:0,0,50003,1,True,0,2,1,True,0,0,False
 pw:0
 ei:337,289
 ti:2,1398,14,81.96,60
@@ -21,7 +21,7 @@ ew
 bw
 id:1
 st:0
-bi:0,0,50005,1,True,0,1,1,False,0,0,False
+bi:3,0,50005,1,True,0,1,1,False,0,0,False
 ei:540,111
 ti:2,136,15,86,60
 ew

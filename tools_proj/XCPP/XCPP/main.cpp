@@ -80,14 +80,6 @@ void EAdd()
 	if (!CheckIn()) return;
 	c = add(a, b);
 	cout << "add result:" << c << endl << endl;
-
-
-	//unordered_map<int, int*> map;
-	//int i = 1001, j = 1002;
-	//int* itr = &i;
-	//int* itr2 = &j;
-	//map.insert(make_pair(2, itr));
-	//cout << "index2:" << *map[2] << endl;
 }
 
 void ESub()
@@ -228,6 +220,11 @@ void main()
 			break;
 		case 'r':
 			start();
+			while (true)
+			{
+				tick(0.33f);
+				Sleep(111);
+			}
 			break;
 		case 'o':
 			stop();

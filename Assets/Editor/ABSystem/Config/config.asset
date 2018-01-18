@@ -19,7 +19,7 @@ MonoBehaviour:
   - valid: 0
     path: Assets/Resources/Equipments
     filter: '*.tga'
-  - valid: 1
+  - valid: 0
     path: Assets/Resources/UI
     filter: '*.prefab'
   files: []

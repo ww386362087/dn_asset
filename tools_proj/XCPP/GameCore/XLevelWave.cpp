@@ -82,7 +82,7 @@ void XLevelWave::ParseInfo(const std::string& data)
 	case BaseInfo:
 	{
 		std::vector<std::string> strInfos = SplitNotEscape(rawData, ',');
-		time = (int)(convert<float>(strInfos[0].c_str()) * 1000);
+		time = (int)(convert<float>(strInfos[0].c_str()));
 		m_LoopInterval = atoi(strInfos[1].c_str());
 		uid = atoi(strInfos[2].c_str());
 		m_YRotate = atoi(strInfos[5].c_str());
