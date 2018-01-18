@@ -154,65 +154,65 @@
     <ClCompile Include="GameObjectMgr.cpp">
       <Filter>unity</Filter>
     </ClCompile>
-    <ClCompile Include="ai\AITree.cpp">
+    <ClCompile Include="AIFactory.cpp">
       <Filter>ai</Filter>
     </ClCompile>
-    <ClCompile Include="ai\AITreeData.cpp">
+    <ClCompile Include="AIBehaviour.cpp">
       <Filter>ai</Filter>
     </ClCompile>
-    <ClCompile Include="ai\AITreeImpleted.cpp">
+    <ClCompile Include="AITree.cpp">
       <Filter>ai</Filter>
     </ClCompile>
-    <ClCompile Include="ai\AIUtil.cpp">
+    <ClCompile Include="AITreeImpleted.cpp">
       <Filter>ai</Filter>
     </ClCompile>
-    <ClCompile Include="ai\AIBehaviour.cpp">
+    <ClCompile Include="AIUtil.cpp">
       <Filter>ai</Filter>
     </ClCompile>
-    <ClCompile Include="ai\AIFactory.cpp">
+    <ClCompile Include="AITreeData.cpp">
       <Filter>ai</Filter>
     </ClCompile>
-    <ClCompile Include="spawn\XLevelSpawn.cpp">
+    <ClCompile Include="XBullet.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XBulletCore.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XJAComboSkill.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XSkill.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XSkillCore.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XSkillMgr.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillReader.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XArtsSkill.cpp">
+      <Filter>skill</Filter>
+    </ClCompile>
+    <ClCompile Include="XLevelScriptMgr.cpp">
       <Filter>spawn</Filter>
     </ClCompile>
-    <ClCompile Include="spawn\XLevelSpawnMgr.cpp">
+    <ClCompile Include="XLevelSpawn.cpp">
       <Filter>spawn</Filter>
     </ClCompile>
-    <ClCompile Include="spawn\XLevelTask.cpp">
+    <ClCompile Include="XLevelSpawnMgr.cpp">
       <Filter>spawn</Filter>
     </ClCompile>
-    <ClCompile Include="spawn\XLevelWave.cpp">
+    <ClCompile Include="XLevelTask.cpp">
       <Filter>spawn</Filter>
     </ClCompile>
-    <ClCompile Include="spawn\XScene.cpp">
+    <ClCompile Include="XLevelWave.cpp">
       <Filter>spawn</Filter>
     </ClCompile>
-    <ClCompile Include="spawn\XLevelScriptMgr.cpp">
+    <ClCompile Include="XScene.cpp">
       <Filter>spawn</Filter>
-    </ClCompile>
-    <ClCompile Include="skill\XBullet.cpp">
-      <Filter>skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill\XBulletCore.cpp">
-      <Filter>skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill\XSkill.cpp">
-      <Filter>skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill\XSkillCore.cpp">
-      <Filter>skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill\XSkillMgr.cpp">
-      <Filter>skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill\XJAComboSkill.cpp">
-      <Filter>skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill\SkillReader.cpp">
-      <Filter>skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill\XArtsSkill.cpp">
-      <Filter>skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -402,77 +402,74 @@
     <ClInclude Include="GameObjectMgr.h">
       <Filter>unity</Filter>
     </ClInclude>
-    <ClInclude Include="ai\AIFactory.h">
+    <ClInclude Include="AIBehaviour.h">
       <Filter>ai</Filter>
     </ClInclude>
-    <ClInclude Include="ai\AITree.h">
+    <ClInclude Include="AIFactory.h">
       <Filter>ai</Filter>
     </ClInclude>
-    <ClInclude Include="ai\AITreeArg.h">
+    <ClInclude Include="AITree.h">
       <Filter>ai</Filter>
     </ClInclude>
-    <ClInclude Include="ai\AITreeData.h">
+    <ClInclude Include="AITreeImpleted.h">
       <Filter>ai</Filter>
     </ClInclude>
-    <ClInclude Include="ai\AITreeImpleted.h">
+    <ClInclude Include="AIUtil.h">
       <Filter>ai</Filter>
     </ClInclude>
-    <ClInclude Include="ai\AIUtil.h">
+    <ClInclude Include="AITreeData.h">
       <Filter>ai</Filter>
     </ClInclude>
-    <ClInclude Include="ai\AIBehaviour.h">
-      <Filter>ai</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\XLevelSpawn.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\XLevelSpawnMgr.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\XLevelStatistics.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\XLevelTask.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\XLevelWave.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\XScene.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\LevelCmd.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\LevelSpawnType.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="spawn\XLevelScriptMgr.h">
-      <Filter>spawn</Filter>
-    </ClInclude>
-    <ClInclude Include="skill\XBullet.h">
+    <ClInclude Include="XArtsSkill.h">
       <Filter>skill</Filter>
     </ClInclude>
-    <ClInclude Include="skill\XBulletCore.h">
+    <ClInclude Include="XBullet.h">
       <Filter>skill</Filter>
     </ClInclude>
-    <ClInclude Include="skill\XSkill.h">
+    <ClInclude Include="XBulletCore.h">
       <Filter>skill</Filter>
     </ClInclude>
-    <ClInclude Include="skill\XSkillCore.h">
+    <ClInclude Include="XJAComboSkill.h">
       <Filter>skill</Filter>
     </ClInclude>
-    <ClInclude Include="skill\XSkillMgr.h">
+    <ClInclude Include="XSkill.h">
       <Filter>skill</Filter>
     </ClInclude>
-    <ClInclude Include="skill\XJAComboSkill.h">
+    <ClInclude Include="XSkillCore.h">
       <Filter>skill</Filter>
     </ClInclude>
-    <ClInclude Include="skill\SkillReader.h">
+    <ClInclude Include="XSkillMgr.h">
       <Filter>skill</Filter>
     </ClInclude>
-    <ClInclude Include="skill\XArtsSkill.h">
+    <ClInclude Include="SkillReader.h">
       <Filter>skill</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSpawnType.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelScriptMgr.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelSpawn.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelSpawnMgr.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelStatistics.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelTask.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XLevelWave.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="XScene.h">
+      <Filter>spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelCmd.h">
+      <Filter>spawn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

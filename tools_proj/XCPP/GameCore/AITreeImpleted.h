@@ -1,10 +1,10 @@
 #ifndef  __AITreeImpleted__
 #define  __AITreeImpleted__
 
-#include "../Vector3.h"
+#include "Vector3.h"
 #include "AIBehaviour.h"
-#include "../Common.h"
-#include "../XAttributeDefine.h"
+#include "Common.h"
+#include "XAttributeDefine.h"
 #include <string>
 
 class  XEntity;

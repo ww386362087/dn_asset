@@ -2,7 +2,7 @@
 #include "XSkillCore.h"
 #include "XSkill.h"
 #include "SkillReader.h"
-#include "../XEntity.h"
+#include "XEntity.h"
 #include "SkillReader.h"
 #include "XArtsSkill.h"
 #include "XJAComboSkill.h"

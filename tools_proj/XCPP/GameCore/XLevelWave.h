@@ -5,8 +5,8 @@
 #include <vector>
 #include <map>
 #include <fstream>
-#include "../Vector3.h"
-#include "../Common.h"
+#include "Vector3.h"
+#include "Common.h"
 #include "LevelSpawnType.h"
 
 class XLevelWave

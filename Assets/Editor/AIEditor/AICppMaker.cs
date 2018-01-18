@@ -31,7 +31,7 @@ public class AICppMaker
             path_ori_h = Path.Combine(dir, "Shell/AITemplate.h");
             path_ori_c = Path.Combine(dir, "Shell/AITemplate.cpp");
             path_dest = Path.Combine(dir, "tools_proj/XCPP/GameCore/runtime");
-            path_fact = Path.Combine(dir, "tools_proj/XCPP/GameCore/ai/AIFactory.cpp");
+            path_fact = Path.Combine(dir, "tools_proj/XCPP/GameCore/AIFactory.cpp");
             ai_h = File.ReadAllText(path_ori_h);
             ai_c = File.ReadAllText(path_ori_c);
         }
@@ -135,7 +135,7 @@ public class AICppMaker
     {
         var dirr = Path.GetDirectoryName(Application.dataPath);
         path_dest = Path.Combine(dirr, "tools_proj/XCPP/GameCore/runtime");
-        path_fact = Path.Combine(dirr, "tools_proj/XCPP/GameCore/ai/AIFactory.cpp");
+        path_fact = Path.Combine(dirr, "tools_proj/XCPP/GameCore/AIFactory.cpp");
 
         string txt = File.ReadAllText(path_fact);
         DirectoryInfo dir = new DirectoryInfo(path_dest);

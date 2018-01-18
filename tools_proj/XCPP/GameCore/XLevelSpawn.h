@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <deque>
-#include "../Common.h"
+#include "Common.h"
 #include "XLevelWave.h"
 #include "XLevelTask.h"
 

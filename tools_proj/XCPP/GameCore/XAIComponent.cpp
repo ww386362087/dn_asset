@@ -1,6 +1,6 @@
 #include "XAIComponent.h"
 #include "XEntity.h"
-#include "ai/AITreeArg.h"
+#include "AITreeArg.h"
 #include "XAttributes.h"
 #include "XPlayer.h"
 

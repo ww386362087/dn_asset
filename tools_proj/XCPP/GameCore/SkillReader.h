@@ -4,9 +4,9 @@
 #include <vector>
 #include <map>
 #include <assert.h>
-#include "../tinyxml2.h"
-#include "../Log.h"
-#include "../Common.h"
+#include "tinyxml2.h"
+#include "Log.h"
+#include "Common.h"
 
 struct XBaseData
 {

@@ -1,9 +1,9 @@
 #ifndef  __XSkill__
 #define  __XSkill__
 
-#include "../Common.h"
-#include "../XEventArgs.h"
-#include "../Vector3.h"
+#include "Common.h"
+#include "XEventArgs.h"
+#include "Vector3.h"
 
 class XEntity;
 class XSkillCore;

@@ -1,6 +1,6 @@
 #include "GameMain.h"
 #include "XEntityMgr.h"
-#include "spawn/XScene.h"
+#include "XScene.h"
 
 void GameMain::OnStart()
 {

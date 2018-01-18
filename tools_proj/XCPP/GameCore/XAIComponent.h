@@ -2,7 +2,7 @@
 #define  __XAIComponent__
 
 #include "XObject.h"
-#include "ai/AITree.h"
+#include "AITree.h"
 #include "XDelegate.h"
 #include "XEventArgs.h"
 

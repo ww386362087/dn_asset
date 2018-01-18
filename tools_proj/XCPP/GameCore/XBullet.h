@@ -1,7 +1,7 @@
 #ifndef  __XBullet__
 #define  __XBullet__
 
-#include "../Vector3.h"
+#include "Vector3.h"
 #include "XBulletCore.h"
 
 

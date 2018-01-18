@@ -1,10 +1,10 @@
 #include "AITreeImpleted.h"
-#include "../XEntityMgr.h"
-#include "../Transform.h"
-#include "../XEntity.h"
-#include "../XAIComponent.h"
-#include "../XAttributes.h"
-#include "../XNavigationComponent.h"
+#include "XEntityMgr.h"
+#include "Transform.h"
+#include "XEntity.h"
+#include "XAIComponent.h"
+#include "XAttributes.h"
+#include "XNavigationComponent.h"
 
 #define CHECKENTY(entity) if (!XEntity::Valide(entity)) return Failure;
 

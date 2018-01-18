@@ -1,8 +1,8 @@
 #ifndef  __XLevelScriptMgr__
 #define  __XLevelScriptMgr__
 
-#include "../Singleton.h"
-#include "../Common.h"
+#include "Singleton.h"
+#include "Common.h"
 #include <unordered_map>
 #include <vector>
 #include <string>

@@ -1,9 +1,9 @@
 #ifndef  __XLevelTask__
 #define  __XLevelTask__
 
-#include "../Common.h"
+#include "Common.h"
 #include <string>
-#include "../Vector3.h"
+#include "Vector3.h"
 #include "LevelSpawnType.h"
 
 class XLevelSpawn;

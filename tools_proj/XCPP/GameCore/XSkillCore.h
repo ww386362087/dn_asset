@@ -1,8 +1,8 @@
 #ifndef  __XSkillCore__
 #define  __XSkillCore__
 
-#include "../Common.h"
-#include "../XStateDefine.h"
+#include "Common.h"
+#include "XStateDefine.h"
 #include <set>
 
 class XEntity;

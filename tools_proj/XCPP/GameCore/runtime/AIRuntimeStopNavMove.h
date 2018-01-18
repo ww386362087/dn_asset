@@ -8,10 +8,10 @@
 #ifndef  __AIRuntimeStopNavMove__
 #define  __AIRuntimeStopNavMove__
 
-#include "../ai/AIBehaviour.h"
 #include "../GameObject.h"
 #include "../Vector3.h"
-#include "../ai/AITreeImpleted.h"
+#include "../AIBehaviour.h"
+#include "../AITreeImpleted.h"
 
 class XEntity;
 

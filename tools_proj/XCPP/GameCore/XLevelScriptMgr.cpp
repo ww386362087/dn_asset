@@ -1,5 +1,5 @@
 #include "XLevelScriptMgr.h"
-#include "../Log.h"
+#include "Log.h"
 #include <assert.h>
 
 XLevelScriptMgr::XLevelScriptMgr()

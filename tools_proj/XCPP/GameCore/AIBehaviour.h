@@ -4,7 +4,7 @@
 
 #include "AITree.h"
 #include "AIFactory.h"
-#include "../Vector3.h"
+#include "Vector3.h"
 #include <vector>
 #include <string>
 

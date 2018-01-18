@@ -2,7 +2,7 @@
 #define  __AITreeData__
 
 #include <vector>
-#include "../Common.h"
+#include "Common.h"
 #include <unordered_map>
 
 class  GameObject;

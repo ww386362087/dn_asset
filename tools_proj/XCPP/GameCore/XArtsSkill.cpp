@@ -1,5 +1,5 @@
 #include "XArtsSkill.h"
-#include "../XEntity.h"
+#include "XEntity.h"
 
 XArtsSkill::XArtsSkill(XEntity* firer) :XSkill(firer)
 {

@@ -1,6 +1,6 @@
 #include "XSkill.h"
-#include "../XEntity.h"
-#include "../XRole.h"
+#include "XEntity.h"
+#include "XRole.h"
 #include "SkillReader.h"
 
 const int XSkill::XJAComboSkillHash = 0;

@@ -2,7 +2,7 @@
 #define  __XSkillComponent__
 
 #include "XObject.h"
-#include "skill/XSkill.h"
+#include "XSkill.h"
 class XSkillMgr;
 
 class XSkillComponent :public XComponent

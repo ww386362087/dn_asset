@@ -2,7 +2,7 @@
 #define __XJACOMBOSKILL_H__
 
 #include "XArtsSkill.h"
-#include "../XTimerMgr.h"
+#include "XTimerMgr.h"
 
 class XJAComboSkill:public XArtsSkill
 {

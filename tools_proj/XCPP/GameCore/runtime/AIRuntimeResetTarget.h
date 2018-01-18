@@ -8,10 +8,10 @@
 #ifndef  __AIRuntimeResetTarget__
 #define  __AIRuntimeResetTarget__
 
-#include "../ai/AIBehaviour.h"
 #include "../GameObject.h"
 #include "../Vector3.h"
-#include "../ai/AITreeImpleted.h"
+#include "../AIBehaviour.h"
+#include "../AITreeImpleted.h"
 
 class XEntity;
 
