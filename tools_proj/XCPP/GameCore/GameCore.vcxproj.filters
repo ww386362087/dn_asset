@@ -214,6 +214,9 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>plugin</Filter>
     </ClCompile>
+    <ClCompile Include="XMonster.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneList.h">
@@ -470,6 +473,9 @@
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
       <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="XMonster.h">
+      <Filter>entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

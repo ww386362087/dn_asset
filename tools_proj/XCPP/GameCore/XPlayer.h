@@ -9,6 +9,7 @@ class XPlayer:public XRole
 public:
 	XPlayer();
 	~XPlayer();
+	virtual EntityType GetType();
 };
 
 #endif

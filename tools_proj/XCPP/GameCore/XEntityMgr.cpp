@@ -74,18 +74,6 @@ void XEntityMgr::DetachFromHost()
 	 return _map_entities[Npc];
  }
 
-XEntity* XEntityMgr::CreateEntity(uint staticid, Vector3 pos, Vector3 rot)
-{
-	XAttributes* attr = new XAttributes();
-	InitAttr(staticid, attr);
-	attr->setAppearPosition(pos);
-	attr->setAppearQuaternion(rot);
-	XEntity* ent = new XEntity();
-	PrepareEntity(attr,ent);
-	Add(Entity, ent);
-	return ent;
-}
-
 void XEntityMgr::PrepareEntity(XAttributes* attr, XEntity* ent)
 {
 	ent->setAttributes(attr);

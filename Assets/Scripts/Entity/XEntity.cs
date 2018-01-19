@@ -42,7 +42,7 @@ public class XEntity : XObject
     protected bool _force_move = false;
     private Vector3 _pos = Vector3.zero;
     protected XStateDefine _state = XStateDefine.XState_Idle;
-
+    protected XAnimComponent anim;
     protected Dictionary<uint, XComponent> components;
 
     public uint EntityID
@@ -152,7 +152,9 @@ public class XEntity : XObject
         _attr = attr;
         _present = XTableMgr.GetTable<XEntityPresentation>().GetItemID(_attr.PresentID);
         components = new Dictionary<uint, XComponent>();
+        anim = AttachComponent<XAnimComponent>();
         OnInitial();
+        InitAnim();
     }
 
     public void UnloadEntity()
@@ -168,6 +170,8 @@ public class XEntity : XObject
     public virtual void OnInitial() { }
 
     protected virtual void OnUnintial() { }
+
+    protected virtual void InitAnim() { }
 
     public virtual void OnUpdate(float delta)
     {
@@ -318,7 +322,6 @@ public class XEntity : XObject
         return DetachComponent(typeof(T).Name);
     }
 
-
     public T GetComponent<T>() where T : XComponent
     {
         uint uid = XCommon.singleton.XHash(typeof(T).Name);
@@ -371,6 +374,15 @@ public class XEntity : XObject
             {
                 e.Current.Value.Update(delta);
             }
+        }
+    }
+
+    protected void OverrideAnim(string key, string clip)
+    {
+        if (anim != null)
+        {
+            string path = present.AnimLocation + clip;
+            anim.OverrideAnim(key, path);
         }
     }
 

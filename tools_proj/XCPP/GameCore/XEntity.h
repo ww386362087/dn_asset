@@ -33,7 +33,7 @@ public:
 	bool IsBoss();
 	bool IsNpc();
 	bool IsDead();
-	EntityType GetType();
+	virtual EntityType GetType();
 	XSkillMgr* SkillManager();
 
 	inline XStateMachine* StateMachine() const { return _pmachine; }
@@ -58,7 +58,6 @@ public:
 
 protected:
 	XStateMachine* _pmachine;
-	EntityType _eEntity_Type = Entity;
 	GameObject* _object;
 	Transform* _transf;
 	int _layer = 0;

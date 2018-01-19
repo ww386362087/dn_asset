@@ -4,10 +4,15 @@
 
 XPlayer::XPlayer()
 {
-	_eEntity_Type = Player;
 }
 
 
 XPlayer::~XPlayer()
 {
+}
+
+
+EntityType XPlayer::GetType()
+{
+	return Player;
 }

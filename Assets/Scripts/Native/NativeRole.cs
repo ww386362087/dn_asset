@@ -14,8 +14,6 @@ public class NativeRole : NativeEntity
         controller = EntityObject.GetComponent<CharacterController>();
         controller.enabled = false;
         AttachComponent<NativeEquipComponent>();
-        ani = AttachComponent<NativeAnimComponent>();
-        InitAnim();
     }
 
 
@@ -27,7 +25,7 @@ public class NativeRole : NativeEntity
         base.OnUnintial();
     }
 
-    private void InitAnim()
+    protected override void InitAnim()
     {
         OverrideAnim(Clip.AAA, "Player_archer_attack_run");
         OverrideAnim(Clip.AAAA, "Player_archer_attack_run");
@@ -47,11 +45,6 @@ public class NativeRole : NativeEntity
         OverrideAnim(Clip.Art, "Player_archer_victory");
     }
 
-
-    private void OverrideAnim(string key, string clip)
-    {
-        string path = present.AnimLocation + clip;
-        ani.OverrideAnim(key, path);
-    }
+   
 
 }

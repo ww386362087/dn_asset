@@ -5,7 +5,6 @@ using XTable;
 public class XNPC : XEntity
 {
     protected XNpcList.RowData row = null;
-
     public static int NpcLayer = LayerMask.NameToLayer("Npc");
     private int _uGazing = 0;
     private Transform _head = null;
@@ -21,11 +20,14 @@ public class XNPC : XEntity
         _head_rotate = EntityTransfer.forward;
         _uGazing = XTableMgr.GetTable<XNpcList>().GetByUID((int)_attr.id).Gazing;
         FindHead();
-        XAnimComponent anim = AttachComponent<XAnimComponent>();
-        anim.OverrideAnim(Clip.Idle, _present.AnimLocation + _present.Idle);
         EnableShadow(true);
     }
 
+    protected override void InitAnim()
+    {
+        base.InitAnim();
+        OverrideAnim(Clip.Idle, _present.Idle);
+    }
 
 
     private void FindHead()
@@ -36,9 +38,7 @@ public class XNPC : XEntity
         string subffix = _present.BoneSuffix + "/";
         _head_path.Replace("/", subffix);
         _head_path.Append(subffix);
-
         _head = EntityTransfer.Find(_head_path.ToString(0, _head_path.Length - 1));
-
         if (_head == null)
         {
             _head_path.Replace("/Bip001 Spine1" + subffix, "/");
@@ -54,7 +54,6 @@ public class XNPC : XEntity
             Vector3 v = _target.Position - Position;
             float d = v.magnitude;
             XCommon.singleton.Horizontal(ref v);
-
             if (d < 10)
             {
                 Vector3 forward = EntityObject.transform.forward;
@@ -71,7 +70,6 @@ public class XNPC : XEntity
             _head_rotate += (v - _head_rotate) * Mathf.Min(1.0f, 3 * Time.deltaTime);
             float y = XCommon.singleton.AngleToFloat(_head_rotate);
             y -= Rotation.eulerAngles.y;
-
             Vector3 rotate = _head.localEulerAngles;
 
             rotate.x += (-y);

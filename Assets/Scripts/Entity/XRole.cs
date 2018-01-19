@@ -5,7 +5,6 @@ public class XRole : XEntity
 {
     protected CharacterController controller;
     protected XNavComponent nav;
-    protected XAnimComponent ani;
 
     public int profession = 1;
     public DefaultEquip.RowData defEquip = null;
@@ -22,11 +21,9 @@ public class XRole : XEntity
 
         AttachComponent<XAIComponent>();
         AttachComponent<XEquipComponent>();
-        ani = AttachComponent<XAnimComponent>();
         nav = AttachComponent<XNavComponent>();
         AttachComponent<XSkillComponent>();
         AttachComponent<XBeHitComponent>();
-        InitAnim();
     }
 
     protected override void OnUnintial()
@@ -53,14 +50,10 @@ public class XRole : XEntity
         }
     }
 
-
-    private void InitAnim()
+    protected override void InitAnim()
     {
-        //OverrideAnim(Clip.A, present.A);
-        //OverrideAnim(Clip.AA, present.AA);
         OverrideAnim(Clip.AAA, "Player_archer_attack_run");
         OverrideAnim(Clip.AAAA, "Player_archer_attack_run");
-        //OverrideAnim(Clip.AAAAA, present.AAAAA);
         OverrideAnim(Clip.Walk, present.Walk);
         OverrideAnim(Clip.Idle, present.Idle);
         OverrideAnim(Clip.Death, present.Death);
@@ -76,12 +69,5 @@ public class XRole : XEntity
         OverrideAnim(Clip.Phase2, "Player_archer_attack_aerialchainshot");
         OverrideAnim(Clip.Art, "Player_archer_victory");
     }
-
-
-    private void OverrideAnim(string key, string clip)
-    {
-        string path = present.AnimLocation + clip;
-        ani.OverrideAnim(key, path);
-    }
-
+    
 }

@@ -60,19 +60,27 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	_attr = attr;
 
 #ifdef Client
-	if (IsRole())
+	if (GetType() == Role)
 	{
 		eCallback(attr->getid(), 'R', attr->getPresentID());
+	}
+	else if (GetType() == Monster)
+	{
+		eCallback(attr->getid(), 'M', attr->getPresentID());
+	}
+	else if(GetType() == Npc)
+	{
+		eCallback(attr->getid(), 'N', attr->getPresentID());
 	}
 	else
 	{
 		eCallback(attr->getid(), 'E', attr->getPresentID());
 	}
-	sncCallback(attr->getid(), 'p', vec2arr(Vector3::one));
+	sncCallback(attr->getid(), 'p', vec2arr(attr->getAppearPostion()));
 	sncCallback(attr->getid(), 'r', vec2arr(attr->getAppearQuaternion()));
 	float scale[] = { 3.0f,3.0f,3.0f };
 	sncCallback(attr->getid(), 's', scale);
-#endif // DEBUG
+#endif // -- Client
 
 	AttachComponent<XAIComponent>();
 	OnInitial();
@@ -84,22 +92,22 @@ void XEntity::OnUnintial() {}
 
 bool XEntity::IsBoss()
 {
-	return (_eEntity_Type & Boss) != 0;
+	return (GetType() & Boss) != 0;
 }
 
 bool XEntity::IsNpc()
 {
-	return (_eEntity_Type & Npc) != 0;
+	return (GetType() & Npc) != 0;
 }
 
 bool XEntity::IsRole()
 {
-	return (_eEntity_Type & Role) || (_eEntity_Type & Player) != 0;
+	return (GetType() & Role) || (GetType() & Player) != 0;
 }
 
 bool XEntity::IsPlayer()
 {
-	return (_eEntity_Type & Player) != 0;
+	return (GetType() & Player) != 0;
 }
 
 void XEntity::MoveForward(Vector3 forward)
@@ -126,7 +134,7 @@ bool XEntity::IsDead()
 
 EntityType XEntity::GetType()
 {
-	return _eEntity_Type;
+	return Entity;
 }
 
 XSkillMgr* XEntity::SkillManager()

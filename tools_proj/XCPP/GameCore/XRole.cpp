@@ -4,10 +4,15 @@
 
 XRole::XRole()
 {
-	_eEntity_Type = Role;
 }
 
 
 XRole::~XRole()
 {
+}
+
+
+EntityType XRole::GetType()
+{
+	return Role;
 }

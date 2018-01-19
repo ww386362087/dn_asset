@@ -7,11 +7,12 @@
 #include "XNpcList.h"
 #include "XLevelStatistics.h"
 #include "XNpcList.h"
+#include "XMonster.h"
 
 XEntity& XLevelSpawnTask::CreateMonster(uint id, int yRotate, Vector3 pos, int _waveid)
 {
 	Vector3 rot = Vector3(0, (float)yRotate, 0);
-	XEntity* entity = XEntityMgr::Instance()->CreateEntity(id, pos, rot);
+	XEntity* entity = XEntityMgr::Instance()->CreateEntity<XMonster>(id, pos, rot);
 	entity->Wave = _waveid;
 	entity->CreateTime = GameMain::Instance()->Time();
 	return *entity;
@@ -32,12 +33,13 @@ bool XLevelSpawnTask::Execute(float time)
 {
 	XLevelBaseTask::Execute(time);
 	XLevelDynamicInfo* dInfo = _spawner->GetWaveDynamicInfo(_id);
-
-	XEntity entity;
+	int entityid;
 	if (spawnType == Spawn_Monster)
 	{
-		entity = CreateMonster(UID, rot, pos + Vector3(0, 0.02f, 0), _id);
-		XLevelStatistics::Instance()->ls->AddLevelSpawnEntityCount(entity.EntityID);
+		XEntity& e = CreateMonster(UID, rot, pos + Vector3(0, 0.02f, 0), _id);
+		entityid = e.EntityID;
+		XLevelStatistics::Instance()->ls->AddLevelSpawnEntityCount(entityid);
+		if (e.IsBoss()) return false;
 	}
 	else if (spawnType == Spawn_Buff)
 	{
@@ -45,7 +47,8 @@ bool XLevelSpawnTask::Execute(float time)
 	}
 	else if (spawnType == Spawn_NPC)
 	{
-		entity = CreateNPC(UID, rot, pos + Vector3(0, 0.02f, 0), _id);
+		XEntity& e = CreateNPC(UID, rot, pos + Vector3(0, 0.02f, 0), _id);
+		entityid = e.EntityID;
 	}
 	else //player or monster
 	{
@@ -55,14 +58,10 @@ bool XLevelSpawnTask::Execute(float time)
 	if (dInfo)
 	{
 		dInfo->generateCount++;
-		dInfo->entityIds.push_back(entity.EntityID);
+		dInfo->entityIds.push_back(entityid);
 		if (dInfo->generateCount == dInfo->totalCount)
 		{
 			dInfo->generatetime = time;
-		}
-		if (entity.IsBoss())
-		{
-			return false;
 		}
 	}
 	return true;

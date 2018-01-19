@@ -68,6 +68,7 @@
     <ClCompile Include="XLevelSpawnMgr.cpp" />
     <ClCompile Include="XLevelTask.cpp" />
     <ClCompile Include="XLevelWave.cpp" />
+    <ClCompile Include="XMonster.cpp" />
     <ClCompile Include="XScene.cpp" />
     <ClCompile Include="XSkill.cpp" />
     <ClCompile Include="XSkillCore.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="XLevelStatistics.h" />
     <ClInclude Include="XLevelTask.h" />
     <ClInclude Include="XLevelWave.h" />
+    <ClInclude Include="XMonster.h" />
     <ClInclude Include="XScene.h" />
     <ClInclude Include="XSkill.h" />
     <ClInclude Include="XSkillCore.h" />

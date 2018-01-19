@@ -9,6 +9,7 @@ public class NativeEntity
     private uint _uid = 0;
     private string _path;
     protected SkinnedMeshRenderer _skin = null;
+    protected NativeAnimComponent anim;
     GameObject _go;
 
     public XEntityPresentation.RowData present
@@ -46,6 +47,8 @@ public class NativeEntity
 
     protected virtual void OnUnintial() { }
 
+    protected virtual void InitAnim() { }
+
     public void Load(uint uid, uint presentid)
     {
         _uid = uid;
@@ -54,7 +57,9 @@ public class NativeEntity
         _go = XResources.LoadInPool(_path);
         _go.name = present.Name;
         components = new Dictionary<uint, NativeComponent>();
+        anim = AttachComponent<NativeAnimComponent>();
         OnInitial();
+        InitAnim();
     }
     
     public void Unload()
@@ -149,6 +154,16 @@ public class NativeEntity
             }
         }
     }
+
+    protected void OverrideAnim(string key, string clip)
+    {
+        if (anim != null)
+        {
+            string path = present.AnimLocation + clip;
+            anim.OverrideAnim(key, path);
+        }
+    }
+
 
 }
 

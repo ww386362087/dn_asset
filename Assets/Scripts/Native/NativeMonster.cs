@@ -1,24 +1,18 @@
 ﻿using UnityEngine;
 
-
-public class XMonster : XEntity
+public class NativeMonster : NativeEntity
 {
-    private int hitCnt = 0;
-    private int maxHit = 4;
 
-    public override void OnInitial()
+    protected CharacterController controller;
+
+    protected override void OnInitial()
     {
-        _eEntity_Type |= EntityType.Monster;
         base.OnInitial();
-        _layer = LayerMask.NameToLayer("Enemy");
-        _speed = 0.001f;
+        controller = EntityObject.GetComponent<CharacterController>();
+        controller.enabled = false;
+    }
 
-        AttachComponent<XAIComponent>();
-        AttachComponent<XNavComponent>();
-        AttachComponent<XSkillComponent>();
-        AttachComponent<XBeHitComponent>();
-    }    
-    
+
     protected override void InitAnim()
     {
         OverrideAnim(Clip.Idle, _present.AttackIdle);
@@ -34,19 +28,6 @@ public class XMonster : XEntity
         OverrideAnim(Clip.HitLanding, hit);
     }
 
-    
-   
-
-
-    public override void OnHit(bool hit)
-    {
-        base.OnHit(hit);
-        hitCnt++;
-        if (hitCnt >= maxHit)
-        {
-           // OnDied();
-        }
-    }
 
 }
 

@@ -164,6 +164,12 @@ public class NativeInterface
             case ASCII.R:
                 NativeEntityMgr.singleton.Add<NativeRole>(entityid, arg);
                 break;
+            case ASCII.M:
+                NativeEntityMgr.singleton.Add<NativeMonster>(entityid, arg);
+                break;
+            case ASCII.N:
+                NativeEntityMgr.singleton.Add<NativeNPC>(entityid, arg);
+                break;
             case ASCII.U:
                 NativeEntityMgr.singleton.Remv(entityid);
                 break;
@@ -173,11 +179,11 @@ public class NativeInterface
     [MonoPInvokeCallback(typeof(NativeComptDelegate))]
     static void OnEntitySync(uint entityid, byte command, ref VectorArr vec)
     {
-       // XDebug.Log("sync entityid: ", entityid, " arg:", vec.ToVector());
         NativeEntity entity = NativeEntityMgr.singleton.Get(entityid);
         switch (command)
         {
             case ASCII.p:
+                XDebug.Log("sync id:" + entityid + " pos:", vec.ToVector());
                 entity.transfrom.position = vec.ToVector();
                 break;
             case ASCII.s:

@@ -9,6 +9,8 @@ class XRole:public XEntity
 public:
 	XRole();
 	~XRole();
+	virtual EntityType GetType();
+	
 };
 
 #endif
