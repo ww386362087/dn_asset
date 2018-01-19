@@ -155,7 +155,6 @@ public class NativeInterface
     [MonoPInvokeCallback(typeof(NativeEntityDelegate))]
     static void OnEntityCallback(uint entityid, byte command, uint arg)
     {
-        XDebug.Log("entity:" + entityid, " arg: ", arg, " command: ", command);
         switch (command)
         {
             case ASCII.E:
@@ -164,6 +163,10 @@ public class NativeInterface
             case ASCII.R:
                 NativeEntityMgr.singleton.Add<NativeRole>(entityid, arg);
                 break;
+            case ASCII.P:
+                NativeEntityMgr.singleton.Player =
+                    NativeEntityMgr.singleton.Add<NativePlayer>(entityid, arg);
+                break;
             case ASCII.M:
                 NativeEntityMgr.singleton.Add<NativeMonster>(entityid, arg);
                 break;
@@ -171,7 +174,11 @@ public class NativeInterface
                 NativeEntityMgr.singleton.Add<NativeNPC>(entityid, arg);
                 break;
             case ASCII.U:
+                XDebug.Log("unload ", entityid);
                 NativeEntityMgr.singleton.Remv(entityid);
+                break;
+            default:
+                XDebug.LogError("not regist command ", command);
                 break;
         }
     }
@@ -195,6 +202,9 @@ public class NativeInterface
             case ASCII.f:
                 entity.transfrom.forward = vec.ToVector();
                 break;
+            default:
+                XDebug.LogError("not regist command ", command);
+                break;
         }
     }
 
@@ -215,6 +225,9 @@ public class NativeInterface
                     NativeEquipComponent ne = entity.GetComponent<NativeEquipComponent>();
                     ne.AttachWeapon(arg);
                 }
+                break;
+            default:
+                XDebug.LogError("not regist command ", command);
                 break;
         }
     }

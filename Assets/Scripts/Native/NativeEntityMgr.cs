@@ -2,19 +2,19 @@
 
 public class NativeEntityMgr :XSingleton<NativeEntityMgr>
 {
-
+    public NativePlayer Player;
     Dictionary<uint, NativeEntity> dic = new Dictionary<uint, NativeEntity>();
 
-    public bool Add<T>(uint uid, uint presentid) where T : NativeEntity, new()
+    public T Add<T>(uint uid, uint presentid) where T : NativeEntity, new()
     {
         if (!dic.ContainsKey(uid))
         {
             T ent = new T();
             ent.Load(uid, presentid);
             dic.Add(uid, ent);
-            return true;
+            return ent;
         }
-        return false;
+        return dic[uid] as T;
     }
 
     public void Update(float delta)

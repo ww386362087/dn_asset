@@ -60,7 +60,11 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	_attr = attr;
 
 #ifdef Client
-	if (GetType() == Role)
+	if (GetType() == Player)
+	{
+		eCallback(attr->getid(), 'P', attr->getPresentID());
+	}
+	else if (GetType() == Role)
 	{
 		eCallback(attr->getid(), 'R', attr->getPresentID());
 	}
@@ -68,7 +72,7 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	{
 		eCallback(attr->getid(), 'M', attr->getPresentID());
 	}
-	else if(GetType() == Npc)
+	else if (GetType() == Npc)
 	{
 		eCallback(attr->getid(), 'N', attr->getPresentID());
 	}

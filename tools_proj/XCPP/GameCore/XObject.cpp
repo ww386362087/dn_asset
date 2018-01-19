@@ -10,7 +10,7 @@ bool XObject::Initilize()
 	return true;
 }
 
-void XObject::Uninitilize() 
+void XObject::Uninitilize()
 {
 	EventUnsubscribe();
 }

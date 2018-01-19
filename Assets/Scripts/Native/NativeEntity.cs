@@ -61,11 +61,11 @@ public class NativeEntity
         OnInitial();
         InitAnim();
     }
-    
+
     public void Unload()
     {
-        OnInitial();
-        XResources.RecyleInPool(_go, _path);
+        OnUnintial();
+        if (_go != null) XResources.RecyleInPool(_go, _path);
         _present = null;
         components = null;
     }

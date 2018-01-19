@@ -1,32 +1,46 @@
 ﻿#if TEST
 
 using System;
+using UnityEngine;
 
 public class TestNativeAI : ITest
 {
+
+    bool m_tick = true;
+    float m_tick_time = 0f;
+    float spf = 0.033f;//30fps
+
     public void LateUpdate()
     {
-        throw new NotImplementedException();
     }
 
     public void OnGUI()
     {
-        throw new NotImplementedException();
     }
 
     public void OnQuit()
     {
-        throw new NotImplementedException();
+        m_tick = false;
+        NativeInterface.iQuitCore();
     }
 
     public void Start()
     {
-        throw new NotImplementedException();
+        m_tick = true;
+        NativeInterface.iStartCore();
     }
 
     public void Update()
     {
-        throw new NotImplementedException();
+        if (m_tick)
+        {
+            m_tick_time += Time.deltaTime;
+            if (m_tick_time > spf)
+            {
+                NativeInterface.iTickCore(m_tick_time);
+                m_tick_time = 0;
+            }
+        }
     }
 }
 #endif
