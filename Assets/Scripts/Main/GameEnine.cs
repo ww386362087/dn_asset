@@ -40,7 +40,7 @@ public sealed class GameEnine : XObject
         XAutoFade.Update();
         XBulletMgr.singleton.Update(delta);
 #if Native
-        NativeCamera.singleton.Update(delta);
+        NativeScene.singleton.Update(delta);
         NativeEntityMgr.singleton.Update(delta);
 #endif
     }

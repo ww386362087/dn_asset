@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class NativeCamera: XSingleton<NativeCamera>
+public class NativeScene : XSingleton<NativeScene>
 {
     private Camera _camera;
     private NativePlayer _player;
     private Vector3 _offset;
+    private Terrain _terrain;
+
 
     public Camera camera { get { return _camera; } }
+
 
     public void Initial()
     {
@@ -22,6 +25,7 @@ public class NativeCamera: XSingleton<NativeCamera>
             _player = NativeEntityMgr.singleton.Player;
         }
         _offset = new Vector3(0.1f, 3f, -6f);
+        _terrain = Terrain.activeTerrain;
     }
 
     public void Update(float delta)
@@ -36,4 +40,16 @@ public class NativeCamera: XSingleton<NativeCamera>
         }
     }
 
+    public float TerrainY(Vector3 pos)
+    {
+        if (_terrain != null)
+        {
+            return _terrain.SampleHeight(pos);
+        }
+        return 0;
+    }
+
+
+
 }
+

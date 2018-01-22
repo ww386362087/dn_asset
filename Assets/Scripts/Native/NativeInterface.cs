@@ -135,7 +135,7 @@ public class NativeInterface
         iInitCompnentCall(OnComponentCallback);
         iInitEntitySyncCall(OnEntitySync);
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/", (short)Application.platform);
-        NativeCamera.singleton.Initial();
+        NativeScene.singleton.Initial();
     }
 
     [MonoPInvokeCallback(typeof(CppDelegate))]
@@ -154,7 +154,6 @@ public class NativeInterface
                 XDebug.CError(command);
                 break;
             case ASCII.G:
-                XDebug.CLog("load object: " + command + " len: " + command.Length);
                 GameObject go = XResources.Load<GameObject>(command, AssetType.Prefab);
                 go.name = command;
                 break;
@@ -204,7 +203,9 @@ public class NativeInterface
         switch (command)
         {
             case ASCII.p:
-                entity.transfrom.position = vec.ToVector();
+                Vector3 pos = vec.ToVector();
+                pos.y = NativeScene.singleton.TerrainY(pos);
+                entity.transfrom.position = pos;
                 break;
             case ASCII.s:
                 entity.transfrom.localScale = vec.ToVector();

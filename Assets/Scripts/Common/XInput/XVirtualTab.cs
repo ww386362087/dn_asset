@@ -131,9 +131,9 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
             _direction = XCommon.singleton.HorizontalRotateVetor3(forward, bClockwise ? angle : -angle);
         }
 #if Native
-        if (NativeCamera.singleton.camera != null)
+        if (NativeScene.singleton.camera != null)
         {
-            Vector3 forward = NativeCamera.singleton.camera.transform.forward;
+            Vector3 forward = NativeScene.singleton.camera.transform.forward;
             forward.y = 0;
             forward.Normalize();
             _direction = XCommon.singleton.HorizontalRotateVetor3(forward, bClockwise ? angle : -angle);
