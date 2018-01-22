@@ -39,7 +39,7 @@ void AISequence::Init(AITaskData* data)
 		for (size_t i = 0, max = data->children.size(); i < max; i++)
 		{
 			AIBase* run = AIFactory::MakeRuntime(data->children[i], _tree);
-			list.push_back(run);
+			if(run) list.push_back(run);
 		}
 	}
 }
@@ -78,7 +78,7 @@ void AISelector::Init(AITaskData* data)
 		for (size_t i = 0, max = data->children.size(); i < max; i++)
 		{
 			AIBase* run = AIFactory::MakeRuntime(data->children[i], _tree);
-			list.push_back(run);
+			if(run) list.push_back(run);
 		}
 	}
 }

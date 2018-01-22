@@ -10,6 +10,7 @@ public:
 	XMonster();
 	~XMonster();
 	virtual EntityType GetType();
+	virtual void OnInitial();
 };
 
 #endif

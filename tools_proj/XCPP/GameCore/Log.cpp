@@ -42,17 +42,18 @@ std::ostream& Log::Start(LogLevel level, std::string text, const std::string &fi
 	time(&tm);
 	char tmp[64];
 	strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S", localtime(&tm));
+	size_t t = file.find_last_of('\\');
+	std::string vl = text + " \n@" + file.substr(t + 1) + ":" + tostring(line);
 	if (callback)
 	{
 		switch (level)
 		{
-		case INFO:callback(CMLog, text.c_str()); break;
-		case WARN:callback(CMWarn, text.c_str()); break;
-		case ERR:callback(CMError, text.c_str()); break;
+		case INFO:callback(CMLog, vl.c_str()); break;
+		case WARN:callback(CMWarn, vl.c_str()); break;
+		case ERR:callback(CMError, vl.c_str()); break;
 		}
 	}
 	std::ostream& ostr = GetStream(level);
-	size_t t = file.find_last_of('\\');
 	ostr << tmp << " " << func << " at:" << file.substr(t + 1) << ":" << line << std::endl;
 	return  ostr;
 }

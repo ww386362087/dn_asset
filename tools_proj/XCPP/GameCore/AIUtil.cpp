@@ -13,7 +13,7 @@ void AIUtil::Load(std::string name, AITreeData* data)
 	}
 	catch (const std::exception& e)
 	{
-		std::string s = tostring(e.what());
+		std::string s = name + " exception:" + tostring(e.what());
 		ERR(s);
 	}
 }

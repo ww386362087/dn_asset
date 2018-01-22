@@ -10,7 +10,7 @@ public:
 	XRole();
 	~XRole();
 	virtual EntityType GetType();
-	
+	virtual void OnInitial();
 };
 
 #endif

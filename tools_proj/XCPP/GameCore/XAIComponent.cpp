@@ -192,7 +192,7 @@ void XAIComponent::InitTree()
 	else
 	{
 		XAttributes* _attr = _entity->getAttributes();
-		tree = "PlayerAutoFight";// _attr->AiBehavior;
+		tree = _attr->AiBehavior;
 	}
 	SetBehaviorTree(tree);
 }

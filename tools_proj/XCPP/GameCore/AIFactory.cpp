@@ -27,6 +27,7 @@ AIFactory::~AIFactory(void)
 AIBase* AIFactory::MakeRuntime(AITaskData* data, AITree* tree)
 {
 	AIBase* rst = NULL;
+	if (data == NULL)  return 0;
 	if (data->type == "Sequence")
 	{
 		rst = new AISequence();
