@@ -4,12 +4,18 @@ public class NativeNPC : NativeEntity
 {
     protected CharacterController controller;
 
+    protected override void OnInitial()
+    {
+        base.OnInitial();
+        EnableShadow(true);
+        //controller = EntityObject.GetComponent<CharacterController>();
+        //controller.enabled = false;
+    }
+
+
     protected override void InitAnim()
     {
         OverrideAnim(Clip.Idle, _present.Idle);
-        EnableShadow(true);
-        controller = EntityObject.GetComponent<CharacterController>();
-        controller.enabled = false;
     }
 
     private void EnableShadow(bool able)

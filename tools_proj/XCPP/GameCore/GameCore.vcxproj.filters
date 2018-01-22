@@ -217,6 +217,9 @@
     <ClCompile Include="XMonster.cpp">
       <Filter>entity</Filter>
     </ClCompile>
+    <ClCompile Include="XNpc.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneList.h">
@@ -475,6 +478,9 @@
       <Filter>plugin</Filter>
     </ClInclude>
     <ClInclude Include="XMonster.h">
+      <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="XNpc.h">
       <Filter>entity</Filter>
     </ClInclude>
   </ItemGroup>

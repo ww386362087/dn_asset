@@ -3,6 +3,7 @@
 #include "XPlayer.h"
 #include "XLevelStatistics.h"
 #include "XLevelScriptMgr.h"
+#include "XMath.h"
 
 XLevelSpawn::XLevelSpawn()
 {
@@ -205,7 +206,10 @@ void XLevelSpawn::GenerateEntityTask(XLevelWave& wave)
 			XLevelSpawnTask* task = new XLevelSpawnTask(this);
 			task->_id = wave.ID;
 			task->UID = (uint)wave.uid;
-			task->pos = pos;// +Quaternion.Euler(0, angle * i, 0) * new Vector3(0, 0, 1) * wave.radius;
+			float r = wave.radius;
+			int ran = Random(0, 360);
+			float ang = XPI*(wave.rotateY + ran) / 180;
+			task->pos = pos + Vector3(sin(ang)*r, 0, cos(ang)*r);
 			task->rot = (int)angle * i + 180;
 			task->spawnType = wave.spawnType;
 			task->isSummonTask = false;

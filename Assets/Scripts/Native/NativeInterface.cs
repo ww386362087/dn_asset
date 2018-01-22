@@ -121,6 +121,7 @@ public class NativeInterface
         iInitCompnentCall(OnComponentCallback);
         iInitEntitySyncCall(OnEntitySync);
         iInitial(Application.streamingAssetsPath + "/", Application.persistentDataPath + "/", (short)Application.platform);
+        NativeCamera.singleton.Initial();
     }
 
     [MonoPInvokeCallback(typeof(CppDelegate))]
@@ -174,7 +175,6 @@ public class NativeInterface
                 NativeEntityMgr.singleton.Add<NativeNPC>(entityid, arg);
                 break;
             case ASCII.U:
-                XDebug.Log("unload ", entityid);
                 NativeEntityMgr.singleton.Remv(entityid);
                 break;
             default:
@@ -190,7 +190,6 @@ public class NativeInterface
         switch (command)
         {
             case ASCII.p:
-                XDebug.Log("sync id:" + entityid + " pos:", vec.ToVector());
                 entity.transfrom.position = vec.ToVector();
                 break;
             case ASCII.s:

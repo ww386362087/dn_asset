@@ -2,9 +2,10 @@
 #include "XEntity.h"
 #include "XAttributes.h"
 #include "XPlayer.h"
+#include "XNpc.h"
 #include "XEntityStatistics.h"
 #include "XEntityPresentation.h"
-
+#include "XScene.h"
 
 XEntityMgr::~XEntityMgr()
 {
@@ -171,6 +172,16 @@ XPlayer* XEntityMgr::CreatePlayer()
 	int staticid = 2;
 	XAttributes* attr = new XAttributes();
 	InitAttr(staticid, attr);
+	SceneListRow* row = XScene::Instance()->getSceneRow();
+	if (row)
+	{
+		std::vector<std::string> s = split(row->startpos, '=');
+		float x = (float)atof(s[0].c_str());
+		float y = (float)atof(s[1].c_str());
+		float z = (float)atof(s[2].c_str());
+		attr->setAppearPosition(Vector3(x, y, z));
+		attr->setAppearQuaternion(Vector3(row->startrot[0], row->startrot[1], row->startrot[2]));
+	}
 	Player = new XPlayer();
 	PrepareEntity(attr, Player);
 	return Player;
@@ -182,7 +193,7 @@ XEntity* XEntityMgr::CreateNPC(XNpcListRow& row, Vector3 pos, Vector3 rot)
 	XAttributes* attr = InitAttrByPresent(row.presentid);
 	attr->setAppearPosition(pos);
 	attr->setAppearQuaternion(rot);
-	XEntity* enty = new XEntity();
+	XEntity* enty = new XNpc();
 	PrepareEntity(attr, enty);
 	Add(Npc, enty);
 	return enty;

@@ -8,8 +8,8 @@ public class NativeMonster : NativeEntity
     protected override void OnInitial()
     {
         base.OnInitial();
-        controller = EntityObject.GetComponent<CharacterController>();
-        controller.enabled = false;
+        //controller = EntityObject.GetComponent<CharacterController>();
+        //controller.enabled = false;
     }
 
 
