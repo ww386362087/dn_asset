@@ -30,7 +30,7 @@ public class NativeEntityMgr :XSingleton<NativeEntityMgr>
     {
         if(dic.ContainsKey(uid))
         {
-            dic[uid].Unload();
+            dic[uid].UnloadEntity();
             return true;
         }
         return false;

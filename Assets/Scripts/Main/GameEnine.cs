@@ -14,7 +14,9 @@ public sealed class GameEnine : XObject
     {
         _entrance = en;
         Application.targetFrameRate = 60;
+#if Native
         NativeInterface.Init();
+#endif
         XTimerMgr.singleton.Init();
         XConfig.Initial(LogLevel.Log, LogLevel.Error);
         XGlobalConfig.Initial();
@@ -37,7 +39,10 @@ public sealed class GameEnine : XObject
         XScene.singleton.Update(delta);
         XAutoFade.Update();
         XBulletMgr.singleton.Update(delta);
+#if Native
         NativeCamera.singleton.Update(delta);
+        NativeEntityMgr.singleton.Update(delta);
+#endif
     }
 
 

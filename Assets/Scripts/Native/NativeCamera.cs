@@ -6,11 +6,14 @@ public class NativeCamera: XSingleton<NativeCamera>
     private NativePlayer _player;
     private Vector3 _offset;
 
+    public Camera camera { get { return _camera; } }
+
     public void Initial()
     {
         if (_camera == null)
         {
             GameObject g = GameObject.FindGameObjectWithTag("MainCamera");
+            if (g == null) return;
             _camera = g.GetComponent<Camera>();
             _camera.transform.rotation = Quaternion.Euler(new Vector3(13, 0, 0));
         }

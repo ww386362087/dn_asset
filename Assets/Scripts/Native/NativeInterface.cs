@@ -113,6 +113,20 @@ public class NativeInterface
 #endif
     static extern void iInitEntitySyncCall(NativeEntitySyncInfoDelegate cb);
 
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("GameCore")]
+#endif
+    public static extern void iEntityMoveForward(uint entityid, ref VectorArr vec);
+
+#if UNITY_IPHONE || UNITY_XBOX360
+	[DllImport("__Internal")]
+#else
+    [DllImport("GameCore")]
+#endif
+    public static extern void iEntitySopMove(uint entityid);
+
 
     public static void Init()
     {

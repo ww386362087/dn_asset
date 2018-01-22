@@ -33,6 +33,8 @@ extern "C"
 	ENGINE_INTERFACE_EXPORT void iStopCore();
 	ENGINE_INTERFACE_EXPORT void iTickCore(float delta);
 	ENGINE_INTERFACE_EXPORT void iQuitCore();
+	ENGINE_INTERFACE_EXPORT void iEntityMoveForward(unsigned int entityid, float* v);
+	ENGINE_INTERFACE_EXPORT void iEntitySopMove(unsigned int entityid);
 };
 
 

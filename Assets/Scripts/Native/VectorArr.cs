@@ -8,6 +8,14 @@ public struct VectorArr
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
     float[] arr;
 
+    public VectorArr(Vector3 v)
+    {
+        arr = new float[3];
+        arr[0] = v.x;
+        arr[1] = v.y;
+        arr[2] = v.z;
+    }
+
     public Vector3 ToVector()
     {
         if (arr.Length == 3)

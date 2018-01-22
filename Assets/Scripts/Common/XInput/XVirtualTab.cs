@@ -123,15 +123,24 @@ internal class XVirtualTab : XSingleton<XVirtualTab>
         float angle = Vector2.Angle(Vector2.up, _tab_dir);
         bool bClockwise = XCommon.singleton.Clockwise(Vector2.up, _tab_dir);
 
-        if (XScene.singleton.GameCamera == null || XScene.singleton.GameCamera.CameraTrans == null) return;
-        Vector3 forward = XScene.singleton.GameCamera.CameraTrans.forward;
-        forward.y = 0;
-        forward.Normalize();
-        _direction = XCommon.singleton.HorizontalRotateVetor3(forward, bClockwise ? angle : -angle);
-       
+        if (XScene.singleton.GameCamera != null && XScene.singleton.GameCamera.CameraTrans != null)
+        {
+            Vector3 forward = XScene.singleton.GameCamera.CameraTrans.forward;
+            forward.y = 0;
+            forward.Normalize();
+            _direction = XCommon.singleton.HorizontalRotateVetor3(forward, bClockwise ? angle : -angle);
+        }
+#if Native
+        if (NativeCamera.singleton.camera != null)
+        {
+            Vector3 forward = NativeCamera.singleton.camera.transform.forward;
+            forward.y = 0;
+            forward.Normalize();
+            _direction = XCommon.singleton.HorizontalRotateVetor3(forward, bClockwise ? angle : -angle);
+        }
+#endif
         JoyStickDlg.singleton.Show(true, _center);
         JoyStickDlg.singleton.SetOffsetPos(radius, (bClockwise ? angle : 360.0f - angle) - 90);
-        
     }
 
     private void TabCulling()

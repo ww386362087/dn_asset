@@ -4,15 +4,8 @@ public class NativeMonster : NativeEntity
 {
 
     protected CharacterController controller;
-
-    protected override void OnInitial()
-    {
-        base.OnInitial();
-        //controller = EntityObject.GetComponent<CharacterController>();
-        //controller.enabled = false;
-    }
-
-
+    
+    
     protected override void InitAnim()
     {
         OverrideAnim(Clip.Idle, _present.AttackIdle);

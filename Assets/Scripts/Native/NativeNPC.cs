@@ -8,8 +8,6 @@ public class NativeNPC : NativeEntity
     {
         base.OnInitial();
         EnableShadow(true);
-        //controller = EntityObject.GetComponent<CharacterController>();
-        //controller.enabled = false;
     }
 
 

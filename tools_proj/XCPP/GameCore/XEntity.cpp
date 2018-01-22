@@ -27,9 +27,16 @@ XEntity::~XEntity()
 
 void XEntity::Update(float delta)
 {
-	for (std::unordered_map<uint, XComponent*>::iterator it = components.begin();it!=components.end();it++)
+	for (std::unordered_map<uint, XComponent*>::iterator it = components.begin(); it != components.end(); it++)
 	{
 		it->second->Update(delta);
+	}
+	if (_force_move && _transf)
+	{
+		_transf->position = _transf->position + _forward * _speed;
+#ifdef  Client
+		sncCallback(_attr->getid(), 'p', vec2arr(_transf->position));
+#endif //  Client
 	}
 }
 
@@ -85,7 +92,8 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 	float scale[] = { 3.0f,3.0f,3.0f };
 	sncCallback(attr->getid(), 's', scale);
 #endif // -- Client
-
+	_transf->position = attr->getAppearPostion();
+	_transf->rotation = attr->getAppearQuaternion();
 	AttachComponent<XAIComponent>();
 	OnInitial();
 }
@@ -146,7 +154,6 @@ XSkillMgr* XEntity::SkillManager()
 	XSkillComponent* pskill = GetComponent<XSkillComponent>();
 	return pskill ? pskill->SkillManager() : NULL;
 }
-
 
 bool XEntity::Valide(XEntity* e)
 {

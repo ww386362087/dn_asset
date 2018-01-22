@@ -2,12 +2,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class NativeEntity
+public class NativeEntity:XObject
 {
     protected Dictionary<uint, NativeComponent> components;
     protected XEntityPresentation.RowData _present;
     private uint _uid = 0;
     private string _path;
+    protected Vector3 _forward = Vector3.zero;
     protected SkinnedMeshRenderer _skin = null;
     protected NativeAnimComponent anim;
     GameObject _go;
@@ -49,6 +50,8 @@ public class NativeEntity
 
     protected virtual void InitAnim() { }
 
+    protected virtual void OnUpdate(float delta) { }
+
     public void Load(uint uid, uint presentid)
     {
         _uid = uid;
@@ -58,16 +61,18 @@ public class NativeEntity
         _go.name = present.Name;
         components = new Dictionary<uint, NativeComponent>();
         anim = AttachComponent<NativeAnimComponent>();
+        base.Initilize();
         OnInitial();
         InitAnim();
     }
 
-    public void Unload()
+    public void UnloadEntity()
     {
         OnUnintial();
         if (_go != null) XResources.RecyleInPool(_go, _path);
         _present = null;
         components = null;
+        base.Unload();
     }
 
     public void Update(float delta)
@@ -77,6 +82,7 @@ public class NativeEntity
         {
             e.Current.Value.Update(delta);
         }
+        OnUpdate(delta);
     }
     
     public T AttachComponent<T>() where T : NativeComponent, new()
@@ -164,6 +170,26 @@ public class NativeEntity
         }
     }
 
+    public void MoveForward(Vector3 forward)
+    {
+        VectorArr va = new VectorArr(forward);
+        NativeInterface.iEntityMoveForward(UID, ref va);
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimTriger.ToMove);
+        }
+    }
+
+    public void StopMove()
+    {
+        _forward = Vector3.zero;
+        NativeInterface.iEntitySopMove(UID);
+        if (anim != null)
+        {
+            anim.SetTrigger(AnimTriger.ToMove, false);
+            anim.SetTrigger(AnimTriger.ToStand);
+        }
+    }
 
 }
 

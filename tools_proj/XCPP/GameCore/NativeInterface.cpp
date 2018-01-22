@@ -1,7 +1,7 @@
 #include "NativeInterface.h"
 #include "GameMain.h"
-
-class XEntity;
+#include "XEntityMgr.h"
+#include "XEntity.h"
 
 extern "C"
 {
@@ -124,5 +124,24 @@ extern "C"
 	void iTickCore(float delta)
 	{
 		GameMain::Instance()->Ontick(delta);
+	}
+
+	void iEntityMoveForward(unsigned int entityid, float* v)
+	{
+		XEntity* ent = XEntityMgr::Instance()->GetEntity(entityid);
+		if (ent)
+		{
+			Vector3 f = Vector3(v[0], v[1], v[2]);
+			ent->MoveForward(f);
+		}
+	}
+
+	void iEntitySopMove(unsigned int entityid)
+	{
+		XEntity* ent = XEntityMgr::Instance()->GetEntity(entityid);
+		if (ent)
+		{
+			ent->StopMove();
+		}
 	}
 }
