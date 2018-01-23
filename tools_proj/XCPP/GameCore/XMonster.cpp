@@ -19,5 +19,5 @@ EntityType XMonster::GetType()
 
 void  XMonster::OnInitial()
 {
-	AttachComponent<XAIComponent>();
+	//AttachComponent<XAIComponent>();
 }

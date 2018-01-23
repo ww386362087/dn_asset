@@ -46,7 +46,7 @@ private:
 	bool _is_inited = false;
 	AITree* _tree;
 	float _ai_tick = 1.0f;  //AIĞÄÌø¼ä¸ô 
-	float _tick_factor = 1.0f;
+	float _tick_factor = 8.0f;
 	uint _cast_skillid = 0;
 	float _tick = 0;
 	float _timer = 0;

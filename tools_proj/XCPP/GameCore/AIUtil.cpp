@@ -14,7 +14,7 @@ void AIUtil::Load(std::string name, AITreeData* data)
 	catch (const std::exception& e)
 	{
 		std::string s = name + " exception:" + tostring(e.what());
-		ERR(s);
+		ERR(name + " with:" + s);
 	}
 }
 
@@ -24,7 +24,7 @@ void AIUtil::Parse(std::string json, std::string name, AITreeData* data)
 	std::string err = picojson::parse(v, json);
 	if (err.size())
 	{
-		ERR(err);
+		ERR(name + " with: " + err);
 		return;
 	}
 	picojson::object& o = v.get<picojson::object>();
@@ -100,7 +100,7 @@ void AIUtil::ParseTask(picojson::object& root, AITaskData* data)
 void AIUtil::ParseSharedVar(std::string key, picojson::object& obj, AISharedVar* var,bool shared)
 {
 	var->name = key;
-	var->bindName = obj["Name"].get<std::string>();
+	var->bindName = shared ? obj["Name"].get<std::string>() : "";
 	var->isShared = shared ? obj["IsShared"].get<bool>() : false;
 	for (picojson::object::iterator it = obj.begin(); it != obj.end(); it++)
 	{

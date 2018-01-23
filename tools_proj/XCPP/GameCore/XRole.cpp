@@ -20,5 +20,5 @@ EntityType XRole::GetType()
 
 void XRole::OnInitial()
 {
-	//AttachComponent<XAIComponent>();
+	AttachComponent<XAIComponent>();
 }

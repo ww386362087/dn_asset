@@ -94,7 +94,7 @@ void XEntity::Initilize(GameObject* go, XAttributes* attr)
 #endif // -- Client
 	_transf->position = attr->getAppearPostion();
 	_transf->rotation = attr->getAppearQuaternion();
-	AttachComponent<XAIComponent>();
+	
 	OnInitial();
 }
 
